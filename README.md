@@ -1,8 +1,10 @@
+# nitsuah.io portfolio
+
 This is a [Next.js](https://nextjs.org) + [wagmi](https://wagmi.sh) + [@wagmi/cli](https://wagmi.sh/cli) project bootstrapped with [`create-wagmi`](https://github.com/wagmi-dev/wagmi/tree/main/packages/create-wagmi)
 
 This template demonstrates usage of the [`@wagmi/cli` Etherscan Plugin](https://wagmi.sh/cli/plugins/etherscan).
 
-# Getting Started
+## Getting Started
 
 Run `npm run dev` in your terminal, and then open [localhost:3000](http://localhost:3000) in your browser.
 
@@ -10,7 +12,15 @@ This command will also generate React Hooks from the Wagmi Mint Example Ethersca
 
 Once the webpage has loaded, changes made to files inside the `src/` directory (e.g. `src/pages/index.tsx`) will automatically update the webpage.
 
-# Learn more
+### Using this Repo
+
+- Deploy contract & update "src/pages/labs/utils/contractABI.json" file
+- Update CONTRACT_ADDRESS in "src/pages/labs/domainsite.jsx"
+- Commit & Push, or Merge to dev & main branches to publish <https://nitsuah.io> automatically like <https://dev.nitsuah.io>
+- Run `npm run dev` locally to get started
+- [![Netlify Status](https://api.netlify.com/api/v1/badges/b018ed24-0ef6-4846-9549-cccfc84e29b4/deploy-status)](https://app.netlify.com/sites/nitsuah/deploys)
+
+### Learn more
 
 To learn more about [Next.js](https://nextjs.org) or [wagmi](https://wagmi.sh), check out the following resources:
 
