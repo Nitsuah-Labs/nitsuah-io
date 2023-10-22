@@ -10,6 +10,14 @@ import { MintNFT } from '../_components/_web3/MintNFT';
 import { NetworkSwitcher } from '../_components/_web3/NetworkSwitcher';
 
 
+const OPENSEA_URL = "https://testnets.opensea.io/assets/";
+const NETSCAN_URL = "https://mumbai.polygonscan.com/tx/";
+const SCAN_LINK = "https://mumbai.polygonscan.com/address/";
+const OPENSEA_LINK = "https://testnets.opensea.io/collection/";
+const MetaMaskURL = "https://metamask.io/download/";
+const CBWalletURL = "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
+const MaticURL = "https://wallet.matic.network/";
+
 const MintSite: React.FC = () => {
   return (
     <div className="App">

@@ -18,7 +18,7 @@ Once the webpage has loaded, changes made to files inside the `src/` directory (
 - Update CONTRACT_ADDRESS in "src/pages/labs/domainsite.jsx"
 - Commit & Push, or Merge to dev & main branches to publish <https://nitsuah.io> automatically like <https://dev.nitsuah.io>
 - Run `npm run dev` locally to get started
-- [![Netlify Status](https://api.netlify.com/api/v1/badges/b018ed24-0ef6-4846-9549-cccfc84e29b4/deploy-status)](https://app.netlify.com/sites/nitsuah/deploys)
+- [![Netlify Status](https://api.netlify.com/api/v1/badges/b018ed24-0ef6-4846-9549-cccfc84e29b4/deploy-status)](https://app.netlify.com/sites/nitsuah-io/deploys)
 
 ### Learn more
 

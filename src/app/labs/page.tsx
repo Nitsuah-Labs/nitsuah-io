@@ -4,26 +4,19 @@ import React from "react";
 import Image from 'next/image';
 import "../_components/_styles/labs.css";
 import mumbaiLogo from '../_components/_web3/_assets/mumbai.png';
-// import Lab from "../_components/_labs/Labs";
+import polygonLogo from '../_components/_web3/_assets/polygonlogo.png';
+import LabNav from "../_components/_labs/LabNav";
+import LabFooter from "../_components/_labs/LabFooter";
 
-const renderOutput = () => {
+function renderOutput() {
   return (
       <>
-      </>
-  );
-};
-
-
-const LabHome = () => {
-  return (
-    <div className="App">
-      <div>
-        <table>
+      <table>
           <thead></thead>
           <tbody>
           <tr>
             <th scope="col"><div className="h4">NETWORK</div></th>
-            <td scope="row"><div className="mumbai-wallet"><h2><Image className="logo" src={mumbaiLogo} alt="Polygon logo" />MUMBAI</h2></div></td>
+            <td scope="row"><div className="mumbai-wallet"><h2><Image className="logo" src={polygonLogo} alt="Polygon logo" />MUMBAI</h2></div></td>
           </tr>
           <tr>
             <th scope="col"><div className="h4">FUNDS</div></th>
@@ -47,6 +40,18 @@ const LabHome = () => {
           </tbody>
           <tfoot></tfoot>
         </table>
+      </>
+  );
+};
+
+
+const LabHome = () => {
+  return (
+    <div className="App">
+      <div>
+        <LabNav />
+          {renderOutput()}
+        <LabFooter />
 			</div>
     </div>
   );
