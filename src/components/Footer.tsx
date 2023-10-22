@@ -1,22 +1,26 @@
+// src/components/Footer.tsx
+
 import React from 'react';
-import Image from 'next/image'; // Import Image from next/image for optimized image loading
-import cat from '../../labs/assets/arf.png';
+import Image from 'next/image';
+import cat from '../../public/images/cat.png';
 
 // CONSTANTS
 const TWITTER_HANDLE = 'nitsuahlabs';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const Footer: React.FC = () => {
+  const handleImageClick = () => {
+    window.open('https://www.linkedin.com/in/austinjhardy', '');
+  };
+
   return (
-    <div className="footer-container">
-      {/* Use next/image for optimized image loading */}
+    <div className="footer-container" onClick={handleImageClick}>
       <Image
         alt="arf"
         className="twitter-logo"
         src={cat}
-        width={40} // Adjust width based on your design
-        height={40} // Adjust height based on your design
-        onClick={() => window.open('https://www.linkedin.com/in/austinjhardy', '')}
+        width={40}
+        height={40}
       />
       <a
         className="footer-text"
