@@ -1,10 +1,10 @@
-// src/app/pages.tsx
+// HOMEPAGE - src/app/pages.tsx
 import React from 'react';
-import HomeBar from './_components/Homebar';
-import Footer from './_components/Footer';
-import SplineScene from './_components/spline-home';
+import HomeBar from './_components/_site/Homebar';
+import Footer from './_components/_site/Footer';
+import SplineScene from './_components/_spline/spline-home';
 
-const Pages: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <div className="App">
         <div className="header">
@@ -18,4 +18,4 @@ const Pages: React.FC = () => {
   );
 };
 
-export default Pages;
+export default HomePage;

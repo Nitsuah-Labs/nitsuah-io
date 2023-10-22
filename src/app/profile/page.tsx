@@ -1,9 +1,9 @@
 // src/app/profile/pages.tsx
 import React from 'react';
-import HomeBar from '../_components/Homebar';
-import Footer from '../_components/Footer';
+import HomeBar from '../_components/_site/Homebar';
+import Footer from '../_components/_site/Footer';
 
-const MintSite: React.FC = () => {
+const ProfilePage: React.FC = () => {
   return (
     <div className="App">
       <div className="container">
@@ -19,4 +19,4 @@ const MintSite: React.FC = () => {
   );
 };
 
-export default MintSite;
+export default ProfilePage;

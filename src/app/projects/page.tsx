@@ -1,29 +1,31 @@
+// PROJECTS - src/app/projects/pages.tsx
+'use client'
 import React from "react";
-import "../styles/home.css";
 import Image from 'next/image';
-import HomeBar from "../_components/Homebar";
-import Footer from "../_components/Footer";
-import darkmoon from "../../assets/darkmoon.gif";
-import nitsuah from "../../assets/NITSUAH.png";
-import cat from "../../assets/cat.png";
-import dev from "../../assets/dao.png";
-import buildspace from "../../assets/buildspace.png";
-import arf from "../../assets/arf.gif";
-import arfg from "../../assets/arf-guild.gif";
-import aiarf from "../../assets/arf-ai.png";
-import blendeth from "../../assets/blend-eth.gif";
-import aboutme from "../../assets/aboutme.jpg";
-import hedge from "../../assets/hedge-ref.png";
-import ngx from "../../assets/ng-game.png";
-import nwb from "../../assets/nights+weekends.png";
-import web3intro from "../../assets/web3-intro.png";
-import web3mint from "../../assets/web3-mint.png";
-import polyens from "../../assets/ens.gif";
-import solana from "../../assets/solana-logo.png";
-import solPay from "../../assets/sol-store.gif";
-import solApp from "../../assets/sol-dapp.gif";
-import spline from "../../assets/spline.gif";
 import { Button, Box, Grid } from "@mui/material";
+import HomeBar from "../_components/_site/Homebar";
+import Footer from "../_components/_site/Footer";
+import "../_components/_styles/global.css";
+import darkmoon from "./_assets/darkmoon.gif";
+import nitsuah from "./_assets/NITSUAH.png";
+import cat from "./_assets/cat.png";
+import dev from "../crypto/_assets/dao.png";
+import buildspace from "./_assets/buildspace.png";
+import arf from "./_assets/arf.gif";
+import arfg from "./_assets/arf-guild.gif";
+import aiarf from "./_assets/arf-ai.png";
+import blendeth from "./_assets/blend-eth.gif";
+import aboutme from "./_assets/aboutme.jpg";
+import hedge from "./_assets/hedge-ref.png";
+import ngx from "./_assets/ng-game.png";
+import nwb from "./_assets/nights+weekends.png";
+import web3intro from "./_assets/web3-intro.png";
+import web3mint from "./_assets/web3-mint.png";
+import polyens from "./_assets/ens.gif";
+import solana from "./_assets/solana-logo.png";
+import solPay from "./_assets/sol-store.gif";
+import solApp from "./_assets/sol-dapp.gif";
+import spline from "./_assets/spline.gif";
 
 const Projects = () => {
 

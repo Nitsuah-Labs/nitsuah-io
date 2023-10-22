@@ -1,11 +1,11 @@
 // src/app/pages/about.tsx
 import React from 'react';
-import HomeBar from '../_components/Homebar';
-import Footer from '../_components/Footer';
-import SplineScene from '../_components/spline-about';
+import HomeBar from '../_components/_site/Homebar';
+import Footer from '../_components/_site/Footer';
+import SplineScene from '../_components/_spline/spline-about';
 
 
-const About: React.FC = () => {
+const AboutPage: React.FC = () => {
   return (
     <div className="App">
       <div className="header">
@@ -23,4 +23,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default AboutPage;

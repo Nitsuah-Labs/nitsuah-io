@@ -1,17 +1,17 @@
+'use client'
 import React, { useEffect, useState } from "react";
-import "../styles/home.css";
+import "../_components/_styles/global.css";
 import Image from 'next/image';
-import HomeBar from "../_components/Homebar";
-import Footer from "../_components/Footer";
-import dao from "../../public/images/dao.png";
-import ledger from "../../public/images/ledger.png";
-import trail from "../../public/images/trailblazer.png";
-import mint from "../../public/images/mint.gif";
-import ape from "../../public/images/ape.png";
-import gaad from "../../public/images/gaad-poap.gif";
 import Button from '@mui/material/Button';
+import HomeBar from "../_components/_site/Homebar";
+import Footer from "../_components/_site/Footer";
+import dao from "./_assets/dao.png";
+import ledger from "./_assets/ledger.png";
+import trail from "./_assets/cbtb.png";
+import mint from "./_assets/mint.gif";
+import gaad from "./_assets/gaad-poap.gif";
   
-const Crypto = () => {
+const CryptoPage = () => {
 	
 	return (
 		<div className="App">
@@ -69,4 +69,4 @@ const Crypto = () => {
 	);
 };
   
-export default Crypto;
+export default CryptoPage;
