@@ -1,4 +1,7 @@
-import * as React from 'react';
+// src/components/HomeBar.tsx
+
+import React from 'react';
+import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,48 +20,39 @@ const settings = ['Profile', 'Logout'];
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
-
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h1"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-        <div className="center">
-              <p className="title">NITSUAH</p>
-        </div>
-          </Typography>
+          <Link href="/">
+            <Typography
+              variant="h1"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <div className="center">
+                <p className="title">NITSUAH</p>
+              </div>
+            </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -89,60 +83,30 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <Button
-                href="/"
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                HOME
-              </Button>
+              <Link href="/">
+                <Button sx={{ my: 2, color: 'black', display: 'block' }}>HOME</Button>
+              </Link>
               {pages.map((page) => (
-              <Button
-                key={page}
-                href={`/${page}`}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+                <Link key={page} href={`/${page}`}>
+                  <Button sx={{ my: 2, color: 'black', display: 'block' }}>{page}</Button>
+                </Link>
+              ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h1"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            <div className="center">
-              <p className="title">NITSUAH</p>
-            </div>
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                href={`/${page}`}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+
+          {/* Profile and Logout buttons as links */}
+          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <Link href="/profile">
+              <Button color="inherit" sx={{ mr: 2 }}>{settings[0]}</Button>
+            </Link>
+            <Link href="/logout">
+              <Button color="inherit">{settings[1]}</Button>
+            </Link>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
+
 export default HomeBar;
