@@ -1,39 +1,21 @@
-// src/app/page.tsx
+// src/app/pages.tsx
 import React from 'react';
-import { Account } from '../components/Account';
-import { Connect } from '../components/Connect';
-import { Connected } from '../components/Connected';
-import { MintNFT } from '../components/MintNFT';
-import { NetworkSwitcher } from '../components/NetworkSwitcher';
-import HomeBar from '../components/Homebar';
-import Footer from '../components/Footer';
-import SplineScene from '../components/Spline';
+import HomeBar from './_components/Homebar';
+import Footer from './_components/Footer';
+import SplineScene from './_components/spline-home';
 
-export function Page() {
+const Pages: React.FC = () => {
   return (
-    <>
     <div className="App">
-			<div className="container">
-				<div className="header">
-					<HomeBar>
-            <Connect />
-          </HomeBar>
-				</div>
-        <div className="middle-row">
-          <Connected>
-          <Account />
-          <MintNFT />
-          <NetworkSwitcher />
-        </Connected>
+        <div className="header">
+          <HomeBar />
         </div>
-				<div className="spline-container">
-					<SplineScene />
-				</div>
-					<Footer />
-			</div>
-		</div>
-    </>
+        <div className="spline-container">
+          <SplineScene />
+        </div>
+        <Footer />
+      </div>
   );
-}
+};
 
-export default Page;
+export default Pages;

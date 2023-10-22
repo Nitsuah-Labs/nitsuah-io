@@ -1,0 +1,630 @@
+.App {
+  height: 100vh;
+  background-color: #181818;
+  text-align: center;
+  color: #ffffff;
+}
+
+p {
+  margin:0;
+}
+
+.lab-container {
+  height: 100%;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.long-container {
+  height: 100%;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  justify-content: space-between;
+}
+
+
+.header-container {
+  padding-top: 10px;
+  display: flex;
+  text-align: center;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 5px 5px 5px;
+}
+
+.title {
+  margin: 0;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+}
+
+.subtitle {
+  font-size: 25px;
+  color: white;
+}
+
+.left{
+  text-align: left;
+  margin-left: 10%;
+}
+
+.logo{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.arf-logo {
+  width: 200px;
+  height: 200px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nft-preview {
+  width: 25%;
+  height: 25%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.med-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.right{
+  display: flex;
+  background: #181818;
+  border-radius: 16px;
+  padding: 12px 20px;
+  height: 99%;
+  margin-right: 10%;
+  margin-top: 10px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  background: grey;
+  border-radius: 5px;
+  background-image: linear-gradient(#d46a6a, #d46a6a);
+  background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #d60000;
+  cursor: pointer;
+  box-shadow: 0 0 2px 0 #555;
+  transition: 0.3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: #d46a6a50 0px 0px 0px 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  box-shadow: #d46a6a50 0px 0px 0px 11px;
+  transition: box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    bottom 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.lab-content-container {
+  background-color: #181818;
+}
+
+.cta-button {
+  height: 45px;
+  border: 0;
+  width: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.connect-wallet-container {
+  font-size: 16px;
+  user-select: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.connect-wallet-container img {
+  user-select: none;
+}
+
+.connect-wallet-button {
+  background-image: linear-gradient(
+    to right,
+    #07ac07 30%,
+    #000000 100%,
+    #07ac07 45%,
+    #000000 100%,
+    #07ac07 75%,
+    #000000 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+}
+
+.eth-wallet {
+  background: -webkit-linear-gradient(left, #000985, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.rink-wallet {
+  background: -webkit-linear-gradient(left, #fff01a, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.sol-wallet {
+  background: -webkit-linear-gradient(left, #059e00, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.cb-wallet {
+  background: -webkit-linear-gradient(left, #616bfa, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.mm-wallet {
+  background: -webkit-linear-gradient(left, #ff9100, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.poly-wallet {
+  background: -webkit-linear-gradient(left, #750691, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.mumbai-wallet {
+  background: -webkit-linear-gradient(left, #750691, #6b6b6b);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 10px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.purp-wallet {
+  background: -webkit-linear-gradient(left, #750691, #6b6b6b);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 10px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  width: auto;
+
+  text-align: center;
+  user-select: auto;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.purp-wallet-disabled {
+  background: -webkit-linear-gradient(left, #464646, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 10px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+  width: auto;
+  cursor: not-allowed;
+  text-align: center;
+  user-select: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.neutral-wallet {
+  background: -webkit-linear-gradient(left, #686868, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: none;
+  cursor: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.ajh-wallet {
+  background: -webkit-linear-gradient(left, #f60202, #000000);
+  background-size: 200% 200%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 10px 20px;
+  text-align: center;
+  user-select: none;
+  cursor: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.mint-button {
+  background: -webkit-linear-gradient(left, #d60000, #000000);
+  background-size: 100% 100%;
+  animation: gradient-animation 4s ease infinite;
+  margin: 20px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  width: auto;
+  padding: 20px;
+  text-align: center;
+  user-select: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.mint-button-disabled{
+  background: #636363;
+  color: rgb(209, 209, 209);
+  cursor: not-allowed;
+}
+
+.mint-text:disabled {
+  color: gray;
+  letter-spacing: 1px;
+}
+
+.mint-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-button{
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 3px;
+  top: 20px;
+  border: 0px;
+  font-size: 12px;
+  background-color: transparent;
+}
+
+.edit-icon{
+  width: 12px;
+}
+
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.twitter-logo {
+  width: 35px;
+  height: 35px;
+  user-select: none; 
+}
+
+.footer-text {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-container{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiFilledInput-root {
+  border-bottom: 2px solid #750691 !important;
+}
+
+input{
+  border: 0;
+  border-radius: 12px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  letter-spacing: 1px;
+  font-size: 14px;
+  width: 400px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+input::placeholder {
+  color: rgb(0, 0, 0);
+  letter-spacing: 1px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.zero-row{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.zero-bar{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 50%;
+  left: 25%;
+}
+
+.first-row{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.second-row{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+
+.tld {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  /* left: -70px; */
+  right: 22px;
+  margin: 0;  
+  padding: 0;
+  margin-bottom: 13px;
+}
+
+.mint-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.mint-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 10px 15px;
+  font-size: 18px;
+  background-color: #c4b7fa;
+  color: black;
+  min-width: 150px;
+  max-width: fit-content;
+  box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+/* Different background-colour for every nth mint-item */
+.mint-item:nth-child(2n) {
+  background-color: lightblue;
+}
+
+.mint-item:nth-child(3n) {
+  background-color: lightpink;
+}
+
+.mint-item:nth-child(5n) {
+  background-color: lightgreen;
+}
+
+.link{
+  color: rgb(234, 0, 255);
+  text-decoration: none;
+}
+
+.underlined{
+  text-decoration: underline;
+}
+
+.underlined:hover{
+  cursor: pointer;
+}
+
+.middle {
+  margin: 0;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  width: 100%;
+  height: 50%;
+  position: fixed;
+  margin: 5% auto; /* Will not center vertically and won't work in IE6/7. */
+  left: 0;
+  right: 0;
+}
+
+.middle-row {
+  margin: 0;
+  font-weight: bold;
+  flex-direction: row;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  top:10%;
+  left: 20%;
+  right: 20%;
+}
+
+/* KeyFrames */
+@-webkit-keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

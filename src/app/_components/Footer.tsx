@@ -3,8 +3,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import '../styles/home.css';
-import cat from '../../public/images/cat.png';
+import '../../styles/home.css';
+import cat from '../../../public/images/cat.png';
 
 // CONSTANTS
 const TWITTER_HANDLE = 'nitsuahlabs';
