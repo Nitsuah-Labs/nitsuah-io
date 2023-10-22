@@ -1,7 +1,9 @@
 // src/components/Footer.tsx
+'use client'
 
 import React from 'react';
 import Image from 'next/image';
+import '../styles/home.css';
 import cat from '../../public/images/cat.png';
 
 // CONSTANTS
