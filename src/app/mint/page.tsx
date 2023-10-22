@@ -1,7 +1,8 @@
 // src/app/mint/pages.tsx
 import React from 'react';
-import HomeBar from '../_components/Homebar';
-import Footer from '../_components/Footer';
+import "../_components/_styles/labs.css";
+import HomeBar from '../_components/_site/Homebar';
+import Footer from '../_components/_site/Footer';
 import { Account } from '../_components/_web3/Account';
 import { Connect } from '../_components/_web3/Connect';
 import { Connected } from '../_components/_web3/Connected';
@@ -20,8 +21,11 @@ const MintSite: React.FC = () => {
         <Connect />
           <Connected>
             <Account />
+            <br />
             <MintNFT />
+            <br />
             <NetworkSwitcher />
+            <br />
           </Connected>
         </div>
         <Footer />
