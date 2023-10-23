@@ -4,7 +4,7 @@ import { SnackbarProvider } from 'notistack';
 import Labslab from './components/Labslab.jsx';
 import Footer from './components/footer';
 
-const StakeSite = () => {
+const NSLookupSite = () => {
 	return (
 		<div className="App">
 			<div className="container">
@@ -20,4 +20,4 @@ const StakeSite = () => {
 	);
 };
   
-export default StakeSite;
+export default NSLookupSite;

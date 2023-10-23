@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import './styles/labs.css';
 import { SnackbarProvider, useSnackbar } from 'notistack';
