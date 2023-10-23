@@ -21,7 +21,7 @@ code {
 }
 
 p {
-  margin:0;
+  margin: 0;
 }
 
 .container {
@@ -39,7 +39,7 @@ p {
   text-align: center;
 }
 
-header{
+header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -58,18 +58,18 @@ header{
   color: white;
 }
 
-.left{
+.left {
   text-align: left;
   margin-left: 10%;
 }
 
-.logo{
+.logo {
   width: 20px;
   height: 20px;
   margin-right: 10px;
 }
 
-.right{
+.right {
   display: flex;
   background: #181818;
   border-radius: 16px;
@@ -210,18 +210,25 @@ header{
   z-index: -1;
 }
 
-.projects-container{
+.projects-container {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  align-items: flex-start;
+  margin: 5px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 5px;
+  overflow: hidden;
+  justify-content: center;
 }
 
 .projects-card {
-  margin: 1rem;
+  margin: 0px;
   padding: 1rem;
   height: 100px;
   width: 100px;
@@ -231,9 +238,13 @@ header{
   align-items: center;
   justify-content: center;
   position: relative;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   background-color: #1875d2;
   border-radius: 5px;
+}
+
+.projects-title {
+  margin-bottom: 5px;
 }
 
 .projects-text {
@@ -247,20 +258,36 @@ header{
 
 .projects-subtitle {
   position: absolute;
-  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-  text-align: center;
-  pointer-events: none;
-  color:#ffffff;
-  top: 85%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-shadow: 4px 4px 4px rgba(25, 0, 255, 0.5);
 }
+
+.projects-subtitle h4 {
+  margin: 0;
+}
+
+.proj-logo {
+  z-index: 1;
+}
+
+.tooltip-container {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.eth-wallet, .red-wallet {
+  margin-top: 10px;
+}
+
 
 .blogs-subtitle {
   position: absolute;
   text-align: center;
   pointer-events: none;
-  color:#050505;
+  color: #050505;
   top: 15%;
   left: 50%;
   padding-top: 5px;
@@ -300,19 +327,19 @@ header{
   cursor: pointer;
 }
 
-.mint-button-disabled{
+.mint-button-disabled {
   background: #ffe600;
   color: rgb(209, 209, 209);
   cursor: not-allowed;
 }
 
-.mint-row{
+.mint-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.edit-button{
+.edit-button {
   border-radius: 50%;
   cursor: pointer;
   margin-left: 3px;
@@ -322,10 +349,9 @@ header{
   background-color: transparent;
 }
 
-.edit-icon{
+.edit-icon {
   width: 12px;
 }
-
 
 .footer-container {
   display: flex;
@@ -336,13 +362,13 @@ header{
 .twitter-logo {
   width: 35px;
   height: 35px;
-  user-select: none; 
+  user-select: none;
 }
 
 .small-logo {
   width: 50px;
   height: 50px;
-  user-select: none; 
+  user-select: none;
 }
 
 .arf-logo {
@@ -366,7 +392,7 @@ header{
   font-weight: bold;
 }
 
-.form-container{
+.form-container {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -374,7 +400,7 @@ header{
   align-items: center;
 }
 
-.spline-container{
+.spline-container {
   display: flex;
   width: 100%;
   height: 75%;
@@ -383,7 +409,7 @@ header{
   align-items: center;
 }
 
-input{
+input {
   border: 0;
   border-radius: 12px;
   background-color: black;
@@ -405,7 +431,7 @@ input:focus {
   outline: none;
 }
 
-.zero-row{
+.zero-row {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -414,7 +440,7 @@ input:focus {
   margin-bottom: 10px;
 }
 
-.first-row{
+.first-row {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -423,7 +449,7 @@ input:focus {
   margin-bottom: 10px;
 }
 
-.second-row{
+.second-row {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -433,7 +459,6 @@ input:focus {
   user-select: none;
 }
 
-
 .tld {
   position: absolute;
   font-size: 20px;
@@ -441,7 +466,7 @@ input:focus {
   color: white;
   /* left: -70px; */
   right: 22px;
-  margin: 0;  
+  margin: 0;
   padding: 0;
   margin-bottom: 13px;
 }
@@ -486,16 +511,16 @@ input:focus {
   background-color: lightgreen;
 }
 
-.link{
+.link {
   color: black;
   text-decoration: none;
 }
 
-.underlined{
+.underlined {
   text-decoration: underline;
 }
 
-.underlined:hover{
+.underlined:hover {
   cursor: pointer;
 }
 
@@ -511,6 +536,7 @@ input:focus {
     background-position: 0% 50%;
   }
 }
+
 @-moz-keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -522,6 +548,7 @@ input:focus {
     background-position: 0% 50%;
   }
 }
+
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;

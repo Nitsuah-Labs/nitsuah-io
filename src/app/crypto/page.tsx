@@ -1,72 +1,58 @@
+// app/cryto/page.tsx
 'use client'
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../_components/_styles/global.css";
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
-import dao from "./_assets/dao.png";
+import dao from "./_assets/dao.gif";
 import ledger from "./_assets/ledger.png";
 import trail from "./_assets/cbtb.png";
 import mint from "./_assets/mint.gif";
 import gaad from "./_assets/gaad-poap.gif";
-  
+import Grid from '@mui/material/Grid';
+
+const web3Data = [
+  { title: "#LIVECRYPTO", link: "https://www.coinbase.com/livecrypto", image: "", button: true },
+  { title: "Trailblazer", link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259", image: trail },
+  { title: "Ledger", link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376", image: ledger },
+  { title: "DAO", link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0", image: dao },
+  { title: "#MintMadness", link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2", image: mint },
+  { title: "#GAAD", link: "https://app.poap.xyz/token/6633244", image: gaad },
+];
+
 const CryptoPage = () => {
-	
-	return (
-		<div className="App">
-			<div className="lab-container">
-			<HomeBar />
-				<div className="form-container">
-					<Button onClick={() => window.open("https://www.coinbase.com/livecrypto")} variant="contained" color="primary">
-					<h2>#LIVECRYPTO</h2>
-					</Button>
-					{/* // TODO replace table with GRID */}
-					<table>
-					<tr>
-					<td scope="row">
-						<div className="projects-card bg-blur">
-						<div className="projects-subtitle"><h4>Trailblazer</h4></div>	
-							<Image alt="" className="proj-logo" src={trail}  onClick={() => window.open("https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259")}/>
-						</div>
-					</td>
-					<td scope="row">
-						<div className="projects-card bg-blur">
-						<div className="projects-subtitle"><h4>Ledger</h4></div>	
-							<Image alt="" className="proj-logo" src={ledger}  onClick={() => window.open("https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376")}/>
-						</div>
-					</td>
-					</tr>
-					<tr>
-					<td scope="row">
-						<div className="projects-card bg-blur">
-						<div className="projects-subtitle"><h4>DAO</h4></div>	
-							<Image alt="" className="proj-logo" src={dao}  onClick={() => window.open("https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0")}/>
-						</div>
-					</td>
-					<td scope="row">
-						<div className="projects-card bg-blur">
-						<div className="projects-subtitle"><h4>#MintMadness</h4></div>	
-							<Image alt="" className="proj-logo" src={mint}  onClick={() => window.open("https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2")}/>
-						</div>
-					</td>
-					</tr>
-					<tr>
-					<td scope="row">
-						<div className="projects-card bg-blur">
-						<div className="projects-subtitle"><h4>#GAAD</h4></div>	
-							<Image alt="" className="proj-logo" src={gaad}  onClick={() => window.open("https://app.poap.xyz/token/6633244")}/>
-						</div>
-					</td>
-					</tr>
-				</table>
-					</div>
-				<div className="footer-container">
-					<Footer />
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="App">
+      <div className="lab-container">
+        <HomeBar />
+        <div className="lab-container">
+          <Grid container spacing={2}>
+            {web3Data.map((project, index) => (
+              <Grid key={index} item xs={4} sm={1} md={1} lg={2} xl={8}>
+                <div className="projects-card bg-blur" onClick={() => window.open(project.link)}>
+                  {project.button ? (
+                    <Button variant="contained" color="primary"><h3>{project.title}</h3></Button>
+                  ) : (
+                    <>
+                    <div className="image-container">
+                      <div className="projects-subtitle"><h4>{project.title}</h4></div>
+                      <Image alt="" className="proj-logo" src={project.image} />
+                      </div>
+                    </>
+                  )}
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+        <div className="footer-container">
+          <Footer />
+        </div>
+      </div>
+    </div>
+  );
 };
-  
+
 export default CryptoPage;

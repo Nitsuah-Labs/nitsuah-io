@@ -2,7 +2,7 @@
 'use client'
 import React from "react";
 import Image from 'next/image';
-import "../_components/_styles/labs.css";
+import '../../_components/_styles/labs.css';
 import mumbaiLogo from '../_components/_web3/_assets/mumbai.png';
 import polygonLogo from '../_components/_web3/_assets/polygonlogo.png';
 import LabNav from "../_components/_labs/LabNav";
