@@ -1,4 +1,4 @@
-// src/app/pages/about.tsx
+// ABOUT - src/app/pages/about.tsx
 import React from 'react';
 import HomeBar from '../_components/_site/Homebar';
 import Footer from '../_components/_site/Footer';

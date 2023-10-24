@@ -1,12 +1,14 @@
-// DOMAINS - src/app/labs/domains/page.tsx
+// DOMAINS - src/app/labs/domains/page.tsx //FIXME - props/etc
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "../_components/_styles/labs.css";
+import LabNav from '../../_components/_labs/LabNav';
+import LabFooter from '../../_components/_labs/LabFooter';
+import { Button, TextField, Grid, Box } from '@mui/material';
+
 import Image from 'next/image';
-import '../../_components/_styles/labs.css';
 import mumbaiLogo from '../_components/_web3/_assets/mumbai.png';
 import polygonLogo from '../_components/_web3/_assets/polygonlogo.png';
-import LabNav from "../_components/_labs/LabNav";
-import LabFooter from "../_components/_labs/LabFooter";
 import ethLogo from '../../assets/ethlogo.png';
 
 // CONSTANTS
