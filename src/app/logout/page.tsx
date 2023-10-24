@@ -1,4 +1,4 @@
-// src/app/logout/pages.tsx
+// src/app/logout/pages.tsx //TODO
 import React from 'react';
 import HomeBar from '../_components/_site/Homebar';
 import Footer from '../_components/_site/Footer';
