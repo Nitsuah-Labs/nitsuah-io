@@ -1,16 +1,16 @@
+// CLIENTS - src/app/projects/clients/page.tsx //FIXME
+'use client'
+import React, { useEffect, useState } from "react";
+import "../_components/_styles/labs.css";
+import LabNav from '../../_components/_labs/LabNav';
+import LabFooter from '../../_components/_labs/LabFooter';
+import { Button, TextField, Grid, Box } from '@mui/material';
+
+import { Account } from '../components/Account'
+import { Connect } from '../components/Connect'
 import { Connected } from '../components/Connected'
 import { MintNFT } from '../components/MintNFT'
 import { NetworkSwitcher } from '../components/NetworkSwitcher'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
-import "./styles/style.css";
-
-import { CoinbaseWrapper } from "./CoinbaseWrapper";
-import { ConnectWallet } from "./ConnectWallet";
-import { EnvelopeSimple } from "./EnvelopeSimple";
-import { Navigation } from "./Navigation";
-import { TwitterLogo } from "./TwitterLogo";
-import { WalletConnectWrapper } from "./WalletConnectWrapper";
 
 
 export const ConnectWalletScreen = (): JSX.Element => {
@@ -101,18 +101,18 @@ export const ConnectWalletScreen = (): JSX.Element => {
 export function Page() {
   return (
     <>
-      <Header></Header>
-      
+      <LabNav />
       <Connect />
-
       <Connected>
-	@@ -18,6 +114,8 @@ export function Page() {
+        <Account />
+        <hr />
+        <MintNFT />
         <hr />
         <NetworkSwitcher />
       </Connected>
-
-      <Footer></Footer>
+      <LabFooter />
     </>
   )
 }
-	
+
+export default Page
