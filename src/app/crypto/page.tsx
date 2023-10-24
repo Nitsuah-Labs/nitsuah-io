@@ -1,17 +1,18 @@
 // app/cryto/page.tsx
 'use client'
 import React from "react";
-import "../_components/_styles/global.css";
 import Image from 'next/image';
-import Button from '@mui/material/Button';
+import { Button, Grid } from '@mui/material';
+
+import "../_components/_styles/global.css";
 import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+
 import dao from "./_assets/dao.gif";
 import ledger from "./_assets/ledger.png";
 import trail from "./_assets/cbtb.png";
 import mint from "./_assets/mint.gif";
 import gaad from "./_assets/gaad-poap.gif";
-import Grid from '@mui/material/Grid';
 
 const web3Data = [
   { title: "#LIVECRYPTO", link: "https://www.coinbase.com/livecrypto", image: "", button: true },
@@ -25,12 +26,12 @@ const web3Data = [
 const CryptoPage = () => {
   return (
     <div className="App">
-      <div className="lab-container">
+        <div className="lab-container">
         <HomeBar />
         <div className="lab-container">
-          <Grid container spacing={2}>
-            {web3Data.map((project, index) => (
-              <Grid key={index} item xs={4} sm={1} md={1} lg={2} xl={8}>
+        <Grid container spacing={1}>
+        {web3Data.map((project, index) => (
+        <Grid key={index} item xs={6} sm={5} md={4} lg={3} xl={2}>
                 <div className="projects-card bg-blur" onClick={() => window.open(project.link)}>
                   {project.button ? (
                     <Button variant="contained" color="primary"><h3>{project.title}</h3></Button>
@@ -46,11 +47,11 @@ const CryptoPage = () => {
               </Grid>
             ))}
           </Grid>
-        </div>
-        <div className="footer-container">
+          </div>
+          <div className="footer-container">
           <Footer />
         </div>
-      </div>
+        </div>
     </div>
   );
 };

@@ -58,7 +58,7 @@ const Projects = () => {
   const renderProjsContainer = () => (
     <Grid container spacing={1}>
       {projectsData.map((project, index) => (
-        <Grid key={index} item xs={5} sm={5} md={4} lg={3} xl={2}>
+        <Grid key={index} item xs={6} sm={5} md={4} lg={3} xl={2}>
           <div className="projects-card bg-blur">
             <div className="projects-subtitle shadow">
               <h4>{project.title}</h4>

@@ -1,0 +1,66 @@
+.blog_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 320px;
+    height: 400px;
+    background-color: #141414;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgb(104, 104, 104);
+    /* background: url('../public/blur-bg.png') */
+  }
+  
+  .blog_image{
+    width: 140px;
+    background-color: #141414;
+  }
+  
+  .blog_details{
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+  }
+  
+  .blog_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .blog_title{
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 12px;
+  }
+
+  .projects-subtitle {
+    position: absolute;
+    text-align: center;
+    pointer-events: none;
+    color:#000000;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .blog_description{
+    color:rgb(186, 184, 184);
+  }
+  
+  .blog_action{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .blog_price{
+    font-size: 1.3em;
+  }

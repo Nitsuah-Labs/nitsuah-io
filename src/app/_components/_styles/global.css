@@ -1,5 +1,7 @@
 .App {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure at least full viewport height */
   background-color: #181818;
   text-align: center;
   color: white;
@@ -221,7 +223,8 @@ header {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  margin: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   gap: 5px;
   overflow: hidden;
   justify-content: center;
@@ -258,10 +261,21 @@ header {
 
 .projects-subtitle {
   position: absolute;
-  top: 15%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 4px 4px 4px rgba(25, 0, 255, 0.5);
+  font-size: 12px; /* Adjust the font size as needed */
+  color: white; /* Set the color of the original text */
+}
+
+.projects-subtitle-outline {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px; /* Same font size as the original text */
+  color: transparent; /* Make the text transparent */
+  -webkit-text-stroke: 2px rgba(25, 0, 255, 0.5); /* Create an outline with text-stroke */
 }
 
 .projects-subtitle h4 {
@@ -354,6 +368,7 @@ header {
 }
 
 .footer-container {
+  margin-top: auto; /* Push the footer to the bottom */
   display: flex;
   justify-content: center;
   align-items: center;

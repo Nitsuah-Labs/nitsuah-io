@@ -82,14 +82,15 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                color: 'blue'
               }}
             >
               <Link href="/">
-                <Button sx={{ my: 2, color: 'black', display: 'block' }}>HOME</Button>
+                <Button sx={{ my: 2, color: 'white', display: 'block' }}>HOME</Button>
               </Link>
               {pages.map((page) => (
                 <Link key={page} href={`/${page}`}>
-                  <Button sx={{ my: 2, color: 'black', display: 'block' }}>{page}</Button>
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page}</Button>
                 </Link>
               ))}
             </Menu>
@@ -98,10 +99,10 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           {/* Profile and Logout buttons as links */}
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Link href="/profile">
-              <Button color="inherit" sx={{ mr: 2 }}>{settings[0]}</Button>
+              <Button color="inherit" sx={{ mr: 2, color: 'white' }}>{settings[0]}</Button>
             </Link>
             <Link href="/logout">
-              <Button color="inherit">{settings[1]}</Button>
+              <Button color="inherit" sx={{ color: 'white' }}>{settings[1]}</Button>
             </Link>
           </Box>
         </Toolbar>
