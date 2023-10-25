@@ -2,7 +2,7 @@
 
 import { BaseError } from 'viem'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
-
+import Image from 'next/image';
 import PropTypes from "prop-types";
 import React from "react";
 import { Storefront } from "./Storefront";
@@ -33,7 +33,7 @@ export const Footer = ({
                 width: "32px",
               }}
             />
-            <img
+            <Image
               className="NFT-marketplace"
               alt="Nft marketplace"
               src={

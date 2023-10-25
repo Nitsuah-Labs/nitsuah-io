@@ -13,16 +13,34 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import AdbIcon from '@mui/icons-material/Adb';
-import HomeIcon from '@mui/icons-material/Home';
 
-interface LabBarProps {}
+interface LabNavProps {}
 
-// PAGES =  'token', 'stake', 'etc'
-const pages = ['register', 'mint', 'domains'];
-const settings = ['Profile', 'Logout'];
+const LAB_PAGES = ['register', 'mint', 'domains'];
+const SUB_PAGES = ['dao', 'lookup', 'stake', 'token', 'ai'];
+const SETTINGS = ['Profile', 'Logout'];
 
-const LabNav: React.FC<LabBarProps> = () => {
+const StyledMenu = (props: any) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
+    {...props}
+    sx={{
+      '& .MuiPaper-root': {
+        backgroundColor: 'black', // Set the background color here
+      },
+    }}
+  />
+);
+
+const LabNav: React.FC<LabNavProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,10 +52,10 @@ const LabNav: React.FC<LabBarProps> = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'red' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/">
+          <Link href="/labs/">
             <Typography
               variant="h1"
               noWrap
@@ -69,18 +87,10 @@ const LabNav: React.FC<LabBarProps> = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            <StyledMenu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
@@ -88,23 +98,28 @@ const LabNav: React.FC<LabBarProps> = () => {
               }}
             >
               <Link href="/">
-                <Button sx={{ my: 2, color: 'black', display: 'block' }}>HOME</Button>
+                <Button sx={{ my: 2, color: 'white', display: 'block' }}>HOME</Button>
               </Link>
-              {pages.map((page) => (
-                <Link key={page} href={`/${page}`}>
-                  <Button sx={{ my: 2, color: 'black', display: 'block' }}>{page}</Button>
+              {LAB_PAGES.map((page) => (
+                <Link key={page} href={`/labs/${page}`}>
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page}</Button>
                 </Link>
               ))}
-            </Menu>
+              {SUB_PAGES.map((page) => (
+                <Link key={page} href={`/labs/${page}`}>
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page}</Button>
+                </Link>
+              ))}
+            </StyledMenu>
           </Box>
 
           {/* Profile and Logout buttons as links */}
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <Link href="/profile">
-              <Button color="inherit" sx={{ mr: 2 }}>{settings[0]}</Button>
+              <Button color="inherit" sx={{ mr: 2, color: 'white' }}>{SETTINGS[0]}</Button>
             </Link>
             <Link href="/logout">
-              <Button color="inherit">{settings[1]}</Button>
+              <Button color="inherit" >{SETTINGS[1]}</Button>
             </Link>
           </Box>
         </Toolbar>

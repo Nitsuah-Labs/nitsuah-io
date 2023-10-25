@@ -1,12 +1,20 @@
-// MINT - src/app/labs/mint/page.tsx // REVIEW
+// MINT - src/app/labs/mint/page.tsx // TODO ADD MINTING LOGIC
+
 'use client'
 import React, { useEffect, useState } from "react";
-import "../_components/_styles/labs.css";
-import LabNav from '../../_components/_labs/LabNav';
-import LabFooter from '../../_components/_labs/LabFooter';
+import Image from 'next/image';
 import { Button, TextField, Grid, Box } from '@mui/material';
 
-import Image from 'next/image';
+// LAB STYLES
+import "../../_components/_styles/labs.css";
+import LabNav from '../../_components/_labs/LabNav';
+import LabFooter from '../../_components/_labs/LabFooter';
+
+// LAB ASSETS
+import mumbai from '../../_components/_web3/_assets/mumbai.png';	
+import polygonLogo from '../../_components/_web3/_assets/polygonlogo.png';
+import ethLogo from '../../_components/_web3/_assets/ethlogo.png';
+
 import { Account } from '../../_components/_web3/Account';
 import { Connect } from '../../_components/_web3/Connect';
 import { Connected } from '../../_components/_web3/Connected';
@@ -45,7 +53,9 @@ const MintSite: React.FC = () => {
             <br />
           </Connected>
         </div>
-        <LabFooter />
+        <div className="footer">
+          <LabFooter />
+        </div>
       </div>
     </div>
   );

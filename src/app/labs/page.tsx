@@ -1,12 +1,18 @@
 // LABS - src/app/labs/page.tsx
 'use client'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from 'next/image';
+import { Button, TextField, Grid, Box } from '@mui/material';
+
+// LAB STYLES
 import "../_components/_styles/labs.css";
-import mumbaiLogo from '../_components/_web3/_assets/mumbai.png';
+import LabNav from '../_components/_labs/LabNav';
+import LabFooter from '../_components/_labs/LabFooter';
+
+// LAB ASSETS
+import mumbai from '../_components/_web3/_assets/mumbai.png';	
 import polygonLogo from '../_components/_web3/_assets/polygonlogo.png';
-import LabNav from "../_components/_labs/LabNav";
-import LabFooter from "../_components/_labs/LabFooter";
+import ethLogo from '../_components/_web3/_assets/ethlogo.png';
 
 function renderOutput() {
   return (
@@ -20,7 +26,7 @@ function renderOutput() {
           </tr>
           <tr>
             <th scope="col"><div className="h4">FUNDS</div></th>
-            <td scope="row"><div className="purp-wallet"onClick={() => window.open("https://wiki.polygon.technology/docs/develop/tools/matic-faucet/")} ><h4><Image className="logo" src={mumbaiLogo} alt="Polygon logo"/>FAUCET</h4></div></td>
+            <td scope="row"><div className="purp-wallet"onClick={() => window.open("https://wiki.polygon.technology/docs/develop/tools/matic-faucet/")} ><h4><Image className="logo" src={mumbai} alt="Polygon logo"/>FAUCET</h4></div></td>
           </tr>
           <tr>
             <th scope="col"><div className="h4">SIGNUP</div></th>

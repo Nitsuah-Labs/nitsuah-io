@@ -4,11 +4,12 @@ import { BaseError } from 'viem'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import PropTypes from "prop-types";
 import React from "react";
+import Image from 'next/image';
 import { BurgerMenu } from "./BurgerMenu";
 import { Button } from "./Button";
 import { Storefront } from "./Storefront";
-import { User } from "./User";
-import "../styles/style.css";
+import { UserProfile } from "./userProfile";
+import "../_styles/client.css";
 
     interface Props {
       property1: "navigation-tablet" | "navigation-desktop" | "navigation-mobile";
@@ -22,7 +23,7 @@ import "../styles/style.css";
       style,
       NFTMarketplace = "NFT-marketplace.svg",
       buttonIcon = (
-        <User
+        <UserProfile
           style={{
             height: "20px",
             minWidth: "20px",
@@ -47,7 +48,7 @@ import "../styles/style.css";
                       width: "24px",
                     }}
                   />
-                  <img
+                  <Image
                     className="NFT-marketplace"
                     alt="Nft marketplace"
                     src={property1 === "navigation-tablet" ? "NFT-marketplace-2.svg" : "image.svg"}

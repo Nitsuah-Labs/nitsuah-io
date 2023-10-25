@@ -1,8 +1,21 @@
-// REGISTER - src/app/labs/register/page.tsx //REVIEW
-import React, { useState } from "react";
+// REGISTER - src/app/labs/register/page.tsx //FIXME
+'use client'
+
+import React, { useEffect, useState } from "react";
+import Image from 'next/image';
+import { Button, TextField, Grid, Box } from '@mui/material';
+
+// LAB STYLES
+import "../../_components/_styles/labs.css";
 import LabNav from '../../_components/_labs/LabNav';
 import LabFooter from '../../_components/_labs/LabFooter';
-import { Button, TextField, Grid } from '@mui/material';
+
+// LAB ASSETS
+import mumbai from '../../_components/_web3/_assets/mumbai.png';	
+import polygonLogo from '../../_components/_web3/_assets/polygonlogo.png';
+import ethLogo from '../../_components/_web3/_assets/ethlogo.png';
+
+// CONTRACT ASSETS
 import registerABI from '../../_components/_labs/_utils/registerABI.json';
 
 // CONSTANTS
@@ -14,7 +27,7 @@ const RegisterSite = () => {
   const [message, setMessage] = useState("");
 
   const register = async () => {
-    // FIXME Your registration logic here
+    // TODO Your registration logic here
   };
 
   const renderInput = () => (

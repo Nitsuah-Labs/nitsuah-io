@@ -1,6 +1,5 @@
 // src/components/Homebar.tsx
 'use client'
-
 import React from 'react';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
@@ -15,6 +14,26 @@ import Button from '@mui/material/Button';
 import '../_styles/global.css';
 
 interface HomeBarProps {}
+
+const StyledMenu = (props: any) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'left',
+    }}
+    {...props}
+    sx={{
+      '& .MuiPaper-root': {
+        backgroundColor: 'darkgrey', // Set the background color here
+      },
+    }}
+  />
+);
 
 const pages = ['about', 'crypto', 'projects', 'labs'];
 const settings = ['Profile', 'Logout'];
@@ -55,7 +74,9 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             </Typography>
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box 
+            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -66,23 +87,14 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Menu
+            <StyledMenu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
-                color: 'blue'
               }}
             >
               <Link href="/">
@@ -93,7 +105,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                   <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page}</Button>
                 </Link>
               ))}
-            </Menu>
+            </StyledMenu>
           </Box>
 
           {/* Profile and Logout buttons as links */}
