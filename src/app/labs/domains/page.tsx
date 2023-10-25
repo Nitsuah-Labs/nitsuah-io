@@ -1,15 +1,18 @@
 // DOMAINS - src/app/labs/domains/page.tsx //FIXME - props/etc
 'use client'
 import React, { useEffect, useState } from "react";
-import "../_components/_styles/labs.css";
-import LabNav from '../../_components/_labs/LabNav';
-import LabFooter from '../../_components/_labs/LabFooter';
+import Image from 'next/image';
 import { Button, TextField, Grid, Box } from '@mui/material';
 
-import Image from 'next/image';
-import mumbaiLogo from '../_components/_web3/_assets/mumbai.png';
-import polygonLogo from '../_components/_web3/_assets/polygonlogo.png';
-import ethLogo from '../../assets/ethlogo.png';
+// LAB STYLES
+import "../../_components/_styles/labs.css";
+import LabNav from '../../_components/_labs/LabNav';
+import LabFooter from '../../_components/_labs/LabFooter';
+
+// LAB ASSETS
+import mumbai from '../../_components/_web3/_assets/mumbai.png';	
+import polygonLogo from '../../_components/_web3/_assets/polygonlogo.png';
+import ethLogo from '../../_components/_web3/_assets/ethlogo.png';
 
 // CONSTANTS
 const tld = '.nitsuah.eth';
@@ -317,7 +320,7 @@ const DomainSite = () => {
                     <div className="zero-row">
                       <div className='neutral-wallet'><h4>STEP 3: Switch network</h4></div>
                       <Button onClick={() => { switchNetwork(); refreshPage(); }} variant="contained" color="secondary">
-                      <img className="logo" src={mumbaiLogo} alt="polygon logo grey"/>POLYGON MUMBAI
+                      <img className="logo" src={mumbai} alt="polygon mumbai logo grey"/>POLYGON MUMBAI
                       </Button>
                     </div>
                   </div>
@@ -439,24 +442,20 @@ const DomainSite = () => {
 
 	return (
 		<div className="App">
-			<Labslab />
-			<SnackbarProvider maxSnack={3}>
-			<ErrorBoundary>
-				<div className="form-container">
-					<h2>SUB-DOMAIN PORTAL</h2>
-					<div className="mint-container">
-					{/* Display a logo and wallet connection status*/}
-					{!currentAccount && renderNotConnectedContainer()}
-					{/* Return the input form if an account is connected */}
-					{currentAccount && renderInputForm()}
-					{/* Return recent mints */}
-					{mints && renderMints()}
-					</div>
-					< Footer />
-				</div>
-				</ErrorBoundary>
-			</SnackbarProvider>
+		<LabNav />
+		<div className="form-container">
+			<h2>SUB-DOMAIN PORTAL</h2>
+			<div className="mint-container">
+			{/* Display a logo and wallet connection status*/}
+			{!currentAccount && renderNotConnectedContainer()}
+			{/* Return the input form if an account is connected */}
+			{currentAccount && renderInputForm()}
+			{/* Return recent mints */}
+			{mints && renderMints()}
 		</div>
+		<LabFooter />
+		</div>
+	</div>
 	);
 };
 

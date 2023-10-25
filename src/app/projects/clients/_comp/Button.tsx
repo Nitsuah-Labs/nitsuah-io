@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { RocketLaunch } from "./rocket";
-import "./_styles/client.css";
+import "../_styles/client.css";
 
 interface Props {
   hasLeftIcon: boolean;

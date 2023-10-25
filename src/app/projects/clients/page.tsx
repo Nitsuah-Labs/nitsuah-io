@@ -1,118 +1,49 @@
+// src/app/projects/clients/page.tsx
 // CLIENTS - src/app/projects/clients/page.tsx //FIXME
-'use client'
-import React, { useEffect, useState } from "react";
+'use client';
 import "../_components/_styles/labs.css";
-import LabNav from '../../_components/_labs/LabNav';
-import LabFooter from '../../_components/_labs/LabFooter';
+import React from 'react';
+import { Navigation } from './_comp/Header';
+import { Footer } from './_comp/Footer';
 import { Button, TextField, Grid, Box } from '@mui/material';
 
-import { Account } from '../components/Account'
-import { Connect } from '../components/Connect'
-import { Connected } from '../components/Connected'
-import { MintNFT } from '../components/MintNFT'
-import { NetworkSwitcher } from '../components/NetworkSwitcher'
+// WEB3
+import { Connect } from '../../_components/_web3/Connect';
+import { Connected } from '../../_components/_web3/Connected';
+import { Account } from '../../_components/_web3/Account';
+import { MintNFT } from '../../_components/_web3/MintNFT';
+import { NetworkSwitcher } from '../../_components/_web3/NetworkSwitcher';
 
+const OPENSEA_URL = "https://testnets.opensea.io/assets/";
+const NETSCAN_URL = "https://mumbai.polygonscan.com/tx/";
+const SCAN_LINK = "https://mumbai.polygonscan.com/address/";
+const OPENSEA_LINK = "https://testnets.opensea.io/collection/";
+const MetaMaskURL = "https://metamask.io/download/";
+const CBWalletURL = "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
+const MaticURL = "https://wallet.matic.network/";
 
-export const ConnectWalletScreen = (): JSX.Element => {
+const MintExample: React.FC = () => {
   return (
-    <div className="connect-wallet-screen">
-      <Navigation
-        NFTMarketplace="NFT-marketplace-2.svg"
-        property1="navigation-mobile"
-        style={{
-          alignSelf: "stretch",
-          width: "unset",
-        }}
-      />
-      <ConnectWallet
-        href="https://www.animaapp.com/?utm_source=figma-samples&utm_campaign=figma-nftmarket&utm_medium=figma-samples"
-        href1="https://www.animaapp.com/?utm_source=figma-samples&utm_campaign=figma-nftmarket&utm_medium=figma-samples"
-        href2="https://www.animaapp.com/?utm_source=figma-samples&utm_campaign=figma-nftmarket&utm_medium=figma-samples"
-        imagePlaceholder="image.png"
-        override={
-          <CoinbaseWrapper
-            style={{
-              backgroundImage: "url(coinbase-2.svg)",
-              height: "32px",
-              minWidth: "32px",
-              position: "relative",
-              width: "unset",
-            }}
-          />
-        }
-        screen="mobile"
-        style={{
-          alignSelf: "stretch",
-          width: "unset",
-        }}
-        walletButton={
-          <WalletConnectWrapper
-            style={{
-              backgroundImage: "url(wallet-connect-3.svg)",
-              height: "32px",
-              minWidth: "32px",
-              position: "relative",
-              width: "unset",
-            }}
-          />
-        }
-        walletButtonMetamaskWrapperMetamaskStyle={{
-          backgroundImage: "url(metamask-2.svg)",
-          height: "32px",
-          minWidth: "32px",
-          position: "relative",
-          width: "unset",
-        }}
-      />
-      <Footer
-        NFTMarketplace="NFT-marketplace-3.svg"
-        divider="divider-2.svg"
-        icon={
-          <TwitterLogo
-            style={{
-              height: "32px",
-              minWidth: "32px",
-              position: "relative",
-            }}
-          />
-        }
-        screen="mobile"
-        style={{
-          alignSelf: "stretch",
-          height: "auto",
-          mixBlendMode: "normal",
-          width: "unset",
-        }}
-        subscribeWidgetButtonIcon={
-          <EnvelopeSimple
-            style={{
-              height: "20px",
-              minWidth: "20px",
-              position: "relative",
-            }}
-          />
-        }
-      />
+    <div className="App">
+      <div className="container">
+        <div className="header">
+          <Navigation property1="navigation-desktop" style={{/* //TODO your style object */}} NFTMarketplace="NFT-marketplace.svg" buttonIcon={<Button />} />
+        </div>
+        <div className="middle-row">
+          <Connect />
+          <Connected>
+            <Account />
+            <br />
+            <MintNFT />
+            <br />
+            <NetworkSwitcher />
+            <br />
+          </Connected>
+        </div>
+        <Footer screen="desktop" style={{/* your style object */}} subscribeWidget={<YourSubscribeWidgetComponent />} />
+      </div>
     </div>
   );
 };
 
-
-export function Page() {
-  return (
-    <>
-      <LabNav />
-      <Connect />
-      <Connected>
-        <Account />
-        <hr />
-        <MintNFT />
-        <hr />
-        <NetworkSwitcher />
-      </Connected>
-      <LabFooter />
-    </>
-  )
-}
-
-export default Page
+export default MintExample;

@@ -38,6 +38,7 @@ const Projects = () => {
     { title: "darkmoon.dev", image: darkmoon, link: "https://darkmoon.dev" },
     { title: "3DX", image: spline, link: "/" },
     { title: "NEXTGEN", image: ngx, link: "https://nft.darkmoon.dev/play" },
+    { title: "CLIENTS", image: cat, link: "/projects/clients" },
     { title: "Profile", image: buildspace, link: "https://buildspace.so/@nitsuah", btnUrl: "https://buildspace.so/join", btnTxt: "Join me! - https://buildspace.so/join" },
     { title: "ENS NFT", image: polyens, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179", btnUrl: "https://buildspace.so/p/build-polygon-ens", btnTxt: "ENS NFT" },
     { title: "NFT Store", image: solPay, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051", btnUrl: "https://buildspace.so/p/ship-solana-nft-collection", btnTxt: "NFT Store" },
