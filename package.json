@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@wagmi/cli": "^1.0.0",
-    "next": "^13.5.4",
+    "next": "^14.2.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "viem": "~0.3.36",
