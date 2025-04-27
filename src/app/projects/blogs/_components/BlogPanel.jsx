@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import styles from "../styles/Blog.module.css";
+import styles from "../_styles/Blog.module.css";
 import Image from 'next/image';
 
 export default function BlogPanel({ blog }) {

@@ -1,0 +1,12 @@
+# robots.txt for nitsuah-io personal resume site
+
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /private/
+
+# Allow all other pages
+Allow: /
+
+# Sitemap location
+Sitemap: https://nitsuah-io.com/sitemap.xml
