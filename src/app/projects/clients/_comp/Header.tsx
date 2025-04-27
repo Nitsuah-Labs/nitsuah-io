@@ -21,7 +21,7 @@ import "../_styles/client.css";
     export const Navigation = ({
       property1,
       style,
-      NFTMarketplace = "NFT-marketplace.svg",
+      NFTMarketplace = "/images/NFT-marketplace.svg",
       buttonIcon = (
         <UserProfile
           style={{
@@ -66,9 +66,9 @@ import "../_styles/client.css";
                       position: "absolute",
                       top: "0",
                       width: "32px",
-                    }}
+                    }} 
                   />
-                  <Image className="img" alt="Nft marketplace" src={NFTMarketplace} />
+                  <Image className="img" alt="Nft marketplace" src={NFTMarketplace} width={32} height={32} />
                 </>
               )}
             </div>

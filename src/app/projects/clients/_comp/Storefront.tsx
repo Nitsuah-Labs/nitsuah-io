@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   style: any;
+  color?: string; // Add the color prop
 }
 
 export const Storefront = ({ style }: Props): JSX.Element => {
