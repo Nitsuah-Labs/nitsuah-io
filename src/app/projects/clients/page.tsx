@@ -1,7 +1,7 @@
 // src/app/projects/clients/page.tsx
 // CLIENTS - src/app/projects/clients/page.tsx //FIXME
 'use client';
-import "../_components/_styles/labs.css";
+import "./_styles/client.css";
 import React from 'react';
 import { Navigation } from './_comp/Header';
 import { Footer } from './_comp/Footer';
@@ -27,7 +27,7 @@ const MintExample: React.FC = () => {
     <div className="App">
       <div className="container">
         <div className="header">
-          <Navigation property1="navigation-desktop" style={{/* //TODO your style object */}} NFTMarketplace="NFT-marketplace.svg" buttonIcon={<Button />} />
+          <Navigation property1="navigation-desktop" style={{/* //TODO your style object */}} NFTMarketplace="/images/NFT-marketplace.svg" buttonIcon={<Button />} />
         </div>
         <div className="middle-row">
           <Connect />
@@ -40,7 +40,7 @@ const MintExample: React.FC = () => {
             <br />
           </Connected>
         </div>
-        <Footer screen="desktop" style={{/* your style object */}} subscribeWidget={<YourSubscribeWidgetComponent />} />
+        <Footer screen="desktop" style={{/* your style object */}} subscribeWidget={<div />} />
       </div>
     </div>
   );

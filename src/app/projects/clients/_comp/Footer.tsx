@@ -6,7 +6,7 @@ import Image from 'next/image';
 import PropTypes from "prop-types";
 import React from "react";
 import { Storefront } from "./Storefront";
-import "../styles/style.css";
+import "../_styles/client.css";
 
 interface Props {
   screen: "desktop" | "tablet" | "mobile";
@@ -17,6 +17,7 @@ interface Props {
 export const Footer = ({
   screen,
   style,
+  subscribeWidget, // add this prop
 }: Props): JSX.Element => {
   return (
     <div className={`footer ${screen}`} style={style}>
@@ -38,11 +39,13 @@ export const Footer = ({
               alt="Nft marketplace"
               src={
                 screen === "tablet"
-                  ? "image.svg"
+                  ? "/image.svg"
                   : screen === "mobile"
-                  ? "NFT-marketplace-2.svg"
-                  : "NFT-marketplace.svg"
+                  ? "/images/NFT-marketplace-2.svg"
+                  : "/images/NFT-marketplace.svg"
               }
+              width={32}
+              height={32}
             />
           </div>
           <div className="additional-info">
@@ -65,6 +68,7 @@ export const Footer = ({
         <div className="subscribe">
           <div className="join-our-weekly">Join Our Weekly Digest</div>
           <div className="subscribe-form-info">
+            {subscribeWidget}
           </div>
         </div>
       </div>
