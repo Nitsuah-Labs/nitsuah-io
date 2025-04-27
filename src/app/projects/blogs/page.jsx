@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "./styles/home.css";
+import "./_styles/Blog.module.css";
 import BlogPanel from "./_components/BlogPanel.jsx";
-import HomeBar from "./_components/homebar.js";
-import HomeFooter from "./_components/footer.js";
-  
+import HomeBar from "../../../app/_components/_site/Homebar";
+import Footer from "../../../app/_components/_site/Footer";
+
 const Blogsite = () => {
 	const { publicKey } = "0x85C67d169A7bc00b252C2f3274c472a25c03b77d";
 	const [blogs, setBlogs] = useState([]);
@@ -34,7 +34,7 @@ const Blogsite = () => {
 		<div className="App">
 			<div className="container">
 				<div className="header">
-				<HomeBar />
+					<HomeBar />
 				</div>
 				<div className="project-container">
 					<h2>BLOGS</h2>
@@ -42,7 +42,7 @@ const Blogsite = () => {
 					{renderBlogContainer()}
 					</div>
 				<div className="footer-container">
-					<HomeFooter />
+					<Footer />
 				</div>
 			</div>
 		</div>
