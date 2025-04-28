@@ -1,8 +1,20 @@
-// DOMAINS - src/app/labs/domains/page.tsx //FIXME - props/etc
+// DOMAINS - src/app/labs/domains/page.tsx
 'use client'
 import React, { useEffect, useState } from "react";
 import Image from 'next/image';
 import { Button, TextField, Grid, Box } from '@mui/material';
+import {
+  useAccount,
+  useNetwork as useWagmiNetwork,
+  useSwitchNetwork,
+  useContractRead,
+  useContractWrite,
+  useWaitForTransaction,
+  usePrepareContractWrite,
+  useContractReads,
+} from 'wagmi';
+import contractAbi from '../../_components/_labs/_utils/domainABI.json';
+import { Abi } from 'viem';
 
 // LAB STYLES
 import "../../_components/_styles/labs.css";
@@ -13,6 +25,7 @@ import LabFooter from '../../_components/_labs/LabFooter';
 import mumbai from '../../_components/_web3/_assets/mumbai.png';	
 import polygonLogo from '../../_components/_web3/_assets/polygonlogo.png';
 import ethLogo from '../../_components/_web3/_assets/ethlogo.png';
+import icons180 from '../../_components/_labs/_assets/icons180.png';
 
 // CONSTANTS
 const tld = '.nitsuah.eth';
@@ -22,18 +35,18 @@ const CONTRACT_ADDRESS = '0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163';
 const MetaMaskURL = "https://metamask.io/download/";
 const CBWalletURL = "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
-class ErrorBoundary extends React.Component {
-	constructor(props) {
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+	constructor(props: { children: React.ReactNode }) {
 	  super(props);
 	  this.state = { hasError: false };
 	}
   
-	static getDerivedStateFromError(error) {
+	static getDerivedStateFromError(error: Error): { hasError: boolean } {
 	  // Update state so the next render will show the fallback UI.
 	  return { hasError: true };
 	}
   
-	componentDidCatch(error, errorInfo) {
+	componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
 	  // You can also log the error to an error reporting service
 	  console.log(error, errorInfo);
 	}
@@ -41,252 +54,178 @@ class ErrorBoundary extends React.Component {
 	render() {
 	  if (this.state.hasError) {
 		// You can render any custom fallback UI
-		return <ErrorFallback />;
+		return <div>An error occurred. Please try again later.</div>;
 	  }
   
 	  return this.props.children;
 	}
 } 
 
+// Define the networks object with chain IDs and their corresponding network names
+const networks = {
+  '0x1': 'Ethereum Mainnet',
+  '0x3': 'Ropsten Testnet',
+  '0x4': 'Rinkeby Testnet',
+  '0x5': 'Goerli Testnet',
+  '0x2a': 'Kovan Testnet',
+  '0x89': 'Polygon Mainnet',
+  '0x13881': 'Polygon Mumbai Testnet',
+};
+
 const DomainSite = () => {
-	const [currentAccount, setCurrentAccount] = useState('');
 	const [domain, setDomain] = useState('');
-  	const [record, setRecord] = useState('');
-	const [network, setNetwork] = useState('');
+  const [record, setRecord] = useState('');
 	const [editing, setEditing] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	// Add a stateful array at the top next to all the other useState calls
-	const [mints, setMints] = useState([]);
-
-	const connectWallet = async () => {
-		try {
-		const { ethereum } = window;
-
-		if (!ethereum) {
-			const key = props.enqueueSnackbar('No connection!', { 
-				variant: 'error',
-				persist: true,
-			});
-        	console.log('WALLET 404 - Not Found');
-			return;
-		}
-				
-		const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
-		setCurrentAccount(accounts[0]);
-		} catch (error) {
-			alert(error);
-		}
+	interface Mint {
+		id: number;
+		name: string;
+		record: string;
+		owner: string;
 	}
+	const [mints, setMints] = useState<Mint[]>([]);
+	const { address: currentAccount, isConnected } = useAccount();
+	const { chain } = useWagmiNetwork();
+	const { switchNetwork: wagmiSwitchNetwork, isLoading: isSwitchingNetwork } = useSwitchNetwork();
 
-	const checkIfWalletIsConnected = async () => {
-		const { ethereum } = window;
+	// Get current network name from wagmi
+	const network = chain?.name || '';
 
-		if (!ethereum) {
-			console.log('WALLET 404 - Not Found');
-			return;
-		} else {
-			console.log('Wallet Found', ethereum);
-		}
-
-		const accounts = await ethereum.request({ method: 'eth_accounts' });
-
-		if (accounts.length !== 0) {
-			const account = accounts[0];
-			console.log('Account Found:', account);
-			setCurrentAccount(account);
-		} else {
-			console.log('Wallet 403 - Not Connected');
-			return;
-		}
-		const chainId = await ethereum.request({ method: 'eth_chainId' });
-			setNetwork(networks[chainId]);
-
-			ethereum.on('chainChanged', handleChainChanged);
-			
-			// Reload the page when they change networks
-			function handleChainChanged(_chainId) {
-			window.location.reload();
-			}
+	// Prepare contract config
+	const contractConfig = {
+		abi: contractAbi.abi as Abi,
 	};
 
-	const switchNetwork = async () => {
-		if (window.ethereum) {
-		  try {
-			// Try to switch to the Mumbai testnet
-			await window.ethereum.request({
-			  method: 'wallet_switchEthereumChain',
-			  params: [{ chainId: '0x13881' }], // Check networks.js for hexadecimal network ids
-			});
-		  } catch (error) {
-			// This error code means that the chain we want has not been added to MetaMask
-			// In this case we ask the user to add it to their MetaMask
-			if (error.code === 4902) {
-			  try {
-				await window.ethereum.request({
-				  method: 'wallet_addEthereumChain',
-				  params: [
-					{	
-					  chainId: '0x13881',
-					  chainName: 'Polygon Mumbai Testnet',
-					  rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
-					  nativeCurrency: {
-						  name: "Mumbai Matic",
-						  symbol: "MATIC",
-						  decimals: 18
-					  },
-					  blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
-					},
-				  ],
-				});
-			  } catch (error) {
-				console.log(error);
-			  }
-			}
-			console.log(error);
-		  }
-		} else {
-		  // If window.ethereum is not found then MetaMask is not installed
-		  alert('MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html');
-		} 
-	  }
+	// Read all names (domains)
+	const { data: names, refetch: refetchNames } = useContractRead({
+			...contractConfig,
+			functionName: 'getAllNames',
+			enabled: isConnected,
+		});
 
-	const mintDomain = async () => {
-		// Don't run if the domain is empty
-		if (!domain) {
-			alert('Domain cannot be empty');
-			return;
-		}
+	// Batch read records and owners for all names using useContractReads
+	const recordCalls = (names as string[] | undefined)?.map((name: string) => ({
+		...contractConfig,
+		functionName: 'records',
+		args: [name],
+	}));
+	const ownerCalls = (names as string[] | undefined)?.map((name: string) => ({
+		...contractConfig,
+		functionName: 'domains',
+		args: [name],
+	}));
+	const { data: records } = useContractReads({
+		contracts: recordCalls || [],
+		enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
+	});
+	const { data: owners } = useContractReads({
+		contracts: ownerCalls || [],
+		enabled: !!names && (ownerCalls?.length ?? 0) > 0,
+	});
 
-		// Alert the user if the domain is too long
-		if (domain.length > 6) {
-			alert('Domain cannot be more than 6 characters long');
-			return;
-		}
-
-		// Special Character control
-		function containsSpecialChars(str) {
-			const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-			return specialChars.test(str);
-		  }
-
-		if (containsSpecialChars(domain)) {
-			alert('⛔️ Domain cannot contain special characters');
-			return;
-		  }
-
-		// Calculate price based on length of domain (change this to match your contract)	
-		// 1 chars = 100 MATIC, 2 chars = 50 MATIC, 3 chars = 25 MATIC, 4 chars = 12 MATIC, 5 or more = 10 MATIC
-		const price = domain.length === 1 ? '1' : domain.length === 2 ? '.5' : domain.length === 3 ? '.2' : domain.length === 4 ? '.1' : '.1';
-		console.log("MINTING DOMAIN:", domain, " PRICE:", price);
-		try {
-			const { ethereum } = window;
-			if (ethereum) {
-				const provider = new ethers.providers.Web3Provider(ethereum);
-				const signer = provider.getSigner();
-				const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
-
-				console.log("Going to pop wallet now to pay gas...")
-				let tx = await contract.register(domain, {value: ethers.utils.parseEther(price)});
-				// Wait for the transaction to be mined - //TODO - replace with snackbar
-					alert("Confirming mint - please dont refresh! https://mumbai.polygonscan.com/tx/"+tx.hash);
-					const receipt = await tx.wait();
-
-				// Check if the transaction was successfully completed
-				if (receipt.status === 1) {
-					alert("Domain minted! https://mumbai.polygonscan.com/tx/"+tx.hash);
-					
-					// Set the record for the domain
-					tx = await contract.setRecord(domain, record);
-					await tx.wait();
-
-					alert("Record set! https://mumbai.polygonscan.com/tx/"+tx.hash);
-        
-					// Call fetchMints after 2 seconds
-					setTimeout(() => {
-					  fetchMints();
-					}, 4000);
-			
-					setRecord('');
-					setDomain('');
-				  } else {
-					alert("Transaction failed! Please try again");
-				  }
-				  }
-				} catch(error) {
-				  alert(error);
-			}
-		}
-
-	// Add this function anywhere in your component (maybe after the mint function)
-	const fetchMints = async () => {
-		try {
-		const { ethereum } = window;
-		if (ethereum) {
-			// TODO - THIS IS BROKEN CURRENTLY!
-			const provider = new ethers.providers.Web3Provider(ethereum);
-			const signer = provider.getSigner();
-			const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
-			
-			// Get all the domain names from our contract
-			const names = await contract.getAllNames();
-			
-			// For each name, get the record and the address
-			const mintRecords = await Promise.all(names.map(async (name) => {
-			const mintRecord = await contract.records(name);
-			const owner = await contract.domains(name);
-			return {
-			id: names.indexOf(name),
-			name: name,
-			record: mintRecord,
-			owner: owner,
-			};
-		}));
-	
-		console.log("MINTS FETCHED ", mintRecords);
-		setMints(mintRecords);
-		}
-		} catch(error){
-		console.log(error);
-		}
-	}
-
+	// Set mints when names, records, and owners are available
 	useEffect(() => {
-		checkIfWalletIsConnected();
-	}, []);
+		if (Array.isArray(names) && Array.isArray(records) && Array.isArray(owners)) {
+			setMints(
+				names.map((name: string, idx: number) => ({
+					id: idx,
+					name,
+					record: String(records[idx]?.result || ''),
+					owner: String(owners[idx]?.result || ''),
+				}))
+			);
+		}
+	}, [names, records, owners]);
+
+	// Connect wallet (handled by wagmi, so just a placeholder for UI)
+	const connectWallet = () => {
+		// wagmi handles connection via Connect button elsewhere
+		alert('Please use the Connect Wallet button in the UI.');
+	};
+
+	// Switch network using wagmi if available, otherwise fallback to MetaMask prompt
+	const handleSwitchNetwork = () => {
+		if (wagmiSwitchNetwork) {
+			wagmiSwitchNetwork(80001); // Polygon Mumbai chainId
+		} else if (window.ethereum) {
+			window.ethereum.request({
+				method: 'wallet_switchEthereumChain',
+				params: [{ chainId: '0x13881' }],
+			});
+		} else {
+			alert('MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html');
+		}
+	};
 
 	// This will run any time currentAccount or network are changed
 	useEffect(() => {
 		if (network === 'Polygon Mumbai Testnet') {
-		fetchMints();
+			refetchNames();
 		}
-	}, [currentAccount, network]);
-	
+	}, [isConnected, network, refetchNames]);
+
+	// Write: Register domain
+	const { config: registerConfig } = usePrepareContractWrite({
+		...contractConfig,
+		functionName: 'register',
+		args: [domain],
+		overrides: {
+			value: BigInt(
+				domain.length === 1
+					? 1e18
+					: domain.length === 2
+					? 5e17
+					: domain.length === 3
+					? 2e17
+					: 1e17
+			),
+		},
+		enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
+	});
+	const { write: registerDomain, data: registerTx } = useContractWrite(registerConfig);
+	const { isLoading: isRegistering, isSuccess: isRegistered } = useWaitForTransaction({
+		hash: registerTx?.hash,
+	});
+
+	// Write: Set record
+	const { config: setRecordConfig } = usePrepareContractWrite({
+				...contractConfig,
+				functionName: 'setRecord',
+				args: [domain, record],
+				value: BigInt(0), // Add value as BigInt zero
+				enabled: !!domain && !!record,
+			});
+	const { write: setRecordWrite, data: setRecordTx } = useContractWrite(setRecordConfig);
+	const { isLoading: isSettingRecord, isSuccess: isRecordSet } = useWaitForTransaction({
+		hash: setRecordTx?.hash,
+	});
+
+	// Mint Domain logic
+	const mintDomain = async () => {
+		if (!domain) {
+			alert('Domain cannot be empty');
+			return;
+		}
+		if (domain.length > 6) {
+			alert('Domain cannot be more than 6 characters long');
+			return;
+		}
+		if (containsSpecialChars(domain)) {
+			alert('⛔️ Domain cannot contain special characters');
+			return;
+		}
+		registerDomain?.();
+	};
+
+	// Update Domain logic
 	const updateDomain = async () => {
 		if (!record || !domain) { return }
 		setLoading(true);
-		console.log("Updating domain", domain, "with record", record);
-		  try {
-		  const { ethereum } = window;
-		  if (ethereum) {
-			const provider = new ethers.providers.Web3Provider(ethereum);
-			const signer = provider.getSigner();
-			const contract = new ethers.Contract(CONTRACT_ADDRESS, contractAbi.abi, signer);
-	  
-			let tx = await contract.setRecord(domain, record);
-			await tx.wait();
-			console.log("Record set https://mumbai.polygonscan.com/tx/"+tx.hash);
-	  
-			fetchMints();
-			setRecord('');
-			setDomain('');
-		  }
-		  } catch(error) {
-			console.log(error);
-		  }
+		setRecordWrite?.();
 		setLoading(false);
-	  }
+	}
 
 	// Render methods
 	const renderNotConnectedContainer = () => (
@@ -314,12 +253,16 @@ const DomainSite = () => {
 	const renderInputForm = () => {
 		// If not on Polygon Mumbai Testnet, render the switch button
 		if (network !== 'Polygon Mumbai Testnet') {
+			function refreshPage() {
+				window.location.reload();
+			}
+
 			return (
               <div>
                   <div className="connect-wallet-container">
                     <div className="zero-row">
                       <div className='neutral-wallet'><h4>STEP 3: Switch network</h4></div>
-                      <Button onClick={() => { switchNetwork(); refreshPage(); }} variant="contained" color="secondary">
+					  <Button onClick={() => { handleSwitchNetwork(); refreshPage(); }} variant="contained" color="secondary">
                       <Image className="logo" src={mumbai} alt="polygon mumbai logo grey"/>POLYGON MUMBAI
                       </Button>
                     </div>
@@ -365,7 +308,7 @@ const DomainSite = () => {
 			  onChange={e => setRecord(e.target.value)}
 			/>
 			{/* Return the current Wallet */}
-			{ currentAccount ? <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><Image alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)} </div> : <Button variant='error'> Not connected </Button> }
+			{ currentAccount ? <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><Image alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)} </div> : <Button variant="contained" color="error"> Not connected </Button> }
 			<div className="zero-row">
 					<Grid container spacing={2}>
 						<Grid item xs={16} sm={10}>
@@ -434,11 +377,18 @@ const DomainSite = () => {
 	};
 	
 	// This will take us into edit mode and show us the edit buttons!
-	const editRecord = (name) => {
+	interface Mint {
+		id: number;
+		name: string;
+		record: string;
+		owner: string;
+	}
+
+	const editRecord = (name: string): void => {
 		console.log("Editing record for", name);
 		setEditing(true);
 		setDomain(name);
-	}
+	};
 
 	return (
 		<div className="App">
@@ -458,5 +408,10 @@ const DomainSite = () => {
 	</div>
 	);
 };
+
+function containsSpecialChars(str: string): boolean {
+	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+	return specialChars.test(str);
+}
 
 export default DomainSite;
