@@ -52,12 +52,12 @@ const MintSite: React.FC = () => {
             <NetworkSwitcher />
             <br />
           </Connected>
-        </div>
-        <div className="footer">
-          <LabFooter />
+          <div className="footer">
+              <LabFooter />
+          </div>
         </div>
       </div>
-    </div>
+  </div>
   );
 };
 

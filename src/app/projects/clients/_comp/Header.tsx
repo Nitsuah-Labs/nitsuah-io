@@ -98,6 +98,8 @@ import "../_styles/client.css";
                 <Button
                   icon={buttonIcon}
                   property1="secondary-filled"
+                  hasLeftIcon={true}
+                  hasText={true}
                   style={{
                     padding: "0px 30px",
                   }}
