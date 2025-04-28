@@ -171,17 +171,14 @@ const DomainSite = () => {
 		...contractConfig,
 		functionName: 'register',
 		args: [domain],
-		overrides: {
-			value: BigInt(
-				domain.length === 1
-					? 1e18
-					: domain.length === 2
-					? 5e17
-					: domain.length === 3
-					? 2e17
-					: 1e17
-			),
-		},
+		value: 
+			domain.length === 1
+				? BigInt(1e18)
+				: domain.length === 2
+				? BigInt(5e17)
+				: domain.length === 3
+				? BigInt(2e17)
+				: BigInt(1e17),
 		enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
 	});
 	const { write: registerDomain, data: registerTx } = useContractWrite(registerConfig);
