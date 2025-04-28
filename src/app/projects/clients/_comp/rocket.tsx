@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   style: any;
+  color?: string;
 }
 
 export const RocketLaunch = ({ style }: Props): JSX.Element => {

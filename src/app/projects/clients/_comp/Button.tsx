@@ -7,6 +7,7 @@ interface Props {
   hasLeftIcon: boolean;
   hasText: boolean;
   text: string;
+  icon?: JSX.Element;
   property1:
     | "primary-filled"
     | "secondary-outlined"

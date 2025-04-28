@@ -320,12 +320,12 @@ const DomainSite = () => {
                     <div className="zero-row">
                       <div className='neutral-wallet'><h4>STEP 3: Switch network</h4></div>
                       <Button onClick={() => { switchNetwork(); refreshPage(); }} variant="contained" color="secondary">
-                      <img className="logo" src={mumbai} alt="polygon mumbai logo grey"/>POLYGON MUMBAI
+                      <Image className="logo" src={mumbai} alt="polygon mumbai logo grey"/>POLYGON MUMBAI
                       </Button>
                     </div>
                   </div>
                 <div className="zero-row">
-                  <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><img alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount} </div>
+                  <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><Image alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount} </div>
                 </div>
             </div>
 			);
@@ -335,7 +335,7 @@ const DomainSite = () => {
 		  <div className="form-container">
 			<div className="zero-row">
 				<span  style={{ position: 'relative', display: 'inline-block' }}>
-					<img src={icons180} alt="svg icon 180" />
+					<Image src={icons180} alt="svg icon 180" />
 					<h3 style={{
 						position: 'absolute',
 						bottom: 0,
@@ -365,7 +365,7 @@ const DomainSite = () => {
 			  onChange={e => setRecord(e.target.value)}
 			/>
 			{/* Return the current Wallet */}
-			{ currentAccount ? <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><img alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)} </div> : <Button variant='error'> Not connected </Button> }
+			{ currentAccount ? <div className={ network.includes("Polygon") ? "poly-wallet" : "eth-wallet"}><Image alt="Network logo" className="logo" src={ network.includes("Polygon") ? polygonLogo : ethLogo} /> {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)} </div> : <Button variant='error'> Not connected </Button> }
 			<div className="zero-row">
 					<Grid container spacing={2}>
 						<Grid item xs={16} sm={10}>
@@ -418,7 +418,7 @@ const DomainSite = () => {
 							{/* If mint.owner is currentAccount, add an "edit" button*/}
 							{ mint.owner.toLowerCase() === currentAccount.toLowerCase() ?
 							<button className="edit-button" onClick={() => editRecord(mint.name)}>
-								<img className="edit-icon" src="https://img.icons8.com/metro/26/000000/pencil.png" alt="Edit button" />
+								<Image className="edit-icon" src="https://img.icons8.com/metro/26/000000/pencil.png" alt="Edit button" />
 							</button>
 							:
 							null
