@@ -23,10 +23,10 @@ const Blogsite = () => {
 	const renderBlogContainer = () => (
 		<div className="blogs-container">
 				{blogs.map((blog) => (
-					<div className="blogs-card bg-blur">
-					<BlogPanel key={blog.id} blog={blog} />
-					</div>
-				))}
+  <div className="blogs-card bg-blur" key={blog.id}>
+    <BlogPanel blog={blog} />
+  </div>
+))}
 		</div>
 	);
 

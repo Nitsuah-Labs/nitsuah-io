@@ -55,25 +55,27 @@ const LabNav: React.FC<LabNavProps> = () => {
     <AppBar position="static" sx={{ backgroundColor: 'red' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/labs/">
-            <Typography
-              variant="h1"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              <div className="center">
-                <p className="title">NITSUAH</p>
-              </div>
-            </Typography>
+          <Link href="/labs/" passHref legacyBehavior>
+            <a style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Typography
+                variant="h1"
+                noWrap
+                component="span"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                <div className="center">
+                  <p className="title">NITSUAH</p>
+                </div>
+              </Typography>
+            </a>
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
