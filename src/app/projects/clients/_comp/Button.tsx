@@ -15,7 +15,7 @@ interface Props {
     | "tertiary-filled"
     | "tertiary-outlined"
     | "secondary-filled";
-  style: any;
+  style: React.CSSProperties;
 }
 
 export const Button = ({

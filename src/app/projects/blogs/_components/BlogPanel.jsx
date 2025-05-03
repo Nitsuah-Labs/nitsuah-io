@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import PropTypes from 'prop-types';
 import styles from "../_styles/Blog.module.css";
 import Image from 'next/image';
 
@@ -24,3 +25,12 @@ export default function BlogPanel({ blog }) {
     </div>
   );
 }
+
+BlogPanel.propTypes = {
+  blog: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    description: PropTypes.string,
+    image_url: PropTypes.string,
+  }).isRequired,
+};
