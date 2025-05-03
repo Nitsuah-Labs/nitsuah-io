@@ -17,6 +17,7 @@
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^0.9.486",
     "@wagmi/cli": "^1.0.0",
+    "bufferutil": "^4.0.9",
     "encoding": "^0.1.13",
     "lokijs": "^1.5.12",
     "next": "^13.5.4",
@@ -24,6 +25,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.34.1",
+    "utf-8-validate": "^6.0.5",
     "viem": "~0.3.36",
     "wagmi": "^1.4.13"
   },
