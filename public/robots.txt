@@ -3,6 +3,13 @@
 User-agent: *
 Disallow: /admin/
 Disallow: /login/
+Disallow: /logout/
+Disallow: /register/
+Disallow: /labs/
+Disallow: /api/
+Disallow: /profile/
+Disallow: /about/
+Disallow: /projects
 Disallow: /private/
 
 # Allow all other pages
