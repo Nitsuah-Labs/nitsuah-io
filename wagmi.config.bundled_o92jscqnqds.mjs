@@ -4,15 +4,15 @@ import { etherscan, react } from "@wagmi/cli/plugins";
 import * as chains from "wagmi/chains";
 var wagmi_config_default = defineConfig(() => {
   const env = loadEnv({
-    mode: process.env.NODE_ENV,
-    envDir: process.cwd()
+    mode: typeof process !== "undefined" ? process.env.NODE_ENV : undefined,
+    envDir: typeof process !== "undefined" ? process.cwd() : undefined
   });
   return {
     out: "src/generated.ts",
     contracts: [],
     plugins: [
       etherscan({
-        apiKey: process.env.ETHERSCAN_API_KEY,
+        apiKey: typeof process !== "undefined" ? process.env.ETHERSCAN_API_KEY : undefined,
         chainId: chains.mainnet.id,
         contracts: [
           {

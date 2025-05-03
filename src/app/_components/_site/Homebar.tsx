@@ -13,9 +13,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import '../_styles/global.css';
 
-interface HomeBarProps {}
+// Replace empty interface with object type
+type HomeBarProps = object;
 
-const StyledMenu = (props: any) => (
+const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   <Menu
     elevation={0}
     anchorOrigin={{

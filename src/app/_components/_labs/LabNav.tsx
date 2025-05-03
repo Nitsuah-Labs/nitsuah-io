@@ -14,13 +14,15 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-interface LabNavProps {}
+// Replace empty interface with object type
+type LabNavProps = object;
 
 const LAB_PAGES = ['register', 'mint', 'domains'];
 const SUB_PAGES = ['dao', 'lookup', 'stake', 'token', 'ai'];
 const SETTINGS = ['Profile', 'Logout'];
 
-const StyledMenu = (props: any) => (
+// Replace any with proper Menu props type
+const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   <Menu
     elevation={0}
     anchorOrigin={{

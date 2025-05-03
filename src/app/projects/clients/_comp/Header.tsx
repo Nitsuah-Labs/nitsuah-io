@@ -13,7 +13,7 @@ import "../_styles/client.css";
 
     interface Props {
       property1: "navigation-tablet" | "navigation-desktop" | "navigation-mobile";
-      style: any;
+      style: React.CSSProperties;
       NFTMarketplace: string;
       buttonIcon: JSX.Element;
     }

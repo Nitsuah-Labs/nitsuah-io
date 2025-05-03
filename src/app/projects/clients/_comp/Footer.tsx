@@ -10,7 +10,7 @@ import "../_styles/client.css";
 
 interface Props {
   screen: "desktop" | "tablet" | "mobile";
-  style: any;
+  style: React.CSSProperties;
   subscribeWidget: JSX.Element;
 }
 

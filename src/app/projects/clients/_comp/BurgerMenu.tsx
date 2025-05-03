@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  style: any;
+  style: React.CSSProperties;
 }
 
 export const BurgerMenu = ({ style }: Props): JSX.Element => {

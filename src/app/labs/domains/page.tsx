@@ -407,7 +407,7 @@ const DomainSite = () => {
 };
 
 function containsSpecialChars(str: string): boolean {
-	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+	const specialChars = /[ `!@#$%^&*()_+\-=\[{};':"\\|,.<>/?~]/;
 	return specialChars.test(str);
 }
 
