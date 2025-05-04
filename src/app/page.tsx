@@ -1,25 +1,21 @@
-import { Account } from '../components/Account'
-import { Connect } from '../components/Connect'
-import { Connected } from '../components/Connected'
-import { MintNFT } from '../components/MintNFT'
-import { NetworkSwitcher } from '../components/NetworkSwitcher'
+// HOMEPAGE - src/app/pages.tsx
+import React from 'react';
+import HomeBar from './_components/_site/Homebar';
+import Footer from './_components/_site/Footer';
+import SplineScene from './_components/_spline/spline-home';
 
-export function Page() {
+const HomePage: React.FC = () => {
   return (
-    <>
-      <h1>wagmi + Next.js + @wagmi/cli (Etherscan)</h1>
+    <div className="App">
+        <div className="header">
+          <HomeBar />
+        </div>
+        <div className="spline-container">
+          <SplineScene />
+        </div>
+        <Footer />
+      </div>
+  );
+};
 
-      <Connect />
-
-      <Connected>
-        <Account />
-        <hr />
-        <MintNFT />
-        <hr />
-        <NetworkSwitcher />
-      </Connected>
-    </>
-  )
-}
-
-export default Page
+export default HomePage;
