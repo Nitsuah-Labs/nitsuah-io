@@ -12,7 +12,7 @@ export default defineConfig(() => {
     contracts: [],
     plugins: [
       etherscan({
-        apiKey: env.ETHERSCAN_API_KEY!,
+        apiKey: process.env.ETHERSCAN_API_KEY!,
         chainId: chains.mainnet.id,
         contracts: [
           {
@@ -20,6 +20,7 @@ export default defineConfig(() => {
             address: {
               [chains.mainnet.id]: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
               [chains.goerli.id]: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+              [chains.polygonMumbai.id]: '0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8',
             },
           },
         ],

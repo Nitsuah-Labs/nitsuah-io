@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "COURSE 1",
+    "description": "A treasured piece of art. A quick proof of concept Non-fungible token for Solana.",
+    "image_url": "https://tokens.buildspace.so/assets/CH7d48e8c6-b978-4ae0-be41-15af47573425-74/render.png",
+    "filename": "",
+    "hash": "Qmcc9nvGwaYfPHZRqB3EbCudqbTc5Z5e15hSwyVAoKXa9V"
+  },
+  {
+    "id": 2,
+    "name": "COURSE2",
+    "description": "NITSUAH - Concepts of Proof on Solana",
+    "image_url": "https://tokens.buildspace.so/assets/CHc4f6a1ec-dfa6-4679-9ad3-59301b7f2bee-44/render.png",
+    "filename": "",
+    "hash": "QmNTYoBTUVhMaRZtMiLTvZquLt81GZGQjtjaTFn19nS8vU"
+  }
+]
