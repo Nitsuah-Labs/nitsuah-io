@@ -26,7 +26,7 @@
     "react-dom": "^18.2.0",
     "sharp": "^0.34.1",
     "utf-8-validate": "^6.0.5",
-    "viem": "~0.3.36",
+    "viem": "~2.37.6",
     "wagmi": "^1.4.13"
   },
   "devDependencies": {
