@@ -20,7 +20,7 @@
     "bufferutil": "^4.0.9",
     "encoding": "^0.1.13",
     "lokijs": "^1.5.12",
-    "next": "^14.2.26",
+    "next": "^15.5.5",
     "pino-pretty": "^10.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
