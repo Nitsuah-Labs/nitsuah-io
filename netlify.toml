@@ -1,0 +1,47 @@
+# Netlify configuration for nitsuah.io
+
+[build]
+  command = "next build"
+  publish = ".next"
+  
+[build.environment]
+  NODE_VERSION = "18.20.8"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Deploy previews (PR builds)
+[context.deploy-preview]
+  command = "next build"
+
+# Production builds
+[context.production]
+  command = "next build"
+
+# Branch deploys
+[context.branch-deploy]
+  command = "next build"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects (if needed in the future)
+# [[redirects]]
+#   from = "/old-path"
+#   to = "/new-path"
+#   status = 301
