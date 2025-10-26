@@ -1,4 +1,10 @@
 import { Providers } from './providers'
+import { 
+  generatePersonSchema, 
+  generateOrganizationSchema, 
+  generateWebSiteSchema,
+  generateBreadcrumbSchema 
+} from '../lib/schema'
 
 export const metadata = {
   title: 'Austin J. Hardy | Developer & Researcher | nitsuah.io',
@@ -55,8 +61,31 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const personSchema = generatePersonSchema();
+  const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebSiteSchema();
+  const breadcrumbSchema = generateBreadcrumbSchema();
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

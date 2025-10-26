@@ -1,19 +1,58 @@
-# robots.txt for nitsuah-io personal resume site
+# robots.txt for nitsuah.io - Austin J. Hardy's Personal Portfolio
 
 User-agent: *
+# Allow main content areas
+Allow: /
+Allow: /about
+Allow: /projects
+Allow: /labs
+
+# Disallow admin and authentication areas
 Disallow: /admin/
 Disallow: /login/
 Disallow: /logout/
 Disallow: /register/
-Disallow: /labs/
-Disallow: /api/
 Disallow: /profile/
-Disallow: /about/
-Disallow: /projects
 Disallow: /private/
 
-# Allow all other pages
+# Disallow API endpoints and internal files
+Disallow: /api/
+Disallow: /_next/
+Disallow: /*.json$
+Disallow: /.*
+
+# Allow specific bots full access
+User-agent: Googlebot
 Allow: /
 
-# Sitemap location
-Sitemap: https://nitsuah-io.com/sitemap.xml
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block problematic bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Crawl delay for general bots
+Crawl-delay: 1
+
+# Sitemap locations
+Sitemap: https://nitsuah.io/sitemap.xml
+Sitemap: https://nitsuah.io/sitemap-index.xml
+
+# Host directive (helps with canonical URL)
+Host: nitsuah.io
