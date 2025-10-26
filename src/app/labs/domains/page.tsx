@@ -14,7 +14,6 @@ import {
   useContractReads,
 } from 'wagmi';
 import contractAbi from '../../_components/_labs/_utils/domainABI.json';
-import { Abi } from 'viem';
 
 // LAB STYLES
 import "../../_components/_styles/labs.css";
@@ -95,7 +94,7 @@ const DomainSite = () => {
 
 	// Prepare contract config
 	const contractConfig = {
-		abi: contractAbi.abi as Abi,
+		abi: contractAbi.abi as any,
 	};
 
 	// Read all names (domains)
@@ -129,7 +128,7 @@ const DomainSite = () => {
 	useEffect(() => {
 		if (Array.isArray(names) && Array.isArray(records) && Array.isArray(owners)) {
 			setMints(
-				names.map((name: string, idx: number) => ({
+				(names as string[]).map((name: string, idx: number) => ({
 					id: idx,
 					name,
 					record: String(records[idx]?.result || ''),
@@ -149,8 +148,8 @@ const DomainSite = () => {
 	const handleSwitchNetwork = () => {
 		if (wagmiSwitchNetwork) {
 			wagmiSwitchNetwork(80001); // Polygon Mumbai chainId
-		} else if (window.ethereum) {
-			window.ethereum.request({
+		} else if ((window as any).ethereum) {
+			(window as any).ethereum.request({
 				method: 'wallet_switchEthereumChain',
 				params: [{ chainId: '0x13881' }],
 			});
@@ -371,6 +370,7 @@ const DomainSite = () => {
 			</div>
 		);
 		}
+		return null;
 	};
 	
 	// This will take us into edit mode and show us the edit buttons!
