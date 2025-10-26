@@ -5,7 +5,9 @@ import { Button, Grid } from "@mui/material";
 import Image from 'next/image';
 import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+import SelectedProjects from "../_components/_site/SelectedProjects";
 import "../_components/_styles/global.css";
+import "../_components/_styles/SelectedProjects.css";
 import darkmoon from "./_assets/darkmoon.gif";
 import nitsuah from "./_assets/NITSUAH.png";
 import cat from "./_assets/cat.png";
@@ -95,6 +97,7 @@ const Projects = () => {
           <div className="header">
             <HomeBar />
           </div>
+          <SelectedProjects />
           <div className="projects-container">
             {renderProjsContainer()}
           </div>
