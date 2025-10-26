@@ -1,15 +1,17 @@
-import { Providers } from './providers'
-import { 
-  generatePersonSchema, 
-  generateOrganizationSchema, 
+import { Providers } from './providers';
+import {
+  generatePersonSchema,
+  generateOrganizationSchema,
   generateWebSiteSchema,
-  generateBreadcrumbSchema 
-} from '../lib/schema'
+  generateBreadcrumbSchema,
+} from '../lib/schema';
 
 export const metadata = {
   title: 'Austin J. Hardy | Developer & Researcher | nitsuah.io',
-  description: 'Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments. Austin J. Hardy\'s selected projects and technical work.',
-  keywords: 'Austin Hardy, nitsuah, developer, cryptography, Web3, Python, Next.js, portfolio, blockchain, automation',
+  description:
+    "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments. Austin J. Hardy's selected projects and technical work.",
+  keywords:
+    'Austin Hardy, nitsuah, developer, cryptography, Web3, Python, Next.js, portfolio, blockchain, automation',
   authors: [{ name: 'Austin J. Hardy', url: 'https://nitsuah.io' }],
   creator: 'Austin J. Hardy',
   publisher: 'Austin J. Hardy',
@@ -23,10 +25,11 @@ export const metadata = {
     url: 'https://nitsuah.io',
     siteName: 'nitsuah.io',
     title: 'Austin J. Hardy | Developer & Researcher',
-    description: 'Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.',
+    description:
+      'Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.',
     images: [
       {
-        url: '/social-preview.png',
+        url: '/social-preview.svg', // TODO: Convert to PNG for better social media compatibility
         width: 1200,
         height: 630,
         alt: 'Austin J. Hardy - Developer & Researcher Portfolio',
@@ -36,8 +39,9 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Austin J. Hardy | Developer & Researcher',
-    description: 'Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.',
-    images: ['/social-preview.png'],
+    description:
+      'Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.',
+    images: ['/social-preview.svg'], // TODO: Convert to PNG for better compatibility
     creator: '@nitsuah',
   },
   robots: {
@@ -52,15 +56,16 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual verification code
+    // TODO: Add Google Search Console verification code
+    // 1. Go to https://search.google.com/search-console
+    // 2. Add property for https://nitsuah.io
+    // 3. Choose "HTML tag" verification method
+    // 4. Copy the content value from the meta tag and add here as: google: 'your-code-here'
+    // google: 'your-verification-code-here',
   },
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const personSchema = generatePersonSchema();
   const organizationSchema = generateOrganizationSchema();
   const websiteSchema = generateWebSiteSchema();
@@ -90,5 +95,5 @@ export default function RootLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }
