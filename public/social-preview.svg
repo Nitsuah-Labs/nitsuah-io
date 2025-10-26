@@ -1,0 +1,46 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f172a"/>
+  
+  <!-- Gradient overlay -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grad1)"/>
+  
+  <!-- Main content -->
+  <text x="600" y="200" font-family="Arial, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="#f8fafc">
+    Austin J. Hardy
+  </text>
+  
+  <text x="600" y="260" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#94a3b8">
+    Developer &amp; Researcher
+  </text>
+  
+  <!-- Project highlights -->
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#cbd5e1">
+    Cryptography Research • Enterprise Automation • Web3 Development
+  </text>
+  
+  <!-- Website -->
+  <text x="600" y="420" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#3b82f6">
+    nitsuah.io
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="200" cy="150" r="4" fill="#3b82f6" opacity="0.6"/>
+  <circle cx="1000" cy="480" r="6" fill="#60a5fa" opacity="0.4"/>
+  <circle cx="150" cy="450" r="3" fill="#93c5fd" opacity="0.5"/>
+  <circle cx="1050" cy="180" r="5" fill="#dbeafe" opacity="0.3"/>
+  
+  <!-- Code-like decorative elements -->
+  <rect x="100" y="500" width="60" height="4" fill="#374151" opacity="0.6"/>
+  <rect x="180" y="500" width="40" height="4" fill="#6b7280" opacity="0.6"/>
+  <rect x="240" y="500" width="80" height="4" fill="#374151" opacity="0.6"/>
+  
+  <rect x="1000" y="120" width="50" height="4" fill="#374151" opacity="0.6"/>
+  <rect x="1070" y="120" width="70" height="4" fill="#6b7280" opacity="0.6"/>
+</svg>
