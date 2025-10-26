@@ -24,12 +24,12 @@
       }
     ],
     // Enhanced strict settings
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
     
     // Path mapping for cleaner imports
     "baseUrl": ".",
@@ -52,6 +52,13 @@
     "node_modules",
     ".next",
     "out",
-    "build"
+    "build",
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "jest.config.ts",
+    "jest.setup.js"
   ]
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { featuredProjects, Project } from '../../lib/data/projects';
+import { featuredProjects, Project } from '../../../lib/data/projects';
 
 interface ProjectCardProps {
   project: Project;
