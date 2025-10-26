@@ -1,9 +1,17 @@
 import {
-  createUseReadContract,
-  createUseWriteContract,
-  createUseSimulateContract,
-  createUseWatchContractEvent,
-} from 'wagmi/codegen'
+  useNetwork,
+  useChainId,
+  useContractRead,
+  UseContractReadConfig,
+  useContractWrite,
+  Address,
+  UseContractWriteConfig,
+  usePrepareContractWrite,
+  UsePrepareContractWriteConfig,
+  useContractEvent,
+  UseContractEventConfig,
+} from 'wagmi';
+import { ReadContractResult, WriteContractMode, PrepareWriteContractResult } from 'wagmi/actions';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WagmiMintExample
@@ -14,30 +22,15 @@ import {
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const wagmiMintExampleAbi = [
-  { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
+export const wagmiMintExampleABI = [
+  { stateMutability: 'nonpayable', type: 'constructor', inputs: [] },
   {
     type: 'event',
     anonymous: false,
     inputs: [
-      {
-        name: 'owner',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
-      {
-        name: 'approved',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
-      {
-        name: 'tokenId',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: true,
-      },
+      { name: 'owner', internalType: 'address', type: 'address', indexed: true },
+      { name: 'approved', internalType: 'address', type: 'address', indexed: true },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256', indexed: true },
     ],
     name: 'Approval',
   },
@@ -45,18 +38,8 @@ export const wagmiMintExampleAbi = [
     type: 'event',
     anonymous: false,
     inputs: [
-      {
-        name: 'owner',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
-      {
-        name: 'operator',
-        internalType: 'address',
-        type: 'address',
-        indexed: true,
-      },
+      { name: 'owner', internalType: 'address', type: 'address', indexed: true },
+      { name: 'operator', internalType: 'address', type: 'address', indexed: true },
       { name: 'approved', internalType: 'bool', type: 'bool', indexed: false },
     ],
     name: 'ApprovalForAll',
@@ -67,16 +50,12 @@ export const wagmiMintExampleAbi = [
     inputs: [
       { name: 'from', internalType: 'address', type: 'address', indexed: true },
       { name: 'to', internalType: 'address', type: 'address', indexed: true },
-      {
-        name: 'tokenId',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: true,
-      },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256', indexed: true },
     ],
     name: 'Transfer',
   },
   {
+    stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
       { name: 'to', internalType: 'address', type: 'address' },
@@ -84,23 +63,23 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'approve',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
     name: 'balanceOf',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     name: 'getApproved',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [
       { name: 'owner', internalType: 'address', type: 'address' },
@@ -108,37 +87,31 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'isApprovedForAll',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
   },
+  { stateMutability: 'nonpayable', type: 'function', inputs: [], name: 'mint', outputs: [] },
   {
-    type: 'function',
-    inputs: [],
-    name: 'mint',
-    outputs: [],
     stateMutability: 'nonpayable',
-  },
-  {
     type: 'function',
     inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     name: 'mint',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [],
     name: 'name',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     name: 'ownerOf',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
       { name: 'from', internalType: 'address', type: 'address' },
@@ -147,9 +120,9 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'safeTransferFrom',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
+    stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
       { name: 'from', internalType: 'address', type: 'address' },
@@ -159,9 +132,9 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'safeTransferFrom',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
+    stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
       { name: 'operator', internalType: 'address', type: 'address' },
@@ -169,37 +142,37 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'setApprovalForAll',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
     name: 'supportsInterface',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [],
     name: 'symbol',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'pure',
     type: 'function',
     inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     name: 'tokenURI',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'pure',
   },
   {
+    stateMutability: 'view',
     type: 'function',
     inputs: [],
     name: 'totalSupply',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
   },
   {
+    stateMutability: 'nonpayable',
     type: 'function',
     inputs: [
       { name: 'from', internalType: 'address', type: 'address' },
@@ -208,9 +181,8 @@ export const wagmiMintExampleAbi = [
     ],
     name: 'transferFrom',
     outputs: [],
-    stateMutability: 'nonpayable',
   },
-] as const
+] as const;
 
 /**
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
@@ -221,7 +193,7 @@ export const wagmiMintExampleAddress = {
   1: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
   5: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
   80001: '0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8',
-} as const
+} as const;
 
 /**
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
@@ -230,366 +202,731 @@ export const wagmiMintExampleAddress = {
  */
 export const wagmiMintExampleConfig = {
   address: wagmiMintExampleAddress,
-  abi: wagmiMintExampleAbi,
-} as const
+  abi: wagmiMintExampleABI,
+} as const;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExample = /*#__PURE__*/ createUseReadContract({
-  abi: wagmiMintExampleAbi,
-  address: wagmiMintExampleAddress,
-})
+export function useWagmiMintExampleRead<
+  TFunctionName extends string,
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"balanceOf"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"balanceOf"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleBalanceOf =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleBalanceOf<
+  TFunctionName extends 'balanceOf',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'balanceOf',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"getApproved"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"getApproved"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleGetApproved =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleGetApproved<
+  TFunctionName extends 'getApproved',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'getApproved',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"isApprovedForAll"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"isApprovedForAll"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleIsApprovedForAll =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleIsApprovedForAll<
+  TFunctionName extends 'isApprovedForAll',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'isApprovedForAll',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"name"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"name"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleName = /*#__PURE__*/ createUseReadContract({
-  abi: wagmiMintExampleAbi,
-  address: wagmiMintExampleAddress,
-  functionName: 'name',
-})
+export function useWagmiMintExampleName<
+  TFunctionName extends 'name',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
+    functionName: 'name',
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"ownerOf"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"ownerOf"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleOwnerOf =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleOwnerOf<
+  TFunctionName extends 'ownerOf',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'ownerOf',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"supportsInterface"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"supportsInterface"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleSupportsInterface =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleSupportsInterface<
+  TFunctionName extends 'supportsInterface',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'supportsInterface',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"symbol"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"symbol"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleSymbol =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleSymbol<
+  TFunctionName extends 'symbol',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'symbol',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"tokenURI"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"tokenURI"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleTokenUri =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleTokenUri<
+  TFunctionName extends 'tokenURI',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'tokenURI',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"totalSupply"`
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"totalSupply"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useReadWagmiMintExampleTotalSupply =
-  /*#__PURE__*/ createUseReadContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleTotalSupply<
+  TFunctionName extends 'totalSupply',
+  TSelectData = ReadContractResult<typeof wagmiMintExampleABI, TFunctionName>
+>(
+  config: Omit<
+    UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractRead({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'totalSupply',
-  })
+    ...config,
+  } as UseContractReadConfig<typeof wagmiMintExampleABI, TFunctionName, TSelectData>);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExample = /*#__PURE__*/ createUseWriteContract({
-  abi: wagmiMintExampleAbi,
-  address: wagmiMintExampleAddress,
-})
+export function useWagmiMintExampleWrite<
+  TFunctionName extends string,
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<typeof wagmiMintExampleABI, string>['request']['abi'],
+        TFunctionName,
+        TMode
+      > & { address?: Address; chainId?: TChainId }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, TFunctionName, TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, TFunctionName, TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"approve"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExampleApprove =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleApprove<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<typeof wagmiMintExampleABI, 'approve'>['request']['abi'],
+        'approve',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'approve' }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, 'approve', TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+        functionName?: 'approve';
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, 'approve', TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'approve',
-  })
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"mint"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExampleMint =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleMint<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<typeof wagmiMintExampleABI, 'mint'>['request']['abi'],
+        'mint',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'mint' }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, 'mint', TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+        functionName?: 'mint';
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, 'mint', TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'mint',
-  })
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"safeTransferFrom"`
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"safeTransferFrom"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExampleSafeTransferFrom =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleSafeTransferFrom<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof wagmiMintExampleABI,
+          'safeTransferFrom'
+        >['request']['abi'],
+        'safeTransferFrom',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'safeTransferFrom' }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, 'safeTransferFrom', TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+        functionName?: 'safeTransferFrom';
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, 'safeTransferFrom', TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'safeTransferFrom',
-  })
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"setApprovalForAll"`
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"setApprovalForAll"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExampleSetApprovalForAll =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleSetApprovalForAll<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof wagmiMintExampleABI,
+          'setApprovalForAll'
+        >['request']['abi'],
+        'setApprovalForAll',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'setApprovalForAll' }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, 'setApprovalForAll', TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+        functionName?: 'setApprovalForAll';
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, 'setApprovalForAll', TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'setApprovalForAll',
-  })
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"transferFrom"`
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"transferFrom"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWriteWagmiMintExampleTransferFrom =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleTransferFrom<
+  TMode extends WriteContractMode = undefined,
+  TChainId extends number = keyof typeof wagmiMintExampleAddress
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<typeof wagmiMintExampleABI, 'transferFrom'>['request']['abi'],
+        'transferFrom',
+        TMode
+      > & { address?: Address; chainId?: TChainId; functionName?: 'transferFrom' }
+    : UseContractWriteConfig<typeof wagmiMintExampleABI, 'transferFrom', TMode> & {
+        abi?: never;
+        address?: never;
+        chainId?: TChainId;
+        functionName?: 'transferFrom';
+      } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractWrite<typeof wagmiMintExampleABI, 'transferFrom', TMode>({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'transferFrom',
-  })
+    ...config,
+  } as any);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExample =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
-  })
+export function usePrepareWagmiMintExampleWrite<TFunctionName extends string>(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, TFunctionName>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, TFunctionName>);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"approve"`
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"approve"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExampleApprove =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function usePrepareWagmiMintExampleApprove(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'approve'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'approve',
-  })
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'approve'>);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"mint"`
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"mint"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExampleMint =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function usePrepareWagmiMintExampleMint(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'mint'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'mint',
-  })
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'mint'>);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"safeTransferFrom"`
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"safeTransferFrom"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExampleSafeTransferFrom =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function usePrepareWagmiMintExampleSafeTransferFrom(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'safeTransferFrom'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'safeTransferFrom',
-  })
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'safeTransferFrom'>);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"setApprovalForAll"`
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"setApprovalForAll"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExampleSetApprovalForAll =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function usePrepareWagmiMintExampleSetApprovalForAll(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'setApprovalForAll'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'setApprovalForAll',
-  })
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'setApprovalForAll'>);
+}
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"transferFrom"`
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `functionName` set to `"transferFrom"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useSimulateWagmiMintExampleTransferFrom =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function usePrepareWagmiMintExampleTransferFrom(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'transferFrom'>,
+    'abi' | 'address' | 'functionName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return usePrepareContractWrite({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     functionName: 'transferFrom',
-  })
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof wagmiMintExampleABI, 'transferFrom'>);
+}
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link wagmiMintExampleABI}__.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWatchWagmiMintExampleEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
-  })
+export function useWagmiMintExampleEvent<TEventName extends string>(
+  config: Omit<
+    UseContractEventConfig<typeof wagmiMintExampleABI, TEventName>,
+    'abi' | 'address'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractEvent({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
+    ...config,
+  } as UseContractEventConfig<typeof wagmiMintExampleABI, TEventName>);
+}
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"Approval"`
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `eventName` set to `"Approval"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWatchWagmiMintExampleApprovalEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleApprovalEvent(
+  config: Omit<
+    UseContractEventConfig<typeof wagmiMintExampleABI, 'Approval'>,
+    'abi' | 'address' | 'eventName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractEvent({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     eventName: 'Approval',
-  })
+    ...config,
+  } as UseContractEventConfig<typeof wagmiMintExampleABI, 'Approval'>);
+}
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"ApprovalForAll"`
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `eventName` set to `"ApprovalForAll"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWatchWagmiMintExampleApprovalForAllEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleApprovalForAllEvent(
+  config: Omit<
+    UseContractEventConfig<typeof wagmiMintExampleABI, 'ApprovalForAll'>,
+    'abi' | 'address' | 'eventName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractEvent({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     eventName: 'ApprovalForAll',
-  })
+    ...config,
+  } as UseContractEventConfig<typeof wagmiMintExampleABI, 'ApprovalForAll'>);
+}
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"Transfer"`
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link wagmiMintExampleABI}__ and `eventName` set to `"Transfer"`.
  *
  * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
  */
-export const useWatchWagmiMintExampleTransferEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({
-    abi: wagmiMintExampleAbi,
-    address: wagmiMintExampleAddress,
+export function useWagmiMintExampleTransferEvent(
+  config: Omit<
+    UseContractEventConfig<typeof wagmiMintExampleABI, 'Transfer'>,
+    'abi' | 'address' | 'eventName'
+  > & { chainId?: keyof typeof wagmiMintExampleAddress } = {} as any
+) {
+  const { chain } = useNetwork();
+  const defaultChainId = useChainId();
+  const chainId = config.chainId ?? chain?.id ?? defaultChainId;
+  return useContractEvent({
+    abi: wagmiMintExampleABI,
+    address: wagmiMintExampleAddress[chainId as keyof typeof wagmiMintExampleAddress],
     eventName: 'Transfer',
-  })
+    ...config,
+  } as UseContractEventConfig<typeof wagmiMintExampleABI, 'Transfer'>);
+}
