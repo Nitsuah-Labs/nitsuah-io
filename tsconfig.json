@@ -59,6 +59,7 @@
     "**/*.spec.ts",
     "**/*.spec.tsx",
     "jest.config.ts",
-    "jest.setup.js"
+    "jest.setup.js",
+    "config/*"
   ]
 }
