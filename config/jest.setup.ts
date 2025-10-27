@@ -25,9 +25,11 @@ jest.mock('next/navigation', () => ({
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
-    // eslint-disable-next-line jsx-a11y/alt-text
-    return <img {...props} />
+  default: (props) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires, jsx-a11y/alt-text
+    const React = require('react');
+    // Create a mock image element without using JSX
+    return React.createElement('img', props);
   },
 }))
 

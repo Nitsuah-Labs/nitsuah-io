@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Footer from './_components/_site/Footer';
-import HomeBar from './_components/_site/Homebar';
+import Link from "next/link";
+import Footer from "./_components/_site/Footer";
+import HomeBar from "./_components/_site/Homebar";
 
 export default function NotFound() {
   return (
@@ -16,7 +16,8 @@ export default function NotFound() {
           <div className="error-code">404</div>
           <h1 className="error-title">Page Not Found</h1>
           <p className="error-description">
-            The page you're looking for doesn't exist or has been moved.
+            The page you&apos;re looking for doesn&apos;t exist or has been
+            moved.
           </p>
 
           <div className="error-actions">

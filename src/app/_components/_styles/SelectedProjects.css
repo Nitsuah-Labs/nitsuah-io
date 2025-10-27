@@ -166,35 +166,35 @@
   .selected-projects {
     padding: 2rem 1rem;
   }
-  
+
   .projects-header h2 {
     font-size: 2rem;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .project-card {
     padding: 1.5rem;
   }
-  
+
   .project-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .project-tags {
     margin-left: 0;
   }
-  
+
   .project-links {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .project-link {
     justify-content: center;
   }
@@ -205,42 +205,42 @@
   .projects-header h2 {
     color: #f9fafb;
   }
-  
+
   .projects-header p {
     color: #9ca3af;
   }
-  
+
   .project-card {
     background: #1f2937;
     border-color: #374151;
   }
-  
+
   .project-card:hover {
     border-color: #60a5fa;
   }
-  
+
   .project-title {
     color: #f9fafb;
   }
-  
+
   .project-description {
     color: #d1d5db;
   }
-  
+
   .project-tag {
     background: #374151;
     color: #d1d5db;
   }
-  
+
   .project-highlight {
     background: #1e293b;
     border-left-color: #60a5fa;
   }
-  
+
   .project-highlight strong {
     color: #93c5fd;
   }
-  
+
   .projects-footer p {
     color: #9ca3af;
   }

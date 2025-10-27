@@ -10,16 +10,15 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Roboto',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Roboto", monospace;
 }
 
 p {
@@ -202,7 +201,7 @@ header {
 }
 
 .bg-blur::before {
-  content: '';
+  content: "";
   background-image: var(--bg-image);
   background-size: cover;
   height: 100%;
@@ -292,10 +291,10 @@ header {
   right: 5px;
 }
 
-.eth-wallet, .red-wallet {
+.eth-wallet,
+.red-wallet {
   margin-top: 10px;
 }
-
 
 .blogs-subtitle {
   position: absolute;
@@ -310,7 +309,7 @@ header {
 
 :root {
   /* galaxy image from https://unsplash.com/s/photos/galaxy */
-  --bg-image: url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80');
+  --bg-image: url("https://images.unsplash.com/photo-1538370965046-79c0d6907d47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
 }
 
 .poly-wallet {

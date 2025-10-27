@@ -110,10 +110,10 @@ npm audit fix
 
 ## Action Items
 
-- [ ] Merge #98 (pino-pretty)
-- [ ] Merge #69 (sha.js)
+- [ ] TODO: UPDATE (pino-pretty)
+- [ ] TODO: UPDATE (sha.js)
 - [ ] Close #107 with comment: "Waiting for coordinated Web3 stack upgrade"
 - [ ] Close #106 with comment: "Requires React 19 migration - planning separate sprint"
 - [ ] Close #105 with comment: "Coordinating with viem v2 upgrade in future sprint"
-- [ ] Create GitHub issue: "Epic: Web3 Stack Upgrade (wagmi v2 + viem v2)"
-- [ ] Create GitHub issue: "Epic: Next.js 16 + React 19 Migration"
+- [ ] TODO: "Epic: Web3 Stack Upgrade (wagmi v2 + viem v2)"
+- [ ] TODO: "Epic: Next.js 16 + React 19 Migration"
