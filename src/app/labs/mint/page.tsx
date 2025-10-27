@@ -10,17 +10,13 @@ import "../../_components/_styles/labs.css";
 
 // LAB ASSETS (unused logos removed until needed)
 
-import mintABI from "../../_components/_labs/_utils/mintABI.json";
 import { Account } from "../../_components/_web3/Account";
 import { Connect } from "../../_components/_web3/Connect";
 import { Connected } from "../../_components/_web3/Connected";
 import { MintNFT } from "../../_components/_web3/MintNFT";
 import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
 
-// Only keep constants actually used by this page; others removed to satisfy lint
-const CONTRACT_ADDRESS = "0x22FACFbf9dd893Ec8a0aF6d0764c9d30b27D5Bc3";
-const contractABI = mintABI.abi;
-const TOTAL_MINT_COUNT = 10;
+// No extra constants required here; mint component reads contract info from web3 components
 
 const MintSite: React.FC = () => {
   return (
