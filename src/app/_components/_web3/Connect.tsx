@@ -1,11 +1,19 @@
 "use client";
 
+import * as React from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 export function Connect() {
   const { connector, isConnected } = useAccount();
-  const { connect, connectors, error, pendingConnector } = useConnect();
+  const { connect, connectors, error } = useConnect();
   const { disconnect } = useDisconnect();
+  const [pendingId, setPendingId] = React.useState<string | null>(null);
+  const cs: any[] = connectors as any[];
+
+  // clear pending state when connection status changes
+  React.useEffect(() => {
+    if (isConnected) setPendingId(null);
+  }, [isConnected]);
 
   return (
     <div>
@@ -16,18 +24,19 @@ export function Connect() {
           </button>
         )}
 
-        {(connectors as any[])
-          .filter((x) => x.ready && x.id !== connector?.id)
-          .map((x) => (
-            <button
-              key={x.id}
-              onClick={() => connect({ connector: x })}
-              aria-busy={pendingConnector?.id === x.id}
-            >
-              {x.name}
-              {pendingConnector?.id === x.id && " (connecting)"}
-            </button>
-          ))}
+        {cs.filter((x) => x.ready && x.id !== connector?.id).map((x) => (
+          <button
+            key={x.id}
+            onClick={() => {
+              setPendingId(x.id);
+              connect({ connector: x });
+            }}
+            aria-busy={pendingId === x.id}
+          >
+            {x.name}
+            {pendingId === x.id && " (connecting)"}
+          </button>
+        ))}
       </div>
 
       {error && (
