@@ -98,8 +98,8 @@ const DomainSite = () => {
   // Get current network name from wagmi
   const network = chain?.name || "";
 
-  // Prepare contract config
-  const contractConfig = {
+  // Prepare contract config (explicitly typed so address retains `0x${string}` shape)
+  const contractConfig: { address: `0x${string}`; abi: any } = {
     address: CONTRACT_ADDRESS,
     abi: contractAbi.abi as any,
   };
@@ -114,29 +114,52 @@ const DomainSite = () => {
   });
 
   // Batch read records and owners for all names using useReadContracts
-  const recordCalls = (names as string[] | undefined)?.map((name: string) => ({
-    ...contractConfig,
+  // Explicitly type the contract call objects to avoid deep TypeScript
+  // inference from wagmi's complex types which can cause the compiler to blow up.
+  type SimpleContractCall = {
+    // Use a template literal type to match wagmi's expected `0x${string}` address shape
+    address: `0x${string}`;
+    abi: any;
+    functionName: string;
+    args?: any[];
+  };
+
+  const recordCalls: SimpleContractCall[] | undefined = (
+    names as string[] | undefined
+  )?.map((name: string) => ({
+    address: contractConfig.address,
+    abi: contractConfig.abi,
     functionName: "records",
     args: [name],
   }));
-  const ownerCalls = (names as string[] | undefined)?.map((name: string) => ({
-    ...contractConfig,
+
+  const ownerCalls: SimpleContractCall[] | undefined = (
+    names as string[] | undefined
+  )?.map((name: string) => ({
+    address: contractConfig.address,
+    abi: contractConfig.abi,
     functionName: "domains",
     args: [name],
   }));
-  const { data: records } = useReadContracts({
-    // cast to any to avoid deep TypeScript instantiation errors from complex inferred types
-    contracts: (recordCalls || []) as any,
+  // Wrap the hook result with a narrow runtime cast to avoid deep generic
+  // type instantiation during Next's type checking while preserving runtime
+  // behavior. This keeps the fix local and minimal.
+  const _recordsRes = useReadContracts({
+    // cast contracts to unknown -> readonly any[] to avoid deep type instantiation
+    contracts: (recordCalls || []) as unknown as readonly any[],
     query: {
       enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
     },
-  });
-  const { data: owners } = useReadContracts({
-    contracts: (ownerCalls || []) as any,
+  }) as unknown as { data?: any[] };
+  const records = _recordsRes.data;
+
+  const _ownersRes = useReadContracts({
+    contracts: (ownerCalls || []) as unknown as readonly any[],
     query: {
       enabled: !!names && (ownerCalls?.length ?? 0) > 0,
     },
-  });
+  }) as unknown as { data?: any[] };
+  const owners = _ownersRes.data;
 
   // Set mints when names, records, and owners are available
   useEffect(() => {
