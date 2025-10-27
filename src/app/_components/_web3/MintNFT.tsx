@@ -16,10 +16,16 @@ function resolveGeneratedHooks() {
     const g = require("../../../generated");
     _useSimulateWagmiMintExampleMint = g.useSimulateWagmiMintExampleMint;
     _useWriteWagmiMintExampleMint = g.useWriteWagmiMintExampleMint;
-  } catch (e) {
+  } catch (_err) {
     // Fallbacks for test environments or when generated hooks aren't available
     _useSimulateWagmiMintExampleMint = () => ({ data: { request: {} } });
-    _useWriteWagmiMintExampleMint = () => ({ data: null, writeContract: () => {}, isPending: false, isError: false, error: null });
+    _useWriteWagmiMintExampleMint = () => ({
+      data: null,
+      writeContract: () => {},
+      isPending: false,
+      isError: false,
+      error: null,
+    });
   }
 }
 
@@ -28,7 +34,8 @@ export function MintNFT() {
 
   resolveGeneratedHooks();
 
-  const useSimulateWagmiMintExampleMint = _useSimulateWagmiMintExampleMint as any;
+  const useSimulateWagmiMintExampleMint =
+    _useSimulateWagmiMintExampleMint as any;
   const useWriteWagmiMintExampleMint = _useWriteWagmiMintExampleMint as any;
 
   const { data: simulation } = useSimulateWagmiMintExampleMint({

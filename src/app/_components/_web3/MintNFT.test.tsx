@@ -15,18 +15,17 @@ jest.mock("../../../generated", () => ({
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
-import React from "react";
 
 // We'll apply the mock inside jest.isolateModules using jest.doMock so the
 // generated module is mocked before MintNFT (which imports it) is evaluated.
 
 const queryClient = new QueryClient();
 
-const renderWithProviders = (ui: React.ReactElement) =>
+const renderWithProviders = (ui) =>
   render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 
-describe.skip("MintNFT Component", () => {
-  it.skip("renders the minting section", () => {
+describe("MintNFT Component", () => {
+  it("renders the minting section", () => {
     // Require the component after Jest has loaded manual mocks from
     // src/__mocks__/generated.js. Using require here avoids ESM import-time
     // evaluation of the generated file.
