@@ -1,0 +1,19 @@
+#!/bin/sh
+# Staged file linting
+# Cross-platform npm script execution
+if command -v wsl >/dev/null 2>&1; then
+  # Execute npm script inside WSL, inheriting the user's profile to load nvm/node
+  # The '-lic' flags ensure that the command runs in a login, interactive shell
+  echo "Running pre-commit hook in WSL..."
+  # Staged file linting in WSL
+  # Auto-format staged/working files in WSL before validation to avoid false-positive check failures
+  # Use a single bash -lic call to ensure the command runs in the repo's working directory under WSL
+  # Auto-format working files inside WSL, stage any changes, then validate
+  wsl -e bash -lic 'npx prettier --config config/prettier.config.json --write "src/**/*.{js,jsx,ts,tsx,json,css}" && git add -A && npm run validate'
+else
+  echo "Running pre-commit hook..."
+  npm run validate
+fi
+
+
+

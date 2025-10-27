@@ -1,81 +1,49 @@
 // DOMAINS - src/app/labs/domains/page.tsx
-'use client';
-import { Box, Button, Grid } from '@mui/material';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+"use client";
+import { Box, Button, Grid } from "@mui/material";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   useAccount,
-  useContractRead,
-  useContractReads,
-  useContractWrite,
-  usePrepareContractWrite,
-  useSwitchNetwork,
-  useNetwork as useWagmiNetwork,
-  useWaitForTransaction,
-} from 'wagmi';
-import contractAbi from '../../_components/_labs/_utils/domainABI.json';
+  useReadContract,
+  useReadContracts,
+  useSimulateContract,
+  useSwitchChain,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+} from "wagmi";
+import contractAbi from "../../_components/_labs/_utils/domainABI.json";
 
 // LAB STYLES
-import LabFooter from '../../_components/_labs/LabFooter';
-import LabNav from '../../_components/_labs/LabNav';
-import '../../_components/_styles/labs.css';
+import LabFooter from "../../_components/_labs/LabFooter";
+import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
 
 // LAB ASSETS
-import icons180 from '../../_components/_labs/_assets/icons180.png';
-import ethLogo from '../../_components/_web3/_assets/ethlogo.png';
-import mumbai from '../../_components/_web3/_assets/mumbai.png';
-import polygonLogo from '../../_components/_web3/_assets/polygonlogo.png';
+import icons180 from "../../_components/_labs/_assets/icons180.png";
+import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
+import mumbai from "../../_components/_web3/_assets/mumbai.png";
+import polygonLogo from "../../_components/_web3/_assets/polygonlogo.png";
 
 // CONSTANTS
-const tld = '.nitsuah.eth';
+const tld = ".nitsuah.eth";
 const SCAN_LINK =
-  'https://mumbai.polygonscan.com/address/0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163';
-const OPENSEA_LINK = 'https://testnets.opensea.io/collection/nitsuah-name-service-grnrwqs5vq';
-const CONTRACT_ADDRESS = '0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163';
-const MetaMaskURL = 'https://metamask.io/download/';
+  "https://mumbai.polygonscan.com/address/0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163";
+const OPENSEA_LINK =
+  "https://testnets.opensea.io/collection/nitsuah-name-service-grnrwqs5vq";
+const CONTRACT_ADDRESS =
+  "0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163" as `0x${string}`;
+const MetaMaskURL = "https://metamask.io/download/";
 const CBWalletURL =
-  'https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/';
+  "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+// ErrorBoundary removed — it was defined but never used. Keep page focused.
 
-  static getDerivedStateFromError(error: Error): { hasError: boolean } {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    // You can also log the error to an error reporting service
-    console.log(error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <div>An error occurred. Please try again later.</div>;
-    }
-
-    return this.props.children;
-  }
-}
-
-// Define the networks object with chain IDs and their corresponding network names
-const networks = {
-  '0x1': 'Ethereum Mainnet',
-  '0x3': 'Ropsten Testnet',
-  '0x4': 'Rinkeby Testnet',
-  '0x5': 'Goerli Testnet',
-  '0x2a': 'Kovan Testnet',
-  '0x89': 'Polygon Mainnet',
-  '0x13881': 'Polygon Mumbai Testnet',
-};
+// networks object removed — not referenced in this file
 
 const DomainSite = () => {
-  const [domain, setDomain] = useState('');
-  const [record, setRecord] = useState('');
+  const [domain, setDomain] = useState("");
+  const [record, setRecord] = useState("");
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -87,55 +55,96 @@ const DomainSite = () => {
     owner: string;
   }
   const [mints, setMints] = useState<Mint[]>([]);
-  const { address: currentAccount, isConnected } = useAccount();
-  const { chain } = useWagmiNetwork();
-  const { switchNetwork: wagmiSwitchNetwork, isLoading: isSwitchingNetwork } = useSwitchNetwork();
+  const { address: currentAccount, isConnected, chain } = useAccount();
+  const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
 
   // Get current network name from wagmi
-  const network = chain?.name || '';
+  const network = chain?.name || "";
 
-  // Prepare contract config
-  const contractConfig = {
+  // Prepare contract config (explicitly typed so address retains `0x${string}` shape)
+  const contractConfig: { address: `0x${string}`; abi: any } = {
+    address: CONTRACT_ADDRESS,
     abi: contractAbi.abi as any,
   };
 
   // Read all names (domains)
-  const { data: names, refetch: refetchNames } = useContractRead({
+  const { data: names, refetch: refetchNames } = useReadContract({
     ...contractConfig,
-    functionName: 'getAllNames',
-    enabled: isConnected,
+    functionName: "getAllNames",
+    query: {
+      enabled: isConnected,
+    },
   });
 
-  // Batch read records and owners for all names using useContractReads
-  const recordCalls = (names as string[] | undefined)?.map((name: string) => ({
-    ...contractConfig,
-    functionName: 'records',
+  // Batch read records and owners for all names using useReadContracts
+  // Explicitly type the contract call objects to avoid deep TypeScript
+  // inference from wagmi's complex types which can cause the compiler to blow up.
+  type SimpleContractCall = {
+    // Use a template literal type to match wagmi's expected `0x${string}` address shape
+    address: `0x${string}`;
+    abi: any;
+    functionName: string;
+    args?: any[];
+  };
+
+  const recordCalls: SimpleContractCall[] | undefined = (
+    names as string[] | undefined
+  )?.map((name: string) => ({
+    address: contractConfig.address,
+    abi: contractConfig.abi,
+    functionName: "records",
     args: [name],
   }));
-  const ownerCalls = (names as string[] | undefined)?.map((name: string) => ({
-    ...contractConfig,
-    functionName: 'domains',
+
+  const ownerCalls: SimpleContractCall[] | undefined = (
+    names as string[] | undefined
+  )?.map((name: string) => ({
+    address: contractConfig.address,
+    abi: contractConfig.abi,
+    functionName: "domains",
     args: [name],
   }));
-  const { data: records } = useContractReads({
-    contracts: recordCalls || [],
-    enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
+  // Wrap the hook result with a narrow runtime cast to avoid deep generic
+  // type instantiation during Next's type checking while preserving runtime
+  // behavior. This keeps the fix local and minimal.
+  // Cast the wagmi hook to a relaxed any-typed function so TypeScript doesn't
+  // try to recursively instantiate wagmi's complex generics during Next's
+  // build-time type checking. Keep the `use` prefix so ESLint hooks rules
+  // continue to recognize it as a hook.
+  const useReadContractsAny = useReadContracts as unknown as (props: any) => {
+    data?: any[];
+  };
+
+  const _recordsRes = useReadContractsAny({
+    contracts: (recordCalls || []) as readonly any[],
+    query: {
+      enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
+    },
   });
-  const { data: owners } = useContractReads({
-    contracts: ownerCalls || [],
-    enabled: !!names && (ownerCalls?.length ?? 0) > 0,
+  const records = _recordsRes.data;
+
+  const _ownersRes = useReadContractsAny({
+    contracts: (ownerCalls || []) as readonly any[],
+    query: {
+      enabled: !!names && (ownerCalls?.length ?? 0) > 0,
+    },
   });
+  const owners = _ownersRes.data;
 
   // Set mints when names, records, and owners are available
   useEffect(() => {
-    if (Array.isArray(names) && Array.isArray(records) && Array.isArray(owners)) {
+    if (
+      Array.isArray(names) &&
+      Array.isArray(records) &&
+      Array.isArray(owners)
+    ) {
       setMints(
         (names as string[]).map((name: string, idx: number) => ({
           id: idx,
           name,
-          record: String(records[idx]?.result || ''),
-          owner: String(owners[idx]?.result || ''),
-        }))
+          record: String(records[idx]?.result || ""),
+          owner: String(owners[idx]?.result || ""),
+        })),
       );
     }
   }, [names, records, owners]);
@@ -143,36 +152,36 @@ const DomainSite = () => {
   // Connect wallet (handled by wagmi, so just a placeholder for UI)
   const connectWallet = () => {
     // wagmi handles connection via Connect button elsewhere
-    alert('Please use the Connect Wallet button in the UI.');
+    alert("Please use the Connect Wallet button in the UI.");
   };
 
   // Switch network using wagmi if available, otherwise fallback to MetaMask prompt
   const handleSwitchNetwork = () => {
     if (wagmiSwitchNetwork) {
-      wagmiSwitchNetwork(80001); // Polygon Mumbai chainId
+      wagmiSwitchNetwork({ chainId: 80001 }); // Polygon Mumbai chainId
     } else if ((window as any).ethereum) {
       (window as any).ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x13881' }],
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x13881" }],
       });
     } else {
       alert(
-        'MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html'
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html",
       );
     }
   };
 
   // This will run any time currentAccount or network are changed
   useEffect(() => {
-    if (network === 'Polygon Mumbai Testnet') {
+    if (network === "Polygon Mumbai Testnet") {
       refetchNames();
     }
   }, [isConnected, network, refetchNames]);
 
-  // Write: Register domain
-  const { config: registerConfig } = usePrepareContractWrite({
+  // Simulate: Register domain
+  const { data: registerSim } = useSimulateContract({
     ...contractConfig,
-    functionName: 'register',
+    functionName: "register",
     args: [domain],
     value:
       domain.length === 1
@@ -182,41 +191,47 @@ const DomainSite = () => {
           : domain.length === 3
             ? BigInt(2e17)
             : BigInt(1e17),
-    enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
+    query: {
+      enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
+    },
   });
-  const { write: registerDomain, data: registerTx } = useContractWrite(registerConfig);
-  const { isLoading: isRegistering, isSuccess: isRegistered } = useWaitForTransaction({
-    hash: registerTx?.hash,
+  const { writeContract: registerDomain, data: registerTx } =
+    useWriteContract();
+  useWaitForTransactionReceipt({
+    // keep monitoring registerTx for side-effects, don't create unused bindings
+    hash: registerTx,
   });
 
-  // Write: Set record
-  const { config: setRecordConfig } = usePrepareContractWrite({
+  // Simulate: Set record
+  const { data: setRecordSim } = useSimulateContract({
     ...contractConfig,
-    functionName: 'setRecord',
+    functionName: "setRecord",
     args: [domain, record],
-    value: BigInt(0), // Add value as BigInt zero
-    enabled: !!domain && !!record,
+    query: {
+      enabled: !!domain && !!record,
+    },
   });
-  const { write: setRecordWrite, data: setRecordTx } = useContractWrite(setRecordConfig);
-  const { isLoading: isSettingRecord, isSuccess: isRecordSet } = useWaitForTransaction({
-    hash: setRecordTx?.hash,
-  });
+  const { writeContract: setRecordWrite, data: setRecordTx } =
+    useWriteContract();
+  useWaitForTransactionReceipt({ hash: setRecordTx });
 
   // Mint Domain logic
   const mintDomain = async () => {
     if (!domain) {
-      alert('Domain cannot be empty');
+      alert("Domain cannot be empty");
       return;
     }
     if (domain.length > 6) {
-      alert('Domain cannot be more than 6 characters long');
+      alert("Domain cannot be more than 6 characters long");
       return;
     }
     if (containsSpecialChars(domain)) {
-      alert('⛔️ Domain cannot contain special characters');
+      alert("⛔️ Domain cannot contain special characters");
       return;
     }
-    registerDomain?.();
+    if (registerSim?.request) {
+      registerDomain(registerSim.request);
+    }
   };
 
   // Update Domain logic
@@ -225,7 +240,9 @@ const DomainSite = () => {
       return;
     }
     setLoading(true);
-    setRecordWrite?.();
+    if (setRecordSim?.request) {
+      setRecordWrite(setRecordSim.request);
+    }
     setLoading(false);
   };
 
@@ -236,11 +253,11 @@ const DomainSite = () => {
         <div className="neutral-wallet">
           <h4>STEP 1: Setup a Wallet app</h4>
         </div>
-        <Box sx={{ textAlign: 'center', my: 5 }}>
+        <Box sx={{ textAlign: "center", my: 5 }}>
           <Button
             variant="contained"
             color="primary"
-            onClick={() => window.open(CBWalletURL, '_blank')}
+            onClick={() => window.open(CBWalletURL, "_blank")}
           >
             COINBASE
           </Button>
@@ -249,7 +266,7 @@ const DomainSite = () => {
           <Button
             variant="contained"
             color="warning"
-            onClick={() => window.open(MetaMaskURL, '_blank')}
+            onClick={() => window.open(MetaMaskURL, "_blank")}
           >
             METAMASK
           </Button>
@@ -258,7 +275,7 @@ const DomainSite = () => {
           <h4>STEP 2: Connect a Wallet</h4>
         </div>
         <div className="connect-wallet-container">
-          <Box sx={{ textAlign: 'center', my: 5 }}>
+          <Box sx={{ textAlign: "center", my: 5 }}>
             <Button onClick={connectWallet} variant="contained" color="success">
               Connect Wallet
             </Button>
@@ -270,10 +287,10 @@ const DomainSite = () => {
 
   const renderInputForm = () => {
     // If not on Polygon Mumbai Testnet, render the switch button
-    if (network !== 'Polygon Mumbai Testnet') {
-      function refreshPage() {
+    if (network !== "Polygon Mumbai Testnet") {
+      const refreshPage = () => {
         window.location.reload();
-      }
+      };
 
       return (
         <div>
@@ -290,19 +307,27 @@ const DomainSite = () => {
                 variant="contained"
                 color="secondary"
               >
-                <Image className="logo" src={mumbai} alt="polygon mumbai logo grey" />
+                <Image
+                  className="logo"
+                  src={mumbai}
+                  alt="polygon mumbai logo grey"
+                />
                 POLYGON MUMBAI
               </Button>
             </div>
           </div>
           <div className="zero-row">
-            <div className={network.includes('Polygon') ? 'poly-wallet' : 'eth-wallet'}>
+            <div
+              className={
+                network.includes("Polygon") ? "poly-wallet" : "eth-wallet"
+              }
+            >
               <Image
                 alt="Network logo"
                 className="logo"
-                src={network.includes('Polygon') ? polygonLogo : ethLogo}
-              />{' '}
-              {currentAccount}{' '}
+                src={network.includes("Polygon") ? polygonLogo : ethLogo}
+              />{" "}
+              {currentAccount}{" "}
             </div>
           </div>
         </div>
@@ -312,17 +337,17 @@ const DomainSite = () => {
     return (
       <div className="form-container">
         <div className="zero-row">
-          <span style={{ position: 'relative', display: 'inline-block' }}>
+          <span style={{ position: "relative", display: "inline-block" }}>
             <Image src={icons180} alt="svg icon 180" />
             <h3
               style={{
-                position: 'absolute',
+                position: "absolute",
                 bottom: 0,
                 right: 0,
                 zIndex: 1,
-                margin: '10px',
-                color: 'white',
-                textShadow: '2px 2px 4px #000000',
+                margin: "10px",
+                color: "white",
+                textShadow: "2px 2px 4px #000000",
               }}
             >
               {domain}
@@ -335,33 +360,37 @@ const DomainSite = () => {
             type="text"
             value={domain}
             placeholder="subdomain"
-            onChange={e => setDomain(e.target.value)}
+            onChange={(e) => setDomain(e.target.value)}
           />
           <p className="tld" color="black">
-            {' '}
-            {tld}{' '}
+            {" "}
+            {tld}{" "}
           </p>
         </div>
         <input
           type="text"
           value={record}
           placeholder={currentAccount}
-          onChange={e => setRecord(e.target.value)}
+          onChange={(e) => setRecord(e.target.value)}
         />
         {/* Return the current Wallet */}
         {currentAccount ? (
-          <div className={network.includes('Polygon') ? 'poly-wallet' : 'eth-wallet'}>
+          <div
+            className={
+              network.includes("Polygon") ? "poly-wallet" : "eth-wallet"
+            }
+          >
             <Image
               alt="Network logo"
               className="logo"
-              src={network.includes('Polygon') ? polygonLogo : ethLogo}
-            />{' '}
-            {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)}{' '}
+              src={network.includes("Polygon") ? polygonLogo : ethLogo}
+            />{" "}
+            {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)}{" "}
           </div>
         ) : (
           <Button variant="contained" color="error">
-            {' '}
-            Not connected{' '}
+            {" "}
+            Not connected{" "}
           </Button>
         )}
         <div className="zero-row">
@@ -405,7 +434,7 @@ const DomainSite = () => {
                 fullWidth
                 variant="contained"
                 color="secondary"
-                onClick={() => window.open(SCAN_LINK, '_blank')}
+                onClick={() => window.open(SCAN_LINK, "_blank")}
               >
                 PolygonScan
               </Button>
@@ -414,7 +443,7 @@ const DomainSite = () => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                onClick={() => window.open(OPENSEA_LINK, '_blank')}
+                onClick={() => window.open(OPENSEA_LINK, "_blank")}
               >
                 OpenSea
               </Button>
@@ -443,14 +472,18 @@ const DomainSite = () => {
                       rel="noopener noreferrer"
                     >
                       <p className="underlined">
-                        {' '}
+                        {" "}
                         {mint.name}
-                        {tld}{' '}
+                        {tld}{" "}
                       </p>
                     </a>
                     {/* If mint.owner is currentAccount, add an "edit" button*/}
-                    {mint.owner.toLowerCase() === currentAccount.toLowerCase() ? (
-                      <button className="edit-button" onClick={() => editRecord(mint.name)}>
+                    {mint.owner.toLowerCase() ===
+                    currentAccount.toLowerCase() ? (
+                      <button
+                        className="edit-button"
+                        onClick={() => editRecord(mint.name)}
+                      >
                         <Image
                           className="edit-icon"
                           src="https://img.icons8.com/metro/26/000000/pencil.png"
@@ -479,7 +512,7 @@ const DomainSite = () => {
   }
 
   const editRecord = (name: string): void => {
-    console.log('Editing record for', name);
+    console.log("Editing record for", name);
     setEditing(true);
     setDomain(name);
   };

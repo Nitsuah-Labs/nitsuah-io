@@ -1,12 +1,10 @@
-'use client'
+"use client";
 
-import { BaseError } from 'viem'
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import Image from 'next/image';
+import Image from "next/image";
 import PropTypes from "prop-types";
 import React from "react";
-import { Storefront } from "./Storefront";
 import "../_styles/client.css";
+import { Storefront } from "./Storefront";
 
 interface Props {
   screen: "desktop" | "tablet" | "mobile";
@@ -41,19 +39,20 @@ export const Footer = ({
                 screen === "tablet"
                   ? "/image.svg"
                   : screen === "mobile"
-                  ? "/images/NFT-marketplace-2.svg"
-                  : "/images/NFT-marketplace.svg"
+                    ? "/images/NFT-marketplace-2.svg"
+                    : "/images/NFT-marketplace.svg"
               }
               width={32}
               height={32}
             />
           </div>
           <div className="additional-info">
-            <p className="NFT-marketplace-UI">NFT marketplace UI created with Anima for Figma.</p>
+            <p className="NFT-marketplace-UI">
+              NFT marketplace UI created with Anima for Figma.
+            </p>
             <div className="community-info">
               <div className="join-our-community">Join our community</div>
-              <div className="icons">
-              </div>
+              <div className="icons"></div>
             </div>
           </div>
         </div>
@@ -67,13 +66,13 @@ export const Footer = ({
         </div>
         <div className="subscribe">
           <div className="join-our-weekly">Join Our Weekly Digest</div>
-          <div className="subscribe-form-info">
-            {subscribeWidget}
-          </div>
+          <div className="subscribe-form-info">{subscribeWidget}</div>
         </div>
       </div>
       <div className="frame">
-        <p className="NFT-market-use-this">Ⓒ nitsuahlabs - use this template freely.</p>
+        <p className="NFT-market-use-this">
+          Ⓒ nitsuahlabs - use this template freely.
+        </p>
       </div>
     </div>
   );

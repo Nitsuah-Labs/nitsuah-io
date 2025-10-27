@@ -1,7 +1,7 @@
 // src/app/logout/pages.tsx //TODO
-import React from 'react';
-import HomeBar from '../_components/_site/Homebar';
-import Footer from '../_components/_site/Footer';
+import React from "react";
+import HomeBar from "../_components/_site/Homebar";
+import Footer from "../_components/_site/Footer";
 
 const Logout: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const Logout: React.FC = () => {
           <HomeBar />
         </div>
         <div className="middle-row">
-            <p>LOGOUT PAGE</p>
+          <p>LOGOUT PAGE</p>
         </div>
         <Footer />
       </div>
