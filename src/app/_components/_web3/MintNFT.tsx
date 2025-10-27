@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useWaitForTransactionReceipt } from "wagmi";
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 // Avoid importing the auto-generated `src/generated.ts` at module-evaluation
 // time because its codegen dependencies can be ESM-only and break Jest.
 // Instead, resolve the hooks at runtime with safe fallbacks.
@@ -16,7 +17,7 @@ function resolveGeneratedHooks() {
     const g = require("../../../generated");
     _useSimulateWagmiMintExampleMint = g.useSimulateWagmiMintExampleMint;
     _useWriteWagmiMintExampleMint = g.useWriteWagmiMintExampleMint;
-  } catch (_err) {
+  } catch {
     // Fallbacks for test environments or when generated hooks aren't available
     _useSimulateWagmiMintExampleMint = () => ({ data: { request: {} } });
     _useWriteWagmiMintExampleMint = () => ({

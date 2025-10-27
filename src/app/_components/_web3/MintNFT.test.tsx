@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 // @jest-environment jsdom
 // Mock generated hooks before importing the component so Jest doesn't try to
 // evaluate the ESM-only generated code during tests.
