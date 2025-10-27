@@ -2,7 +2,7 @@
 "use client";
 import { Box, Button, Grid } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAccount,
   useReadContract,
@@ -37,45 +37,9 @@ const MetaMaskURL = "https://metamask.io/download/";
 const CBWalletURL =
   "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+// ErrorBoundary removed — it was defined but never used. Keep page focused.
 
-  static getDerivedStateFromError(error: Error): { hasError: boolean } {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    // You can also log the error to an error reporting service
-    console.log(error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <div>An error occurred. Please try again later.</div>;
-    }
-
-    return this.props.children;
-  }
-}
-
-// Define the networks object with chain IDs and their corresponding network names
-const networks = {
-  "0x1": "Ethereum Mainnet",
-  "0x3": "Ropsten Testnet",
-  "0x4": "Rinkeby Testnet",
-  "0x5": "Goerli Testnet",
-  "0x2a": "Kovan Testnet",
-  "0x89": "Polygon Mainnet",
-  "0x13881": "Polygon Mumbai Testnet",
-};
+// networks object removed — not referenced in this file
 
 const DomainSite = () => {
   const [domain, setDomain] = useState("");
@@ -92,8 +56,7 @@ const DomainSite = () => {
   }
   const [mints, setMints] = useState<Mint[]>([]);
   const { address: currentAccount, isConnected, chain } = useAccount();
-  const { switchChain: wagmiSwitchNetwork, isPending: isSwitchingNetwork } =
-    useSwitchChain();
+  const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
 
   // Get current network name from wagmi
   const network = chain?.name || "";
@@ -232,12 +195,10 @@ const DomainSite = () => {
       enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
     },
   });
-  const {
-    writeContract: registerDomain,
-    data: registerTx,
-    isPending: isRegistering,
-  } = useWriteContract();
-  const { isSuccess: isRegistered } = useWaitForTransactionReceipt({
+  const { writeContract: registerDomain, data: registerTx } =
+    useWriteContract();
+  useWaitForTransactionReceipt({
+    // keep monitoring registerTx for side-effects, don't create unused bindings
     hash: registerTx,
   });
 
@@ -250,14 +211,9 @@ const DomainSite = () => {
       enabled: !!domain && !!record,
     },
   });
-  const {
-    writeContract: setRecordWrite,
-    data: setRecordTx,
-    isPending: isSettingRecord,
-  } = useWriteContract();
-  const { isSuccess: isRecordSet } = useWaitForTransactionReceipt({
-    hash: setRecordTx,
-  });
+  const { writeContract: setRecordWrite, data: setRecordTx } =
+    useWriteContract();
+  useWaitForTransactionReceipt({ hash: setRecordTx });
 
   // Mint Domain logic
   const mintDomain = async () => {

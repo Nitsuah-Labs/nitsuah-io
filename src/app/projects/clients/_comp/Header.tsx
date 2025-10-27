@@ -1,15 +1,14 @@
 "use client";
 
-import { BaseError } from "viem";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+// Removed unused BaseError and wagmi hooks imports
+import Image from "next/image";
 import PropTypes from "prop-types";
 import React from "react";
-import Image from "next/image";
+import "../_styles/client.css";
 import { BurgerMenu } from "./BurgerMenu";
 import { Button } from "./Button";
 import { Storefront } from "./Storefront";
 import { UserProfile } from "./userProfile";
-import "../_styles/client.css";
 
 interface Props {
   property1: "navigation-tablet" | "navigation-desktop" | "navigation-mobile";
