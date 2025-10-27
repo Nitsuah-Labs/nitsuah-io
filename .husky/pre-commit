@@ -1,18 +1,58 @@
-#!/bin/sh
-# Staged file linting
-# Cross-platform npm script execution
+#!/usr/bin/env sh
+set -e
+
+# Pre-commit wrapper: run project validation in a robust, cross-environment way
+# - Prefer running 'npm run validate' so checks are centralized in package.json
+# - If WSL is available, attempt to run validation inside WSL (where many devs keep node/npm)
+# - Give clear instructions if dev-deps (prettier/eslint) are missing rather than failing with 'not found'
+
+if ! command -v npm >/dev/null 2>&1; then
+  echo "ERROR: npm not found in PATH. Install Node.js or commit from an environment with Node (WSL or Windows)." >&2
+  exit 1
+fi
+
+echo "Running pre-commit hook..."
+
 if command -v wsl >/dev/null 2>&1; then
-  # Execute npm script inside WSL, inheriting the user's profile to load nvm/node
-  # The '-lic' flags ensure that the command runs in a login, interactive shell
-  echo "Running pre-commit hook in WSL..."
-  # Staged file linting in WSL
-  # Auto-format staged/working files in WSL before validation to avoid false-positive check failures
-  # Use a single bash -lic call to ensure the command runs in the repo's working directory under WSL
-  # Auto-format working files inside WSL, stage any changes, then validate
-  wsl -e bash -lic 'npx prettier --config config/prettier.config.json --write "src/**/*.{js,jsx,ts,tsx,json,css}" && git add -A && npm run validate'
+  echo "Detected WSL; attempting to run validate inside WSL..."
+  if wsl -e bash -lc "command -v npm >/dev/null 2>&1"; then
+    if wsl -e bash -lc "npx --yes prettier --config config/prettier.config.json --write 'src/**/*.{js,jsx,ts,tsx,json,css}' && git add -A && npm run validate --silent"; then
+      exit 0
+    else
+      echo ""
+      echo "Validation failed inside WSL. Common fixes:"
+      echo "  • Run 'npm ci' in your WSL checkout to install dev dependencies."
+      echo "  • Or commit from Windows after running 'npm ci' there."
+      echo ""
+      exit 1
+    fi
+  else
+    echo "WSL detected but npm not available inside WSL. Falling back to local npm..."
+  fi
+fi
+
+# Fallback to local execution (Windows / Git Bash)
+if command -v npx >/dev/null 2>&1; then
+  if npx --yes prettier --config config/prettier.config.json --write "src/**/*.{js,jsx,ts,tsx,json,css}"; then
+    git add -A || true
+  else
+    echo "Prettier formatting failed. Ensure dev dependencies are installed: run 'npm ci'." >&2
+    exit 1
+  fi
 else
-  echo "Running pre-commit hook..."
-  npm run validate
+  echo "npx not found; ensure Node.js is installed and dev dependencies are present." >&2
+  exit 1
+fi
+
+if npm run validate --silent; then
+  exit 0
+else
+  echo ""
+  echo "Validation failed. Common fixes:"
+  echo "  • Run 'npm ci' in the environment you commit from to install dev dependencies." 
+  echo "  • If committing from WSL, make sure node_modules exists in that checkout or push from the environment with node_modules present." 
+  echo ""
+  exit 1
 fi
 
 
