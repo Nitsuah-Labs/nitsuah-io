@@ -1,50 +1,60 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useWaitForTransaction } from 'wagmi'
-
-import {
-  usePrepareWagmiMintExampleMint,
-  useWagmiMintExampleMint,
-} from '../../../generated'
+import { useState } from 'react';
+import { useWaitForTransactionReceipt } from 'wagmi';
+import { useSimulateWagmiMintExampleMint, useWriteWagmiMintExampleMint } from '../../../generated';
 
 export function MintNFT() {
-  const [tokenId, setTokenId] = useState('')
+  const [tokenId, setTokenId] = useState('');
+
+  const { data: simulation } = useSimulateWagmiMintExampleMint({
+    args: tokenId ? [BigInt(tokenId)] : undefined,
+  });
 
   const {
-    config,
-    error: prepareError,
-    isError: isPrepareError,
-  } = usePrepareWagmiMintExampleMint({
-    args: tokenId ? [BigInt(tokenId)] : undefined,
-  })
-  const { data, error, isError, write } = useWagmiMintExampleMint(config)
+    data,
+    writeContract,
+    isPending: isWriting,
+    isError: isWriteError,
+    error: writeError,
+  } = useWriteWagmiMintExampleMint();
 
-  const { isLoading, isSuccess } = useWaitForTransaction({
-    hash: data?.hash,
-  })
+  const {
+    isLoading: isConfirming,
+    isSuccess: isConfirmed,
+    isError: isConfirmError,
+    error: confirmError,
+  } = useWaitForTransactionReceipt({
+    hash: data,
+  });
+
+  const handleMint = () => {
+    if (simulation?.request) {
+      writeContract(simulation.request);
+    }
+  };
 
   return (
     <div>
       <input
-        onChange={(e) => setTokenId(e.target.value)}
+        onChange={e => setTokenId(e.target.value)}
         placeholder="Token ID (optional)"
         value={tokenId}
       />
-      <button disabled={!write || isLoading} onClick={() => write?.()}>
-        {isLoading ? 'Minting...' : 'Mint'}
+      <button disabled={!simulation?.request || isWriting || isConfirming} onClick={handleMint}>
+        {isWriting ? 'Minting...' : isConfirming ? 'Confirming...' : 'Mint'}
       </button>
-      {isSuccess && (
+      {isConfirmed && (
         <div>
           Successfully minted your NFT!
           <div>
-            <a href={`https://etherscan.io/tx/${data?.hash}`}>Etherscan</a>
+            <a href={`https://etherscan.io/tx/${data}`}>Etherscan</a>
           </div>
         </div>
       )}
-      {(isPrepareError || isError) && (
-        <div>Error: {(prepareError || error)?.message}</div>
+      {(isWriteError || isConfirmError) && (
+        <div>Error: {(writeError || confirmError)?.message}</div>
       )}
     </div>
-  )
+  );
 }
