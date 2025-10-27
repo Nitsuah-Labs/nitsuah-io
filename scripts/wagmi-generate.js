@@ -1,5 +1,13 @@
 #!/usr/bin/env node
-const { execSync } = require("child_process");
+// Load local environment when present to support local dev (.env.local)
+try {
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+  require('dotenv').config({ path: '.env.local' });
+} catch (e) {
+  // noop if dotenv isn't installed in the environment.
+}
+
+const { execSync } = require('child_process');
 
 const etherscanKey = process.env.ETHERSCAN_API_KEY;
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
