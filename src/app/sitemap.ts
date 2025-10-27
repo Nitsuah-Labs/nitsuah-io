@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { featuredProjects } from "../lib/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nitsuah.io";

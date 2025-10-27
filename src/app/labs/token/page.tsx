@@ -1,13 +1,10 @@
 // Token - src/app/labs/token/page.tsx //TODO
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Button, TextField, Grid, Box } from "@mui/material";
 
 // LAB STYLES
-import "../../_components/_styles/labs.css";
-import LabNav from "../../_components/_labs/LabNav";
 import LabFooter from "../../_components/_labs/LabFooter";
+import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
 
 const TokenSite = () => {
   return (

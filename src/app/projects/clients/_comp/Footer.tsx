@@ -1,12 +1,10 @@
 "use client";
 
-import { BaseError } from "viem";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import React from "react";
-import { Storefront } from "./Storefront";
 import "../_styles/client.css";
+import { Storefront } from "./Storefront";
 
 interface Props {
   screen: "desktop" | "tablet" | "mobile";
