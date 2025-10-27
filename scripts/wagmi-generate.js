@@ -89,7 +89,8 @@ if (!etherscanKey && !alchemyKey) {
 try {
   // Run the generator and stream output to the console. Explicitly pass
   // the config so CI behaves the same as local development.
-  execSync("npx wagmi generate -c config/wagmi.config.ts", {
+  // Use the package executable name explicitly (works better in some npx setups)
+  execSync("npx --yes @wagmi/cli generate -c config/wagmi.config.ts", {
     stdio: "inherit",
   });
 } catch (err) {
