@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Footer from './_components/_site/Footer';
-import HomeBar from './_components/_site/Homebar';
+import Link from "next/link";
+import Footer from "./_components/_site/Footer";
+import HomeBar from "./_components/_site/Homebar";
 
 export default function NotFound() {
   return (
