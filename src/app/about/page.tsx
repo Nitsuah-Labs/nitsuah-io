@@ -1,9 +1,8 @@
 // ABOUT - src/app/pages/about.tsx
-import React from 'react';
-import HomeBar from '../_components/_site/Homebar';
-import Footer from '../_components/_site/Footer';
-import SplineScene from '../_components/_spline/spline-about';
-
+import React from "react";
+import HomeBar from "../_components/_site/Homebar";
+import Footer from "../_components/_site/Footer";
+import SplineScene from "../_components/_spline/spline-about";
 
 const AboutPage: React.FC = () => {
   return (

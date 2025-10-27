@@ -1,18 +1,18 @@
 // src/components/Footer.tsx
-'use client'
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import '../_styles/global.css';
-import cat from '../../../../public/images/cat.png';
+import React from "react";
+import Image from "next/image";
+import "../_styles/global.css";
+import cat from "../../../../public/images/cat.png";
 
 // CONSTANTS
-const TWITTER_HANDLE = 'nitsuahlabs';
+const TWITTER_HANDLE = "nitsuahlabs";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const Footer: React.FC = () => {
   const handleImageClick = () => {
-    window.open('https://www.linkedin.com/in/austinjhardy', '');
+    window.open("https://www.linkedin.com/in/austinjhardy", "");
   };
 
   return (
