@@ -15,8 +15,11 @@ const config: Config = {
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/config/jest.setup.ts'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
+  // Map module paths and mock ESM-heavy third-party modules to local mocks to avoid transform issues
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+  '^wagmi(.*)$': '<rootDir>/__mocks__/wagmi.js',
+  '^viem(.*)$': '<rootDir>/__mocks__/viem.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {
@@ -24,8 +27,9 @@ const config: Config = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   // Allow transforming certain ESM node_modules (e.g. wagmi, viem) so Jest can parse them
+  // Only ignore transforming node_modules except wagmi and viem (they ship ESM)
   transformIgnorePatterns: [
-    '/node_modules/(?!(wagmi|viem)/)',
+    '^.+node_modules/(?!wagmi|viem).+$',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
 };
