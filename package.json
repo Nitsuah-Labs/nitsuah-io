@@ -28,7 +28,6 @@
     "@mui/material": "^5.14.14",
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^0.9.486",
-    "@wagmi/cli": "^1.0.0",
     "bufferutil": "^4.0.9",
     "encoding": "^0.1.13",
     "lokijs": "^1.5.12",
@@ -38,8 +37,8 @@
     "react-dom": "^18.2.0",
     "sharp": "^0.34.1",
     "utf-8-validate": "^6.0.5",
-    "viem": "0.3.36",
-    "wagmi": "^1.4.13"
+    "viem": "^2.38.4",
+    "wagmi": "^2.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
@@ -48,6 +47,8 @@
     "@types/react-dom": "^18.2.14",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
+    "@wagmi/cli": "^2.7.1",
+    "esbuild": "^0.16.17",
     "eslint": "^9.26.0",
     "eslint-config-next": "^15.3.1",
     "eslint-config-prettier": "^10.1.8",
