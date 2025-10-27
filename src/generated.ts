@@ -10,9 +10,7 @@ import {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const wagmiMintExampleAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
@@ -213,20 +211,14 @@ export const wagmiMintExampleAbi = [
 ] as const
 
 /**
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const wagmiMintExampleAddress = {
   1: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-  5: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-  80001: '0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8',
 } as const
 
 /**
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const wagmiMintExampleConfig = {
   address: wagmiMintExampleAddress,
@@ -240,9 +232,7 @@ export const wagmiMintExampleConfig = {
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExample = /*#__PURE__*/ createUseReadContract({
   abi: wagmiMintExampleAbi,
@@ -252,9 +242,7 @@ export const useReadWagmiMintExample = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"balanceOf"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleBalanceOf =
   /*#__PURE__*/ createUseReadContract({
@@ -266,9 +254,7 @@ export const useReadWagmiMintExampleBalanceOf =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"getApproved"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleGetApproved =
   /*#__PURE__*/ createUseReadContract({
@@ -280,9 +266,7 @@ export const useReadWagmiMintExampleGetApproved =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleIsApprovedForAll =
   /*#__PURE__*/ createUseReadContract({
@@ -294,9 +278,7 @@ export const useReadWagmiMintExampleIsApprovedForAll =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"name"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleName = /*#__PURE__*/ createUseReadContract({
   abi: wagmiMintExampleAbi,
@@ -307,9 +289,7 @@ export const useReadWagmiMintExampleName = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"ownerOf"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleOwnerOf =
   /*#__PURE__*/ createUseReadContract({
@@ -321,9 +301,7 @@ export const useReadWagmiMintExampleOwnerOf =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"supportsInterface"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
@@ -335,9 +313,7 @@ export const useReadWagmiMintExampleSupportsInterface =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"symbol"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleSymbol =
   /*#__PURE__*/ createUseReadContract({
@@ -349,9 +325,7 @@ export const useReadWagmiMintExampleSymbol =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"tokenURI"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleTokenUri =
   /*#__PURE__*/ createUseReadContract({
@@ -363,9 +337,7 @@ export const useReadWagmiMintExampleTokenUri =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"totalSupply"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useReadWagmiMintExampleTotalSupply =
   /*#__PURE__*/ createUseReadContract({
@@ -377,9 +349,7 @@ export const useReadWagmiMintExampleTotalSupply =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExample = /*#__PURE__*/ createUseWriteContract({
   abi: wagmiMintExampleAbi,
@@ -389,9 +359,7 @@ export const useWriteWagmiMintExample = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"approve"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExampleApprove =
   /*#__PURE__*/ createUseWriteContract({
@@ -403,9 +371,7 @@ export const useWriteWagmiMintExampleApprove =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"mint"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExampleMint =
   /*#__PURE__*/ createUseWriteContract({
@@ -417,9 +383,7 @@ export const useWriteWagmiMintExampleMint =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExampleSafeTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -431,9 +395,7 @@ export const useWriteWagmiMintExampleSafeTransferFrom =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExampleSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
@@ -445,9 +407,7 @@ export const useWriteWagmiMintExampleSetApprovalForAll =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"transferFrom"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWriteWagmiMintExampleTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -459,9 +419,7 @@ export const useWriteWagmiMintExampleTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExample =
   /*#__PURE__*/ createUseSimulateContract({
@@ -472,9 +430,7 @@ export const useSimulateWagmiMintExample =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"approve"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExampleApprove =
   /*#__PURE__*/ createUseSimulateContract({
@@ -486,9 +442,7 @@ export const useSimulateWagmiMintExampleApprove =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"mint"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExampleMint =
   /*#__PURE__*/ createUseSimulateContract({
@@ -500,9 +454,7 @@ export const useSimulateWagmiMintExampleMint =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExampleSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -514,9 +466,7 @@ export const useSimulateWagmiMintExampleSafeTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExampleSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
@@ -528,9 +478,7 @@ export const useSimulateWagmiMintExampleSetApprovalForAll =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `functionName` set to `"transferFrom"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useSimulateWagmiMintExampleTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -542,9 +490,7 @@ export const useSimulateWagmiMintExampleTransferFrom =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWatchWagmiMintExampleEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -555,9 +501,7 @@ export const useWatchWagmiMintExampleEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"Approval"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWatchWagmiMintExampleApprovalEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -569,9 +513,7 @@ export const useWatchWagmiMintExampleApprovalEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"ApprovalForAll"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWatchWagmiMintExampleApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -583,9 +525,7 @@ export const useWatchWagmiMintExampleApprovalForAllEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link wagmiMintExampleAbi}__ and `eventName` set to `"Transfer"`
  *
- * - [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Goerli Etherscan__](https://goerli.etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
- * - [__View Contract on Polygon Mumbai Polygon Scan__](https://mumbai.polygonscan.com/address/0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8)
+ * [__View Contract on Ethereum Etherscan__](https://etherscan.io/address/0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2)
  */
 export const useWatchWagmiMintExampleTransferEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
