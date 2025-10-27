@@ -1,13 +1,31 @@
 #!/usr/bin/env node
-// Load local environment when present to support local dev (.env.local)
+// Load local environment when present to support local dev (.env.local).
+// Try a set of candidate locations so WSL runs can pick up the Windows
+// workspace .env.local when developers work on Windows and run inside WSL.
 try {
   // eslint-disable-next-line global-require, import/no-extraneous-dependencies
-  require('dotenv').config({ path: '.env.local' });
-} catch (e) {
-  // noop if dotenv isn't installed in the environment.
+  const dotenv = require("dotenv");
+  const fs = require("fs");
+  const path = require("path");
+
+  const candidates = [
+    path.resolve(process.cwd(), ".env.local"),
+    path.resolve(__dirname, "..", ".env.local"),
+    // Common Windows mount for WSL users (adjusted for this repo's user path)
+    "/mnt/c/Users/ajhar/code/nitsuah-io/.env.local",
+  ];
+
+  const found = candidates.find((p) => fs.existsSync(p));
+  if (found) {
+    // eslint-disable-next-line no-console
+    console.log(`Loading environment from ${found}`);
+    dotenv.config({ path: found });
+  }
+} catch (err) {
+  // noop if dotenv/fs/path aren't available in the environment.
 }
 
-const { execSync } = require('child_process');
+const { execSync } = require("child_process");
 
 const etherscanKey = process.env.ETHERSCAN_API_KEY;
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY;
