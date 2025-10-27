@@ -1,36 +1,35 @@
 // PROJECTS - src/app/projects/pages.tsx
 "use client";
-import React from "react";
-import { Button, Grid } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+import { Grid } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import Image from "next/image";
-import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+import HomeBar from "../_components/_site/Homebar";
 import SelectedProjects from "../_components/_site/SelectedProjects";
-import "../_components/_styles/global.css";
 import "../_components/_styles/SelectedProjects.css";
-import darkmoon from "./_assets/darkmoon.gif";
-import nitsuah from "./_assets/NITSUAH.png";
-import cat from "./_assets/cat.png";
+import "../_components/_styles/global.css";
 import dev from "../crypto/_assets/dao.png";
-import buildspace from "./_assets/buildspace.png";
-import arf from "./_assets/arf.gif";
-import arfg from "./_assets/arf-guild.gif";
-import aiarf from "./_assets/arf-ai.png";
-import blendeth from "./_assets/blend-eth.gif";
+import nitsuah from "./_assets/NITSUAH.png";
 import aboutme from "./_assets/aboutme.jpg";
+import aiarf from "./_assets/arf-ai.png";
+import arfg from "./_assets/arf-guild.gif";
+import arf from "./_assets/arf.gif";
+import blendeth from "./_assets/blend-eth.gif";
+import buildspace from "./_assets/buildspace.png";
+import cat from "./_assets/cat.png";
+import darkmoon from "./_assets/darkmoon.gif";
+import polyens from "./_assets/ens.gif";
 import hedge from "./_assets/hedge-ref.png";
 import ngx from "./_assets/ng-game.png";
 import nwb from "./_assets/nights+weekends.png";
+import solApp from "./_assets/sol-dapp.gif";
+import solPay from "./_assets/sol-store.gif";
+import solana from "./_assets/solana-logo.png";
+import spline from "./_assets/spline.gif";
 import web3intro from "./_assets/web3-intro.png";
 import web3mint from "./_assets/web3-mint.png";
-import polyens from "./_assets/ens.gif";
-import solana from "./_assets/solana-logo.png";
-import solPay from "./_assets/sol-store.gif";
-import solApp from "./_assets/sol-dapp.gif";
-import spline from "./_assets/spline.gif";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import InfoIcon from "@mui/icons-material/Info";
 
 const Projects = () => {
   const projectsData = [
