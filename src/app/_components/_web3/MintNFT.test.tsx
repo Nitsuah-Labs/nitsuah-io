@@ -19,7 +19,7 @@ const renderWithProviders = (ui: React.ReactElement) => {
   return render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-    </WagmiProvider>
+    </WagmiProvider>,
   );
 };
 

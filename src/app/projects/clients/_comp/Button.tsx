@@ -30,7 +30,13 @@ export const Button = ({
       {hasLeftIcon && (
         <RocketLaunch
           color={
-            ["primary-outlined", "secondary-outlined", "tertiary-outlined"].includes(property1) ? "#A259FF" : "white"
+            [
+              "primary-outlined",
+              "secondary-outlined",
+              "tertiary-outlined",
+            ].includes(property1)
+              ? "#A259FF"
+              : "white"
           }
           style={{
             height: "20px",

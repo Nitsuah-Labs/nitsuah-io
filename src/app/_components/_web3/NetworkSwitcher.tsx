@@ -19,7 +19,7 @@ export function NetworkSwitcher() {
                 {x.name}
                 {isPending && " (switching)"}
               </button>
-            )
+            ),
           )}
         </div>
       )}

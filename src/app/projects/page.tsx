@@ -1,8 +1,8 @@
 // PROJECTS - src/app/projects/pages.tsx
-'use client'
+"use client";
 import React from "react";
 import { Button, Grid } from "@mui/material";
-import Image from 'next/image';
+import Image from "next/image";
 import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
 import SelectedProjects from "../_components/_site/SelectedProjects";
@@ -32,7 +32,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import InfoIcon from "@mui/icons-material/Info";
 
-
 const Projects = () => {
   const projectsData = [
     { title: "GitHub", image: cat, link: "https://github.com/nitsuah" },
@@ -41,21 +40,112 @@ const Projects = () => {
     { title: "3DX", image: spline, link: "/" },
     { title: "NEXTGEN", image: ngx, link: "https://nft.darkmoon.dev/play" },
     { title: "CLIENTS", image: cat, link: "/projects/clients" },
-    { title: "Profile", image: buildspace, link: "https://buildspace.so/@nitsuah", btnUrl: "https://buildspace.so/join", btnTxt: "Join me! - https://buildspace.so/join" },
-    { title: "ENS NFT", image: polyens, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179", btnUrl: "https://buildspace.so/p/build-polygon-ens", btnTxt: "ENS NFT" },
-    { title: "NFT Store", image: solPay, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051", btnUrl: "https://buildspace.so/p/ship-solana-nft-collection", btnTxt: "NFT Store" },
-    { title: "Spline3D", image: aboutme, link: "/about", btnUrl: "https://spline.design/", btnTxt: "https://spline.design/" },
-    { title: "NFT Game", image: hedge, link: "", btnUrl: "https://buildspace.so/p/create-turn-based-nft-game", btnTxt: "NFT Game" },
-    { title: "N+W S1", image: nwb, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083", btnUrl: "https://buildspace.so/nw", btnTxt: "N+W S1" },
-    { title: "ETH dApp", image: web3mint, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857", btnUrl: "https://buildspace.so/p/mint-nft-collection", btnTxt: "ETH dApp" },
-    { title: "SOL dApp", image: solApp, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995", btnUrl: "https://buildspace.so/p/build-solana-web3-app", btnTxt: "SOL dApp" },
-    { title: "Blender", image: blendeth, link: "https://www.youtube.com/watch?v=nIoXOplUvAw", btnUrl: "https://www.youtube.com/watch?v=nIoXOplUvAw", btnTxt: "Blender Tutorial" },
-    { title: "AutoGPT", image: arf, link: "https://buildspace.so/@nitsuah", btnUrl: "https://buildspace.so/p/build-ai-writing-assistant-gpt3", btnTxt: "GPT3 Ai Ghost-Writer" },
-    { title: "ETH Core", image: web3intro, link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457", btnUrl: "https://buildspace.so/p/build-solidity-web3-app", btnTxt: "ETH Core" },
-    { title: "DevDAO", image: dev, link: "/labs/dao", btnUrl: "https://buildspace.so/p/build-dao-with-javascript", btnTxt: "Build a Dao with JS" },
-    { title: "SOL Core", image: solana, link: "https://darkmoon.dev/about", btnUrl: "https://buildspace.so/p/solana-core", btnTxt: "Solana Core" },
-    { title: "Paint3D", image: arfg, link: "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/60508307908081726032856631071720531552206552958895219492912716482941726752788", btnUrl: "https://support.microsoft.com/en-us/windows/basic-3d-modeling-with-paint-3d-78a27393-4cc5-1c9a-5929-3b4644eb5a94", btnTxt: "Basic 3D modeling with Paint 3D" },
-    { title: "ImaGen", image: aiarf, link: "/labs/imagen", btnUrl: "https://buildspace.so/p/build-ai-avatars", btnTxt: "Dream AI Avatars" },
+    {
+      title: "Profile",
+      image: buildspace,
+      link: "https://buildspace.so/@nitsuah",
+      btnUrl: "https://buildspace.so/join",
+      btnTxt: "Join me! - https://buildspace.so/join",
+    },
+    {
+      title: "ENS NFT",
+      image: polyens,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
+      btnUrl: "https://buildspace.so/p/build-polygon-ens",
+      btnTxt: "ENS NFT",
+    },
+    {
+      title: "NFT Store",
+      image: solPay,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
+      btnUrl: "https://buildspace.so/p/ship-solana-nft-collection",
+      btnTxt: "NFT Store",
+    },
+    {
+      title: "Spline3D",
+      image: aboutme,
+      link: "/about",
+      btnUrl: "https://spline.design/",
+      btnTxt: "https://spline.design/",
+    },
+    {
+      title: "NFT Game",
+      image: hedge,
+      link: "",
+      btnUrl: "https://buildspace.so/p/create-turn-based-nft-game",
+      btnTxt: "NFT Game",
+    },
+    {
+      title: "N+W S1",
+      image: nwb,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
+      btnUrl: "https://buildspace.so/nw",
+      btnTxt: "N+W S1",
+    },
+    {
+      title: "ETH dApp",
+      image: web3mint,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
+      btnUrl: "https://buildspace.so/p/mint-nft-collection",
+      btnTxt: "ETH dApp",
+    },
+    {
+      title: "SOL dApp",
+      image: solApp,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+      btnUrl: "https://buildspace.so/p/build-solana-web3-app",
+      btnTxt: "SOL dApp",
+    },
+    {
+      title: "Blender",
+      image: blendeth,
+      link: "https://www.youtube.com/watch?v=nIoXOplUvAw",
+      btnUrl: "https://www.youtube.com/watch?v=nIoXOplUvAw",
+      btnTxt: "Blender Tutorial",
+    },
+    {
+      title: "AutoGPT",
+      image: arf,
+      link: "https://buildspace.so/@nitsuah",
+      btnUrl: "https://buildspace.so/p/build-ai-writing-assistant-gpt3",
+      btnTxt: "GPT3 Ai Ghost-Writer",
+    },
+    {
+      title: "ETH Core",
+      image: web3intro,
+      link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
+      btnUrl: "https://buildspace.so/p/build-solidity-web3-app",
+      btnTxt: "ETH Core",
+    },
+    {
+      title: "DevDAO",
+      image: dev,
+      link: "/labs/dao",
+      btnUrl: "https://buildspace.so/p/build-dao-with-javascript",
+      btnTxt: "Build a Dao with JS",
+    },
+    {
+      title: "SOL Core",
+      image: solana,
+      link: "https://darkmoon.dev/about",
+      btnUrl: "https://buildspace.so/p/solana-core",
+      btnTxt: "Solana Core",
+    },
+    {
+      title: "Paint3D",
+      image: arfg,
+      link: "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/60508307908081726032856631071720531552206552958895219492912716482941726752788",
+      btnUrl:
+        "https://support.microsoft.com/en-us/windows/basic-3d-modeling-with-paint-3d-78a27393-4cc5-1c9a-5929-3b4644eb5a94",
+      btnTxt: "Basic 3D modeling with Paint 3D",
+    },
+    {
+      title: "ImaGen",
+      image: aiarf,
+      link: "/labs/imagen",
+      btnUrl: "https://buildspace.so/p/build-ai-avatars",
+      btnTxt: "Dream AI Avatars",
+    },
   ];
 
   const renderProjsContainer = () => (
@@ -67,7 +157,12 @@ const Projects = () => {
               <h4>{project.title}</h4>
             </div>
             <div className="image-container">
-              <Image alt={project.title} className="proj-logo" src={project.image} onClick={() => window.open(project.link)} />
+              <Image
+                alt={project.title}
+                className="proj-logo"
+                src={project.image}
+                onClick={() => window.open(project.link)}
+              />
               {/* Tooltip icon */}
               {project.btnUrl && (
                 <div className="tooltip-container">
@@ -75,9 +170,12 @@ const Projects = () => {
                     title={`Explore ${project.title}`}
                     placement="top-end"
                     arrow
-                    style={{ transform: 'translateX(8px)' }} // Adjust the value as needed
+                    style={{ transform: "translateX(8px)" }} // Adjust the value as needed
                   >
-                    <IconButton style={{ color: 'white' }} onClick={() => window.open(project.btnUrl)}>
+                    <IconButton
+                      style={{ color: "white" }}
+                      onClick={() => window.open(project.btnUrl)}
+                    >
                       <InfoIcon />
                     </IconButton>
                   </Tooltip>
@@ -98,12 +196,10 @@ const Projects = () => {
             <HomeBar />
           </div>
           <SelectedProjects />
-          <div className="projects-container">
-            {renderProjsContainer()}
-          </div>
+          <div className="projects-container">{renderProjsContainer()}</div>
         </div>
         <div className="footer-container">
-            <Footer />
+          <Footer />
         </div>
       </div>
     </div>

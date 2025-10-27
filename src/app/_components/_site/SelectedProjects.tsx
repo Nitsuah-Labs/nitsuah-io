@@ -1,5 +1,5 @@
-import React from 'react';
-import { featuredProjects, Project } from '../../../lib/data/projects';
+import React from "react";
+import { featuredProjects, Project } from "../../../lib/data/projects";
 
 interface ProjectCardProps {
   project: Project;
@@ -11,7 +11,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       <div className="project-header">
         <h3 className="project-title">{project.title}</h3>
         <div className="project-tags">
-          {project.tags.slice(0, 3).map(tag => (
+          {project.tags.slice(0, 3).map((tag) => (
             <span key={tag} className="project-tag">
               {tag}
             </span>
@@ -61,18 +61,21 @@ const SelectedProjects: React.FC = () => {
     <section className="selected-projects">
       <div className="projects-header">
         <h2>Selected Projects</h2>
-        <p>A curated collection of technical work showcasing different skills and approaches</p>
+        <p>
+          A curated collection of technical work showcasing different skills and
+          approaches
+        </p>
       </div>
 
       <div className="projects-grid">
-        {featuredProjects.map(project => (
+        {featuredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
 
       <div className="projects-footer">
         <p>
-          More projects and experiments available on{' '}
+          More projects and experiments available on{" "}
           <a
             href="https://github.com/nitsuah"
             target="_blank"

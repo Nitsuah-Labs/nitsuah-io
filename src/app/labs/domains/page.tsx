@@ -151,7 +151,7 @@ const DomainSite = () => {
           name,
           record: String(records[idx]?.result || ""),
           owner: String(owners[idx]?.result || ""),
-        }))
+        })),
       );
     }
   }, [names, records, owners]);
@@ -173,7 +173,7 @@ const DomainSite = () => {
       });
     } else {
       alert(
-        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html"
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html",
       );
     }
   };
