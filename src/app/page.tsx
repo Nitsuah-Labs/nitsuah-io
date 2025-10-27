@@ -7,14 +7,14 @@ import SplineScene from './_components/_spline/spline-home';
 const HomePage: React.FC = () => {
   return (
     <div className="App">
-        <div className="header">
-          <HomeBar />
-        </div>
-        <div className="spline-container">
-          <SplineScene />
-        </div>
-        <Footer />
+      <div className="header">
+        <HomeBar />
       </div>
+      <div className="spline-container">
+        <SplineScene />
+      </div>
+      <Footer />
+    </div>
   );
 };
 
