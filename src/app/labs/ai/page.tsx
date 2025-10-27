@@ -1,11 +1,9 @@
 // IMAGEN - src/app/labs/ai/imagen/page.tsx // TODO
 "use client";
-import React, { useEffect, useState } from "react";
-import "../../_components/_styles/labs.css";
-import LabNav from "../../_components/_labs/LabNav";
 import LabFooter from "../../_components/_labs/LabFooter";
-import { Button, TextField, Grid, Box } from "@mui/material";
-import Image from "next/image";
+import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
+// UI imports were unused here; keep file minimal until features are added
 
 const ImagenSite = () => {
   return (

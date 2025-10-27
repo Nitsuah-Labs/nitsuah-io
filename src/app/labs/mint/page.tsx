@@ -1,36 +1,23 @@
 // MINT - src/app/labs/mint/page.tsx // TODO ADD MINTING LOGIC
 
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Button, TextField, Grid, Box } from "@mui/material";
+import React from "react";
 
 // LAB STYLES
-import "../../_components/_styles/labs.css";
-import LabNav from "../../_components/_labs/LabNav";
 import LabFooter from "../../_components/_labs/LabFooter";
+import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
 
-// LAB ASSETS
-import mumbai from "../../_components/_web3/_assets/mumbai.png";
-import polygonLogo from "../../_components/_web3/_assets/polygonlogo.png";
-import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
+// LAB ASSETS (unused logos removed until needed)
 
+import mintABI from "../../_components/_labs/_utils/mintABI.json";
 import { Account } from "../../_components/_web3/Account";
 import { Connect } from "../../_components/_web3/Connect";
 import { Connected } from "../../_components/_web3/Connected";
 import { MintNFT } from "../../_components/_web3/MintNFT";
 import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
-import mintABI from "../../_components/_labs/_utils/mintABI.json";
 
-const OPENSEA_URL = "https://testnets.opensea.io/assets/";
-const NETSCAN_URL = "https://mumbai.polygonscan.com/tx/";
-const SCAN_LINK = "https://mumbai.polygonscan.com/address/";
-const OPENSEA_LINK = "https://testnets.opensea.io/collection/";
-const MetaMaskURL = "https://metamask.io/download/";
-const CBWalletURL =
-  "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
-const MaticURL = "https://wallet.matic.network/";
-
+// Only keep constants actually used by this page; others removed to satisfy lint
 const CONTRACT_ADDRESS = "0x22FACFbf9dd893Ec8a0aF6d0764c9d30b27D5Bc3";
 const contractABI = mintABI.abi;
 const TOTAL_MINT_COUNT = 10;
