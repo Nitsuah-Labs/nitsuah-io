@@ -144,21 +144,28 @@ const DomainSite = () => {
   // Wrap the hook result with a narrow runtime cast to avoid deep generic
   // type instantiation during Next's type checking while preserving runtime
   // behavior. This keeps the fix local and minimal.
-  const _recordsRes = useReadContracts({
-    // cast contracts to unknown -> readonly any[] to avoid deep type instantiation
-    contracts: (recordCalls || []) as unknown as readonly any[],
+  // Cast the wagmi hook to a relaxed any-typed function so TypeScript doesn't
+  // try to recursively instantiate wagmi's complex generics during Next's
+  // build-time type checking. Keep the `use` prefix so ESLint hooks rules
+  // continue to recognize it as a hook.
+  const useReadContractsAny = useReadContracts as unknown as (props: any) => {
+    data?: any[];
+  };
+
+  const _recordsRes = useReadContractsAny({
+    contracts: (recordCalls || []) as readonly any[],
     query: {
       enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
     },
-  }) as unknown as { data?: any[] };
+  });
   const records = _recordsRes.data;
 
-  const _ownersRes = useReadContracts({
-    contracts: (ownerCalls || []) as unknown as readonly any[],
+  const _ownersRes = useReadContractsAny({
+    contracts: (ownerCalls || []) as readonly any[],
     query: {
       enabled: !!names && (ownerCalls?.length ?? 0) > 0,
     },
-  }) as unknown as { data?: any[] };
+  });
   const owners = _ownersRes.data;
 
   // Set mints when names, records, and owners are available
@@ -325,9 +332,9 @@ const DomainSite = () => {
   const renderInputForm = () => {
     // If not on Polygon Mumbai Testnet, render the switch button
     if (network !== "Polygon Mumbai Testnet") {
-      function refreshPage() {
+      const refreshPage = () => {
         window.location.reload();
-      }
+      };
 
       return (
         <div>
