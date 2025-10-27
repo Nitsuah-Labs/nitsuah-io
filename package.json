@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "wagmi": "wagmi generate -c config/wagmi.config.ts",
+  "wagmi": "node scripts/wagmi-generate.js",
     "typecheck": "tsc --project config/tsconfig.json --noEmit",
     "format": "prettier --config config/prettier.config.json --write \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
     "format:check": "prettier --config config/prettier.config.json --check \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
