@@ -1,25 +1,71 @@
-import * as _wagmi_codegen from 'wagmi/codegen'
+// Attempt to require the codegen factories at runtime. Use try/catch so that
+// test environments (Jest) or other contexts that don't expose
+// `wagmi/codegen` won't throw during module evaluation. If the factories are
+// available, use them; otherwise fall back to no-op factories that return
+// minimal hooks used by the app during tests.
+// Lazy wrapper helpers: resolve the real factory from `wagmi/codegen` at call
+// time (when tests or runtime have module mappings available), otherwise
+// fall back to safe no-op factories.
+let __readFactory: any = null
+function createUseReadContract(opts: any) {
+  if (!__readFactory) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const cg = require('wagmi/codegen')
+      __readFactory = cg?.createUseReadContract ?? cg?.default?.createUseReadContract
+    } catch (e) {
+      // ignore
+    }
+    if (typeof __readFactory !== 'function') __readFactory = () => () => ({})
+  }
+  return __readFactory(opts)
+}
 
-// Provide safe runtime fallbacks for the codegen factory functions so tests
-// or environments that don't expose the ESM factories won't crash during
-// module evaluation. Prefer real exports when available, otherwise use
-// no-op factory functions that return minimal hooks.
-const createUseReadContract: any =
-  typeof ((_wagmi_codegen as any)?.createUseReadContract) === 'function'
-    ? (_wagmi_codegen as any).createUseReadContract
-    : (() => () => ({}))
-const createUseWriteContract: any =
-  typeof ((_wagmi_codegen as any)?.createUseWriteContract) === 'function'
-    ? (_wagmi_codegen as any).createUseWriteContract
-    : (() => () => ({ data: null, writeContract: () => {}, isPending: false, isError: false, error: null }))
-const createUseSimulateContract: any =
-  typeof ((_wagmi_codegen as any)?.createUseSimulateContract) === 'function'
-    ? (_wagmi_codegen as any).createUseSimulateContract
-    : (() => () => ({ data: { request: {} } }))
-const createUseWatchContractEvent: any =
-  typeof ((_wagmi_codegen as any)?.createUseWatchContractEvent) === 'function'
-    ? (_wagmi_codegen as any).createUseWatchContractEvent
-    : (() => () => ({}))
+let __writeFactory: any = null
+function createUseWriteContract(opts: any) {
+  if (!__writeFactory) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const cg = require('wagmi/codegen')
+      __writeFactory = cg?.createUseWriteContract ?? cg?.default?.createUseWriteContract
+    } catch (e) {
+      // ignore
+    }
+    if (typeof __writeFactory !== 'function')
+      __writeFactory = () => () => ({ data: null, writeContract: () => {}, isPending: false, isError: false, error: null })
+  }
+  return __writeFactory(opts)
+}
+
+let __simulateFactory: any = null
+function createUseSimulateContract(opts: any) {
+  if (!__simulateFactory) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const cg = require('wagmi/codegen')
+      __simulateFactory = cg?.createUseSimulateContract ?? cg?.default?.createUseSimulateContract
+    } catch (e) {
+      // ignore
+    }
+    if (typeof __simulateFactory !== 'function') __simulateFactory = () => () => ({ data: { request: {} } })
+  }
+  return __simulateFactory(opts)
+}
+
+let __watchFactory: any = null
+function createUseWatchContractEvent(opts: any) {
+  if (!__watchFactory) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const cg = require('wagmi/codegen')
+      __watchFactory = cg?.createUseWatchContractEvent ?? cg?.default?.createUseWatchContractEvent
+    } catch (e) {
+      // ignore
+    }
+    if (typeof __watchFactory !== 'function') __watchFactory = () => () => ({})
+  }
+  return __watchFactory(opts)
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WagmiMintExample
