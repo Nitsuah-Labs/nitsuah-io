@@ -3,15 +3,14 @@
 import { Box, Button, Grid } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { BaseError } from "viem";
 import {
   useAccount,
   useReadContract,
   useReadContracts,
   useSimulateContract,
-  useWriteContract,
   useSwitchChain,
   useWaitForTransactionReceipt,
+  useWriteContract,
 } from "wagmi";
 import contractAbi from "../../_components/_labs/_utils/domainABI.json";
 
@@ -126,13 +125,14 @@ const DomainSite = () => {
     args: [name],
   }));
   const { data: records } = useReadContracts({
-    contracts: recordCalls || [],
+    // cast to any to avoid deep TypeScript instantiation errors from complex inferred types
+    contracts: (recordCalls || []) as any,
     query: {
       enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
     },
   });
   const { data: owners } = useReadContracts({
-    contracts: ownerCalls || [],
+    contracts: (ownerCalls || []) as any,
     query: {
       enabled: !!names && (ownerCalls?.length ?? 0) > 0,
     },
