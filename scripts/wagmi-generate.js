@@ -24,11 +24,32 @@ if (!etherscanKey && !alchemyKey) {
   }
 
   if (isGithubActions && ghaEvent === "pull_request") {
-    // eslint-disable-next-line no-console
-    console.warn(
-      'Skipping "wagmi generate": running on GitHub Actions pull_request and ETHERSCAN_API_KEY / NEXT_PUBLIC_ALCHEMY_API_KEY are not set.'
-    );
-    process.exit(0);
+    // If this PR is from a fork we don't have secrets available — skip.
+    const eventPath = process.env.GITHUB_EVENT_PATH;
+    try {
+      if (eventPath) {
+        // eslint-disable-next-line node/no-sync
+        const payload = JSON.parse(
+          require("fs").readFileSync(eventPath, "utf8")
+        );
+        const headRepo = payload?.pull_request?.head?.repo?.full_name;
+        const baseRepo = payload?.pull_request?.base?.repo?.full_name;
+        if (headRepo && baseRepo && headRepo !== baseRepo) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            'Skipping "wagmi generate": pull_request comes from a fork and secrets are not available.'
+          );
+          process.exit(0);
+        }
+      }
+    } catch (e) {
+      // If we can't read the event payload, fall back to skipping to be safe.
+      // eslint-disable-next-line no-console
+      console.warn(
+        "Unable to inspect GITHUB_EVENT_PATH, skipping wagmi generate as a precaution."
+      );
+      process.exit(0);
+    }
   }
 
   // For other builds (e.g. main/protected branches) require an API key.
