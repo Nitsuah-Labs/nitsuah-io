@@ -23,8 +23,9 @@ const config: Config = {
     // Use babel-jest to transpile tests with the next/babel preset
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
+  // Allow transforming certain ESM node_modules (e.g. wagmi, viem) so Jest can parse them
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!(wagmi|viem)/)',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
 };
