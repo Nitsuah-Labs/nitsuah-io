@@ -1,11 +1,10 @@
 "use client";
 
-import { BaseError } from "viem";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 export function Connect() {
   const { connector, isConnected } = useAccount();
-  const { connect, connectors, error, isPending } = useConnect();
+  const { connect, connectors, error, pendingConnector } = useConnect();
   const { disconnect } = useDisconnect();
 
   return (
@@ -17,17 +16,27 @@ export function Connect() {
           </button>
         )}
 
-        {connectors
+        {(connectors as any[])
           .filter((x) => x.ready && x.id !== connector?.id)
           .map((x) => (
-            <button key={x.id} onClick={() => connect({ connector: x })}>
+            <button
+              key={x.id}
+              onClick={() => connect({ connector: x })}
+              aria-busy={pendingConnector?.id === x.id}
+            >
               {x.name}
-              {isPending && " (connecting)"}
+              {pendingConnector?.id === x.id && " (connecting)"}
             </button>
           ))}
       </div>
 
-      {error && <div>{(error as BaseError).shortMessage}</div>}
+      {error && (
+        <div>
+          {(error as any)?.shortMessage ??
+            (error as any)?.message ??
+            `${error}`}
+        </div>
+      )}
     </div>
   );
 }
