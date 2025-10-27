@@ -9,7 +9,7 @@ export interface Project {
   demo?: string;
   highlight: string;
   tags: string[];
-  status: 'active' | 'maintained' | 'archived';
+  status: "active" | "maintained" | "archived";
   featured: boolean;
 }
 
@@ -42,7 +42,7 @@ export interface SEOMetadata {
 }
 
 export interface SocialLink {
-  platform: 'github' | 'twitter' | 'linkedin' | 'email';
+  platform: "github" | "twitter" | "linkedin" | "email";
   url: string;
   username?: string;
 }
@@ -137,7 +137,7 @@ export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 export type Required<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 
 // Theme types
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = "light" | "dark" | "system";
 
 export interface ThemeConfig {
   theme: Theme;
@@ -164,7 +164,7 @@ export interface AppError {
 
 // Environment types
 export interface EnvironmentConfig {
-  NODE_ENV: 'development' | 'production' | 'test';
+  NODE_ENV: "development" | "production" | "test";
   NEXT_PUBLIC_SITE_URL: string;
   NEXT_PUBLIC_GA_ID?: string;
   NEXT_PUBLIC_VERCEL_URL?: string;

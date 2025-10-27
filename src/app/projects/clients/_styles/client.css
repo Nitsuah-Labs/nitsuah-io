@@ -1,539 +1,538 @@
 .button {
-    align-items: center;
-    border-radius: 20px;
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    padding: 0px 50px;
-    position: relative;
-    transition: all 0.3s ease;
-    width: fit-content;
-  }
-  
-  .button .text-wrapper {
-    color: #ffffff;
-    font-family: "Work Sans-SemiBold", Helvetica;
-    font-weight: 600;
-    letter-spacing: 0;
-    position: relative;
-    text-align: center;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .button.primary-filled {
-    background-color: #a259ff;
-    height: 72px;
-  }
-  
-  .button.tertiary-filled {
-    background-color: #a259ff;
-    height: 46px;
-  }
-  
-  .button.tertiary-outlined {
-    border: 2px solid;
-    border-color: #a259ff;
-    height: 46px;
-  }
-  
-  .button.secondary-outlined {
-    border: 2px solid;
-    border-color: #a259ff;
-    height: 60px;
-  }
-  
-  .button.primary-outlined {
-    border: 2px solid;
-    border-color: #a259ff;
-    height: 72px;
-  }
-  
-  .button.secondary-filled {
-    background-color: #a259ff;
-    height: 60px;
-  }
-  
-  .button.primary-filled .text-wrapper {
-    font-size: 22px;
-    line-height: 30.8px;
-  }
-  
-  .button.tertiary-filled .text-wrapper {
-    font-size: 16px;
-    line-height: 22.4px;
-  }
-  
-  .button.tertiary-outlined .text-wrapper {
-    font-size: 16px;
-    line-height: 22.4px;
-  }
-  
-  .button.secondary-outlined .text-wrapper {
-    font-size: 16px;
-    line-height: 22.4px;
-  }
-  
-  .button.primary-outlined .text-wrapper {
-    font-size: 22px;
-    line-height: 30.8px;
-  }
-  
-  .button.secondary-filled .text-wrapper {
-    font-size: 16px;
-    line-height: 22.4px;
-  }
-  
+  align-items: center;
+  border-radius: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 0px 50px;
+  position: relative;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.button .text-wrapper {
+  color: #ffffff;
+  font-family: "Work Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  letter-spacing: 0;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.button.primary-filled {
+  background-color: #a259ff;
+  height: 72px;
+}
+
+.button.tertiary-filled {
+  background-color: #a259ff;
+  height: 46px;
+}
+
+.button.tertiary-outlined {
+  border: 2px solid;
+  border-color: #a259ff;
+  height: 46px;
+}
+
+.button.secondary-outlined {
+  border: 2px solid;
+  border-color: #a259ff;
+  height: 60px;
+}
+
+.button.primary-outlined {
+  border: 2px solid;
+  border-color: #a259ff;
+  height: 72px;
+}
+
+.button.secondary-filled {
+  background-color: #a259ff;
+  height: 60px;
+}
+
+.button.primary-filled .text-wrapper {
+  font-size: 22px;
+  line-height: 30.8px;
+}
+
+.button.tertiary-filled .text-wrapper {
+  font-size: 16px;
+  line-height: 22.4px;
+}
+
+.button.tertiary-outlined .text-wrapper {
+  font-size: 16px;
+  line-height: 22.4px;
+}
+
+.button.secondary-outlined .text-wrapper {
+  font-size: 16px;
+  line-height: 22.4px;
+}
+
+.button.primary-outlined .text-wrapper {
+  font-size: 22px;
+  line-height: 30.8px;
+}
+
+.button.secondary-filled .text-wrapper {
+  font-size: 16px;
+  line-height: 22.4px;
+}
+
 .connect-wallet-screen {
-    align-items: flex-start;
-    background-color: #2b2b2b;
-    border: 1px none;
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-    position: relative;
-  }
-  .footer {
-    background-color: #3b3b3b;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 195px;
-    position: relative;
-  }
-  
-  .footer .footer-info {
-    align-items: flex-start;
-    display: flex;
-    position: relative;
-  }
-  
-  .footer .NFT-marketplace-info {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .footer .logo {
-    height: 32px;
-    min-width: 243.41px;
-    position: relative;
-  }
-  
-  .footer .NFT-marketplace {
-    height: 20px;
-    left: 44px;
-    position: absolute;
-    top: 9px;
-    width: 199px;
-  }
-  
-  .footer .additional-info {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-  }
-  
-  .footer .NFT-marketplace-UI {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    margin-top: -1px;
-    position: relative;
-  }
-  
-  .footer .community-info {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    position: relative;
-  }
-  
-  .footer .join-our-community {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    margin-top: -1px;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  .footer .icons {
-    align-items: flex-start;
-    display: flex;
-    gap: 10px;
-    position: relative;
-    width: fit-content;
-  }
-  
-  .footer .explore {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .footer .div {
-    color: #ffffff;
-    font-family: "Space Mono-Bold", Helvetica;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 35.2px;
-    margin-top: -1px;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  .footer .pages {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-  }
-  
-  .footer .marketplace {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    margin-top: -1px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .footer .rankings {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .footer .connect-a-wallet {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .footer .subscribe {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .footer .join-our-weekly {
-    color: #ffffff;
-    font-family: "Space Mono-Bold", Helvetica;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 35.2px;
-    margin-top: -1px;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  .footer .subscribe-form-info {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-  }
-  
-  .footer .get-exclusive {
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    margin-top: -1px;
-    position: relative;
-  }
-  
-  .footer .p {
-    align-self: stretch;
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22.4px;
-    margin-top: -1px;
-    position: relative;
-  }
-  
-  .footer .frame {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-  }
-  
-  .footer .divider {
-    align-self: stretch;
-    height: 1px;
-    margin-top: -1px;
-    object-fit: cover;
-    position: relative;
-  }
-  
-  .footer .NFT-market-use-this {
-    align-self: stretch;
-    color: #cccccc;
-    font-family: "Work Sans-Regular", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 13.2px;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  .footer.desktop {
-    align-items: flex-start;
-    gap: 49px;
-    width: 1439px;
-  }
-  
-  .footer.tablet {
-    align-items: center;
-    gap: 49px;
-    width: 834px;
-  }
-  
-  .footer.mobile {
-    align-items: center;
-    gap: 30px;
-    width: 375px;
-  }
-  
-  .footer.desktop .footer-info {
-    align-self: stretch;
-    justify-content: space-between;
-  }
-  
-  .footer.tablet .footer-info {
-    flex-direction: column;
-    gap: 30px;
-    margin-left: -123px;
-    margin-right: -123px;
-    width: 690px;
-  }
-  
-  .footer.mobile .footer-info {
-    flex-direction: column;
-    gap: 30px;
-    margin-left: -165px;
-    margin-right: -165px;
-    width: 315px;
-  }
-  
-  .footer.desktop .NFT-marketplace-info {
-    gap: 30px;
-    padding: 0px 84px 0px 0px;
-    width: 327.41px;
-  }
-  
-  .footer.tablet .NFT-marketplace-info {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.mobile .NFT-marketplace-info {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.desktop .additional-info {
-    width: fit-content;
-  }
-  
-  .footer.tablet .additional-info {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .additional-info {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .NFT-marketplace-UI {
-    width: 238px;
-  }
-  
-  .footer.tablet .NFT-marketplace-UI {
-    align-self: stretch;
-    white-space: nowrap;
-  }
-  
-  .footer.mobile .NFT-marketplace-UI {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .community-info {
-    width: fit-content;
-  }
-  
-  .footer.tablet .community-info {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .community-info {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .join-our-community {
-    height: 18px;
-    width: 238px;
-  }
-  
-  .footer.tablet .join-our-community {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .join-our-community {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .explore {
-    gap: 25px;
-    width: 240px;
-  }
-  
-  .footer.tablet .explore {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.mobile .explore {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.desktop .div {
-    width: fit-content;
-  }
-  
-  .footer.tablet .div {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .div {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .pages {
-    width: fit-content;
-  }
-  
-  .footer.tablet .pages {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .pages {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .subscribe {
-    gap: 25px;
-    width: fit-content;
-  }
-  
-  .footer.tablet .subscribe {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.mobile .subscribe {
-    align-self: stretch;
-    gap: 20px;
-  }
-  
-  .footer.desktop .join-our-weekly {
-    width: fit-content;
-  }
-  
-  .footer.tablet .join-our-weekly {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .join-our-weekly {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .subscribe-form-info {
-    width: fit-content;
-  }
-  
-  .footer.tablet .subscribe-form-info {
-    align-self: stretch;
-  }
-  
-  .footer.mobile .subscribe-form-info {
-    align-self: stretch;
-  }
-  
-  .footer.desktop .get-exclusive {
-    width: 330px;
-  }
-  
-  .footer.tablet .get-exclusive {
-    align-self: stretch;
-    white-space: nowrap;
-  }
-  
-  .footer.desktop .frame {
-    align-self: stretch;
-  }
-  
-  .footer.tablet .frame {
-    margin-left: -123px;
-    margin-right: -123px;
-    width: 690px;
-  }
-  
-  .footer.mobile .frame {
-    margin-left: -165px;
-    margin-right: -165px;
-    width: 315px;
-  }
-  
-  .footer.desktop .divider {
-    min-width: 1049.41px;
-  }
-  
-  .footer.tablet .divider {
-    min-width: 690px;
-  }
-  
-  .footer.mobile .divider {
-    min-width: 315px;
-  }
-    
+  align-items: flex-start;
+  background-color: #2b2b2b;
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  position: relative;
+}
+.footer {
+  background-color: #3b3b3b;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 195px;
+  position: relative;
+}
+
+.footer .footer-info {
+  align-items: flex-start;
+  display: flex;
+  position: relative;
+}
+
+.footer .NFT-marketplace-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.footer .logo {
+  height: 32px;
+  min-width: 243.41px;
+  position: relative;
+}
+
+.footer .NFT-marketplace {
+  height: 20px;
+  left: 44px;
+  position: absolute;
+  top: 9px;
+  width: 199px;
+}
+
+.footer .additional-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.footer .NFT-marketplace-UI {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.footer .community-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.footer .join-our-community {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.footer .icons {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  width: fit-content;
+}
+
+.footer .explore {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.footer .div {
+  color: #ffffff;
+  font-family: "Space Mono-Bold", Helvetica;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 35.2px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.footer .pages {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.footer .marketplace {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.footer .rankings {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.footer .connect-a-wallet {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.footer .subscribe {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.footer .join-our-weekly {
+  color: #ffffff;
+  font-family: "Space Mono-Bold", Helvetica;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 35.2px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.footer .subscribe-form-info {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.footer .get-exclusive {
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.footer .p {
+  align-self: stretch;
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  margin-top: -1px;
+  position: relative;
+}
+
+.footer .frame {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.footer .divider {
+  align-self: stretch;
+  height: 1px;
+  margin-top: -1px;
+  object-fit: cover;
+  position: relative;
+}
+
+.footer .NFT-market-use-this {
+  align-self: stretch;
+  color: #cccccc;
+  font-family: "Work Sans-Regular", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 13.2px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.footer.desktop {
+  align-items: flex-start;
+  gap: 49px;
+  width: 1439px;
+}
+
+.footer.tablet {
+  align-items: center;
+  gap: 49px;
+  width: 834px;
+}
+
+.footer.mobile {
+  align-items: center;
+  gap: 30px;
+  width: 375px;
+}
+
+.footer.desktop .footer-info {
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.footer.tablet .footer-info {
+  flex-direction: column;
+  gap: 30px;
+  margin-left: -123px;
+  margin-right: -123px;
+  width: 690px;
+}
+
+.footer.mobile .footer-info {
+  flex-direction: column;
+  gap: 30px;
+  margin-left: -165px;
+  margin-right: -165px;
+  width: 315px;
+}
+
+.footer.desktop .NFT-marketplace-info {
+  gap: 30px;
+  padding: 0px 84px 0px 0px;
+  width: 327.41px;
+}
+
+.footer.tablet .NFT-marketplace-info {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.mobile .NFT-marketplace-info {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.desktop .additional-info {
+  width: fit-content;
+}
+
+.footer.tablet .additional-info {
+  align-self: stretch;
+}
+
+.footer.mobile .additional-info {
+  align-self: stretch;
+}
+
+.footer.desktop .NFT-marketplace-UI {
+  width: 238px;
+}
+
+.footer.tablet .NFT-marketplace-UI {
+  align-self: stretch;
+  white-space: nowrap;
+}
+
+.footer.mobile .NFT-marketplace-UI {
+  align-self: stretch;
+}
+
+.footer.desktop .community-info {
+  width: fit-content;
+}
+
+.footer.tablet .community-info {
+  align-self: stretch;
+}
+
+.footer.mobile .community-info {
+  align-self: stretch;
+}
+
+.footer.desktop .join-our-community {
+  height: 18px;
+  width: 238px;
+}
+
+.footer.tablet .join-our-community {
+  align-self: stretch;
+}
+
+.footer.mobile .join-our-community {
+  align-self: stretch;
+}
+
+.footer.desktop .explore {
+  gap: 25px;
+  width: 240px;
+}
+
+.footer.tablet .explore {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.mobile .explore {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.desktop .div {
+  width: fit-content;
+}
+
+.footer.tablet .div {
+  align-self: stretch;
+}
+
+.footer.mobile .div {
+  align-self: stretch;
+}
+
+.footer.desktop .pages {
+  width: fit-content;
+}
+
+.footer.tablet .pages {
+  align-self: stretch;
+}
+
+.footer.mobile .pages {
+  align-self: stretch;
+}
+
+.footer.desktop .subscribe {
+  gap: 25px;
+  width: fit-content;
+}
+
+.footer.tablet .subscribe {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.mobile .subscribe {
+  align-self: stretch;
+  gap: 20px;
+}
+
+.footer.desktop .join-our-weekly {
+  width: fit-content;
+}
+
+.footer.tablet .join-our-weekly {
+  align-self: stretch;
+}
+
+.footer.mobile .join-our-weekly {
+  align-self: stretch;
+}
+
+.footer.desktop .subscribe-form-info {
+  width: fit-content;
+}
+
+.footer.tablet .subscribe-form-info {
+  align-self: stretch;
+}
+
+.footer.mobile .subscribe-form-info {
+  align-self: stretch;
+}
+
+.footer.desktop .get-exclusive {
+  width: 330px;
+}
+
+.footer.tablet .get-exclusive {
+  align-self: stretch;
+  white-space: nowrap;
+}
+
+.footer.desktop .frame {
+  align-self: stretch;
+}
+
+.footer.tablet .frame {
+  margin-left: -123px;
+  margin-right: -123px;
+  width: 690px;
+}
+
+.footer.mobile .frame {
+  margin-left: -165px;
+  margin-right: -165px;
+  width: 315px;
+}
+
+.footer.desktop .divider {
+  min-width: 1049.41px;
+}
+
+.footer.tablet .divider {
+  min-width: 690px;
+}
+
+.footer.mobile .divider {
+  min-width: 315px;
+}
