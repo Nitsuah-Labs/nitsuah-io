@@ -1,7 +1,7 @@
 // ABOUT - src/app/pages/about.tsx
 import React from "react";
-import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+import HomeBar from "../_components/_site/Homebar";
 import SplineScene from "../_components/_spline/spline-about";
 
 const AboutPage: React.FC = () => {
@@ -13,7 +13,6 @@ const AboutPage: React.FC = () => {
       </div>
       <div className="spline-container">
         <SplineScene />
-        <h4>May take some time to load, thanks for your patience!</h4>
       </div>
       <div className="footer-container">
         <Footer />
