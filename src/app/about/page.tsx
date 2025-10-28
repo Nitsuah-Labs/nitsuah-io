@@ -7,9 +7,7 @@ import SplineScene from "../_components/_spline/spline-about";
 const AboutPage: React.FC = () => {
   return (
     <div className="App">
-      <div className="header-fixed">
-        <HomeBar />
-      </div>
+      <HomeBar />
       <main>
         <h1 className="sr-only">About Austin Hardy</h1>
         <h2 style={{ margin: "1rem 0", position: "relative", zIndex: 100 }}>
