@@ -13,12 +13,13 @@ const AboutPage: React.FC = () => {
           ABOUT ME
         </h2>
       </div>
-      <div className="spline-container">
-        <SplineScene />
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      <main>
+        <h1 className="sr-only">About Austin Hardy</h1>
+        <div className="spline-container">
+          <SplineScene />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };

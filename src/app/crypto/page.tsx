@@ -65,7 +65,7 @@ const CryptoPage = () => {
   return (
     <div className="App">
       <HomeBar />
-      <div
+      <main
         className="content-container"
         style={{
           marginTop: "64px",
@@ -76,7 +76,7 @@ const CryptoPage = () => {
         }}
       >
         <div className="projects-header" style={{ marginBottom: "32px" }}>
-          <h2>Web3 & Crypto</h2>
+          <h1>Web3 & Crypto</h1>
           <p>NFTs, POAPs, and blockchain achievements</p>
         </div>
 
@@ -156,10 +156,8 @@ const CryptoPage = () => {
             </Grid>
           ))}
         </Grid>
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
