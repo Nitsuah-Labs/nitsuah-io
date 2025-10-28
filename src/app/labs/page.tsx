@@ -123,11 +123,9 @@ function renderOutput() {
 const LabHome = () => {
   return (
     <div className="App">
-      <div>
-        <LabNav />
-        {renderOutput()}
-        <LabFooter />
-      </div>
+      <LabNav />
+      {renderOutput()}
+      <LabFooter />
     </div>
   );
 };
