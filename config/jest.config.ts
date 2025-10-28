@@ -19,7 +19,9 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   '^wagmi(.*)$': '<rootDir>/__mocks__/wagmi.js',
+  '^wagmi/codegen$': '<rootDir>/__mocks__/wagmi-codegen.js',
   '^viem(.*)$': '<rootDir>/__mocks__/viem.js',
+  '^src/generated$': '<rootDir>/__mocks__/generated.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   transform: {

@@ -1,16 +1,16 @@
 // src/components/Homebar.tsx
 "use client";
-import React from "react";
-import Link from "next/link";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import React from "react";
 import "../_styles/global.css";
 
 // Replace empty interface with object type
@@ -56,25 +56,27 @@ const HomeBar: React.FC<HomeBarProps> = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/">
-            <Typography
-              variant="h1"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <div className="center">
-                <p className="title">NITSUAH</p>
-              </div>
-            </Typography>
+          <Link href="/" legacyBehavior>
+            <a style={{ textDecoration: "none", color: "inherit" }}>
+              <Typography
+                variant="h1"
+                noWrap
+                component="span"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <div className="center">
+                  <p className="title">NITSUAH</p>
+                </div>
+              </Typography>
+            </a>
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -107,16 +109,40 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                 </Button>
               </Link>
               {pages.map((page) => (
-                <Link key={page} href={`/${page}`}>
-                  <Button
-                    component="span"
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    {page}
-                  </Button>
-                </Link>
+                <Button
+                  key={page}
+                  component={Link}
+                  href={`/${page}`}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    textTransform: "none",
+                  }}
+                >
+                  {page}
+                </Button>
               ))}
             </StyledMenu>
+          </Box>
+
+          {/* Desktop navigation (md and up) */}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                component={Link}
+                href={`/${page}`}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  textTransform: "none",
+                }}
+              >
+                {page}
+              </Button>
+            ))}
           </Box>
 
           {/* Profile and Logout buttons as links */}

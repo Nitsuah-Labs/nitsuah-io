@@ -1,26 +1,27 @@
 // REGISTER - src/app/labs/register/page.tsx
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Button, TextField, Grid, Box } from "@mui/material";
+import { useState } from "react";
+// Use standard <img> to avoid requiring next/image types in this build context
+import { Box, Button, Grid, TextField } from "@mui/material";
 import {
   useAccount,
   useSimulateContract,
-  useWriteContract,
   useSwitchChain,
   useWaitForTransactionReceipt,
+  useWriteContract,
 } from "wagmi";
+import { Connect } from "../../_components/_web3/Connect";
 
 // LAB STYLES
-import "../../_components/_styles/labs.css";
-import LabNav from "../../_components/_labs/LabNav";
 import LabFooter from "../../_components/_labs/LabFooter";
+import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
 
 // LAB ASSETS
+import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
 import mumbai from "../../_components/_web3/_assets/mumbai.png";
 import polygonLogo from "../../_components/_web3/_assets/polygonlogo.png";
-import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
 
 // CONTRACT ASSETS
 import registerABI from "../../_components/_labs/_utils/registerABI.json";
@@ -41,11 +42,12 @@ const RegisterSite = () => {
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
   const network = chain?.name || "";
 
-  const contractConfig = {
+  const contractConfig: { address: `0x${string}`; abi: any } = {
     address: contractAddress,
     abi: contractABI as any,
   };
 
+  // Cast to any to avoid deep generic type instantiation during Next's build
   const { data: registerSim } = useSimulateContract({
     ...contractConfig,
     functionName: "register",
@@ -53,7 +55,7 @@ const RegisterSite = () => {
     query: {
       enabled: !!message,
     },
-  });
+  } as unknown as any) as any;
 
   const {
     writeContract: register,
@@ -66,8 +68,8 @@ const RegisterSite = () => {
   });
 
   const handleRegister = () => {
-    if (registerSim?.request) {
-      register(registerSim.request);
+    if ((registerSim as any)?.request) {
+      register((registerSim as any).request);
     }
   };
 
@@ -106,15 +108,7 @@ const RegisterSite = () => {
         </div>
         <div className="connect-wallet-container">
           <Box sx={{ textAlign: "center", my: 5 }}>
-            <Button
-              onClick={() =>
-                alert("Please use the Connect Wallet button in the UI.")
-              }
-              variant="contained"
-              color="success"
-            >
-              Connect Wallet
-            </Button>
+            <Connect />
           </Box>
         </div>
       </div>
@@ -135,9 +129,9 @@ const RegisterSite = () => {
                 variant="contained"
                 color="secondary"
               >
-                <Image
+                <img
                   className="logo"
-                  src={mumbai}
+                  src={mumbai.src}
                   alt="polygon mumbai logo grey"
                 />
                 POLYGON MUMBAI
@@ -150,10 +144,12 @@ const RegisterSite = () => {
                 network.includes("Polygon") ? "poly-wallet" : "eth-wallet"
               }
             >
-              <Image
+              <img
                 alt="Network logo"
                 className="logo"
-                src={network.includes("Polygon") ? polygonLogo : ethLogo}
+                src={
+                  network.includes("Polygon") ? polygonLogo.src : ethLogo.src
+                }
               />{" "}
               {currentAccount}{" "}
             </div>
@@ -187,7 +183,7 @@ const RegisterSite = () => {
                 variant="contained"
                 color="primary"
                 onClick={handleRegister}
-                disabled={!registerSim?.request || isRegistering}
+                disabled={!(registerSim as any)?.request || isRegistering}
               >
                 {isRegistering ? "Registering..." : "Register"}
               </Button>
