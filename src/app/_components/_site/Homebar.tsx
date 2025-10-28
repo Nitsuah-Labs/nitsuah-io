@@ -36,7 +36,7 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   />
 );
 
-const pages = ["about", "crypto", "projects", "labs"];
+const pages = ["about", "resume", "crypto", "projects", "labs"];
 // Removed profile/logout since they're not implemented yet
 
 const HomeBar: React.FC<HomeBarProps> = () => {
