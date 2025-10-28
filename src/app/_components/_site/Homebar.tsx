@@ -37,11 +37,11 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
 );
 
 const pages = ["about", "crypto", "projects", "labs"];
-const settings = ["Profile", "Logout"];
+// Removed profile/logout since they're not implemented yet
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
+    null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -143,24 +143,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                 {page}
               </Button>
             ))}
-          </Box>
-
-          {/* Profile and Logout buttons as links */}
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Link href="/profile">
-              <Button
-                component="span"
-                color="inherit"
-                sx={{ mr: 2, color: "white" }}
-              >
-                {settings[0]}
-              </Button>
-            </Link>
-            <Link href="/logout">
-              <Button component="span" color="inherit" sx={{ color: "white" }}>
-                {settings[1]}
-              </Button>
-            </Link>
           </Box>
         </Toolbar>
       </Container>
