@@ -23,7 +23,12 @@ export function SplineScene() {
   }, []);
 
   return (
-    <div role="img" aria-label="Interactive 3D scene">
+    // Use the page-level spline container so the scene can sit behind header/footer
+    <div
+      className="spline-container"
+      role="region"
+      aria-label="Interactive 3D scene"
+    >
       {isLoading && (
         <div className="spline-loading" aria-live="polite">
           <div className="spinner" aria-hidden="true"></div>
@@ -32,7 +37,11 @@ export function SplineScene() {
           </div>
         </div>
       )}
-      <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+
+      {/* The Spline runtime injects a canvas; wrap it so we can force sizing via CSS */}
+      <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
+        <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+      </div>
     </div>
   );
 }

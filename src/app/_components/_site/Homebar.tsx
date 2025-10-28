@@ -30,14 +30,13 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
     {...props}
     sx={{
       "& .MuiPaper-root": {
-        backgroundColor: "darkgrey", // Set the background color here
+        backgroundColor: "darkgrey",
       },
     }}
   />
 );
 
 const pages = ["about", "resume", "crypto", "projects", "labs"];
-// Removed profile/logout since they're not implemented yet
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -103,9 +102,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               keepMounted
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               <Link href="/">
                 <Button
@@ -153,6 +150,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           </Box>
         </Toolbar>
       </Container>
+      {/* Toolbar spacer ensures the fixed AppBar does not overlap page content */}
+      <Toolbar />
     </AppBar>
   );
 };
