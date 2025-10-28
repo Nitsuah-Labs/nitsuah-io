@@ -6,6 +6,7 @@
     "dev": "next dev",
     "dev:wagmi": "npm run wagmi && next dev",
     "build": "npm run wagmi && next build",
+    "build:skip-wagmi": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -19,7 +20,10 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "test:a11y": "playwright test tests/accessibility --project=chromium-desktop",
+    "test:a11y:quick": "playwright test tests/accessibility/all-pages.spec.ts --grep='Homepage|About|Projects' --project=chromium-desktop",
     "validate": "npm run typecheck && npm run format:check",
+    "validate:full": "npm run validate && npm run lint && npm run test:a11y:quick",
     "clean": "rm -rf .next out node_modules/.cache",
     "analyze": "cross-env ANALYZE=true npm run build",
     "prepare": "husky"

@@ -1,0 +1,1 @@
+npm run test:a11y:quick || exit 1

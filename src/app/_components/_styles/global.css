@@ -1,12 +1,21 @@
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensure at least full viewport height */
   height: 100vh; /* Fixed viewport height */
+  width: 100vw;
   background-color: #181818;
   text-align: center;
   color: white;
   overflow: hidden; /* Prevent scrolling */
+  margin: 0;
+  padding: 0;
 }
 
 body {
