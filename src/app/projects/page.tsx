@@ -189,17 +189,21 @@ const Projects = () => {
 
   return (
     <div className="App">
-      <div className="container">
-        <div className="content-container">
-          <div className="header">
-            <HomeBar />
-          </div>
-          <SelectedProjects />
-          <div className="projects-container">{renderProjsContainer()}</div>
-        </div>
-        <div className="footer-container">
-          <Footer />
-        </div>
+      <HomeBar />
+      <div
+        className="content-container"
+        style={{
+          marginTop: "64px",
+          marginBottom: "60px",
+          overflowY: "auto",
+          height: "calc(100vh - 124px)",
+        }}
+      >
+        <SelectedProjects />
+        <div className="projects-container">{renderProjsContainer()}</div>
+      </div>
+      <div className="footer-container">
+        <Footer />
       </div>
     </div>
   );

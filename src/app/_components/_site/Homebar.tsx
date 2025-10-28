@@ -53,7 +53,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/" legacyBehavior>
