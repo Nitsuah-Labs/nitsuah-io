@@ -28,6 +28,23 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # Content Security Policy - strict XSS protection
+    Content-Security-Policy = """
+      default-src 'self'; \
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com; \
+      style-src 'self' 'unsafe-inline'; \
+      img-src 'self' data: https: blob:; \
+      font-src 'self' data:; \
+      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org wss://*.walletconnect.com wss://*.walletconnect.org https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
+      frame-src 'self' https://challenges.cloudflare.com; \
+      worker-src 'self' blob:; \
+      object-src 'none'; \
+      base-uri 'self'; \
+      form-action 'self'; \
+      frame-ancestors 'none'; \
+      upgrade-insecure-requests
+    """
 
 # Cache static assets
 [[headers]]
