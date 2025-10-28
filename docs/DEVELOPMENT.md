@@ -157,36 +157,29 @@ Add these in Netlify UI:
 
 ---
 
-## WSL Development
+## Pre-Commit Hook
 
-### Dual Environment Setup
+Husky pre-commit hook automatically runs `lint-staged` which:
+1. Formats staged files with Prettier
+2. Ensures code consistency before commit
 
-This repo supports Windows + WSL development:
-
-1. **Windows:** `c:\Users\ajhar\code\nitsuah-io`
-2. **WSL:** `~/nitsuah-io-wsl` (validation clone)
-
-### Pre-Commit Hook
-
-Husky pre-commit hook:
-1. Syncs staged files to WSL clone
-2. Runs Prettier validation in WSL
-3. Blocks commit if formatting fails
+The hook runs locally using your installed Node.js.
 
 **Setup:**
 ```bash
-# In WSL
-cd ~/nitsuah-io-wsl
-npm ci  # Install dev deps for validation
+npm ci  # Install dependencies (includes husky setup)
 ```
 
 **Usage:**
 ```bash
-# Commit from Windows - validation runs in WSL automatically
+# Commit normally - formatting runs automatically
 git commit -m "feat: add feature"
 
-# Format before commit
+# Manually format all files
 npm run format
+
+# Check formatting without changing files
+npm run format:check
 ```
 
 ---
@@ -279,8 +272,8 @@ npm run format     # Fix formatting
 
 **Solution:**
 ```bash
-# Ensure WSL clone has node_modules
-cd ~/nitsuah-io-wsl && npm ci
+# Ensure dependencies are installed
+npm ci
 
 # Or skip hook (not recommended)
 git commit --no-verify
