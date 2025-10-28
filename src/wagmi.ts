@@ -33,7 +33,13 @@ export const config = createConfig({
   chains: [mainnet, polygon, sepolia, polygonAmoy, polygonMumbai],
   connectors: [
     injected(),
-    walletConnect({ projectId: walletConnectProjectId }),
+    walletConnect({
+      projectId: walletConnectProjectId,
+      showQrModal: true,
+      qrModalOptions: {
+        themeMode: "dark",
+      },
+    }),
     metaMask(),
     safe(),
   ],
