@@ -147,7 +147,7 @@ const PortfolioGrid: React.FC = () => {
                           rel="noopener noreferrer"
                           className="portfolio-link"
                         >
-                          <InfoIcon sx={{ fontSize: 16 }} />
+                          <InfoIcon sx={{ fontSize: 12 }} />
                         </a>
                       </Tooltip>
                     )}
