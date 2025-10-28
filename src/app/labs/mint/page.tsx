@@ -21,26 +21,48 @@ import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
 const MintSite: React.FC = () => {
   return (
     <div className="App">
-      <div className="container">
-        <div className="header">
-          <LabNav />
-        </div>
-        <div className="middle-row">
-          <h2>MINT PORTAL</h2>
-          <Connect />
-          <Connected>
-            <Account />
-            <br />
-            <MintNFT />
-            <br />
-            <NetworkSwitcher />
-            <br />
-          </Connected>
-          <div className="footer">
-            <LabFooter />
+      <LabNav />
+      <h2>MINT PORTAL</h2>
+      <div className="form-container">
+        <div className="labs-card">
+          <div className="labs-card-header">
+            <h3 className="labs-card-title">Connect Your Wallet</h3>
+          </div>
+          <div className="labs-card-body">
+            <Connect />
           </div>
         </div>
+
+        <Connected>
+          <div className="labs-card">
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">Account Details</h3>
+            </div>
+            <div className="labs-card-body">
+              <Account />
+            </div>
+          </div>
+
+          <div className="labs-card">
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">Mint NFT</h3>
+            </div>
+            <div className="labs-card-body">
+              <MintNFT />
+            </div>
+          </div>
+
+          <div className="labs-card">
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">Network Settings</h3>
+            </div>
+            <div className="labs-card-body">
+              <NetworkSwitcher />
+            </div>
+          </div>
+        </Connected>
       </div>
+      <LabFooter />
     </div>
   );
 };
