@@ -8,12 +8,13 @@ const HomePage: React.FC = () => {
   return (
     <div className="App">
       <HomeBar />
-      <div className="spline-container">
-        <SplineScene />
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      <main>
+        <h1 className="sr-only">Welcome to Nitsuah Labs</h1>
+        <div className="spline-container">
+          <SplineScene />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };

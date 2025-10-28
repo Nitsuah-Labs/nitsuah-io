@@ -91,7 +91,7 @@ function getResumeData(): ResumeData {
     process.cwd(),
     "public",
     "assets",
-    "resume.json",
+    "resume.json"
   );
   const resumeContent = fs.readFileSync(resumePath, "utf-8");
   return JSON.parse(resumeContent);
@@ -204,6 +204,7 @@ export default function ResumePage() {
                     type="checkbox"
                     id={`work-item-${idx}`}
                     className="work-toggle"
+                    aria-label={`Toggle details for ${job.position} at ${job.name}`}
                   />
                   <label htmlFor={`work-item-${idx}`} className="work-label">
                     <div className="work-header">
