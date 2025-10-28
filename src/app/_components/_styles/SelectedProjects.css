@@ -200,6 +200,121 @@
   }
 }
 
+/* Portfolio Grid Styles (smaller cards for "More Projects" section) */
+.portfolio-grid {
+  padding: 2rem 0;
+}
+
+.portfolio-card {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 10px;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-color: #3b82f6;
+}
+
+.portfolio-card-image {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.portfolio-card-image img {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-card-image img {
+  transform: scale(1.05);
+}
+
+.portfolio-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+}
+
+.portfolio-card-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  flex: 1;
+}
+
+.portfolio-card-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.portfolio-tag {
+  background: #f3f4f6;
+  color: #4b5563;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.portfolio-card-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.portfolio-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.portfolio-link:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.portfolio-link-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.portfolio-link-primary:hover {
+  background: #2563eb;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .projects-header h2 {
@@ -243,5 +358,46 @@
 
   .projects-footer p {
     color: #9ca3af;
+  }
+
+  /* Dark mode for portfolio cards */
+  .portfolio-card {
+    background: #1f2937;
+    border-color: #374151;
+  }
+
+  .portfolio-card:hover {
+    border-color: #60a5fa;
+  }
+
+  .portfolio-card-title {
+    color: #f9fafb;
+  }
+
+  .portfolio-card-description {
+    color: #9ca3af;
+  }
+
+  .portfolio-tag {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  .portfolio-link {
+    background: #374151;
+    color: #d1d5db;
+  }
+
+  .portfolio-link:hover {
+    background: #4b5563;
+  }
+
+  .portfolio-link-primary {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .portfolio-link-primary:hover {
+    background: #2563eb;
   }
 }
