@@ -55,7 +55,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
     <AppBar
       position="fixed"
       sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)" }}
-      component="nav"
+      component="header"
+      role="banner"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>

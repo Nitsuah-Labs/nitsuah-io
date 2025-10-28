@@ -1,5 +1,6 @@
 import { defineChain } from "viem";
 import { createConfig, http } from "wagmi";
+import type { Chain } from "wagmi/chains";
 import { mainnet, polygon, polygonAmoy, sepolia } from "wagmi/chains";
 // Import connectors from the standalone package to ensure the bundler
 // resolves the correct ESM exports instead of a possibly-misaligned
@@ -28,26 +29,59 @@ export const polygonMumbai = defineChain({
   testnet: true,
 });
 
-// Support mainnet/polygon prod + testnets (Sepolia, Amoy, and legacy Mumbai)
-export const config = createConfig({
-  chains: [mainnet, polygon, sepolia, polygonAmoy, polygonMumbai],
-  connectors: [
-    injected(),
-    walletConnect({
-      projectId: walletConnectProjectId,
-      showQrModal: true,
-      qrModalOptions: {
-        themeMode: "dark",
-      },
-    }),
-    metaMask(),
-    safe(),
-  ],
-  transports: {
-    [mainnet.id]: http(),
-    [polygon.id]: http(),
-    [sepolia.id]: http(),
-    [polygonAmoy.id]: http(),
-    [polygonMumbai.id]: http(),
-  },
-});
+// Create and cache the Wagmi config on first client access to avoid
+// initializing WalletConnect/SignClient during SSR or multiple test imports.
+let _clientConfig: ReturnType<typeof createConfig> | null = null;
+
+export function getWagmiConfig() {
+  if (_clientConfig) return _clientConfig;
+
+  // Base chains
+  const chains = [mainnet, polygon, sepolia, polygonAmoy, polygonMumbai];
+
+  // createConfig expects a readonly tuple type; cast safely to the expected
+  // readonly [Chain, ...Chain[]] to satisfy the signature while preserving
+  // proper runtime values.
+  const typedChains = chains as unknown as readonly [Chain, ...Chain[]];
+
+  // Create connectors only on the client where window and Web APIs exist.
+  // This prevents WalletConnect from initializing in SSR or test harnesses
+  // where it can cause multiple SignClient initializations.
+  const isClient = typeof window !== "undefined";
+
+  const connectors = [] as any[];
+  // injected connector is lightweight and can be created client or server-side
+  connectors.push(injected());
+
+  if (isClient) {
+    connectors.push(
+      walletConnect({
+        projectId: walletConnectProjectId,
+        showQrModal: true,
+        qrModalOptions: {
+          themeMode: "dark",
+        },
+      }),
+    );
+    connectors.push(metaMask());
+    connectors.push(safe());
+  } else {
+    // On server, provide minimal fallback connectors so imports don't fail
+    connectors.push(metaMask());
+    connectors.push(safe());
+  }
+
+  _clientConfig = createConfig({
+    chains: typedChains,
+    connectors,
+    transports: {
+      [mainnet.id]: http(),
+      [polygon.id]: http(),
+      [sepolia.id]: http(),
+      [polygonAmoy.id]: http(),
+      [polygonMumbai.id]: http(),
+    },
+  });
+
+  return _clientConfig;
+}

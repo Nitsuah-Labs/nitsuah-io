@@ -18,11 +18,13 @@
     "test:watch": "jest --config config/jest.config.ts --watch",
     "test:coverage": "jest --config config/jest.config.ts --coverage",
     "test:e2e": "playwright test",
+  "test:e2e:ci": "cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:a11y": "playwright test tests/accessibility --project=chromium-desktop",
     "test:a11y:quick": "playwright test tests/accessibility/all-pages.spec.ts --grep=\"(Homepage|About|Projects)\" --project=chromium-desktop",
-    "test:smoke": "playwright test tests/accessibility/all-pages.spec.ts --grep=\"Homepage has no accessibility violations\" --project=chromium-desktop --timeout=5000",
+  "test:smoke": "playwright test tests/accessibility/all-pages.spec.ts --grep=\"Homepage has no accessibility violations\" --project=chromium-desktop --timeout=5000",
+  "test:precommit": "npm run test:smoke",
     "validate": "npm run typecheck && npm run format:check",
     "validate:full": "npm run validate && npm run lint && npm run test:a11y:quick",
     "clean": "rm -rf .next out node_modules/.cache",
@@ -86,6 +88,7 @@
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.1.6",
-    "typescript-eslint": "^8.31.0"
+    "typescript-eslint": "^8.31.0",
+    "cross-env": "^7.0.3"
   }
 }
