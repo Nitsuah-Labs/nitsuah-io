@@ -72,6 +72,7 @@ export function MintNFT() {
         onChange={(e) => setTokenId(e.target.value)}
         placeholder="Token ID (optional)"
         value={tokenId}
+        aria-label="Token ID for NFT minting"
         style={{
           padding: "12px",
           borderRadius: "8px",
@@ -85,11 +86,15 @@ export function MintNFT() {
         className="labs-btn labs-btn-primary labs-btn-large"
         disabled={!simulation?.request || isWriting || isConfirming}
         onClick={handleMint}
+        aria-busy={isWriting || isConfirming}
+        aria-label="Mint NFT"
       >
         {isWriting ? "Minting..." : isConfirming ? "Confirming..." : "Mint"}
       </button>
       {isConfirmed && (
         <div
+          role="status"
+          aria-live="polite"
           style={{
             padding: "16px",
             backgroundColor: "rgba(16, 185, 129, 0.1)",
@@ -104,6 +109,7 @@ export function MintNFT() {
             target="_blank"
             rel="noopener noreferrer"
             className="labs-btn labs-btn-secondary labs-btn-small"
+            aria-label="View transaction on Etherscan"
           >
             View on Etherscan
           </a>
@@ -111,6 +117,8 @@ export function MintNFT() {
       )}
       {(isWriteError || isConfirmError) && (
         <div
+          role="alert"
+          aria-live="assertive"
           style={{
             padding: "16px",
             backgroundColor: "rgba(239, 68, 68, 0.1)",
