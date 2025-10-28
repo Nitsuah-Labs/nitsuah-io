@@ -60,16 +60,20 @@
 
 ---
 
-## Recent Fixes
+## Recent Fixes (Phase 3)
 
 - Labs white border fixed (CSS viewport width, flexbox)
 - Labs footer positioning (flex: 1 on main)
+- Labs header styling (AppBar background to #181818)
 - Projects page color contrast (WCAG 2.1 AA)
 - Test timeouts fixed (60s for Spline pages)
 - About page landmark violation resolved
-- WagmiConfig to WagmiProvider upgrade
+- WagmiConfig to WagmiProvider upgrade (wagmi v2)
 - Git cleanup (200+ playwright-report files removed)
-- Pre-commit/pre-push hooks fixed for Git Bash
+- Pre-commit/pre-push hooks upgraded to match CI exactly
+  - Pre-commit: typecheck + format:check + jest + lint-staged
+  - Pre-push: accessibility tests + production build
+- TODO.md cleaned up and moved out of .gitignore
 
 ---
 

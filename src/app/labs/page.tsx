@@ -49,14 +49,14 @@ function renderOutput() {
                 className="purp-wallet"
                 aria-label="Get test MATIC from Polygon faucet"
               >
-                <h4>
+                <h2>
                   <Image
                     className="logo"
                     src={mumbai}
                     alt="Polygon Mumbai icon"
                   />
                   FAUCET
-                </h4>
+                </h2>
               </a>
             </td>
           </tr>
@@ -70,7 +70,7 @@ function renderOutput() {
                 className="purp-wallet"
                 aria-label="Register for Web3 labs"
               >
-                <h4>REGISTER</h4>
+                <h2>REGISTER</h2>
               </Link>
             </td>
           </tr>
@@ -84,7 +84,7 @@ function renderOutput() {
                 className="purp-wallet"
                 aria-label="Mint NFT landplot"
               >
-                <h4>LANDPLOT</h4>
+                <h2>LANDPLOT</h2>
               </Link>
             </td>
           </tr>
