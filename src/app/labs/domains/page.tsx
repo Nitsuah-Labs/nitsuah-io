@@ -1,6 +1,6 @@
 // DOMAINS - src/app/labs/domains/page.tsx
 "use client";
-import { Box, Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -245,37 +245,31 @@ const DomainSite = () => {
 
   // Render methods
   const renderNotConnectedContainer = () => (
-    <div className="connect-wallet-container">
-      <div className="form-container">
-        <div className="neutral-wallet">
-          <h4>STEP 1: Setup a Wallet app</h4>
-        </div>
-        <Box sx={{ textAlign: "center", my: 5 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => window.open(CBWalletURL, "_blank")}
-          >
-            COINBASE
-          </Button>
-          <br />
-          <br />
-          <Button
-            variant="contained"
-            color="warning"
-            onClick={() => window.open(MetaMaskURL, "_blank")}
-          >
-            METAMASK
-          </Button>
-        </Box>
-        <div className="neutral-wallet">
-          <h4>STEP 2: Connect a Wallet</h4>
-        </div>
-        <div className="connect-wallet-container">
-          <Box sx={{ textAlign: "center", my: 5 }}>
-            <Connect />
-          </Box>
-        </div>
+    <div className="labs-card">
+      <div className="labs-card-header">
+        <h3 className="labs-card-title">STEP 1: Setup a Wallet app</h3>
+      </div>
+      <div className="labs-card-body" style={{ textAlign: "center" }}>
+        <button
+          className="labs-btn labs-btn-primary labs-btn-large"
+          onClick={() => window.open(CBWalletURL, "_blank")}
+        >
+          COINBASE
+        </button>
+        <div className="labs-spacing-md"></div>
+        <button
+          className="labs-btn labs-btn-secondary labs-btn-large"
+          onClick={() => window.open(MetaMaskURL, "_blank")}
+        >
+          METAMASK
+        </button>
+      </div>
+
+      <div className="labs-card-header labs-spacing-lg">
+        <h3 className="labs-card-title">STEP 2: Connect a Wallet</h3>
+      </div>
+      <div className="labs-card-body" style={{ textAlign: "center" }}>
+        <Connect />
       </div>
     </div>
   );
@@ -289,18 +283,17 @@ const DomainSite = () => {
 
       return (
         <div>
-          <div className="connect-wallet-container">
-            <div className="zero-row">
-              <div className="neutral-wallet">
-                <h4>STEP 3: Switch network</h4>
-              </div>
-              <Button
+          <div className="labs-card">
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">STEP 3: Switch network</h3>
+            </div>
+            <div className="labs-card-body" style={{ textAlign: "center" }}>
+              <button
                 onClick={() => {
                   handleSwitchNetwork();
                   refreshPage();
                 }}
-                variant="contained"
-                color="secondary"
+                className="labs-btn labs-btn-secondary labs-btn-large"
               >
                 <Image
                   className="logo"
@@ -308,7 +301,7 @@ const DomainSite = () => {
                   alt="polygon mumbai logo grey"
                 />
                 POLYGON MUMBAI
-              </Button>
+              </button>
             </div>
           </div>
           <div className="zero-row">
@@ -383,10 +376,7 @@ const DomainSite = () => {
             {currentAccount.slice(0, 6)}...{currentAccount.slice(-4)}{" "}
           </div>
         ) : (
-          <Button variant="contained" color="error">
-            {" "}
-            Not connected{" "}
-          </Button>
+          <button className="labs-btn labs-btn-danger">Not connected</button>
         )}
         <div className="zero-row">
           <Grid container spacing={2}>
@@ -412,36 +402,32 @@ const DomainSite = () => {
                 </div>
               ) : (
                 <div className="zero-row">
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="error"
+                  <button
+                    className="labs-btn labs-btn-danger labs-btn-large"
+                    style={{ width: "100%" }}
                     disabled={loading}
                     onClick={mintDomain}
                   >
                     MINT
-                  </Button>
+                  </button>
                 </div>
               )}
             </Grid>
             <Grid item xs={16} sm={10}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="secondary"
+              <button
+                className="labs-btn labs-btn-secondary"
+                style={{ width: "100%", marginBottom: "10px" }}
                 onClick={() => window.open(SCAN_LINK, "_blank")}
               >
                 PolygonScan
-              </Button>
-              <br />
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
+              </button>
+              <button
+                className="labs-btn labs-btn-primary"
+                style={{ width: "100%" }}
                 onClick={() => window.open(OPENSEA_LINK, "_blank")}
               >
                 OpenSea
-              </Button>
+              </button>
             </Grid>
           </Grid>
         </div>
