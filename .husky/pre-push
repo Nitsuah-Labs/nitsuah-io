@@ -2,6 +2,4 @@
 # Add Node.js to PATH for Git Bash on Windows
 export PATH="/c/Program Files/nodejs:$PATH"
 
-# Temporarily disabled while fixing accessibility issues
-# npm run test:a11y:quick || exit 1
-echo "Pre-push hook: Skipping accessibility tests (temporarily disabled)"
+npm run test:a11y:quick || exit 1

@@ -13,13 +13,13 @@
 .projects-header h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .projects-header p {
   font-size: 1.1rem;
-  color: #666;
+  color: #d1d5db;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -88,15 +88,16 @@
 }
 
 .project-highlight {
-  background: #f8fafc;
+  background: #1e293b;
   border-left: 4px solid #3b82f6;
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-radius: 0 8px 8px 0;
+  color: #e2e8f0;
 }
 
 .project-highlight strong {
-  color: #1e40af;
+  color: #60a5fa;
   font-weight: 600;
 }
 
