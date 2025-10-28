@@ -11,7 +11,7 @@ const Projects = () => {
   return (
     <div className="App">
       <HomeBar />
-      <div
+      <main
         className="content-container"
         style={{
           marginTop: "64px",
@@ -20,12 +20,11 @@ const Projects = () => {
           height: "calc(100vh - 124px)",
         }}
       >
+        <h1 className="sr-only">Projects Portfolio</h1>
         <SelectedProjects />
         <PortfolioGrid />
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 };
