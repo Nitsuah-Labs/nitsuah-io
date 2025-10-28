@@ -50,7 +50,11 @@ function renderOutput() {
                 aria-label="Get test MATIC from Polygon faucet"
               >
                 <h4>
-                  <Image className="logo" src={mumbai} alt="Polygon Mumbai icon" />
+                  <Image
+                    className="logo"
+                    src={mumbai}
+                    alt="Polygon Mumbai icon"
+                  />
                   FAUCET
                 </h4>
               </a>
