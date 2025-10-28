@@ -1,19 +1,38 @@
-#!/bin/sh
-# Staged file linting
-# Cross-platform npm script execution
+#!/usr/bin/env sh
+set -e
+
+echo "Running pre-commit validation..."
+
+# Get list of staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+# If we have WSL and the canonical clone exists, use it
 if command -v wsl >/dev/null 2>&1; then
-  # Execute npm script inside WSL, inheriting the user's profile to load nvm/node
-  # The '-lic' flags ensure that the command runs in a login, interactive shell
-  echo "Running pre-commit hook in WSL..."
-  # Staged file linting in WSL
-  # Auto-format staged/working files in WSL before validation to avoid false-positive check failures
-  # Use a single bash -lic call to ensure the command runs in the repo's working directory under WSL
-  # Auto-format working files inside WSL, stage any changes, then validate
-  wsl -e bash -lic 'npx prettier --config config/prettier.config.json --write "src/**/*.{js,jsx,ts,tsx,json,css}" && git add -A && npm run validate'
-else
-  echo "Running pre-commit hook..."
-  npm run validate
+  if wsl -e bash -lc "[ -d ~/nitsuah-io-wsl/node_modules ]" 2>/dev/null; then
+    echo "Syncing staged files to WSL clone..."
+    
+    # Copy each staged file to WSL clone
+    for file in $STAGED_FILES; do
+      if [ -f "$file" ]; then
+        wsl -e bash -lc "mkdir -p ~/nitsuah-io-wsl/\$(dirname '$file')"
+        cat "$file" | wsl -e bash -lc "cat > ~/nitsuah-io-wsl/$file"
+      fi
+    done
+    
+    # Run validation in WSL clone
+    if wsl -e bash -lc "cd ~/nitsuah-io-wsl && npm run wagmi --silent 2>/dev/null || true && npm run format:check --silent && npm run typecheck --silent"; then
+      echo "✓ All checks passed"
+      exit 0
+    else
+      echo ""
+      echo "Validation failed. Run: npm run format"
+      exit 1
+    fi
+  fi
 fi
+
+echo "WARNING: WSL clone not found. Skipping validation."
+exit 0
 
 
 

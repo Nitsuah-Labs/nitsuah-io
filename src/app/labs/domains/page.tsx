@@ -13,6 +13,7 @@ import {
   useWriteContract,
 } from "wagmi";
 import contractAbi from "../../_components/_labs/_utils/domainABI.json";
+import { Connect } from "../../_components/_web3/Connect";
 
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
@@ -37,9 +38,9 @@ const MetaMaskURL = "https://metamask.io/download/";
 const CBWalletURL =
   "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
-// ErrorBoundary removed — it was defined but never used. Keep page focused.
+// ErrorBoundary removed ΓÇö it was defined but never used. Keep page focused.
 
-// networks object removed — not referenced in this file
+// networks object removed ΓÇö not referenced in this file
 
 const DomainSite = () => {
   const [domain, setDomain] = useState("");
@@ -149,11 +150,7 @@ const DomainSite = () => {
     }
   }, [names, records, owners]);
 
-  // Connect wallet (handled by wagmi, so just a placeholder for UI)
-  const connectWallet = () => {
-    // wagmi handles connection via Connect button elsewhere
-    alert("Please use the Connect Wallet button in the UI.");
-  };
+  // Use shared Connect component for wallet connection UI
 
   // Switch network using wagmi if available, otherwise fallback to MetaMask prompt
   const handleSwitchNetwork = () => {
@@ -226,7 +223,7 @@ const DomainSite = () => {
       return;
     }
     if (containsSpecialChars(domain)) {
-      alert("⛔️ Domain cannot contain special characters");
+      alert("Γ¢ö∩╕Å Domain cannot contain special characters");
       return;
     }
     if (registerSim?.request) {
@@ -276,9 +273,7 @@ const DomainSite = () => {
         </div>
         <div className="connect-wallet-container">
           <Box sx={{ textAlign: "center", my: 5 }}>
-            <Button onClick={connectWallet} variant="contained" color="success">
-              Connect Wallet
-            </Button>
+            <Connect />
           </Box>
         </div>
       </div>
@@ -526,7 +521,7 @@ const DomainSite = () => {
           {/* Display a logo and wallet connection status*/}
           {!currentAccount && renderNotConnectedContainer()}
           {/* Return the input form if an account is connected */}
-          {currentAccount && renderInputForm()}
+          <>{currentAccount ? renderInputForm() : null}</>
           {/* Return recent mints */}
           {mints && renderMints()}
         </div>
