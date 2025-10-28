@@ -36,11 +36,11 @@
 
 .section-title {
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #ff6d1f;
+  font-weight: 700;
+  color: #b04115; /* slightly darker orange for contrast */
   margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #f1f8ff;
+  border-bottom: 2px solid #dbeffd; /* darker border for contrast */
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -76,8 +76,8 @@
 
 .resume-summary h3 {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #ff6d1f;
+  font-weight: 700;
+  color: #d9480f; /* darker orange for contrast */
   margin-bottom: 0.75rem;
 }
 
@@ -103,13 +103,13 @@
 }
 
 .contact-item i {
-  color: #0095ff;
+  color: #005ea6; /* darker blue */
   width: 20px;
   text-align: center;
 }
 
-.contact-item a {
-  color: #0095ff;
+.contact-link {
+  color: #005ea6; /* darker blue for contrast */
   text-decoration: none;
 }
 
@@ -131,9 +131,9 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: #f1f8ff;
+  background: #eaf6ff; /* slightly darker background */
   border-radius: 4px;
-  color: #0095ff;
+  color: #003b66; /* stronger dark blue for contrast */
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s;
@@ -387,7 +387,7 @@
 }
 
 .projects-link-anchor {
-  color: #0095ff;
+  color: #003b66; /* darker blue for contrast */
   font-weight: 600;
   text-decoration: none;
 }

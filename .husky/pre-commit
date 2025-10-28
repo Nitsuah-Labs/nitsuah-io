@@ -5,6 +5,9 @@ export PATH="/c/Program Files/nodejs:$PATH"
 echo "🔍 Running pre-commit validation (same as CI)..."
 
 # Run ALL the checks that CI runs
+echo "0/5 Quick smoke accessibility test (pre-commit)..."
+npm run test:precommit || exit 1
+
 echo "1/4 Checking types..."
 npm run typecheck || exit 1
 
