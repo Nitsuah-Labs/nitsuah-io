@@ -33,34 +33,37 @@ npm run dev
 - This repo supports development on both Windows and WSL. The canonical config files used by CI and the project's scripts live in the `config/` directory (for example: `config/tsconfig.json`, `config/prettier.config.json`). Editors may also read the root `tsconfig.json` but prefer `config/` when running CLI tooling.
 - Husky pre-commit hooks run `npm run validate`. Make sure you run `npm ci` in the environment you plan to commit from so `node_modules/.bin/prettier` and other dev tools are available to the hook. If you commit from WSL, either install dev deps in the WSL checkout (`npm ci` inside WSL) or push from the environment where dev deps are installed.
 
-
 ## Code Standards
 
 ### TypeScript
+
 - Use strict TypeScript (no `any` unless absolutely necessary)
 - Follow existing type patterns in `src/types/`
 - Leverage path aliases (`@/components`, `@/lib`, etc.)
 
 ### React/Next.js
+
 - Use functional components with hooks
 - Keep components small and focused
 - Use Next.js 14 App Router conventions
 - Leverage server components when appropriate
 
 ### Styling
+
 - CSS modules or component-scoped styles preferred
 - Follow existing color schemes and spacing
 - Ensure responsive design (mobile-first)
 - Maintain accessibility (WCAG 2.1 AA)
 
 ### Formatting
+
 - ESLint and Prettier are configured - they run on save
 - Run `npm run lint` to check for issues
 - Run `npm run typecheck` for TypeScript errors
 
 ## Project Structure
 
-```
+```bash
 src/
 ├── app/              # Next.js App Router pages
 │   ├── _components/  # React components
@@ -73,12 +76,14 @@ src/
 ## Adding Content
 
 ### New Project
+
 1. Edit `src/lib/data/projects.ts`
 2. Add project with all required fields
 3. Set `featured: true` to show on homepage
 4. Add project assets to `public/assets/`
 
 ### New Page
+
 1. Create in `src/app/your-page/page.tsx`
 2. Update sitemap in `src/app/sitemap.ts`
 3. Add to navigation if needed
@@ -113,6 +118,7 @@ Example: `feat: add dark mode toggle to navigation`
 ## Pull Request Guidelines
 
 ### Before Submitting
+
 - [ ] Code builds successfully (`npm run build`)
 - [ ] All tests pass (`npm test`)
 - [ ] No TypeScript errors (`npm run typecheck`)
@@ -121,6 +127,7 @@ Example: `feat: add dark mode toggle to navigation`
 - [ ] Includes tests for new features
 
 ### PR Description Should Include
+
 - Clear description of changes
 - Motivation/context for the change
 - Screenshots for UI changes

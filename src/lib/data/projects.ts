@@ -3,12 +3,16 @@ export type Project = {
   title: string;
   short: string;
   description: string;
-  github: string;
+  github?: string;
   demo?: string;
   highlight: string;
   tags: string[];
   status: "active" | "maintained" | "archived";
   featured: boolean;
+  icon?: any;
+  externalLink?: string;
+  infoUrl?: string;
+  infoText?: string;
 };
 
 const projects: Project[] = [
@@ -68,10 +72,291 @@ const projects: Project[] = [
     status: "active",
     featured: false,
   },
+  {
+    id: "github",
+    title: "GitHub",
+    short: "My GitHub profile with all public repositories.",
+    description:
+      "Collection of open-source projects, experiments, and contributions showcasing development work across multiple languages and frameworks.",
+    externalLink: "https://github.com/nitsuah",
+    highlight: "Open source contributions and public projects",
+    tags: ["github", "portfolio"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "labs",
+    title: "/labs",
+    short: "Experimental Web3 features and blockchain tools.",
+    description:
+      "Collection of Web3 experiments including ENS domains, NFT minting, token management, and DAO governance tools.",
+    demo: "/labs/",
+    highlight: "Web3 experiments and blockchain tools",
+    tags: ["web3", "blockchain", "experiments"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "darkmoon",
+    title: "darkmoon.dev",
+    short: "Custom domain showcasing additional projects.",
+    description:
+      "Alternative portfolio site featuring specialized projects and blockchain applications.",
+    externalLink: "https://darkmoon.dev",
+    highlight: "Alternative portfolio and project showcase",
+    tags: ["portfolio", "web3"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "spline3d",
+    title: "3DX",
+    short: "Interactive 3D experiences using Spline.",
+    description:
+      "Interactive 3D graphics and animations created with Spline, showcasing modern web graphics capabilities.",
+    demo: "/",
+    externalLink: "https://spline.design/",
+    infoUrl: "https://spline.design/",
+    infoText: "Created with Spline - https://spline.design/",
+    highlight: "3D graphics and interactive experiences",
+    tags: ["3d", "spline", "graphics"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "nextgen",
+    title: "NEXTGEN",
+    short: "NFT-based game with blockchain integration.",
+    description:
+      "Next-generation NFT game combining blockchain technology with interactive gameplay mechanics.",
+    externalLink: "https://nft.darkmoon.dev/play",
+    highlight: "NFT gaming and blockchain mechanics",
+    tags: ["nft", "game", "web3"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "clients",
+    title: "CLIENTS",
+    short: "Client project showcase and storefront.",
+    description:
+      "Professional client work examples and storefront demonstrating commercial project capabilities.",
+    demo: "/projects/clients",
+    highlight: "Client projects and commercial work",
+    tags: ["portfolio", "clients"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "buildspace",
+    title: "Profile",
+    short: "Buildspace community profile and achievements.",
+    description:
+      "Profile on Buildspace showcasing completed projects and community involvement in Web3 education.",
+    externalLink: "https://buildspace.so/@nitsuah",
+    infoUrl: "https://buildspace.so/join",
+    infoText: "Join me on Buildspace! - https://buildspace.so/join",
+    highlight: "Web3 learning and community",
+    tags: ["buildspace", "web3", "learning"],
+    status: "active",
+    featured: false,
+  },
+  {
+    id: "ens-nft",
+    title: "ENS NFT",
+    short: "Polygon ENS subdomain NFT project.",
+    description:
+      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
+    infoUrl: "https://buildspace.so/p/build-polygon-ens",
+    infoText: "Learn to build ENS on Polygon",
+    highlight: "ENS subdomains on Polygon",
+    tags: ["nft", "ens", "polygon", "web3"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "nft-store",
+    title: "NFT Store",
+    short: "Solana NFT collection with payment integration.",
+    description:
+      "Complete NFT storefront built on Solana with payment processing and collection management.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
+    infoUrl: "https://buildspace.so/p/ship-solana-nft-collection",
+    infoText: "Build your own Solana NFT store",
+    highlight: "Solana NFT marketplace",
+    tags: ["nft", "solana", "web3", "marketplace"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "nft-game",
+    title: "NFT Game",
+    short: "Turn-based NFT game with on-chain mechanics.",
+    description:
+      "Turn-based game built with NFT characters and on-chain game state management.",
+    infoUrl: "https://buildspace.so/p/create-turn-based-nft-game",
+    infoText: "Create a turn-based NFT game",
+    highlight: "On-chain game mechanics",
+    tags: ["nft", "game", "web3", "ethereum"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "nights-weekends",
+    title: "N+W S1",
+    short: "Nights + Weekends Season 1 cohort participation.",
+    description:
+      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
+    infoUrl: "https://buildspace.so/nw",
+    infoText: "Nights + Weekends program",
+    highlight: "Community building and Web3 education",
+    tags: ["buildspace", "web3", "community"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "eth-dapp",
+    title: "ETH dApp",
+    short: "Ethereum NFT minting dApp.",
+    description:
+      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
+    infoUrl: "https://buildspace.so/p/mint-nft-collection",
+    infoText: "Build an NFT minting dApp",
+    highlight: "NFT minting smart contracts",
+    tags: ["ethereum", "nft", "web3", "dapp"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "sol-dapp",
+    title: "SOL dApp",
+    short: "Solana Web3 application.",
+    description:
+      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+    infoUrl: "https://buildspace.so/p/build-solana-web3-app",
+    infoText: "Learn Solana dApp development",
+    highlight: "Solana blockchain development",
+    tags: ["solana", "web3", "dapp"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "blender",
+    title: "Blender",
+    short: "3D modeling and animation work.",
+    description:
+      "3D modeling and animation projects created with Blender, showcasing CGI and rendering capabilities.",
+    externalLink: "https://www.youtube.com/watch?v=nIoXOplUvAw",
+    infoUrl: "https://www.youtube.com/watch?v=nIoXOplUvAw",
+    infoText: "Blender tutorial walkthrough",
+    highlight: "3D modeling and CGI",
+    tags: ["3d", "blender", "animation"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "autogpt",
+    title: "AutoGPT",
+    short: "GPT-3 powered AI writing assistant.",
+    description:
+      "AI-powered writing assistant using GPT-3 API for automated content generation and creative writing support.",
+    externalLink: "https://buildspace.so/@nitsuah",
+    infoUrl: "https://buildspace.so/p/build-ai-writing-assistant-gpt3",
+    infoText: "Build an AI ghost-writer with GPT-3",
+    highlight: "AI-powered writing automation",
+    tags: ["ai", "gpt3", "automation"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "eth-core",
+    title: "ETH Core",
+    short: "Core Ethereum and Solidity development course project.",
+    description:
+      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
+    infoUrl: "https://buildspace.so/p/build-solidity-web3-app",
+    infoText: "Learn Ethereum core development",
+    highlight: "Smart contract fundamentals",
+    tags: ["ethereum", "solidity", "web3"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "devdao",
+    title: "DevDAO",
+    short: "DAO governance project with JavaScript.",
+    description:
+      "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
+    demo: "/labs/dao",
+    infoUrl: "https://buildspace.so/p/build-dao-with-javascript",
+    infoText: "Build a DAO with JavaScript",
+    highlight: "DAO governance and voting",
+    tags: ["dao", "web3", "javascript"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "sol-core",
+    title: "SOL Core",
+    short: "Solana core development and fundamentals.",
+    description:
+      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
+    externalLink: "https://darkmoon.dev/about",
+    infoUrl: "https://buildspace.so/p/solana-core",
+    infoText: "Master Solana core concepts",
+    highlight: "Solana fundamentals and Rust",
+    tags: ["solana", "rust", "web3"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "paint3d",
+    title: "Paint3D",
+    short: "3D art created with Microsoft Paint 3D.",
+    description:
+      "3D artwork and models created using Microsoft Paint 3D, demonstrating accessible 3D design tools.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x2953399124f0cbb46d2cbacd8a89cf0599974963/60508307908081726032856631071720531552206552958895219492912716482941726752788",
+    infoUrl:
+      "https://support.microsoft.com/en-us/windows/basic-3d-modeling-with-paint-3d-78a27393-4cc5-1c9a-5929-3b4644eb5a94",
+    infoText: "Learn basic 3D modeling with Paint 3D",
+    highlight: "Accessible 3D art tools",
+    tags: ["3d", "art", "modeling"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "imagen",
+    title: "ImaGen",
+    short: "AI avatar generation using machine learning.",
+    description:
+      "AI-powered avatar generation tool using machine learning models to create unique profile pictures and digital art.",
+    demo: "/labs/ai",
+    infoUrl: "https://buildspace.so/p/build-ai-avatars",
+    infoText: "Create AI-generated avatars",
+    highlight: "AI image generation",
+    tags: ["ai", "ml", "image-generation"],
+    status: "archived",
+    featured: false,
+  },
 ];
 
 // Export filtered lists for different use cases
 export const featuredProjects = projects.filter((project) => project.featured);
+export const portfolioProjects = projects.filter(
+  (project) => !project.featured,
+);
 export const activeProjects = projects.filter(
   (project) => project.status === "active",
 );
