@@ -24,10 +24,18 @@ const pages = [
 
 for (const pageInfo of pages) {
   test(`${pageInfo.name} has no accessibility violations`, async ({ page }) => {
+    // Increase timeout for pages with Spline components
+    test.setTimeout(60000);
+
     await page.goto(pageInfo.path);
 
     // Wait for page to be fully loaded
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
+
+    // For pages with Spline, wait a bit longer for it to initialize
+    if (pageInfo.path === "/" || pageInfo.path === "/about") {
+      await page.waitForTimeout(3000);
+    }
 
     // Run axe accessibility scan
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
