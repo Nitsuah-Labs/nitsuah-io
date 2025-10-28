@@ -14,14 +14,34 @@ const NSLookupSite = () => {
   return (
     <div className="App">
       <div className="container">
+        <LabNav />
         <div className="form-container">
-          <LabNav />
           <h2>LOOKUP HERE!</h2>
-          <div className="connect-wallet-container">
-            <Connect />
+
+          <div className="labs-card labs-spacing-md">
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">Connect Wallet</h3>
+            </div>
+            <div className="labs-card-body">
+              <Connect />
+            </div>
           </div>
+
           <Connected>
-            <p>Lookup UI goes here — connected wallet detected.</p>
+            <div className="labs-card labs-spacing-md">
+              <div className="labs-card-body">
+                <p>Lookup UI goes here — connected wallet detected.</p>
+                <p
+                  style={{
+                    opacity: 0.7,
+                    fontSize: "0.9rem",
+                    marginTop: "10px",
+                  }}
+                >
+                  This feature is under development.
+                </p>
+              </div>
+            </div>
           </Connected>
         </div>
         <LabFooter />
