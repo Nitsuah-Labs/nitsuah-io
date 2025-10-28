@@ -131,7 +131,7 @@ const RegisterSite = () => {
               >
                 <img
                   className="logo"
-                  src={mumbai}
+                  src={mumbai.src}
                   alt="polygon mumbai logo grey"
                 />
                 POLYGON MUMBAI
@@ -147,7 +147,9 @@ const RegisterSite = () => {
               <img
                 alt="Network logo"
                 className="logo"
-                src={network.includes("Polygon") ? polygonLogo : ethLogo}
+                src={
+                  network.includes("Polygon") ? polygonLogo.src : ethLogo.src
+                }
               />{" "}
               {currentAccount}{" "}
             </div>

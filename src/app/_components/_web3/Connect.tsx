@@ -24,19 +24,21 @@ export function Connect() {
           </button>
         )}
 
-        {cs.filter((x) => x.ready && x.id !== connector?.id).map((x) => (
-          <button
-            key={x.id}
-            onClick={() => {
-              setPendingId(x.id);
-              connect({ connector: x });
-            }}
-            aria-busy={pendingId === x.id}
-          >
-            {x.name}
-            {pendingId === x.id && " (connecting)"}
-          </button>
-        ))}
+        {cs
+          .filter((x) => x.ready && x.id !== connector?.id)
+          .map((x) => (
+            <button
+              key={x.id}
+              onClick={() => {
+                setPendingId(x.id);
+                connect({ connector: x });
+              }}
+              aria-busy={pendingId === x.id}
+            >
+              {x.name}
+              {pendingId === x.id && " (connecting)"}
+            </button>
+          ))}
       </div>
 
       {error && (
