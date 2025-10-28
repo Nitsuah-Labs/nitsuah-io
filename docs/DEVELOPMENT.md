@@ -65,11 +65,13 @@ npm run dev:wagmi
 ### CI/CD Behavior
 
 **Netlify Deploys:**
+
 - Preview builds: Skips generation if no API keys
 - Production builds: Uses committed `src/generated.ts`
 - Add `ETHERSCAN_API_KEY` to Netlify env vars to enable regeneration
 
 **Script Logic:**
+
 `scripts/wagmi-generate.js` checks for API keys and:
 - ✅ Skips generation if keys missing (preview/fork builds)
 - ✅ Uses committed file for build
@@ -86,12 +88,14 @@ npm run dev:wagmi
 **Quick Fixes Applied:**
 
 1. **Conditional wagmi generation**
+
    ```bash
    npm run dev           # Fast - no regeneration
    npm run dev:wagmi     # Regenerates hooks first
    ```
 
 2. **Lazy load heavy components**
+
    ```typescript
    // Spline 3D loads on demand, not at startup
    const SplineScene = dynamic(
@@ -101,6 +105,7 @@ npm run dev:wagmi
    ```
 
 3. **TypeScript incremental builds**
+
    ```json
    // tsconfig.json
    {
@@ -112,6 +117,7 @@ npm run dev:wagmi
    ```
 
 **Expected Performance:**
+
 - Cold start: ~8-12 seconds (40% faster)
 - Hot reload: ~1-2 seconds (60% faster)
 - Build time: ~30-40 seconds (33% faster)
@@ -125,6 +131,7 @@ npm run build
 ```
 
 **Tips:**
+
 - Use Next.js `Image` component for all images
 - Dynamic imports for heavy components (Spline, Charts)
 - Tree-shake unused Material-UI components
@@ -150,6 +157,7 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 ### Production (Netlify)
 
 Add these in Netlify UI:
+
 - `ETHERSCAN_API_KEY` or `NEXT_PUBLIC_ALCHEMY_API_KEY`
 - `NEXT_PUBLIC_GA_ID` (if using analytics)
 
@@ -160,17 +168,20 @@ Add these in Netlify UI:
 ## Pre-Commit Hook
 
 Husky pre-commit hook automatically runs `lint-staged` which:
+
 1. Formats staged files with Prettier
 2. Ensures code consistency before commit
 
 The hook runs locally using your installed Node.js.
 
 **Setup:**
+
 ```bash
 npm ci  # Install dependencies (includes husky setup)
 ```
 
 **Usage:**
+
 ```bash
 # Commit normally - formatting runs automatically
 git commit -m "feat: add feature"
@@ -239,11 +250,13 @@ npm run start
 ### Netlify Deploy
 
 **Build Settings:**
+
 - Build command: `next build`
 - Publish directory: `.next`
 - Node version: 22.x LTS
 
 **Deployment:**
+
 - Push to `main` → Production deploy
 - Pull request → Preview deploy
 - Preview builds skip wagmi generation if no keys
@@ -262,7 +275,8 @@ npm run start
 
 ### TypeScript Errors
 
-**Solution:** 
+**Solution:**
+
 ```bash
 npm run typecheck  # Check errors
 npm run format     # Fix formatting
@@ -271,6 +285,7 @@ npm run format     # Fix formatting
 ### Pre-Commit Hook Fails
 
 **Solution:**
+
 ```bash
 # Ensure dependencies are installed
 npm ci

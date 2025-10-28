@@ -6,7 +6,15 @@ import { WagmiConfig } from "wagmi";
 
 import { config } from "../wagmi";
 
-const queryClient = new QueryClient();
+// Create singleton instances to prevent multiple initializations
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);

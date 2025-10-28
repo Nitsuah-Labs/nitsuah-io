@@ -43,23 +43,6 @@ npm run dev
 
 ### React/Next.js
 
-```
-
-## Environment notes (WSL vs Windows)
-
-- This repo supports development on both Windows and WSL. The canonical config files used by CI and the project's scripts live in the `config/` directory (for example: `config/tsconfig.json`, `config/prettier.config.json`). Editors may also read the root `tsconfig.json` but prefer `config/` when running CLI tooling.
-- Husky pre-commit hooks run `npm run validate`. Make sure you run `npm ci` in the environment you plan to commit from so `node_modules/.bin/prettier` and other dev tools are available to the hook. If you commit from WSL, either install dev deps in the WSL checkout (`npm ci` inside WSL) or push from the environment where dev deps are installed.
-
-## Code Standards
-
-### TypeScript
-
-- Use strict TypeScript (no `any` unless absolutely necessary)
-- Follow existing type patterns in `src/types/`
-- Leverage path aliases (`@/components`, `@/lib`, etc.)
-
-### React/Next.js
-
 - Use functional components with hooks
 - Keep components small and focused
 - Use Next.js 14 App Router conventions
