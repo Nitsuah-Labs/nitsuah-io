@@ -11,7 +11,6 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 
 export function SplineScene() {
   // Render the dynamic Spline component client-side only
-  // @ts-ignore - dynamic import provides the component at runtime
   return <Spline scene={SPLINE_SCENE} />;
 }
 

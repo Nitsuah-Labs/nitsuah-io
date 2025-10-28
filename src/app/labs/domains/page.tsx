@@ -38,9 +38,9 @@ const MetaMaskURL = "https://metamask.io/download/";
 const CBWalletURL =
   "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
-// ErrorBoundary removed — it was defined but never used. Keep page focused.
+// ErrorBoundary removed ΓÇö it was defined but never used. Keep page focused.
 
-// networks object removed — not referenced in this file
+// networks object removed ΓÇö not referenced in this file
 
 const DomainSite = () => {
   const [domain, setDomain] = useState("");
@@ -145,7 +145,7 @@ const DomainSite = () => {
           name,
           record: String(records[idx]?.result || ""),
           owner: String(owners[idx]?.result || ""),
-        }))
+        })),
       );
     }
   }, [names, records, owners]);
@@ -163,7 +163,7 @@ const DomainSite = () => {
       });
     } else {
       alert(
-        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html"
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html",
       );
     }
   };
@@ -223,7 +223,7 @@ const DomainSite = () => {
       return;
     }
     if (containsSpecialChars(domain)) {
-      alert("⛔️ Domain cannot contain special characters");
+      alert("Γ¢ö∩╕Å Domain cannot contain special characters");
       return;
     }
     if (registerSim?.request) {

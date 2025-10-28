@@ -8,42 +8,57 @@ set -e
 
 echo "Running pre-commit hook..."
 
-## Prefer running validation in a WSL clone that has dev deps installed.
-# Some devs keep a WSL-local clone at ~/nitsuah-io-wsl where npm ci was run.
+# This hook aims to enforce the project's validation in a safe, VS Code-friendly way.
+# Key principles:
+# - Prefer running validation in the canonical WSL clone (~/nitsuah-io-wsl) when available.
+# - Do NOT auto-modify or git-add files inside WSL (that would affect a different working tree).
+# - Run checks (format:check + typecheck) only; if fixes are required, provide clear instructions.
+
+run_wsl_checks() {
+  echo "Running validation inside WSL clone ~/nitsuah-io-wsl (checks only)..."
+  # Use the project's npm scripts; format:check will detect formatting problems without writing files.
+  wsl -e bash -lc "cd ~/nitsuah-io-wsl && npm run wagmi --silent || true && npm run format:check --silent && npm run typecheck --silent"
+}
+
+run_local_checks() {
+  echo "Running local validation (checks only)..."
+  npm run wagmi --silent || true
+  npm run format:check --silent
+  npm run typecheck --silent
+}
+
+# Prefer running validation in WSL clone if WSL is available and the canonical clone appears populated
 if command -v wsl >/dev/null 2>&1; then
-  # If the WSL clone has node_modules, run validation there (safe path)
-  if wsl -e bash -lc "[ -d ~/nitsuah-io-wsl/node_modules ]" >/dev/null 2>&1; then
-    echo "Running validation inside WSL clone ~/nitsuah-io-wsl..."
-    if wsl -e bash -lc "cd ~/nitsuah-io-wsl && npx --yes prettier --config config/prettier.config.json --write 'src/**/*.{js,jsx,ts,tsx,json,css}' && git add -A && npm run validate --silent"; then
-      exit 0
+  if wsl -e bash -lc "[ -d ~/nitsuah-io-wsl ]" >/dev/null 2>&1; then
+    # Ensure dev deps were installed in the WSL clone
+    if wsl -e bash -lc "[ -d ~/nitsuah-io-wsl/node_modules ]" >/dev/null 2>&1; then
+      if run_wsl_checks; then
+        exit 0
+      else
+        echo "Validation failed inside WSL clone. To fix: open WSL shell, run 'cd ~/nitsuah-io-wsl && npm ci' then run the failing commands (format or typecheck) to see fixes."
+        echo "You can then run formatting in your editor or in WSL (npm run format) before re-trying the commit." >&2
+        exit 1
+      fi
     else
-      echo "Validation failed inside WSL clone. Run 'npm ci' in ~/nitsuah-io-wsl or commit from the environment where dev deps are installed." >&2
+      echo "WSL clone exists but dev dependencies are missing in ~/nitsuah-io-wsl. Run inside WSL: 'cd ~/nitsuah-io-wsl && npm ci'" >&2
       exit 1
     fi
   fi
 fi
 
-# If npm is available locally, run validation here
-if command -v npm >/dev/null 2>&1 && command -v npx >/dev/null 2>&1; then
-  if npx --yes prettier --config config/prettier.config.json --write "src/**/*.{js,jsx,ts,tsx,json,css}"; then
-    git add -A || true
-    if npm run validate --silent; then
-      exit 0
-    else
-      echo "Validation failed. Run 'npm ci' to install dev dependencies and try again." >&2
-      exit 1
-    fi
+# If we get here, either WSL isn't available or the canonical clone isn't present.
+# Fall back to running checks in the local environment (the environment VS Code will typically run hooks from).
+if command -v npm >/dev/null 2>&1; then
+  if run_local_checks; then
+    exit 0
   else
-    echo "Prettier formatting failed. Ensure dev dependencies are installed: run 'npm ci'." >&2
+    echo "Local validation failed. Run 'npm ci' to install dev dependencies and re-run the commit, or open the project in WSL and run validation there." >&2
     exit 1
   fi
 fi
 
-# Neither WSL nor local npm found — warn and allow the commit to proceed so users
-# using minimal environments or credential helpers aren't blocked. Encourage them to
-# run validation locally or in CI.
 echo "WARNING: npm not found in PATH and WSL either; skipping pre-commit validation."
-echo "To enable hooks, run 'npm ci' in your environment or commit from WSL where npm is installed."
+echo "To enable hooks, install Node and run 'npm ci' or use the WSL canonical clone with dev deps installed." 
 exit 0
 
 
