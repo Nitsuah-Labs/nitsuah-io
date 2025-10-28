@@ -9,12 +9,12 @@ const AboutPage: React.FC = () => {
     <div className="App">
       <div className="header-fixed">
         <HomeBar />
-        <h2 style={{ margin: "1rem 0", position: "relative", zIndex: 100 }}>
-          ABOUT ME
-        </h2>
       </div>
       <main>
         <h1 className="sr-only">About Austin Hardy</h1>
+        <h2 style={{ margin: "1rem 0", position: "relative", zIndex: 100 }}>
+          ABOUT ME
+        </h2>
         <div className="spline-container">
           <SplineScene />
         </div>
