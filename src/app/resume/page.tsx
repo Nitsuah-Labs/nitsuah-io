@@ -1,6 +1,7 @@
 import fs from "fs";
 import { Metadata } from "next";
 import path from "path";
+import { PrintButton } from "./_components/PrintButton";
 import "./resume.css";
 
 export const metadata: Metadata = {
@@ -127,13 +128,7 @@ export default function ResumePage() {
       <div className="resume-content">
         {/* Header Actions */}
         <div className="resume-actions print-hide">
-          <button
-            onClick={() => window.print()}
-            className="labs-btn labs-btn-primary"
-            aria-label="Print resume or save as PDF"
-          >
-            <i className="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF
-          </button>
+          <PrintButton />
         </div>
 
         {/* Basics Section */}
