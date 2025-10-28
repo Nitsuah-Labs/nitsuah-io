@@ -13,6 +13,7 @@ import {
   useWriteContract,
 } from "wagmi";
 import contractAbi from "../../_components/_labs/_utils/domainABI.json";
+import { Connect } from "../../_components/_web3/Connect";
 
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
@@ -144,16 +145,12 @@ const DomainSite = () => {
           name,
           record: String(records[idx]?.result || ""),
           owner: String(owners[idx]?.result || ""),
-        })),
+        }))
       );
     }
   }, [names, records, owners]);
 
-  // Connect wallet (handled by wagmi, so just a placeholder for UI)
-  const connectWallet = () => {
-    // wagmi handles connection via Connect button elsewhere
-    alert("Please use the Connect Wallet button in the UI.");
-  };
+  // Use shared Connect component for wallet connection UI
 
   // Switch network using wagmi if available, otherwise fallback to MetaMask prompt
   const handleSwitchNetwork = () => {
@@ -166,7 +163,7 @@ const DomainSite = () => {
       });
     } else {
       alert(
-        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html",
+        "MetaMask is not installed. Please install it to use this app: https://metamask.io/download.html"
       );
     }
   };
@@ -276,9 +273,7 @@ const DomainSite = () => {
         </div>
         <div className="connect-wallet-container">
           <Box sx={{ textAlign: "center", my: 5 }}>
-            <Button onClick={connectWallet} variant="contained" color="success">
-              Connect Wallet
-            </Button>
+            <Connect />
           </Box>
         </div>
       </div>
@@ -526,7 +521,7 @@ const DomainSite = () => {
           {/* Display a logo and wallet connection status*/}
           {!currentAccount && renderNotConnectedContainer()}
           {/* Return the input form if an account is connected */}
-          {currentAccount && renderInputForm()}
+          <>{currentAccount ? renderInputForm() : null}</>
           {/* Return recent mints */}
           {mints && renderMints()}
         </div>

@@ -44,3 +44,14 @@ Notes
 ***
 
 I'll open small, focused PRs for the Type & lint cleanup task and the test scaffolding next.
+
+Completed items
+
+- Guarded codegen and added a scripts/wagmi-generate.js runner to avoid running codegen in CI without keys.
+- Added shared `Connect` and `Connected` components and standardized their usage across labs pages (register, domains, mint, lookup, token, stake, dao, ai).
+- Removed root babel.config.js which allowed Next's SWC to run and fixed build-time errors originating from third-party modern JS syntax.
+
+Next small steps
+
+- Run a focused lint-fix PR series (5 PRs of 10-20 files) to clear noisy warnings.
+- Add unit tests for Account, Connect, MintNFT and run them in CI.

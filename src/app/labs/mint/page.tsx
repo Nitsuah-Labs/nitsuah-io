@@ -1,18 +1,18 @@
-// MINT - src/app/labs/mint/page.tsx // TODO ADD MINTING LOGIC
-
+// MINT - src/app/labs/mint/page.tsx
 "use client";
 import React from "react";
-
-// LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
+import "../../_components/_styles/labs.css";
+import { Connect } from "../../_components/_web3/Connect";
+import { Connected } from "../../_components/_web3/Connected";
+
+// LAB STYLES
 import "../../_components/_styles/labs.css";
 
 // LAB ASSETS (unused logos removed until needed)
 
 import { Account } from "../../_components/_web3/Account";
-import { Connect } from "../../_components/_web3/Connect";
-import { Connected } from "../../_components/_web3/Connected";
 import { MintNFT } from "../../_components/_web3/MintNFT";
 import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
 

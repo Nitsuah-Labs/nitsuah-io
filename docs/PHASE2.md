@@ -39,6 +39,14 @@ Next steps (first sprint)
 - Regenerate lockfile locally on a dev machine and commit results.
 - Open small PRs to fix remaining lint warnings (10-20 files per PR).
 
+Completed
+
+- Guarded wagmi codegen so CI/preview builds don't fail when API keys are absent.
+- Removed project root Babel config that disabled SWC to fix production build issues.
+- Stabilized jest/babel setup and added runtime-safe mocks for generated hooks.
+- Standardized wallet Connect/Connected components in `src/app/labs/*` pages.
+ 
+
 Notes on environment
 
 - Do not commit secrets; use Netlify/hosting env variable settings for runtime secrets.
