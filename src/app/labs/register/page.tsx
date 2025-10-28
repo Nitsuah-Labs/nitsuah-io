@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 // Use standard <img> to avoid requiring next/image types in this build context
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import {
   useAccount,
   useSimulateContract,
@@ -80,37 +80,32 @@ const RegisterSite = () => {
   };
 
   const renderNotConnectedContainer = () => (
-    <div className="connect-wallet-container">
-      <div className="form-container">
-        <div className="neutral-wallet">
-          <h4>STEP 1: Setup a Wallet app</h4>
-        </div>
-        <Box sx={{ textAlign: "center", my: 5 }}>
-          <Button
-            variant="contained"
-            color="primary"
+    <div className="labs-card">
+      <div className="labs-card-header">
+        <h3 className="labs-card-title">STEP 1: Setup a Wallet app</h3>
+      </div>
+      <div className="labs-card-body">
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <button
+            className="labs-btn labs-btn-primary labs-btn-large"
             onClick={() => window.open(CBWalletURL, "_blank")}
           >
-            COINBASE
-          </Button>
-          <br />
-          <br />
-          <Button
-            variant="contained"
-            color="warning"
+            COINBASE WALLET
+          </button>
+          <button
+            className="labs-btn labs-btn-secondary labs-btn-large"
             onClick={() => window.open(MetaMaskURL, "_blank")}
           >
             METAMASK
-          </Button>
-        </Box>
-        <div className="neutral-wallet">
-          <h4>STEP 2: Connect a Wallet</h4>
+          </button>
         </div>
-        <div className="connect-wallet-container">
-          <Box sx={{ textAlign: "center", my: 5 }}>
-            <Connect />
-          </Box>
-        </div>
+      </div>
+
+      <div className="labs-card-header" style={{ marginTop: "24px" }}>
+        <h3 className="labs-card-title">STEP 2: Connect a Wallet</h3>
+      </div>
+      <div className="labs-card-body">
+        <Connect />
       </div>
     </div>
   );
@@ -118,31 +113,27 @@ const RegisterSite = () => {
   const renderInput = () => {
     if (network !== "Polygon Mumbai Testnet") {
       return (
-        <div>
-          <div className="connect-wallet-container">
-            <div className="zero-row">
-              <div className="neutral-wallet">
-                <h4>STEP 3: Switch network</h4>
-              </div>
-              <Button
-                onClick={handleSwitchNetwork}
-                variant="contained"
-                color="secondary"
-              >
-                <img
-                  className="logo"
-                  src={mumbai.src}
-                  alt="polygon mumbai logo grey"
-                />
-                POLYGON MUMBAI
-              </Button>
-            </div>
+        <div className="labs-card">
+          <div className="labs-card-header">
+            <h3 className="labs-card-title">STEP 3: Switch Network</h3>
           </div>
-          <div className="zero-row">
+          <div className="labs-card-body">
+            <button
+              onClick={handleSwitchNetwork}
+              className="labs-btn labs-btn-primary labs-btn-large"
+            >
+              <img
+                className="logo"
+                src={mumbai.src}
+                alt="polygon mumbai logo grey"
+              />
+              SWITCH TO POLYGON MUMBAI
+            </button>
             <div
               className={
                 network.includes("Polygon") ? "poly-wallet" : "eth-wallet"
               }
+              style={{ marginTop: "16px" }}
             >
               <img
                 alt="Network logo"
@@ -159,12 +150,18 @@ const RegisterSite = () => {
     }
 
     return (
-      <div className="lab-container">
-        <h3>Sign-up here for future give-aways!</h3>
-        <p>You can even include a message to contact me directly.</p>
-        <div className="form-container">
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={10} sm={8}>
+      <div className="labs-card">
+        <div className="labs-card-header">
+          <h3 className="labs-card-title">
+            Sign-up here for future give-aways!
+          </h3>
+        </div>
+        <div className="labs-card-body">
+          <p style={{ marginBottom: "16px" }}>
+            You can even include a message to contact me directly.
+          </p>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={8}>
               <TextField
                 fullWidth
                 variant="filled"
@@ -177,28 +174,31 @@ const RegisterSite = () => {
                 onChange={(e) => setMessage(e.target.value)}
               />
             </Grid>
-            <Grid item xs={8} sm={4}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={handleRegister}
-                disabled={!(registerSim as any)?.request || isRegistering}
+            <Grid item xs={12} sm={4}>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
               >
-                {isRegistering ? "Registering..." : "Register"}
-              </Button>
-              <br />
-              <Button
-                fullWidth
-                variant="contained"
-                color="secondary"
-                onClick={() => window.open(SCAN_LINK, "_blank")}
-              >
-                PolygonScan
-              </Button>
+                <button
+                  className="labs-btn labs-btn-primary"
+                  onClick={handleRegister}
+                  disabled={!(registerSim as any)?.request || isRegistering}
+                >
+                  {isRegistering ? "Registering..." : "Register"}
+                </button>
+                <button
+                  className="labs-btn labs-btn-secondary"
+                  onClick={() => window.open(SCAN_LINK, "_blank")}
+                >
+                  View on PolygonScan
+                </button>
+              </div>
             </Grid>
           </Grid>
-          {isRegistered && <p>Successfully registered!</p>}
+          {isRegistered && (
+            <p style={{ marginTop: "16px", color: "#10b981" }}>
+              Successfully registered!
+            </p>
+          )}
         </div>
       </div>
     );

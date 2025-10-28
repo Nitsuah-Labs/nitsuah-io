@@ -16,33 +16,45 @@ export function Connect() {
   }, [isConnected]);
 
   return (
-    <div>
-      <div>
-        {isConnected && (
-          <button onClick={() => disconnect()}>
-            Disconnect from {connector?.name}
-          </button>
-        )}
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      {isConnected && (
+        <button
+          onClick={() => disconnect()}
+          className="labs-btn labs-btn-danger"
+        >
+          Disconnect from {connector?.name}
+        </button>
+      )}
 
-        {cs
-          .filter((x) => x.ready && x.id !== connector?.id)
-          .map((x) => (
-            <button
-              key={x.id}
-              onClick={() => {
-                setPendingId(x.id);
-                connect({ connector: x });
-              }}
-              aria-busy={pendingId === x.id}
-            >
-              {x.name}
-              {pendingId === x.id && " (connecting)"}
-            </button>
-          ))}
-      </div>
+      {cs
+        .filter((x) => x.ready && x.id !== connector?.id)
+        .map((x) => (
+          <button
+            key={x.id}
+            onClick={() => {
+              setPendingId(x.id);
+              connect({ connector: x });
+            }}
+            aria-busy={pendingId === x.id}
+            className="labs-btn labs-btn-primary"
+            disabled={pendingId === x.id}
+          >
+            {x.name}
+            {pendingId === x.id && " (connecting...)"}
+          </button>
+        ))}
 
       {error && (
-        <div>
+        <div
+          style={{
+            padding: "12px",
+            backgroundColor: "rgba(239, 68, 68, 0.1)",
+            border: "1px solid rgba(239, 68, 68, 0.3)",
+            borderRadius: "8px",
+            color: "#ef4444",
+            marginTop: "8px",
+          }}
+        >
           {(error as any)?.shortMessage ??
             (error as any)?.message ??
             `${error}`}
