@@ -23,7 +23,11 @@ const config: Config = {
   '^viem(.*)$': '<rootDir>/__mocks__/viem.js',
   '^src/generated$': '<rootDir>/__mocks__/generated.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+    '<rootDir>/tests/', // Exclude Playwright tests (run with npm run test:e2e)
+  ],
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
