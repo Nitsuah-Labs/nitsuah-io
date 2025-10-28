@@ -28,6 +28,23 @@ npm run dev
 5. **Push**: Push to your fork (`git push origin feature/your-feature`)
 6. **PR**: Open a pull request with a clear description
 
+## Environment Setup
+
+- The canonical config files used by CI and the project's scripts live in the `config/` directory (for example: `config/tsconfig.json`, `config/prettier.config.json`). Editors may also read the root `tsconfig.json` but prefer `config/` when running CLI tooling.
+- Husky pre-commit hooks run `lint-staged` to automatically format staged files. Make sure you run `npm ci` to install dependencies before committing.
+
+## Code Standards
+
+### TypeScript
+
+- Use strict TypeScript (no `any` unless absolutely necessary)
+- Follow existing type patterns in `src/types/`
+- Leverage path aliases (`@/components`, `@/lib`, etc.)
+
+### React/Next.js
+
+```
+
 ## Environment notes (WSL vs Windows)
 
 - This repo supports development on both Windows and WSL. The canonical config files used by CI and the project's scripts live in the `config/` directory (for example: `config/tsconfig.json`, `config/prettier.config.json`). Editors may also read the root `tsconfig.json` but prefer `config/` when running CLI tooling.

@@ -1,38 +1,4 @@
-#!/usr/bin/env sh
-set -e
-
-echo "Running pre-commit validation..."
-
-# Get list of staged files
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
-
-# If we have WSL and the canonical clone exists, use it
-if command -v wsl >/dev/null 2>&1; then
-  if wsl -e bash -lc "[ -d ~/nitsuah-io-wsl/node_modules ]" 2>/dev/null; then
-    echo "Syncing staged files to WSL clone..."
-    
-    # Copy each staged file to WSL clone
-    for file in $STAGED_FILES; do
-      if [ -f "$file" ]; then
-        wsl -e bash -lc "mkdir -p ~/nitsuah-io-wsl/\$(dirname '$file')"
-        cat "$file" | wsl -e bash -lc "cat > ~/nitsuah-io-wsl/$file"
-      fi
-    done
-    
-    # Run validation in WSL clone
-    if wsl -e bash -lc "cd ~/nitsuah-io-wsl && npm run wagmi --silent 2>/dev/null || true && npm run format:check --silent && npm run typecheck --silent"; then
-      echo "✓ All checks passed"
-      exit 0
-    else
-      echo ""
-      echo "Validation failed. Run: npm run format"
-      exit 1
-    fi
-  fi
-fi
-
-echo "WARNING: WSL clone not found. Skipping validation."
-exit 0
+npx lint-staged
 
 
 

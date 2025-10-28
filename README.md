@@ -162,8 +162,6 @@ src/
 
 ### Key Commands
 
-When using Windows, use `wsl` or install node/npm locally.
-
 ```bash
 npm run dev        # Development server
 npm run build      # Production build
