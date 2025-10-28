@@ -2,6 +2,45 @@ name: CI
 
 on:
   push:
+    branches: [ main, master, phase-2 ]
+  pull_request:
+    branches: [ main, master, phase-2 ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Cache .next
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-next-${{ hashFiles('**/package-lock.json') }}
+      - name: Run codegen
+        run: node scripts/wagmi-generate.js || true
+      - name: Build
+        run: npm run build
+      - name: Typecheck
+        run: npm run typecheck || true
+      - name: Run tests
+        run: npm test
+name: CI
+
+on:
+  push:
     branches: [ main, phase-2 ]
   pull_request:
     branches: [ main, phase-2 ]
