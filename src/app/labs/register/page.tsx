@@ -82,19 +82,21 @@ const RegisterSite = () => {
   const renderNotConnectedContainer = () => (
     <div className="labs-card">
       <div className="labs-card-header">
-        <h3 className="labs-card-title">STEP 1: Setup a Wallet app</h3>
+        <h2 className="labs-card-title">STEP 1: Setup a Wallet app</h2>
       </div>
       <div className="labs-card-body">
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <button
             className="labs-btn labs-btn-primary labs-btn-large"
             onClick={() => window.open(CBWalletURL, "_blank")}
+            aria-label="Download Coinbase Wallet"
           >
             COINBASE WALLET
           </button>
           <button
             className="labs-btn labs-btn-secondary labs-btn-large"
             onClick={() => window.open(MetaMaskURL, "_blank")}
+            aria-label="Download MetaMask Wallet"
           >
             METAMASK
           </button>
@@ -102,7 +104,7 @@ const RegisterSite = () => {
       </div>
 
       <div className="labs-card-header" style={{ marginTop: "24px" }}>
-        <h3 className="labs-card-title">STEP 2: Connect a Wallet</h3>
+        <h2 className="labs-card-title">STEP 2: Connect a Wallet</h2>
       </div>
       <div className="labs-card-body">
         <Connect />
@@ -115,12 +117,13 @@ const RegisterSite = () => {
       return (
         <div className="labs-card">
           <div className="labs-card-header">
-            <h3 className="labs-card-title">STEP 3: Switch Network</h3>
+            <h2 className="labs-card-title">STEP 3: Switch Network</h2>
           </div>
           <div className="labs-card-body">
             <button
               onClick={handleSwitchNetwork}
               className="labs-btn labs-btn-primary labs-btn-large"
+              aria-label="Switch to Polygon Mumbai testnet"
             >
               <img
                 className="logo"
@@ -207,12 +210,14 @@ const RegisterSite = () => {
   return (
     <div className="App">
       <LabNav />
-      <h2>REGISTRATION PORTAL</h2>
-      <div className="form-container">
-        <div className="mint-container">
-          {!isConnected ? renderNotConnectedContainer() : renderInput()}
+      <main>
+        <h1>REGISTRATION PORTAL</h1>
+        <div className="form-container">
+          <div className="mint-container">
+            {!isConnected ? renderNotConnectedContainer() : renderInput()}
+          </div>
         </div>
-      </div>
+      </main>
       <LabFooter />
     </div>
   );

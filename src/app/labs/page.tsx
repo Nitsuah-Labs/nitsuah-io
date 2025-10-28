@@ -1,6 +1,7 @@
 // LABS - src/app/labs/page.tsx
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 // LAB STYLES
 import LabFooter from "../_components/_labs/LabFooter";
@@ -14,7 +15,8 @@ import polygonLogo from "../_components/_web3/_assets/polygonlogo.png";
 
 function renderOutput() {
   return (
-    <>
+    <main>
+      <h1 className="sr-only">Labs - Web3 Experiments</h1>
       <table>
         <thead></thead>
         <tbody>
@@ -22,7 +24,7 @@ function renderOutput() {
             <th scope="col">
               <div className="h4">NETWORK</div>
             </th>
-            <td scope="row">
+            <td>
               <div className="mumbai-wallet">
                 <h2>
                   <Image
@@ -39,20 +41,19 @@ function renderOutput() {
             <th scope="col">
               <div className="h4">FUNDS</div>
             </th>
-            <td scope="row">
-              <div
+            <td>
+              <a
+                href="https://wiki.polygon.technology/docs/develop/tools/matic-faucet/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="purp-wallet"
-                onClick={() =>
-                  window.open(
-                    "https://wiki.polygon.technology/docs/develop/tools/matic-faucet/",
-                  )
-                }
+                aria-label="Get test MATIC from Polygon faucet"
               >
                 <h4>
-                  <Image className="logo" src={mumbai} alt="Polygon logo" />
+                  <Image className="logo" src={mumbai} alt="Polygon Mumbai icon" />
                   FAUCET
                 </h4>
-              </div>
+              </a>
             </td>
           </tr>
           <tr>
@@ -60,12 +61,13 @@ function renderOutput() {
               <div className="h4">SIGNUP</div>
             </th>
             <td>
-              <div
+              <Link
+                href="/labs/register"
                 className="purp-wallet"
-                onClick={() => window.open("/labs/register", "_self")}
+                aria-label="Register for Web3 labs"
               >
                 <h4>REGISTER</h4>
-              </div>
+              </Link>
             </td>
           </tr>
           <tr>
@@ -73,12 +75,13 @@ function renderOutput() {
               <div className="h4">MINT</div>
             </th>
             <td>
-              <div
+              <Link
+                href="/labs/mint"
                 className="purp-wallet"
-                onClick={() => window.open("/labs/mint", "_self")}
+                aria-label="Mint NFT landplot"
               >
                 <h4>LANDPLOT</h4>
-              </div>
+              </Link>
             </td>
           </tr>
           <tr>
@@ -86,28 +89,30 @@ function renderOutput() {
               <div className="h4">DOMAINS</div>
             </th>
             <td>
-              <div
+              <Link
+                href="/labs/domains"
                 className="purp-wallet"
-                onClick={() => window.open("/labs/domains", "_self")}
+                aria-label="Manage subdomains"
               >
                 <h4>SUBDOMAIN</h4>
-              </div>
+              </Link>
             </td>
           </tr>
           <tr>
-            <th>
-              <div
+            <td>
+              <Link
+                href="/"
                 className="eth-wallet"
-                onClick={() => window.open("/", "_self")}
+                aria-label="Return to homepage"
               >
                 <h4>GO HOME</h4>
-              </div>
-            </th>
+              </Link>
+            </td>
           </tr>
         </tbody>
         <tfoot></tfoot>
       </table>
-    </>
+    </main>
   );
 }
 
