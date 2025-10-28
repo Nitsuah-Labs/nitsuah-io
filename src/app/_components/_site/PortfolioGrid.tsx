@@ -77,6 +77,16 @@ const PortfolioGrid: React.FC = () => {
                     src={image}
                     fill
                     style={{ objectFit: "cover" }}
+                    unoptimized={
+                      image === darkmoon ||
+                      image === spline ||
+                      image === polyens ||
+                      image === solPay ||
+                      image === solApp ||
+                      image === blendeth ||
+                      image === arf ||
+                      image === arfg
+                    }
                   />
                 </div>
 

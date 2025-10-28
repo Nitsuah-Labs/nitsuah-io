@@ -95,6 +95,11 @@ const CryptoPage = () => {
                       src={project.image}
                       fill
                       style={{ objectFit: "cover" }}
+                      unoptimized={
+                        project.image === dao ||
+                        project.image === gaad ||
+                        project.image === mint
+                      }
                     />
                   ) : (
                     <div
