@@ -21,6 +21,7 @@ export function Connect() {
         <button
           onClick={() => disconnect()}
           className="labs-btn labs-btn-danger"
+          aria-label={`Disconnect from ${connector?.name || "wallet"}`}
         >
           Disconnect from {connector?.name}
         </button>
@@ -36,6 +37,7 @@ export function Connect() {
               connect({ connector: x });
             }}
             aria-busy={pendingId === x.id}
+            aria-label={`Connect to ${x.name} wallet`}
             className="labs-btn labs-btn-primary"
             disabled={pendingId === x.id}
           >
@@ -46,6 +48,8 @@ export function Connect() {
 
       {error && (
         <div
+          role="alert"
+          aria-live="polite"
           style={{
             padding: "12px",
             backgroundColor: "rgba(239, 68, 68, 0.1)",
