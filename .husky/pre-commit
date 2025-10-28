@@ -2,7 +2,21 @@
 # Add Node.js to PATH for Git Bash on Windows
 export PATH="/c/Program Files/nodejs:$PATH"
 
+echo "🔍 Running pre-commit validation (same as CI)..."
+
+# Run ALL the checks that CI runs
+echo "1/4 Checking types..."
 npm run typecheck || exit 1
-npx lint-staged
+
+echo "2/4 Checking formatting..."
+npm run format:check || exit 1
+
+echo "3/4 Running Jest tests..."
+npm test || exit 1
+
+echo "4/4 Running lint-staged..."
+npx lint-staged || exit 1
+
+echo "✅ All pre-commit checks passed!"
 
 
