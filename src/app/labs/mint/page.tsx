@@ -22,46 +22,48 @@ const MintSite: React.FC = () => {
   return (
     <div className="App">
       <LabNav />
-      <h2>MINT PORTAL</h2>
-      <div className="form-container">
-        <div className="labs-card">
-          <div className="labs-card-header">
-            <h3 className="labs-card-title">Connect Your Wallet</h3>
+      <main>
+        <h1>MINT PORTAL</h1>
+        <div className="form-container">
+          <div className="labs-card">
+            <div className="labs-card-header">
+              <h2 className="labs-card-title">Connect Your Wallet</h2>
+            </div>
+            <div className="labs-card-body">
+              <Connect />
+            </div>
           </div>
-          <div className="labs-card-body">
-            <Connect />
-          </div>
+
+          <Connected>
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Account Details</h2>
+              </div>
+              <div className="labs-card-body">
+                <Account />
+              </div>
+            </div>
+
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Mint NFT</h2>
+              </div>
+              <div className="labs-card-body">
+                <MintNFT />
+              </div>
+            </div>
+
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Network Settings</h2>
+              </div>
+              <div className="labs-card-body">
+                <NetworkSwitcher />
+              </div>
+            </div>
+          </Connected>
         </div>
-
-        <Connected>
-          <div className="labs-card">
-            <div className="labs-card-header">
-              <h3 className="labs-card-title">Account Details</h3>
-            </div>
-            <div className="labs-card-body">
-              <Account />
-            </div>
-          </div>
-
-          <div className="labs-card">
-            <div className="labs-card-header">
-              <h3 className="labs-card-title">Mint NFT</h3>
-            </div>
-            <div className="labs-card-body">
-              <MintNFT />
-            </div>
-          </div>
-
-          <div className="labs-card">
-            <div className="labs-card-header">
-              <h3 className="labs-card-title">Network Settings</h3>
-            </div>
-            <div className="labs-card-body">
-              <NetworkSwitcher />
-            </div>
-          </div>
-        </Connected>
-      </div>
+      </main>
       <LabFooter />
     </div>
   );

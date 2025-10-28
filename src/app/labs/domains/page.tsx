@@ -501,18 +501,20 @@ const DomainSite = () => {
   return (
     <div className="App">
       <LabNav />
-      <div className="form-container">
-        <h2>SUB-DOMAIN PORTAL</h2>
-        <div className="mint-container">
-          {/* Display a logo and wallet connection status*/}
-          {!currentAccount && renderNotConnectedContainer()}
-          {/* Return the input form if an account is connected */}
-          <>{currentAccount ? renderInputForm() : null}</>
-          {/* Return recent mints */}
-          {mints && renderMints()}
+      <main>
+        <h1>SUB-DOMAIN PORTAL</h1>
+        <div className="form-container">
+          <div className="mint-container">
+            {/* Display a logo and wallet connection status*/}
+            {!currentAccount && renderNotConnectedContainer()}
+            {/* Return the input form if an account is connected */}
+            <>{currentAccount ? renderInputForm() : null}</>
+            {/* Return recent mints */}
+            {mints && renderMints()}
+          </div>
         </div>
-        <LabFooter />
-      </div>
+      </main>
+      <LabFooter />
     </div>
   );
 };

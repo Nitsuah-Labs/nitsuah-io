@@ -13,35 +13,36 @@ const StakeSite = () => {
     <div className="App">
       <div className="container">
         <LabNav />
-        <div className="form-container">
-          <h2>STAKING HERE!</h2>
-
-          <div className="labs-card labs-spacing-md">
-            <div className="labs-card-header">
-              <h3 className="labs-card-title">Connect Wallet</h3>
-            </div>
-            <div className="labs-card-body">
-              <Connect />
-            </div>
-          </div>
-
-          <Connected>
+        <main>
+          <h1>STAKING HERE!</h1>
+          <div className="form-container">
             <div className="labs-card labs-spacing-md">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Connect Wallet</h2>
+              </div>
               <div className="labs-card-body">
-                <p>Staking UI goes here — connected wallet detected.</p>
-                <p
-                  style={{
-                    opacity: 0.7,
-                    fontSize: "0.9rem",
-                    marginTop: "10px",
-                  }}
-                >
-                  This feature is under development.
-                </p>
+                <Connect />
               </div>
             </div>
-          </Connected>
-        </div>
+
+            <Connected>
+              <div className="labs-card labs-spacing-md">
+                <div className="labs-card-body">
+                  <p>Staking UI goes here — connected wallet detected.</p>
+                  <p
+                    style={{
+                      opacity: 0.7,
+                      fontSize: "0.9rem",
+                      marginTop: "10px",
+                    }}
+                  >
+                    This feature is under development.
+                  </p>
+                </div>
+              </div>
+            </Connected>
+          </div>
+        </main>
         <LabFooter />
       </div>
     </div>
