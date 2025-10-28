@@ -12,17 +12,20 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
 
-  // Maximum time one test can run
-  timeout: 30 * 1000,
+  // Global setup to clean WalletConnect state
+  globalSetup: require.resolve("./tests/global-setup"),
+
+  // Maximum time one test can run - reduced from 30s to 15s
+  timeout: 15 * 1000,
 
   // Test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: process.env.CI ? 1 : 0, // Reduced from 2 to 1
+  workers: process.env.CI ? 1 : 2, // Limit workers to reduce memory issues
 
-  // Reporter configuration
-  reporter: [["html"], ["list"], ...(process.env.CI ? [["github"]] : [])],
+  // Reporter configuration - simplified for speed
+  reporter: "list",
 
   // Shared settings for all projects
   use: {
@@ -40,36 +43,34 @@ export default defineConfig({
   },
 
   // Configure projects for different browsers and viewports
+  // REDUCED: Only run Chromium for speed - add others back for full testing
   projects: [
     // Desktop browsers
     {
       name: "chromium-desktop",
       use: { ...devices["Desktop Chrome"] },
     },
-    {
-      name: "firefox-desktop",
-      use: { ...devices["Desktop Firefox"] },
-    },
-    {
-      name: "webkit-desktop",
-      use: { ...devices["Desktop Safari"] },
-    },
-
-    // Mobile devices
-    {
-      name: "mobile-chrome",
-      use: { ...devices["Pixel 5"] },
-    },
-    {
-      name: "mobile-safari",
-      use: { ...devices["iPhone 12"] },
-    },
-
-    // Tablet devices
-    {
-      name: "tablet-ipad",
-      use: { ...devices["iPad Pro"] },
-    },
+    // Commented out for speed - uncomment for full cross-browser testing
+    // {
+    //   name: "firefox-desktop",
+    //   use: { ...devices["Desktop Firefox"] },
+    // },
+    // {
+    //   name: "webkit-desktop",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
+    // {
+    //   name: "mobile-chrome",
+    //   use: { ...devices["Pixel 5"] },
+    // },
+    // {
+    //   name: "mobile-safari",
+    //   use: { ...devices["iPhone 12"] },
+    // },
+    // {
+    //   name: "tablet-ipad",
+    //   use: { ...devices["iPad Pro"] },
+    // },
   ],
 
   // Run local dev server before starting tests

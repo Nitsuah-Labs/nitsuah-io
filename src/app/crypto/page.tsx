@@ -122,7 +122,7 @@ const CryptoPage = () => {
                 </div>
 
                 <div className="portfolio-card-content">
-                  <h3 className="portfolio-card-title">{project.title}</h3>
+                  <h2 className="portfolio-card-title">{project.title}</h2>
 
                   {project.description && (
                     <p className="portfolio-card-description">

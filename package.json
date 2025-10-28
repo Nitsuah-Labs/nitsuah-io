@@ -22,6 +22,7 @@
     "test:e2e:headed": "playwright test --headed",
     "test:a11y": "playwright test tests/accessibility --project=chromium-desktop",
     "test:a11y:quick": "playwright test tests/accessibility/all-pages.spec.ts --grep=\"(Homepage|About|Projects)\" --project=chromium-desktop",
+    "test:smoke": "playwright test tests/accessibility/all-pages.spec.ts --grep=\"Homepage has no accessibility violations\" --project=chromium-desktop --timeout=5000",
     "validate": "npm run typecheck && npm run format:check",
     "validate:full": "npm run validate && npm run lint && npm run test:a11y:quick",
     "clean": "rm -rf .next out node_modules/.cache",
