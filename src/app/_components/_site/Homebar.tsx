@@ -41,7 +41,7 @@ const pages = ["about", "resume", "crypto", "projects", "labs"];
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
+    null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -57,9 +57,12 @@ const HomeBar: React.FC<HomeBarProps> = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/" legacyBehavior>
-            <a style={{ textDecoration: "none", color: "inherit" }}>
+            <a
+              style={{ textDecoration: "none", color: "inherit" }}
+              aria-label="nitsuah labs home"
+            >
               <Typography
-                variant="h1"
+                variant="h6"
                 noWrap
                 component="span"
                 sx={{
@@ -82,7 +85,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="open navigation menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
