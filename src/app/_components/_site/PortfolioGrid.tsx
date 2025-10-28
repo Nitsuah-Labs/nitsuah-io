@@ -1,5 +1,5 @@
 import InfoIcon from "@mui/icons-material/Info";
-import { Grid, IconButton, Tooltip } from "@mui/material";
+import { Grid, Tooltip } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { portfolioProjects } from "../../../lib/data/projects";
@@ -57,44 +57,101 @@ const PortfolioGrid: React.FC = () => {
         <p>Additional work, experiments, and learning projects</p>
       </div>
 
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         {portfolioProjects.map((project) => {
           const image = projectImages[project.id] || cat;
-          const link =
-            project.externalLink || project.demo || project.github || "#";
+          const primaryLink =
+            project.demo || project.externalLink || project.github;
 
           return (
-            <Grid key={project.id} item xs={6} sm={5} md={4} lg={3} xl={2}>
-              <div className="projects-card bg-blur">
-                <div className="projects-subtitle shadow">
-                  <h4>{project.title}</h4>
-                </div>
-                <div className="image-container">
+            <Grid key={project.id} item xs={12} sm={6} md={4} lg={3}>
+              <div className="portfolio-card">
+                <div
+                  className="portfolio-card-image"
+                  onClick={() =>
+                    primaryLink && window.open(primaryLink, "_blank")
+                  }
+                >
                   <Image
                     alt={project.title}
-                    className="proj-logo"
                     src={image}
-                    onClick={() => window.open(link, "_blank")}
-                    style={{ cursor: "pointer" }}
+                    fill
+                    style={{ objectFit: "cover" }}
                   />
-                  {project.infoUrl && (
-                    <div className="tooltip-container">
-                      <Tooltip
-                        title={project.infoText || `Explore ${project.title}`}
-                        placement="top-end"
-                        arrow
-                        style={{ transform: "translateX(8px)" }}
-                      >
-                        <IconButton
-                          style={{ color: "white" }}
-                          onClick={() => window.open(project.infoUrl, "_blank")}
-                          aria-label={`Learn more about ${project.title}`}
-                        >
-                          <InfoIcon />
-                        </IconButton>
-                      </Tooltip>
+                </div>
+
+                <div className="portfolio-card-content">
+                  <h3 className="portfolio-card-title">{project.title}</h3>
+
+                  {project.description && (
+                    <p className="portfolio-card-description">
+                      {project.description}
+                    </p>
+                  )}
+
+                  {project.tags && project.tags.length > 0 && (
+                    <div className="portfolio-card-tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="portfolio-tag">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   )}
+
+                  <div className="portfolio-card-links">
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="portfolio-link portfolio-link-primary"
+                      >
+                        View Demo
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="portfolio-link"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                    {!project.demo &&
+                      !project.github &&
+                      project.externalLink && (
+                        <a
+                          href={project.externalLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-link portfolio-link-primary"
+                        >
+                          View Project
+                        </a>
+                      )}
+                    {project.infoUrl && (
+                      <Tooltip
+                        title={
+                          project.infoText ||
+                          `Learn more about ${project.title}`
+                        }
+                        placement="top"
+                        arrow
+                      >
+                        <a
+                          href={project.infoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="portfolio-link"
+                        >
+                          <InfoIcon sx={{ fontSize: 16 }} />
+                        </a>
+                      </Tooltip>
+                    )}
+                  </div>
                 </div>
               </div>
             </Grid>
