@@ -91,7 +91,7 @@ function getResumeData(): ResumeData {
     process.cwd(),
     "public",
     "assets",
-    "resume.json"
+    "resume.json",
   );
   const resumeContent = fs.readFileSync(resumePath, "utf-8");
   return JSON.parse(resumeContent);
