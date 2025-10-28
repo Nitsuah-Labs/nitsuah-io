@@ -15,9 +15,12 @@ homebar - can probably hide profile/logout for now, redirect to a funny 404 page
 
 - this page too has the footer overlap issue when the spline loads. try and keep it one page height always. if possible.
 
-1. For crypto and projects page. lets be consistent. the footer overlap issue should be addressed in the same way as the homepage and about me page. but primarily we have different types of displays and "cards" lets strive to be consistent. i like the new model but use some of the details and examples and elements we already have (ie: the icons and hyper links to my existing projects and the intended layout in a grid style). but employ best practices so it renders properly on mobile and desktop. 
+3. Projects page
+
+- For crypto and projects page. lets be consistent. the footer overlap issue should be addressed in the same way as the homepage and about me page. but primarily we have different types of displays and "cards" lets strive to be consistent. i like the new model but use some of the details and examples and elements we already have (ie: the icons and hyper links to my existing projects and the intended layout in a grid style). but employ best practices so it renders properly on mobile and desktop. 
  - tl;dr - combine the two and we'll probably have a winner. but use best practices to ensure it renders properly on all screen sizes. and that may mean defaulting to cards or icons or including both at different experiencing sizes.
 
+TL;DR these can be combined, but hte new card should have the icons like the other existing tiles. but hte existing tiles may need some relative info generated for them to match the new ones. also ensure consistent spacing, padding, margins, font sizes, etc. across all cards and tiles.
 
 ## LABS 
 
