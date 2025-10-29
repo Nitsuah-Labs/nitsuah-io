@@ -1,31 +1,28 @@
 # Security & Dependency Audit Plan
 
-## Current Status
+## Current Status (October 29, 2025)
 
-**GitHub Alert:** 3 vulnerabilities detected on default branch
-- 2 moderate severity
-- 1 low severity
+**npm audit results:** 21 vulnerabilities detected
+- 3 moderate severity
+- 18 low severity
 
-## Action Items
+**See Phase 6 plan:** All security updates scheduled for [PHASE-6.md](./PHASE-6.md)
 
-### Immediate (When Node.js Available)
+## Phase 6 Security Update Plan
 
-1. **Run audit scan:**
-   ```bash
-   npm audit
-   npm audit --json > audit-report.json
-   ```
+All security updates moved to [PHASE-6.md](./PHASE-6.md). Key items:
 
-2. **Attempt automatic fixes:**
-   ```bash
-   npm audit fix
-   npm audit fix --force  # if needed for breaking changes
-   ```
+1. **Moderate severity fixes:**
+   - Update `esbuild` (<=0.24.2 → 0.25.1)
+   - Update `micromatch` (<4.0.8 → 4.0.8+)
 
-3. **Review Dependabot PRs:**
-   - Visit: `https://github.com/Nitsuah-Labs/nitsuah-io/security/dependabot`
-   - Review and merge safe updates
-   - Test breaking changes in separate branch
+2. **Review WalletConnect chain** (18 low severity items)
+   - Prototype pollution in fast-redact affecting @walletconnect/* packages
+
+3. **Process:**
+   - Run `npm audit fix` for non-breaking updates
+   - Test `npm audit fix --force` in separate branch
+   - Review Dependabot PRs: <https://github.com/Nitsuah-Labs/nitsuah-io/security/dependabot>
 
 ### Package Review Priorities
 
