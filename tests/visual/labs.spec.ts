@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 test.describe("Labs Pages Visual Tests", () => {
   const labsPages = [
@@ -12,9 +13,7 @@ test.describe("Labs Pages Visual Tests", () => {
     test(`${page.name} page renders correctly`, async ({
       page: browserPage,
     }) => {
-      await browserPage.goto(page.path);
-
-      await browserPage.waitForLoadState("networkidle");
+      await go(browserPage, page.path);
 
       // Check header and footer
       await expect(browserPage.locator("header")).toBeVisible();
@@ -40,7 +39,7 @@ test.describe("Labs Pages Visual Tests", () => {
   }
 
   test("labs pages use consistent design system", async ({ page }) => {
-    await page.goto("/labs/register");
+    await go(page, "/labs/register");
 
     // Check for .labs-btn class buttons
     const labsButtons = page.locator(".labs-btn");

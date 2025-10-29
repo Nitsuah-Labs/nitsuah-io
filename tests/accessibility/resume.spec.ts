@@ -1,10 +1,11 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
     // Ensure the resume page is fully loaded before each test to avoid flakiness
-    await page.goto("/resume");
+  await go(page, "/resume");
     await page.waitForLoadState("networkidle");
   });
 
@@ -79,7 +80,7 @@ test.describe("Resume Page Accessibility Tests", () => {
   });
 
   test("should have semantic HTML structure", async ({ page }) => {
-    await page.goto("/resume");
+  await go(page, "/resume");
 
     // Check for semantic elements
     await expect(page.locator("main")).toBeVisible();
