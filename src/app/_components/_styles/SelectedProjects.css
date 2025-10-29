@@ -130,12 +130,12 @@
 }
 
 .demo-link {
-  background: #3b82f6;
+  background: #1e40af; /* darker blue for better contrast */
   color: white;
 }
 
 .demo-link:hover {
-  background: #2563eb;
+  background: #163071;
   transform: translateY(-1px);
 }
 
@@ -146,7 +146,7 @@
 }
 
 .projects-footer p {
-  color: #6b7280;
+  color: #d1d5db; /* lighter gray for sufficient contrast on dark backgrounds */
   font-size: 1rem;
 }
 
@@ -309,12 +309,12 @@
 }
 
 .portfolio-link-primary {
-  background: #3b82f6;
+  background: #1e40af; /* darker blue to improve contrast for small text */
   color: white;
 }
 
 .portfolio-link-primary:hover {
-  background: #2563eb;
+  background: #163071;
 }
 
 /* Dark mode support */
