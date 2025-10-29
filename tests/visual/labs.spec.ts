@@ -15,23 +15,14 @@ test.describe("Labs Pages Visual Tests", () => {
     }) => {
       await go(browserPage, page.path);
 
-      // Check header and footer
+      // Check header and footer are visible
       await expect(browserPage.locator("header")).toBeVisible();
       await expect(browserPage.locator("footer")).toBeVisible();
 
-      // Wait for Spline canvas or other stable content if present
-      const spline = browserPage.locator(
-        '[data-testid="spline-container"], canvas'
-      );
-      await spline
-        .first()
-        .waitFor({ state: "visible", timeout: 15000 })
-        .catch(() => {});
+      // Wait for layout to stabilize
+      await browserPage.waitForTimeout(1000);
 
-      // Give a small settle window for animations
-      await browserPage.waitForTimeout(200);
-
-      // Take screenshot (increase timeout for stability)
+      // Take screenshot
       const screenshotName = `${page.path.replace(/\//g, "-").slice(1) || "labs"}-desktop.png`;
       await expect(browserPage).toHaveScreenshot(screenshotName, {
         fullPage: true,

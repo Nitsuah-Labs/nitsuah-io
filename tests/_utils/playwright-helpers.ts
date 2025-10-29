@@ -16,7 +16,7 @@ export async function go(page: Page, path: string) {
   }
 
   const resp = await page.goto(url);
-  // Wait for network idle to stabilize client-side assets and Spline
-  await page.waitForLoadState("networkidle");
+  // Wait for DOM to be ready - don't wait for networkidle (Spline keeps connections open)
+  await page.waitForLoadState("domcontentloaded");
   return resp;
 }
