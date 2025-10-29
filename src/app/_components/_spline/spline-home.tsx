@@ -12,14 +12,35 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
 
   // Auto-hide loading after 10 seconds regardless of actual load state
   useEffect(() => {
+    // Defer heavy Spline rendering until the browser is idle to improve LCP/TBT
+    let idleId: any = null;
+    const idleCallback = () => setShouldRender(true);
+
+    if ((window as any).requestIdleCallback) {
+      idleId = (window as any).requestIdleCallback(idleCallback, {
+        timeout: 2000,
+      });
+    } else {
+      // Fallback: small timeout to avoid blocking initial paint
+      idleId = window.setTimeout(idleCallback, 1000);
+    }
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 10000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if ((window as any).cancelIdleCallback && idleId) {
+        (window as any).cancelIdleCallback(idleId);
+      } else if (idleId) {
+        clearTimeout(idleId as number);
+      }
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -41,7 +62,9 @@ export function SplineScene() {
 
       {/* The Spline runtime injects a canvas; wrap it so we can force sizing via CSS */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+        {shouldRender ? (
+          <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+        ) : null}
       </div>
     </div>
   );

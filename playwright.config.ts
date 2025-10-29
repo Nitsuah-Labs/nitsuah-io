@@ -75,7 +75,9 @@ export default defineConfig({
 
   // Run local dev server before starting tests
   webServer: {
-    command: "npm run dev",
+    command: process.env.CI
+      ? "npm run build:ci && npm run start"
+      : "npm run dev",
     url: "http://localhost:3000",
     // If test helpers are enabled, force Playwright to start its own dev server
     reuseExistingServer:
