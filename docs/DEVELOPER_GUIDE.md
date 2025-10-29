@@ -167,7 +167,6 @@ npm test -- Connect.test.tsx
 
 ## Need Help?
 
-- Check `TODO.md` for known issues
-- Check `FEEDBACK.md` for UI/UX issues
-- Check `ARCHITECTURE.md` for high-level overview
-- Open an issue on GitHub
+- Check `ARCHITECTURE.md` for project overview
+- Check `FEEDBACK.md` for known UI/UX issues
+- Open a GitHub issue for bugs/features
