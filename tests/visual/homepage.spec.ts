@@ -6,11 +6,15 @@ test.describe("Homepage Visual Tests", () => {
 
     // Wait for critical content to be visible (not Spline)
     await expect(page.locator("header")).toBeVisible();
-    
+
     // Wait for main content sections to load
-    await expect(page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /Featured Projects/i })).toBeVisible();
-    
+    await expect(
+      page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Featured Projects/i })
+    ).toBeVisible();
+
     await expect(page.locator("footer")).toBeVisible();
 
     // Wait a moment for layout to stabilize (don't wait for Spline)
@@ -31,11 +35,15 @@ test.describe("Homepage Visual Tests", () => {
     await page.goto("/", { waitUntil: "networkidle" });
 
     await expect(page.locator("header")).toBeVisible();
-    
+
     // Wait for main content sections to load
-    await expect(page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })).toBeVisible();
-    await expect(page.getByRole("heading", { name: /Featured Projects/i })).toBeVisible();
-    
+    await expect(
+      page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Featured Projects/i })
+    ).toBeVisible();
+
     await expect(page.locator("footer")).toBeVisible();
 
     await page.waitForTimeout(2000);
