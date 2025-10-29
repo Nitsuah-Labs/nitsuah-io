@@ -9,16 +9,20 @@
 ## Active Feedback
 
 ### Layout & Styling
+
 - [ ] **Resume Layout** - Improve about section (button, city, GitHub, LinkedIn positioning)
 - [ ] **Resume Export Button** - Style PDF button to match orange/black theme
 
 ### Features
+
 - [ ] **Projects Filters** - Add categories/filters based on tags
-- [ ] **Wallet Connection UX** - Simplify to modern wallet selector pattern
+- [ ] **Lab Wallet Connection UX** - Simplify to modern wallet selector pattern, see web3 section below
 
 ### Web3
+
+
+- [ ] **Wallet Flow** - Auto-detect/redirect to install if wallet missing (this should be a natural part of the connect wallet flow already i think we need to dig into the wallet features further to understand the expected best practice - learn about the packages we use, web3/wagmi/etc. whatever were using and deep dive on those.)
 - [ ] **Profile Page** - Display wallet info on profile and labs header
-- [ ] **Wallet Flow** - Auto-detect/redirect to install if wallet missing
 
 ---
 

@@ -288,8 +288,8 @@ const HomePage: React.FC = () => {
                       <span
                         key={i}
                         style={{
-                          backgroundColor: "rgba(249, 115, 22, 0.15)",
-                          color: "#f97316",
+                          backgroundColor: "rgba(249, 115, 22, 0.1)",
+                          color: "#fb923c",
                           padding: "0.25rem 0.75rem",
                           borderRadius: "4px",
                           fontSize: "0.8rem",
