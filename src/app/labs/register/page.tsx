@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 // Use standard <img> to avoid requiring next/image types in this build context
 import { Grid, TextField } from "@mui/material";
+import Image from "next/image";
 import {
   useAccount,
   useSimulateContract,
@@ -177,10 +178,12 @@ const RegisterSite = () => {
               className="labs-btn labs-btn-primary labs-btn-large"
               aria-label="Switch to Polygon Mumbai testnet"
             >
-              <img
+              <Image
                 className="logo"
-                src={mumbai.src}
+                src={mumbai}
                 alt="polygon mumbai logo grey"
+                width={24}
+                height={24}
               />
               SWITCH TO POLYGON MUMBAI
             </button>
@@ -190,12 +193,12 @@ const RegisterSite = () => {
               }
               style={{ marginTop: "16px" }}
             >
-              <img
+              <Image
                 alt="Network logo"
                 className="logo"
-                src={
-                  network.includes("Polygon") ? polygonLogo.src : ethLogo.src
-                }
+                src={network.includes("Polygon") ? polygonLogo : ethLogo}
+                width={20}
+                height={20}
               />{" "}
               {currentAccount}{" "}
             </div>
