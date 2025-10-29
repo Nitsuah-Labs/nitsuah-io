@@ -68,11 +68,10 @@ const CryptoPage = () => {
       <main
         className="content-container"
         style={{
-          marginTop: "80px", // Increased from 64px to prevent header cutoff
+          marginTop: "80px",
           marginBottom: "60px",
-          paddingBottom: "80px", // Footer spacing buffer
-          overflowY: "auto",
-          height: "calc(100vh - 140px)", // Adjusted for increased margin
+          paddingBottom: "120px", // Increased footer spacing buffer from 80px
+          minHeight: "calc(100vh - 200px)", // Changed from fixed height to minHeight
           padding: "2rem 1rem",
         }}
       >

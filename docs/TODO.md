@@ -5,10 +5,10 @@
 _No active tasks. This file tracks in-progress development work._
 
 ---
+
 ## User Feedback
 
 - [] See `FEEDBACK.md` for active user-reported issues and feature requests.
-
 
 ## Backlog
 
