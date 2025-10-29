@@ -8,8 +8,16 @@ _No active tasks. This file tracks in-progress development work._
 
 ## Backlog
 
-Future work to consider:
-- Dependency cleanup (remove unused packages)
-- Security updates (npm audit fixes)
-- Resume page layout improvements
+### Dependency Cleanup
+**Verified unused packages to remove:**
+```bash
+npm uninstall lokijs pino-pretty encoding
+npm uninstall -D @react-native-async-storage/async-storage
+```
+
+### Security
+Run `npm audit` and apply fixes (current status unknown)
+
+### UX Improvements
+- Resume page layout (about section positioning)
 - Projects page filters/categories
