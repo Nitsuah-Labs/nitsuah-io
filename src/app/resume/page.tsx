@@ -212,8 +212,13 @@ export default function ResumePage() {
                 <div className="contact-item">
                   <i className="fa fa-map-marker" aria-hidden="true"></i>
                   <span>
-                    {resume.basics.location.city},{" "}
-                    {resume.basics.location.region}
+                    {[
+                      resume.basics.location.city,
+                      resume.basics.location.region,
+                      resume.basics.location.countryCode,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
                   </span>
                 </div>
               )}
