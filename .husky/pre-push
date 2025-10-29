@@ -2,10 +2,5 @@
 # Add Node.js to PATH for Git Bash on Windows
 export PATH="/c/Program Files/nodejs:$PATH"
 
-echo "🔍 Running pre-push validation (production build only)..."
-
-# Production build catches most issues - let CI run full test suite
-echo "1/1 Running production build..."
-npm run build || exit 1
-
-echo "✅ Pre-push checks passed! Full test suite (including accessibility) will run in CI."
+echo "⚡ Pre-push: Fast-forwarding to CI (no local checks)"
+echo "✅ Push accepted. CI will run full validation (build, tests, accessibility, visual regression)."
