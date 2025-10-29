@@ -9,7 +9,7 @@ test.describe("Navigation Tests", () => {
     const homeLink = page.getByRole("link", { name: /home|nitsuah/i }).first();
     if (await homeLink.isVisible()) {
       await homeLink.click();
-      await expect(page).toHaveURL(/\/(\?.*)?$/);  // Match path with optional query
+      await expect(page).toHaveURL(/\/(\?.*)?$/); // Match path with optional query
     }
 
     // Test about link
@@ -44,7 +44,7 @@ test.describe("Navigation Tests", () => {
 
     // Check for links to lab pages - wait for navigation to be ready
     await page.waitForSelector('a[href*="/labs/"]', { timeout: 5000 });
-    
+
     const registerLink = page
       .getByRole("link", { name: /register|domain/i })
       .first();
