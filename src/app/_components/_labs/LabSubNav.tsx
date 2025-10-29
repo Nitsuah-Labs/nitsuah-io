@@ -9,11 +9,12 @@ const LAB_PAGES = [
   { href: "/labs/register", label: "Register" },
   { href: "/labs/mint", label: "Mint" },
   { href: "/labs/domains", label: "Domains" },
-  { href: "/labs/lookup", label: "Lookup" },
-  { href: "/labs/stake", label: "Stake" },
-  { href: "/labs/token", label: "Token" },
-  { href: "/labs/dao", label: "DAO" },
-  { href: "/labs/ai", label: "AI" },
+  // Uncomment when implemented:
+  // { href: "/labs/lookup", label: "Lookup" },
+  // { href: "/labs/stake", label: "Stake" },
+  // { href: "/labs/token", label: "Token" },
+  // { href: "/labs/dao", label: "DAO" },
+  // { href: "/labs/ai", label: "AI" },
 ];
 
 const LabSubNav: React.FC = () => {
