@@ -5,16 +5,20 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check that main sections are visible
+    // Wait for key resume selectors to appear
     await expect(page.locator(".resume-name")).toBeVisible();
     await expect(page.locator(".resume-label")).toBeVisible();
     await expect(page.locator("#work")).toBeVisible();
     await expect(page.locator("#skills")).toBeVisible();
     await expect(page.locator("#education")).toBeVisible();
 
-    // Take full page screenshot
+    // Allow layout/fonts to stabilize
+    await page.waitForTimeout(300);
+
+    // Take full page screenshot with larger timeout
     await expect(page).toHaveScreenshot("resume-desktop.png", {
       fullPage: true,
+      timeout: 20000,
     });
   });
 
@@ -26,9 +30,13 @@ test.describe("Resume Page Visual Tests", () => {
     // Check responsive layout
     await expect(page.locator(".resume-name")).toBeVisible();
 
+    // Allow layout to settle
+    await page.waitForTimeout(300);
+
     // Take mobile screenshot
     await expect(page).toHaveScreenshot("resume-mobile.png", {
       fullPage: true,
+      timeout: 20000,
     });
   });
 

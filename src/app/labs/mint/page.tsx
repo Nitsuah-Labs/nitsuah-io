@@ -26,8 +26,8 @@ const MintSite: React.FC = () => {
     try {
       const params = new URLSearchParams(window.location.search);
       if (params.get("testHelpers") === "1") setShowTestHelpers(true);
-    } catch (e) {
-      // ignore
+    } catch {
+      // ignore errors reading window.location in unusual runtimes
     }
   }, []);
 

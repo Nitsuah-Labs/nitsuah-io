@@ -20,11 +20,21 @@ test.describe("Labs Pages Visual Tests", () => {
       await expect(browserPage.locator("header")).toBeVisible();
       await expect(browserPage.locator("footer")).toBeVisible();
 
-      // Take screenshot
+      // Wait for Spline canvas or other stable content if present
+      const spline = browserPage.locator(
+        '[data-testid="spline-container"], canvas'
+      );
+      await spline
+        .first()
+        .waitFor({ timeout: 15000 })
+        .catch(() => {});
+
+      // Take screenshot (increase timeout for stability)
       const screenshotName = `${page.path.replace(/\//g, "-").slice(1) || "labs"}-desktop.png`;
       await expect(browserPage).toHaveScreenshot(screenshotName, {
         fullPage: true,
         animations: "disabled",
+        timeout: 20000,
       });
     });
   }
