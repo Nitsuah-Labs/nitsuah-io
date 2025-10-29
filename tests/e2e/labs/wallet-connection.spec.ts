@@ -64,6 +64,7 @@ test.describe("Wallet Connection Flow", () => {
     page,
   }) => {
     await page.goto("/labs/register?testHelpers=1");
+    await page.waitForLoadState("networkidle");
 
     // With test helpers, should see the test helper panel OR actual domain input
     const testHelpers = page.getByTestId("register-test-helpers");
