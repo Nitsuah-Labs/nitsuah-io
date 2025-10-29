@@ -191,6 +191,10 @@
   .projects-link-anchor:hover {
     color: #8ab9ff !important;
   }
+
+  .projects-link {
+    background: rgba(255, 255, 255, 0.03) !important;
+  }
 }
 
 .resume-content {

@@ -25,14 +25,17 @@ export function SplineScene() {
   return (
     <>
       {isLoading && (
-        <div className="spline-loading">
-          <div className="spinner"></div>
+        <div className="spline-loading" aria-live="polite">
+          <div className="spinner" aria-hidden="true"></div>
           <div className="spline-loading-text">
             Loading interactive scene...
           </div>
         </div>
       )}
-      <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+      {/* Wrap Spline in canvas div to enable pointer events */}
+      <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
+        <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+      </div>
     </>
   );
 }

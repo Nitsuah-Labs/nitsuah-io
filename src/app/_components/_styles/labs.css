@@ -793,11 +793,18 @@ input:focus {
   .labs-btn {
     width: 100%;
     padding: 12px 16px;
+    font-size: 14px; /* Slightly smaller text on mobile */
+    white-space: normal; /* Allow text wrapping */
+    word-break: break-word; /* Break long words if needed */
   }
 
   .labs-card {
     margin: 8px;
     padding: 16px;
+  }
+
+  .labs-card-title {
+    font-size: 18px; /* Smaller title on mobile */
   }
 
   .labs-grid {

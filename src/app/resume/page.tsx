@@ -150,7 +150,7 @@ export default function ResumePage() {
   const resume = getResumeData();
 
   return (
-    <>
+    <div style={{ background: "#1a1a1a", minHeight: "100vh" }}>
       <div className="print-hide">
         <HomeBar />
       </div>
@@ -418,6 +418,6 @@ export default function ResumePage() {
       <div className="print-hide">
         <Footer />
       </div>
-    </>
+    </div>
   );
 }

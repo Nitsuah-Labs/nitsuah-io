@@ -80,9 +80,9 @@ const CryptoPage = () => {
           <p>NFTs, POAPs, and blockchain achievements</p>
         </div>
 
-        <Grid container spacing={3} rowSpacing={4}>
+        <Grid container spacing={3} rowSpacing={6}>
           {" "}
-          {/* Added rowSpacing for vertical gap */}
+          {/* Increased rowSpacing from 4 to 6 for better separation */}
           {web3Data.map((project, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <div
