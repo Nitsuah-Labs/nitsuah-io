@@ -15,7 +15,7 @@ test.describe("Homepage Visual Tests", () => {
     const spline = page.locator('[data-testid="spline-container"], canvas');
     await spline
       .first()
-      .waitFor({ state: 'visible', timeout: 15000 })
+      .waitFor({ state: "visible", timeout: 15000 })
       .catch(() => {});
 
     // Allow small animation settle before screenshot
@@ -41,7 +41,7 @@ test.describe("Homepage Visual Tests", () => {
     const spline = page.locator('[data-testid="spline-container"], canvas');
     await spline
       .first()
-      .waitFor({ state: 'visible', timeout: 15000 })
+      .waitFor({ state: "visible", timeout: 15000 })
       .catch(() => {});
 
     await page.waitForTimeout(200);
@@ -78,7 +78,7 @@ test.describe("Homepage Visual Tests", () => {
     // Either Spline loads or loading indicator appears
     await splineContainer
       .first()
-      .waitFor({ state: 'visible', timeout: 15000 })
+      .waitFor({ state: "visible", timeout: 15000 })
       .catch(() => {});
 
     await page.waitForTimeout(200);
