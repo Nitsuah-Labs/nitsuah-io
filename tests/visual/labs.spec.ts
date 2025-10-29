@@ -25,8 +25,11 @@ test.describe("Labs Pages Visual Tests", () => {
       );
       await spline
         .first()
-        .waitFor({ timeout: 15000 })
+        .waitFor({ state: 'visible', timeout: 15000 })
         .catch(() => {});
+
+      // Give a small settle window for animations
+      await browserPage.waitForTimeout(200);
 
       // Take screenshot (increase timeout for stability)
       const screenshotName = `${page.path.replace(/\//g, "-").slice(1) || "labs"}-desktop.png`;

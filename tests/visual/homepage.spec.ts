@@ -15,8 +15,11 @@ test.describe("Homepage Visual Tests", () => {
     const spline = page.locator('[data-testid="spline-container"], canvas');
     await spline
       .first()
-      .waitFor({ timeout: 25000 })
+      .waitFor({ state: 'visible', timeout: 15000 })
       .catch(() => {});
+
+    // Allow small animation settle before screenshot
+    await page.waitForTimeout(200);
 
     // Take full page screenshot for visual regression (increase timeout)
     await expect(page).toHaveScreenshot("homepage-desktop.png", {
@@ -38,8 +41,10 @@ test.describe("Homepage Visual Tests", () => {
     const spline = page.locator('[data-testid="spline-container"], canvas');
     await spline
       .first()
-      .waitFor({ timeout: 25000 })
+      .waitFor({ state: 'visible', timeout: 15000 })
       .catch(() => {});
+
+    await page.waitForTimeout(200);
 
     await expect(page).toHaveScreenshot("homepage-mobile.png", {
       fullPage: true,
@@ -73,8 +78,10 @@ test.describe("Homepage Visual Tests", () => {
     // Either Spline loads or loading indicator appears
     await splineContainer
       .first()
-      .waitFor({ timeout: 20000 })
+      .waitFor({ state: 'visible', timeout: 15000 })
       .catch(() => {});
+
+    await page.waitForTimeout(200);
   });
 
   test("homepage navigation links are clickable", async ({ page }) => {
