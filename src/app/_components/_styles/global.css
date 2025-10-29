@@ -452,13 +452,14 @@ header {
   align-items: center;
   overflow: hidden; /* Prevent spline from expanding container */
   z-index: 1; /* Behind header and footer (header/footer use higher z-index) */
-  pointer-events: none; /* ensure interactive layers above capture events */
+  pointer-events: none; /* Container doesn't capture clicks, but canvas will */
 }
 
 /* Ensure main content sits above the spline */
 main {
   position: relative;
   z-index: 50;
+  pointer-events: auto; /* Ensure main content captures clicks */
 }
 
 /* Canvas wrapper created around the Spline runtime output. Ensure full coverage. */
@@ -469,6 +470,7 @@ main {
   height: 100%;
   display: block;
   z-index: 1; /* behind header/footer which use z-index:100 */
+  pointer-events: auto; /* Allow Spline interactions */
 }
 
 /* Ensure any canvas inside the wrapper stretches to fill */
@@ -476,6 +478,7 @@ main {
   width: 100% !important;
   height: 100% !important;
   display: block;
+  pointer-events: auto; /* Enable Spline canvas interactions */
 }
 
 .spline-loading {
