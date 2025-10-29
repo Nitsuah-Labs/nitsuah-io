@@ -154,8 +154,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           </Box>
         </Toolbar>
       </Container>
-      {/* Toolbar spacer ensures the fixed AppBar does not overlap page content */}
-      <Toolbar />
     </AppBar>
   );
 };
