@@ -15,7 +15,7 @@ import polygonLogo from "../_components/_web3/_assets/polygonlogo.png";
 
 function renderOutput() {
   return (
-    <main style={{ padding: "80px 20px 20px" }}>
+    <main style={{ padding: "80px 20px 20px", paddingBottom: "80px" }}>
       <h1 className="sr-only">Labs - Web3 Experiments</h1>
 
       <div style={{ textAlign: "center", marginBottom: "40px" }}>

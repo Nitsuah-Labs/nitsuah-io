@@ -13,7 +13,7 @@ const StakeSite = () => {
     <div className="App">
       <div className="container">
         <LabNav />
-        <main>
+        <main style={{ paddingBottom: "80px" }}>
           <h1>STAKING HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

@@ -70,6 +70,7 @@ const CryptoPage = () => {
         style={{
           marginTop: "80px", // Increased from 64px to prevent header cutoff
           marginBottom: "60px",
+          paddingBottom: "80px", // Footer spacing buffer
           overflowY: "auto",
           height: "calc(100vh - 140px)", // Adjusted for increased margin
           padding: "2rem 1rem",

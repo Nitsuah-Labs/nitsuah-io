@@ -504,7 +504,7 @@ const DomainSite = () => {
       <LabNav />
       <LabSubNav />
       {/* Ensure a top-level H1 exists for correct heading order */}
-      <main>
+      <main style={{ paddingBottom: "80px" }}>
         <h1 className="sr-only">Domains - Labs</h1>
         <h1>SUB-DOMAIN PORTAL</h1>
         <div className="form-container">

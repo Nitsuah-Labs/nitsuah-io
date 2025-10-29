@@ -12,7 +12,7 @@ const ImagenSite = () => {
     <div className="App">
       <div className="container">
         <LabNav />
-        <main>
+        <main style={{ paddingBottom: "80px" }}>
           <h1>IMAGEN AI HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

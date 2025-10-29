@@ -267,7 +267,7 @@ const RegisterSite = () => {
     <div className="App">
       <LabNav />
       <LabSubNav />
-      <main>
+      <main style={{ paddingBottom: "80px" }}>
         <h1>REGISTRATION PORTAL</h1>
         <div className="form-container">
           <div className="mint-container">

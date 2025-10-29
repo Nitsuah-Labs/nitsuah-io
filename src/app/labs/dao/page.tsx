@@ -14,7 +14,7 @@ const DaoSite = () => {
   return (
     <div className="App">
       <LabNav />
-      <main>
+      <main style={{ paddingBottom: "80px" }}>
         <h1>DAO HERE!</h1>
         <div className="form-container">
           <div className="labs-card labs-spacing-md">

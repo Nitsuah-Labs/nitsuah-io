@@ -15,7 +15,7 @@ const NSLookupSite = () => {
     <div className="App">
       <div className="container">
         <LabNav />
-        <main>
+        <main style={{ paddingBottom: "80px" }}>
           <h1>LOOKUP HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

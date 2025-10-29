@@ -16,6 +16,7 @@ const Projects = () => {
         style={{
           marginTop: "80px", // Increased from 64px
           marginBottom: "60px",
+          paddingBottom: "80px", // Footer spacing buffer
           overflowY: "auto",
           height: "calc(100vh - 140px)", // Adjusted for increased margin
         }}
