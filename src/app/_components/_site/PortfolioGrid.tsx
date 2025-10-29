@@ -57,7 +57,9 @@ const PortfolioGrid: React.FC = () => {
         <p>Additional work, experiments, and learning projects</p>
       </div>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} rowSpacing={4}>
+        {" "}
+        {/* Added rowSpacing for vertical gap */}
         {portfolioProjects.map((project) => {
           const image = projectImages[project.id] || cat;
           const primaryLink =

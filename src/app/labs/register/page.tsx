@@ -17,6 +17,7 @@ import { Connect } from "../../_components/_web3/Connect";
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
+import LabSubNav from "../../_components/_labs/LabSubNav";
 import "../../_components/_styles/labs.css";
 
 // LAB ASSETS
@@ -265,6 +266,7 @@ const RegisterSite = () => {
   return (
     <div className="App">
       <LabNav />
+      <LabSubNav />
       <main>
         <h1>REGISTRATION PORTAL</h1>
         <div className="form-container">

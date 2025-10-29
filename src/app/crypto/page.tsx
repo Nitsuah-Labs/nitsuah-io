@@ -68,10 +68,10 @@ const CryptoPage = () => {
       <main
         className="content-container"
         style={{
-          marginTop: "64px",
+          marginTop: "80px", // Increased from 64px to prevent header cutoff
           marginBottom: "60px",
           overflowY: "auto",
-          height: "calc(100vh - 124px)",
+          height: "calc(100vh - 140px)", // Adjusted for increased margin
           padding: "2rem 1rem",
         }}
       >
@@ -80,7 +80,9 @@ const CryptoPage = () => {
           <p>NFTs, POAPs, and blockchain achievements</p>
         </div>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} rowSpacing={4}>
+          {" "}
+          {/* Added rowSpacing for vertical gap */}
           {web3Data.map((project, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <div

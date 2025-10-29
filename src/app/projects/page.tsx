@@ -14,10 +14,10 @@ const Projects = () => {
       <main
         className="content-container"
         style={{
-          marginTop: "64px",
+          marginTop: "80px", // Increased from 64px
           marginBottom: "60px",
           overflowY: "auto",
-          height: "calc(100vh - 124px)",
+          height: "calc(100vh - 140px)", // Adjusted for increased margin
         }}
       >
         <h1 className="sr-only">Projects Portfolio</h1>
