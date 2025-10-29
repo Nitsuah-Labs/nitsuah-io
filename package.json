@@ -28,6 +28,8 @@
   "test:precommit": "npm run test:smoke",
     "validate": "npm run typecheck && npm run format:check",
     "validate:full": "npm run validate && npm run lint && npm run test:a11y:quick",
+    "commit:quick": "git commit --no-verify",
+    "commit:safe": "npm run typecheck && npm run format && git add -A && git commit",
     "clean": "rm -rf .next out node_modules/.cache",
     "analyze": "cross-env ANALYZE=true npm run build",
     "prepare": "husky"
