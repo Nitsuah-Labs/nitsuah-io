@@ -19,6 +19,7 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-desktop.png", {
       fullPage: true,
       timeout: 20000,
+      maxDiffPixelRatio: 0.02, // Allow 2% pixel difference for CI font rendering variations
     });
   });
 
@@ -37,6 +38,7 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-mobile.png", {
       fullPage: true,
       timeout: 20000,
+      maxDiffPixelRatio: 0.02, // Allow 2% pixel difference for CI font rendering variations
     });
   });
 
