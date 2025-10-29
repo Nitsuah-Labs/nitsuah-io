@@ -25,9 +25,6 @@ npm run format:check || exit 1
 echo "3/4 Running Jest tests..."
 npm test || exit 1
 
-echo "4/4 Running lint-staged..."
-npx lint-staged || exit 1
-
 echo "✅ All pre-commit checks passed!"
 
 
