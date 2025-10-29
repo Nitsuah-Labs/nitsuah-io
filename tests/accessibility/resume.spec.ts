@@ -85,7 +85,8 @@ test.describe("Resume Page Accessibility Tests", () => {
     // Check for semantic elements
     await expect(page.locator("main")).toBeVisible();
     await expect(page.locator("section")).toHaveCount(6); // basics, work, skills, education, languages, projects
-    await expect(page.locator("header")).toBeVisible();
+    // Check for page header (AppBar) - use role selector to avoid conflict with resume-header
+    await expect(page.getByRole("banner")).toBeVisible();
   });
 
   test("should work with screen readers", async ({ page }) => {
