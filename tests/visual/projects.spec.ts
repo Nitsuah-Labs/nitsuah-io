@@ -5,20 +5,14 @@ test.describe("Projects Page Visual Tests", () => {
   test("projects page renders correctly", async ({ page }) => {
     await go(page, "/projects");
 
-    await page.waitForLoadState("networkidle");
-
-    // Check header and footer
+    // Check header and footer are visible
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
-    // Wait for Spline or other canvas to stabilize if present
-    const spline = page.locator('[data-testid="spline-container"], canvas');
-    await spline
-      .first()
-      .waitFor({ state: "visible", timeout: 15000 })
-      .catch(() => {});
+    // Wait for layout to stabilize
+    await page.waitForTimeout(1000);
 
-    // Take screenshot with increased timeout after a brief settle
+    // Take screenshot
     await expect(page).toHaveScreenshot("projects-desktop.png", {
       fullPage: true,
       animations: "disabled",

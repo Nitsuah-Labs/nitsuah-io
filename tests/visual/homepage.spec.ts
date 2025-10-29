@@ -4,24 +4,14 @@ test.describe("Homepage Visual Tests", () => {
   test("homepage renders correctly on desktop", async ({ page }) => {
     await page.goto("/");
 
-    // Wait for page to be fully loaded and for Spline to finish loading
-    await page.waitForLoadState("networkidle");
-
-    // Wait for critical elements
+    // Wait for critical content to be visible (not Spline)
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
+    
+    // Wait a moment for layout to stabilize (don't wait for Spline)
+    await page.waitForTimeout(1000);
 
-    // Wait for Spline canvas or its loading indicator to settle for stable screenshots
-    const spline = page.locator('[data-testid="spline-container"], canvas');
-    await spline
-      .first()
-      .waitFor({ state: "visible", timeout: 15000 })
-      .catch(() => {});
-
-    // Allow small animation settle before screenshot
-    await page.waitForTimeout(200);
-
-    // Take full page screenshot for visual regression (increase timeout)
+    // Take full page screenshot for visual regression
     await expect(page).toHaveScreenshot("homepage-desktop.png", {
       fullPage: true,
       animations: "disabled",
@@ -33,18 +23,10 @@ test.describe("Homepage Visual Tests", () => {
     await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE
     await page.goto("/");
 
-    await page.waitForLoadState("networkidle");
-
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
-    const spline = page.locator('[data-testid="spline-container"], canvas');
-    await spline
-      .first()
-      .waitFor({ state: "visible", timeout: 15000 })
-      .catch(() => {});
-
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(1000);
 
     await expect(page).toHaveScreenshot("homepage-mobile.png", {
       fullPage: true,
