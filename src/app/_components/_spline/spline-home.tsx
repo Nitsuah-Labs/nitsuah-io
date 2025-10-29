@@ -28,6 +28,7 @@ export function SplineScene() {
       className="spline-container"
       role="region"
       aria-label="Interactive 3D scene"
+      data-testid="spline-container"
     >
       {isLoading && (
         <div className="spline-loading" aria-live="polite">
