@@ -17,6 +17,7 @@ test.describe("Projects Page Visual Tests", () => {
       fullPage: true,
       animations: "disabled",
       timeout: 20000,
+      maxDiffPixelRatio: 0.02, // Allow 2% pixel difference for CI font rendering variations
     });
   });
 
