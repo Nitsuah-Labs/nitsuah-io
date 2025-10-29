@@ -86,7 +86,7 @@ const HomePage: React.FC = () => {
               <Link
                 href="/projects"
                 style={{
-                  backgroundColor: "#f97316",
+                  backgroundColor: "#c2410c",
                   color: "white",
                   padding: "1rem 2rem",
                   borderRadius: "8px",
@@ -97,11 +97,11 @@ const HomePage: React.FC = () => {
                   display: "inline-block",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#ea580c";
+                  e.currentTarget.style.backgroundColor = "#9a3412";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f97316";
+                  e.currentTarget.style.backgroundColor = "#c2410c";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
