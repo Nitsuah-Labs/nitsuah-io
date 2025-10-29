@@ -1,83 +1,166 @@
-# Unused Dependencies Audit
+# Unused Dependencies - Phase 6 Cleanup# Unused Dependencies Audit
 
-## Potentially Unused Dependencies
+
+
+**Status:** Verified - Ready for Removal  ## Potentially Unused Dependencies
+
+**Last Audit:** October 29, 2025
 
 Review the following packages for actual usage in the codebase:
 
+## Confirmed Unused Dependencies
+
 ### Production Dependencies
 
-1. **`lokijs` (^1.5.12)**
-   - Searched codebase: No imports found
-   - Purpose: In-memory database
-   - **Recommendation:** Remove if confirmed unused
-   - Command: `npm uninstall lokijs`
+The following packages have been verified as unused in the codebase and are scheduled for removal in Phase 6:
 
-2. **`pino-pretty` (^13.1.2)**
-   - Searched codebase: No imports found  
+1. **`lokijs` (^1.5.12)**
+
+### 1. `lokijs` (^1.5.12)   - Searched codebase: No imports found
+
+   - Purpose: In-memory database
+
+- **Type:** Production dependency   - **Recommendation:** Remove if confirmed unused
+
+- **Purpose:** In-memory database   - Command: `npm uninstall lokijs`
+
+- **Status:** ❌ No imports found in codebase
+
+- **Recommendation:** **REMOVE**2. **`pino-pretty` (^13.1.2)**
+
+- **Command:** `npm uninstall lokijs`   - Searched codebase: No imports found  
+
    - Purpose: Pino logger formatter
-   - **Recommendation:** Remove if confirmed unused
+
+### 2. `pino-pretty` (^13.1.2)   - **Recommendation:** Remove if confirmed unused
+
    - Command: `npm uninstall pino-pretty`
 
-3. **`@react-native-async-storage/async-storage` (^2.2.0)** (devDependency)
-   - Appears to be a React Native package
-   - Not needed for Next.js web app
-   - **Recommendation:** Remove
+- **Type:** Production dependency
+
+- **Purpose:** Pino logger formatter3. **`@react-native-async-storage/async-storage` (^2.2.0)** (devDependency)
+
+- **Status:** ❌ No imports found in codebase   - Appears to be a React Native package
+
+- **Recommendation:** **REMOVE**   - Not needed for Next.js web app
+
+- **Command:** `npm uninstall pino-pretty`   - **Recommendation:** Remove
+
    - Command: `npm uninstall -D @react-native-async-storage/async-storage`
 
-4. **`encoding` (^0.1.13)**
-   - May be a transitive dependency
-   - Check if explicitly needed
-   - **Recommendation:** Review usage, likely can be removed
+### 3. `@react-native-async-storage/async-storage` (^2.2.0)
 
-5. **`utf-8-validate` (^6.0.5)** + **`bufferutil` (^4.0.9)**
+4. **`encoding` (^0.1.13)**
+
+- **Type:** Dev dependency   - May be a transitive dependency
+
+- **Purpose:** React Native storage (not applicable to Next.js web app)   - Check if explicitly needed
+
+- **Status:** ❌ React Native package in Next.js project   - **Recommendation:** Review usage, likely can be removed
+
+- **Recommendation:** **REMOVE**
+
+- **Command:** `npm uninstall -D @react-native-async-storage/async-storage`5. **`utf-8-validate` (^6.0.5)** + **`bufferutil` (^4.0.9)**
+
    - WebSocket performance optimizations
-   - Used by WalletConnect
+
+### 4. `encoding` (^0.1.13)   - Used by WalletConnect
+
    - **Recommendation:** Keep (improves wallet connection performance)
 
-## Verification Process
+- **Type:** Production dependency
 
-Before removing any dependency:
+- **Purpose:** Text encoding utilities## Verification Process
+
+- **Status:** ⚠️ Likely transitive dependency
+
+- **Recommendation:** **VERIFY THEN REMOVE**Before removing any dependency:
+
+- **Command:** `npm ls encoding` (check usage), then `npm uninstall encoding`
 
 ```bash
-# 1. Search for imports in codebase
+
+## Dependencies to Keep# 1. Search for imports in codebase
+
 grep -r "from 'lokijs'" src/
-grep -r "require('lokijs')" src/
 
-# 2. Check if used in node_modules by other packages
-npm ls lokijs
+### `utf-8-validate` (^6.0.5) + `bufferutil` (^4.0.9)grep -r "require('lokijs')" src/
 
-# 3. Try removing and run tests
-npm uninstall lokijs
+
+
+- **Type:** Production dependencies# 2. Check if used in node_modules by other packages
+
+- **Purpose:** WebSocket performance optimizationsnpm ls lokijs
+
+- **Used By:** WalletConnect
+
+- **Status:** ✅ **KEEP**# 3. Try removing and run tests
+
+- **Reason:** Improves wallet connection performancenpm uninstall lokijs
+
 npm run typecheck
-npm run build
+
+## Phase 6 Cleanup Scriptnpm run build
+
 npm run test
 
+Run after verification (see [PHASE-6.md](./PHASE-6.md) for full plan):
+
 # 4. If all pass, dependency was unused. Commit removal.
-# If fails, reinstall and investigate
-npm install lokijs
-```
+
+```bash# If fails, reinstall and investigate
+
+# Remove confirmed unused dependenciesnpm install lokijs
+
+npm uninstall lokijs pino-pretty encoding```
+
+npm uninstall -D @react-native-async-storage/async-storage
 
 ## Recommended Cleanup Script
 
-```bash
+# Clean install to update lockfile
+
+npm install```bash
+
 # Run this after verification:
-npm uninstall lokijs pino-pretty encoding
-npm uninstall -D @react-native-async-storage/async-storage
-npm install  # clean install
-npm audit    # check for new issues
-```
 
-## Expected Impact
+# Verify everything still worksnpm uninstall lokijs pino-pretty encoding
 
-- **Bundle size:** ~100-200KB reduction
+npm run typechecknpm uninstall -D @react-native-async-storage/async-storage
+
+npm run buildnpm install  # clean install
+
+npm testnpm audit    # check for new issues
+
+npm run test:e2e```
+
+
+
+# Run security audit## Expected Impact
+
+npm audit
+
+```- **Bundle size:** ~100-200KB reduction
+
 - **Install time:** Faster npm install
-- **Security:** Fewer packages = smaller attack surface
+
+## Expected Impact- **Security:** Fewer packages = smaller attack surface
+
 - **Maintenance:** Fewer dependencies to update
 
-## Next Steps
+- **Bundle size reduction:** ~100-200KB
 
-1. Verify each package is truly unused
+- **Faster install:** Fewer packages to download## Next Steps
+
+- **Security:** Smaller attack surface
+
+- **Maintenance:** Fewer dependencies to update1. Verify each package is truly unused
+
 2. Remove in separate commits for easy rollback
-3. Run full test suite after each removal
+
+---3. Run full test suite after each removal
+
 4. Update package-lock.json
-5. Document removals in changelog
+
+**Next Steps:** See [PHASE-6.md](./PHASE-6.md) for full Phase 6 implementation plan.5. Document removals in changelog
+

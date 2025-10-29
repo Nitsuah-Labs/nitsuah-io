@@ -73,21 +73,32 @@ The project uses GitHub Actions for continuous integration. The workflow is defi
 
 The site is deployed to Netlify. The `netlify.toml` file in the project root configures the build settings, including the build command, publish directory, and environment variables.
 
-## Next Phase of Work
+## Current Status & Next Phase
 
-With the wagmi v2 migration complete and the project structure cleaned up, the next phase of work should focus on improving the project's robustness and developer experience.
+**Last Updated:** October 29, 2025
 
-### 1. Enhance Testing
+### Completed (Phase 1-5)
 
-- **Increase Test Coverage:** Write additional unit and integration tests for the Web3 components, focusing on the `domains` and `register` pages.
-- **End-to-End Testing:** Implement end-to-end tests using a framework like [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/) to simulate user interactions with the Web3 functionality.
+- ✅ wagmi v2 migration complete
+- ✅ Project structure cleanup complete
+- ✅ Comprehensive test suite (unit, e2e, accessibility, visual)
+- ✅ CI/CD pipeline with GitHub Actions
+- ✅ Automated git hooks (Husky) with optimized workflow
+- ✅ Playwright e2e testing implemented
+- ✅ Lighthouse accessibility checks automated
+- ✅ Layout-based visual regression testing (platform-agnostic)
 
-### 2. Improve CI/CD
+### Phase 6: Homepage Redesign & Platform Improvements
 
-- **Add Testing to CI:** Add a step to the GitHub Actions workflow to run the Jest test suite on every push and pull request.
-- **Automate Lighthouse Checks:** Integrate [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) into the workflow to automatically check for performance, accessibility, and SEO regressions.
+**Status:** Planning Complete  
+**Details:** See [PHASE-6.md](./PHASE-6.md)
 
-### 3. Refine Developer Experience
+**Primary Focus:**
 
-- **Storybook:** Implement [Storybook](https://storybook.js.org/) to create a component library, allowing for isolated development and testing of UI components.
-- **Husky Pre-Commit Hooks:** Configure [Husky](https://typicode.github.io/husky/#/) to run linting, formatting, and tests before allowing a commit, ensuring that only high-quality code is committed to the repository.
+1. **Homepage Redesign** - Interactive scroll-based hero section
+2. **Dependency Cleanup** - Remove unused packages
+3. **Security Updates** - Fix 21 npm audit vulnerabilities
+4. **Web3 Infrastructure** - Mumbai→Amoy migration verification
+5. **Code Quality** - Address Copilot feedback items
+
+**Target Outcome:** Professional, fast, accessible homepage that immediately communicates identity and value proposition.
