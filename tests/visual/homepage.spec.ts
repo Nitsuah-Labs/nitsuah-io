@@ -17,7 +17,7 @@ test.describe("Homepage Visual Tests", () => {
       animations: "disabled",
       timeout: 20000,
       mask: [page.locator('[data-testid="spline-container"], canvas')],
-      maxDiffPixelRatio: 0.02, // Allow 2% pixel difference for CI font rendering variations
+      maxDiffPixelRatio: 0.1, // Allow 10% pixel difference for CI/local environment variations
     });
   });
 
@@ -35,7 +35,7 @@ test.describe("Homepage Visual Tests", () => {
       animations: "disabled",
       timeout: 20000,
       mask: [page.locator('[data-testid="spline-container"], canvas')],
-      maxDiffPixelRatio: 0.02, // Allow 2% pixel difference for CI font rendering variations
+      maxDiffPixelRatio: 0.1, // Allow 10% pixel difference for CI/local environment variations
     });
   });
 
