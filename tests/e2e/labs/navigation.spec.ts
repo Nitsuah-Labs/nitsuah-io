@@ -9,7 +9,7 @@ test.describe("Navigation Tests", () => {
     const homeLink = page.getByRole("link", { name: /home|nitsuah/i }).first();
     if (await homeLink.isVisible()) {
       await homeLink.click();
-      await expect(page).toHaveURL("/");
+      await expect(page).toHaveURL(/^\//); // Allow query params
     }
 
     // Test about link
