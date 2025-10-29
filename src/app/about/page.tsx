@@ -10,7 +10,14 @@ const AboutPage: React.FC = () => {
       <HomeBar />
       <main>
         <h1 className="sr-only">About Austin Hardy</h1>
-        <h2 style={{ margin: "1rem 0", position: "relative", zIndex: 100 }}>
+        <h2
+          style={{
+            margin: "1rem 0",
+            position: "relative",
+            zIndex: 100,
+            paddingTop: "80px", // Clear the fixed navbar
+          }}
+        >
           ABOUT ME
         </h2>
         <div className="spline-container">

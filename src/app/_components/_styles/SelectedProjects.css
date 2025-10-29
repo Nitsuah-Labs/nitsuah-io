@@ -227,7 +227,7 @@
 
 .portfolio-card-image {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 16 / 9; /* Reduce from 1:1 to 16:9 for better proportion */
   position: relative;
   margin-bottom: 0.75rem;
   border-radius: 6px;
