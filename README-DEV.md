@@ -1,6 +1,6 @@
 # Developer quickstart (PowerShell)
 
-This file lists the common commands to run tests, format code, and debug pre-commit issues on Windows (PowerShell).
+This short guide lists the common commands to run tests, format code, and debug pre-commit issues on Windows PowerShell.
 
 ## Prerequisites
 
@@ -10,41 +10,6 @@ This file lists the common commands to run tests, format code, and debug pre-com
 ## Formatting
 
 Format entire workspace (Prettier):
-
-## Developer quickstart (PowerShell)
-
-This file lists the common commands to run tests, format code, and debug pre-commit issues on Windows (PowerShell).
-
-
-## Prerequisites
-
-- Node.js and npm installed (v18+ recommended)
-
-- Run `npm ci` to install dev dependencies (husky, lint-staged, playwright, etc.)
-
-
-## Formatting
-
-Format entire workspace (Prettier):
-
-```powershell
-npm run format
-```
-
-Check formatting only:
-
-# Developer quickstart (PowerShell)
-
-This is a short, focused quickstart for running the common developer commands on Windows PowerShell.
-
-Prerequisites
-
-- Node.js (v18+) and npm installed and available on PATH
-- Run `npm ci` to install dependencies
-
-Formatting
-
-Format the whole repo (Prettier):
 
 ```powershell
 npm run format
@@ -56,7 +21,7 @@ Check formatting only:
 npm run format:check
 ```
 
-Pre-commit helper
+## Pre-commit helper
 
 If a commit fails due to formatting/lint-staged, run this to format and stage changes:
 
@@ -65,7 +30,7 @@ npm run format
 git add -A
 ```
 
-Playwright (visual/e2e) examples
+## Playwright (visual/e2e) examples
 
 Run a focused test with test helpers enabled:
 
@@ -97,7 +62,7 @@ If `npx` is unavailable, use local binaries from `node_modules\.bin` (PowerShell
 .\node_modules\.bin\cross-env NEXT_PUBLIC_TEST_HELPERS=1 .\node_modules\.bin\playwright test
 ```
 
-Visual diffs
+## Visual diffs
 
 - Playwright saves diff artifacts under `test-results/.../compare` when snapshots differ.
 - If a visual change is intentional, update the snapshot baseline and commit.

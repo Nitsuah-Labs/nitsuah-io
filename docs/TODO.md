@@ -8,29 +8,43 @@
 ## HIGH PRIORITY (From FEEDBACK.md)
 
 ### Homepage
+
 - [ ] Fix Spline sizing - too small, should be 100% width extending behind header/footer
 
 ### About Page
+
 - [ ] Fix mobile nav overlap - nav bar overlaps ABOUT ME text on mobile
 
 ### Resume Page
+
 - [ ] Update styling - white background jarring, needs dark mode
+
 - [ ] Add header/footer for consistency
 
 ### Crypto Page
+
 - [ ] Move heading to header/nav bar like About page
 
 ### Projects Page
+
 - [ ] Smaller icons in lower section
+
 - [ ] Better text alignment
+
 - [ ] More spacing/dividers
+
 - [ ] Reorganize by impressiveness
+
 - [ ] Shorten descriptions
 
 ### Labs Section
+
 - [x] Fix white border
+
 - [x] Fix footer positioning
+
 - [x] Standardize header styling
+
 - [ ] Fix wallet connection (Coinbase Wallet and Phantom not prompting)
 
 ---
@@ -38,13 +52,19 @@
 ## TECHNICAL DEBT
 
 ### Dependencies
+
 - [ ] Deduplicate Lit versions (npm ls lit, use npm overrides)
+
 - [ ] Review Dependabot PRs: lint-staged, globals, typescript
 
 ### Web3
+
 - [ ] Mumbai to Amoy testnet migration
+
   - Update wagmi.ts chain config
+
   - Update contract addresses and RPC endpoints
+
   - Test all Web3 functionality
 
 ---

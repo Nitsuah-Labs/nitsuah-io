@@ -7,13 +7,12 @@ html {
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure at least full viewport height */
-  height: 100vh; /* Fixed viewport height */
+  min-height: 100vh; /* let content grow beyond viewport when needed */
   width: 100vw;
   background-color: #181818;
   text-align: center;
   color: white;
-  overflow: hidden; /* Prevent scrolling */
+  overflow-x: hidden; /* only hide horizontal overflow */
   margin: 0;
   padding: 0;
 }
@@ -443,18 +442,23 @@ header {
 }
 
 .spline-container {
-  position: fixed; /* Fix position to allow header/footer overlap */
-  top: 64px; /* Below header (AppBar height) */
-  bottom: 60px; /* Above footer */
-  left: 0;
-  right: 0;
+  position: fixed; /* full-bleed background scene */
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
   display: flex;
   width: 100%;
+  height: 100vh; /* fill viewport */
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden; /* Prevent spline from expanding container */
-  z-index: 1; /* Behind header and footer */
+  z-index: 1; /* Behind header and footer (header/footer use higher z-index) */
+  pointer-events: none; /* ensure interactive layers above capture events */
+}
+
+/* Ensure main content sits above the spline */
+main {
+  position: relative;
+  z-index: 50;
 }
 
 /* Canvas wrapper created around the Spline runtime output. Ensure full coverage. */

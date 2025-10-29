@@ -28,7 +28,7 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-  await go(page, pageInfo.path);
+    await go(page, pageInfo.path);
 
     // Wait for page to be fully loaded
     await page.waitForLoadState("domcontentloaded");

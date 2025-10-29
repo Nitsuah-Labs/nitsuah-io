@@ -57,97 +57,66 @@ export const polygonMumbai = defineChain({
   nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://rpc-mumbai.maticvigil.com"],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: "PolygonScan",
-      url: "https://mumbai.polygonscan.com",
-    },
-  },
-  testnet: true,
-});
-Copilot AI
-8 minutes ago
-Using deprecated Polygon Mumbai testnet. Consider migrating to Polygon Amoy testnet (already included in chains) for better long-term support. Mumbai will eventually be fully deprecated.
+      # FEEDBACK
 
-Copilot uses AI. Check for mistakes.
-@nitsuah	Reply...
-src/app/resume/page.tsx
-    Expert: 4,
-    Master: 5,
-  };
-  return level ? levels[level] || 3 : 3;
-Copilot AI
-8 minutes ago
-The function uses a magic number '3' as default fallback. Consider using a named constant or enum to make the default proficiency level more explicit and maintainable.
+      Home
 
-Suggested change
-  return level ? levels[level] || 3 : 3;
-  const DEFAULT_PROFICIENCY_LEVEL = levels["Advanced"];
-  return level ? levels[level] || DEFAULT_PROFICIENCY_LEVEL : DEFAULT_PROFICIENCY_LEVEL;
-Copilot uses AI. Check for mistakes.
-@nitsuah	Reply...
-src/app/labs/register/page.tsx
-  );
+      - The spline component is now TOO small. It should take up 100% of the width and the height should fall behind the header/nav bar and the footer. Currently it looks like a small box in the middle of the screen.
 
-  const renderInput = () => {
-    if (network !== "Polygon Mumbai Testnet") {
-Copilot AI
-8 minutes ago
-Hardcoded network name string comparison is brittle. Consider using chain ID comparison or a constant to make network detection more reliable and easier to maintain.
+      About me
 
-Copilot uses AI. Check for mistakes.
-@nitsuah	Reply...
-src/app/_components/_styles/labs.css
-.labs-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
+      - The spline component is good here and I like the about text in the header for that page. When the window is smaller the nav bar text can overlap the about text; they should not overlap. Consider moving the about text into the top-right of the bar for smaller windows.
 
-Copilot AI
-8 minutes ago
-Button press animation using transform could interfere with screen readers and keyboard navigation. Consider adding @media (prefers-reduced-motion: reduce) to disable animations for users who prefer reduced motion.
+      Resume
 
-Suggested change
-/* Accessibility: Disable button motion for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .labs-btn,
-  .labs-btn:hover:not(:disabled),
-  .labs-btn:active:not(:disabled) {
-    transition: none !important;
-    transform: none !important;
-  }
-}
-Copilot uses AI. Check for mistakes.
-@nitsuah	Reply...
-tests/README.md
-Comment on lines +110 to +112
-sudo npx playwright install-deps
-```
+      - The resume should match the overall site styling. The white background with black text is jarring compared to the rest of the site. Consider a dark-mode or adjusted color scheme and add header/footer for consistency.
 
-Copilot AI
-8 minutes ago
-Running sudo npx can be a security risk as it downloads and executes packages with elevated privileges. Consider using npx playwright install-deps first, and only use sudo if specifically required by the system.
+      Crypto
 
-Suggested change
-sudo npx playwright install-deps
-```
-npx playwright install-deps
-Note: Only use sudo if you encounter permission errors. Running sudo npx can be a security risk as it downloads and executes packages with elevated privileges.
+      - This page looks good.
 
-Copilot uses AI. Check for mistakes.
-@nitsuah	Reply...
-playwright.config.ts
-  ],
+      Projects
 
-  // Run local dev server before starting tests
-  webServer: {
-Copilot AI
-8 minutes ago
-The webServer configuration will start a new dev server for every test run in CI. Consider using a production build (npm run build && npm start) in CI for faster, more consistent test execution.
+      - Icons in the lower project section should be smaller. Text alignment should be adjusted so descriptions are centered responsively. Increase spacing between rows and consider a dividing line for clarity. Reorder projects by relevance/recency and shorten descriptions where needed.
 
-Suggested change
-  webServer: {
-    command: process.env.CI ? "npm run build && npm start" : "npm run dev",
-Copilot uses AI. Check for mistakes.
+      LABS (labs/)
+
+      - This section needs the most work.
+
+      - The app currently appears inside a white bordered box. Remove that border so the app occupies the full page width.
+
+      - Standardize header/footer on Labs pages for visual unity with the rest of the site.
+
+      - Register: connect wallet flow still seems broken; investigate web3 wallet connection best-practices and wallet injection.
+
+      - Footer: ensure the footer is fixed to the bottom when content is short.
+
+      - Header: add links to other parts of the labs site and match header names when navigating.
+
+      - Landplot: shows 'connect your wallet' with no prompt for Coinbase Wallet or Phantom. Investigate multi-wallet support.
+
+      Example wallet mock used in tests (for reference)
+
+      ```ts
+      await page.addInitScript(() => {
+        (window as any).ethereum = {
+          isMetaMask: true,
+          request: async ({ method }: { method: string }) => {
+            if (method === "eth_requestAccounts") {
+              return ["0x1234567890123456789012345678901234567890"];
+            }
+            if (method === "eth_chainId") {
+              return "0x1"; // Mainnet
+            }
+            return null;
+          },
+          on: () => {},
+          removeListener: () => {},
+        };
+      });
+      ```
+
+      Notes and suggestions
+
+      - Consider extracting the wallet mock into `tests/utils/wallet-mock.ts` to avoid duplication.
+      - Consider migrating from Polygon Mumbai testnet to Polygon Amoy testnet over time.

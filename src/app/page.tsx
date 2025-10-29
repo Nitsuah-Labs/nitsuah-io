@@ -10,9 +10,7 @@ const HomePage: React.FC = () => {
       <HomeBar />
       <main>
         <h1 className="sr-only">Welcome to Nitsuah Labs</h1>
-        <div className="spline-container">
-          <SplineScene />
-        </div>
+        <SplineScene />
       </main>
       <Footer />
     </div>
