@@ -19,9 +19,9 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-desktop.png", {
       fullPage: true,
       timeout: 20000,
-      // Use threshold instead of maxDiffPixels to handle dimension changes
-      // 0.3 = 30% similarity threshold (allows significant layout changes)
-      threshold: 0.3,
+      // Use maxDiffPixelRatio to handle platform-specific rendering differences
+      // Allows up to 10% of pixels to differ (handles font/layout variations between Windows/Linux)
+      maxDiffPixelRatio: 0.1,
     });
   });
 
@@ -40,9 +40,9 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-mobile.png", {
       fullPage: true,
       timeout: 20000,
-      // Use threshold instead of maxDiffPixels to handle dimension changes
-      // 0.3 = 30% similarity threshold (allows significant layout changes)
-      threshold: 0.3,
+      // Use maxDiffPixelRatio to handle platform-specific rendering differences
+      // Allows up to 10% of pixels to differ (handles font/layout variations between Windows/Linux)
+      maxDiffPixelRatio: 0.1,
     });
   });
 
