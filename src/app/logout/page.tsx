@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useDisconnect } from "wagmi";
-import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+import HomeBar from "../_components/_site/Homebar";
 
 const Logout = () => {
   const router = useRouter();

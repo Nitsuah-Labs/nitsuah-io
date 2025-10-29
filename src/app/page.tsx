@@ -2,10 +2,10 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { featuredProjects } from "../lib/data/projects";
 import Footer from "./_components/_site/Footer";
 import HomeBar from "./_components/_site/Homebar";
 import SplineScene from "./_components/_spline/spline-home";
-import { featuredProjects } from "../lib/data/projects";
 
 const HomePage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
