@@ -45,11 +45,15 @@ const LabSubNav: React.FC = () => {
             href={page.href}
             aria-current={isActive ? "page" : undefined}
             style={{
-              color: isActive ? "#f97316" : "rgba(255, 255, 255, 0.7)",
+              color: isActive
+                ? "#fb923c"
+                : page.isWIP
+                  ? "rgba(255, 255, 255, 0.5)"
+                  : "rgba(255, 255, 255, 0.85)",
               textDecoration: "none",
               padding: "0.5rem 0.875rem",
               borderRadius: "6px",
-              background: isActive ? "rgba(249, 115, 22, 0.15)" : "transparent",
+              background: isActive ? "rgba(249, 115, 22, 0.1)" : "transparent",
               border: isActive
                 ? "1px solid rgba(249, 115, 22, 0.4)"
                 : "1px solid transparent",
@@ -57,7 +61,6 @@ const LabSubNav: React.FC = () => {
               fontSize: "0.875rem",
               fontWeight: isActive ? 600 : 400,
               position: "relative",
-              opacity: page.isWIP ? 0.5 : 1,
             }}
             onMouseEnter={(e) => {
               if (!isActive) {
@@ -68,7 +71,9 @@ const LabSubNav: React.FC = () => {
             onMouseLeave={(e) => {
               if (!isActive) {
                 e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.color = "rgba(255, 255, 255, 0.7)";
+                e.currentTarget.style.color = page.isWIP
+                  ? "rgba(255, 255, 255, 0.5)"
+                  : "rgba(255, 255, 255, 0.85)";
               }
             }}
             title={page.isWIP ? `${page.label} (Work in Progress)` : page.label}
