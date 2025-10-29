@@ -7,7 +7,7 @@ test.describe("Homepage Visual Tests", () => {
     // Wait for critical content to be visible (not Spline)
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
-    
+
     // Wait a moment for layout to stabilize (don't wait for Spline)
     await page.waitForTimeout(1000);
 
@@ -16,6 +16,7 @@ test.describe("Homepage Visual Tests", () => {
       fullPage: true,
       animations: "disabled",
       timeout: 20000,
+      mask: [page.locator('[data-testid="spline-container"], canvas')],
     });
   });
 
@@ -32,6 +33,7 @@ test.describe("Homepage Visual Tests", () => {
       fullPage: true,
       animations: "disabled",
       timeout: 20000,
+      mask: [page.locator('[data-testid="spline-container"], canvas')],
     });
   });
 
@@ -70,8 +72,14 @@ test.describe("Homepage Visual Tests", () => {
     await page.goto("/");
 
     // Check key navigation links exist (use .first() to avoid strict mode issues with footer links)
-    await expect(page.getByRole("link", { name: /about/i }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /projects/i }).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /labs/i }).first()).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /about/i }).first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /projects/i }).first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /labs/i }).first()
+    ).toBeVisible();
   });
 });
