@@ -3,6 +3,7 @@
 import React from "react";
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
+import LabSubNav from "../../_components/_labs/LabSubNav";
 import "../../_components/_styles/labs.css";
 import { Connect } from "../../_components/_web3/Connect";
 import { Connected } from "../../_components/_web3/Connected";
@@ -37,6 +38,7 @@ const MintSite: React.FC = () => {
   return (
     <div className="App">
       <LabNav />
+      <LabSubNav />
       <main>
         <h1>MINT PORTAL</h1>
         <div className="form-container">
