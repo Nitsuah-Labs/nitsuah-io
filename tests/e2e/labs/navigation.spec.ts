@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { go } from "../_utils/playwright-helpers";
+import { go } from "../../_utils/playwright-helpers";
 
 test.describe("Navigation Tests", () => {
   test("all main navigation links work", async ({ page }) => {
