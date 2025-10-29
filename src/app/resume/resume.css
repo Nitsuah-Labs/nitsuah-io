@@ -67,13 +67,13 @@
     border-color: #ff8c42 !important;
   }
 
-  .work-item {
+  .work-header {
     background: rgba(255, 255, 255, 0.03) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: #ff8c42 !important;
   }
 
-  .work-item:hover {
-    border-color: #ff8c42 !important;
+  .work-label:hover .work-header {
+    background: rgba(255, 255, 255, 0.06) !important;
   }
 
   .work-position {

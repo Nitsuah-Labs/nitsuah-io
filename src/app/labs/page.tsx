@@ -74,69 +74,78 @@ function renderOutput() {
         </div>
 
         {/* Register Card */}
-        <Link href="/labs/register" style={{ textDecoration: "none" }}>
-          <div className="labs-card">
+        <Link
+          href="/labs/register"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
               <h3 className="labs-card-title">SIGNUP</h3>
             </div>
             <div className="labs-card-body">
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
-                style={{ width: "100%" }}
+                style={{ width: "100%", pointerEvents: "none" }}
               >
                 REGISTER
-              </button>
+              </div>
             </div>
           </div>
         </Link>
 
         {/* Mint Card */}
-        <Link href="/labs/mint" style={{ textDecoration: "none" }}>
-          <div className="labs-card">
+        <Link
+          href="/labs/mint"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
               <h3 className="labs-card-title">MINT</h3>
             </div>
             <div className="labs-card-body">
-              <button
+              <div
                 className="labs-btn labs-btn-success"
-                style={{ width: "100%" }}
+                style={{ width: "100%", pointerEvents: "none" }}
               >
                 LANDPLOT NFT
-              </button>
+              </div>
             </div>
           </div>
         </Link>
 
         {/* Domains Card */}
-        <Link href="/labs/domains" style={{ textDecoration: "none" }}>
-          <div className="labs-card">
+        <Link
+          href="/labs/domains"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
               <h3 className="labs-card-title">DOMAINS</h3>
             </div>
             <div className="labs-card-body">
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
-                style={{ width: "100%" }}
+                style={{ width: "100%", pointerEvents: "none" }}
               >
                 SUBDOMAIN
-              </button>
+              </div>
             </div>
           </div>
         </Link>
 
         {/* Home Card */}
-        <Link href="/" style={{ textDecoration: "none" }}>
-          <div className="labs-card">
+        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
               <h3 className="labs-card-title">EXIT</h3>
             </div>
             <div className="labs-card-body">
-              <button
+              <div
                 className="labs-btn labs-btn-secondary"
-                style={{ width: "100%" }}
+                style={{ width: "100%", pointerEvents: "none" }}
               >
                 GO HOME
-              </button>
+              </div>
             </div>
           </div>
         </Link>
