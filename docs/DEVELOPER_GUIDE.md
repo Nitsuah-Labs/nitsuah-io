@@ -29,14 +29,17 @@ git push
 ## Git Hooks (Optimized)
 
 ### Pre-commit (~3 seconds)
+
 - TypeScript type checking
 - Auto-format staged files
 - Jest unit tests
 
 ### Pre-push (~1 minute)
+
 - Production build only
 
 ### CI (Full Suite)
+
 - Accessibility tests
 - Visual regression tests
 - E2E wallet flows
@@ -55,23 +58,27 @@ git commit --no-verify
 ```
 
 **Safe to skip for:**
+
 - Documentation changes
 - JSON/config tweaks
 - Minor CSS you've manually verified
 
 **NOT safe to skip for:**
+
 - TypeScript changes (will break CI)
 - Component/logic changes (tests will fail)
 
 ## Configuration Files
 
 **Main configs in `config/` directory:**
+
 - `config/jest.config.ts` - Testing
 - `config/tsconfig.json` - TypeScript
 - `config/wagmi.config.ts` - Web3 codegen
 - `config/prettier.config.json` - Formatting
 
 **Root configs:**
+
 - `tsconfig.json` - Editor/Next.js TypeScript
 - `next.config.js` - Next.js build
 - `package.json` - Scripts and dependencies
@@ -88,6 +95,7 @@ npm run dev:wagmi
 ```
 
 **Requires API keys in `.env.local`:**
+
 ```bash
 ETHERSCAN_API_KEY=your_key_here
 # OR
@@ -107,19 +115,23 @@ npm run test:a11y:quick           # Accessibility tests
 ## Troubleshooting
 
 ### "npx: command not found"
+
 Node.js not in PATH. Fix:
+
 ```powershell
 # PowerShell (permanent)
 [Environment]::SetEnvironmentVariable("PATH", "C:\Program Files\nodejs;$env:PATH", "User")
 ```
 
 ### Pre-commit too slow?
+
 Use quick commit script:
 ```bash
 npm run commit:safe
 ```
 
 ### CI failing but local passed?
+
 Expected! Local is lightweight. Check CI logs for specifics.
 
 ## Performance Targets
@@ -133,6 +145,7 @@ Expected! Local is lightweight. Check CI logs for specifics.
 ## Environment Variables
 
 **Local (`.env.local`):**
+
 ```bash
 # Optional - for wagmi generation
 ETHERSCAN_API_KEY=your_key
