@@ -1,107 +1,45 @@
-# nitsuah-io TODO
+# TODO
 
 **Updated:** October 28, 2025
-**Branch:** phase-3
 
----
-
-## HIGH PRIORITY (From FEEDBACK.md)
+## UI/UX Fixes (See FEEDBACK.md for details)
 
 ### Homepage
+- [ ] Fix Spline sizing - should be 100% width behind header/footer
 
-- [ ] Fix Spline sizing - too small, should be 100% width extending behind header/footer
+### About
+- [ ] Fix mobile nav overlap with ABOUT ME text
 
-### About Page
-
-- [ ] Fix mobile nav overlap - nav bar overlaps ABOUT ME text on mobile
-
-### Resume Page
-
-- [ ] Update styling - white background jarring, needs dark mode
-
+### Resume
+- [ ] Add dark mode styling (white background jarring)
 - [ ] Add header/footer for consistency
 
-### Crypto Page
+### Crypto
+- [ ] Move heading to header/nav bar (like About page)
 
-- [ ] Move heading to header/nav bar like About page
-
-### Projects Page
-
+### Projects
 - [ ] Smaller icons in lower section
-
-- [ ] Better text alignment
-
-- [ ] More spacing/dividers
-
+- [ ] Better text alignment & spacing
 - [ ] Reorganize by impressiveness
-
 - [ ] Shorten descriptions
 
-### Labs Section
+### Labs
+- [ ] Fix wallet connection (Coinbase/Phantom not prompting)
 
-- [x] Fix white border
-
-- [x] Fix footer positioning
-
-- [x] Standardize header styling
-
-- [ ] Fix wallet connection (Coinbase Wallet and Phantom not prompting)
-
----
-
-## TECHNICAL DEBT
+## Technical
 
 ### Dependencies
-
-- [ ] Deduplicate Lit versions (npm ls lit, use npm overrides)
-
-- [ ] Review Dependabot PRs: lint-staged, globals, typescript
+- [ ] Remove unused: `lokijs`, `pino-pretty`, `@react-native-async-storage/async-storage` (see UNUSED_DEPENDENCIES.md)
+- [ ] Security: Run `npm audit` and fix moderate+ vulnerabilities
+- [ ] Review Dependabot PRs
 
 ### Web3
-
-- [ ] Mumbai to Amoy testnet migration
-
+- [ ] Mumbai → Amoy testnet migration
   - Update wagmi.ts chain config
-
-  - Update contract addresses and RPC endpoints
-
+  - Update contract addresses/RPC endpoints
   - Test all Web3 functionality
 
----
-
-## PRODUCTION READINESS
-
-- [ ] Run full Playwright test suite (all 13 pages)
-- [ ] Lighthouse scores >=90 on all metrics
-- [ ] Security scan (npm audit)
-- [ ] CSP headers validation
-- [ ] Cross-browser testing
-- [ ] Mobile testing
-
----
-
-## Recent Fixes (Phase 3)
-
-- Labs white border fixed (CSS viewport width, flexbox)
-- Labs footer positioning (flex: 1 on main)
-- Labs header styling (AppBar background to #181818)
-- Projects page color contrast (WCAG 2.1 AA)
-- Test timeouts fixed (60s for Spline pages)
-- About page landmark violation resolved
-- WagmiConfig to WagmiProvider upgrade (wagmi v2)
-- Git cleanup (200+ playwright-report files removed)
-- Pre-commit/pre-push hooks upgraded to match CI exactly
-  - Pre-commit: typecheck + format:check + jest + lint-staged
-  - Pre-push: accessibility tests + production build
-- TODO.md cleaned up and moved out of .gitignore
-
----
-
-## Key Commands
-
-npm run dev              # Start dev server
-npm run build            # Production build
-npm run validate         # Typecheck + format check
-npm test                 # Jest tests
-npm run test:a11y:quick  # Quick accessibility tests
-npm run format           # Auto-format all files
+## Production Readiness
+- [ ] Lighthouse scores ≥90 on all pages
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile testing (iOS Safari, Chrome Android)
