@@ -141,7 +141,7 @@ const RegisterSite = () => {
               onClick={() => {
                 /* focus the Connect area */
                 const el = document.querySelector(
-                  "[aria-label='Connect to MetaMask wallet'], [aria-label^='Connect to']",
+                  "[aria-label='Connect to MetaMask wallet'], [aria-label^='Connect to']"
                 );
                 if (el) (el as HTMLElement).focus();
               }}

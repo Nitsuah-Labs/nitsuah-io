@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { go } from "../_utils/playwright-helpers";
 
 test.describe("Resume Page Visual Tests", () => {
   test("should render resume page correctly on desktop", async ({ page }) => {
