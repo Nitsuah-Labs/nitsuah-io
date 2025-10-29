@@ -15,7 +15,7 @@ test.describe("Projects Page Visual Tests", () => {
     const spline = page.locator('[data-testid="spline-container"], canvas');
     await spline
       .first()
-      .waitFor({ state: 'visible', timeout: 15000 })
+      .waitFor({ state: "visible", timeout: 15000 })
       .catch(() => {});
 
     // Take screenshot with increased timeout after a brief settle
