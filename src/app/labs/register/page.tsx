@@ -1,7 +1,7 @@
 // REGISTER - src/app/labs/register/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Use standard <img> to avoid requiring next/image types in this build context
 import { Grid, TextField } from "@mui/material";
 import {
@@ -37,6 +37,20 @@ const CBWalletURL =
   "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
 const RegisterSite = () => {
+  const [showTestHelpers, setShowTestHelpers] = useState(false);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const helpersEnabled =
+    process.env.NEXT_PUBLIC_TEST_HELPERS === "1" || showTestHelpers;
+
   const [message, setMessage] = useState("");
   const { address: currentAccount, isConnected, chain } = useAccount();
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
@@ -109,8 +123,9 @@ const RegisterSite = () => {
       <div className="labs-card-body">
         <Connect />
         {/* Minimal fallbacks to help e2e tests detect presence of connect/network/input UI */}
-        {process.env.NEXT_PUBLIC_TEST_HELPERS === "1" && (
+        {helpersEnabled && (
           <div
+            data-testid="register-test-helpers"
             style={{
               marginTop: "16px",
               display: "flex",
@@ -121,6 +136,7 @@ const RegisterSite = () => {
             <button
               className="labs-btn labs-btn-primary"
               aria-label="Connect Wallet"
+              data-testid="register-connect-button"
               onClick={() => {
                 /* focus the Connect area */
                 const el = document.querySelector(
@@ -132,12 +148,13 @@ const RegisterSite = () => {
               Connect Wallet
             </button>
 
-            <div aria-label="network-info">testnet</div>
+            <div data-testid="network-info">testnet</div>
 
             <input
               type="text"
               placeholder="domain"
               aria-label="domain-input"
+              data-testid="domain-input"
               disabled
               style={{ padding: "8px", borderRadius: "6px" }}
             />

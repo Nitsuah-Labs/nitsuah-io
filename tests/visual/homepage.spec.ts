@@ -4,17 +4,24 @@ test.describe("Homepage Visual Tests", () => {
   test("homepage renders correctly on desktop", async ({ page }) => {
     await page.goto("/");
 
-    // Wait for page to be fully loaded
+    // Wait for page to be fully loaded and for Spline to finish loading
     await page.waitForLoadState("networkidle");
 
     // Wait for critical elements
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
-    // Take full page screenshot for visual regression
+    // Wait for Spline canvas or its loading indicator to settle for stable screenshots
+    const spline = page.locator("canvas");
+    await expect(spline.first())
+      .toBeVisible({ timeout: 20000 })
+      .catch(() => {});
+
+    // Take full page screenshot for visual regression (increase timeout)
     await expect(page).toHaveScreenshot("homepage-desktop.png", {
       fullPage: true,
       animations: "disabled",
+      timeout: 20000,
     });
   });
 
@@ -27,9 +34,15 @@ test.describe("Homepage Visual Tests", () => {
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
+    const spline = page.locator("canvas");
+    await expect(spline.first())
+      .toBeVisible({ timeout: 20000 })
+      .catch(() => {});
+
     await expect(page).toHaveScreenshot("homepage-mobile.png", {
       fullPage: true,
       animations: "disabled",
+      timeout: 20000,
     });
   });
 

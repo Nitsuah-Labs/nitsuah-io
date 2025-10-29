@@ -77,7 +77,13 @@ export default defineConfig({
   webServer: {
     command: "npm run dev",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
+    // If test helpers are enabled, force Playwright to start its own dev server
+    reuseExistingServer:
+      process.env.NEXT_PUBLIC_TEST_HELPERS === "1" ? false : !process.env.CI,
     timeout: 120 * 1000,
+    // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
+    env: {
+      NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
+    },
   },
 });

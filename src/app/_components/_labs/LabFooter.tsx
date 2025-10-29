@@ -27,8 +27,9 @@ const LabFooter: React.FC = () => {
           href={TWITTER_LINK}
           target="_blank"
           rel="noreferrer"
+          aria-label={`Follow @${TWITTER_HANDLE.replace("labs", "")} on Twitter`}
         >
-          <p>{`@${TWITTER_HANDLE}`}</p>
+          <p>{`Twitter — @${TWITTER_HANDLE.replace("labs", "")}`}</p>
         </a>
       </div>
     </footer>

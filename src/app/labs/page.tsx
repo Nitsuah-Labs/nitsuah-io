@@ -98,7 +98,7 @@ function renderOutput() {
                 className="purp-wallet"
                 aria-label="Manage subdomains"
               >
-                <h4>SUBDOMAIN</h4>
+                <h2>SUBDOMAIN</h2>
               </Link>
             </td>
           </tr>
@@ -109,7 +109,7 @@ function renderOutput() {
                 className="eth-wallet"
                 aria-label="Return to homepage"
               >
-                <h4>GO HOME</h4>
+                <h2>GO HOME</h2>
               </Link>
             </td>
           </tr>

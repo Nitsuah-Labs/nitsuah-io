@@ -12,6 +12,14 @@ echo "1/4 Checking types..."
 npm run typecheck || exit 1
 
 echo "2/4 Checking formatting..."
+echo "2a/4 Auto-format staged files (lint-staged)..."
+npx lint-staged || {
+	echo "npx lint-staged failed or unavailable; falling back to project formatter..."
+	npm run format || exit 1
+	git add -A
+}
+
+echo "2b/4 Checking formatting..."
 npm run format:check || exit 1
 
 echo "3/4 Running Jest tests..."

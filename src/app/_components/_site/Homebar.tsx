@@ -3,7 +3,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -63,7 +62,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Link href="/" legacyBehavior>
             <a
               style={{ textDecoration: "none", color: "inherit" }}
-              aria-label="nitsuah labs home"
+              aria-label="Nitsuah home"
             >
               <Typography
                 variant="h6"
@@ -105,28 +104,32 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              <Link href="/">
-                <Button
-                  component="span"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  HOME
-                </Button>
-              </Link>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  component={Link}
-                  href={`/${page}`}
-                  sx={{
-                    my: 2,
+              <Link href="/" legacyBehavior>
+                <a
+                  aria-label="Navigate to home"
+                  style={{
                     color: "white",
                     display: "block",
-                    textTransform: "none",
+                    padding: "12px 16px",
                   }}
                 >
-                  {page}
-                </Button>
+                  HOME
+                </a>
+              </Link>
+              {pages.map((page) => (
+                <Link key={page} href={`/${page}`} legacyBehavior>
+                  <a
+                    aria-label={`Navigate to ${page}`}
+                    style={{
+                      color: "white",
+                      display: "block",
+                      padding: "12px 16px",
+                      textTransform: "none",
+                    }}
+                  >
+                    {page}
+                  </a>
+                </Link>
               ))}
             </StyledMenu>
           </Box>
@@ -134,19 +137,19 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           {/* Desktop navigation (md and up) */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                component={Link}
-                href={`/${page}`}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                  textTransform: "none",
-                }}
-              >
-                {page}
-              </Button>
+              <Link key={page} href={`/${page}`} legacyBehavior>
+                <a
+                  aria-label={`Navigate to ${page}`}
+                  style={{
+                    color: "white",
+                    margin: "0 12px",
+                    textDecoration: "none",
+                    textTransform: "none",
+                  }}
+                >
+                  {page}
+                </a>
+              </Link>
             ))}
           </Box>
         </Toolbar>

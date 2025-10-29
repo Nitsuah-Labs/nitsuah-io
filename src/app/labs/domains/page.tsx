@@ -247,7 +247,7 @@ const DomainSite = () => {
   const renderNotConnectedContainer = () => (
     <div className="labs-card">
       <div className="labs-card-header">
-        <h3 className="labs-card-title">STEP 1: Setup a Wallet app</h3>
+        <h2 className="labs-card-title">STEP 1: Setup a Wallet app</h2>
       </div>
       <div className="labs-card-body" style={{ textAlign: "center" }}>
         <button
@@ -266,7 +266,7 @@ const DomainSite = () => {
       </div>
 
       <div className="labs-card-header labs-spacing-lg">
-        <h3 className="labs-card-title">STEP 2: Connect a Wallet</h3>
+        <h2 className="labs-card-title">STEP 2: Connect a Wallet</h2>
       </div>
       <div className="labs-card-body" style={{ textAlign: "center" }}>
         <Connect />
@@ -501,7 +501,9 @@ const DomainSite = () => {
   return (
     <div className="App">
       <LabNav />
+      {/* Ensure a top-level H1 exists for correct heading order */}
       <main>
+        <h1 className="sr-only">Domains - Labs</h1>
         <h1>SUB-DOMAIN PORTAL</h1>
         <div className="form-container">
           <div className="mint-container">
