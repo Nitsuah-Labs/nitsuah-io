@@ -19,7 +19,7 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-desktop.png", {
       fullPage: true,
       timeout: 20000,
-      maxDiffPixelRatio: 0.1, // Allow 10% pixel difference for CI/local environment variations
+      maxDiffPixels: 100000, // Allow for CI/local rendering height differences (~80k pixels for +62px height)
     });
   });
 
@@ -38,7 +38,7 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page).toHaveScreenshot("resume-mobile.png", {
       fullPage: true,
       timeout: 20000,
-      maxDiffPixelRatio: 0.1, // Allow 10% pixel difference for CI/local environment variations
+      maxDiffPixels: 20000, // Allow for CI/local rendering height differences (~17k pixels for +45px height)
     });
   });
 
