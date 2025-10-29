@@ -67,28 +67,68 @@ export function MintNFT() {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <input
         onChange={(e) => setTokenId(e.target.value)}
         placeholder="Token ID (optional)"
         value={tokenId}
+        aria-label="Token ID for NFT minting"
+        style={{
+          padding: "12px",
+          borderRadius: "8px",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          color: "white",
+          fontSize: "16px",
+        }}
       />
       <button
+        className="labs-btn labs-btn-primary labs-btn-large"
         disabled={!simulation?.request || isWriting || isConfirming}
         onClick={handleMint}
+        aria-busy={isWriting || isConfirming}
+        aria-label="Mint NFT"
       >
         {isWriting ? "Minting..." : isConfirming ? "Confirming..." : "Mint"}
       </button>
       {isConfirmed && (
-        <div>
-          Successfully minted your NFT!
-          <div>
-            <a href={`https://etherscan.io/tx/${data}`}>Etherscan</a>
-          </div>
+        <div
+          role="status"
+          aria-live="polite"
+          style={{
+            padding: "16px",
+            backgroundColor: "rgba(16, 185, 129, 0.1)",
+            border: "1px solid rgba(16, 185, 129, 0.3)",
+            borderRadius: "8px",
+            color: "#10b981",
+          }}
+        >
+          <p style={{ margin: "0 0 8px 0" }}>Successfully minted your NFT!</p>
+          <a
+            href={`https://etherscan.io/tx/${data}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="labs-btn labs-btn-secondary labs-btn-small"
+            aria-label="View transaction on Etherscan"
+          >
+            View on Etherscan
+          </a>
         </div>
       )}
       {(isWriteError || isConfirmError) && (
-        <div>Error: {(writeError || confirmError)?.message}</div>
+        <div
+          role="alert"
+          aria-live="assertive"
+          style={{
+            padding: "16px",
+            backgroundColor: "rgba(239, 68, 68, 0.1)",
+            border: "1px solid rgba(239, 68, 68, 0.3)",
+            borderRadius: "8px",
+            color: "#ef4444",
+          }}
+        >
+          Error: {(writeError || confirmError)?.message}
+        </div>
       )}
     </div>
   );

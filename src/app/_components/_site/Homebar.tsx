@@ -3,7 +3,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -30,14 +29,13 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
     {...props}
     sx={{
       "& .MuiPaper-root": {
-        backgroundColor: "darkgrey", // Set the background color here
+        backgroundColor: "darkgrey",
       },
     }}
   />
 );
 
-const pages = ["about", "crypto", "projects", "labs"];
-const settings = ["Profile", "Logout"];
+const pages = ["about", "resume", "crypto", "projects", "labs"];
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -53,13 +51,21 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)" }}
+      component="header"
+      role="banner"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/" legacyBehavior>
-            <a style={{ textDecoration: "none", color: "inherit" }}>
+            <a
+              style={{ textDecoration: "none", color: "inherit" }}
+              aria-label="Nitsuah home"
+            >
               <Typography
-                variant="h1"
+                variant="h6"
                 noWrap
                 component="span"
                 sx={{
@@ -82,7 +88,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="open navigation menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -96,32 +102,34 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               keepMounted
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
-              <Link href="/">
-                <Button
-                  component="span"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  HOME
-                </Button>
-              </Link>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  component={Link}
-                  href={`/${page}`}
-                  sx={{
-                    my: 2,
+              <Link href="/" legacyBehavior>
+                <a
+                  aria-label="Navigate to home"
+                  style={{
                     color: "white",
                     display: "block",
-                    textTransform: "none",
+                    padding: "12px 16px",
                   }}
                 >
-                  {page}
-                </Button>
+                  HOME
+                </a>
+              </Link>
+              {pages.map((page) => (
+                <Link key={page} href={`/${page}`} legacyBehavior>
+                  <a
+                    aria-label={`Navigate to ${page}`}
+                    style={{
+                      color: "white",
+                      display: "block",
+                      padding: "12px 16px",
+                      textTransform: "none",
+                    }}
+                  >
+                    {page}
+                  </a>
+                </Link>
               ))}
             </StyledMenu>
           </Box>
@@ -129,38 +137,20 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           {/* Desktop navigation (md and up) */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                component={Link}
-                href={`/${page}`}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                  textTransform: "none",
-                }}
-              >
-                {page}
-              </Button>
+              <Link key={page} href={`/${page}`} legacyBehavior>
+                <a
+                  aria-label={`Navigate to ${page}`}
+                  style={{
+                    color: "white",
+                    margin: "0 12px",
+                    textDecoration: "none",
+                    textTransform: "none",
+                  }}
+                >
+                  {page}
+                </a>
+              </Link>
             ))}
-          </Box>
-
-          {/* Profile and Logout buttons as links */}
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Link href="/profile">
-              <Button
-                component="span"
-                color="inherit"
-                sx={{ mr: 2, color: "white" }}
-              >
-                {settings[0]}
-              </Button>
-            </Link>
-            <Link href="/logout">
-              <Button component="span" color="inherit" sx={{ color: "white" }}>
-                {settings[1]}
-              </Button>
-            </Link>
           </Box>
         </Toolbar>
       </Container>

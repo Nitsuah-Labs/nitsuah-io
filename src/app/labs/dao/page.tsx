@@ -13,19 +13,38 @@ import { Connected } from "../../_components/_web3/Connected";
 const DaoSite = () => {
   return (
     <div className="App">
-      <div className="container">
+      <LabNav />
+      <main>
+        <h1>DAO HERE!</h1>
         <div className="form-container">
-          <LabNav />
-          <h2>DAO HERE!</h2>
-          <div className="connect-wallet-container">
-            <Connect />
+          <div className="labs-card labs-spacing-md">
+            <div className="labs-card-header">
+              <h2 className="labs-card-title">Connect Wallet</h2>
+            </div>
+            <div className="labs-card-body">
+              <Connect />
+            </div>
           </div>
+
           <Connected>
-            <p>DAO UI goes here — connected wallet detected.</p>
+            <div className="labs-card labs-spacing-md">
+              <div className="labs-card-body">
+                <p>DAO UI goes here — connected wallet detected.</p>
+                <p
+                  style={{
+                    opacity: 0.7,
+                    fontSize: "0.9rem",
+                    marginTop: "10px",
+                  }}
+                >
+                  This feature is under development.
+                </p>
+              </div>
+            </div>
           </Connected>
         </div>
-        <LabFooter />
-      </div>
+      </main>
+      <LabFooter />
     </div>
   );
 };

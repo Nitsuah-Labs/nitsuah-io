@@ -1,38 +1,42 @@
 // src/components/Footer.tsx
 "use client";
 
-import React from "react";
 import Image from "next/image";
-import "../_styles/global.css";
+import React from "react";
 import cat from "../../../../public/images/cat.png";
+import "../_styles/global.css";
 
 // CONSTANTS
 const TWITTER_HANDLE = "nitsuahlabs";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const Footer: React.FC = () => {
-  const handleImageClick = () => {
-    window.open("https://www.linkedin.com/in/austinjhardy", "");
-  };
-
   return (
-    <div className="footer-container" onClick={handleImageClick}>
-      <Image
-        alt="arf"
-        className="twitter-logo"
-        src={cat}
-        width={40}
-        height={40}
-      />
+    <footer className="footer-container">
+      <a
+        href="https://www.linkedin.com/in/austinjhardy"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Visit Austin Hardy's LinkedIn profile"
+      >
+        <Image
+          alt="Cat avatar icon for Austin Hardy"
+          className="twitter-logo"
+          src={cat}
+          width={40}
+          height={40}
+        />
+      </a>
       <a
         className="footer-text"
         href={TWITTER_LINK}
         target="_blank"
         rel="noreferrer"
+        aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
       >
-        <p>{`@${TWITTER_HANDLE}`}</p>
+        {`@${TWITTER_HANDLE}`}
       </a>
-    </div>
+    </footer>
   );
 };
 

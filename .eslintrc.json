@@ -7,9 +7,17 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
+  "ignorePatterns": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "tests/**",
+    "playwright.config.ts"
+  ],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
+      "excludedFiles": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "tests/**", "playwright.config.ts"],
       "parserOptions": {
         "project": "./tsconfig.json"
       }

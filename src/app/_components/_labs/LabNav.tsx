@@ -1,18 +1,18 @@
 // src/components/_labs/LabNav.tsx
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import "../_styles/labs.css";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import React from "react";
+import "../_styles/labs.css";
 
 // Replace empty interface with object type
 type LabNavProps = object;
@@ -56,7 +56,7 @@ const LabNav: React.FC<LabNavProps> = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "red" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#181818" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/labs/" passHref legacyBehavior>

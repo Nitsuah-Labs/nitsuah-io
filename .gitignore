@@ -9,6 +9,8 @@
 # testing
 
 /coverage
+/test-results
+/playwright-report
 
 # next.js
 
@@ -22,10 +24,9 @@
 # misc
 
 .DS_Store
-\*.pem
+*.pem
 dist
 dist-ssr
-TODO.md
 .vscode/
 
 # debug
@@ -50,3 +51,4 @@ yarn-error.log*
 \*.tsbuildinfo
 tsconfig.tsbuildinfo
 next-env.d.ts
+# (visual snapshots should be committed so CI can compare baselines)
