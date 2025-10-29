@@ -1,6 +1,7 @@
 // LABS - src/app/labs/page.tsx
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 // LAB STYLES
 import LabFooter from "../_components/_labs/LabFooter";
@@ -14,111 +15,151 @@ import polygonLogo from "../_components/_web3/_assets/polygonlogo.png";
 
 function renderOutput() {
   return (
-    <>
-      <table>
-        <thead></thead>
-        <tbody>
-          <tr>
-            <th scope="col">
-              <div className="h4">NETWORK</div>
-            </th>
-            <td scope="row">
-              <div className="mumbai-wallet">
-                <h2>
-                  <Image
-                    className="logo"
-                    src={polygonLogo}
-                    alt="Polygon logo"
-                  />
-                  MUMBAI
-                </h2>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">
-              <div className="h4">FUNDS</div>
-            </th>
-            <td scope="row">
+    <main style={{ padding: "80px 20px 20px" }}>
+      <h1 className="sr-only">Labs - Web3 Experiments</h1>
+
+      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h2>
+        <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.1rem" }}>
+          Polygon Mumbai Testnet Experiments
+        </p>
+      </div>
+
+      <div
+        className="labs-grid labs-grid-2"
+        style={{ maxWidth: "900px", margin: "0 auto" }}
+      >
+        {/* Network Info Card */}
+        <div className="labs-card">
+          <div className="labs-card-header">
+            <h3 className="labs-card-title">
+              <Image
+                className="logo"
+                src={polygonLogo}
+                alt="Polygon logo"
+                style={{ display: "inline", marginRight: "10px" }}
+              />
+              NETWORK
+            </h3>
+          </div>
+          <div className="labs-card-body">
+            <p>Mumbai Testnet</p>
+          </div>
+        </div>
+
+        {/* Faucet Card */}
+        <div className="labs-card">
+          <div className="labs-card-header">
+            <h3 className="labs-card-title">
+              <Image
+                className="logo"
+                src={mumbai}
+                alt="Mumbai icon"
+                style={{ display: "inline", marginRight: "10px" }}
+              />
+              FUNDS
+            </h3>
+          </div>
+          <div className="labs-card-body">
+            <a
+              href="https://wiki.polygon.technology/docs/develop/tools/matic-faucet/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="labs-btn labs-btn-primary"
+              aria-label="Get test MATIC from Polygon faucet"
+            >
+              GET MATIC
+            </a>
+          </div>
+        </div>
+
+        {/* Register Card */}
+        <Link
+          href="/labs/register"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">SIGNUP</h3>
+            </div>
+            <div className="labs-card-body">
               <div
-                className="purp-wallet"
-                onClick={() =>
-                  window.open(
-                    "https://wiki.polygon.technology/docs/develop/tools/matic-faucet/",
-                  )
-                }
+                className="labs-btn labs-btn-primary"
+                style={{ width: "100%", pointerEvents: "none" }}
               >
-                <h4>
-                  <Image className="logo" src={mumbai} alt="Polygon logo" />
-                  FAUCET
-                </h4>
+                REGISTER
               </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">
-              <div className="h4">SIGNUP</div>
-            </th>
-            <td>
+            </div>
+          </div>
+        </Link>
+
+        {/* Mint Card */}
+        <Link
+          href="/labs/mint"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">MINT</h3>
+            </div>
+            <div className="labs-card-body">
               <div
-                className="purp-wallet"
-                onClick={() => window.open("/labs/register", "_self")}
+                className="labs-btn labs-btn-success"
+                style={{ width: "100%", pointerEvents: "none" }}
               >
-                <h4>REGISTER</h4>
+                LANDPLOT NFT
               </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">
-              <div className="h4">MINT</div>
-            </th>
-            <td>
+            </div>
+          </div>
+        </Link>
+
+        {/* Domains Card */}
+        <Link
+          href="/labs/domains"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <div className="labs-card" style={{ cursor: "pointer" }}>
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">DOMAINS</h3>
+            </div>
+            <div className="labs-card-body">
               <div
-                className="purp-wallet"
-                onClick={() => window.open("/labs/mint", "_self")}
+                className="labs-btn labs-btn-primary"
+                style={{ width: "100%", pointerEvents: "none" }}
               >
-                <h4>LANDPLOT</h4>
+                SUBDOMAIN
               </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="col">
-              <div className="h4">DOMAINS</div>
-            </th>
-            <td>
+            </div>
+          </div>
+        </Link>
+
+        {/* Home Card */}
+        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <div className="labs-card" style={{ cursor: "pointer" }}>
+            <div className="labs-card-header">
+              <h3 className="labs-card-title">EXIT</h3>
+            </div>
+            <div className="labs-card-body">
               <div
-                className="purp-wallet"
-                onClick={() => window.open("/labs/domains", "_self")}
+                className="labs-btn labs-btn-secondary"
+                style={{ width: "100%", pointerEvents: "none" }}
               >
-                <h4>SUBDOMAIN</h4>
+                GO HOME
               </div>
-            </td>
-          </tr>
-          <tr>
-            <th>
-              <div
-                className="eth-wallet"
-                onClick={() => window.open("/", "_self")}
-              >
-                <h4>GO HOME</h4>
-              </div>
-            </th>
-          </tr>
-        </tbody>
-        <tfoot></tfoot>
-      </table>
-    </>
+            </div>
+          </div>
+        </Link>
+      </div>
+    </main>
   );
 }
 
 const LabHome = () => {
   return (
     <div className="App">
-      <div>
-        <LabNav />
-        {renderOutput()}
-        <LabFooter />
-      </div>
+      <LabNav />
+      {renderOutput()}
+      <LabFooter />
     </div>
   );
 };

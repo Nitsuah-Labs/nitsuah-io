@@ -2,20 +2,37 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as React from "react";
-import { WagmiConfig } from "wagmi";
+import { WagmiProvider } from "wagmi";
 
-import { config } from "../wagmi";
+// Import a client-only getter for config so WalletConnect is only created on the client
+import { getWagmiConfig } from "../wagmi";
 
-const queryClient = new QueryClient();
+// Create singleton instances to prevent multiple initializations
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  const [clientConfig, setClientConfig] = React.useState<any | null>(null);
+
+  React.useEffect(() => {
+    setMounted(true);
+    // Only create the Wagmi config on the client
+    const cfg = getWagmiConfig();
+    setClientConfig(cfg);
+  }, []);
+
+  if (!mounted || !clientConfig) return null;
+
   return (
-    <WagmiConfig config={config}>
-      <QueryClientProvider client={queryClient}>
-        {mounted && children}
-      </QueryClientProvider>
-    </WagmiConfig>
+    <WagmiProvider config={clientConfig}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </WagmiProvider>
   );
 }

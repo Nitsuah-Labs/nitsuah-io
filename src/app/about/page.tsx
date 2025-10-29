@@ -1,23 +1,30 @@
 // ABOUT - src/app/pages/about.tsx
 import React from "react";
-import HomeBar from "../_components/_site/Homebar";
 import Footer from "../_components/_site/Footer";
+import HomeBar from "../_components/_site/Homebar";
 import SplineScene from "../_components/_spline/spline-about";
 
 const AboutPage: React.FC = () => {
   return (
     <div className="App">
-      <div className="header">
-        <HomeBar />
-        <h2>ABOUT ME</h2>
-      </div>
-      <div className="spline-container">
-        <SplineScene />
-        <h4>May take some time to load, thanks for your patience!</h4>
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      <HomeBar />
+      <main>
+        <h1 className="sr-only">About Austin Hardy</h1>
+        <h2
+          style={{
+            margin: "1rem 0",
+            position: "relative",
+            zIndex: 100,
+            paddingTop: "80px", // Clear the fixed navbar
+          }}
+        >
+          ABOUT ME
+        </h2>
+        <div className="spline-container">
+          <SplineScene />
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 };

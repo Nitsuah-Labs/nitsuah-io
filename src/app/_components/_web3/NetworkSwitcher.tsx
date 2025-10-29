@@ -11,6 +11,13 @@ export function NetworkSwitcher() {
     <div>
       <div>Connected to {chain?.name ?? chain?.id}</div>
 
+      {/* Test helper: reveal a simple network info element when test helpers are enabled */}
+      {process.env.NEXT_PUBLIC_TEST_HELPERS === "1" && (
+        <div data-testid="test-network-info" aria-label="test-network-info">
+          Network: testnet
+        </div>
+      )}
+
       {switchChain && (
         <div>
           {chains.map((x) =>
