@@ -141,7 +141,7 @@ const RegisterSite = () => {
               onClick={() => {
                 /* focus the Connect area */
                 const el = document.querySelector(
-                  "[data-testid^='connector-'], [aria-label^='Connect to']"
+                  "[data-testid^='connector-'], [aria-label^='Connect to']",
                 );
                 if (el) (el as HTMLElement).focus();
               }}
