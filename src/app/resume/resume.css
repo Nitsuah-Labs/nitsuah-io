@@ -3,13 +3,194 @@
 .resume-container {
   max-width: 850px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 5rem 1.5rem 2rem; /* Add top padding for fixed header */
   background: #fff;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
   color: #222;
   line-height: 1.6;
+  min-height: 100vh;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .resume-container {
+    background: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+  .resume-name {
+    color: #fff !important;
+  }
+
+  .resume-label {
+    color: #b0b0b0 !important;
+  }
+
+  .resume-summary p {
+    color: #d0d0d0 !important;
+  }
+
+  .section-title {
+    color: #ff8c42 !important;
+    border-bottom-color: #333 !important;
+  }
+
+  .resume-summary h3 {
+    color: #ff8c42 !important;
+  }
+
+  .contact-item {
+    color: #d0d0d0 !important;
+  }
+
+  .contact-link {
+    color: #6ba4ff !important;
+  }
+
+  .contact-link:hover {
+    color: #8ab9ff !important;
+  }
+
+  .profile-link {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e0e0e0 !important;
+  }
+
+  .profile-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ff8c42 !important;
+  }
+
+  .work-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .work-item:hover {
+    border-color: #ff8c42 !important;
+  }
+
+  .work-position {
+    color: #fff !important;
+  }
+
+  .work-company {
+    color: #b0b0b0 !important;
+  }
+
+  .work-company a {
+    color: #6ba4ff !important;
+  }
+
+  .work-company a:hover {
+    color: #8ab9ff !important;
+  }
+
+  .work-date {
+    color: #888 !important;
+  }
+
+  .work-summary {
+    color: #d0d0d0 !important;
+  }
+
+  .work-highlights li {
+    color: #d0d0d0 !important;
+  }
+
+  .work-highlights li::marker {
+    color: #ff8c42 !important;
+  }
+
+  .skill-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .skill-item:hover {
+    border-color: #ff8c42 !important;
+  }
+
+  .skill-name {
+    color: #fff !important;
+  }
+
+  .skill-level {
+    color: #ff8c42 !important;
+  }
+
+  .skill-bar {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .skill-bar-fill {
+    background: linear-gradient(90deg, #ff8c42 0%, #ff6b1a 100%) !important;
+  }
+
+  .skill-keywords {
+    color: #999 !important;
+  }
+
+  .education-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .education-item:hover {
+    border-color: #ff8c42 !important;
+  }
+
+  .education-degree {
+    color: #fff !important;
+  }
+
+  .education-institution {
+    color: #b0b0b0 !important;
+  }
+
+  .education-institution a {
+    color: #6ba4ff !important;
+  }
+
+  .education-institution a:hover {
+    color: #8ab9ff !important;
+  }
+
+  .education-date,
+  .education-score {
+    color: #888 !important;
+  }
+
+  .language-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .language-name {
+    color: #fff !important;
+  }
+
+  .language-fluency {
+    color: #ff8c42 !important;
+  }
+
+  .projects-link p {
+    color: #d0d0d0 !important;
+  }
+
+  .projects-link-anchor {
+    color: #6ba4ff !important;
+  }
+
+  .projects-link-anchor:hover {
+    color: #8ab9ff !important;
+  }
 }
 
 .resume-content {
