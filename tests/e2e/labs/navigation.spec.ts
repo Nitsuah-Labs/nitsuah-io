@@ -48,6 +48,9 @@ test.describe("Navigation Tests", () => {
       .first();
     const mintLink = page.getByRole("link", { name: /mint|nft/i }).first();
 
+    // Wait for at least one link to be visible
+    await expect(registerLink.or(mintLink)).toBeVisible({ timeout: 5000 });
+
     // At least one lab link should be visible
     const hasRegister = await registerLink.isVisible().catch(() => false);
     const hasMint = await mintLink.isVisible().catch(() => false);
