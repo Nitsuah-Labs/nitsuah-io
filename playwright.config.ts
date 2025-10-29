@@ -15,14 +15,14 @@ export default defineConfig({
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("./tests/global-setup"),
 
-  // Maximum time one test can run - reduced from 30s to 15s
-  timeout: 15 * 1000,
+  // Maximum time one test can run - increased for visual tests with Spline
+  timeout: 30 * 1000,
 
   // Test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0, // Reduced from 2 to 1
-  workers: process.env.CI ? 1 : 2, // Limit workers to reduce memory issues
+  retries: process.env.CI ? 1 : 0,
+  workers: process.env.CI ? 1 : 2,
 
   // Reporter configuration - simplified for speed
   reporter: "list",

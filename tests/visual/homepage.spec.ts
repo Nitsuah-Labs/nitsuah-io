@@ -87,9 +87,9 @@ test.describe("Homepage Visual Tests", () => {
   test("homepage navigation links are clickable", async ({ page }) => {
     await page.goto("/");
 
-    // Check key navigation links exist
-    await expect(page.getByRole("link", { name: /about/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /projects/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /labs/i })).toBeVisible();
+    // Check key navigation links exist (use .first() to avoid strict mode issues with footer links)
+    await expect(page.getByRole("link", { name: /about/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /projects/i }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /labs/i }).first()).toBeVisible();
   });
 });
