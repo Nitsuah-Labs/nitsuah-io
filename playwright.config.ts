@@ -42,6 +42,10 @@ export default defineConfig({
     video: "retain-on-failure",
   },
 
+  // Use platform-agnostic snapshot paths to avoid Windows/Linux baseline conflicts
+  snapshotPathTemplate:
+    "{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}",
+
   // Configure projects for different browsers and viewports
   // REDUCED: Only run Chromium for speed - add others back for full testing
   projects: [
