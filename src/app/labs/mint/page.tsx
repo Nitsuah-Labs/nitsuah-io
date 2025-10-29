@@ -61,7 +61,7 @@ const MintSite: React.FC = () => {
                 data-testid="mint-connect-button"
                 onClick={() => {
                   const el = document.querySelector(
-                    "[aria-label='Connect to MetaMask wallet'], [aria-label^='Connect to']",
+                    "[data-testid^='connector-'], [aria-label^='Connect to']"
                   );
                   if (el) (el as HTMLElement).focus();
                 }}

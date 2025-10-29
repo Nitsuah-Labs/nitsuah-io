@@ -16,7 +16,10 @@ export function Connect() {
   }, [isConnected]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    <div
+      aria-label="Connect to wallet"
+      style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+    >
       {isConnected && (
         <button
           onClick={() => disconnect()}
@@ -28,7 +31,11 @@ export function Connect() {
       )}
 
       {cs
-        .filter((x) => x.ready && x.id !== connector?.id)
+        // Show all connectors to surface options like Coinbase Wallet even when
+        // the injected provider isn't marked `ready`. Disable connectors that
+        // aren't ready but still render them so users know about available
+        // options and tests can target them deterministically.
+        .filter((x) => x.id !== connector?.id)
         .map((x) => (
           <button
             key={x.id}
@@ -38,11 +45,14 @@ export function Connect() {
             }}
             aria-busy={pendingId === x.id}
             aria-label={`Connect to ${x.name} wallet`}
+            data-testid={`connector-${x.id}`}
             className="labs-btn labs-btn-primary"
-            disabled={pendingId === x.id}
+            disabled={!x.ready || pendingId === x.id}
+            title={!x.ready ? `${x.name} not available` : undefined}
           >
             {x.name}
             {pendingId === x.id && " (connecting...)"}
+            {!x.ready && " (not available)"}
           </button>
         ))}
 
