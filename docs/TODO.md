@@ -1,45 +1,21 @@
 # TODO
 
-**Updated:** October 28, 2025
+**Updated:** October 29, 2025
 
-## UI/UX Fixes (See FEEDBACK.md for details)
+## Phase 6 Active Tasks
 
-### Homepage
-- [ ] Fix Spline sizing - should be 100% width behind header/footer
+All Phase 6 objectives have been moved to [PHASE-6.md](./PHASE-6.md).
 
-### About
-- [ ] Fix mobile nav overlap with ABOUT ME text
+This file will be used to track in-progress tasks during Phase 6 development.
 
-### Resume
-- [ ] Add dark mode styling (white background jarring)
-- [ ] Add header/footer for consistency
+---
 
-### Crypto
-- [ ] Move heading to header/nav bar (like About page)
+## Current Sprint
 
-### Projects
-- [ ] Smaller icons in lower section
-- [ ] Better text alignment & spacing
-- [ ] Reorganize by impressiveness
-- [ ] Shorten descriptions
+_No active tasks - Phase 6 planning complete, awaiting implementation start._
 
-### Labs
-- [ ] Fix wallet connection (Coinbase/Phantom not prompting)
+---
 
-## Technical
+## Backlog
 
-### Dependencies
-- [ ] Remove unused: `lokijs`, `pino-pretty`, `@react-native-async-storage/async-storage` (see UNUSED_DEPENDENCIES.md)
-- [ ] Security: Run `npm audit` and fix moderate+ vulnerabilities
-- [ ] Review Dependabot PRs
-
-### Web3
-- [ ] Mumbai → Amoy testnet migration
-  - Update wagmi.ts chain config
-  - Update contract addresses/RPC endpoints
-  - Test all Web3 functionality
-
-## Production Readiness
-- [ ] Lighthouse scores ≥90 on all pages
-- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
-- [ ] Mobile testing (iOS Safari, Chrome Android)
+_Items will be added here as Phase 6 progresses._
