@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 /**
  * Accessibility tests for all pages using axe-core
@@ -27,7 +28,7 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-    await page.goto(pageInfo.path);
+  await go(page, pageInfo.path);
 
     // Wait for page to be fully loaded
     await page.waitForLoadState("domcontentloaded");

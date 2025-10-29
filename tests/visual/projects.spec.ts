@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 test.describe("Projects Page Visual Tests", () => {
   test("projects page renders correctly", async ({ page }) => {
-    await page.goto("/projects");
+  await go(page, "/projects");
 
     await page.waitForLoadState("networkidle");
 
@@ -26,7 +27,7 @@ test.describe("Projects Page Visual Tests", () => {
   });
 
   test("projects page shows featured repositories", async ({ page }) => {
-    await page.goto("/projects");
+  await go(page, "/projects");
 
     // Look for project cards or grid
     const projectSection = page
@@ -36,7 +37,7 @@ test.describe("Projects Page Visual Tests", () => {
   });
 
   test("project cards have icons and links", async ({ page }) => {
-    await page.goto("/projects");
+  await go(page, "/projects");
 
     // Check that links exist (GitHub, live demos, etc.)
     const links = page

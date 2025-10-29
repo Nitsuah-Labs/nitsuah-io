@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 test.describe("Navigation Tests", () => {
   test("all main navigation links work", async ({ page }) => {
-    await page.goto("/");
+  await go(page, "/");
 
     // Test homepage link
     const homeLink = page.getByRole("link", { name: /home|nitsuah/i }).first();
@@ -12,7 +13,7 @@ test.describe("Navigation Tests", () => {
     }
 
     // Test about link
-    await page.goto("/");
+  await go(page, "/");
     const aboutLink = page.getByRole("link", { name: /about/i }).first();
     if (await aboutLink.isVisible()) {
       await aboutLink.click();
@@ -20,7 +21,7 @@ test.describe("Navigation Tests", () => {
     }
 
     // Test projects link
-    await page.goto("/");
+  await go(page, "/");
     const projectsLink = page.getByRole("link", { name: /projects/i }).first();
     if (await projectsLink.isVisible()) {
       await projectsLink.click();
@@ -28,7 +29,7 @@ test.describe("Navigation Tests", () => {
     }
 
     // Test labs link
-    await page.goto("/");
+  await go(page, "/");
     const labsLink = page.getByRole("link", { name: /labs/i }).first();
     if (await labsLink.isVisible()) {
       await labsLink.click();
@@ -37,7 +38,7 @@ test.describe("Navigation Tests", () => {
   });
 
   test("labs hub navigation works", async ({ page }) => {
-    await page.goto("/labs");
+  await go(page, "/labs");
 
     await page.waitForLoadState("networkidle");
 
@@ -55,7 +56,7 @@ test.describe("Navigation Tests", () => {
   });
 
   test("footer links are present", async ({ page }) => {
-    await page.goto("/");
+  await go(page, "/");
 
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
@@ -67,7 +68,7 @@ test.describe("Navigation Tests", () => {
   });
 
   test("404 page exists", async ({ page }) => {
-    const response = await page.goto("/this-page-does-not-exist");
+  const response = await page.goto("/this-page-does-not-exist");
 
     // Should return 404 status
     expect(response?.status()).toBe(404);
