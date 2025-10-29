@@ -21,6 +21,9 @@ test.describe("Resume Page Accessibility Tests", () => {
 
   test("should have proper heading hierarchy", async ({ page }) => {
     // navigation and networkidle are handled in beforeEach
+    // Wait for resume content to load
+    await page.locator("h1").waitFor({ timeout: 5000 });
+    
     // Check h1 exists and is unique
     const h1Count = await page.locator("h1").count();
     expect(h1Count).toBe(1);
