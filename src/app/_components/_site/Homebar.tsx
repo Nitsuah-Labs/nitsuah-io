@@ -53,8 +53,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
     setAnchorElNav(null);
   };
 
-  const handleLogoClick = () => {
-    setShowAltName((prev) => !prev);
+  const handleLogoHover = () => {
+    setShowAltName(true);
   };
 
   return (
@@ -69,11 +69,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Link href="/" legacyBehavior>
             <a
               style={{ textDecoration: "none", color: "inherit" }}
-              aria-label="Nitsuah home"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLogoClick();
-              }}
+              aria-label="Nitsuah home - Navigate to homepage"
+              onMouseEnter={handleLogoHover}
             >
               <Typography
                 variant="h6"
@@ -123,7 +120,13 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             </a>
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+            }}
+          >
             <IconButton
               size="large"
               aria-label="open navigation menu"
@@ -134,6 +137,65 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             >
               <MenuIcon />
             </IconButton>
+            <Link href="/" legacyBehavior>
+              <a
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  marginLeft: "16px",
+                }}
+                aria-label="Nitsuah home - Navigate to homepage"
+                onMouseEnter={handleLogoHover}
+              >
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="span"
+                  sx={{
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    color: "inherit",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "relative",
+                      height: "24px",
+                      width: "120px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        transition: "opacity 0.3s ease, transform 0.3s ease",
+                        opacity: showAltName ? 0 : 1,
+                        transform: showAltName
+                          ? "translateY(-10px)"
+                          : "translateY(0)",
+                        position: showAltName ? "absolute" : "relative",
+                      }}
+                    >
+                      NITSUAH
+                    </span>
+                    <span
+                      style={{
+                        transition: "opacity 0.3s ease, transform 0.3s ease",
+                        opacity: showAltName ? 1 : 0,
+                        transform: showAltName
+                          ? "translateY(0)"
+                          : "translateY(10px)",
+                        position: showAltName ? "relative" : "absolute",
+                        left: 0,
+                      }}
+                    >
+                      AUSTIN H.
+                    </span>
+                  </div>
+                </Typography>
+              </a>
+            </Link>
             <StyledMenu
               id="menu-appbar"
               anchorEl={anchorElNav}
