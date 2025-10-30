@@ -8,11 +8,11 @@
 
 ## Active Feedback
 
-- [ ] **Homepage Scroll Experience** - Transform homepage into a single continuous scroll. The hero section ("Hi, I'm Austin Hardy") should act as an overlay that peels away as you scroll, revealing the Featured Projects section underneath. Further scrolling should then load the Spline 3D scene. Currently feels disjointed with separate sections.
+- [x] **Homepage Scroll Experience** - ✅ COMPLETED - Homepage now has continuous scroll with hero overlay that peels away, revealing projects underneath, then Spline scene loads further down.
 
-- [ ] **Logo Animation Behavior** - The "nitsuah" ↔ "austin h." animation should trigger on hover and remain in that state. Clicking the logo should navigate to the homepage.
+- [x] **Logo Animation Behavior** - ✅ COMPLETED - Logo switches to "AUSTIN H." on hover and stays that way. Clicking navigates to homepage.
 
-- [ ] **Page Bottom Spacing** - Add spacing/padding at the end of short pages (crypto, labs) so the footer doesn't feel jammed against the viewport bottom. Apply globally to all pages if needed.
+- [x] **Page Bottom Spacing** - ✅ COMPLETED - Added 120px bottom padding to crypto and labs pages for better footer spacing.
 
 ### Layout & Styling
 
