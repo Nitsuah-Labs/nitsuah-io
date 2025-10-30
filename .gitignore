@@ -10,7 +10,6 @@
 
 /coverage
 /test-results
-/playwright-report
 
 # next.js
 
@@ -44,7 +43,6 @@ yarn-error.log*
 *.local
 
 # vercel
-
 .vercel
 
 # typescript
@@ -52,4 +50,3 @@ yarn-error.log*
 \*.tsbuildinfo
 tsconfig.tsbuildinfo
 next-env.d.ts
-# (visual snapshots should be committed so CI can compare baselines)
