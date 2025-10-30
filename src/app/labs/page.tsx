@@ -54,7 +54,7 @@ function renderOutput() {
           </div>
           <div className="labs-card-body">
             <p
-              style={{ fontSize: "18px", fontWeight: "600", color: "#a855f7" }}
+              style={{ fontSize: "18px", fontWeight: "600", color: "#c084fc" }}
             >
               Mumbai Testnet
             </p>
