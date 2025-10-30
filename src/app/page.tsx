@@ -14,7 +14,8 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      if (window.scrollY > 300) {
+      // Show Spline after scrolling past projects section (~2000px)
+      if (window.scrollY > 2000) {
         setShowSpline(true);
       }
     };
@@ -23,13 +24,18 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Calculate hero opacity based on scroll (fade out 0-800px)
+  const heroOpacity = Math.max(0, 1 - scrollY / 800);
+  // Calculate hero scale (slight zoom effect as it fades)
+  const heroScale = 1 + (scrollY / 800) * 0.1;
+
   return (
     <div className="App">
       <HomeBar />
       <main>
         <h1 className="sr-only">Welcome to Nitsuah Labs</h1>
 
-        {/* Hero Section */}
+        {/* Hero Section - Fixed overlay that fades as you scroll */}
         <section
           style={{
             minHeight: "100vh",
@@ -39,7 +45,15 @@ const HomePage: React.FC = () => {
             alignItems: "center",
             padding: "2rem",
             background: "linear-gradient(135deg, #1a1a1a 0%, #2d1a3a 100%)",
-            position: "relative",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: heroOpacity > 0.01 ? 5 : -1, // Hide when fully scrolled
+            opacity: heroOpacity,
+            transform: `scale(${heroScale})`,
+            transition: "z-index 0s linear 0.3s", // Delay z-index change
+            pointerEvents: heroOpacity < 0.5 ? "none" : "auto", // Disable clicks when fading out
           }}
         >
           <div
@@ -183,12 +197,15 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* Featured Projects Section */}
+        {/* Featured Projects Section - Starts below hero, revealed as you scroll */}
         <section
           style={{
             padding: "4rem 2rem",
+            paddingTop: "100vh", // Start after hero viewport
             background: "#1a1a1a",
             minHeight: "100vh",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
@@ -338,14 +355,16 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* Spline Scene (Revealed on Scroll) */}
+        {/* Spline Scene (Loads after scrolling past projects ~2000px) */}
         {showSpline && (
           <section
             style={{
               minHeight: "100vh",
               position: "relative",
-              opacity: Math.min((scrollY - 300) / 500, 1),
+              opacity: Math.min((scrollY - 2000) / 500, 1),
               transition: "opacity 0.3s ease",
+              background: "#0a0a0a",
+              paddingTop: "2rem",
             }}
           >
             <div
