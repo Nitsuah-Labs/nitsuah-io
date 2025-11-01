@@ -8,6 +8,7 @@
 - [ ] Network auto-switch detection
 - [ ] Projects page filters
 - [ ] Mumbai → Amoy migration
+- [ ] FIX Playwright visual tests to better handle CI/local environment differences - use Docker?
 
 ---
 
