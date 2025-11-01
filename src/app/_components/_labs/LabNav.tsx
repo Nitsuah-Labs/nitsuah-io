@@ -199,6 +199,7 @@ const LabNav: React.FC<LabNavProps> = () => {
             <Button
               onClick={handleHomeClick}
               title="Click once for Labs home, double-click for main home"
+              aria-label="Navigate home (single click for Labs, double click for main site)"
               sx={{
                 background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
                 color: "#000",
