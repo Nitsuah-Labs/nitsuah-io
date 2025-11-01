@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useAccount, useBalance, useDisconnect, useEnsName } from "wagmi";
+import { getExplorerLink } from "../../lib/constants/networks";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import { Connect } from "../_components/_web3/Connect";
@@ -27,18 +28,8 @@ const ProfilePage: React.FC = () => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
-  const getExplorerLink = () => {
-    if (!address || !chain) return "";
-    const explorers: Record<number, string> = {
-      1: "https://etherscan.io",
-      137: "https://polygonscan.com",
-      11155111: "https://sepolia.etherscan.io",
-      80002: "https://amoy.polygonscan.com",
-      80001: "https://mumbai.polygonscan.com",
-    };
-    const baseUrl = explorers[chain.id] || "";
-    return baseUrl ? `${baseUrl}/address/${address}` : "";
-  };
+  const explorerLink =
+    address && chain ? getExplorerLink(address, chain.id) : null;
 
   return (
     <div
@@ -282,9 +273,9 @@ const ProfilePage: React.FC = () => {
                   flexWrap: "wrap",
                 }}
               >
-                {getExplorerLink() && (
+                {explorerLink && (
                   <a
-                    href={getExplorerLink()}
+                    href={explorerLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{

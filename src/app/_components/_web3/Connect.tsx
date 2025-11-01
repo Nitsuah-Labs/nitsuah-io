@@ -3,6 +3,7 @@
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { WALLET_CONNECT_ID } from "../../../lib/constants/wallets";
 import {
   CoinbaseWalletIcon,
   InjectedIcon,
@@ -130,7 +131,7 @@ export function Connect() {
         .filter((x) => x.id !== connector?.id)
         .map((x) => {
           const IconComponent = walletIcons[x.id] || InjectedIcon;
-          const isReady = x.ready || x.id === "walletConnect"; // WalletConnect works without extension
+          const isReady = x.ready || x.id === WALLET_CONNECT_ID;
           const isPending = pendingId === x.id;
 
           return (

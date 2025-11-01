@@ -1,59 +1,15 @@
 // PROJECTS - src/app/projects/pages.tsx
 "use client";
 import { Grid } from "@mui/material";
-import type { Project } from "../../lib/data/projects";
 import { allProjects } from "../../lib/data/projects";
+import { categorizeProjects } from "../../lib/utils/projectCategories";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import "../_components/_styles/SelectedProjects.css";
 import "../_components/_styles/global.css";
 
 // Categorize projects
-const categorizedProjects: Record<string, Project[]> = {
-  "Featured Projects": allProjects.filter((p) => p.featured),
-  "Websites & Apps": allProjects.filter(
-    (p) =>
-      !p.featured &&
-      (p.tags.includes("nextjs") ||
-        p.tags.includes("portfolio") ||
-        p.tags.includes("typescript") ||
-        p.id === "nitsuah-io" ||
-        (!p.tags.some((tag) =>
-          [
-            "web3",
-            "blockchain",
-            "dao",
-            "nft",
-            "ai",
-            "ml",
-            "3d",
-            "spline",
-            "blender",
-          ].includes(tag),
-        ) &&
-          !p.tags.includes("github"))),
-  ),
-  "Web3 & Blockchain": allProjects.filter(
-    (p) =>
-      !p.featured &&
-      (p.tags.includes("web3") ||
-        p.tags.includes("blockchain") ||
-        p.tags.includes("dao") ||
-        p.tags.includes("nft") ||
-        p.tags.includes("ethereum") ||
-        p.tags.includes("solana")),
-  ),
-  "AI & Machine Learning": allProjects.filter(
-    (p) => !p.featured && (p.tags.includes("ai") || p.tags.includes("ml")),
-  ),
-  "3D Graphics & Design": allProjects.filter(
-    (p) =>
-      !p.featured &&
-      (p.tags.includes("3d") ||
-        p.tags.includes("spline") ||
-        p.tags.includes("blender")),
-  ),
-};
+const categorizedProjects = categorizeProjects(allProjects);
 
 const Projects = () => {
   return (

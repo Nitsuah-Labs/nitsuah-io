@@ -135,9 +135,10 @@ function renderOutput() {
               </p>
               <button
                 className="labs-btn labs-btn-primary"
+                disabled={true}
+                aria-disabled="true"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
                 }}
               >
