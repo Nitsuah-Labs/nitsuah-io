@@ -243,7 +243,8 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 - [ ] Day 5: Debug Register component
 
 ### Week 4: Polish & Testing (Priorities 4-5)
-- [ ] Day 1-2: Toast notifications
+- [ ] Day 1: Security vulnerabilities audit and fixes
+- [ ] Day 2: Toast notifications
 - [ ] Day 3: Loading states
 - [ ] Day 4-5: E2E tests and documentation
 
@@ -264,19 +265,30 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 
 ## Technical Debt to Address
 
-1. **Mumbai Deprecation**: Mumbai testnet is deprecated, migrate to Polygon Amoy
+1. **Dependency Warnings**: Optional peer dependencies causing webpack warnings
+   - ✅ FIXED: Added webpack fallbacks in `next.config.js` to suppress false warnings
+   - These packages (`@react-native-async-storage`, `pino-pretty`, etc.) are React Native/Node.js deps
+   - Not needed in browser, warnings are harmless but now silenced
+
+2. **Security Vulnerabilities**: 21 vulnerabilities (18 low, 3 moderate)
+   - [ ] Run `npm audit fix` to auto-fix compatible issues
+   - [ ] Review remaining vulnerabilities for manual updates
+   - [ ] Document any vulnerabilities that can't be fixed (waiting on upstream)
+   - [ ] Consider `npm audit fix --force` if safe (test thoroughly)
+
+3. **Mumbai Deprecation**: Mumbai testnet is deprecated, migrate to Polygon Amoy
    - Update all contract references
    - Update documentation
    - Update faucet links
 
-2. **Wagmi Codegen**: Ensure `npm run wagmi` runs in CI without API key
+4. **Wagmi Codegen**: Ensure `npm run wagmi` runs in CI without API key
    - Already handled with env check, but document this
 
-3. **Wallet Logos**: Need to add wallet logo assets
+5. **Wallet Logos**: Need to add wallet logo assets
    - MetaMask, Coinbase Wallet, WalletConnect, Safe logos
    - Store in `src/app/_components/_web3/_assets/wallets/`
 
-4. **Type Safety**: MintNFT has `any` casts to avoid deep type instantiation
+6. **Type Safety**: MintNFT has `any` casts to avoid deep type instantiation
    - Investigate proper typing for wagmi hooks
 
 ---
