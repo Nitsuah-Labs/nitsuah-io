@@ -136,12 +136,10 @@ Example: `feat: add dark mode toggle to navigation`
 
 ## Areas That Need Help
 
-- 🧪 **Testing**: More component tests welcome
-- ♿ **Accessibility**: Audit and improvements
-- 🎨 **Design**: Visual improvements
-- 📱 **Mobile**: Mobile experience optimization
-- 🚀 **Performance**: Load time and optimization
-- 📝 **Documentation**: README improvements
+- 🧪 **Testing**: E2E tests for wallet flows
+- 🔗 **Web3**: Contract debugging, Mumbai → Amoy migration
+- 📱 **Mobile**: Wallet connection optimization
+- 🚀 **Performance**: Bundle size optimization
 
 ## Questions?
 
