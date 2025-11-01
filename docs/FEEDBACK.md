@@ -33,13 +33,20 @@
 ### Features
 
 - [ ] **Projects Filters** - Add categories/filters based on tags
-- [ ] **Lab Wallet Connection UX** - Simplify to modern wallet selector pattern, see web3 section below
 
-### Web3
+### Web3 (See PHASE_7.3_WEB3_IMPROVEMENTS.md for detailed plan)
 
-- [ ] **Wallet Flow** - Auto-detect/redirect to install if wallet missing (this should be a natural part of the connect wallet flow already i think we need to dig into the wallet features further to understand the expected best practice - learn about the packages we use, web3/wagmi/etc. whatever were using and deep dive on those.)
+**Phase 7.3 items moved to dedicated planning doc:**
 
-- [ ] **/profile Page** - Display wallet info on profile and labs header
+- [ ] **Wallet Connection UX** - Modern wallet selector with logos, auto-detect, better error handling
+- [ ] **Wallet Flow** - Auto-detect/redirect to install if wallet missing
+- [ ] **Network Switching** - Auto-detect wrong network and prompt switch
+- [ ] **Profile Page** - Display wallet info (address, ENS, balance, network)
+- [ ] **Labs Header** - Show connected wallet status
+- [ ] **Contract Debugging** - Test MintNFT and Register flows locally
+- [ ] **Local Dev Setup** - Hardhat/Anvil for testing contracts
+- [ ] **Toast Notifications** - Better feedback for wallet actions
+- [ ] **Mumbai → Amoy Migration** - Update deprecated testnet
 
 ---
 
