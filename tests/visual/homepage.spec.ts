@@ -23,7 +23,7 @@ test.describe("Homepage Visual Tests", () => {
       animations: "disabled",
       timeout: 20000,
       mask: [page.locator('[data-testid="spline-container"], canvas')],
-      maxDiffPixelRatio: 0.15, // Increased to 15% to account for color contrast improvements and CI/local environment variations
+      maxDiffPixels: 5000, // Allow up to 5000 pixels difference to handle CI/local environment height variations (10px height diff across 1280px width)
     });
   });
 
