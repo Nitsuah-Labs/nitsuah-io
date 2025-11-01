@@ -12,19 +12,7 @@ _No active tasks. This file tracks in-progress development work._
 
 ## Backlog
 
-### ✅ Completed
-
-- ✅ Dependency Cleanup - Removed unused packages (lokijs, pino-pretty, encoding, @react-native-async-storage/async-storage)
-- ✅ Phase 7 UX Improvements - All feedback items from FEEDBACK.md completed
-  - ✅ Homepage scroll reveal redesign
-  - ✅ Navigation logo updates
-  - ✅ About page loader timing
-  - ✅ Resume page improvements (layout, buttons, icons)
-  - ✅ Crypto page footer spacing
-  - ✅ Projects page reorganization
-  - ✅ Labs page button fixes
-  - ✅ Labs navigation theming
-- ✅ Phase 7.2 - Projects blog and clients consistent styling
+### In Progress
 
 ### Security
 
