@@ -234,10 +234,37 @@ export default function ResumePage() {
                     rel="noopener noreferrer"
                     className="profile-link"
                     aria-label={`${profile.network} profile`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      padding: "0.5rem 1rem",
+                      background: "rgba(249, 115, 22, 0.1)",
+                      border: "1px solid rgba(249, 115, 22, 0.3)",
+                      borderRadius: "6px",
+                      color: "#f97316",
+                      textDecoration: "none",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(249, 115, 22, 0.2)";
+                      e.currentTarget.style.borderColor =
+                        "rgba(249, 115, 22, 0.6)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(249, 115, 22, 0.1)";
+                      e.currentTarget.style.borderColor =
+                        "rgba(249, 115, 22, 0.3)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
                   >
                     <i
                       className={`fa ${getNetworkIcon(profile.network)}`}
                       aria-hidden="true"
+                      style={{ fontSize: "1.2rem" }}
                     ></i>
                     <span>{profile.network}</span>
                   </a>
@@ -411,12 +438,39 @@ export default function ResumePage() {
             <h3 className="section-title">
               <i className="fa fa-rocket" aria-hidden="true"></i> Projects
             </h3>
-            <p>
-              View my portfolio of selected projects at{" "}
-              <a href="/projects" className="projects-link-anchor">
-                nitsuah.io/projects
-              </a>
+            <p style={{ marginBottom: "1rem" }}>
+              View my portfolio of selected projects
             </p>
+            <a
+              href="/projects"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                color: "#1a1a1a",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "8px",
+                textDecoration: "none",
+                fontWeight: "600",
+                border: "2px solid #000",
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 6px 16px rgba(249, 115, 22, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(249, 115, 22, 0.3)";
+              }}
+            >
+              <i className="fa fa-folder-open" aria-hidden="true"></i>
+              Visit Portfolio
+            </a>
           </section>
         </div>
       </main>
