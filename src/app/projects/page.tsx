@@ -1,12 +1,62 @@
 // PROJECTS - src/app/projects/pages.tsx
 "use client";
 import { Grid } from "@mui/material";
+import Image from "next/image";
 import { allProjects } from "../../lib/data/projects";
 import { categorizeProjects } from "../../lib/utils/projectCategories";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import "../_components/_styles/SelectedProjects.css";
 import "../_components/_styles/global.css";
+
+// Import project images
+import dev from "../crypto/_assets/dao.png";
+import nitsuah from "./_assets/NITSUAH.png";
+import aiarf from "./_assets/arf-ai.png";
+import arfg from "./_assets/arf-guild.gif";
+import arf from "./_assets/arf.gif";
+import blendeth from "./_assets/blend-eth.gif";
+import buildspace from "./_assets/buildspace.png";
+import cat from "./_assets/cat.png";
+import darkmoon from "./_assets/darkmoon.gif";
+import polyens from "./_assets/ens.gif";
+import hedge from "./_assets/hedge-ref.png";
+import ngx from "./_assets/ng-game.png";
+import nwb from "./_assets/nights+weekends.png";
+import solApp from "./_assets/sol-dapp.gif";
+import solPay from "./_assets/sol-store.gif";
+import solana from "./_assets/solana-logo.png";
+import spline from "./_assets/spline.gif";
+import web3intro from "./_assets/web3-intro.png";
+import web3mint from "./_assets/web3-mint.png";
+
+// Map project IDs to their images
+const projectImages: Record<string, any> = {
+  github: cat,
+  labs: nitsuah,
+  darkmoon: darkmoon,
+  spline3d: spline,
+  nextgen: ngx,
+  clients: cat,
+  buildspace: buildspace,
+  "ens-nft": polyens,
+  "nft-store": solPay,
+  "nft-game": hedge,
+  "nights-weekends": nwb,
+  "eth-dapp": web3mint,
+  "sol-dapp": solApp,
+  blender: blendeth,
+  autogpt: arf,
+  "eth-core": web3intro,
+  devdao: dev,
+  "sol-core": solana,
+  paint3d: arfg,
+  imagen: aiarf,
+  kryptos: cat,
+  gcp: cat,
+  stash: cat,
+  "nitsuah-io": nitsuah,
+};
 
 // Categorize projects
 const categorizedProjects = categorizeProjects(allProjects);
@@ -61,164 +111,194 @@ const Projects = () => {
                   {category}
                 </h2>
                 <Grid container spacing={3} rowSpacing={6}>
-                  {projects.map((project) => (
-                    <Grid key={project.id} item xs={12} sm={6} md={4}>
-                      <div
-                        className="portfolio-card"
-                        style={{
-                          background: "rgba(20, 20, 20, 0.8)",
-                          border: "2px solid rgba(249, 115, 22, 0.3)",
-                          borderRadius: "12px",
-                          overflow: "hidden",
-                          transition: "all 0.3s ease",
-                          cursor: "pointer",
-                          height: "100%",
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                        onClick={() =>
-                          project.externalLink
-                            ? window.open(project.externalLink, "_blank")
-                            : project.demo
-                              ? window.open(project.demo, "_blank")
-                              : null
-                        }
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor =
-                            "rgba(249, 115, 22, 0.8)";
-                          e.currentTarget.style.transform = "translateY(-4px)";
-                          e.currentTarget.style.boxShadow =
-                            "0 8px 24px rgba(249, 115, 22, 0.2)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor =
-                            "rgba(249, 115, 22, 0.3)";
-                          e.currentTarget.style.transform = "translateY(0)";
-                          e.currentTarget.style.boxShadow = "none";
-                        }}
-                      >
-                        <div style={{ padding: "1.5rem", flex: 1 }}>
-                          <h3
-                            style={{
-                              fontSize: "1.5rem",
-                              fontWeight: "600",
-                              color: "#fff",
-                              marginBottom: "0.75rem",
-                            }}
-                          >
-                            {project.title}
-                          </h3>
-                          <p
-                            style={{
-                              color: "rgba(255, 255, 255, 0.7)",
-                              marginBottom: "1rem",
-                              fontSize: "0.95rem",
-                            }}
-                          >
-                            {project.description}
-                          </p>
+                  {projects.map((project) => {
+                    const image = projectImages[project.id] || cat;
+                    return (
+                      <Grid key={project.id} item xs={12} sm={6} md={4}>
+                        <div
+                          className="portfolio-card"
+                          style={{
+                            background: "rgba(20, 20, 20, 0.8)",
+                            border: "2px solid rgba(249, 115, 22, 0.3)",
+                            borderRadius: "12px",
+                            overflow: "hidden",
+                            transition: "all 0.3s ease",
+                            cursor: "pointer",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                          onClick={() =>
+                            project.externalLink
+                              ? window.open(project.externalLink, "_blank")
+                              : project.demo
+                                ? window.open(project.demo, "_blank")
+                                : null
+                          }
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor =
+                              "rgba(249, 115, 22, 0.8)";
+                            e.currentTarget.style.transform =
+                              "translateY(-4px)";
+                            e.currentTarget.style.boxShadow =
+                              "0 8px 24px rgba(249, 115, 22, 0.2)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor =
+                              "rgba(249, 115, 22, 0.3)";
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow = "none";
+                          }}
+                        >
+                          {/* Project Image */}
                           <div
                             style={{
-                              display: "flex",
-                              flexWrap: "wrap",
-                              gap: "0.5rem",
-                              marginBottom: "1rem",
+                              position: "relative",
+                              height: "200px",
+                              width: "100%",
+                              borderBottom: "1px solid rgba(249, 115, 22, 0.2)",
                             }}
                           >
-                            {project.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                style={{
-                                  padding: "0.25rem 0.75rem",
-                                  background: "rgba(249, 115, 22, 0.2)",
-                                  border: "1px solid rgba(249, 115, 22, 0.4)",
-                                  borderRadius: "4px",
-                                  fontSize: "0.85rem",
-                                  color: "#f97316",
-                                }}
-                              >
-                                {tag}
-                              </span>
-                            ))}
+                            <Image
+                              alt={project.title}
+                              src={image}
+                              fill
+                              style={{ objectFit: "cover" }}
+                              unoptimized={
+                                image === darkmoon ||
+                                image === spline ||
+                                image === polyens ||
+                                image === solPay ||
+                                image === solApp ||
+                                image === blendeth ||
+                                image === arf ||
+                                image === arfg
+                              }
+                            />
                           </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              gap: "0.75rem",
-                              marginTop: "auto",
-                            }}
-                          >
-                            {project.github && (
-                              <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                style={{
-                                  padding: "0.5rem 1rem",
-                                  background:
-                                    "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                                  color: "#000",
-                                  border: "2px solid #000",
-                                  borderRadius: "6px",
-                                  fontWeight: "600",
-                                  fontSize: "0.9rem",
-                                  textDecoration: "none",
-                                  transition: "all 0.3s ease",
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.transform =
-                                    "translateY(-2px)";
-                                  e.currentTarget.style.boxShadow =
-                                    "0 4px 12px rgba(249, 115, 22, 0.4)";
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.transform =
-                                    "translateY(0)";
-                                  e.currentTarget.style.boxShadow = "none";
-                                }}
-                              >
-                                GitHub
-                              </a>
-                            )}
-                            {(project.demo || project.externalLink) && (
-                              <a
-                                href={project.demo || project.externalLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                style={{
-                                  padding: "0.5rem 1rem",
-                                  background:
-                                    "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                                  color: "#000",
-                                  border: "2px solid #000",
-                                  borderRadius: "6px",
-                                  fontWeight: "600",
-                                  fontSize: "0.9rem",
-                                  textDecoration: "none",
-                                  transition: "all 0.3s ease",
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.currentTarget.style.transform =
-                                    "translateY(-2px)";
-                                  e.currentTarget.style.boxShadow =
-                                    "0 4px 12px rgba(249, 115, 22, 0.4)";
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.currentTarget.style.transform =
-                                    "translateY(0)";
-                                  e.currentTarget.style.boxShadow = "none";
-                                }}
-                              >
-                                View
-                              </a>
-                            )}
+                          <div style={{ padding: "1.5rem", flex: 1 }}>
+                            <h3
+                              style={{
+                                fontSize: "1.5rem",
+                                fontWeight: "600",
+                                color: "#fff",
+                                marginBottom: "0.75rem",
+                              }}
+                            >
+                              {project.title}
+                            </h3>
+                            <p
+                              style={{
+                                color: "rgba(255, 255, 255, 0.7)",
+                                marginBottom: "1rem",
+                                fontSize: "0.95rem",
+                              }}
+                            >
+                              {project.description}
+                            </p>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: "0.5rem",
+                                marginBottom: "1rem",
+                              }}
+                            >
+                              {project.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  style={{
+                                    padding: "0.25rem 0.75rem",
+                                    background: "rgba(249, 115, 22, 0.2)",
+                                    border: "1px solid rgba(249, 115, 22, 0.4)",
+                                    borderRadius: "4px",
+                                    fontSize: "0.85rem",
+                                    color: "#f97316",
+                                  }}
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "0.75rem",
+                                marginTop: "auto",
+                              }}
+                            >
+                              {project.github && (
+                                <a
+                                  href={project.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  style={{
+                                    padding: "0.5rem 1rem",
+                                    background:
+                                      "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                                    color: "#000",
+                                    border: "2px solid #000",
+                                    borderRadius: "6px",
+                                    fontWeight: "600",
+                                    fontSize: "0.9rem",
+                                    textDecoration: "none",
+                                    transition: "all 0.3s ease",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform =
+                                      "translateY(-2px)";
+                                    e.currentTarget.style.boxShadow =
+                                      "0 4px 12px rgba(249, 115, 22, 0.4)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform =
+                                      "translateY(0)";
+                                    e.currentTarget.style.boxShadow = "none";
+                                  }}
+                                >
+                                  GitHub
+                                </a>
+                              )}
+                              {(project.demo || project.externalLink) && (
+                                <a
+                                  href={project.demo || project.externalLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  style={{
+                                    padding: "0.5rem 1rem",
+                                    background:
+                                      "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                                    color: "#000",
+                                    border: "2px solid #000",
+                                    borderRadius: "6px",
+                                    fontWeight: "600",
+                                    fontSize: "0.9rem",
+                                    textDecoration: "none",
+                                    transition: "all 0.3s ease",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform =
+                                      "translateY(-2px)";
+                                    e.currentTarget.style.boxShadow =
+                                      "0 4px 12px rgba(249, 115, 22, 0.4)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform =
+                                      "translateY(0)";
+                                    e.currentTarget.style.boxShadow = "none";
+                                  }}
+                                >
+                                  View
+                                </a>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Grid>
-                  ))}
+                      </Grid>
+                    );
+                  })}
                 </Grid>
               </section>
             ),
