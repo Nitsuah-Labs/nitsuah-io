@@ -154,9 +154,38 @@ NEXT_PUBLIC_ALCHEMY_API_KEY=your_key
 
 # Optional - analytics
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# WalletConnect Project ID (hardcoded in wagmi.ts, can be moved here)
+# NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
 ```
 
 **Netlify:** Add same vars in Netlify UI for production builds.
+
+## Web3 Development
+
+### Wallet Testing
+
+The Connect component now includes:
+- Wallet logos for all major providers
+- Loading spinners during connection
+- Install prompts when no wallet detected
+- Better error messages
+
+### Profile Page
+
+Navigate to `/profile` to see:
+- Connected wallet address with ENS resolution
+- Current network and chain ID
+- Wallet balance
+- Copy address functionality
+- Disconnect button
+
+### Labs Integration
+
+The labs header shows connected wallet status:
+- Truncated address (0x1234...5678)
+- Green connection indicator
+- Click to copy address
 
 ## Common Tasks
 
