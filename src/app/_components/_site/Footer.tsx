@@ -7,7 +7,7 @@ import cat from "../../../../public/images/cat.png";
 import "../_styles/global.css";
 
 // CONSTANTS
-const TWITTER_HANDLE = "nitsuahlabs";
+const TWITTER_HANDLE = "nitsuah";
 const TWITTER_LINK = `https://github.com/${TWITTER_HANDLE}`;
 
 const Footer: React.FC = () => {

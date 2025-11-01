@@ -143,16 +143,16 @@ export default function ResumePage() {
 
           {/* Basics Section */}
           <section className="resume-section basics" id="basics">
-            <header className="resume-header">
+            <div className="resume-header">
               <h1 className="resume-name">{resume.basics.name}</h1>
-              <h2 className="resume-label">
-                {resume.basics.label || resume.basics.title}
-              </h2>
-            </header>
+              <p className="resume-label">
+                {resume.basics.label || resume.basics.title || ""}
+              </p>
+            </div>
 
             {resume.basics.summary && (
               <div className="resume-summary">
-                <h3>About</h3>
+                <h2>About</h2>
                 <p>{resume.basics.summary}</p>
               </div>
             )}
@@ -256,10 +256,10 @@ export default function ResumePage() {
           {/* Work Experience Section */}
           {resume.work && resume.work.length > 0 && (
             <section className="resume-section work" id="work">
-              <h3 className="section-title">
-                <i className="fa fa-briefcase" aria-hidden="true"></i> Work
-                Experience
-              </h3>
+              <h2 className="section-title">
+                <i className="fa fa-briefcase" aria-hidden="true"></i>
+                Work Experience
+              </h2>
               <div className="work-items">
                 {resume.work.map((job, idx) => (
                   <div key={idx} className="work-item">
@@ -319,9 +319,9 @@ export default function ResumePage() {
           {/* Skills Section */}
           {resume.skills && resume.skills.length > 0 && (
             <section className="resume-section skills" id="skills">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-code" aria-hidden="true"></i> Skills
-              </h3>
+              </h2>
               <div className="skills-grid">
                 {resume.skills.map((skill, idx) => (
                   <div key={idx} className="skill-item">
@@ -355,10 +355,10 @@ export default function ResumePage() {
           {/* Education Section */}
           {resume.education && resume.education.length > 0 && (
             <section className="resume-section education" id="education">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-graduation-cap" aria-hidden="true"></i>{" "}
                 Education
-              </h3>
+              </h2>
               <div className="education-items">
                 {resume.education.map((edu, idx) => (
                   <div key={idx} className="education-item">
@@ -399,9 +399,9 @@ export default function ResumePage() {
           {/* Languages Section */}
           {resume.languages && resume.languages.length > 0 && (
             <section className="resume-section languages" id="languages">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-language" aria-hidden="true"></i> Languages
-              </h3>
+              </h2>
               <div className="languages-list">
                 {resume.languages.map((lang, idx) => (
                   <div key={idx} className="language-item">
@@ -415,9 +415,9 @@ export default function ResumePage() {
 
           {/* Projects Link */}
           <section className="resume-section projects-link" id="projects">
-            <h3 className="section-title">
+            <h2 className="section-title">
               <i className="fa fa-rocket" aria-hidden="true"></i> Projects
-            </h3>
+            </h2>
             <p style={{ marginBottom: "1rem" }}>
               View my portfolio of selected projects
             </p>
