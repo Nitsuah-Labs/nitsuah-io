@@ -14,10 +14,15 @@ export default function NotFound() {
       <div className="not-found-container">
         <div className="not-found-content">
           <div className="error-code">404</div>
-          <h1 className="error-title">Page Not Found</h1>
+          <div className="error-emoji">🤔</div>
+          <h1 className="error-title">Well, this is awkward...</h1>
           <p className="error-description">
-            The page you&apos;re looking for doesn&apos;t exist or has been
-            moved.
+            Looks like you found a page that doesn&apos;t exist. Even the best
+            engineers hit 404s sometimes.
+            <br />
+            <span className="error-joke">
+              (Maybe it&apos;s still compiling? 😅)
+            </span>
           </p>
 
           <div className="error-actions">
@@ -73,10 +78,17 @@ export default function NotFound() {
         .error-code {
           font-size: 8rem;
           font-weight: 900;
-          color: #3b82f6;
+          color: #f97316;
           line-height: 1;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        .error-emoji {
+          font-size: 4rem;
+          margin-bottom: 1rem;
+          animation: bounce 1s ease-in-out infinite;
         }
 
         .error-title {
@@ -93,6 +105,36 @@ export default function NotFound() {
           line-height: 1.6;
         }
 
+        .error-joke {
+          display: block;
+          font-size: 1rem;
+          color: #9ca3af;
+          margin-top: 0.5rem;
+          font-style: italic;
+        }
+
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(0.95);
+          }
+        }
+
+        @keyframes bounce {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
         .error-actions {
           display: flex;
           gap: 1rem;
@@ -102,7 +144,7 @@ export default function NotFound() {
         }
 
         .primary-button {
-          background: #3b82f6;
+          background: #f97316;
           color: white;
           padding: 1rem 2rem;
           border-radius: 8px;
@@ -115,16 +157,16 @@ export default function NotFound() {
         }
 
         .primary-button:hover {
-          background: #2563eb;
+          background: #ea580c;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+          box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
         }
 
         .secondary-button {
           background: transparent;
-          color: #3b82f6;
+          color: #f97316;
           padding: 1rem 2rem;
-          border: 2px solid #3b82f6;
+          border: 2px solid #f97316;
           border-radius: 8px;
           text-decoration: none;
           font-weight: 600;
@@ -135,9 +177,21 @@ export default function NotFound() {
         }
 
         .secondary-button:hover {
-          background: #3b82f6;
+          background: #f97316;
           color: white;
           transform: translateY(-2px);
+        }
+
+        .helpful-links a {
+          color: #f97316;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.2s ease;
+        }
+
+        .helpful-links a:hover {
+          color: #ea580c;
+          text-decoration: underline;
         }
 
         .helpful-links {
@@ -162,18 +216,6 @@ export default function NotFound() {
 
         .helpful-links li {
           margin-bottom: 0.75rem;
-        }
-
-        .helpful-links a {
-          color: #3b82f6;
-          text-decoration: none;
-          font-weight: 500;
-          transition: color 0.2s ease;
-        }
-
-        .helpful-links a:hover {
-          color: #2563eb;
-          text-decoration: underline;
         }
 
         @media (max-width: 768px) {

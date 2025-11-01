@@ -15,12 +15,14 @@ We take the security of nitsuah-io seriously. If you believe you have found a se
 **Please do NOT report security vulnerabilities through public GitHub issues.**
 
 Instead, please report them via:
-- Email: [your-security-email@domain.com]
-- GitHub Security Advisories: https://github.com/Nitsuah-Labs/nitsuah-io/security/advisories/new
+
+- Email: [nitsuahlabs+security@gmail.com]
+- GitHub Security Advisories: [https://github.com/Nitsuah-Labs/nitsuah-io/security/advisories/new](https://github.com/Nitsuah-Labs/nitsuah-io/security/advisories/new)
 
 ### What to Include
 
 Please include the following information:
+
 - Type of issue (e.g., buffer overflow, SQL injection, XSS, etc.)
 - Full paths of source file(s) related to the issue
 - Location of the affected source code (tag/branch/commit or direct URL)
@@ -70,11 +72,13 @@ When contributing to this project:
 ## Known Security Considerations
 
 ### Web3 Integration
+
 - This application interacts with blockchain networks
 - Users are responsible for reviewing all transactions
 - Always verify contract addresses and network settings
 
 ### Third-Party Services
+
 - Spline 3D scenes loaded from `https://prod.spline.design`
 - WalletConnect for wallet connections
 - Users should verify wallet connection prompts
@@ -91,6 +95,7 @@ When we receive a security bug report, we will:
 ## Public Disclosure Timing
 
 We ask security researchers to keep vulnerability reports confidential until:
+
 - A fix has been developed and tested
 - Affected users have been notified
 - A reasonable time has passed for users to update (typically 7 days)
@@ -101,8 +106,8 @@ We appreciate the security research community and will acknowledge researchers w
 
 ## Contact
 
-For security concerns: [your-security-email@domain.com]
-For general questions: [your-general-email@domain.com]
+For security concerns: [nitsuahlabs+security@gmail.com]
+For general questions: [nitsuahlabs+help@gmail.com]
 
 ---
 

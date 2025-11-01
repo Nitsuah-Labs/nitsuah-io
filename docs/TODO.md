@@ -1,45 +1,31 @@
 # TODO
 
-**Updated:** October 28, 2025
+**Updated:** October 29, 2025
 
-## UI/UX Fixes (See FEEDBACK.md for details)
+_No active tasks. This file tracks in-progress development work._
 
-### Homepage
-- [ ] Fix Spline sizing - should be 100% width behind header/footer
+---
 
-### About
-- [ ] Fix mobile nav overlap with ABOUT ME text
+## User Feedback
 
-### Resume
-- [ ] Add dark mode styling (white background jarring)
-- [ ] Add header/footer for consistency
+- [] See `FEEDBACK.md` for active user-reported issues and feature requests.
 
-### Crypto
-- [ ] Move heading to header/nav bar (like About page)
+## Backlog
 
-### Projects
-- [ ] Smaller icons in lower section
-- [ ] Better text alignment & spacing
-- [ ] Reorganize by impressiveness
-- [ ] Shorten descriptions
+### Dependency Cleanup
 
-### Labs
-- [ ] Fix wallet connection (Coinbase/Phantom not prompting)
+**Verified unused packages to remove:**
 
-## Technical
+```bash
+npm uninstall lokijs pino-pretty encoding
+npm uninstall -D @react-native-async-storage/async-storage
+```
 
-### Dependencies
-- [ ] Remove unused: `lokijs`, `pino-pretty`, `@react-native-async-storage/async-storage` (see UNUSED_DEPENDENCIES.md)
-- [ ] Security: Run `npm audit` and fix moderate+ vulnerabilities
-- [ ] Review Dependabot PRs
+### Security
 
-### Web3
-- [ ] Mumbai → Amoy testnet migration
-  - Update wagmi.ts chain config
-  - Update contract addresses/RPC endpoints
-  - Test all Web3 functionality
+Run `npm audit` and apply fixes (current status unknown)
 
-## Production Readiness
-- [ ] Lighthouse scores ≥90 on all pages
-- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
-- [ ] Mobile testing (iOS Safari, Chrome Android)
+### UX Improvements
+
+- Resume page layout (about section positioning)
+- Projects page filters/categories
