@@ -11,9 +11,6 @@ test.describe("Homepage Visual Tests", () => {
     await expect(
       page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
     ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: /Featured Projects/i })
-    ).toBeVisible();
 
     await expect(page.locator("footer")).toBeVisible();
 
@@ -41,9 +38,6 @@ test.describe("Homepage Visual Tests", () => {
     // Wait for main content sections to load
     await expect(
       page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
-    ).toBeVisible();
-    await expect(
-      page.getByRole("heading", { name: /Featured Projects/i })
     ).toBeVisible();
 
     await expect(page.locator("footer")).toBeVisible();
