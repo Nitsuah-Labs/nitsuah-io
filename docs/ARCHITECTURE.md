@@ -51,8 +51,10 @@ The Web3 functionality is built around the `wagmi` and `viem` libraries.
 
 - **`src/wagmi.ts`**: This file configures the wagmi client, defining the supported chains, connectors, and transports.
 - **`src/app/providers.tsx`**: This component wraps the application in the necessary `WagmiProvider` and `QueryClientProvider`, making the wagmi hooks available throughout the app.
-- **`src/app/_components/_web3/`**: This directory contains the core Web3 UI components, such as `Connect`, `Account`, and `NetworkSwitcher`.
-- **`src/app/labs/`**: The "Labs" pages (`domains`, `register`, etc.) demonstrate more complex smart contract interactions, using wagmi hooks with custom ABIs.
+- **`src/app/_components/_web3/`**: This directory contains the core Web3 UI components, such as `Connect`, `Account`, `NetworkSwitcher`, and `MintNFT`. The `Connect` component features wallet logos, loading spinners, and install prompts for better UX.
+- **`src/app/_components/_web3/_assets/wallets/`**: SVG wallet icons for MetaMask, Coinbase Wallet, WalletConnect, Safe, and Injected connectors.
+- **`src/app/profile/`**: Full wallet dashboard displaying connected address, ENS name, balance, network, and account management.
+- **`src/app/labs/`**: The "Labs" pages (`domains`, `register`, `mint`, etc.) demonstrate complex smart contract interactions using wagmi hooks with custom ABIs.
 
 ### Configuration
 
@@ -75,15 +77,19 @@ The site is deployed to Netlify. The `netlify.toml` file in the project root con
 
 ## Current Status
 
-**Last Updated:** October 29, 2025
+**Last Updated:** October 31, 2025
 
 ### Production Ready
 
 - ✅ Next.js 14 App Router with TypeScript
-- ✅ wagmi v2 + viem v2 Web3 integration
+- ✅ wagmi v2 + viem v2 Web3 integration with enhanced wallet UX
+- ✅ Modern wallet connection (icons, loading states, install prompts)
+- ✅ Profile page with full wallet dashboard
+- ✅ Labs header with connected wallet display
 - ✅ Comprehensive test suite (Jest, Playwright, accessibility)
 - ✅ CI/CD with GitHub Actions + Netlify deployment
 - ✅ Optimized git hooks (Husky + lint-staged)
 - ✅ Interactive homepage with scroll-to-reveal design
 - ✅ Labs section with Web3 experiments
 - ✅ Responsive design with accessibility compliance
+- ✅ Security hardened (0 moderate/high vulnerabilities)
