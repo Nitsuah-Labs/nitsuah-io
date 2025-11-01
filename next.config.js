@@ -30,6 +30,22 @@ const nextConfig = {
   // Enable React strict mode for better development
   reactStrictMode: true,
 
+  // Suppress false-positive module warnings from third-party packages
+  // These are optional peer dependencies for React Native/Node.js environments
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Ignore optional dependencies that aren't needed in browser
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        "@react-native-async-storage/async-storage": false,
+        "pino-pretty": false,
+        lokijs: false,
+        encoding: false,
+      };
+    }
+    return config;
+  },
+
   // Improve image optimization
   images: {
     formats: ["image/avif", "image/webp"],

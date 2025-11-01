@@ -51,8 +51,10 @@ The Web3 functionality is built around the `wagmi` and `viem` libraries.
 
 - **`src/wagmi.ts`**: This file configures the wagmi client, defining the supported chains, connectors, and transports.
 - **`src/app/providers.tsx`**: This component wraps the application in the necessary `WagmiProvider` and `QueryClientProvider`, making the wagmi hooks available throughout the app.
-- **`src/app/_components/_web3/`**: This directory contains the core Web3 UI components, such as `Connect`, `Account`, and `NetworkSwitcher`.
-- **`src/app/labs/`**: The "Labs" pages (`domains`, `register`, etc.) demonstrate more complex smart contract interactions, using wagmi hooks with custom ABIs.
+- **`src/app/_components/_web3/`**: This directory contains the core Web3 UI components, such as `Connect`, `Account`, `NetworkSwitcher`, and `MintNFT`. The `Connect` component features wallet logos, loading spinners, and install prompts for better UX.
+- **`src/app/_components/_web3/_assets/wallets/`**: SVG wallet icons for MetaMask, Coinbase Wallet, WalletConnect, Safe, and Injected connectors.
+- **`src/app/profile/`**: Full wallet dashboard displaying connected address, ENS name, balance, network, and account management.
+- **`src/app/labs/`**: The "Labs" pages (`domains`, `register`, `mint`, etc.) demonstrate complex smart contract interactions using wagmi hooks with custom ABIs.
 
 ### Configuration
 
@@ -62,28 +64,27 @@ All major configuration files have been centralized in the `config/` directory t
 
 The project uses GitHub Actions for continuous integration. The workflow is defined in `.github/workflows/ci.yml` and includes the following steps:
 
-1.  **Checkout:** Checks out the code.
-2.  **Setup Node:** Sets up the specified Node.js version.
-3.  **Install Dependencies:** Installs the project dependencies.
-4.  **Lint:** Runs ESLint to check for code quality issues.
-5.  **Typecheck:** Runs the TypeScript compiler to check for type errors.
-6.  **Build:** Builds the Next.js application.
+1. **Checkout:** Checks out the code.
+2. **Setup Node:** Sets up the specified Node.js version.
+3. **Install Dependencies:** Installs the project dependencies.
+4. **Lint:** Runs ESLint to check for code quality issues.
+5. **Typecheck:** Runs the TypeScript compiler to check for type errors.
+6. **Build:** Builds the Next.js application.
 
 ### Deployment
 
 The site is deployed to Netlify. The `netlify.toml` file in the project root configures the build settings, including the build command, publish directory, and environment variables.
 
-## Current Status
+## Status
 
-**Last Updated:** October 29, 2025
+**Last Updated:** November 1, 2025
 
-### Production Ready
+### Production Ready ✅
 
-- ✅ Next.js 14 App Router with TypeScript
-- ✅ wagmi v2 + viem v2 Web3 integration
-- ✅ Comprehensive test suite (Jest, Playwright, accessibility)
-- ✅ CI/CD with GitHub Actions + Netlify deployment
-- ✅ Optimized git hooks (Husky + lint-staged)
-- ✅ Interactive homepage with scroll-to-reveal design
-- ✅ Labs section with Web3 experiments
-- ✅ Responsive design with accessibility compliance
+- Next.js 14 App Router with TypeScript
+- wagmi v2 + viem v2 Web3 integration
+- Wallet connection (icons, toasts, install prompts)
+- Profile page with wallet dashboard
+- Jest + Playwright + accessibility tests
+- CI/CD with GitHub Actions + Netlify
+- Security hardened (0 moderate/high vulnerabilities)

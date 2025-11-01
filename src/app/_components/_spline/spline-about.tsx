@@ -13,14 +13,19 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Auto-hide loading after 10 seconds regardless of actual load state
+  // Auto-hide loading after 3 seconds minimum to ensure visibility
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 10000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Also hide when Spline actually loads (whichever is later)
+  const handleLoad = () => {
+    setTimeout(() => setIsLoading(false), 2000); // Keep visible for 2 more seconds after load
+  };
 
   return (
     <>
@@ -34,7 +39,7 @@ export function SplineScene() {
       )}
       {/* Wrap Spline in canvas div to enable pointer events */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+        <Spline scene={SPLINE_SCENE} onLoad={handleLoad} />
       </div>
     </>
   );

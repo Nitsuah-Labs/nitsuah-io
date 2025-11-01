@@ -4,12 +4,12 @@ import ape from "../../../../public/images/ape.png";
 import "../_styles/labs.css";
 
 // CONSTANTS
-const TWITTER_HANDLE = "nitsuahlabs";
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const TWITTER_HANDLE = "nitsuah";
+const TWITTER_LINK = `https://github.com/${TWITTER_HANDLE}`;
 
 const LabFooter: React.FC = () => {
   const handleImageClick = () => {
-    window.open("https://www.linkedin.com/in/austinjhardy", "");
+    window.open(`https://www.github.com/${TWITTER_HANDLE}`);
   };
 
   return (
@@ -27,9 +27,9 @@ const LabFooter: React.FC = () => {
           href={TWITTER_LINK}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Follow @${TWITTER_HANDLE.replace("labs", "")} on Twitter`}
+          aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
         >
-          <p>{`Twitter — @${TWITTER_HANDLE.replace("labs", "")}`}</p>
+          <p>{`github — @${TWITTER_HANDLE}`}</p>
         </a>
       </div>
     </footer>

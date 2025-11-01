@@ -1,22 +1,10 @@
-import fs from "fs";
-import { Metadata } from "next";
-import path from "path";
+"use client";
+
+import resumeDataImport from "../../../public/assets/resume.json";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import { PrintButton } from "./_components/PrintButton";
 import "./resume.css";
-
-export const metadata: Metadata = {
-  title: "Resume | Austin J. Hardy",
-  description:
-    "Professional resume of Austin J. Hardy - Senior Systems Engineer at Netflix with experience in Web3, DevOps, and full-stack development",
-  openGraph: {
-    title: "Resume | Austin J. Hardy",
-    description:
-      "Professional resume of Austin J. Hardy - Senior Systems Engineer at Netflix",
-    type: "profile",
-  },
-};
 
 interface ResumeData {
   basics: {
@@ -90,21 +78,13 @@ function formatDate(dateStr: string): string {
 }
 
 function getResumeData(): ResumeData {
-  const resumePath = path.join(
-    process.cwd(),
-    "public",
-    "assets",
-    "resume.json",
-  );
+  // Use imported JSON data (works in client components)
   try {
-    const resumeContent = fs.readFileSync(resumePath, "utf-8");
-    return JSON.parse(resumeContent);
+    return resumeDataImport as unknown as ResumeData;
   } catch (err) {
-    // If file read fails (dev server startup edge cases), return a minimal fallback
-    // so the page still renders meaningful DOM for tests and a11y checks.
-    // Keep shape matching ResumeData to avoid undefined accessors.
+    // Fallback if import fails
     // eslint-disable-next-line no-console
-    console.warn("Could not read resume.json; using fallback data", err);
+    console.warn("Could not load resume.json; using fallback data", err);
     return {
       basics: {
         name: "Austin J. Hardy",
@@ -163,16 +143,16 @@ export default function ResumePage() {
 
           {/* Basics Section */}
           <section className="resume-section basics" id="basics">
-            <header className="resume-header">
+            <div className="resume-header">
               <h1 className="resume-name">{resume.basics.name}</h1>
-              <h2 className="resume-label">
-                {resume.basics.label || resume.basics.title}
-              </h2>
-            </header>
+              <p className="resume-label">
+                {resume.basics.label || resume.basics.title || ""}
+              </p>
+            </div>
 
             {resume.basics.summary && (
               <div className="resume-summary">
-                <h3>About</h3>
+                <h2>About</h2>
                 <p>{resume.basics.summary}</p>
               </div>
             )}
@@ -234,10 +214,37 @@ export default function ResumePage() {
                     rel="noopener noreferrer"
                     className="profile-link"
                     aria-label={`${profile.network} profile`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                      padding: "0.5rem 1rem",
+                      background: "rgba(249, 115, 22, 0.1)",
+                      border: "1px solid rgba(249, 115, 22, 0.3)",
+                      borderRadius: "6px",
+                      color: "#c2410c",
+                      textDecoration: "none",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(249, 115, 22, 0.2)";
+                      e.currentTarget.style.borderColor =
+                        "rgba(249, 115, 22, 0.6)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(249, 115, 22, 0.1)";
+                      e.currentTarget.style.borderColor =
+                        "rgba(249, 115, 22, 0.3)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
                   >
                     <i
                       className={`fa ${getNetworkIcon(profile.network)}`}
                       aria-hidden="true"
+                      style={{ fontSize: "1.2rem" }}
                     ></i>
                     <span>{profile.network}</span>
                   </a>
@@ -249,10 +256,10 @@ export default function ResumePage() {
           {/* Work Experience Section */}
           {resume.work && resume.work.length > 0 && (
             <section className="resume-section work" id="work">
-              <h3 className="section-title">
-                <i className="fa fa-briefcase" aria-hidden="true"></i> Work
-                Experience
-              </h3>
+              <h2 className="section-title">
+                <i className="fa fa-briefcase" aria-hidden="true"></i>
+                Work Experience
+              </h2>
               <div className="work-items">
                 {resume.work.map((job, idx) => (
                   <div key={idx} className="work-item">
@@ -312,9 +319,9 @@ export default function ResumePage() {
           {/* Skills Section */}
           {resume.skills && resume.skills.length > 0 && (
             <section className="resume-section skills" id="skills">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-code" aria-hidden="true"></i> Skills
-              </h3>
+              </h2>
               <div className="skills-grid">
                 {resume.skills.map((skill, idx) => (
                   <div key={idx} className="skill-item">
@@ -348,10 +355,10 @@ export default function ResumePage() {
           {/* Education Section */}
           {resume.education && resume.education.length > 0 && (
             <section className="resume-section education" id="education">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-graduation-cap" aria-hidden="true"></i>{" "}
                 Education
-              </h3>
+              </h2>
               <div className="education-items">
                 {resume.education.map((edu, idx) => (
                   <div key={idx} className="education-item">
@@ -392,9 +399,9 @@ export default function ResumePage() {
           {/* Languages Section */}
           {resume.languages && resume.languages.length > 0 && (
             <section className="resume-section languages" id="languages">
-              <h3 className="section-title">
+              <h2 className="section-title">
                 <i className="fa fa-language" aria-hidden="true"></i> Languages
-              </h3>
+              </h2>
               <div className="languages-list">
                 {resume.languages.map((lang, idx) => (
                   <div key={idx} className="language-item">
@@ -408,15 +415,42 @@ export default function ResumePage() {
 
           {/* Projects Link */}
           <section className="resume-section projects-link" id="projects">
-            <h3 className="section-title">
+            <h2 className="section-title">
               <i className="fa fa-rocket" aria-hidden="true"></i> Projects
-            </h3>
-            <p>
-              View my portfolio of selected projects at{" "}
-              <a href="/projects" className="projects-link-anchor">
-                nitsuah.io/projects
-              </a>
+            </h2>
+            <p style={{ marginBottom: "1rem" }}>
+              View my portfolio of selected projects
             </p>
+            <a
+              href="/projects"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                color: "#1a1a1a",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "8px",
+                textDecoration: "none",
+                fontWeight: "600",
+                border: "2px solid #000",
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 6px 16px rgba(249, 115, 22, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(249, 115, 22, 0.3)";
+              }}
+            >
+              <i className="fa fa-folder-open" aria-hidden="true"></i>
+              Visit Portfolio
+            </a>
           </section>
         </div>
       </main>

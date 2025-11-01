@@ -2,7 +2,6 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { featuredProjects } from "../lib/data/projects";
 import Footer from "./_components/_site/Footer";
 import HomeBar from "./_components/_site/Homebar";
 import SplineScene from "./_components/_spline/spline-home";
@@ -14,11 +13,14 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      // Show Spline after scrolling past projects section (~2000px)
-      if (window.scrollY > 2000) {
+      // Show Spline immediately when page loads
+      if (window.scrollY > 50) {
         setShowSpline(true);
       }
     };
+
+    // Show Spline on mount
+    setShowSpline(true);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -197,200 +199,68 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* Featured Projects Section - Starts below hero, revealed as you scroll */}
-        <section
-          style={{
-            padding: "4rem 2rem",
-            paddingTop: "100vh", // Start after hero viewport
-            background: "#1a1a1a",
-            minHeight: "100vh",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <h2
-              style={{
-                fontSize: "2.5rem",
-                fontWeight: "700",
-                marginBottom: "1rem",
-                textAlign: "center",
-                color: "#ffffff",
-              }}
-            >
-              Featured Projects
-            </h2>
-            <p
-              style={{
-                textAlign: "center",
-                color: "rgba(255, 255, 255, 0.7)",
-                marginBottom: "3rem",
-                fontSize: "1.1rem",
-              }}
-            >
-              Recent work that showcases my approach to developer productivity
-              and system design
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                gap: "2rem",
-              }}
-            >
-              {featuredProjects.slice(0, 5).map((project, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    borderRadius: "12px",
-                    padding: "1.5rem",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.borderColor =
-                      "rgba(249, 115, 22, 0.5)";
-                    e.currentTarget.style.boxShadow =
-                      "0 8px 24px rgba(249, 115, 22, 0.15)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.borderColor =
-                      "rgba(255, 255, 255, 0.1)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <h3
-                    style={{
-                      color: "#f97316",
-                      fontSize: "1.5rem",
-                      marginBottom: "0.75rem",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    style={{
-                      color: "rgba(255, 255, 255, 0.85)",
-                      marginBottom: "0.75rem",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    {project.description}
-                  </p>
-                  {project.highlight && (
-                    <p
-                      style={{
-                        color: "rgba(249, 115, 22, 0.9)",
-                        fontSize: "0.9rem",
-                        marginBottom: "1rem",
-                        fontStyle: "italic",
-                      }}
-                    >
-                      💡 {project.highlight}
-                    </p>
-                  )}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.5rem",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    {project.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          backgroundColor: "rgba(249, 115, 22, 0.1)",
-                          color: "#fb923c",
-                          padding: "0.25rem 0.75rem",
-                          borderRadius: "4px",
-                          fontSize: "0.8rem",
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {(project.github || project.demo || project.externalLink) && (
-                    <a
-                      href={
-                        project.github ||
-                        project.demo ||
-                        project.externalLink ||
-                        "#"
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: "#f97316",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      View Project →
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div style={{ textAlign: "center", marginTop: "3rem" }}>
-              <Link
-                href="/projects"
-                style={{
-                  color: "#f97316",
-                  textDecoration: "none",
-                  fontSize: "1.1rem",
-                  fontWeight: "600",
-                }}
-              >
-                View All Projects →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Spline Scene (Loads after scrolling past projects ~2000px) */}
+        {/* Spline Scene - Revealed as hero peels away */}
         {showSpline && (
           <section
             style={{
               minHeight: "100vh",
-              position: "relative",
-              opacity: Math.min((scrollY - 2000) / 500, 1),
-              transition: "opacity 0.3s ease",
+              paddingTop: "100vh", // Start after hero viewport
+              padding: "4rem 2rem", // Breathing room around Spline
               background: "#0a0a0a",
-              paddingTop: "2rem",
+              position: "relative",
+              zIndex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <div
               style={{
-                position: "absolute",
-                top: "2rem",
-                left: "50%",
-                transform: "translateX(-50%)",
-                textAlign: "center",
-                zIndex: 10,
+                width: "100%",
+                maxWidth: "1400px",
+                margin: "0 auto",
+                padding: "2rem",
               }}
             >
-              <h2
+              <div
                 style={{
-                  color: "rgba(255, 255, 255, 0.9)",
-                  fontSize: "2rem",
-                  fontWeight: "600",
+                  textAlign: "center",
+                  marginBottom: "2rem",
+                  zIndex: 10,
+                  position: "relative",
                 }}
               >
-                Behind the Scenes
-              </h2>
-              <p style={{ color: "rgba(255, 255, 255, 0.6)" }}>
-                Interactive 3D visualization
-              </p>
+                <h2
+                  style={{
+                    color: "rgba(255, 255, 255, 0.9)",
+                    fontSize: "2.5rem",
+                    fontWeight: "600",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Behind the Scenes
+                </h2>
+                <p
+                  style={{
+                    color: "rgba(255, 255, 255, 0.6)",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  Interactive 3D visualization
+                </p>
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "600px",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+                }}
+              >
+                <SplineScene />
+              </div>
             </div>
-            <SplineScene />
           </section>
         )}
 

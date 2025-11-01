@@ -1,31 +1,15 @@
 # TODO
 
-**Updated:** October 29, 2025
-
-_No active tasks. This file tracks in-progress development work._
-
----
-
-## User Feedback
-
-- [] See `FEEDBACK.md` for active user-reported issues and feature requests.
+**Updated:** November 1, 2025
 
 ## Backlog
 
-### Dependency Cleanup
+- [ ] Contract debugging on local testnet
+- [ ] Network auto-switch detection
+- [ ] Projects page filters
+- [ ] Mumbai → Amoy migration
+- [ ] FIX Playwright visual tests to better handle CI/local environment differences - use Docker?
 
-**Verified unused packages to remove:**
+---
 
-```bash
-npm uninstall lokijs pino-pretty encoding
-npm uninstall -D @react-native-async-storage/async-storage
-```
-
-### Security
-
-Run `npm audit` and apply fixes (current status unknown)
-
-### UX Improvements
-
-- Resume page layout (about section positioning)
-- Projects page filters/categories
+_For feature requests see `FEEDBACK.md` • For security status see `SECURITY_FIXES.md`_
