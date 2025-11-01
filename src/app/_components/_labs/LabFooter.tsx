@@ -5,11 +5,11 @@ import "../_styles/labs.css";
 
 // CONSTANTS
 const TWITTER_HANDLE = "nitsuah";
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const TWITTER_LINK = `https://github.com/${TWITTER_HANDLE}`;
 
 const LabFooter: React.FC = () => {
   const handleImageClick = () => {
-    window.open("https://www.linkedin.com/in/austinjhardy", "");
+    window.open(`https://www.github.com/${TWITTER_HANDLE}`);
   };
 
   return (
@@ -29,7 +29,7 @@ const LabFooter: React.FC = () => {
           rel="noreferrer"
           aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
         >
-          <p>{`Twitter — @${TWITTER_HANDLE}`}</p>
+          <p>{`github — @${TWITTER_HANDLE}`}</p>
         </a>
       </div>
     </footer>

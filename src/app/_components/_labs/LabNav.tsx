@@ -77,7 +77,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                 }}
               >
                 <div className="center">
-                  <p className="title">NITSUAH LABS</p>
+                  <p className="title">LABS</p>
                 </div>
               </Typography>
             </a>
