@@ -26,10 +26,10 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate hero opacity based on scroll (fade out 0-800px)
-  const heroOpacity = Math.max(0, 1 - scrollY / 800);
+  // Calculate hero opacity based on scroll (fade out 0-1200px for complete hide)
+  const heroOpacity = Math.max(0, 1 - scrollY / 1200);
   // Calculate hero scale (slight zoom effect as it fades)
-  const heroScale = 1 + (scrollY / 800) * 0.1;
+  const heroScale = 1 + (scrollY / 1200) * 0.1;
 
   return (
     <div className="App">

@@ -50,6 +50,11 @@ const LabNav: React.FC<LabNavProps> = () => {
   );
   const { address, isConnected } = useAccount();
   const [copied, setCopied] = React.useState(false);
+  const [profileHovered, setProfileHovered] = React.useState(false);
+  const [logoutHovered, setLogoutHovered] = React.useState(false);
+  const [homeClickCount, setHomeClickCount] = React.useState(0);
+  const [homeClickTimer, setHomeClickTimer] =
+    React.useState<NodeJS.Timeout | null>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -69,6 +74,31 @@ const LabNav: React.FC<LabNavProps> = () => {
       setCopied(true);
       toast.success("Address copied!", { icon: "📋" });
       setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (homeClickTimer) {
+      clearTimeout(homeClickTimer);
+      setHomeClickTimer(null);
+    }
+
+    const newCount = homeClickCount + 1;
+    setHomeClickCount(newCount);
+
+    if (newCount === 2) {
+      // Double click - go to main home
+      window.location.href = "/";
+      setHomeClickCount(0);
+    } else {
+      // Single click - set timer to go to labs
+      const timer = setTimeout(() => {
+        window.location.href = "/labs";
+        setHomeClickCount(0);
+      }, 300);
+      setHomeClickTimer(timer);
     }
   };
 
@@ -162,6 +192,35 @@ const LabNav: React.FC<LabNavProps> = () => {
             </StyledMenu>
           </Box>
 
+          {/* Home Button with Double-Click */}
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, marginRight: "1rem" }}
+          >
+            <Button
+              onClick={handleHomeClick}
+              title="Click once for Labs home, double-click for main home"
+              sx={{
+                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                color: "#000",
+                fontWeight: 600,
+                padding: "0.5rem 1rem",
+                borderRadius: "6px",
+                transition: "all 0.3s ease",
+                minWidth: "auto",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
+                },
+              }}
+            >
+              <i
+                className="fa fa-home"
+                aria-hidden="true"
+                style={{ fontSize: "1.2rem" }}
+              ></i>
+            </Button>
+          </Box>
+
           {/* Wallet Status Display */}
           {isConnected && address && (
             <Box
@@ -225,6 +284,8 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Profile"
+                onMouseEnter={() => setProfileHovered(true)}
+                onMouseLeave={() => setProfileHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
@@ -250,7 +311,8 @@ const LabNav: React.FC<LabNavProps> = () => {
                   <i className="fa fa-user" aria-hidden="true"></i>
                   <span
                     style={{
-                      display: window.innerWidth < 768 ? "none" : "inline",
+                      display: profileHovered ? "inline" : "none",
+                      transition: "all 0.3s ease",
                     }}
                   >
                     Profile
@@ -262,6 +324,8 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Logout"
+                onMouseEnter={() => setLogoutHovered(true)}
+                onMouseLeave={() => setLogoutHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
@@ -293,7 +357,8 @@ const LabNav: React.FC<LabNavProps> = () => {
                   ></i>
                   <span
                     style={{
-                      display: window.innerWidth < 768 ? "none" : "inline",
+                      display: logoutHovered ? "inline" : "none",
+                      transition: "all 0.3s ease",
                     }}
                   >
                     Logout

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 const LAB_PAGES = [
-  { href: "/labs", label: "Labs Home" },
+  { href: "/labs", label: "Labs Home", isIcon: true, icon: "fa-home" },
   { href: "/labs/register", label: "Register" },
   { href: "/labs/mint", label: "Mint NFT" },
   { href: "/labs/domains", label: "Domains" },
@@ -64,13 +64,21 @@ const LabSubNav: React.FC = () => {
             }}
             onMouseEnter={(e) => {
               if (!isActive) {
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
-                e.currentTarget.style.color = "#fff";
+                if (page.isWIP) {
+                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.15)";
+                  e.currentTarget.style.color = "#ef4444";
+                  e.currentTarget.style.borderColor = "rgba(239, 68, 68, 0.3)";
+                } else {
+                  e.currentTarget.style.background =
+                    "rgba(255, 255, 255, 0.08)";
+                  e.currentTarget.style.color = "#fff";
+                }
               }
             }}
             onMouseLeave={(e) => {
               if (!isActive) {
                 e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = "transparent";
                 e.currentTarget.style.color = page.isWIP
                   ? "rgba(255, 255, 255, 0.5)"
                   : "rgba(255, 255, 255, 0.85)";
@@ -78,17 +86,27 @@ const LabSubNav: React.FC = () => {
             }}
             title={page.isWIP ? `${page.label} (Work in Progress)` : page.label}
           >
-            {page.label}
-            {page.isWIP && (
-              <span
-                style={{
-                  fontSize: "0.65rem",
-                  marginLeft: "0.25rem",
-                  opacity: 0.6,
-                }}
-              >
-                WIP
-              </span>
+            {page.isIcon ? (
+              <i
+                className={`fa ${page.icon}`}
+                aria-hidden="true"
+                style={{ fontSize: "1.1rem" }}
+              ></i>
+            ) : (
+              <>
+                {page.label}
+                {page.isWIP && (
+                  <span
+                    style={{
+                      fontSize: "0.65rem",
+                      marginLeft: "0.25rem",
+                      opacity: 0.6,
+                    }}
+                  >
+                    WIP
+                  </span>
+                )}
+              </>
             )}
           </Link>
         );
