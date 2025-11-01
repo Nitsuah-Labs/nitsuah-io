@@ -163,30 +163,11 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
 ## Web3 Development
 
-### Wallet Testing
+### Web3 Features
 
-The Connect component now includes:
-- Wallet logos for all major providers
-- Loading spinners during connection
-- Install prompts when no wallet detected
-- Better error messages
-
-### Profile Page
-
-Navigate to `/profile` to see:
-- Connected wallet address with ENS resolution
-- Current network and chain ID
-- Wallet balance
-- Copy address functionality
-- Disconnect button
-
-### Labs Integration
-
-The labs header shows connected wallet status:
-
-- Truncated address (0x1234...5678)
-- Green connection indicator
-- Click to copy address
+- `/profile` - Wallet dashboard (address, ENS, balance, copy, disconnect)
+- Labs header - Shows connected wallet (click to copy)
+- Connect component - Wallet logos, loading states, install prompts
 
 ## Common Tasks
 

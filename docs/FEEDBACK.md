@@ -4,11 +4,11 @@
 
 ## Feature Requests
 
-- [ ] **Projects Filters** - Add categories/filters based on tags
-- [ ] **Dark Mode** - Toggle for dark/light theme
-- [ ] **Network Auto-Switch** - Detect wrong network and prompt switch
-- [ ] **Contract Testing** - MintNFT and Register flows on local testnet
-- [ ] **Mumbai → Amoy** - Migrate to new Polygon testnet
+- [ ] **Projects Filters** - Categories/filters based on tags
+- [ ] **Dark Mode** - Theme toggle
+- [ ] **Network Auto-Switch** - Auto-detect wrong network
+- [ ] **Contract Testing** - Local testnet debugging
+- [ ] **Mumbai → Amoy** - Polygon testnet migration
 
 ## Submit Feedback
 
