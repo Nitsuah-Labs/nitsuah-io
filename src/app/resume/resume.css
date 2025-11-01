@@ -410,7 +410,7 @@
 .duration-bar {
   width: 20px;
   height: 100%;
-  background: #0095ff;
+  background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -421,6 +421,22 @@
 
 .duration-bar.partial {
   opacity: 0.6;
+}
+
+.duration-bar.current {
+  position: relative;
+}
+
+.duration-bar.current::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #10b981;
 }
 
 .duration-text {
@@ -696,6 +712,11 @@
 @media screen and (max-width: 768px) {
   .resume-container {
     padding: 1.5rem 1rem;
+  }
+
+  .education-languages-container {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
   }
 
   .work-header {
