@@ -251,7 +251,7 @@
 .resume-label {
   font-size: 1.5rem;
   font-weight: 400;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance (4.5:1 contrast) */
   margin-bottom: 1rem;
 }
 
@@ -284,7 +284,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
 }
 
 .contact-item i {
@@ -369,7 +369,7 @@
 .work-date {
   min-width: 150px;
   font-weight: 600;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   font-size: 0.9rem;
 }
 
@@ -385,7 +385,7 @@
 }
 
 .work-company {
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   font-size: 1rem;
 }
 
@@ -456,7 +456,7 @@
 
 .skill-level {
   font-size: 0.875rem;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   font-style: italic;
 }
 
@@ -476,7 +476,7 @@
 
 .skill-keywords {
   font-size: 0.875rem;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   line-height: 1.5;
 }
 
@@ -506,7 +506,7 @@
 }
 
 .education-institution {
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   font-size: 1rem;
 }
 
@@ -521,13 +521,13 @@
 
 .education-date {
   font-size: 0.875rem;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   margin-top: 0.5rem;
 }
 
 .education-score {
   font-size: 0.875rem;
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   margin-top: 0.25rem;
 }
 
@@ -554,7 +554,7 @@
 }
 
 .language-fluency {
-  color: #666;
+  color: #595959; /* Darker for WCAG AA compliance */
   font-size: 0.9rem;
 }
 
@@ -629,7 +629,7 @@
   a[href]:after {
     content: " (" attr(href) ")";
     font-size: 9pt;
-    color: #666;
+    color: #595959; /* Darker for WCAG AA compliance */
   }
 
   .profile-link:after,
