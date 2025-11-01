@@ -107,6 +107,8 @@ function renderOutput() {
                 display: "block",
                 textAlign: "center",
                 textDecoration: "none",
+                margin: "0",
+                padding: "0.75rem 1rem",
               }}
             >
               GET MATIC
@@ -132,12 +134,16 @@ function renderOutput() {
               >
                 Sign up for Web3 experiments
               </p>
-              <div
+              <button
                 className="labs-btn labs-btn-primary"
-                style={{ width: "100%", pointerEvents: "none" }}
+                style={{
+                  width: "100%",
+                  pointerEvents: "none",
+                  margin: "0",
+                }}
               >
                 GET STARTED
-              </div>
+              </button>
             </div>
           </div>
         </Link>
@@ -160,12 +166,16 @@ function renderOutput() {
               >
                 Create a Landplot NFT
               </p>
-              <div
+              <button
                 className="labs-btn labs-btn-success"
-                style={{ width: "100%", pointerEvents: "none" }}
+                style={{
+                  width: "100%",
+                  pointerEvents: "none",
+                  margin: "0",
+                }}
               >
                 START MINTING
-              </div>
+              </button>
             </div>
           </div>
         </Link>
@@ -188,12 +198,16 @@ function renderOutput() {
               >
                 Manage your subdomains
               </p>
-              <div
+              <button
                 className="labs-btn labs-btn-primary"
-                style={{ width: "100%", pointerEvents: "none" }}
+                style={{
+                  width: "100%",
+                  pointerEvents: "none",
+                  margin: "0",
+                }}
               >
                 VIEW DOMAINS
-              </div>
+              </button>
             </div>
           </div>
         </Link>
@@ -213,12 +227,16 @@ function renderOutput() {
               >
                 Return to main site
               </p>
-              <div
+              <button
                 className="labs-btn labs-btn-secondary"
-                style={{ width: "100%", pointerEvents: "none" }}
+                style={{
+                  width: "100%",
+                  pointerEvents: "none",
+                  margin: "0",
+                }}
               >
                 EXIT LABS
-              </div>
+              </button>
             </div>
           </div>
         </Link>

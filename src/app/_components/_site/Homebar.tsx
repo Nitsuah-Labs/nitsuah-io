@@ -43,7 +43,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
-  const [showAltName, setShowAltName] = React.useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -51,10 +50,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleLogoHover = () => {
-    setShowAltName(true);
   };
 
   return (
@@ -69,8 +64,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Link href="/" legacyBehavior>
             <a
               style={{ textDecoration: "none", color: "inherit" }}
-              aria-label="Nitsuah home - Navigate to homepage"
-              onMouseEnter={handleLogoHover}
+              aria-label="Austin H home - Navigate to homepage"
             >
               <Typography
                 variant="h6"
@@ -82,40 +76,17 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                   fontFamily: "monospace",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
-                  color: "inherit",
+                  color: "#f97316",
                   textDecoration: "none",
                   cursor: "pointer",
-                  transition: "opacity 0.3s ease",
+                  transition: "all 0.3s ease",
+                  textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                  },
                 }}
               >
-                <div className="center">
-                  <p
-                    className="title"
-                    style={{
-                      transition: "opacity 0.3s ease, transform 0.3s ease",
-                      opacity: showAltName ? 0 : 1,
-                      transform: showAltName
-                        ? "translateY(-10px)"
-                        : "translateY(0)",
-                      position: showAltName ? "absolute" : "relative",
-                    }}
-                  >
-                    NITSUAH
-                  </p>
-                  <p
-                    className="title"
-                    style={{
-                      transition: "opacity 0.3s ease, transform 0.3s ease",
-                      opacity: showAltName ? 1 : 0,
-                      transform: showAltName
-                        ? "translateY(0)"
-                        : "translateY(10px)",
-                      position: showAltName ? "relative" : "absolute",
-                    }}
-                  >
-                    AUSTIN H.
-                  </p>
-                </div>
+                AUSTIN H.
               </Typography>
             </a>
           </Link>
@@ -141,11 +112,11 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               <a
                 style={{
                   textDecoration: "none",
-                  color: "inherit",
+                  color: "#f97316",
                   marginLeft: "16px",
+                  transition: "all 0.3s ease",
                 }}
-                aria-label="Nitsuah home - Navigate to homepage"
-                onMouseEnter={handleLogoHover}
+                aria-label="Austin H home - Navigate to homepage"
               >
                 <Typography
                   variant="h6"
@@ -155,44 +126,13 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                     fontFamily: "monospace",
                     fontWeight: 700,
                     letterSpacing: ".3rem",
-                    color: "inherit",
+                    color: "#f97316",
                     textDecoration: "none",
                     cursor: "pointer",
+                    textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
                   }}
                 >
-                  <div
-                    style={{
-                      position: "relative",
-                      height: "24px",
-                      width: "120px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        transition: "opacity 0.3s ease, transform 0.3s ease",
-                        opacity: showAltName ? 0 : 1,
-                        transform: showAltName
-                          ? "translateY(-10px)"
-                          : "translateY(0)",
-                        position: showAltName ? "absolute" : "relative",
-                      }}
-                    >
-                      NITSUAH
-                    </span>
-                    <span
-                      style={{
-                        transition: "opacity 0.3s ease, transform 0.3s ease",
-                        opacity: showAltName ? 1 : 0,
-                        transform: showAltName
-                          ? "translateY(0)"
-                          : "translateY(10px)",
-                        position: showAltName ? "relative" : "absolute",
-                        left: 0,
-                      }}
-                    >
-                      AUSTIN H.
-                    </span>
-                  </div>
+                  AUSTIN H.
                 </Typography>
               </a>
             </Link>
