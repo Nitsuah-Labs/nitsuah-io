@@ -1,22 +1,10 @@
-import fs from "fs";
-import { Metadata } from "next";
-import path from "path";
+"use client";
+
+import resumeDataImport from "../../../public/assets/resume.json";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import { PrintButton } from "./_components/PrintButton";
 import "./resume.css";
-
-export const metadata: Metadata = {
-  title: "Resume | Austin J. Hardy",
-  description:
-    "Professional resume of Austin J. Hardy - Senior Systems Engineer at Netflix with experience in Web3, DevOps, and full-stack development",
-  openGraph: {
-    title: "Resume | Austin J. Hardy",
-    description:
-      "Professional resume of Austin J. Hardy - Senior Systems Engineer at Netflix",
-    type: "profile",
-  },
-};
 
 interface ResumeData {
   basics: {
@@ -90,21 +78,13 @@ function formatDate(dateStr: string): string {
 }
 
 function getResumeData(): ResumeData {
-  const resumePath = path.join(
-    process.cwd(),
-    "public",
-    "assets",
-    "resume.json",
-  );
+  // Use imported JSON data (works in client components)
   try {
-    const resumeContent = fs.readFileSync(resumePath, "utf-8");
-    return JSON.parse(resumeContent);
+    return resumeDataImport as unknown as ResumeData;
   } catch (err) {
-    // If file read fails (dev server startup edge cases), return a minimal fallback
-    // so the page still renders meaningful DOM for tests and a11y checks.
-    // Keep shape matching ResumeData to avoid undefined accessors.
+    // Fallback if import fails
     // eslint-disable-next-line no-console
-    console.warn("Could not read resume.json; using fallback data", err);
+    console.warn("Could not load resume.json; using fallback data", err);
     return {
       basics: {
         name: "Austin J. Hardy",
