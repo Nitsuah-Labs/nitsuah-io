@@ -228,22 +228,15 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 
 ## Implementation Plan
 
-### Week 1: Core Wallet UX (Priority 1) ✅ COMPLETED
-- [x] Day 1-2: Modern wallet selector with logos
-- [x] Day 3-4: Auto-detect network and wallet
-- [x] Day 5: Wallet not installed flow
 
-### Week 2: Profile & Labs Header (Priority 2) ✅ COMPLETED
-- [x] Day 1-3: Profile page implementation
-- [x] Day 4-5: Labs header wallet display
+### Week 3: Contract Debugging
 
-### Week 3: Contract Debugging (Priority 3)
 - [ ] Day 1-2: Local dev setup with Hardhat
 - [ ] Day 3-4: Debug MintNFT component
 - [ ] Day 5: Debug Register component
 
-### Week 4: Polish & Testing (Priorities 4-5) 🔄 IN PROGRESS
-- [x] Day 1: Security vulnerabilities audit and fixes (COMPLETED)
+### Week 4: Polish & Testing
+ 
 - [ ] Day 2: Toast notifications
 - [ ] Day 3: Loading states
 - [ ] Day 4-5: E2E tests and documentation
@@ -265,30 +258,25 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 
 ## Technical Debt to Address
 
-1. **Dependency Warnings**: Optional peer dependencies causing webpack warnings
-   - ✅ FIXED: Added webpack fallbacks in `next.config.js` to suppress false warnings
-   - These packages (`@react-native-async-storage`, `pino-pretty`, etc.) are React Native/Node.js deps
-   - Not needed in browser, warnings are harmless but now silenced
-
-2. **Security Vulnerabilities**: 21 vulnerabilities (18 low, 3 moderate)
+1. **Security Vulnerabilities**: 21 vulnerabilities (18 low, 3 moderate)
    - [ ] Run `npm audit fix` to auto-fix compatible issues
    - [ ] Review remaining vulnerabilities for manual updates
    - [ ] Document any vulnerabilities that can't be fixed (waiting on upstream)
    - [ ] Consider `npm audit fix --force` if safe (test thoroughly)
 
-3. **Mumbai Deprecation**: Mumbai testnet is deprecated, migrate to Polygon Amoy
+2. **Mumbai Deprecation**: Mumbai testnet is deprecated, migrate to Polygon Amoy
    - Update all contract references
    - Update documentation
    - Update faucet links
 
-4. **Wagmi Codegen**: Ensure `npm run wagmi` runs in CI without API key
+3. **Wagmi Codegen**: Ensure `npm run wagmi` runs in CI without API key
    - Already handled with env check, but document this
 
-5. **Wallet Logos**: Need to add wallet logo assets
+4. **Wallet Logos**: Need to add wallet logo assets
    - MetaMask, Coinbase Wallet, WalletConnect, Safe logos
    - Store in `src/app/_components/_web3/_assets/wallets/`
 
-6. **Type Safety**: MintNFT has `any` casts to avoid deep type instantiation
+5. **Type Safety**: MintNFT has `any` casts to avoid deep type instantiation
    - Investigate proper typing for wagmi hooks
 
 ---
@@ -309,20 +297,24 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 ## Resources
 
 ### Wagmi v2 Documentation
+
 - [Wagmi Docs](https://wagmi.sh/)
 - [Wagmi Examples](https://github.com/wevm/wagmi/tree/main/examples)
 - [Viem Docs](https://viem.sh/)
 
 ### Wallet Integration Guides
+
 - [MetaMask Docs](https://docs.metamask.io/)
 - [WalletConnect v2](https://docs.walletconnect.com/)
 - [Coinbase Wallet SDK](https://docs.cloud.coinbase.com/wallet-sdk/docs)
 
 ### Testing
+
 - [Playwright Web3 Testing](https://playwright.dev/)
 - [Synpress (MetaMask E2E)](https://github.com/Synthetixio/synpress)
 
 ### Local Development
+
 - [Hardhat](https://hardhat.org/)
 - [Anvil (Foundry)](https://book.getfoundry.sh/anvil/)
 - [Tenderly Forks](https://tenderly.co/)
@@ -356,6 +348,7 @@ Phase 7.3 focuses on improving the Web3 wallet integration, debugging connection
 **Ready to start implementation!** 🚀
 
 Next steps:
+
 1. Review this plan
 2. Prioritize items based on user feedback
 3. Set up local Web3 dev environment
