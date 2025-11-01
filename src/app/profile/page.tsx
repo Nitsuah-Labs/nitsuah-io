@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useAccount, useBalance, useDisconnect, useEnsName } from "wagmi";
 import { getExplorerLink } from "../../lib/constants/networks";
+import LabNav from "../_components/_labs/LabNav";
 import Footer from "../_components/_site/Footer";
-import HomeBar from "../_components/_site/Homebar";
 import { Connect } from "../_components/_web3/Connect";
 
 const ProfilePage: React.FC = () => {
@@ -40,7 +41,7 @@ const ProfilePage: React.FC = () => {
         flexDirection: "column",
       }}
     >
-      <HomeBar />
+      <LabNav />
       <main
         style={{
           flex: 1,
@@ -51,18 +52,57 @@ const ProfilePage: React.FC = () => {
           margin: "80px auto 0",
         }}
       >
-        <h1
+        <div
           style={{
-            fontSize: "2.5rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             marginBottom: "1rem",
-            background: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
           }}
         >
-          PROFILE
-        </h1>
+          <h1
+            style={{
+              fontSize: "2.5rem",
+              background: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              margin: 0,
+            }}
+          >
+            PROFILE
+          </h1>
+          <Link href="/labs">
+            <button
+              style={{
+                padding: "0.75rem 1.5rem",
+                background: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+                border: "2px solid #000",
+                borderRadius: "8px",
+                color: "#000",
+                fontSize: "1rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow =
+                  "0 4px 12px rgba(192, 132, 252, 0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <i className="fa fa-arrow-left" aria-hidden="true"></i>
+              Return to Labs
+            </button>
+          </Link>
+        </div>
         <p
           style={{
             color: "rgba(255, 255, 255, 0.7)",
