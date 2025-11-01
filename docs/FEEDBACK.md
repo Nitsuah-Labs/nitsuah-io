@@ -8,7 +8,6 @@
 - [ ] **Dark Mode** - Toggle for dark/light theme
 - [ ] **Network Auto-Switch** - Detect wrong network and prompt switch
 - [ ] **Contract Testing** - MintNFT and Register flows on local testnet
-- [ ] **Toast Notifications** - Better feedback for wallet actions
 - [ ] **Mumbai → Amoy** - Migrate to new Polygon testnet
 
 ## Submit Feedback

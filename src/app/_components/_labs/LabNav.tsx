@@ -12,6 +12,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 import "../_styles/labs.css";
 
@@ -67,6 +68,7 @@ const LabNav: React.FC<LabNavProps> = () => {
     if (address) {
       navigator.clipboard.writeText(address);
       setCopied(true);
+      toast.success("Address copied!", { icon: "📋" });
       setTimeout(() => setCopied(false), 2000);
     }
   };
