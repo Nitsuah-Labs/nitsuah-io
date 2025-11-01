@@ -222,7 +222,7 @@ export default function ResumePage() {
                       background: "rgba(249, 115, 22, 0.1)",
                       border: "1px solid rgba(249, 115, 22, 0.3)",
                       borderRadius: "6px",
-                      color: "#f97316",
+                      color: "#c2410c",
                       textDecoration: "none",
                       transition: "all 0.3s ease",
                     }}
