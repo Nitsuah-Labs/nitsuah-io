@@ -18,7 +18,7 @@ const web3Data = [
   {
     title: "🌑DARKMOON",
     description:
-      "A web3 NFT project exploring a 3D lunar setting with f2p & p2p modes",
+      "A web3 NFT project exploring a 3D lunar setting with F2P & P2P modes",
     link: "https://www.darkmoon.dev/",
     image: null,
     tags: ["NFT", "Solana", "3D Game"],

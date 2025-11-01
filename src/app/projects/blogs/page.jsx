@@ -6,7 +6,7 @@ import BlogPanel from "./_components/BlogPanel.jsx";
 import "./_styles/Blog.module.css";
 
 const Blogsite = () => {
-  const { publicKey } = "0x85C67d169A7bc00b252C2f3274c472a25c03b77d";
+  const publicKey = "0x85C67d169A7bc00b252C2f3274c472a25c03b77d";
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
