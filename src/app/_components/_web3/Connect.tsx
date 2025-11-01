@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import toast from "react-hot-toast";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import {
   CoinbaseWalletIcon,
@@ -22,11 +23,12 @@ const walletIcons: Record<string, React.FC> = {
 };
 
 export function Connect() {
-  const { connector, isConnected } = useAccount();
+  const { connector, isConnected, address } = useAccount();
   const { connect, connectors, error } = useConnect();
   const { disconnect } = useDisconnect();
   const [pendingId, setPendingId] = React.useState<string | null>(null);
   const [hasInjected, setHasInjected] = React.useState(false);
+  const [wasConnected, setWasConnected] = React.useState(false);
   const cs: any[] = connectors as any[];
 
   // Check for injected wallet on mount
@@ -36,10 +38,31 @@ export function Connect() {
     }
   }, []);
 
-  // clear pending state when connection status changes
+  // Show toast on connection/disconnection
   React.useEffect(() => {
-    if (isConnected) setPendingId(null);
-  }, [isConnected]);
+    if (isConnected && !wasConnected && address) {
+      toast.success(`Connected to ${connector?.name || "wallet"}`, {
+        icon: "🔗",
+      });
+      setWasConnected(true);
+      setPendingId(null);
+    } else if (!isConnected && wasConnected) {
+      toast("Wallet disconnected", { icon: "👋" });
+      setWasConnected(false);
+    }
+  }, [isConnected, address, connector?.name, wasConnected]);
+
+  // Show error toast
+  React.useEffect(() => {
+    if (error) {
+      toast.error(
+        (error as any)?.shortMessage ||
+          (error as any)?.message ||
+          "Failed to connect",
+      );
+      setPendingId(null);
+    }
+  }, [error]);
 
   return (
     <div

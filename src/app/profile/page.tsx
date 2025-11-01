@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useAccount, useBalance, useDisconnect, useEnsName } from "wagmi";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
@@ -17,6 +18,7 @@ const ProfilePage: React.FC = () => {
     if (address) {
       navigator.clipboard.writeText(address);
       setCopied(true);
+      toast.success("Address copied to clipboard!", { icon: "📋" });
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -309,7 +311,10 @@ const ProfilePage: React.FC = () => {
                   </a>
                 )}
                 <button
-                  onClick={() => disconnect()}
+                  onClick={() => {
+                    disconnect();
+                    toast("Disconnecting wallet...", { icon: "👋" });
+                  }}
                   style={{
                     padding: "0.75rem 1.5rem",
                     background:

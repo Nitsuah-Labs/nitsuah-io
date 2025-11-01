@@ -6,6 +6,7 @@ import { WagmiProvider } from "wagmi";
 
 // Import a client-only getter for config so WalletConnect is only created on the client
 import { getWagmiConfig } from "../wagmi";
+import { ToastProvider } from "./_components/_web3/ToastProvider";
 
 // Create singleton instances to prevent multiple initializations
 const queryClient = new QueryClient({
@@ -32,7 +33,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <WagmiProvider config={clientConfig}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider />
+        {children}
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }
