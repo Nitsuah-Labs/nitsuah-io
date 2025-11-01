@@ -1,68 +1,41 @@
 # User Feedback
 
-**Purpose:** Track user-reported issues, feature requests, and design feedback.
+**Updated:** November 1, 2025
 
-**Updated:** October 29, 2025
-
----
-
-## Active Feedback
-
-✅ **PHASE 7 COMPLETED:**
-
-- ✅ home - removed featured products section from scroll reveal - hero peels away to reveal Spline directly
-- ✅ home nav - AUSTIN H. stays in orange/black theme permanently
-- ✅ about me - loader/spinner visibility extended (3+ seconds minimum)
-- ✅ resume page - export PDF text now dark grey for contrast, portfolio URL is now a button, LinkedIn/GitHub have enhanced styling with icons
-- ✅ crypto - added 200px footer buffer to prevent overlap
-- ✅ projects - project cards maintained (use gradient backgrounds), reorganized with Websites & Apps at top, added rowSpacing for proper card separation
-- ✅ labs - test funds button overlap fixed with explicit margin/padding
-- ✅ labs nav - WIP links non-clickable with red hover, Profile button matches purple/black theme, navigation shows "NITSUAH LABS", logout button styled with purple/black gradient
-
-✅ **PHASE 7.2 COMPLETED:**
-
-- ✅ Projects blog and clients pages now use consistent card styling with homepage - blog uses blue accent (#3b82f6), clients uses green accent (#10b981)
-
----
-
-### Layout & Styling
-
-- ✅ **Resume Layout** - Improved about section with styled profile links featuring icons and hover effects
-- ✅ **Resume Export Button** - Styled with orange/black theme and dark grey text for contrast
+## Active Requests
 
 ### Features
-
 - [ ] **Projects Filters** - Add categories/filters based on tags
+- [ ] **Dark Mode** - Toggle for dark/light theme
 
-### Web3 (See PHASE_7.3_WEB3_IMPROVEMENTS.md for detailed plan)
-
-**Phase 7.3 Week 1-2 COMPLETED:**
-
-- ✅ **Wallet Connection UX** - Modern wallet selector with logos, loading spinners, better error handling
-- ✅ **Wallet Flow** - Auto-detect/redirect to install if wallet missing with install links
-- ✅ **Profile Page** - Full wallet dashboard (address, ENS, balance, network, disconnect)
-- ✅ **Labs Header** - Connected wallet status with truncated address and copy functionality
-
-**Phase 7.3 Week 3-4 Remaining:**
-
-- [ ] **Network Switching** - Auto-detect wrong network and prompt switch
-- [ ] **Contract Debugging** - Test MintNFT and Register flows locally
-- [ ] **Local Dev Setup** - Hardhat/Anvil for testing contracts
+### Web3
+- [ ] **Network Auto-Switch** - Detect wrong network and prompt switch
+- [ ] **Contract Testing** - MintNFT and Register flows on local testnet
 - [ ] **Toast Notifications** - Better feedback for wallet actions
-- [ ] **Mumbai → Amoy Migration** - Update deprecated testnet
+- [ ] **Mumbai → Amoy** - Migrate to new Polygon testnet
 
----
+## Completed (Phase 7 - 7.3)
 
-## Future Ideas
+<details>
+<summary>View completed improvements</summary>
 
-- Dark mode toggle
-- Enhanced analytics (heatmaps, user flows)
+### Phase 7 & 7.2
+- ✅ Homepage scroll reveal with Spline
+- ✅ Resume page improvements (export button, profile links)
+- ✅ Projects page reorganization with consistent card styling
+- ✅ Blog and clients pages with accent colors
+- ✅ Labs navigation improvements
 
----
+### Phase 7.3 (Week 1-2)
+- ✅ Wallet connection with logos and loading states
+- ✅ Install prompts when wallet missing
+- ✅ Profile page dashboard (address, ENS, balance)
+- ✅ Labs header wallet status display
+- ✅ Security fixes (0 moderate/high vulnerabilities)
 
-## How to Submit Feedback
+</details>
 
-- **Bugs:** GitHub issue with [BUG] prefix
-- **Features:** GitHub issue with [FEATURE] prefix
-- **Design:** Comment here or on PRs
-- **Other:** Add notes in this file
+## Submit Feedback
+
+- **Bugs:** [GitHub issue](https://github.com/Nitsuah-Labs/nitsuah-io/issues) with [BUG] prefix
+- **Features:** [GitHub issue](https://github.com/Nitsuah-Labs/nitsuah-io/issues) with [FEATURE] prefix
