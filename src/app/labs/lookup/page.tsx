@@ -4,6 +4,7 @@
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
+import LabSubNav from "../../_components/_labs/LabSubNav";
 import "../../_components/_styles/labs.css";
 import { Connect } from "../../_components/_web3/Connect";
 import { Connected } from "../../_components/_web3/Connected";
@@ -15,7 +16,8 @@ const NSLookupSite = () => {
     <div className="App">
       <div className="container">
         <LabNav />
-        <main>
+        <LabSubNav />
+        <main style={{ paddingBottom: "80px" }}>
           <h1>LOOKUP HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

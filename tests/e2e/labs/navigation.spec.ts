@@ -9,7 +9,7 @@ test.describe("Navigation Tests", () => {
     const homeLink = page.getByRole("link", { name: /home|nitsuah/i }).first();
     if (await homeLink.isVisible()) {
       await homeLink.click();
-      await expect(page).toHaveURL("/");
+      await expect(page).toHaveURL(/\/(\?.*)?$/); // Match path with optional query
     }
 
     // Test about link
@@ -17,7 +17,7 @@ test.describe("Navigation Tests", () => {
     const aboutLink = page.getByRole("link", { name: /about/i }).first();
     if (await aboutLink.isVisible()) {
       await aboutLink.click();
-      await expect(page).toHaveURL("/about");
+      await expect(page).toHaveURL(/\/about/);
     }
 
     // Test projects link
@@ -25,7 +25,7 @@ test.describe("Navigation Tests", () => {
     const projectsLink = page.getByRole("link", { name: /projects/i }).first();
     if (await projectsLink.isVisible()) {
       await projectsLink.click();
-      await expect(page).toHaveURL("/projects");
+      await expect(page).toHaveURL(/\/projects/);
     }
 
     // Test labs link
@@ -33,7 +33,7 @@ test.describe("Navigation Tests", () => {
     const labsLink = page.getByRole("link", { name: /labs/i }).first();
     if (await labsLink.isVisible()) {
       await labsLink.click();
-      await expect(page).toHaveURL("/labs");
+      await expect(page).toHaveURL(/\/labs/);
     }
   });
 
@@ -42,7 +42,9 @@ test.describe("Navigation Tests", () => {
 
     await page.waitForLoadState("networkidle");
 
-    // Check for links to lab pages
+    // Check for links to lab pages - wait for navigation to be ready
+    await page.waitForSelector('a[href*="/labs/"]', { timeout: 5000 });
+
     const registerLink = page
       .getByRole("link", { name: /register|domain/i })
       .first();

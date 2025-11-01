@@ -54,7 +54,7 @@ test.describe("Wallet Connection Flow", () => {
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
-    
+
     // Page should have some content (not checking for network switcher without wallet connected)
     const mainContent = page.locator("main");
     await expect(mainContent).toBeVisible();
@@ -64,6 +64,7 @@ test.describe("Wallet Connection Flow", () => {
     page,
   }) => {
     await page.goto("/labs/register?testHelpers=1");
+    await page.waitForLoadState("networkidle");
 
     // With test helpers, should see the test helper panel OR actual domain input
     const testHelpers = page.getByTestId("register-test-helpers");
@@ -148,7 +149,7 @@ test.describe("Domains Page", () => {
     // Should have header/footer at minimum (wallet buttons require connection)
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
-    
+
     // Check for main content area
     const mainContent = page.locator("main");
     await expect(mainContent).toBeVisible();
