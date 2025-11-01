@@ -103,7 +103,6 @@ function renderOutput() {
               className="labs-btn labs-btn-primary"
               aria-label="Get test MATIC from Polygon faucet"
               style={{
-                width: "100%",
                 display: "block",
                 textAlign: "center",
                 textDecoration: "none",
