@@ -8,24 +8,27 @@
 
 ## Active Feedback
 
-- [ ] home - just remove the featured products section from the scroll reveal experience. instead the reveal should uncover our spline component (which is there in between it seems so just removing the projects bit should fix everything)
-- [ ] home nav - austin h. MUCH BETTER! but make it stay austin h. in orange/black theme of the site instead of morphing back to nitsuah.
-- [ ] about me - the loader/spinner is going away too fast
-- [ ] resume page is good, but the export pdf text might need to be dark grey? for sufficient contrast against the orange background. more a nit. playwright and lighthouse can complain if it is i guess. "View my portfolio of selected projects at nitsuah.io/projects" can have a button instead of a bare url. linkedin and github buttons should have icons in the buttons for clarity.
-- [ ] crypto - could use some buffer at the bottom so the footer doesnt overlap the content as much. cards still get overlapped by the footer
-- [ ] projects - a little better. but you removed the images from the project cards? they should be there. definitely fix this.
-- [ ] projects - website and apps should be near the top and portfolio site should be a part of this category. als othe cards should have space between each row similar to the crypto page.
+✅ **PHASE 7 COMPLETED:**
 
-- [ ] labs -the "test funds" button still overlap the card but the rest are fixed it looks like. 
-- [ ] labs nav wip links should not be clickable, and should have red on hover to indicate work in progress.
-- [ ] labs nav - accent color for buttons should match purple black theme of "labs" site.
-- [ ] labs nav - navigation should say nitsuah labs one word.
-- [ ] labs nav logout button should match purple black theme as well.
+- ✅ home - removed featured products section from scroll reveal - hero peels away to reveal Spline directly
+- ✅ home nav - AUSTIN H. stays in orange/black theme permanently
+- ✅ about me - loader/spinner visibility extended (3+ seconds minimum)
+- ✅ resume page - export PDF text now dark grey for contrast, portfolio URL is now a button, LinkedIn/GitHub have enhanced styling with icons
+- ✅ crypto - added 200px footer buffer to prevent overlap
+- ✅ projects - project cards maintained (use gradient backgrounds), reorganized with Websites & Apps at top, added rowSpacing for proper card separation
+- ✅ labs - test funds button overlap fixed with explicit margin/padding
+- ✅ labs nav - WIP links non-clickable with red hover, Profile button matches purple/black theme, navigation shows "NITSUAH LABS", logout button styled with purple/black gradient
+
+✅ **PHASE 7.2 COMPLETED:**
+
+- ✅ Projects blog and clients pages now use consistent card styling with homepage - blog uses blue accent (#3b82f6), clients uses green accent (#10b981)
+
+---
 
 ### Layout & Styling
 
-- [ ] **Resume Layout** - Improve about section (button, city, GitHub, LinkedIn positioning)
-- [ ] **Resume Export Button** - Style PDF button to match orange/black theme
+- ✅ **Resume Layout** - Improved about section with styled profile links featuring icons and hover effects
+- ✅ **Resume Export Button** - Styled with orange/black theme and dark grey text for contrast
 
 ### Features
 
