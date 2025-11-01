@@ -228,7 +228,7 @@
 
 /* Smaller non-featured cards for better density */
 .non-featured-card {
-  transform: scale(0.85);
+  transform: scale(0.72);
   transform-origin: top center;
   transition:
     transform 0.3s ease,
@@ -237,7 +237,7 @@
 }
 
 .non-featured-card:hover {
-  transform: scale(0.85) translateY(-2px);
+  transform: scale(0.72) translateY(-2px);
 }
 
 .portfolio-card-image {

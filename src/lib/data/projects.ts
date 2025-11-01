@@ -169,19 +169,6 @@ const projects: Project[] = [
     featured: false,
   },
   {
-    id: "nft-game",
-    title: "NFT Game",
-    short: "Turn-based NFT game with on-chain mechanics.",
-    description:
-      "Turn-based game built with NFT characters and on-chain game state management.",
-    infoUrl: "https://buildspace.so/p/create-turn-based-nft-game",
-    infoText: "Create a turn-based NFT game",
-    highlight: "On-chain game mechanics",
-    tags: ["nft", "game", "web3", "ethereum"],
-    status: "archived",
-    featured: false,
-  },
-  {
     id: "nights-weekends",
     title: "N+W S1",
     short: "Nights + Weekends Season 1 cohort participation.",
