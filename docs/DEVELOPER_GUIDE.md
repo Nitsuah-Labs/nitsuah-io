@@ -183,6 +183,7 @@ Navigate to `/profile` to see:
 ### Labs Integration
 
 The labs header shows connected wallet status:
+
 - Truncated address (0x1234...5678)
 - Green connection indicator
 - Click to copy address
