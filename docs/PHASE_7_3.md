@@ -2,7 +2,7 @@
 
 **Created:** October 31, 2025  
 **Status:** Planning  
-**Focus:** Web3/Wallet UX, Debugging, and Modern Best Practices
+**Focus:** Web3/Wallet UX, Debugging, and Modern Best Practices - TL;DR - WEB3_IMPROVEMENTS
 
 ---
 
