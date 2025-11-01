@@ -64,12 +64,12 @@ All major configuration files have been centralized in the `config/` directory t
 
 The project uses GitHub Actions for continuous integration. The workflow is defined in `.github/workflows/ci.yml` and includes the following steps:
 
-1.  **Checkout:** Checks out the code.
-2.  **Setup Node:** Sets up the specified Node.js version.
-3.  **Install Dependencies:** Installs the project dependencies.
-4.  **Lint:** Runs ESLint to check for code quality issues.
-5.  **Typecheck:** Runs the TypeScript compiler to check for type errors.
-6.  **Build:** Builds the Next.js application.
+1. **Checkout:** Checks out the code.
+2. **Setup Node:** Sets up the specified Node.js version.
+3. **Install Dependencies:** Installs the project dependencies.
+4. **Lint:** Runs ESLint to check for code quality issues.
+5. **Typecheck:** Runs the TypeScript compiler to check for type errors.
+6. **Build:** Builds the Next.js application.
 
 ### Deployment
 
@@ -81,15 +81,10 @@ The site is deployed to Netlify. The `netlify.toml` file in the project root con
 
 ### Production Ready ✅
 
-- ✅ Next.js 14 App Router with TypeScript
-- ✅ wagmi v2 + viem v2 Web3 integration with enhanced wallet UX
-- ✅ Modern wallet connection (icons, loading states, install prompts)
-- ✅ Profile page with full wallet dashboard
-- ✅ Labs header with connected wallet display
-- ✅ Comprehensive test suite (Jest, Playwright, accessibility)
-- ✅ CI/CD with GitHub Actions + Netlify deployment
-- ✅ Optimized git hooks (Husky + lint-staged)
-- ✅ Interactive homepage with scroll-to-reveal design
-- ✅ Labs section with Web3 experiments
-- ✅ Responsive design with accessibility compliance
-- ✅ Security hardened (0 moderate/high vulnerabilities)
+- Next.js 14 App Router with TypeScript
+- wagmi v2 + viem v2 Web3 integration
+- Wallet connection (icons, toasts, install prompts)
+- Profile page with wallet dashboard
+- Jest + Playwright + accessibility tests
+- CI/CD with GitHub Actions + Netlify
+- Security hardened (0 moderate/high vulnerabilities)
