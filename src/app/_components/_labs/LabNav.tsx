@@ -19,6 +19,7 @@ type LabNavProps = object;
 
 const LAB_PAGES = ["register", "mint", "domains"];
 const SUB_PAGES = ["dao", "lookup", "stake", "token", "ai"];
+const WIP_PAGES = ["dao", "lookup", "stake", "token", "ai"]; // Work in progress pages
 const SETTINGS = ["Profile", "Logout"];
 
 // Replace any with proper Menu props type
@@ -76,7 +77,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                 }}
               >
                 <div className="center">
-                  <p className="title">NITSUAH</p>
+                  <p className="title">NITSUAH LABS</p>
                 </div>
               </Typography>
             </a>
@@ -115,25 +116,77 @@ const LabNav: React.FC<LabNavProps> = () => {
                   </Button>
                 </Link>
               ))}
-              {SUB_PAGES.map((page) => (
-                <Link key={page} href={`/labs/${page}`}>
-                  <Button sx={{ my: 2, color: "white", display: "block" }}>
-                    {page}
-                  </Button>
-                </Link>
-              ))}
+              {SUB_PAGES.map((page) => {
+                const isWIP = WIP_PAGES.includes(page);
+                return (
+                  <span
+                    key={page}
+                    style={{
+                      pointerEvents: isWIP ? "none" : "auto",
+                      opacity: isWIP ? 0.5 : 1,
+                    }}
+                  >
+                    <Link href={`/labs/${page}`}>
+                      <Button
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          "&:hover": isWIP
+                            ? { color: "#ff6b6b", cursor: "not-allowed" }
+                            : {},
+                        }}
+                      >
+                        {page} {isWIP && "(WIP)"}
+                      </Button>
+                    </Link>
+                  </span>
+                );
+              })}
             </StyledMenu>
           </Box>
 
           {/* Profile and Logout buttons as links */}
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}>
             <Link href="/profile">
-              <Button color="inherit" sx={{ mr: 2, color: "white" }}>
+              <Button
+                color="inherit"
+                sx={{
+                  background:
+                    "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+                  color: "#000",
+                  fontWeight: 600,
+                  padding: "0.5rem 1rem",
+                  borderRadius: "6px",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 4px 12px rgba(168, 85, 247, 0.4)",
+                  },
+                }}
+              >
                 {SETTINGS[0]}
               </Button>
             </Link>
             <Link href="/logout">
-              <Button color="inherit">{SETTINGS[1]}</Button>
+              <Button
+                color="inherit"
+                sx={{
+                  background:
+                    "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
+                  color: "#000",
+                  fontWeight: 600,
+                  padding: "0.5rem 1rem",
+                  borderRadius: "6px",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 4px 12px rgba(168, 85, 247, 0.4)",
+                  },
+                }}
+              >
+                {SETTINGS[1]}
+              </Button>
             </Link>
           </Box>
         </Toolbar>

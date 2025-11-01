@@ -4,7 +4,7 @@ import ape from "../../../../public/images/ape.png";
 import "../_styles/labs.css";
 
 // CONSTANTS
-const TWITTER_HANDLE = "nitsuahlabs";
+const TWITTER_HANDLE = "nitsuah";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const LabFooter: React.FC = () => {
@@ -27,9 +27,9 @@ const LabFooter: React.FC = () => {
           href={TWITTER_LINK}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Follow @${TWITTER_HANDLE.replace("labs", "")} on Twitter`}
+          aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
         >
-          <p>{`Twitter — @${TWITTER_HANDLE.replace("labs", "")}`}</p>
+          <p>{`Twitter — @${TWITTER_HANDLE}`}</p>
         </a>
       </div>
     </footer>
