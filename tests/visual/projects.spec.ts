@@ -2,8 +2,7 @@ import { expect, test } from "@playwright/test";
 import { go } from "../_utils/playwright-helpers";
 
 test.describe("Projects Page Visual Tests", () => {
-  // SKIPPED: Visual regression tests have CI/local environment rendering differences (237px height variance, 15% pixel diff)
-  // TODO: Re-enable when Docker-based testing is implemented for consistent rendering across environments
+  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
   test.skip("projects page renders correctly", async ({ page }) => {
     await go(page, "/projects");
 
@@ -19,7 +18,6 @@ test.describe("Projects Page Visual Tests", () => {
       fullPage: true,
       animations: "disabled",
       timeout: 20000,
-      maxDiffPixels: 350000, // Tolerate CI/local environment rendering differences until Docker-based testing is implemented
     });
   });
 

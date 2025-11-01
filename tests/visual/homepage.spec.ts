@@ -1,8 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Homepage Visual Tests", () => {
-  // SKIPPED: Visual regression tests have CI/local environment rendering differences (10px height variance)
-  // TODO: Re-enable when Docker-based testing is implemented for consistent rendering across environments
+  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
   test.skip("homepage renders correctly on desktop", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
 
@@ -25,7 +24,6 @@ test.describe("Homepage Visual Tests", () => {
       animations: "disabled",
       timeout: 20000,
       mask: [page.locator('[data-testid="spline-container"], canvas')],
-      maxDiffPixels: 15000, // Tolerate CI/local environment rendering differences until Docker-based testing is implemented
     });
   });
 
