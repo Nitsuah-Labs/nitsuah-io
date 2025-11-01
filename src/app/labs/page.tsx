@@ -22,12 +22,10 @@ function renderOutput() {
         minHeight: "calc(100vh - 200px)",
       }}
     >
-      <h1 className="sr-only">Labs - Web3 Experiments</h1>
-
       <div style={{ textAlign: "center", marginBottom: "40px" }}>
-        <h2 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h2>
+        <h1 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h1>
         <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.1rem" }}>
-          Polygon Mumbai Testnet Experiments
+          Basic Testnet Experiments
         </p>
       </div>
 
@@ -135,8 +133,6 @@ function renderOutput() {
               </p>
               <button
                 className="labs-btn labs-btn-primary"
-                disabled={true}
-                aria-disabled="true"
                 style={{
                   width: "100%",
                   margin: "0",

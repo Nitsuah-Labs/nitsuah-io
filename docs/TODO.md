@@ -4,11 +4,15 @@
 
 ## Backlog
 
+- [ ] FIX Playwright visual tests to better handle CI/local environment differences - use Docker?
 - [ ] Contract debugging on local testnet
 - [ ] Network auto-switch detection
 - [ ] Projects page filters
 - [ ] Mumbai → Amoy migration
-- [ ] FIX Playwright visual tests to better handle CI/local environment differences - use Docker?
+
+## Small nits
+
+- the "website" url in the resume page should be a button like the linkedin and github ones instead of bare url (but in resume pdf keep the similar action where it prints out the full url, etc.)
 
 ---
 

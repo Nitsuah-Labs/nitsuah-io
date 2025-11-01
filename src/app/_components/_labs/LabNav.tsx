@@ -22,7 +22,6 @@ type LabNavProps = object;
 const LAB_PAGES = ["register", "mint", "domains"];
 const SUB_PAGES = ["dao", "lookup", "stake", "token", "ai"];
 const WIP_PAGES = ["dao", "lookup", "stake", "token", "ai"]; // Work in progress pages
-const SETTINGS = ["Profile", "Logout"];
 
 // Replace any with proper Menu props type
 const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
@@ -213,11 +212,19 @@ const LabNav: React.FC<LabNavProps> = () => {
             </Box>
           )}
 
-          {/* Profile and Logout buttons as links */}
-          <Box sx={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}>
+          {/* Profile and Logout buttons - aligned right */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "0.5rem",
+              marginLeft: "auto",
+            }}
+          >
             <Link href="/profile">
               <Button
                 color="inherit"
+                title="Profile"
                 sx={{
                   background:
                     "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
@@ -226,33 +233,72 @@ const LabNav: React.FC<LabNavProps> = () => {
                   padding: "0.5rem 1rem",
                   borderRadius: "6px",
                   transition: "all 0.3s ease",
+                  minWidth: { xs: "auto", md: "auto" },
                   "&:hover": {
                     transform: "translateY(-2px)",
                     boxShadow: "0 4px 12px rgba(168, 85, 247, 0.4)",
                   },
                 }}
               >
-                {SETTINGS[0]}
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <i className="fa fa-user" aria-hidden="true"></i>
+                  <span
+                    style={{
+                      display: window.innerWidth < 768 ? "none" : "inline",
+                    }}
+                  >
+                    Profile
+                  </span>
+                </span>
               </Button>
             </Link>
             <Link href="/logout">
               <Button
                 color="inherit"
+                title="Logout"
                 sx={{
                   background:
-                    "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
-                  color: "#000",
+                    "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+                  color: "#fff",
                   fontWeight: 600,
                   padding: "0.5rem 1rem",
                   borderRadius: "6px",
                   transition: "all 0.3s ease",
+                  minWidth: { xs: "auto", md: "auto" },
                   "&:hover": {
+                    background:
+                      "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)",
                     transform: "translateY(-2px)",
-                    boxShadow: "0 4px 12px rgba(168, 85, 247, 0.4)",
+                    boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
                   },
                 }}
               >
-                {SETTINGS[1]}
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <i
+                    className="fa fa-sign-out"
+                    aria-hidden="true"
+                    style={{ fontSize: "1.1rem" }}
+                  ></i>
+                  <span
+                    style={{
+                      display: window.innerWidth < 768 ? "none" : "inline",
+                    }}
+                  >
+                    Logout
+                  </span>
+                </span>
               </Button>
             </Link>
           </Box>

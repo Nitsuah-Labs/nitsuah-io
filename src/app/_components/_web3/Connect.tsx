@@ -4,23 +4,11 @@ import * as React from "react";
 import toast from "react-hot-toast";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { WALLET_CONNECT_ID } from "../../../lib/constants/wallets";
-import {
-  CoinbaseWalletIcon,
-  InjectedIcon,
-  MetaMaskIcon,
-  SafeWalletIcon,
-  WalletConnectIcon,
-} from "./_assets/wallets/WalletIcons";
+import { WalletConnectIcon } from "./_assets/wallets/WalletIcons";
 
 // Map connector IDs to their icons
 const walletIcons: Record<string, React.FC> = {
-  metaMask: MetaMaskIcon,
-  metaMaskSDK: MetaMaskIcon,
-  coinbaseWallet: CoinbaseWalletIcon,
-  coinbaseWalletSDK: CoinbaseWalletIcon,
   walletConnect: WalletConnectIcon,
-  safe: SafeWalletIcon,
-  injected: InjectedIcon,
 };
 
 export function Connect() {
@@ -28,16 +16,8 @@ export function Connect() {
   const { connect, connectors, error } = useConnect();
   const { disconnect } = useDisconnect();
   const [pendingId, setPendingId] = React.useState<string | null>(null);
-  const [hasInjected, setHasInjected] = React.useState(false);
   const [wasConnected, setWasConnected] = React.useState(false);
   const cs: any[] = connectors as any[];
-
-  // Check for injected wallet on mount
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHasInjected(!!window.ethereum);
-    }
-  }, []);
 
   // Show toast on connection/disconnection
   React.useEffect(() => {
@@ -80,57 +60,10 @@ export function Connect() {
         </button>
       )}
 
-      {/* Show install prompt if no injected wallet detected */}
-      {!hasInjected &&
-        cs.some((x) => x.id === "injected" || x.id === "metaMask") && (
-          <div
-            style={{
-              padding: "16px",
-              backgroundColor: "rgba(192, 132, 252, 0.1)",
-              border: "1px solid rgba(192, 132, 252, 0.3)",
-              borderRadius: "8px",
-              marginBottom: "8px",
-            }}
-          >
-            <p style={{ margin: "0 0 12px", fontWeight: "600" }}>
-              No wallet detected
-            </p>
-            <p
-              style={{
-                margin: "0 0 12px",
-                fontSize: "0.9rem",
-                color: "rgba(255, 255, 255, 0.7)",
-              }}
-            >
-              Install a wallet extension to connect:
-            </p>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-              <a
-                href="https://metamask.io/download/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="labs-btn labs-btn-secondary"
-                style={{ textDecoration: "none", fontSize: "0.9rem" }}
-              >
-                Get MetaMask
-              </a>
-              <a
-                href="https://www.coinbase.com/wallet/downloads"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="labs-btn labs-btn-secondary"
-                style={{ textDecoration: "none", fontSize: "0.9rem" }}
-              >
-                Get Coinbase Wallet
-              </a>
-            </div>
-          </div>
-        )}
-
       {cs
-        .filter((x) => x.id !== connector?.id)
+        .filter((x) => x.id !== connector?.id && x.id === WALLET_CONNECT_ID)
         .map((x) => {
-          const IconComponent = walletIcons[x.id] || InjectedIcon;
+          const IconComponent = walletIcons[x.id] || WalletConnectIcon;
           const isReady = x.ready || x.id === WALLET_CONNECT_ID;
           const isPending = pendingId === x.id;
 

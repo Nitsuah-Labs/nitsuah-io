@@ -4,12 +4,16 @@ import { BaseError } from "viem";
 import { useAccount, useSwitchChain } from "wagmi";
 
 export function NetworkSwitcher() {
-  const { chain } = useAccount();
+  const { chain, isConnected } = useAccount();
   const { chains, error, isPending, switchChain } = useSwitchChain();
 
   return (
     <div>
-      <div>Connected to {chain?.name ?? chain?.id}</div>
+      <div>
+        {isConnected
+          ? `Connected to ${chain?.name ?? chain?.id ?? "Unknown Network"}`
+          : "Disconnected"}
+      </div>
 
       {/* Test helper: reveal a simple network info element when test helpers are enabled */}
       {process.env.NEXT_PUBLIC_TEST_HELPERS === "1" && (

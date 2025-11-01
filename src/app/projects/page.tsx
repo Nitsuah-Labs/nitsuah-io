@@ -113,10 +113,18 @@ const Projects = () => {
                 <Grid container spacing={3} rowSpacing={6}>
                   {projects.map((project) => {
                     const image = projectImages[project.id] || cat;
+                    const isFeatured = category === "Featured Projects";
                     return (
-                      <Grid key={project.id} item xs={12} sm={6} md={4}>
+                      <Grid
+                        key={project.id}
+                        item
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        lg={isFeatured ? 4 : 3}
+                      >
                         <div
-                          className="portfolio-card"
+                          className={`portfolio-card ${isFeatured ? "featured-card" : "non-featured-card"}`}
                           style={{
                             background: "rgba(20, 20, 20, 0.8)",
                             border: "2px solid rgba(249, 115, 22, 0.3)",

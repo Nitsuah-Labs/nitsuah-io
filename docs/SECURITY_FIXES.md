@@ -5,30 +5,7 @@
 
 ## Current Status
 
-- **Total:** 18 vulnerabilities (all low severity)
-- **Moderate/High/Critical:** 0
-- **Assessment:** Safe to deploy
-
-All low severity issues are in WalletConnect/Reown transitive dependencies (logging and internal utilities not exposed to users).
-
----
-
-## Recent Fixes (October 31, 2025)
-
-### Security Updates
-
-- ✅ Updated **esbuild** to 0.25.11 (fixed moderate vulnerability)
-- ✅ Updated **lint-staged** to 16.2.6 (fixed moderate vulnerability)
-- ✅ Resolved **micromatch** vulnerability via lint-staged update
-
-### Build Warnings
-
-- ✅ Fixed webpack module resolution warnings for optional peer dependencies
-- Added webpack fallback configuration for browser-only build
-
-**Result:** All moderate/high severity vulnerabilities eliminated.
-
----
+No high severity or impactful vulns. Some low severity related to WalletConnect that may need updates or review (it is on the latest?) Also some dependnency updates pending that may address some other issues or need evaluation/testing.
 
 ## Low Severity Details
 
@@ -45,9 +22,38 @@ All low severity issues are in WalletConnect/Reown transitive dependencies (logg
 ## Maintenance
 
 Run security audit before deployments:
+
 ```bash
 npm audit
 npm audit --audit-level=moderate  # Fail on moderate+
 ```
+
+### Dependency updates
+
+- make recommendations to address all issues (including warnings/low severity vulnerabilities)
+
+
+Pending dependnency updates:
+
+chore(deps): bump @splinetool/runtime from 0.9.526 to 1.10.91 
+ dependencies javascript
+#125 opened 2 days ago by dependabot bot
+@nitsuah
+ 2
+
+chore(deps-dev): bump globals from 16.0.0 to 16.4.0 
+ dependencies javascript
+#118 opened last week by dependabot bot
+@nitsuah
+ 2
+
+chore(deps-dev): bump typescript from 5.1.6 to 5.9.3 
+ dependencies javascript
+#117 opened last week by dependabot bot
+@nitsuah
+ 2
+
+chore(deps-dev): bump typescript-eslint from 8.31.1 to 8.46.2 
+ dependencies javascript
 
 **Next Review:** November 7, 2025

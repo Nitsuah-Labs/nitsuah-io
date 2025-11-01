@@ -55,7 +55,7 @@ const ProfilePage: React.FC = () => {
           style={{
             fontSize: "2.5rem",
             marginBottom: "1rem",
-            background: "linear-gradient(135deg, #f97316 0%, #fb923c 100%)",
+            background: "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -79,7 +79,7 @@ const ProfilePage: React.FC = () => {
           <div
             style={{
               background: "#1a1a1a",
-              border: "2px solid rgba(249, 115, 22, 0.3)",
+              border: "2px solid rgba(192, 132, 252, 0.3)",
               borderRadius: "12px",
               padding: "2rem",
             }}
@@ -88,7 +88,7 @@ const ProfilePage: React.FC = () => {
               style={{
                 fontSize: "1.5rem",
                 marginBottom: "1.5rem",
-                color: "#f97316",
+                color: "#c084fc",
               }}
             >
               Connect Wallet
@@ -103,7 +103,7 @@ const ProfilePage: React.FC = () => {
             <div
               style={{
                 background: "#1a1a1a",
-                border: "2px solid rgba(249, 115, 22, 0.3)",
+                border: "2px solid rgba(192, 132, 252, 0.3)",
                 borderRadius: "12px",
                 padding: "1.5rem",
               }}
@@ -112,7 +112,7 @@ const ProfilePage: React.FC = () => {
                 style={{
                   fontSize: "1.2rem",
                   marginBottom: "1rem",
-                  color: "#f97316",
+                  color: "#c084fc",
                 }}
               >
                 {ensName ? "ENS Name" : "Wallet Address"}
@@ -143,7 +143,7 @@ const ProfilePage: React.FC = () => {
                     padding: "0.75rem 1.5rem",
                     background: copied
                       ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-                      : "linear-gradient(135deg, #f97316 0%, #fb923c 100%)",
+                      : "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
                     border: "2px solid #000",
                     borderRadius: "8px",
                     color: "#fff",
@@ -178,7 +178,7 @@ const ProfilePage: React.FC = () => {
             <div
               style={{
                 background: "#1a1a1a",
-                border: "2px solid rgba(249, 115, 22, 0.3)",
+                border: "2px solid rgba(192, 132, 252, 0.3)",
                 borderRadius: "12px",
                 padding: "1.5rem",
               }}
@@ -187,7 +187,7 @@ const ProfilePage: React.FC = () => {
                 style={{
                   fontSize: "1.2rem",
                   marginBottom: "1rem",
-                  color: "#f97316",
+                  color: "#c084fc",
                 }}
               >
                 Network
@@ -228,7 +228,7 @@ const ProfilePage: React.FC = () => {
               <div
                 style={{
                   background: "#1a1a1a",
-                  border: "2px solid rgba(249, 115, 22, 0.3)",
+                  border: "2px solid rgba(192, 132, 252, 0.3)",
                   borderRadius: "12px",
                   padding: "1.5rem",
                 }}
@@ -237,7 +237,7 @@ const ProfilePage: React.FC = () => {
                   style={{
                     fontSize: "1.2rem",
                     marginBottom: "1rem",
-                    color: "#f97316",
+                    color: "#c084fc",
                   }}
                 >
                   Balance
@@ -252,7 +252,7 @@ const ProfilePage: React.FC = () => {
             <div
               style={{
                 background: "#1a1a1a",
-                border: "2px solid rgba(249, 115, 22, 0.3)",
+                border: "2px solid rgba(192, 132, 252, 0.3)",
                 borderRadius: "12px",
                 padding: "1.5rem",
               }}
@@ -261,7 +261,7 @@ const ProfilePage: React.FC = () => {
                 style={{
                   fontSize: "1.2rem",
                   marginBottom: "1rem",
-                  color: "#f97316",
+                  color: "#c084fc",
                 }}
               >
                 Actions
