@@ -46,16 +46,16 @@ const LabSubNav: React.FC = () => {
             aria-current={isActive ? "page" : undefined}
             style={{
               color: isActive
-                ? "#fb923c"
+                ? "#c084fc"
                 : page.isWIP
                   ? "rgba(255, 255, 255, 0.5)"
                   : "rgba(255, 255, 255, 0.85)",
               textDecoration: "none",
               padding: "0.5rem 0.875rem",
               borderRadius: "6px",
-              background: isActive ? "rgba(249, 115, 22, 0.1)" : "transparent",
+              background: isActive ? "rgba(168, 85, 247, 0.1)" : "transparent",
               border: isActive
-                ? "1px solid rgba(249, 115, 22, 0.4)"
+                ? "1px solid rgba(168, 85, 247, 0.4)"
                 : "1px solid transparent",
               transition: "all 0.2s ease",
               fontSize: "0.875rem",

@@ -226,6 +226,20 @@
   border-color: #3b82f6;
 }
 
+/* Smaller non-featured cards for better density */
+.non-featured-card {
+  transform: scale(0.85);
+  transform-origin: top center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.non-featured-card:hover {
+  transform: scale(0.85) translateY(-2px);
+}
+
 .portfolio-card-image {
   width: 100%;
   aspect-ratio: 16 / 9; /* Reduce from 1:1 to 16:9 for better proportion */
@@ -285,7 +299,9 @@
 
 .portfolio-card-links {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
 }
 
 .portfolio-link {
@@ -293,24 +309,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: 5px;
+  gap: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
   text-decoration: none;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  background: #f3f4f6;
-  color: #374151;
+  background: #374151;
+  color: #f3f4f6;
 }
 
 .portfolio-link:hover {
-  background: #e5e7eb;
+  background: #4b5563;
   transform: translateY(-1px);
 }
 
 .portfolio-link-primary {
-  background: #1e40af; /* darker blue to improve contrast for small text */
+  background: #1e40af;
   color: white;
 }
 
