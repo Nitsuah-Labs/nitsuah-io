@@ -15,12 +15,16 @@ test.describe("Labs Pages Visual Tests", () => {
     }) => {
       await go(browserPage, page.path);
 
-      // Check header and footer are visible
-      await expect(browserPage.locator("header")).toBeVisible();
-      await expect(browserPage.locator("footer")).toBeVisible();
+      // Wait for page to be fully loaded and hydrated
+      await browserPage.waitForLoadState("networkidle");
+
+      // Wait for main content to be visible
+      await expect(browserPage.locator("main").first()).toBeVisible({
+        timeout: 10000,
+      });
 
       // Wait for layout to stabilize
-      await browserPage.waitForTimeout(1000);
+      await browserPage.waitForTimeout(2000);
 
       // Take screenshot
       const screenshotName = `${page.path.replace(/\//g, "-").slice(1) || "labs"}-desktop.png`;

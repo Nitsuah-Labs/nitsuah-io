@@ -117,6 +117,7 @@ function renderOutput() {
         <Link
           href="/labs/register"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Register page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
@@ -131,15 +132,18 @@ function renderOutput() {
               >
                 Sign up for Web3 experiments
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
                 style={{
                   width: "100%",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 GET STARTED
-              </button>
+              </div>
             </div>
           </div>
         </Link>
@@ -148,6 +152,7 @@ function renderOutput() {
         <Link
           href="/labs/mint"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Mint NFT page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
@@ -162,16 +167,18 @@ function renderOutput() {
               >
                 Create a Landplot NFT
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-success"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 START MINTING
-              </button>
+              </div>
             </div>
           </div>
         </Link>
@@ -180,6 +187,7 @@ function renderOutput() {
         <Link
           href="/labs/domains"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Domains page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
@@ -194,22 +202,28 @@ function renderOutput() {
               >
                 Manage your subdomains
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 VIEW DOMAINS
-              </button>
+              </div>
             </div>
           </div>
         </Link>
 
         {/* Home Card */}
-        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link
+          href="/"
+          style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to main site homepage"
+        >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
               <h3 className="labs-card-title">HOME</h3>
@@ -223,16 +237,18 @@ function renderOutput() {
               >
                 Return to main site
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-secondary"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 EXIT LABS
-              </button>
+              </div>
             </div>
           </div>
         </Link>
