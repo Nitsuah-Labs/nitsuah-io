@@ -54,7 +54,7 @@ const projectImages: Record<string, any> = {
   gcp: cat,
   stash: cat,
   "nitsuah-io": nitsuah,
-  games: cat,
+  games: ngx,
 };
 
 // GIF projects for unoptimized loading
@@ -170,7 +170,7 @@ const Projects = () => {
   const categories = ["all", "Featured", "Apps", "Web3", "AI/ML", "Design"];
 
   return (
-    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div className={styles.pageWrapper}>
       <HomeBar />
       <main className={styles.projectsPage}>
         <div className={styles.container}>

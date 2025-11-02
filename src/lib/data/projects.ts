@@ -10,6 +10,7 @@ export type Project = {
   category: "Apps" | "Web3" | "AI/ML" | "Design" | "Featured";
   status: "active" | "maintained" | "archived" | "planned";
   featured: boolean;
+  isComingSoon?: boolean;
   icon?: any;
   externalLink?: string;
   infoUrl?: string;
@@ -351,6 +352,7 @@ const projects: Project[] = [
     category: "AI/ML",
     status: "planned",
     featured: false,
+    isComingSoon: true,
   },
 ];
 

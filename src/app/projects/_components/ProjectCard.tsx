@@ -38,7 +38,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
-  const isComingSoon = project.id === "ai-coming-soon";
+  const isComingSoon = project.isComingSoon || false;
 
   return (
     <div
