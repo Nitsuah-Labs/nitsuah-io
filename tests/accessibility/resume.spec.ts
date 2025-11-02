@@ -112,7 +112,7 @@ test.describe("Resume Page Accessibility Tests", () => {
     for (let i = 0; i < iconCount; i++) {
       const icon = icons.nth(i);
       const parentText = await icon.locator("xpath=..").textContent();
-      expect(parentText && parentText.trim().length).toBeGreaterThan(0);
+      expect((parentText || "").trim().length).toBeGreaterThan(0);
     }
   });
 });
