@@ -11,7 +11,6 @@ import "../_components/_styles/SelectedProjects.css";
 import "../_components/_styles/global.css";
 
 // Project card transform constants
-const FEATURED_SCALE = 1;
 const NON_FEATURED_SCALE = 0.72;
 const HOVER_TRANSLATE_Y_FEATURED = "-4px";
 const HOVER_TRANSLATE_Y_NON_FEATURED = "-2px";
