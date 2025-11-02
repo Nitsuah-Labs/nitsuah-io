@@ -36,7 +36,7 @@ function renderOutput() {
         {/* Network Info Card */}
         <div className="labs-card">
           <div className="labs-card-header">
-            <h3 className="labs-card-title">
+            <h2 className="labs-card-title">
               <Image
                 className="logo"
                 src={polygonLogo}
@@ -48,7 +48,7 @@ function renderOutput() {
                 }}
               />
               NETWORK
-            </h3>
+            </h2>
           </div>
           <div className="labs-card-body">
             <p
@@ -71,7 +71,7 @@ function renderOutput() {
         {/* Faucet Card */}
         <div className="labs-card">
           <div className="labs-card-header">
-            <h3 className="labs-card-title">
+            <h2 className="labs-card-title">
               <Image
                 className="logo"
                 src={mumbai}
@@ -83,7 +83,7 @@ function renderOutput() {
                 }}
               />
               TEST FUNDS
-            </h3>
+            </h2>
           </div>
           <div className="labs-card-body">
             <p
@@ -121,7 +121,7 @@ function renderOutput() {
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">REGISTER</h3>
+              <h2 className="labs-card-title">REGISTER</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -156,7 +156,7 @@ function renderOutput() {
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">MINT NFT</h3>
+              <h2 className="labs-card-title">MINT NFT</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -191,7 +191,7 @@ function renderOutput() {
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">DOMAINS</h3>
+              <h2 className="labs-card-title">DOMAINS</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -226,7 +226,7 @@ function renderOutput() {
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">HOME</h3>
+              <h2 className="labs-card-title">HOME</h2>
             </div>
             <div className="labs-card-body">
               <p
