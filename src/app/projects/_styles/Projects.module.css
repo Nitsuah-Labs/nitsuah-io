@@ -1,0 +1,438 @@
+/* Projects Page Styles */
+
+.pageWrapper {
+  background: #0a0a0a;
+  min-height: 100vh;
+}
+
+.projectsPage {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  padding-bottom: 80px;
+  min-height: calc(100vh - 140px);
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+}
+
+/* Filter Panel */
+.filterPanel {
+  margin-bottom: 2rem;
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filterHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #f97316;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.filterToggle:hover {
+  color: #ea580c;
+}
+
+.filterToggle i {
+  margin-right: 0.5rem;
+}
+
+.categoryButtonsInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filterContent {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+/* Category Filters */
+.categoryFilters {
+  margin-bottom: 1.5rem;
+}
+
+.filterLabel {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.categoryButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 2px solid rgba(249, 115, 22, 0.3);
+  background: rgba(20, 20, 20, 0.8);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.categoryButton:hover {
+  border-color: #f97316;
+  color: #f97316;
+  transform: translateY(-2px);
+}
+
+.categoryButton.active {
+  border-color: #f97316;
+  background: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+}
+
+/* Tag Filters */
+.tagFilters {
+  margin-top: 1.5rem;
+}
+
+.tagButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tagButton {
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tagButton:hover {
+  border-color: #f97316;
+  color: #f97316;
+}
+
+.tagButton.selected {
+  background: rgba(249, 115, 22, 0.2);
+  border-color: #f97316;
+  color: #f97316;
+}
+
+/* Project Grid */
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Project Card */
+.card {
+  background: rgba(20, 20, 20, 0.8);
+  border: 2px solid rgba(249, 115, 22, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card:hover {
+  border-color: rgba(249, 115, 22, 0.8);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+}
+
+/* Coming Soon Card - Special holographic/gradient effect */
+.comingSoonCard {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(249, 115, 22, 0.15) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  border: 2px solid;
+  border-image: linear-gradient(
+      135deg,
+      #f97316 0%,
+      #ea580c 25%,
+      #000 50%,
+      #ea580c 75%,
+      #f97316 100%
+    )
+    1;
+  position: relative;
+  overflow: hidden;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.comingSoonCard::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(249, 115, 22, 0.1) 50%,
+    transparent 70%
+  );
+  animation: rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+.comingSoonCard:hover {
+  border-image: linear-gradient(
+      135deg,
+      #f97316 0%,
+      #ea580c 25%,
+      #f97316 50%,
+      #ea580c 75%,
+      #f97316 100%
+    )
+    1;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(249, 115, 22, 0.4);
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Featured Star - Interactive */
+.featuredStar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(249, 115, 22, 0.4);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.featuredStar:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: #f97316;
+  transform: scale(1.1);
+  color: #f97316;
+}
+
+.featuredStar.featured {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-color: #f97316;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+}
+
+.featuredStar.featured:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.6);
+}
+
+.featuredStar i {
+  font-size: 1.1rem;
+}
+
+/* Card Image */
+.cardImage {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.cardDescription {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+/* Card Tags */
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cardTag {
+  padding: 0.25rem 0.75rem;
+  background: rgba(249, 115, 22, 0.2);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #f97316;
+}
+
+/* Card Actions */
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  justify-content: flex-end;
+}
+
+.cardButton {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.cardButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .filterPanel {
+    padding: 1rem;
+  }
+
+  .categoryButtons,
+  .tagButtons {
+    gap: 0.5rem;
+  }
+
+  .categoryButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsPage {
+    padding: 1rem 0.5rem;
+  }
+
+  .cardActions {
+    flex-direction: column;
+  }
+
+  .cardButton {
+    width: 100%;
+    text-align: center;
+  }
+}

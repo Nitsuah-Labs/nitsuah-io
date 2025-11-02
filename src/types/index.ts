@@ -11,6 +11,7 @@ export interface Project {
   tags: string[];
   status: "active" | "maintained" | "archived";
   featured: boolean;
+  isComingSoon?: boolean;
 }
 
 export interface BlogPost {
