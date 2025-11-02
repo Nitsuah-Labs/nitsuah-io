@@ -1,24 +1,158 @@
 "use client";
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "../_styles/Blog.module.css";
 import Image from "next/image";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import arfPlaceholder from "../../../_components/_labs/_assets/arf.png";
+import styles from "../_styles/Blog.module.css";
 
-export default function BlogPanel({ blog }) {
-  const { id, name, description, image_url } = blog;
+export default function BlogPanel({ blog, onUpvote }) {
+  const {
+    id,
+    title,
+    description,
+    image_url,
+    author,
+    category,
+    tags,
+    date,
+    readTime,
+    upvotes,
+    comments,
+    views,
+  } = blog;
+
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [currentUpvotes, setCurrentUpvotes] = useState(upvotes);
+  const [showCopyMessage, setShowCopyMessage] = useState(false);
+
+  const handleUpvote = (e) => {
+    e.stopPropagation();
+    const newUpvoteState = !isUpvoted;
+    setIsUpvoted(newUpvoteState);
+    setCurrentUpvotes((prev) => (newUpvoteState ? prev + 1 : prev - 1));
+    if (onUpvote) {
+      onUpvote(id, newUpvoteState);
+    }
+  };
+
+  const handleShare = async (e) => {
+    e.stopPropagation();
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: description,
+          url: window.location.href,
+        });
+      } catch {
+        // User cancelled share, ignore
+      }
+    } else {
+      // Fallback: copy to clipboard with toast message
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setShowCopyMessage(true);
+        setTimeout(() => setShowCopyMessage(false), 2000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    }
+  };
 
   return (
     <div className={styles.blog_container}>
-      <div>
-        <Image className={styles.blog_image} src={image_url} alt="" />
+      <div className={styles.blog_image_wrapper}>
+        <Image
+          className={styles.blog_image}
+          src={image_url || arfPlaceholder}
+          alt={title}
+          width={400}
+          height={250}
+          style={{ objectFit: "cover" }}
+          unoptimized
+        />
+        <div className={styles.blog_category_badge}>{category}</div>
       </div>
 
       <div className={styles.blog_details}>
         <div className={styles.blog_text}>
-          <div className={styles.blog_title}>{name}</div>
+          <div className={styles.blog_title}>{title}</div>
+          <div className={styles.blog_meta}>
+            <span className={styles.blog_author}>By {author}</span>
+            <span className={styles.blog_date}>
+              {new Date(date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+            <span className={styles.blog_readtime}>{readTime}</span>
+          </div>
           <div className={styles.blog_description}>{description}</div>
+          <div className={styles.blog_tags}>
+            {tags &&
+              tags.slice(0, 3).map((tag, index) => (
+                <span key={index} className={styles.blog_tag}>
+                  #{tag}
+                </span>
+              ))}
+          </div>
         </div>
-        <div className={styles.blog_action}>{id}</div>
+
+        <div className={styles.blog_stats}>
+          <div className={styles.blog_stat}>
+            <i className="fa fa-eye" aria-hidden="true"></i>
+            <span>{views}</span>
+          </div>
+          <div className={styles.blog_stat}>
+            <i className="fa fa-comment" aria-hidden="true"></i>
+            <span>{comments}</span>
+          </div>
+        </div>
+
+        <div className={styles.blog_actions}>
+          <button
+            onClick={handleUpvote}
+            className={`${styles.blog_action_btn} ${isUpvoted ? styles.upvoted : ""}`}
+            aria-label="Upvote"
+          >
+            <i
+              className={`fa ${isUpvoted ? "fa-heart" : "fa-heart-o"}`}
+              aria-hidden="true"
+            ></i>
+            <span>{currentUpvotes}</span>
+          </button>
+          <button
+            onClick={handleShare}
+            className={styles.blog_action_btn}
+            aria-label="Share"
+            style={{ position: "relative" }}
+          >
+            <i className="fa fa-share-alt" aria-hidden="true"></i>
+            <span>Share</span>
+            {showCopyMessage && (
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "100%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  marginBottom: "0.5rem",
+                  padding: "0.5rem 1rem",
+                  background: "#10b981",
+                  color: "white",
+                  borderRadius: "6px",
+                  fontSize: "0.875rem",
+                  whiteSpace: "nowrap",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+                  zIndex: 10,
+                }}
+              >
+                Link copied!
+              </div>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -26,9 +160,18 @@ export default function BlogPanel({ blog }) {
 
 BlogPanel.propTypes = {
   blog: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    name: PropTypes.string,
-    description: PropTypes.string,
-    image_url: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    image_url: PropTypes.string.isRequired,
+    author: PropTypes.string,
+    category: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    date: PropTypes.string,
+    readTime: PropTypes.string,
+    upvotes: PropTypes.number,
+    comments: PropTypes.number,
+    views: PropTypes.number,
   }).isRequired,
+  onUpvote: PropTypes.func,
 };

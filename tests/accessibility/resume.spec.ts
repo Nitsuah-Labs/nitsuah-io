@@ -87,7 +87,7 @@ test.describe("Resume Page Accessibility Tests", () => {
 
     // Check for semantic elements
     await expect(page.locator("main")).toBeVisible();
-    await expect(page.locator("section")).toHaveCount(6); // basics, work, skills, education, languages, projects
+    await expect(page.locator("section")).toHaveCount(5); // basics, work, skills, education, languages
     // Check for page header (AppBar) - use role selector to avoid conflict with resume-header
     await expect(page.getByRole("banner")).toBeVisible();
   });
@@ -112,7 +112,7 @@ test.describe("Resume Page Accessibility Tests", () => {
     for (let i = 0; i < iconCount; i++) {
       const icon = icons.nth(i);
       const parentText = await icon.locator("xpath=..").textContent();
-      expect(parentText && parentText.trim().length).toBeGreaterThan(0);
+      expect((parentText || "").trim().length).toBeGreaterThan(0);
     }
   });
 });

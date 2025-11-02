@@ -6,6 +6,14 @@ import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import "./resume.css";
 
+/**
+ * Extracts duration text from parentheses if present, otherwise returns the original duration.
+ * Example: "Jan 2020 - Dec 2021 (2 years)" => "2 years"
+ */
+function extractDurationText(duration: string): string {
+  return duration.match(/\(([^)]+)\)/)?.[1] || duration;
+}
+
 interface ResumeData {
   basics: {
     name: string;
@@ -137,18 +145,6 @@ function getProficiencyLevel(level?: string): number {
   return level ? levels[level] || 3 : 3;
 }
 
-function getNetworkIcon(network: string): string {
-  const icons: { [key: string]: string } = {
-    GitHub: "fa-github",
-    LinkedIn: "fa-linkedin",
-    Twitter: "fa-twitter",
-    X: "fa-twitter",
-    Website: "fa-globe",
-    Portfolio: "fa-briefcase",
-  };
-  return icons[network] || "fa-link";
-}
-
 export default function ResumePage() {
   const resume = getResumeData();
   const [showAllJobs, setShowAllJobs] = useState(false);
@@ -171,7 +167,7 @@ export default function ResumePage() {
 
             {resume.basics.summary && (
               <div className="resume-summary">
-                <h2>About</h2>
+                <h2 className="section-title">About</h2>
                 <p>{resume.basics.summary}</p>
               </div>
             )}
@@ -228,32 +224,68 @@ export default function ResumePage() {
                       alignItems: "center",
                       gap: "0.5rem",
                       padding: "0.5rem 1rem",
-                      background: "rgba(249, 115, 22, 0.1)",
-                      border: "1px solid rgba(249, 115, 22, 0.3)",
+                      background: "#f97316",
+                      border: "1px solid #ea580c",
                       borderRadius: "6px",
-                      color: "#c2410c",
+                      color: "#000",
                       textDecoration: "none",
                       transition: "all 0.3s ease",
+                      fontWeight: "600",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(249, 115, 22, 0.2)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(249, 115, 22, 0.6)";
+                      e.currentTarget.style.background = "#ea580c";
+                      e.currentTarget.style.borderColor = "#c2410c";
                       e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(249, 115, 22, 0.4)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(249, 115, 22, 0.1)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(249, 115, 22, 0.3)";
+                      e.currentTarget.style.background = "#f97316";
+                      e.currentTarget.style.borderColor = "#ea580c";
                       e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                   >
-                    <i className="fa fa-globe" aria-hidden="true"></i>
+                    <span style={{ fontSize: "1.1rem" }}>🌐</span>
                     <span>Website</span>
                   </a>
                 )}
+
+                {/* Projects Button */}
+                <a
+                  href="/projects"
+                  className="profile-link"
+                  aria-label="View portfolio projects"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem 1rem",
+                    background: "#f97316",
+                    border: "1px solid #ea580c",
+                    borderRadius: "6px",
+                    color: "#000",
+                    textDecoration: "none",
+                    transition: "all 0.3s ease",
+                    fontWeight: "600",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#ea580c";
+                    e.currentTarget.style.borderColor = "#c2410c";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 8px rgba(249, 115, 22, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#f97316";
+                    e.currentTarget.style.borderColor = "#ea580c";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <span style={{ fontSize: "1.1rem" }}>📁</span>
+                  <span>Projects</span>
+                </a>
 
                 {/* Social Profile Buttons */}
                 {resume.basics.profiles &&
@@ -292,11 +324,16 @@ export default function ResumePage() {
                         e.currentTarget.style.transform = "translateY(0)";
                       }}
                     >
-                      <i
-                        className={`fa ${getNetworkIcon(profile.network)}`}
-                        aria-hidden="true"
-                        style={{ fontSize: "1.2rem" }}
-                      ></i>
+                      <span style={{ fontSize: "1.1rem" }}>
+                        {profile.network === "GitHub"
+                          ? "💻"
+                          : profile.network === "LinkedIn"
+                            ? "👔"
+                            : profile.network === "Twitter" ||
+                                profile.network === "X"
+                              ? "🐦"
+                              : "🔗"}
+                      </span>
                       <span>{profile.network}</span>
                     </a>
                   ))}
@@ -324,6 +361,7 @@ export default function ResumePage() {
                       <label
                         htmlFor={`work-item-${idx}`}
                         className="work-label"
+                        style={{ position: "relative" }}
                       >
                         <div className="work-header">
                           <div className="work-left">
@@ -337,6 +375,21 @@ export default function ResumePage() {
                                   ? formatDate(job.endDate)
                                   : "Present"}
                               </span>
+                              <div
+                                className="expand-indicator"
+                                style={{
+                                  marginTop: "0.5rem",
+                                  color: "#f97316",
+                                  fontSize: "1.2rem",
+                                  transition: "transform 0.3s ease",
+                                }}
+                              >
+                                <i
+                                  className="fa fa-chevron-down"
+                                  aria-hidden="true"
+                                ></i>
+                                <span className="sr-only">Expand details</span>
+                              </div>
                             </div>
                             <div className="work-info">
                               <div className="work-position">
@@ -368,9 +421,6 @@ export default function ResumePage() {
                               );
                               const fullBars = Math.floor(years);
                               const partialBar = years - fullBars;
-                              const partialPercent = Math.round(
-                                (partialBar / 0.25) * 25,
-                              );
                               const isCurrent = !job.endDate;
 
                               return (
@@ -380,21 +430,18 @@ export default function ResumePage() {
                                       (_, i) => (
                                         <div
                                           key={i}
-                                          className={`duration-bar full ${isCurrent && i === fullBars - 1 && partialBar === 0 ? "current" : ""}`}
+                                          className="duration-bar full"
                                         />
                                       ),
                                     )}
                                     {partialBar > 0 && (
-                                      <div
-                                        className={`duration-bar partial ${isCurrent ? "current" : ""}`}
-                                        style={{
-                                          width: `${Math.max(25, partialPercent)}%`,
-                                        }}
-                                      />
+                                      <div className="duration-bar partial" />
                                     )}
                                   </div>
-                                  <div className="duration-text">
-                                    {duration}
+                                  <div
+                                    className={`duration-text ${isCurrent ? "current" : ""}`}
+                                  >
+                                    {extractDurationText(duration)}
                                   </div>
                                 </div>
                               );
@@ -429,7 +476,7 @@ export default function ResumePage() {
                       padding: "0.75rem 1.5rem",
                       background:
                         "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                      color: "white",
+                      color: "#000",
                       border: "none",
                       borderRadius: "8px",
                       fontSize: "1rem",
@@ -561,11 +608,7 @@ export default function ResumePage() {
 
               {/* Languages Section */}
               {resume.languages && resume.languages.length > 0 && (
-                <section
-                  className="resume-section languages"
-                  id="languages"
-                  style={{ marginBottom: 0 }}
-                >
+                <section className="resume-section languages" id="languages">
                   <h2 className="section-title">
                     <i className="fa fa-language" aria-hidden="true"></i>{" "}
                     Languages
@@ -582,46 +625,6 @@ export default function ResumePage() {
               )}
             </div>
           )}
-
-          {/* Projects Link */}
-          <section className="resume-section projects-link" id="projects">
-            <h2 className="section-title">
-              <i className="fa fa-rocket" aria-hidden="true"></i> Projects
-            </h2>
-            <p style={{ marginBottom: "1rem" }}>
-              View my portfolio of selected projects
-            </p>
-            <a
-              href="/projects"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                color: "#1a1a1a",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                textDecoration: "none",
-                fontWeight: "600",
-                border: "2px solid #000",
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 6px 16px rgba(249, 115, 22, 0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(249, 115, 22, 0.3)";
-              }}
-            >
-              <i className="fa fa-folder-open" aria-hidden="true"></i>
-              Visit Portfolio
-            </a>
-          </section>
         </div>
       </main>
       <div className="print-hide">

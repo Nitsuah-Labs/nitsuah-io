@@ -1,5 +1,18 @@
 /* Resume Page - StackOverflow Theme Adaptation */
 
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .resume-container {
   max-width: 850px;
   margin: 0 auto;
@@ -368,6 +381,10 @@
   background: #e6f4ff;
 }
 
+.work-toggle:checked ~ .work-label .expand-indicator i {
+  transform: rotate(180deg);
+}
+
 .work-left {
   flex: 1;
   display: flex;
@@ -405,10 +422,13 @@
   gap: 4px;
   align-items: center;
   height: 24px;
+  width: 150px;
+  justify-content: flex-end;
 }
 
 .duration-bar {
   width: 20px;
+  min-width: 20px;
   height: 100%;
   background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
   border-radius: 2px;
@@ -423,21 +443,7 @@
   opacity: 0.6;
 }
 
-.duration-bar.current {
-  position: relative;
-}
-
-.duration-bar.current::after {
-  content: "";
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid #10b981;
-}
+/* Triangle moved to duration-text */
 
 .duration-text {
   font-size: 0.85rem;
@@ -445,6 +451,21 @@
   font-weight: 600;
   text-align: right;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.duration-text.current::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 8px solid #10b981;
+  margin-right: 0.25rem;
 }
 
 .work-position {
@@ -473,6 +494,10 @@
   overflow: hidden;
   transition: max-height 0.3s ease-out;
   padding: 0 1rem;
+}
+
+.work-toggle:checked ~ label .fa-chevron-down {
+  transform: rotate(180deg);
 }
 
 .work-toggle:checked ~ .work-details {
@@ -509,6 +534,15 @@
   background: #f8f9fa;
   border-radius: 4px;
   border-left: 3px solid #ff6d1f;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.skill-item:hover {
+  background: #e6f4ff;
+  border-left-color: #0095ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .skill-header {
@@ -562,6 +596,15 @@
   background: #f8f9fa;
   border-left: 3px solid #0095ff;
   border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.education-item:hover {
+  background: #e6f4ff;
+  border-left-color: #0095ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .education-header {
@@ -616,6 +659,15 @@
   background: #f8f9fa;
   border-radius: 4px;
   border-left: 3px solid #ff6d1f;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.language-item:hover {
+  background: #e6f4ff;
+  border-left-color: #0095ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .language-name {
@@ -711,7 +763,7 @@
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .resume-container {
-    padding: 1.5rem 1rem;
+    padding: 6rem 1rem 2rem;
   }
 
   .education-languages-container {
@@ -722,24 +774,44 @@
   .work-header {
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
   }
 
   .work-left {
     flex-direction: column;
     gap: 0.75rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .work-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .work-date .expand-indicator {
+    margin-top: 0 !important;
   }
 
   .work-duration {
     align-items: flex-start;
     min-width: auto;
+    width: 100%;
   }
 
   .duration-container {
-    align-items: flex-start;
+    flex-direction: row !important;
+    align-items: center;
+    width: 100%;
+    gap: 0.75rem;
   }
 
   .duration-text {
     text-align: left;
+    justify-content: flex-start;
   }
 
   .resume-name {
@@ -780,6 +852,10 @@
 
   .profile-link {
     justify-content: center;
+  }
+
+  .languages-list {
+    padding-bottom: 2rem;
   }
 }
 

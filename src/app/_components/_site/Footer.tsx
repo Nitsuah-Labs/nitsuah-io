@@ -26,72 +26,64 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <>
-      {/* Back to Top Button */}
+    <footer className="footer-container" style={{ position: "fixed" }}>
+      <a
+        href="https://www.linkedin.com/in/austinjhardy"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Visit Austin Hardy's LinkedIn profile"
+      >
+        <Image
+          alt="Cat avatar icon for Austin Hardy"
+          className="twitter-logo"
+          src={cat}
+          width={40}
+          height={40}
+        />
+      </a>
+      <a
+        className="footer-text"
+        href={TWITTER_LINK}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
+      >
+        {`@${TWITTER_HANDLE}`}
+      </a>
+      {/* Back to Top Button - Inside Footer */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
           style={{
-            position: "fixed",
-            bottom: "100px",
+            position: "absolute",
             right: "2rem",
-            zIndex: 1000,
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-            border: "2px solid rgba(0, 0, 0, 0.3)",
-            color: "#fff",
-            fontSize: "1.5rem",
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 10,
+            width: "0",
+            height: "0",
+            border: "none",
+            borderLeft: "20px solid transparent",
+            borderRight: "20px solid transparent",
+            borderBottom: "25px solid #f97316",
+            background: "transparent",
             cursor: "pointer",
-            boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
             transition: "all 0.3s ease",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            padding: 0,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateY(-4px)";
-            e.currentTarget.style.boxShadow =
-              "0 8px 20px rgba(249, 115, 22, 0.6)";
+            e.currentTarget.style.borderBottomColor = "#ea580c";
+            e.currentTarget.style.filter =
+              "drop-shadow(0 4px 8px rgba(249, 115, 22, 0.6))";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow =
-              "0 4px 12px rgba(249, 115, 22, 0.4)";
+            e.currentTarget.style.borderBottomColor = "#f97316";
+            e.currentTarget.style.filter = "none";
           }}
-        >
-          <i className="fa fa-chevron-up" aria-hidden="true"></i>
-        </button>
+        />
       )}
-
-      <footer className="footer-container">
-        <a
-          href="https://www.linkedin.com/in/austinjhardy"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Visit Austin Hardy's LinkedIn profile"
-        >
-          <Image
-            alt="Cat avatar icon for Austin Hardy"
-            className="twitter-logo"
-            src={cat}
-            width={40}
-            height={40}
-          />
-        </a>
-        <a
-          className="footer-text"
-          href={TWITTER_LINK}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Follow @${TWITTER_HANDLE} on Twitter`}
-        >
-          {`@${TWITTER_HANDLE}`}
-        </a>
-      </footer>
-    </>
+    </footer>
   );
 };
 

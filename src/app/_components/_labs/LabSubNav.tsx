@@ -42,8 +42,14 @@ const LabSubNav: React.FC = () => {
         return (
           <Link
             key={page.href}
-            href={page.href}
+            href={page.isWIP ? "#" : page.href}
             aria-current={isActive ? "page" : undefined}
+            aria-disabled={page.isWIP ? "true" : undefined}
+            onClick={(e) => {
+              if (page.isWIP) {
+                e.preventDefault();
+              }
+            }}
             style={{
               color: isActive
                 ? "#c084fc"
@@ -61,37 +67,27 @@ const LabSubNav: React.FC = () => {
               fontSize: "0.875rem",
               fontWeight: isActive ? 600 : 400,
               position: "relative",
+              cursor: page.isWIP ? "not-allowed" : "pointer",
+              pointerEvents: page.isWIP ? "none" : "auto",
+              opacity: page.isWIP ? 0.6 : 1,
             }}
             onMouseEnter={(e) => {
-              if (!isActive) {
-                if (page.isWIP) {
-                  e.currentTarget.style.background = "rgba(239, 68, 68, 0.15)";
-                  e.currentTarget.style.color = "#ef4444";
-                  e.currentTarget.style.borderColor = "rgba(239, 68, 68, 0.3)";
-                } else {
-                  e.currentTarget.style.background =
-                    "rgba(255, 255, 255, 0.08)";
-                  e.currentTarget.style.color = "#fff";
-                }
+              if (!isActive && !page.isWIP) {
+                e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
+                e.currentTarget.style.color = "#fff";
               }
             }}
             onMouseLeave={(e) => {
-              if (!isActive) {
+              if (!isActive && !page.isWIP) {
                 e.currentTarget.style.background = "transparent";
                 e.currentTarget.style.borderColor = "transparent";
-                e.currentTarget.style.color = page.isWIP
-                  ? "rgba(255, 255, 255, 0.5)"
-                  : "rgba(255, 255, 255, 0.85)";
+                e.currentTarget.style.color = "rgba(255, 255, 255, 0.85)";
               }
             }}
             title={page.isWIP ? `${page.label} (Work in Progress)` : page.label}
           >
             {page.isIcon ? (
-              <i
-                className={`fa ${page.icon}`}
-                aria-hidden="true"
-                style={{ fontSize: "1.1rem" }}
-              ></i>
+              <span style={{ fontSize: "1.1rem" }}>🏠</span>
             ) : (
               <>
                 {page.label}
