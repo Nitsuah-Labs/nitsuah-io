@@ -4,18 +4,8 @@
 
 ## Deployment Feedback
 
-## Deployment Feedback
-
-- [ ] resume - on mobile the print pdf button appears behind the nav bar (it should be on top of the nav bar visually)
-- [ ] resume - on mobile/small width the top of my name is not visible (cut off by nav bar height, so might just need some top padding or margin on the main content area?)
-- [ ]  resume - xp cards on mobile should maintain alignment intent or align left for all.
-- [ ]  resume - green "current" indicator should be same hight as the year bars next to it for consistency. and next to it to indicate growth (so treated like its own cell)
-- [ ]  resume - languages section (the bottom) gets cut off a bit at the end on mobile.
-- [ ]  gobackup - carrot should actually be a carrot, not a square, also cleanup the old buttons/circles from about and home. but REGARDLESS this needs to be a triangle upward and it needs to be in the FOOTER BAR. NOT IN THE PAGE.
-- [ ]  projects - lower cards are still not what we want. replicate how the featured project ones react to onhover n shit. jesus christ. right now they just take up a ton of space and pop out when hovered. but then they dont go back to being small when not hoevered over. (pasted img 2)
-- [ ]  /labs NAV BUTTONS STILL DONT HAVE ICONS OR EMOJIS BY DEFAULT DISPLAYED AS THE "TEXT".
-- [ ]  /labs nav on mobile should use color scheme from labs (so grey/black/purple not blue/darkblack)
-- [ ]  /labs home  
+- [ ] home - tbd
+- [ ]  /labs - home
 
 ## Feature Requests
 
