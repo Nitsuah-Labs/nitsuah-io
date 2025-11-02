@@ -861,7 +861,7 @@
 
 @media screen and (max-width: 480px) {
   .resume-container {
-    padding: 1rem 0.75rem;
+    padding: 6rem 0.75rem 1rem; /* Extra top padding to clear nav bar on mobile */
   }
 
   .resume-name {

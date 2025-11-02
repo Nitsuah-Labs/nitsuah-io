@@ -177,9 +177,9 @@ const Projects = () => {
           {/* Header */}
           <div className={styles.header}>
             <h1 className={styles.title}>PROJECTS</h1>
-            <p className={styles.subtitle}>
+            <h2 className={styles.subtitle}>
               Explore projects organized by category
-            </p>
+            </h2>
           </div>
 
           {/* Filter Panel */}
@@ -272,7 +272,10 @@ const Projects = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className={styles.projectGrid}>
+          <section
+            className={styles.projectGrid}
+            aria-label="Project Repositories"
+          >
             {filteredProjects.map((project) => {
               const image = projectImages[project.id] || cat;
               const isGif = gifProjects.has(project.id);
@@ -289,7 +292,7 @@ const Projects = () => {
                 />
               );
             })}
-          </div>
+          </section>
 
           {/* No Results Message */}
           {filteredProjects.length === 0 && (
