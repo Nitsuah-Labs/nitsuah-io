@@ -126,6 +126,7 @@ Node.js not in PATH. Fix:
 ### Pre-commit too slow?
 
 Use quick commit script:
+
 ```bash
 npm run commit:safe
 ```

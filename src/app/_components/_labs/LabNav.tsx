@@ -50,8 +50,6 @@ const LabNav: React.FC<LabNavProps> = () => {
   );
   const { address, isConnected } = useAccount();
   const [copied, setCopied] = React.useState(false);
-  const [profileHovered, setProfileHovered] = React.useState(false);
-  const [logoutHovered, setLogoutHovered] = React.useState(false);
   const [homeClickCount, setHomeClickCount] = React.useState(0);
   const [homeClickTimer, setHomeClickTimer] =
     React.useState<NodeJS.Timeout | null>(null);
@@ -106,6 +104,38 @@ const LabNav: React.FC<LabNavProps> = () => {
     <AppBar position="static" sx={{ backgroundColor: "#181818" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Home Button with Double-Click - MOVED TO LEFT */}
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, marginRight: "1rem" }}
+          >
+            <Button
+              onClick={handleHomeClick}
+              title="Click once for Labs home, double-click for main home"
+              aria-label="Navigate home (single click for Labs, double click for main site)"
+              sx={{
+                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                color: "#000",
+                fontWeight: 600,
+                padding: "0.5rem 1rem",
+                borderRadius: "6px",
+                transition: "all 0.3s ease",
+                minWidth: "auto",
+                "&:hover": {
+                  background:
+                    "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
+                },
+              }}
+            >
+              <i
+                className="fa fa-home"
+                aria-hidden="true"
+                style={{ fontSize: "1.2rem" }}
+              ></i>
+            </Button>
+          </Box>
+
           <Link href="/labs/" passHref legacyBehavior>
             <a style={{ textDecoration: "none", color: "inherit" }}>
               <Typography
@@ -151,13 +181,27 @@ const LabNav: React.FC<LabNavProps> = () => {
               }}
             >
               <Link href="/">
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: "#f97316",
+                    display: "block",
+                    "&:hover": { color: "#ea580c" },
+                  }}
+                >
                   HOME
                 </Button>
               </Link>
               {LAB_PAGES.map((page) => (
                 <Link key={page} href={`/labs/${page}`}>
-                  <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  <Button
+                    sx={{
+                      my: 2,
+                      color: "#c084fc",
+                      display: "block",
+                      "&:hover": { color: "#a855f7" },
+                    }}
+                  >
                     {page}
                   </Button>
                 </Link>
@@ -176,11 +220,11 @@ const LabNav: React.FC<LabNavProps> = () => {
                       <Button
                         sx={{
                           my: 2,
-                          color: "white",
+                          color: "#a1a1aa",
                           display: "block",
                           "&:hover": isWIP
-                            ? { color: "#ff6b6b", cursor: "not-allowed" }
-                            : {},
+                            ? { color: "#ef4444", cursor: "not-allowed" }
+                            : { color: "#c084fc" },
                         }}
                       >
                         {page} {isWIP && "(WIP)"}
@@ -190,36 +234,6 @@ const LabNav: React.FC<LabNavProps> = () => {
                 );
               })}
             </StyledMenu>
-          </Box>
-
-          {/* Home Button with Double-Click */}
-          <Box
-            sx={{ display: { xs: "none", md: "flex" }, marginRight: "1rem" }}
-          >
-            <Button
-              onClick={handleHomeClick}
-              title="Click once for Labs home, double-click for main home"
-              aria-label="Navigate home (single click for Labs, double click for main site)"
-              sx={{
-                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                color: "#000",
-                fontWeight: 600,
-                padding: "0.5rem 1rem",
-                borderRadius: "6px",
-                transition: "all 0.3s ease",
-                minWidth: "auto",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
-                },
-              }}
-            >
-              <i
-                className="fa fa-home"
-                aria-hidden="true"
-                style={{ fontSize: "1.2rem" }}
-              ></i>
-            </Button>
           </Box>
 
           {/* Wallet Status Display */}
@@ -285,8 +299,6 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Profile"
-                onMouseEnter={() => setProfileHovered(true)}
-                onMouseLeave={() => setProfileHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
@@ -309,15 +321,12 @@ const LabNav: React.FC<LabNavProps> = () => {
                     gap: "0.5rem",
                   }}
                 >
-                  <i className="fa fa-user" aria-hidden="true"></i>
-                  <span
-                    style={{
-                      display: profileHovered ? "inline" : "none",
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    Profile
-                  </span>
+                  <i
+                    className="fa fa-user"
+                    aria-hidden="true"
+                    style={{ fontSize: "1.1rem" }}
+                  ></i>
+                  <span>Profile</span>
                 </span>
               </Button>
             </Link>
@@ -325,8 +334,6 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Logout"
-                onMouseEnter={() => setLogoutHovered(true)}
-                onMouseLeave={() => setLogoutHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
@@ -356,14 +363,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                     aria-hidden="true"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  <span
-                    style={{
-                      display: logoutHovered ? "inline" : "none",
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    Logout
-                  </span>
+                  <span>Logout</span>
                 </span>
               </Button>
             </Link>

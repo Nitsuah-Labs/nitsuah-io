@@ -84,6 +84,7 @@ const CryptoPage = () => {
             marginBottom: "48px",
             maxWidth: "900px",
             margin: "0 auto 48px",
+            textAlign: "center",
           }}
         >
           <h1 style={{ marginBottom: "1.5rem" }}>Web3 & Crypto</h1>
@@ -94,7 +95,7 @@ const CryptoPage = () => {
               borderRadius: "12px",
               padding: "2rem",
               marginBottom: "2rem",
-              textAlign: "left",
+              textAlign: "center",
             }}
           >
             <h2
@@ -103,6 +104,7 @@ const CryptoPage = () => {
                 fontWeight: "600",
                 marginBottom: "1rem",
                 color: "#f97316",
+                textAlign: "center",
               }}
             >
               Why Web3 Matters

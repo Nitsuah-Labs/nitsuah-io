@@ -405,10 +405,13 @@
   gap: 4px;
   align-items: center;
   height: 24px;
+  width: 150px;
+  justify-content: flex-end;
 }
 
 .duration-bar {
   width: 20px;
+  min-width: 20px;
   height: 100%;
   background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
   border-radius: 2px;
@@ -430,13 +433,13 @@
 .duration-bar.current::after {
   content: "";
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: 0;
+  right: -12px;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid #10b981;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 24px solid #10b981;
 }
 
 .duration-text {
@@ -473,6 +476,10 @@
   overflow: hidden;
   transition: max-height 0.3s ease-out;
   padding: 0 1rem;
+}
+
+.work-toggle:checked ~ label .fa-chevron-down {
+  transform: rotate(180deg);
 }
 
 .work-toggle:checked ~ .work-details {
@@ -616,6 +623,12 @@
   background: #f8f9fa;
   border-radius: 4px;
   border-left: 3px solid #ff6d1f;
+  transition: all 0.2s ease;
+}
+
+.language-item:hover {
+  background: #e6f4ff;
+  border-left-color: #0095ff;
 }
 
 .language-name {
@@ -711,7 +724,7 @@
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .resume-container {
-    padding: 1.5rem 1rem;
+    padding: 6rem 1rem 2rem;
   }
 
   .education-languages-container {
@@ -722,20 +735,25 @@
   .work-header {
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
   }
 
   .work-left {
     flex-direction: column;
     gap: 0.75rem;
+    align-items: flex-start;
+    width: 100%;
   }
 
   .work-duration {
     align-items: flex-start;
     min-width: auto;
+    width: 100%;
   }
 
   .duration-container {
     align-items: flex-start;
+    width: 100%;
   }
 
   .duration-text {
@@ -780,6 +798,10 @@
 
   .profile-link {
     justify-content: center;
+  }
+
+  .languages-list {
+    padding-bottom: 2rem;
   }
 }
 

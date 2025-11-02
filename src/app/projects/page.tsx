@@ -146,15 +146,18 @@ const Projects = () => {
                           onMouseEnter={(e) => {
                             e.currentTarget.style.borderColor =
                               "rgba(249, 115, 22, 0.8)";
-                            e.currentTarget.style.transform =
-                              "translateY(-4px)";
+                            e.currentTarget.style.transform = isFeatured
+                              ? "translateY(-4px)"
+                              : "scale(0.72) translateY(-2px)";
                             e.currentTarget.style.boxShadow =
                               "0 8px 24px rgba(249, 115, 22, 0.2)";
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.borderColor =
                               "rgba(249, 115, 22, 0.3)";
-                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.transform = isFeatured
+                              ? "translateY(0)"
+                              : "scale(0.72) translateY(0)";
                             e.currentTarget.style.boxShadow = "none";
                           }}
                         >
@@ -184,7 +187,14 @@ const Projects = () => {
                               }
                             />
                           </div>
-                          <div style={{ padding: "1.5rem", flex: 1 }}>
+                          <div
+                            style={{
+                              padding: "1.5rem",
+                              flex: 1,
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
                             <h3
                               style={{
                                 fontSize: "1.5rem",
@@ -200,6 +210,7 @@ const Projects = () => {
                                 color: "rgba(255, 255, 255, 0.7)",
                                 marginBottom: "1rem",
                                 fontSize: "0.95rem",
+                                flex: 1,
                               }}
                             >
                               {project.description}
@@ -233,6 +244,7 @@ const Projects = () => {
                                 display: "flex",
                                 gap: "0.75rem",
                                 marginTop: "auto",
+                                justifyContent: "flex-end",
                               }}
                             >
                               {project.github && (
