@@ -125,7 +125,7 @@ const HomePage: React.FC = () => {
                 paddingBottom: "0.25rem",
                 display: "inline-block",
                 cursor: "pointer",
-                minWidth: "300px",
+                minWidth: "clamp(180px, 50vw, 300px)",
                 textAlign: "left",
               }}
               onMouseEnter={() => {
