@@ -30,7 +30,9 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
     {...props}
     sx={{
       "& .MuiPaper-root": {
-        backgroundColor: "darkgrey",
+        backgroundColor: "#1a1a1a",
+        border: "2px solid #f97316",
+        borderRadius: "8px",
       },
     }}
   />
@@ -43,6 +45,16 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
+  const [showFullName, setShowFullName] = React.useState(false);
+  const [isHovering, setIsHovering] = React.useState(false);
+
+  React.useEffect(() => {
+    // Auto-animate to Austin H. after 3 seconds in nav
+    const timer = setTimeout(() => {
+      setShowFullName(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -65,6 +77,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             <a
               style={{ textDecoration: "none", color: "inherit" }}
               aria-label="Austin H home - Navigate to homepage"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
               <Typography
                 variant="h6"
@@ -86,7 +100,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                   },
                 }}
               >
-                NITSUAH
+                {showFullName || isHovering ? "AUSTIN H." : "NITSUAH"}
               </Typography>
             </a>
           </Link>
@@ -149,13 +163,28 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                   aria-label="Navigate to home"
                   aria-current={pathname === "/" ? "page" : undefined}
                   style={{
-                    color: "white",
+                    color: pathname === "/" ? "#f97316" : "#fff",
                     display: "block",
                     padding: "12px 16px",
                     backgroundColor:
                       pathname === "/"
                         ? "rgba(249, 115, 22, 0.2)"
                         : "transparent",
+                    fontWeight: pathname === "/" ? 600 : 400,
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#f97316";
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(249, 115, 22, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color =
+                      pathname === "/" ? "#f97316" : "#fff";
+                    e.currentTarget.style.backgroundColor =
+                      pathname === "/"
+                        ? "rgba(249, 115, 22, 0.2)"
+                        : "transparent";
                   }}
                 >
                   HOME
@@ -169,13 +198,28 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                       aria-label={`Navigate to ${page}`}
                       aria-current={isActive ? "page" : undefined}
                       style={{
-                        color: "white",
+                        color: isActive ? "#f97316" : "#fff",
                         display: "block",
                         padding: "12px 16px",
                         textTransform: "none",
                         backgroundColor: isActive
                           ? "rgba(249, 115, 22, 0.2)"
                           : "transparent",
+                        fontWeight: isActive ? 600 : 400,
+                        transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "#f97316";
+                        e.currentTarget.style.backgroundColor =
+                          "rgba(249, 115, 22, 0.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = isActive
+                          ? "#f97316"
+                          : "#fff";
+                        e.currentTarget.style.backgroundColor = isActive
+                          ? "rgba(249, 115, 22, 0.2)"
+                          : "transparent";
                       }}
                     >
                       {page}

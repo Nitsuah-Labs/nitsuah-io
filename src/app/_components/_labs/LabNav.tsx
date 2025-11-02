@@ -311,21 +311,12 @@ const LabNav: React.FC<LabNavProps> = () => {
                     gap: "0.5rem",
                   }}
                 >
-                  {!profileHovered && (
-                    <i
-                      className="fa fa-user"
-                      aria-hidden="true"
-                      style={{ fontSize: "1.1rem" }}
-                    ></i>
-                  )}
-                  <span
-                    style={{
-                      display: profileHovered ? "inline" : "none",
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    👤 Profile
-                  </span>
+                  <i
+                    className="fa fa-user"
+                    aria-hidden="true"
+                    style={{ fontSize: "1.1rem" }}
+                  ></i>
+                  {profileHovered && <span>Profile</span>}
                 </span>
               </Button>
             </Link>
@@ -359,21 +350,12 @@ const LabNav: React.FC<LabNavProps> = () => {
                     gap: "0.5rem",
                   }}
                 >
-                  {!logoutHovered && (
-                    <i
-                      className="fa fa-sign-out"
-                      aria-hidden="true"
-                      style={{ fontSize: "1.1rem" }}
-                    ></i>
-                  )}
-                  <span
-                    style={{
-                      display: logoutHovered ? "inline" : "none",
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    🚪 Logout
-                  </span>
+                  <i
+                    className="fa fa-sign-out"
+                    aria-hidden="true"
+                    style={{ fontSize: "1.1rem" }}
+                  ></i>
+                  {logoutHovered && <span>Logout</span>}
                 </span>
               </Button>
             </Link>

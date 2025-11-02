@@ -420,9 +420,6 @@ export default function ResumePage() {
                               );
                               const fullBars = Math.floor(years);
                               const partialBar = years - fullBars;
-                              const partialPercent = Math.round(
-                                (partialBar / 0.25) * 25,
-                              );
                               const isCurrent = !job.endDate;
 
                               return (
@@ -439,9 +436,6 @@ export default function ResumePage() {
                                     {partialBar > 0 && (
                                       <div
                                         className={`duration-bar partial ${isCurrent ? "current" : ""}`}
-                                        style={{
-                                          width: `${Math.max(25, partialPercent)}%`,
-                                        }}
                                       />
                                     )}
                                   </div>
@@ -482,7 +476,7 @@ export default function ResumePage() {
                       padding: "0.75rem 1.5rem",
                       background:
                         "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                      color: "white",
+                      color: "#000",
                       border: "none",
                       borderRadius: "8px",
                       fontSize: "1rem",

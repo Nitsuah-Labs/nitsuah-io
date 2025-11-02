@@ -19,8 +19,8 @@ const AboutPage: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate section 1 opacity based on scroll
-  const section1Opacity = Math.max(0, 1 - scrollY / 600);
+  // Calculate section 1 opacity based on scroll (fade out at 300px for consistency with home)
+  const section1Opacity = Math.max(0, 1 - scrollY / 300);
 
   return (
     <div className="App">
