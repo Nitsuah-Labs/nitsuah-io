@@ -22,12 +22,10 @@ function renderOutput() {
         minHeight: "calc(100vh - 200px)",
       }}
     >
-      <h1 className="sr-only">Labs - Web3 Experiments</h1>
-
       <div style={{ textAlign: "center", marginBottom: "40px" }}>
-        <h2 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h2>
+        <h1 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h1>
         <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.1rem" }}>
-          Polygon Mumbai Testnet Experiments
+          Basic Testnet Experiments
         </p>
       </div>
 
@@ -38,7 +36,7 @@ function renderOutput() {
         {/* Network Info Card */}
         <div className="labs-card">
           <div className="labs-card-header">
-            <h3 className="labs-card-title">
+            <h2 className="labs-card-title">
               <Image
                 className="logo"
                 src={polygonLogo}
@@ -50,7 +48,7 @@ function renderOutput() {
                 }}
               />
               NETWORK
-            </h3>
+            </h2>
           </div>
           <div className="labs-card-body">
             <p
@@ -73,7 +71,7 @@ function renderOutput() {
         {/* Faucet Card */}
         <div className="labs-card">
           <div className="labs-card-header">
-            <h3 className="labs-card-title">
+            <h2 className="labs-card-title">
               <Image
                 className="logo"
                 src={mumbai}
@@ -85,7 +83,7 @@ function renderOutput() {
                 }}
               />
               TEST FUNDS
-            </h3>
+            </h2>
           </div>
           <div className="labs-card-body">
             <p
@@ -119,10 +117,11 @@ function renderOutput() {
         <Link
           href="/labs/register"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Register page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">REGISTER</h3>
+              <h2 className="labs-card-title">REGISTER</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -133,17 +132,18 @@ function renderOutput() {
               >
                 Sign up for Web3 experiments
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
-                disabled={true}
-                aria-disabled="true"
                 style={{
                   width: "100%",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 GET STARTED
-              </button>
+              </div>
             </div>
           </div>
         </Link>
@@ -152,10 +152,11 @@ function renderOutput() {
         <Link
           href="/labs/mint"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Mint NFT page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">MINT NFT</h3>
+              <h2 className="labs-card-title">MINT NFT</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -166,16 +167,18 @@ function renderOutput() {
               >
                 Create a Landplot NFT
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-success"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 START MINTING
-              </button>
+              </div>
             </div>
           </div>
         </Link>
@@ -184,10 +187,11 @@ function renderOutput() {
         <Link
           href="/labs/domains"
           style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to Domains page"
         >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">DOMAINS</h3>
+              <h2 className="labs-card-title">DOMAINS</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -198,25 +202,31 @@ function renderOutput() {
               >
                 Manage your subdomains
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-primary"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 VIEW DOMAINS
-              </button>
+              </div>
             </div>
           </div>
         </Link>
 
         {/* Home Card */}
-        <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link
+          href="/"
+          style={{ textDecoration: "none", color: "inherit" }}
+          aria-label="Navigate to main site homepage"
+        >
           <div className="labs-card" style={{ cursor: "pointer" }}>
             <div className="labs-card-header">
-              <h3 className="labs-card-title">HOME</h3>
+              <h2 className="labs-card-title">HOME</h2>
             </div>
             <div className="labs-card-body">
               <p
@@ -227,16 +237,18 @@ function renderOutput() {
               >
                 Return to main site
               </p>
-              <button
+              <div
                 className="labs-btn labs-btn-secondary"
                 style={{
                   width: "100%",
-                  pointerEvents: "none",
                   margin: "0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 EXIT LABS
-              </button>
+              </div>
             </div>
           </div>
         </Link>

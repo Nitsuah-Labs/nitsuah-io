@@ -35,9 +35,6 @@ const OPENSEA_LINK =
   "https://testnets.opensea.io/collection/nitsuah-name-service-grnrwqs5vq";
 const CONTRACT_ADDRESS =
   "0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163" as `0x${string}`;
-const MetaMaskURL = "https://metamask.io/download/";
-const CBWalletURL =
-  "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
 // ErrorBoundary removed ΓÇö it was defined but never used. Keep page focused.
 
@@ -248,26 +245,7 @@ const DomainSite = () => {
   const renderNotConnectedContainer = () => (
     <div className="labs-card">
       <div className="labs-card-header">
-        <h2 className="labs-card-title">STEP 1: Setup a Wallet app</h2>
-      </div>
-      <div className="labs-card-body" style={{ textAlign: "center" }}>
-        <button
-          className="labs-btn labs-btn-primary labs-btn-large"
-          onClick={() => window.open(CBWalletURL, "_blank")}
-        >
-          COINBASE
-        </button>
-        <div className="labs-spacing-md"></div>
-        <button
-          className="labs-btn labs-btn-secondary labs-btn-large"
-          onClick={() => window.open(MetaMaskURL, "_blank")}
-        >
-          METAMASK
-        </button>
-      </div>
-
-      <div className="labs-card-header labs-spacing-lg">
-        <h2 className="labs-card-title">STEP 2: Connect a Wallet</h2>
+        <h2 className="labs-card-title">Connect a Wallet</h2>
       </div>
       <div className="labs-card-body" style={{ textAlign: "center" }}>
         <Connect />
@@ -505,7 +483,6 @@ const DomainSite = () => {
       <LabSubNav />
       {/* Ensure a top-level H1 exists for correct heading order */}
       <main style={{ paddingBottom: "80px" }}>
-        <h1 className="sr-only">Domains - Labs</h1>
         <h1>SUB-DOMAIN PORTAL</h1>
         <div className="form-container">
           <div className="mint-container">

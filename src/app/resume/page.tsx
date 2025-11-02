@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import resumeDataImport from "../../../public/assets/resume.json";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
-import { PrintButton } from "./_components/PrintButton";
 import "./resume.css";
 
 interface ResumeData {
@@ -77,6 +77,29 @@ function formatDate(dateStr: string): string {
   return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
+function calculateDuration(startDate: string, endDate?: string): string {
+  if (!startDate) return "";
+
+  const start = new Date(startDate);
+  const end = endDate ? new Date(endDate) : new Date(); // Use today if no end date
+
+  const diffMs = end.getTime() - start.getTime();
+  const diffMonths = diffMs / (1000 * 60 * 60 * 24 * 30.44); // Average days per month
+  const years = Math.floor(diffMonths / 12);
+  const months = Math.round(diffMonths % 12);
+
+  // Calculate decimal representation (e.g., 2.5 years)
+  const decimalYears = (diffMonths / 12).toFixed(1);
+
+  if (years === 0) {
+    return `${months} month${months !== 1 ? "s" : ""} (${(diffMonths / 12).toFixed(1)} years)`;
+  } else if (months === 0) {
+    return `${years} year${years !== 1 ? "s" : ""} (${decimalYears} years)`;
+  } else {
+    return `${years} year${years !== 1 ? "s" : ""}, ${months} month${months !== 1 ? "s" : ""} (${decimalYears} years)`;
+  }
+}
+
 function getResumeData(): ResumeData {
   // Use imported JSON data (works in client components)
   try {
@@ -128,6 +151,7 @@ function getNetworkIcon(network: string): string {
 
 export default function ResumePage() {
   const resume = getResumeData();
+  const [showAllJobs, setShowAllJobs] = useState(false);
 
   return (
     <div style={{ background: "#1a1a1a", minHeight: "100vh" }}>
@@ -136,11 +160,6 @@ export default function ResumePage() {
       </div>
       <main className="resume-container">
         <div className="resume-content">
-          {/* Header Actions */}
-          <div className="resume-actions print-hide">
-            <PrintButton />
-          </div>
-
           {/* Basics Section */}
           <section className="resume-section basics" id="basics">
             <div className="resume-header">
@@ -169,18 +188,6 @@ export default function ResumePage() {
                     {resume.basics.email}
                   </a>
                 </div>
-              ) : resume.basics.url || (resume as any).basics.website ? (
-                <div className="contact-item">
-                  <i className="fa fa-globe" aria-hidden="true"></i>
-                  <a
-                    href={resume.basics.url || (resume as any).basics.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-link"
-                  >
-                    {resume.basics.url || (resume as any).basics.website}
-                  </a>
-                </div>
               ) : null}
               {resume.basics.phone && (
                 <div className="contact-item">
@@ -204,16 +211,18 @@ export default function ResumePage() {
               )}
             </div>
 
-            {resume.basics.profiles && resume.basics.profiles.length > 0 && (
+            {(resume.basics.profiles ||
+              resume.basics.url ||
+              (resume as any).basics.website) && (
               <div className="resume-profiles">
-                {resume.basics.profiles.map((profile, idx) => (
+                {/* Website/URL Button */}
+                {(resume.basics.url || (resume as any).basics.website) && (
                   <a
-                    key={idx}
-                    href={profile.url}
+                    href={resume.basics.url || (resume as any).basics.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="profile-link"
-                    aria-label={`${profile.network} profile`}
+                    aria-label="Personal website"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -241,14 +250,56 @@ export default function ResumePage() {
                       e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
-                    <i
-                      className={`fa ${getNetworkIcon(profile.network)}`}
-                      aria-hidden="true"
-                      style={{ fontSize: "1.2rem" }}
-                    ></i>
-                    <span>{profile.network}</span>
+                    <i className="fa fa-globe" aria-hidden="true"></i>
+                    <span>Website</span>
                   </a>
-                ))}
+                )}
+
+                {/* Social Profile Buttons */}
+                {resume.basics.profiles &&
+                  resume.basics.profiles.map((profile, idx) => (
+                    <a
+                      key={idx}
+                      href={profile.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="profile-link"
+                      aria-label={`${profile.network} profile`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.5rem 1rem",
+                        background: "rgba(249, 115, 22, 0.1)",
+                        border: "1px solid rgba(249, 115, 22, 0.3)",
+                        borderRadius: "6px",
+                        color: "#c2410c",
+                        textDecoration: "none",
+                        transition: "all 0.3s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background =
+                          "rgba(249, 115, 22, 0.2)";
+                        e.currentTarget.style.borderColor =
+                          "rgba(249, 115, 22, 0.6)";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background =
+                          "rgba(249, 115, 22, 0.1)";
+                        e.currentTarget.style.borderColor =
+                          "rgba(249, 115, 22, 0.3)";
+                        e.currentTarget.style.transform = "translateY(0)";
+                      }}
+                    >
+                      <i
+                        className={`fa ${getNetworkIcon(profile.network)}`}
+                        aria-hidden="true"
+                        style={{ fontSize: "1.2rem" }}
+                      ></i>
+                      <span>{profile.network}</span>
+                    </a>
+                  ))}
               </div>
             )}
           </section>
@@ -261,58 +312,152 @@ export default function ResumePage() {
                 Work Experience
               </h2>
               <div className="work-items">
-                {resume.work.map((job, idx) => (
-                  <div key={idx} className="work-item">
-                    <input
-                      type="checkbox"
-                      id={`work-item-${idx}`}
-                      className="work-toggle"
-                      aria-label={`Toggle details for ${job.position} at ${job.name}`}
-                    />
-                    <label htmlFor={`work-item-${idx}`} className="work-label">
-                      <div className="work-header">
-                        <div className="work-date">
-                          <span className="startDate">
-                            {formatDate(job.startDate)}
-                          </span>
-                          {" - "}
-                          <span className="endDate">
-                            {job.endDate ? formatDate(job.endDate) : "Present"}
-                          </span>
-                        </div>
-                        <div className="work-info">
-                          <div className="work-position">{job.position}</div>
-                          <div className="work-company">
-                            {job.url ? (
-                              <a
-                                href={job.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {job.name}
-                              </a>
-                            ) : (
-                              job.name
-                            )}
+                {(showAllJobs ? resume.work : resume.work.slice(0, 5)).map(
+                  (job, idx) => (
+                    <div key={idx} className="work-item">
+                      <input
+                        type="checkbox"
+                        id={`work-item-${idx}`}
+                        className="work-toggle"
+                        aria-label={`Toggle details for ${job.position} at ${job.name}`}
+                      />
+                      <label
+                        htmlFor={`work-item-${idx}`}
+                        className="work-label"
+                      >
+                        <div className="work-header">
+                          <div className="work-left">
+                            <div className="work-date">
+                              <span className="startDate">
+                                {formatDate(job.startDate)}
+                              </span>
+                              {" - "}
+                              <span className="endDate">
+                                {job.endDate
+                                  ? formatDate(job.endDate)
+                                  : "Present"}
+                              </span>
+                            </div>
+                            <div className="work-info">
+                              <div className="work-position">
+                                {job.position}
+                              </div>
+                              <div className="work-company">
+                                {job.url ? (
+                                  <a
+                                    href={job.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {job.name}
+                                  </a>
+                                ) : (
+                                  job.name
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="work-duration">
+                            {(() => {
+                              const duration = calculateDuration(
+                                job.startDate,
+                                job.endDate,
+                              );
+                              const years = parseFloat(
+                                duration.match(/\(([^)]+) years\)/)?.[1] || "0",
+                              );
+                              const fullBars = Math.floor(years);
+                              const partialBar = years - fullBars;
+                              const partialPercent = Math.round(
+                                (partialBar / 0.25) * 25,
+                              );
+                              const isCurrent = !job.endDate;
+
+                              return (
+                                <div className="duration-container">
+                                  <div className="duration-bars">
+                                    {Array.from({ length: fullBars }).map(
+                                      (_, i) => (
+                                        <div
+                                          key={i}
+                                          className={`duration-bar full ${isCurrent && i === fullBars - 1 && partialBar === 0 ? "current" : ""}`}
+                                        />
+                                      ),
+                                    )}
+                                    {partialBar > 0 && (
+                                      <div
+                                        className={`duration-bar partial ${isCurrent ? "current" : ""}`}
+                                        style={{
+                                          width: `${Math.max(25, partialPercent)}%`,
+                                        }}
+                                      />
+                                    )}
+                                  </div>
+                                  <div className="duration-text">
+                                    {duration}
+                                  </div>
+                                </div>
+                              );
+                            })()}
                           </div>
                         </div>
+                      </label>
+                      <div className="work-details">
+                        {job.summary && (
+                          <p className="work-summary">{job.summary}</p>
+                        )}
+                        {job.highlights && job.highlights.length > 0 && (
+                          <ul className="work-highlights">
+                            {job.highlights.map((highlight, hidx) => (
+                              <li key={hidx}>{highlight}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
-                    </label>
-                    <div className="work-details">
-                      {job.summary && (
-                        <p className="work-summary">{job.summary}</p>
-                      )}
-                      {job.highlights && job.highlights.length > 0 && (
-                        <ul className="work-highlights">
-                          {job.highlights.map((highlight, hidx) => (
-                            <li key={hidx}>{highlight}</li>
-                          ))}
-                        </ul>
-                      )}
                     </div>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
+              {resume.work.length > 5 && (
+                <div
+                  style={{ textAlign: "center", marginTop: "1.5rem" }}
+                  className="print-hide"
+                >
+                  <button
+                    onClick={() => setShowAllJobs(!showAllJobs)}
+                    style={{
+                      padding: "0.75rem 1.5rem",
+                      background:
+                        "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "1rem",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(249, 115, 22, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    <i
+                      className={`fa fa-chevron-${showAllJobs ? "up" : "down"}`}
+                      aria-hidden="true"
+                      style={{ marginRight: "0.5rem" }}
+                    ></i>
+                    {showAllJobs
+                      ? `Show Less (${resume.work.length - 5} hidden)`
+                      : `Show All (${resume.work.length - 5} more)`}
+                  </button>
+                </div>
+              )}
             </section>
           )}
 
@@ -352,65 +497,90 @@ export default function ResumePage() {
             </section>
           )}
 
-          {/* Education Section */}
-          {resume.education && resume.education.length > 0 && (
-            <section className="resume-section education" id="education">
-              <h2 className="section-title">
-                <i className="fa fa-graduation-cap" aria-hidden="true"></i>{" "}
-                Education
-              </h2>
-              <div className="education-items">
-                {resume.education.map((edu, idx) => (
-                  <div key={idx} className="education-item">
-                    <div className="education-header">
-                      <div className="education-degree">
-                        {edu.studyType} in {edu.area}
-                      </div>
-                      <div className="education-institution">
-                        {edu.url ? (
-                          <a
-                            href={edu.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {edu.institution}
-                          </a>
-                        ) : (
-                          edu.institution
+          {/* Education & Languages Side-by-Side */}
+          {((resume.education && resume.education.length > 0) ||
+            (resume.languages && resume.languages.length > 0)) && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "2rem",
+                marginBottom: "2.5rem",
+              }}
+              className="education-languages-container"
+            >
+              {/* Education Section */}
+              {resume.education && resume.education.length > 0 && (
+                <section
+                  className="resume-section education"
+                  id="education"
+                  style={{ marginBottom: 0 }}
+                >
+                  <h2 className="section-title">
+                    <i className="fa fa-graduation-cap" aria-hidden="true"></i>{" "}
+                    Education
+                  </h2>
+                  <div className="education-items">
+                    {resume.education.map((edu, idx) => (
+                      <div key={idx} className="education-item">
+                        <div className="education-header">
+                          <div className="education-degree">
+                            {edu.studyType} in {edu.area}
+                          </div>
+                          <div className="education-institution">
+                            {edu.url ? (
+                              <a
+                                href={edu.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {edu.institution}
+                              </a>
+                            ) : (
+                              edu.institution
+                            )}
+                          </div>
+                        </div>
+                        {(edu.startDate || edu.endDate) && (
+                          <div className="education-date">
+                            {edu.startDate && formatDate(edu.startDate)}
+                            {edu.startDate && edu.endDate && " - "}
+                            {edu.endDate && formatDate(edu.endDate)}
+                          </div>
+                        )}
+                        {edu.score && (
+                          <div className="education-score">
+                            GPA: {edu.score}
+                          </div>
                         )}
                       </div>
-                    </div>
-                    {(edu.startDate || edu.endDate) && (
-                      <div className="education-date">
-                        {edu.startDate && formatDate(edu.startDate)}
-                        {edu.startDate && edu.endDate && " - "}
-                        {edu.endDate && formatDate(edu.endDate)}
-                      </div>
-                    )}
-                    {edu.score && (
-                      <div className="education-score">GPA: {edu.score}</div>
-                    )}
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
+                </section>
+              )}
 
-          {/* Languages Section */}
-          {resume.languages && resume.languages.length > 0 && (
-            <section className="resume-section languages" id="languages">
-              <h2 className="section-title">
-                <i className="fa fa-language" aria-hidden="true"></i> Languages
-              </h2>
-              <div className="languages-list">
-                {resume.languages.map((lang, idx) => (
-                  <div key={idx} className="language-item">
-                    <span className="language-name">{lang.language}</span>
-                    <span className="language-fluency">{lang.fluency}</span>
+              {/* Languages Section */}
+              {resume.languages && resume.languages.length > 0 && (
+                <section
+                  className="resume-section languages"
+                  id="languages"
+                  style={{ marginBottom: 0 }}
+                >
+                  <h2 className="section-title">
+                    <i className="fa fa-language" aria-hidden="true"></i>{" "}
+                    Languages
+                  </h2>
+                  <div className="languages-list">
+                    {resume.languages.map((lang, idx) => (
+                      <div key={idx} className="language-item">
+                        <span className="language-name">{lang.language}</span>
+                        <span className="language-fluency">{lang.fluency}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
+                </section>
+              )}
+            </div>
           )}
 
           {/* Projects Link */}

@@ -2,6 +2,7 @@
 /**
  * @jest-environment jsdom
  */
+import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
@@ -10,36 +11,38 @@ const mockConnect = jest.fn();
 const mockDisconnect = jest.fn();
 
 jest.mock("wagmi", () => ({
-  useAccount: () => ({ connector: null, isConnected: false }),
+  useAccount: () => ({ connector: null, isConnected: false, address: null }),
   useConnect: () => ({
     connect: mockConnect,
-    connectors: [
-      { id: "meta", name: "MetaMask", ready: true },
-      { id: "wc", name: "WalletConnect", ready: true },
-    ],
+    connectors: [{ id: "walletConnect", name: "WalletConnect", ready: true }],
     error: null,
     isPending: false,
   }),
   useDisconnect: () => ({ disconnect: mockDisconnect }),
 }));
 
+// Mock the WALLET_CONNECT_ID constant
+jest.mock("../../../lib/constants/wallets", () => ({
+  WALLET_CONNECT_ID: "walletConnect",
+}));
+
 describe("Connect component", () => {
-  it("renders connector buttons and calls connect when clicked", () => {
+  it("renders WalletConnect button and calls connect when clicked", () => {
     // Import after mocks are in place
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const { Connect } = require("./Connect");
 
     render(React.createElement(Connect));
 
-    const metaBtn = screen.getByRole("button", { name: /MetaMask/i });
-    expect(metaBtn).toBeInTheDocument();
+    const wcBtn = screen.getByRole("button", { name: /WalletConnect/i });
+    expect(wcBtn).toBeInTheDocument();
 
-    fireEvent.click(metaBtn);
+    fireEvent.click(wcBtn);
 
     expect(mockConnect).toHaveBeenCalledTimes(1);
     // First call should receive an object with the selected connector
     expect(mockConnect).toHaveBeenCalledWith({
-      connector: expect.objectContaining({ id: "meta" }),
+      connector: expect.objectContaining({ id: "walletConnect" }),
     });
   });
 });

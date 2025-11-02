@@ -26,17 +26,15 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate hero opacity based on scroll (fade out 0-800px)
-  const heroOpacity = Math.max(0, 1 - scrollY / 800);
+  // Calculate hero opacity based on scroll (fade out 0-1200px for complete hide)
+  const heroOpacity = Math.max(0, 1 - scrollY / 1200);
   // Calculate hero scale (slight zoom effect as it fades)
-  const heroScale = 1 + (scrollY / 800) * 0.1;
+  const heroScale = 1 + (scrollY / 1200) * 0.1;
 
   return (
     <div className="App">
       <HomeBar />
       <main>
-        <h1 className="sr-only">Welcome to Nitsuah Labs</h1>
-
         {/* Hero Section - Fixed overlay that fades as you scroll */}
         <section
           style={{
@@ -65,7 +63,7 @@ const HomePage: React.FC = () => {
               zIndex: 10,
             }}
           >
-            <h2
+            <h1
               style={{
                 fontSize: "clamp(2rem, 5vw, 3.5rem)",
                 fontWeight: "700",
@@ -79,7 +77,7 @@ const HomePage: React.FC = () => {
               <span style={{ color: "#f97316" }}>
                 Developer Productivity Engineer & Researcher
               </span>
-            </h2>
+            </h1>
             <p
               style={{
                 fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
@@ -203,7 +201,7 @@ const HomePage: React.FC = () => {
         {showSpline && (
           <section
             style={{
-              minHeight: "100vh",
+              minHeight: "150vh", // Extended height for full Spline visibility
               paddingTop: "100vh", // Start after hero viewport
               padding: "4rem 2rem", // Breathing room around Spline
               background: "#0a0a0a",
@@ -262,6 +260,45 @@ const HomePage: React.FC = () => {
               </div>
             </div>
           </section>
+        )}
+
+        {/* Back to Top Button */}
+        {scrollY > 300 && (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            style={{
+              position: "fixed",
+              bottom: "2rem",
+              right: "2rem",
+              backgroundColor: "#f97316",
+              color: "white",
+              border: "none",
+              borderRadius: "50%",
+              width: "50px",
+              height: "50px",
+              fontSize: "1.5rem",
+              cursor: "pointer",
+              boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
+              zIndex: 1000,
+              transition: "all 0.3s ease",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.boxShadow =
+                "0 6px 16px rgba(249, 115, 22, 0.5)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 12px rgba(249, 115, 22, 0.4)";
+            }}
+            aria-label="Scroll to top"
+          >
+            ↑
+          </button>
         )}
 
         <style jsx>{`
