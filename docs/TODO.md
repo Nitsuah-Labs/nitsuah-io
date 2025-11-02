@@ -12,6 +12,7 @@ To be done after existing feedback or phase items (or to track said items):
 - [ ] Contract debugging on local testnet
 - [ ] Network auto-switch detection
 - [ ] Mumbai → Amoy migration
+- [ ] **TECH DEBT** - Strategic codebase cleanup and refactoring (see `TECH_DEBT.md` for full plan)
 
 ## Detailed Improvements
 
