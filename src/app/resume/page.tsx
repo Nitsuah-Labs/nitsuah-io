@@ -608,11 +608,7 @@ export default function ResumePage() {
 
               {/* Languages Section */}
               {resume.languages && resume.languages.length > 0 && (
-                <section
-                  className="resume-section languages"
-                  id="languages"
-                  style={{ marginBottom: 0 }}
-                >
+                <section className="resume-section languages" id="languages">
                   <h2 className="section-title">
                     <i className="fa fa-language" aria-hidden="true"></i>{" "}
                     Languages
