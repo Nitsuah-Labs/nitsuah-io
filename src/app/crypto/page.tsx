@@ -78,9 +78,86 @@ const CryptoPage = () => {
           padding: "2rem 1rem",
         }}
       >
-        <div className="projects-header" style={{ marginBottom: "32px" }}>
-          <h1>Web3 & Crypto</h1>
-          <p>NFTs, POAPs, and blockchain achievements</p>
+        <div
+          className="projects-header"
+          style={{
+            marginBottom: "48px",
+            maxWidth: "900px",
+            margin: "0 auto 48px",
+          }}
+        >
+          <h1 style={{ marginBottom: "1.5rem" }}>Web3 & Crypto</h1>
+          <div
+            style={{
+              background: "rgba(249, 115, 22, 0.1)",
+              border: "2px solid rgba(249, 115, 22, 0.3)",
+              borderRadius: "12px",
+              padding: "2rem",
+              marginBottom: "2rem",
+              textAlign: "left",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                marginBottom: "1rem",
+                color: "#f97316",
+              }}
+            >
+              Why Web3 Matters
+            </h2>
+            <p
+              style={{
+                fontSize: "1.1rem",
+                lineHeight: "1.7",
+                marginBottom: "1rem",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              Web3 represents a fundamental shift from centralized platforms to
+              decentralized ownership and governance. It&apos;s about giving
+              users control over their data, identity, and digital assets
+              through blockchain technology.
+            </p>
+            <p
+              style={{
+                fontSize: "1.1rem",
+                lineHeight: "1.7",
+                marginBottom: "1rem",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              Beyond speculation, blockchain enables{" "}
+              <strong>trustless verification</strong>,{" "}
+              <strong>transparent governance</strong>, and{" "}
+              <strong>programmable value exchange</strong>. NFTs and POAPs
+              aren&apos;t just collectibles—they&apos;re proof of participation,
+              achievement, and community membership that no central authority
+              can revoke.
+            </p>
+            <p
+              style={{
+                fontSize: "1.1rem",
+                lineHeight: "1.7",
+                color: "rgba(255, 255, 255, 0.9)",
+              }}
+            >
+              My exploration of this space focuses on practical applications:
+              DAOs for decentralized decision-making, on-chain credentials for
+              verifiable achievements, and building tools that make Web3 more
+              accessible to developers and users alike.
+            </p>
+          </div>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: "500",
+              color: "rgba(255, 255, 255, 0.8)",
+            }}
+          >
+            NFTs, POAPs, and On-Chain Achievements
+          </p>
         </div>
 
         <Grid container spacing={3} rowSpacing={6}>

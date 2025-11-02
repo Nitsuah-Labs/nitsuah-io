@@ -34,9 +34,6 @@ const SCAN_LINK =
 const contractAddress =
   "0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8" as `0x${string}`;
 const contractABI = registerABI.abi;
-const MetaMaskURL = "https://metamask.io/download/";
-const CBWalletURL =
-  "https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad/";
 
 const RegisterSite = () => {
   const [showTestHelpers, setShowTestHelpers] = useState(false);
@@ -98,29 +95,7 @@ const RegisterSite = () => {
   const renderNotConnectedContainer = () => (
     <div className="labs-card">
       <div className="labs-card-header">
-        <h2 className="labs-card-title">STEP 1: Setup a Wallet app</h2>
-      </div>
-      <div className="labs-card-body">
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <button
-            className="labs-btn labs-btn-primary labs-btn-large"
-            onClick={() => window.open(CBWalletURL, "_blank")}
-            aria-label="Download Coinbase Wallet"
-          >
-            COINBASE WALLET
-          </button>
-          <button
-            className="labs-btn labs-btn-secondary labs-btn-large"
-            onClick={() => window.open(MetaMaskURL, "_blank")}
-            aria-label="Download MetaMask Wallet"
-          >
-            METAMASK
-          </button>
-        </div>
-      </div>
-
-      <div className="labs-card-header" style={{ marginTop: "24px" }}>
-        <h2 className="labs-card-title">STEP 2: Connect a Wallet</h2>
+        <h2 className="labs-card-title">Connect a Wallet</h2>
       </div>
       <div className="labs-card-body">
         <Connect />
