@@ -184,7 +184,14 @@ const Projects = () => {
                               }
                             />
                           </div>
-                          <div style={{ padding: "1.5rem", flex: 1 }}>
+                          <div
+                            style={{
+                              padding: "1.5rem",
+                              flex: 1,
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
                             <h3
                               style={{
                                 fontSize: "1.5rem",
@@ -200,6 +207,7 @@ const Projects = () => {
                                 color: "rgba(255, 255, 255, 0.7)",
                                 marginBottom: "1rem",
                                 fontSize: "0.95rem",
+                                flex: 1,
                               }}
                             >
                               {project.description}
@@ -233,6 +241,7 @@ const Projects = () => {
                                 display: "flex",
                                 gap: "0.75rem",
                                 marginTop: "auto",
+                                justifyContent: "flex-end",
                               }}
                             >
                               {project.github && (
