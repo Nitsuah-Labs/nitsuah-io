@@ -9,6 +9,8 @@ import SplineScene from "./_components/_spline/spline-home";
 const HomePage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [showSpline, setShowSpline] = useState(false);
+  const [showFullName, setShowFullName] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,14 +24,22 @@ const HomePage: React.FC = () => {
     // Show Spline on mount
     setShowSpline(true);
 
+    // Auto-animate to Austin H. after 1 second
+    const timer = setTimeout(() => {
+      setShowFullName(true);
+    }, 1000);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
-  // Calculate hero opacity based on scroll (fade out 0-800px for faster hide)
-  const heroOpacity = Math.max(0, 1 - scrollY / 800);
+  // Calculate hero opacity based on scroll (fade out 0-300px for very fast hide)
+  const heroOpacity = Math.max(0, 1 - scrollY / 300);
   // Calculate hero scale (slight zoom effect as it fades)
-  const heroScale = 1 + (scrollY / 800) * 0.1;
+  const heroScale = 1 + (scrollY / 300) * 0.1;
 
   return (
     <div className="App">
@@ -80,9 +90,20 @@ const HomePage: React.FC = () => {
                 marginBottom: "0.75rem",
                 lineHeight: "1.1",
                 color: "#ffffff",
+                cursor: "pointer",
+                transition: "all 0.5s ease",
+                borderBottom:
+                  showFullName || isHovering
+                    ? "3px solid #f97316"
+                    : "3px solid transparent",
+                paddingBottom: "0.25rem",
+                display: "inline-block",
               }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+              onClick={() => setShowFullName(!showFullName)}
             >
-              Austin Hardy
+              {showFullName || isHovering ? "Austin H." : "nitsuah"}
             </h1>
             <h2
               style={{

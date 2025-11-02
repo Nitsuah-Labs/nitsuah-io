@@ -122,14 +122,19 @@ function renderOutput() {
                 className="labs-btn labs-btn-primary"
                 style={{
                   width: "100%",
+                  maxWidth: "100%",
                   margin: "0",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: "48px",
+                  height: "48px",
                   whiteSpace: "nowrap",
+                  gap: "0.5rem",
+                  padding: "0.75rem 1rem",
                 }}
               >
+                <i className="fa fa-rocket" aria-hidden="true"></i>
                 GET STARTED
               </div>
             </div>
@@ -159,14 +164,19 @@ function renderOutput() {
                 className="labs-btn labs-btn-success"
                 style={{
                   width: "100%",
+                  maxWidth: "100%",
                   margin: "0",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: "48px",
+                  height: "48px",
                   whiteSpace: "nowrap",
+                  gap: "0.5rem",
+                  padding: "0.75rem 1rem",
                 }}
               >
+                <i className="fa fa-magic" aria-hidden="true"></i>
                 START MINTING
               </div>
             </div>
@@ -196,14 +206,19 @@ function renderOutput() {
                 className="labs-btn labs-btn-primary"
                 style={{
                   width: "100%",
+                  maxWidth: "100%",
                   margin: "0",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: "48px",
+                  height: "48px",
                   whiteSpace: "nowrap",
+                  gap: "0.5rem",
+                  padding: "0.75rem 1rem",
                 }}
               >
+                <i className="fa fa-globe" aria-hidden="true"></i>
                 VIEW DOMAINS
               </div>
             </div>
@@ -233,14 +248,19 @@ function renderOutput() {
                 className="labs-btn labs-btn-secondary"
                 style={{
                   width: "100%",
+                  maxWidth: "100%",
                   margin: "0",
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   minHeight: "48px",
+                  height: "48px",
                   whiteSpace: "nowrap",
+                  gap: "0.5rem",
+                  padding: "0.75rem 1rem",
                 }}
               >
+                <i className="fa fa-sign-out" aria-hidden="true"></i>
                 EXIT LABS
               </div>
             </div>
