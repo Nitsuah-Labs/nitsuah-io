@@ -1,12 +1,12 @@
 # User Feedback
 
-**Updated:** November 1, 2025
+**Updated:** November 2, 2025
 
-## Deployment Feedback
+## QA Feedback
 
-- 
+- pending QAs
 
-## Submit Feedback
+## External Feedback
 
 - **Bugs:** [GitHub issue](https://github.com/Nitsuah-Labs/nitsuah-io/issues) with [BUG] prefix
 - **Features:** [GitHub issue](https://github.com/Nitsuah-Labs/nitsuah-io/issues) with [FEATURE] prefix
