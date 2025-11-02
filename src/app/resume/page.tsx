@@ -388,6 +388,7 @@ export default function ResumePage() {
                                   className="fa fa-chevron-down"
                                   aria-hidden="true"
                                 ></i>
+                                <span className="sr-only">Expand details</span>
                               </div>
                             </div>
                             <div className="work-info">
