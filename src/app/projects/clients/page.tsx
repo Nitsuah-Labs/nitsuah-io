@@ -1,6 +1,6 @@
 // src/app/projects/clients/page.tsx
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../../_components/_site/Footer";
 import HomeBar from "../../_components/_site/Homebar";
 import "./_styles/client.css";
@@ -12,7 +12,177 @@ import { Connected } from "../../_components/_web3/Connected";
 import { MintNFT } from "../../_components/_web3/MintNFT";
 import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
 
+type ProjectType = "web3" | "ecommerce" | "saas" | "service" | "all";
+
+interface ClientProject {
+  id: string;
+  name: string;
+  type: ProjectType;
+  description: string;
+  technologies: string[];
+  features: string[];
+  status: "live" | "demo" | "mockup";
+}
+
+const clientProjects: ClientProject[] = [
+  {
+    id: "nft-mint",
+    name: "NFT Minting Platform",
+    type: "web3",
+    description:
+      "Web3 NFT minting demo with wallet connection and network switching",
+    technologies: ["React", "wagmi", "Web3", "Ethereum"],
+    features: [
+      "Wallet Connect",
+      "NFT Minting",
+      "Network Switching",
+      "Account Management",
+    ],
+    status: "demo",
+  },
+  {
+    id: "storefront",
+    name: "E-Commerce Storefront",
+    type: "ecommerce",
+    description:
+      "Modern e-commerce platform with cart, checkout, and inventory management",
+    technologies: ["Next.js", "Stripe", "Headless CMS"],
+    features: [
+      "Product Catalog",
+      "Shopping Cart",
+      "Payment Integration",
+      "Order Management",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "restaurant",
+    name: "Restaurant & Booking",
+    type: "service",
+    description:
+      "Restaurant website with online menu, reservations, and ordering system",
+    technologies: ["React", "Node.js", "PostgreSQL"],
+    features: [
+      "Menu Display",
+      "Table Reservations",
+      "Online Ordering",
+      "Reviews",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "dashboard",
+    name: "SaaS Analytics Dashboard",
+    type: "saas",
+    description:
+      "Analytics dashboard for tracking KPIs, metrics, and business insights",
+    technologies: ["React", "D3.js", "Chart.js", "REST API"],
+    features: [
+      "Real-time Analytics",
+      "Custom Reports",
+      "Data Visualization",
+      "Export Tools",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "realestate",
+    name: "Real Estate Listings",
+    type: "service",
+    description:
+      "Property listing platform with search, filters, and virtual tours",
+    technologies: ["Next.js", "Mapbox", "Sanity CMS"],
+    features: [
+      "Property Search",
+      "Map Integration",
+      "Virtual Tours",
+      "Agent Profiles",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "crm",
+    name: "Customer CRM System",
+    type: "saas",
+    description:
+      "Customer relationship management system for sales and support teams",
+    technologies: ["React", "GraphQL", "MongoDB"],
+    features: [
+      "Contact Management",
+      "Sales Pipeline",
+      "Task Tracking",
+      "Email Integration",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "portfolio",
+    name: "Creative Portfolio",
+    type: "service",
+    description: "Portfolio showcase for photographers, designers, and artists",
+    technologies: ["Next.js", "Framer Motion", "Cloudinary"],
+    features: [
+      "Gallery Grid",
+      "Lightbox View",
+      "Project Details",
+      "Contact Form",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "booking",
+    name: "Appointment Booking",
+    type: "service",
+    description:
+      "Booking system for service providers with calendar and reminders",
+    technologies: ["React", "Calendar API", "Twilio"],
+    features: [
+      "Calendar Sync",
+      "SMS Reminders",
+      "Payment Processing",
+      "Cancellation Policy",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "marketplace",
+    name: "NFT Marketplace",
+    type: "web3",
+    description: "Decentralized marketplace for buying and selling NFTs",
+    technologies: ["React", "Solidity", "IPFS", "ethers.js"],
+    features: [
+      "NFT Listing",
+      "Auction System",
+      "Wallet Integration",
+      "Gas Optimization",
+    ],
+    status: "mockup",
+  },
+  {
+    id: "blog-cms",
+    name: "Content Management",
+    type: "service",
+    description: "Blog CMS with markdown support, SEO tools, and analytics",
+    technologies: ["Next.js", "MDX", "Vercel Analytics"],
+    features: [
+      "Rich Text Editor",
+      "SEO Tools",
+      "Draft System",
+      "Analytics Dashboard",
+    ],
+    status: "mockup",
+  },
+];
+
 const MintExample: React.FC = () => {
+  const [selectedType, setSelectedType] = useState<ProjectType>("all");
+  const [showDemo, setShowDemo] = useState<string | null>(null);
+
+  const filteredProjects =
+    selectedType === "all"
+      ? clientProjects
+      : clientProjects.filter((p) => p.type === selectedType);
+
   return (
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <HomeBar />
@@ -43,65 +213,291 @@ const MintExample: React.FC = () => {
               style={{
                 color: "rgba(255, 255, 255, 0.7)",
                 fontSize: "1.2rem",
+                marginBottom: "2rem",
               }}
             >
-              Web3 NFT Minting Demo
+              Professional service, freelance, and commercial app demonstrations
             </p>
+
+            {/* Project Type Switcher */}
+            <div
+              style={{
+                display: "flex",
+                gap: "1rem",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                marginBottom: "2rem",
+              }}
+            >
+              {[
+                { type: "all", label: "All Projects", color: "#10b981" },
+                { type: "web3", label: "Web3", color: "#8b5cf6" },
+                { type: "ecommerce", label: "E-Commerce", color: "#f59e0b" },
+                { type: "saas", label: "SaaS", color: "#3b82f6" },
+                { type: "service", label: "Services", color: "#ec4899" },
+              ].map(({ type, label, color }) => (
+                <button
+                  key={type}
+                  onClick={() => setSelectedType(type as ProjectType)}
+                  style={{
+                    padding: "0.75rem 1.5rem",
+                    borderRadius: "8px",
+                    border:
+                      selectedType === type
+                        ? `2px solid ${color}`
+                        : "2px solid rgba(255, 255, 255, 0.2)",
+                    background:
+                      selectedType === type
+                        ? `${color}20`
+                        : "rgba(20, 20, 20, 0.8)",
+                    color:
+                      selectedType === type
+                        ? color
+                        : "rgba(255, 255, 255, 0.7)",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (selectedType !== type) {
+                      e.currentTarget.style.borderColor = `${color}80`;
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (selectedType !== type) {
+                      e.currentTarget.style.borderColor =
+                        "rgba(255, 255, 255, 0.2)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {/* Projects Grid */}
           <div
             style={{
-              background: "rgba(20, 20, 20, 0.8)",
-              border: "2px solid rgba(16, 185, 129, 0.3)",
-              borderRadius: "12px",
-              padding: "2rem",
-              maxWidth: "800px",
-              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+              gap: "2rem",
+              marginBottom: "3rem",
             }}
           >
-            <div style={{ marginBottom: "1.5rem" }}>
-              <Connect />
-            </div>
-            <Connected>
+            {filteredProjects.map((project) => (
               <div
+                key={project.id}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1.5rem",
+                  background: "rgba(20, 20, 20, 0.8)",
+                  border: "2px solid rgba(16, 185, 129, 0.3)",
+                  borderRadius: "12px",
+                  padding: "1.5rem",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                }}
+                onClick={() =>
+                  setShowDemo(project.id === showDemo ? null : project.id)
+                }
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.8)";
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(16, 185, 129, 0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.3)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 <div
                   style={{
-                    padding: "1rem",
-                    background: "rgba(16, 185, 129, 0.1)",
-                    border: "1px solid rgba(16, 185, 129, 0.3)",
-                    borderRadius: "8px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "start",
+                    marginBottom: "1rem",
                   }}
                 >
-                  <Account />
+                  <h3
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "600",
+                      color: "#10b981",
+                      margin: 0,
+                    }}
+                  >
+                    {project.name}
+                  </h3>
+                  <span
+                    style={{
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "4px",
+                      fontSize: "0.75rem",
+                      fontWeight: "600",
+                      background:
+                        project.status === "live"
+                          ? "#10b98120"
+                          : project.status === "demo"
+                            ? "#3b82f620"
+                            : "#6b728020",
+                      color:
+                        project.status === "live"
+                          ? "#10b981"
+                          : project.status === "demo"
+                            ? "#3b82f6"
+                            : "#9ca3af",
+                    }}
+                  >
+                    {project.status.toUpperCase()}
+                  </span>
                 </div>
-                <div
+
+                <p
                   style={{
-                    padding: "1rem",
-                    background: "rgba(16, 185, 129, 0.1)",
-                    border: "1px solid rgba(16, 185, 129, 0.3)",
-                    borderRadius: "8px",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    marginBottom: "1rem",
                   }}
                 >
-                  <MintNFT />
+                  {project.description}
+                </p>
+
+                <div style={{ marginBottom: "1rem" }}>
+                  <div
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "#10b981",
+                      marginBottom: "0.5rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Technologies:
+                  </div>
+                  <div
+                    style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}
+                  >
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          background: "rgba(16, 185, 129, 0.1)",
+                          border: "1px solid rgba(16, 185, 129, 0.3)",
+                          borderRadius: "4px",
+                          fontSize: "0.75rem",
+                          color: "rgba(255, 255, 255, 0.8)",
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    padding: "1rem",
-                    background: "rgba(16, 185, 129, 0.1)",
-                    border: "1px solid rgba(16, 185, 129, 0.3)",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <NetworkSwitcher />
+
+                <div>
+                  <div
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "#10b981",
+                      marginBottom: "0.5rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Key Features:
+                  </div>
+                  <ul
+                    style={{
+                      margin: 0,
+                      paddingLeft: "1.25rem",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontSize: "0.875rem",
+                    }}
+                  >
+                    {project.features.slice(0, 3).map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            </Connected>
+            ))}
           </div>
+
+          {/* NFT Minting Demo - Only show when selected */}
+          {showDemo === "nft-mint" && (
+            <div style={{ marginTop: "3rem" }}>
+              <div style={{ marginBottom: "2rem", textAlign: "center" }}>
+                <h2
+                  style={{
+                    fontSize: "2rem",
+                    fontWeight: "600",
+                    color: "#10b981",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Live Demo: NFT Minting Platform
+                </h2>
+                <p style={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                  Connect your wallet and interact with the live demo
+                </p>
+              </div>
+              <div
+                style={{
+                  background: "rgba(20, 20, 20, 0.8)",
+                  border: "2px solid rgba(16, 185, 129, 0.3)",
+                  borderRadius: "12px",
+                  padding: "2rem",
+                  maxWidth: "800px",
+                  margin: "0 auto",
+                }}
+              >
+                <div style={{ marginBottom: "1.5rem" }}>
+                  <Connect />
+                </div>
+                <Connected>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1.5rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <Account />
+                    </div>
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <MintNFT />
+                    </div>
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <NetworkSwitcher />
+                    </div>
+                  </div>
+                </Connected>
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
