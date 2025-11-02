@@ -11,6 +11,36 @@ const HomePage: React.FC = () => {
   const [showSpline, setShowSpline] = useState(false);
   const [showFullName, setShowFullName] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(false);
+  const [displayedText, setDisplayedText] = useState("nitsuah");
+  const [isTyping, setIsTyping] = useState(false);
+  const [typingComplete, setTypingComplete] = useState(false);
+
+  // Auto-type animation after 1.5 seconds
+  useEffect(() => {
+    const startTyping = setTimeout(() => {
+      setIsTyping(true);
+      const fullName = "Austin H.";
+      let currentIndex = 0;
+
+      // Clear the text first
+      setDisplayedText("");
+
+      const typeInterval = setInterval(() => {
+        if (currentIndex < fullName.length) {
+          setDisplayedText(fullName.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typeInterval);
+          setTypingComplete(true);
+          setIsTyping(false);
+        }
+      }, 100); // 100ms per character
+
+      return () => clearInterval(typeInterval);
+    }, 1500); // Start after 1.5 seconds
+
+    return () => clearTimeout(startTyping);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,8 +115,8 @@ const HomePage: React.FC = () => {
             </div>
             <h1
               style={{
-                fontSize: "clamp(2.5rem, 6vw, 4rem)",
-                fontWeight: "700",
+                fontSize: "clamp(2.5rem, 8vw, 5rem)",
+                fontWeight: "900",
                 marginBottom: "0.75rem",
                 lineHeight: "1.1",
                 color: "#ffffff",
@@ -95,12 +125,40 @@ const HomePage: React.FC = () => {
                 paddingBottom: "0.25rem",
                 display: "inline-block",
                 cursor: "pointer",
+                minWidth: "300px",
+                textAlign: "left",
               }}
-              onMouseEnter={() => setShowFullName(true)}
+              onMouseEnter={() => {
+                if (typingComplete) {
+                  setShowFullName(true);
+                }
+              }}
               onMouseLeave={() => setShowFullName(false)}
             >
-              {showFullName ? "Austin H." : "nitsuah"}
+              {showFullName && typingComplete ? "Austin H." : displayedText}
+              {isTyping && (
+                <span
+                  style={{
+                    opacity: 0.7,
+                    animation: "blink 1s infinite",
+                  }}
+                >
+                  |
+                </span>
+              )}
             </h1>
+            <style jsx>{`
+              @keyframes blink {
+                0%,
+                50% {
+                  opacity: 1;
+                }
+                51%,
+                100% {
+                  opacity: 0;
+                }
+              }
+            `}</style>
             <h2
               style={{
                 fontSize: "clamp(1.3rem, 3.5vw, 2rem)",

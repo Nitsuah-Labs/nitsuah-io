@@ -73,6 +73,21 @@ const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [filtersExpanded, setFiltersExpanded] = useState(true);
+  const [featuredProjects, setFeaturedProjects] = useState<Set<string>>(
+    new Set(allProjects.filter((p) => p.featured).map((p) => p.id)),
+  );
+
+  const handleToggleFeatured = (projectId: string) => {
+    setFeaturedProjects((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(projectId)) {
+        newSet.delete(projectId);
+      } else {
+        newSet.add(projectId);
+      }
+      return newSet;
+    });
+  };
 
   // Auto-collapse filters on mobile
   useEffect(() => {
@@ -88,23 +103,40 @@ const Projects = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Extract all unique tags from all projects
-  const allUniqueTags = useMemo(() => {
+  // Sort projects: featured first (using dynamic state), then by original order
+  const sortedProjects = useMemo(() => {
+    return [...allProjects].sort((a, b) => {
+      const aFeatured = featuredProjects.has(a.id);
+      const bFeatured = featuredProjects.has(b.id);
+      if (aFeatured && !bFeatured) return -1;
+      if (!aFeatured && bFeatured) return 1;
+      return 0;
+    });
+  }, [featuredProjects]);
+
+  // Get available tags based on currently filtered projects (by category only)
+  const availableTags = useMemo(() => {
+    let projectsForTags = sortedProjects;
+
+    // Apply category filter only
+    if (selectedCategory !== "all") {
+      if (selectedCategory === "Featured") {
+        projectsForTags = projectsForTags.filter((p) =>
+          featuredProjects.has(p.id),
+        );
+      } else {
+        projectsForTags = projectsForTags.filter(
+          (p) => p.category === selectedCategory,
+        );
+      }
+    }
+
     const tagsSet = new Set<string>();
-    allProjects.forEach((project) => {
+    projectsForTags.forEach((project) => {
       project.tags.forEach((tag) => tagsSet.add(tag));
     });
     return Array.from(tagsSet).sort();
-  }, []);
-
-  // Sort projects: featured first, then by original order
-  const sortedProjects = useMemo(() => {
-    return [...allProjects].sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      return 0;
-    });
-  }, []);
+  }, [sortedProjects, selectedCategory, featuredProjects]);
 
   // Filter projects by category and tags
   const filteredProjects = useMemo(() => {
@@ -112,18 +144,22 @@ const Projects = () => {
 
     // Filter by category
     if (selectedCategory !== "all") {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
+      if (selectedCategory === "Featured") {
+        filtered = filtered.filter((p) => featuredProjects.has(p.id));
+      } else {
+        filtered = filtered.filter((p) => p.category === selectedCategory);
+      }
     }
 
-    // Filter by tags
+    // Filter by tags (AND logic - must have ALL selected tags)
     if (selectedTags.length > 0) {
       filtered = filtered.filter((project) =>
-        selectedTags.some((tag) => project.tags.includes(tag)),
+        selectedTags.every((tag) => project.tags.includes(tag)),
       );
     }
 
     return filtered;
-  }, [sortedProjects, selectedCategory, selectedTags]);
+  }, [sortedProjects, selectedCategory, selectedTags, featuredProjects]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -148,40 +184,41 @@ const Projects = () => {
 
           {/* Filter Panel */}
           <div className={styles.filterPanel}>
-            <button
-              className={styles.filterToggle}
-              onClick={() => setFiltersExpanded(!filtersExpanded)}
-            >
-              <span>
-                <i className="fa fa-filter" aria-hidden="true"></i>
-                Filters
-              </span>
-              <i
-                className={`fa fa-chevron-${filtersExpanded ? "up" : "down"}`}
-                aria-hidden="true"
-              ></i>
-            </button>
+            <div className={styles.filterHeader}>
+              <div className={styles.filterHeaderLeft}>
+                <button
+                  className={styles.filterToggle}
+                  onClick={() => setFiltersExpanded(!filtersExpanded)}
+                >
+                  <span>
+                    <i className="fa fa-filter" aria-hidden="true"></i>
+                    Filters
+                  </span>
+                  <i
+                    className={`fa fa-chevron-${filtersExpanded ? "up" : "down"}`}
+                    aria-hidden="true"
+                  ></i>
+                </button>
+
+                {/* Category Filters Inline */}
+                <div className={styles.categoryButtonsInline}>
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`${styles.categoryButton} ${
+                        selectedCategory === cat ? styles.active : ""
+                      }`}
+                    >
+                      {cat === "all" ? "All" : cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             {filtersExpanded && (
               <div className={styles.filterContent}>
-                {/* Category Filters */}
-                <div className={styles.categoryFilters}>
-                  <label className={styles.filterLabel}>Category</label>
-                  <div className={styles.categoryButtons}>
-                    {categories.map((cat) => (
-                      <button
-                        key={cat}
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`${styles.categoryButton} ${
-                          selectedCategory === cat ? styles.active : ""
-                        }`}
-                      >
-                        {cat === "all" ? "All Projects" : cat}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Tag Filters */}
                 <div className={styles.tagFilters}>
                   <label className={styles.filterLabel}>
@@ -193,7 +230,7 @@ const Projects = () => {
                     )}
                   </label>
                   <div className={styles.tagButtons}>
-                    {allUniqueTags.map((tag) => (
+                    {availableTags.map((tag) => (
                       <button
                         key={tag}
                         onClick={() => toggleTag(tag)}
@@ -239,14 +276,16 @@ const Projects = () => {
             {filteredProjects.map((project) => {
               const image = projectImages[project.id] || cat;
               const isGif = gifProjects.has(project.id);
+              const isFeatured = featuredProjects.has(project.id);
 
               return (
                 <ProjectCard
                   key={project.id}
                   project={project}
                   image={image}
-                  isFeatured={project.featured}
+                  isFeatured={isFeatured}
                   isGif={isGif}
+                  onToggleFeatured={handleToggleFeatured}
                 />
               );
             })}
