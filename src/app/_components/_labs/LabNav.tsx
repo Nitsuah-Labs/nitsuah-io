@@ -124,7 +124,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                   background:
                     "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
                   transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
+                  boxShadow: "0 4px 12px rgba(220, 38, 38, 0.4)",
                 },
               }}
             >
@@ -347,7 +347,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                     background:
                       "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)",
                     transform: "translateY(-2px)",
-                    boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
+                    boxShadow: "0 4px 12px rgba(185, 28, 28, 0.4)",
                   },
                 }}
               >
