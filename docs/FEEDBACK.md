@@ -4,6 +4,7 @@
 
 ## QA Feedback Items
 
+- change pre-push/pre-commit so linting happens earlier and include automation to fix issues where possible
 - 
 
 ## External Feedback
