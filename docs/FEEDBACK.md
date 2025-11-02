@@ -4,15 +4,12 @@
 
 ## Deployment Feedback
 
-- [ ] home - tbd
-- [ ]  /labs
+- [ ] home - 
+- [ ] navbar - Austin H.
+- [ ]  /labs - 
 - [ ] /projects/clients
 - [ ] /blogs
-
-## Feature Requests
-
-- [ ] Setup Docker and re-enable skipped playwright visual tests
-- [ ] FIX Playwright visual tests to better handle CI/local environment differences
+- [ ] /resume
 
 ## Submit Feedback
 
