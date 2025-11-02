@@ -437,17 +437,17 @@ export default function ResumePage() {
                                       (_, i) => (
                                         <div
                                           key={i}
-                                          className={`duration-bar full ${isCurrent && i === fullBars - 1 && partialBar === 0 ? "current" : ""}`}
+                                          className="duration-bar full"
                                         />
                                       ),
                                     )}
                                     {partialBar > 0 && (
-                                      <div
-                                        className={`duration-bar partial ${isCurrent ? "current" : ""}`}
-                                      />
+                                      <div className="duration-bar partial" />
                                     )}
                                   </div>
-                                  <div className="duration-text">
+                                  <div
+                                    className={`duration-text ${isCurrent ? "current" : ""}`}
+                                  >
                                     {extractDurationText(duration)}
                                   </div>
                                 </div>

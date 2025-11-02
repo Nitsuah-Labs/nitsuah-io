@@ -304,13 +304,19 @@ const LabNav: React.FC<LabNavProps> = () => {
                     "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
                   color: "#000",
                   fontWeight: 600,
-                  padding: "0.5rem 1rem",
+                  padding: "0.5rem",
                   borderRadius: "6px",
                   transition: "all 0.3s ease",
-                  minWidth: { xs: "auto", md: "auto" },
+                  minWidth: "auto",
                   "&:hover": {
+                    padding: "0.5rem 1rem",
                     transform: "translateY(-2px)",
                     boxShadow: "0 4px 12px rgba(168, 85, 247, 0.4)",
+                    "& .profile-text": {
+                      maxWidth: "100px",
+                      marginLeft: "0.5rem",
+                      opacity: 1,
+                    },
                   },
                 }}
               >
@@ -318,7 +324,6 @@ const LabNav: React.FC<LabNavProps> = () => {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.5rem",
                   }}
                 >
                   <i
@@ -326,7 +331,18 @@ const LabNav: React.FC<LabNavProps> = () => {
                     aria-hidden="true"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  <span>Profile</span>
+                  <span
+                    className="profile-text"
+                    style={{
+                      maxWidth: 0,
+                      overflow: "hidden",
+                      opacity: 0,
+                      transition: "all 0.3s ease",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Profile
+                  </span>
                 </span>
               </Button>
             </Link>
@@ -339,15 +355,21 @@ const LabNav: React.FC<LabNavProps> = () => {
                     "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
                   color: "#fff",
                   fontWeight: 600,
-                  padding: "0.5rem 1rem",
+                  padding: "0.5rem",
                   borderRadius: "6px",
                   transition: "all 0.3s ease",
-                  minWidth: { xs: "auto", md: "auto" },
+                  minWidth: "auto",
                   "&:hover": {
+                    padding: "0.5rem 1rem",
                     background:
                       "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)",
                     transform: "translateY(-2px)",
                     boxShadow: "0 4px 12px rgba(185, 28, 28, 0.4)",
+                    "& .logout-text": {
+                      maxWidth: "100px",
+                      marginLeft: "0.5rem",
+                      opacity: 1,
+                    },
                   },
                 }}
               >
@@ -355,7 +377,6 @@ const LabNav: React.FC<LabNavProps> = () => {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "0.5rem",
                   }}
                 >
                   <i
@@ -363,7 +384,18 @@ const LabNav: React.FC<LabNavProps> = () => {
                     aria-hidden="true"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  <span>Logout</span>
+                  <span
+                    className="logout-text"
+                    style={{
+                      maxWidth: 0,
+                      overflow: "hidden",
+                      opacity: 0,
+                      transition: "all 0.3s ease",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Logout
+                  </span>
                 </span>
               </Button>
             </Link>
