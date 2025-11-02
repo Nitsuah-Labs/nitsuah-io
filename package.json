@@ -35,7 +35,11 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --config config/prettier.config.json --write"
+    ],
+    "src/**/*.{json,css}": [
       "prettier --config config/prettier.config.json --write"
     ]
   },

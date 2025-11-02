@@ -138,27 +138,15 @@ const HomePage: React.FC = () => {
               {showFullName && typingComplete ? "Austin H." : displayedText}
               {isTyping && (
                 <span
+                  className="typing-cursor"
                   style={{
                     opacity: 0.7,
-                    animation: "blink 1s infinite",
                   }}
                 >
                   |
                 </span>
               )}
             </h1>
-            <style jsx>{`
-              @keyframes blink {
-                0%,
-                50% {
-                  opacity: 1;
-                }
-                51%,
-                100% {
-                  opacity: 0;
-                }
-              }
-            `}</style>
             <h2
               style={{
                 fontSize: "clamp(1.3rem, 3.5vw, 2rem)",
