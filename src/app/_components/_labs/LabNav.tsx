@@ -50,8 +50,6 @@ const LabNav: React.FC<LabNavProps> = () => {
   );
   const { address, isConnected } = useAccount();
   const [copied, setCopied] = React.useState(false);
-  const [profileHovered, setProfileHovered] = React.useState(false);
-  const [logoutHovered, setLogoutHovered] = React.useState(false);
   const [homeClickCount, setHomeClickCount] = React.useState(0);
   const [homeClickTimer, setHomeClickTimer] =
     React.useState<NodeJS.Timeout | null>(null);
@@ -183,13 +181,27 @@ const LabNav: React.FC<LabNavProps> = () => {
               }}
             >
               <Link href="/">
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Button
+                  sx={{
+                    my: 2,
+                    color: "#f97316",
+                    display: "block",
+                    "&:hover": { color: "#ea580c" },
+                  }}
+                >
                   HOME
                 </Button>
               </Link>
               {LAB_PAGES.map((page) => (
                 <Link key={page} href={`/labs/${page}`}>
-                  <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  <Button
+                    sx={{
+                      my: 2,
+                      color: "#c084fc",
+                      display: "block",
+                      "&:hover": { color: "#a855f7" },
+                    }}
+                  >
                     {page}
                   </Button>
                 </Link>
@@ -208,11 +220,11 @@ const LabNav: React.FC<LabNavProps> = () => {
                       <Button
                         sx={{
                           my: 2,
-                          color: "white",
+                          color: "#a1a1aa",
                           display: "block",
                           "&:hover": isWIP
-                            ? { color: "#ff6b6b", cursor: "not-allowed" }
-                            : {},
+                            ? { color: "#ef4444", cursor: "not-allowed" }
+                            : { color: "#c084fc" },
                         }}
                       >
                         {page} {isWIP && "(WIP)"}
@@ -287,8 +299,6 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Profile"
-                onMouseEnter={() => setProfileHovered(true)}
-                onMouseLeave={() => setProfileHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #c084fc 0%, #a855f7 100%)",
@@ -316,7 +326,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                     aria-hidden="true"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  {profileHovered && <span>Profile</span>}
+                  <span>Profile</span>
                 </span>
               </Button>
             </Link>
@@ -324,8 +334,6 @@ const LabNav: React.FC<LabNavProps> = () => {
               <Button
                 color="inherit"
                 title="Logout"
-                onMouseEnter={() => setLogoutHovered(true)}
-                onMouseLeave={() => setLogoutHovered(false)}
                 sx={{
                   background:
                     "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
@@ -355,7 +363,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                     aria-hidden="true"
                     style={{ fontSize: "1.1rem" }}
                   ></i>
-                  {logoutHovered && <span>Logout</span>}
+                  <span>Logout</span>
                 </span>
               </Button>
             </Link>
