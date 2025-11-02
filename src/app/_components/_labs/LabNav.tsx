@@ -106,6 +106,38 @@ const LabNav: React.FC<LabNavProps> = () => {
     <AppBar position="static" sx={{ backgroundColor: "#181818" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Home Button with Double-Click - MOVED TO LEFT */}
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, marginRight: "1rem" }}
+          >
+            <Button
+              onClick={handleHomeClick}
+              title="Click once for Labs home, double-click for main home"
+              aria-label="Navigate home (single click for Labs, double click for main site)"
+              sx={{
+                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                color: "#000",
+                fontWeight: 600,
+                padding: "0.5rem 1rem",
+                borderRadius: "6px",
+                transition: "all 0.3s ease",
+                minWidth: "auto",
+                "&:hover": {
+                  background:
+                    "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 4px 12px rgba(239, 68, 68, 0.4)",
+                },
+              }}
+            >
+              <i
+                className="fa fa-home"
+                aria-hidden="true"
+                style={{ fontSize: "1.2rem" }}
+              ></i>
+            </Button>
+          </Box>
+
           <Link href="/labs/" passHref legacyBehavior>
             <a style={{ textDecoration: "none", color: "inherit" }}>
               <Typography
@@ -190,36 +222,6 @@ const LabNav: React.FC<LabNavProps> = () => {
                 );
               })}
             </StyledMenu>
-          </Box>
-
-          {/* Home Button with Double-Click */}
-          <Box
-            sx={{ display: { xs: "none", md: "flex" }, marginRight: "1rem" }}
-          >
-            <Button
-              onClick={handleHomeClick}
-              title="Click once for Labs home, double-click for main home"
-              aria-label="Navigate home (single click for Labs, double click for main site)"
-              sx={{
-                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                color: "#000",
-                fontWeight: 600,
-                padding: "0.5rem 1rem",
-                borderRadius: "6px",
-                transition: "all 0.3s ease",
-                minWidth: "auto",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
-                },
-              }}
-            >
-              <i
-                className="fa fa-home"
-                aria-hidden="true"
-                style={{ fontSize: "1.2rem" }}
-              ></i>
-            </Button>
           </Box>
 
           {/* Wallet Status Display */}
@@ -309,14 +311,20 @@ const LabNav: React.FC<LabNavProps> = () => {
                     gap: "0.5rem",
                   }}
                 >
-                  <i className="fa fa-user" aria-hidden="true"></i>
+                  {!profileHovered && (
+                    <i
+                      className="fa fa-user"
+                      aria-hidden="true"
+                      style={{ fontSize: "1.1rem" }}
+                    ></i>
+                  )}
                   <span
                     style={{
                       display: profileHovered ? "inline" : "none",
                       transition: "all 0.3s ease",
                     }}
                   >
-                    Profile
+                    👤 Profile
                   </span>
                 </span>
               </Button>
@@ -351,18 +359,20 @@ const LabNav: React.FC<LabNavProps> = () => {
                     gap: "0.5rem",
                   }}
                 >
-                  <i
-                    className="fa fa-sign-out"
-                    aria-hidden="true"
-                    style={{ fontSize: "1.1rem" }}
-                  ></i>
+                  {!logoutHovered && (
+                    <i
+                      className="fa fa-sign-out"
+                      aria-hidden="true"
+                      style={{ fontSize: "1.1rem" }}
+                    ></i>
+                  )}
                   <span
                     style={{
                       display: logoutHovered ? "inline" : "none",
                       transition: "all 0.3s ease",
                     }}
                   >
-                    Logout
+                    🚪 Logout
                   </span>
                 </span>
               </Button>

@@ -10,8 +10,7 @@ import "../_components/_styles/labs.css";
 
 // LAB ASSETS
 import mumbai from "../_components/_web3/_assets/mumbai.png";
-import polygonLogo from "../_components/_web3/_assets/polygonlogo.png";
-// ethLogo not currently used in this page
+// polygonLogo and ethLogo not currently used in this page
 
 function renderOutput() {
   return (
@@ -36,35 +35,22 @@ function renderOutput() {
         {/* Network Info Card */}
         <div className="labs-card">
           <div className="labs-card-header">
-            <h2 className="labs-card-title">
-              <Image
-                className="logo"
-                src={polygonLogo}
-                alt="Polygon logo"
-                style={{
-                  display: "inline",
-                  marginRight: "10px",
-                  verticalAlign: "middle",
-                }}
-              />
-              NETWORK
-            </h2>
+            <h2 className="labs-card-title">NETWORK</h2>
           </div>
           <div className="labs-card-body">
-            <p
-              style={{ fontSize: "18px", fontWeight: "600", color: "#c084fc" }}
-            >
-              Mumbai Testnet
-            </p>
-            <p
+            <button
+              className="labs-btn"
+              disabled
               style={{
-                marginTop: "8px",
-                color: "rgba(255, 255, 255, 0.6)",
-                fontSize: "14px",
+                width: "100%",
+                margin: "0",
+                background: "rgba(255, 255, 255, 0.1)",
+                color: "rgba(255, 255, 255, 0.5)",
+                cursor: "not-allowed",
               }}
             >
-              Polygon test environment
-            </p>
+              DISCONNECTED
+            </button>
           </div>
         </div>
 
@@ -137,9 +123,11 @@ function renderOutput() {
                 style={{
                   width: "100%",
                   margin: "0",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minHeight: "48px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 GET STARTED
@@ -172,9 +160,11 @@ function renderOutput() {
                 style={{
                   width: "100%",
                   margin: "0",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minHeight: "48px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 START MINTING
@@ -207,9 +197,11 @@ function renderOutput() {
                 style={{
                   width: "100%",
                   margin: "0",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minHeight: "48px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 VIEW DOMAINS
@@ -242,9 +234,11 @@ function renderOutput() {
                 style={{
                   width: "100%",
                   margin: "0",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minHeight: "48px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 EXIT LABS

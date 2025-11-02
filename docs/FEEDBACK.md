@@ -23,7 +23,11 @@
 - [ ] projects - the project cards "github" and "view" buttons should be on the bottom right of the card instead of bottom left. (pasted image 2)
 - [ ] projects - for web3 and block chain category items, organize the items in the following order: /labs, darkmoon.dev, N+W S1, ETH Core, ETH dApp, NFT Store, ENS NFT, SOL Core, SOL dApp, DevDAO, etc.
 - [ ] projects - AI & Machine learning section - add a "coming soon ..." card next to "Imagen" that teases upcoming AI/ML projects to be added to this section.
-- [ ] labs/  
+- [ ] labs/ - nav orange home button should be on the "left" of the LABS text in the nav bar and should have a "home" icon or emoji and on hover should show a red left arrow icon instead of the home icon. but on click of either should take the user home. (the text when hovered should affect all for labs nav buttons) (pasted image 3)
+- [ ] labs/ - nav profile and logout buttons should also display icons/emojis when NOT hovered over (pasted image 3)
+- [ ] labs/ - buttons on home are out of span now (pasted image 3)
+- [ ] labs/ - network still shows the default placeholder text for mumbai, remove it and the "polygon test environment" test and the icon/logo. we'll set this up again later. but by default should always show a "disabled/uninteractive" button with "disconnected" text until a wallet is connected. (pasted image 3)
+- [ ] /labs - sub nav bar should not be able to click on the "disabled"/wip items.
 
 ## Feature Requests
 
