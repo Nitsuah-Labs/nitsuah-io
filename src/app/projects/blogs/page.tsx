@@ -5,12 +5,32 @@ import HomeBar from "../../../app/_components/_site/Homebar";
 import BlogPanel from "./_components/BlogPanel.jsx";
 import "./_styles/Blog.module.css";
 
+interface Blog {
+  id: number;
+  title: string;
+  slug?: string;
+  excerpt?: string;
+  description?: string;
+  content?: string;
+  author: string;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  image_url: string;
+  upvotes: number;
+  comments: number;
+  views: number;
+}
+
+type SortOption = "recent" | "popular" | "views";
+
 const Blogsite = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [filteredBlogs, setFilteredBlogs] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortBy, setSortBy] = useState("recent");
-  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<SortOption>("recent");
+  const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
 
   useEffect(() => {
     // Load blogs from static JSON file
@@ -31,7 +51,9 @@ const Blogsite = () => {
     // Sort blogs
     switch (sortBy) {
       case "recent":
-        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+        filtered.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
         break;
       case "popular":
         filtered.sort((a, b) => b.upvotes - a.upvotes);
@@ -46,9 +68,12 @@ const Blogsite = () => {
     setFilteredBlogs(filtered);
   }, [selectedCategory, sortBy, blogs]);
 
-  const categories = ["all", ...new Set(blogs.map((blog) => blog.category))];
+  const categories = [
+    "all",
+    ...Array.from(new Set(blogs.map((blog) => blog.category))),
+  ];
 
-  const handleUpvote = (blogId, isUpvoted) => {
+  const handleUpvote = (blogId: number, isUpvoted: boolean) => {
     console.log(`Blog ${blogId} ${isUpvoted ? "upvoted" : "downvoted"}`);
     // In a real app, this would update the backend
   };
@@ -165,7 +190,7 @@ const Blogsite = () => {
             {/* Sort Dropdown */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
+              onChange={(e) => setSortBy(e.target.value as SortOption)}
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "6px",

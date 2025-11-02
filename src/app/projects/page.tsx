@@ -10,6 +10,12 @@ import HomeBar from "../_components/_site/Homebar";
 import "../_components/_styles/SelectedProjects.css";
 import "../_components/_styles/global.css";
 
+// Project card transform constants
+const FEATURED_SCALE = 1;
+const NON_FEATURED_SCALE = 0.72;
+const HOVER_TRANSLATE_Y_FEATURED = "-4px";
+const HOVER_TRANSLATE_Y_NON_FEATURED = "-2px";
+
 // Import project images
 import dev from "../crypto/_assets/dao.png";
 import nitsuah from "./_assets/NITSUAH.png";
@@ -188,8 +194,8 @@ const Projects = () => {
                         e.currentTarget.style.borderColor =
                           "rgba(249, 115, 22, 0.8)";
                         e.currentTarget.style.transform = isFeatured
-                          ? "translateY(-4px)"
-                          : "scale(0.72) translateY(-2px)";
+                          ? `translateY(${HOVER_TRANSLATE_Y_FEATURED})`
+                          : `scale(${NON_FEATURED_SCALE}) translateY(${HOVER_TRANSLATE_Y_NON_FEATURED})`;
                         e.currentTarget.style.boxShadow =
                           "0 8px 24px rgba(249, 115, 22, 0.2)";
                       }}
@@ -198,7 +204,7 @@ const Projects = () => {
                           "rgba(249, 115, 22, 0.3)";
                         e.currentTarget.style.transform = isFeatured
                           ? "translateY(0)"
-                          : "scale(0.72) translateY(0)";
+                          : `scale(${NON_FEATURED_SCALE}) translateY(0)`;
                         e.currentTarget.style.boxShadow = "none";
                       }}
                     >
@@ -606,16 +612,14 @@ const Projects = () => {
                             onMouseEnter={(e) => {
                               e.currentTarget.style.borderColor =
                                 "rgba(249, 115, 22, 0.8)";
-                              e.currentTarget.style.transform =
-                                "scale(0.72) translateY(-2px)";
+                              e.currentTarget.style.transform = `scale(${NON_FEATURED_SCALE}) translateY(${HOVER_TRANSLATE_Y_NON_FEATURED})`;
                               e.currentTarget.style.boxShadow =
                                 "0 8px 24px rgba(249, 115, 22, 0.2)";
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.borderColor =
                                 "rgba(249, 115, 22, 0.3)";
-                              e.currentTarget.style.transform =
-                                "scale(0.72) translateY(0)";
+                              e.currentTarget.style.transform = `scale(${NON_FEATURED_SCALE}) translateY(0)`;
                               e.currentTarget.style.boxShadow = "none";
                             }}
                           >
@@ -827,16 +831,14 @@ const Projects = () => {
                         onMouseEnter={(e) => {
                           e.currentTarget.style.borderColor =
                             "rgba(249, 115, 22, 0.8)";
-                          e.currentTarget.style.transform =
-                            "scale(0.72) translateY(-2px)";
+                          e.currentTarget.style.transform = `scale(${NON_FEATURED_SCALE}) translateY(${HOVER_TRANSLATE_Y_NON_FEATURED})`;
                           e.currentTarget.style.boxShadow =
                             "0 8px 24px rgba(249, 115, 22, 0.2)";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.borderColor =
                             "rgba(249, 115, 22, 0.3)";
-                          e.currentTarget.style.transform =
-                            "scale(0.72) translateY(0)";
+                          e.currentTarget.style.transform = `scale(${NON_FEATURED_SCALE}) translateY(0)`;
                           e.currentTarget.style.boxShadow = "none";
                         }}
                       >

@@ -6,6 +6,14 @@ import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import "./resume.css";
 
+/**
+ * Extracts duration text from parentheses if present, otherwise returns the original duration.
+ * Example: "Jan 2020 - Dec 2021 (2 years)" => "2 years"
+ */
+function extractDurationText(duration: string): string {
+  return duration.match(/\(([^)]+)\)/)?.[1] || duration;
+}
+
 interface ResumeData {
   basics: {
     name: string;
@@ -440,8 +448,7 @@ export default function ResumePage() {
                                     )}
                                   </div>
                                   <div className="duration-text">
-                                    {duration.match(/\(([^)]+)\)/)?.[1] ||
-                                      duration}
+                                    {extractDurationText(duration)}
                                   </div>
                                 </div>
                               );
