@@ -228,32 +228,68 @@ export default function ResumePage() {
                       alignItems: "center",
                       gap: "0.5rem",
                       padding: "0.5rem 1rem",
-                      background: "rgba(249, 115, 22, 0.1)",
-                      border: "1px solid rgba(249, 115, 22, 0.3)",
+                      background: "#f97316",
+                      border: "1px solid #ea580c",
                       borderRadius: "6px",
-                      color: "#c2410c",
+                      color: "#000",
                       textDecoration: "none",
                       transition: "all 0.3s ease",
+                      fontWeight: "600",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(249, 115, 22, 0.2)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(249, 115, 22, 0.6)";
+                      e.currentTarget.style.background = "#ea580c";
+                      e.currentTarget.style.borderColor = "#c2410c";
                       e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(249, 115, 22, 0.4)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(249, 115, 22, 0.1)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(249, 115, 22, 0.3)";
+                      e.currentTarget.style.background = "#f97316";
+                      e.currentTarget.style.borderColor = "#ea580c";
                       e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
                     }}
                   >
                     <i className="fa fa-globe" aria-hidden="true"></i>
                     <span>Website</span>
                   </a>
                 )}
+
+                {/* Projects Button */}
+                <a
+                  href="/projects"
+                  className="profile-link"
+                  aria-label="View portfolio projects"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem 1rem",
+                    background: "#f97316",
+                    border: "1px solid #ea580c",
+                    borderRadius: "6px",
+                    color: "#000",
+                    textDecoration: "none",
+                    transition: "all 0.3s ease",
+                    fontWeight: "600",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#ea580c";
+                    e.currentTarget.style.borderColor = "#c2410c";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 12px rgba(249, 115, 22, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#f97316";
+                    e.currentTarget.style.borderColor = "#ea580c";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <i className="fa fa-folder-open" aria-hidden="true"></i>
+                  <span>Projects</span>
+                </a>
 
                 {/* Social Profile Buttons */}
                 {resume.basics.profiles &&
@@ -324,7 +360,23 @@ export default function ResumePage() {
                       <label
                         htmlFor={`work-item-${idx}`}
                         className="work-label"
+                        style={{ position: "relative" }}
                       >
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "1rem",
+                            left: "-1.5rem",
+                            color: "#f97316",
+                            fontSize: "1.2rem",
+                            transition: "transform 0.3s ease",
+                          }}
+                        >
+                          <i
+                            className="fa fa-chevron-down"
+                            aria-hidden="true"
+                          ></i>
+                        </div>
                         <div className="work-header">
                           <div className="work-left">
                             <div className="work-date">
@@ -394,7 +446,8 @@ export default function ResumePage() {
                                     )}
                                   </div>
                                   <div className="duration-text">
-                                    {duration}
+                                    {duration.match(/\(([^)]+)\)/)?.[1] ||
+                                      duration}
                                   </div>
                                 </div>
                               );
@@ -582,46 +635,6 @@ export default function ResumePage() {
               )}
             </div>
           )}
-
-          {/* Projects Link */}
-          <section className="resume-section projects-link" id="projects">
-            <h2 className="section-title">
-              <i className="fa fa-rocket" aria-hidden="true"></i> Projects
-            </h2>
-            <p style={{ marginBottom: "1rem" }}>
-              View my portfolio of selected projects
-            </p>
-            <a
-              href="/projects"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                color: "#1a1a1a",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                textDecoration: "none",
-                fontWeight: "600",
-                border: "2px solid #000",
-                transition: "all 0.3s ease",
-                boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 6px 16px rgba(249, 115, 22, 0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(249, 115, 22, 0.3)";
-              }}
-            >
-              <i className="fa fa-folder-open" aria-hidden="true"></i>
-              Visit Portfolio
-            </a>
-          </section>
         </div>
       </main>
       <div className="print-hide">

@@ -7,7 +7,7 @@ export type Project = {
   demo?: string;
   highlight: string;
   tags: string[];
-  status: "active" | "maintained" | "archived";
+  status: "active" | "maintained" | "archived" | "planned";
   featured: boolean;
   icon?: any;
   externalLink?: string;
@@ -72,6 +72,7 @@ const projects: Project[] = [
     status: "active",
     featured: false,
   },
+  // WEB3 & BLOCKCHAIN PROJECTS - Ordered as requested
   {
     id: "labs",
     title: "/labs",
@@ -96,6 +97,125 @@ const projects: Project[] = [
     status: "active",
     featured: false,
   },
+  {
+    id: "nights-weekends",
+    title: "N+W S1",
+    short: "Nights + Weekends Season 1 cohort participation.",
+    description:
+      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
+    infoUrl: "https://buildspace.so/nw",
+    infoText: "Nights + Weekends program",
+    highlight: "Community building and Web3 education",
+    tags: ["buildspace", "web3", "community"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "eth-core",
+    title: "ETH Core",
+    short: "Core Ethereum and Solidity development course project.",
+    description:
+      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
+    infoUrl: "https://buildspace.so/p/build-solidity-web3-app",
+    infoText: "Learn Ethereum core development",
+    highlight: "Smart contract fundamentals",
+    tags: ["ethereum", "solidity", "web3"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "eth-dapp",
+    title: "ETH dApp",
+    short: "Ethereum NFT minting dApp.",
+    description:
+      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
+    infoUrl: "https://buildspace.so/p/mint-nft-collection",
+    infoText: "Build an NFT minting dApp",
+    highlight: "NFT minting smart contracts",
+    tags: ["ethereum", "nft", "web3", "dapp"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "nft-store",
+    title: "NFT Store",
+    short: "Solana NFT collection with payment integration.",
+    description:
+      "Complete NFT storefront built on Solana with payment processing and collection management.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
+    infoUrl: "https://buildspace.so/p/ship-solana-nft-collection",
+    infoText: "Build your own Solana NFT store",
+    highlight: "Solana NFT marketplace",
+    tags: ["nft", "solana", "web3", "marketplace"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "ens-nft",
+    title: "ENS NFT",
+    short: "Polygon ENS subdomain NFT project.",
+    description:
+      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
+    infoUrl: "https://buildspace.so/p/build-polygon-ens",
+    infoText: "Learn to build ENS on Polygon",
+    highlight: "ENS subdomains on Polygon",
+    tags: ["nft", "ens", "polygon", "web3"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "sol-core",
+    title: "SOL Core",
+    short: "Solana core development and fundamentals.",
+    description:
+      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
+    externalLink: "https://darkmoon.dev/about",
+    infoUrl: "https://buildspace.so/p/solana-core",
+    infoText: "Master Solana core concepts",
+    highlight: "Solana fundamentals and Rust",
+    tags: ["solana", "rust", "web3"],
+    status: "archived",
+    featured: false,
+  },
+  {
+    id: "sol-dapp",
+    title: "SOL dApp",
+    short: "Solana Web3 application.",
+    description:
+      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
+    externalLink:
+      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+    infoUrl: "https://buildspace.so/p/build-solana-web3-app",
+    infoText: "Learn Solana dApp development",
+    highlight: "Solana blockchain development",
+    tags: ["solana", "web3", "dapp"],
+    status: "maintained",
+    featured: false,
+  },
+  {
+    id: "devdao",
+    title: "DevDAO",
+    short: "DAO governance project with JavaScript.",
+    description:
+      "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
+    demo: "/labs/dao",
+    infoUrl: "https://buildspace.so/p/build-dao-with-javascript",
+    infoText: "Build a DAO with JavaScript",
+    highlight: "DAO governance and voting",
+    tags: ["dao", "web3", "javascript"],
+    status: "archived",
+    featured: false,
+  },
+  // END WEB3 PROJECTS
   {
     id: "games",
     title: "Nitsuah Arcade",
@@ -139,81 +259,6 @@ const projects: Project[] = [
   },
 
   {
-    id: "ens-nft",
-    title: "ENS NFT",
-    short: "Polygon ENS subdomain NFT project.",
-    description:
-      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
-    infoUrl: "https://buildspace.so/p/build-polygon-ens",
-    infoText: "Learn to build ENS on Polygon",
-    highlight: "ENS subdomains on Polygon",
-    tags: ["nft", "ens", "polygon", "web3"],
-    status: "maintained",
-    featured: false,
-  },
-  {
-    id: "nft-store",
-    title: "NFT Store",
-    short: "Solana NFT collection with payment integration.",
-    description:
-      "Complete NFT storefront built on Solana with payment processing and collection management.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
-    infoUrl: "https://buildspace.so/p/ship-solana-nft-collection",
-    infoText: "Build your own Solana NFT store",
-    highlight: "Solana NFT marketplace",
-    tags: ["nft", "solana", "web3", "marketplace"],
-    status: "maintained",
-    featured: false,
-  },
-  {
-    id: "nights-weekends",
-    title: "N+W S1",
-    short: "Nights + Weekends Season 1 cohort participation.",
-    description:
-      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
-    infoUrl: "https://buildspace.so/nw",
-    infoText: "Nights + Weekends program",
-    highlight: "Community building and Web3 education",
-    tags: ["buildspace", "web3", "community"],
-    status: "archived",
-    featured: false,
-  },
-  {
-    id: "eth-dapp",
-    title: "ETH dApp",
-    short: "Ethereum NFT minting dApp.",
-    description:
-      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
-    infoUrl: "https://buildspace.so/p/mint-nft-collection",
-    infoText: "Build an NFT minting dApp",
-    highlight: "NFT minting smart contracts",
-    tags: ["ethereum", "nft", "web3", "dapp"],
-    status: "maintained",
-    featured: false,
-  },
-  {
-    id: "sol-dapp",
-    title: "SOL dApp",
-    short: "Solana Web3 application.",
-    description:
-      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
-    infoUrl: "https://buildspace.so/p/build-solana-web3-app",
-    infoText: "Learn Solana dApp development",
-    highlight: "Solana blockchain development",
-    tags: ["solana", "web3", "dapp"],
-    status: "maintained",
-    featured: false,
-  },
-  {
     id: "blender",
     title: "Blender",
     short: "3D modeling and animation work.",
@@ -241,49 +286,7 @@ const projects: Project[] = [
     status: "archived",
     featured: false,
   },
-  {
-    id: "eth-core",
-    title: "ETH Core",
-    short: "Core Ethereum and Solidity development course project.",
-    description:
-      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
-    externalLink:
-      "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
-    infoUrl: "https://buildspace.so/p/build-solidity-web3-app",
-    infoText: "Learn Ethereum core development",
-    highlight: "Smart contract fundamentals",
-    tags: ["ethereum", "solidity", "web3"],
-    status: "archived",
-    featured: false,
-  },
-  {
-    id: "devdao",
-    title: "DevDAO",
-    short: "DAO governance project with JavaScript.",
-    description:
-      "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
-    demo: "/labs/dao",
-    infoUrl: "https://buildspace.so/p/build-dao-with-javascript",
-    infoText: "Build a DAO with JavaScript",
-    highlight: "DAO governance and voting",
-    tags: ["dao", "web3", "javascript"],
-    status: "archived",
-    featured: false,
-  },
-  {
-    id: "sol-core",
-    title: "SOL Core",
-    short: "Solana core development and fundamentals.",
-    description:
-      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
-    externalLink: "https://darkmoon.dev/about",
-    infoUrl: "https://buildspace.so/p/solana-core",
-    infoText: "Master Solana core concepts",
-    highlight: "Solana fundamentals and Rust",
-    tags: ["solana", "rust", "web3"],
-    status: "archived",
-    featured: false,
-  },
+
   {
     id: "paint3d",
     title: "Paint3D",
@@ -312,6 +315,18 @@ const projects: Project[] = [
     highlight: "AI image generation",
     tags: ["ai", "ml", "image-generation"],
     status: "archived",
+    featured: false,
+  },
+  {
+    id: "ai-coming-soon",
+    title: "Coming Soon...",
+    short: "More AI & ML projects in development.",
+    description:
+      "Exciting new AI and machine learning projects are currently in development. Stay tuned for innovative tools in natural language processing, computer vision, and more.",
+    infoText: "More AI projects coming soon",
+    highlight: "Future AI/ML innovations",
+    tags: ["ai", "ml", "coming-soon"],
+    status: "planned",
     featured: false,
   },
 ];

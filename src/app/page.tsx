@@ -26,10 +26,10 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate hero opacity based on scroll (fade out 0-1200px for complete hide)
-  const heroOpacity = Math.max(0, 1 - scrollY / 1200);
+  // Calculate hero opacity based on scroll (fade out 0-800px for faster hide)
+  const heroOpacity = Math.max(0, 1 - scrollY / 800);
   // Calculate hero scale (slight zoom effect as it fades)
-  const heroScale = 1 + (scrollY / 1200) * 0.1;
+  const heroScale = 1 + (scrollY / 800) * 0.1;
 
   return (
     <div className="App">
@@ -63,21 +63,38 @@ const HomePage: React.FC = () => {
               zIndex: 10,
             }}
           >
+            <div
+              style={{
+                fontSize: "clamp(1.2rem, 3vw, 1.8rem)",
+                fontWeight: "400",
+                marginBottom: "0.75rem",
+                color: "rgba(255, 255, 255, 0.8)",
+              }}
+            >
+              Hi, I&apos;m
+            </div>
             <h1
               style={{
-                fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                fontSize: "clamp(2.5rem, 6vw, 4rem)",
                 fontWeight: "700",
-                marginBottom: "1.5rem",
-                lineHeight: "1.2",
+                marginBottom: "0.75rem",
+                lineHeight: "1.1",
                 color: "#ffffff",
               }}
             >
-              Hi, I&apos;m Austin Hardy
-              <br />
-              <span style={{ color: "#f97316" }}>
-                Developer Productivity Engineer & Researcher
-              </span>
+              Austin Hardy
             </h1>
+            <h2
+              style={{
+                fontSize: "clamp(1.3rem, 3.5vw, 2rem)",
+                fontWeight: "600",
+                marginBottom: "1.5rem",
+                lineHeight: "1.3",
+                color: "#f97316",
+              }}
+            >
+              Developer Productivity Engineer & Researcher
+            </h2>
             <p
               style={{
                 fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
@@ -157,8 +174,9 @@ const HomePage: React.FC = () => {
               position: "absolute",
               bottom: "2rem",
               animation: "bounce 2s infinite",
-              opacity: scrollY > 100 ? 0 : 1,
+              opacity: scrollY > 50 ? 0 : 1,
               transition: "opacity 0.3s ease",
+              zIndex: 20,
             }}
           >
             <div
@@ -260,45 +278,6 @@ const HomePage: React.FC = () => {
               </div>
             </div>
           </section>
-        )}
-
-        {/* Back to Top Button */}
-        {scrollY > 300 && (
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{
-              position: "fixed",
-              bottom: "2rem",
-              right: "2rem",
-              backgroundColor: "#f97316",
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: "50px",
-              height: "50px",
-              fontSize: "1.5rem",
-              cursor: "pointer",
-              boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
-              zIndex: 1000,
-              transition: "all 0.3s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px)";
-              e.currentTarget.style.boxShadow =
-                "0 6px 16px rgba(249, 115, 22, 0.5)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 12px rgba(249, 115, 22, 0.4)";
-            }}
-            aria-label="Scroll to top"
-          >
-            ↑
-          </button>
         )}
 
         <style jsx>{`

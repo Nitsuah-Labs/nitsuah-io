@@ -2,6 +2,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import arf from "../_components/_labs/_assets/arf.png";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import SplineScene from "../_components/_spline/spline-about";
@@ -75,7 +76,7 @@ const AboutPage: React.FC = () => {
               }}
             >
               <Image
-                src="/images/profile.jpg"
+                src={arf}
                 alt="Austin Hardy Profile"
                 width={150}
                 height={150}
