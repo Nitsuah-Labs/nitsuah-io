@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="footer-container" style={{ position: "relative" }}>
+    <footer className="footer-container" style={{ position: "fixed" }}>
       <a
         href="https://www.linkedin.com/in/austinjhardy"
         target="_blank"

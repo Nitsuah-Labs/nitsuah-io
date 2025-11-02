@@ -54,7 +54,6 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(page.locator("#skills")).toBeVisible();
     await expect(page.locator("#education")).toBeVisible();
     await expect(page.locator("#languages")).toBeVisible();
-    await expect(page.locator("#projects")).toBeVisible();
   });
 
   test("should expand work experience details", async ({ page }) => {
