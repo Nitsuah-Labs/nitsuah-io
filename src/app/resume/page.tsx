@@ -179,7 +179,7 @@ export default function ResumePage() {
 
             {resume.basics.summary && (
               <div className="resume-summary">
-                <h2>About</h2>
+                <h2 className="section-title">About</h2>
                 <p>{resume.basics.summary}</p>
               </div>
             )}
@@ -258,7 +258,7 @@ export default function ResumePage() {
                       e.currentTarget.style.boxShadow = "none";
                     }}
                   >
-                    <i className="fa fa-globe" aria-hidden="true"></i>
+                    <span style={{ fontSize: "1.1rem" }}>🌐</span>
                     <span>Website</span>
                   </a>
                 )}
@@ -286,7 +286,7 @@ export default function ResumePage() {
                     e.currentTarget.style.borderColor = "#c2410c";
                     e.currentTarget.style.transform = "translateY(-2px)";
                     e.currentTarget.style.boxShadow =
-                      "0 4px 12px rgba(249, 115, 22, 0.4)";
+                      "0 4px 8px rgba(249, 115, 22, 0.3)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "#f97316";
@@ -295,7 +295,7 @@ export default function ResumePage() {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  <i className="fa fa-folder-open" aria-hidden="true"></i>
+                  <span style={{ fontSize: "1.1rem" }}>📁</span>
                   <span>Projects</span>
                 </a>
 
@@ -336,11 +336,16 @@ export default function ResumePage() {
                         e.currentTarget.style.transform = "translateY(0)";
                       }}
                     >
-                      <i
-                        className={`fa ${getNetworkIcon(profile.network)}`}
-                        aria-hidden="true"
-                        style={{ fontSize: "1.2rem" }}
-                      ></i>
+                      <span style={{ fontSize: "1.1rem" }}>
+                        {profile.network === "GitHub"
+                          ? "💻"
+                          : profile.network === "LinkedIn"
+                            ? "👔"
+                            : profile.network === "Twitter" ||
+                                profile.network === "X"
+                              ? "🐦"
+                              : "🔗"}
+                      </span>
                       <span>{profile.network}</span>
                     </a>
                   ))}
@@ -370,21 +375,6 @@ export default function ResumePage() {
                         className="work-label"
                         style={{ position: "relative" }}
                       >
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "1rem",
-                            left: "-1.5rem",
-                            color: "#f97316",
-                            fontSize: "1.2rem",
-                            transition: "transform 0.3s ease",
-                          }}
-                        >
-                          <i
-                            className="fa fa-chevron-down"
-                            aria-hidden="true"
-                          ></i>
-                        </div>
                         <div className="work-header">
                           <div className="work-left">
                             <div className="work-date">
@@ -397,6 +387,20 @@ export default function ResumePage() {
                                   ? formatDate(job.endDate)
                                   : "Present"}
                               </span>
+                              <div
+                                className="expand-indicator"
+                                style={{
+                                  marginTop: "0.5rem",
+                                  color: "#f97316",
+                                  fontSize: "1.2rem",
+                                  transition: "transform 0.3s ease",
+                                }}
+                              >
+                                <i
+                                  className="fa fa-chevron-down"
+                                  aria-hidden="true"
+                                ></i>
+                              </div>
                             </div>
                             <div className="work-info">
                               <div className="work-position">

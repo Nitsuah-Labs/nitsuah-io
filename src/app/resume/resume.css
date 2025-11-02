@@ -368,6 +368,10 @@
   background: #e6f4ff;
 }
 
+.work-toggle:checked ~ .work-label .expand-indicator i {
+  transform: rotate(180deg);
+}
+
 .work-left {
   flex: 1;
   display: flex;
@@ -767,6 +771,18 @@
     width: 100%;
   }
 
+  .work-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .work-date .expand-indicator {
+    margin-top: 0 !important;
+  }
+
   .work-duration {
     align-items: flex-start;
     min-width: auto;
@@ -774,12 +790,15 @@
   }
 
   .duration-container {
-    align-items: flex-start;
+    flex-direction: row !important;
+    align-items: center;
     width: 100%;
+    gap: 0.75rem;
   }
 
   .duration-text {
     text-align: left;
+    justify-content: flex-start;
   }
 
   .resume-name {

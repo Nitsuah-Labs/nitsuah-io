@@ -2,6 +2,7 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import arfPlaceholder from "../../../_components/_labs/_assets/arf.png";
 import styles from "../_styles/Blog.module.css";
 
 export default function BlogPanel({ blog, onUpvote }) {
@@ -63,7 +64,7 @@ export default function BlogPanel({ blog, onUpvote }) {
       <div className={styles.blog_image_wrapper}>
         <Image
           className={styles.blog_image}
-          src={image_url}
+          src={image_url || arfPlaceholder}
           alt={title}
           width={400}
           height={250}
