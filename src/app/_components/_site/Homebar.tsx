@@ -258,9 +258,9 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             })}
           </Box>
 
-          {/* Export PDF button - only visible on resume page */}
+          {/* Export PDF button - visible on all screens on resume page */}
           {pathname === "/resume" && (
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Box sx={{ display: "block", position: "relative", zIndex: 9999 }}>
               <button
                 onClick={() => window.print()}
                 aria-label="Print resume or save as PDF"
