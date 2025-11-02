@@ -4,7 +4,7 @@
 
 ## QA Feedback
 
-- pending QAs
+- pending QA of phase 10 build
 
 ## External Feedback
 
