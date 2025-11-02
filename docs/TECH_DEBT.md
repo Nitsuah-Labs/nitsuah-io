@@ -280,6 +280,7 @@ Extract stateful logic into reusable hooks:
 - Storybook for component documentation (future)
 
 ### Dependencies
+
 - Audit before removing any package
 - Check for transitive dependencies
 - Test all affected features

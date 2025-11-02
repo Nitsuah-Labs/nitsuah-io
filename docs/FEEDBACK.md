@@ -2,9 +2,9 @@
 
 **Updated:** November 2, 2025
 
-## QA Feedback
+## QA Feedback Items
 
-- pending QAs
+- 
 
 ## External Feedback
 
