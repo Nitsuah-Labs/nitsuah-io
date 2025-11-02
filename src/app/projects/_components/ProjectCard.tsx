@@ -9,6 +9,7 @@ interface ProjectCardProps {
   image: StaticImageData | string;
   isFeatured?: boolean;
   isGif?: boolean;
+  onToggleFeatured?: (projectId: string) => void;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -16,6 +17,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   isFeatured = false,
   isGif = false,
+  onToggleFeatured,
 }) => {
   const handleCardClick = () => {
     if (project.externalLink) {
@@ -25,22 +27,36 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
-  const handleLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    url: string,
-  ) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
   };
 
+  const handleStarClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (onToggleFeatured) {
+      onToggleFeatured(project.id);
+    }
+  };
+
+  const isComingSoon = project.id === "ai-coming-soon";
+
   return (
-    <div className={styles.card} onClick={handleCardClick}>
-      {/* Featured Badge */}
-      {isFeatured && (
-        <div className={styles.featuredBadge}>
-          <i className="fa fa-star" aria-hidden="true"></i>
-          <span>Featured</span>
-        </div>
-      )}
+    <div
+      className={`${styles.card} ${isComingSoon ? styles.comingSoonCard : ""}`}
+      onClick={handleCardClick}
+    >
+      {/* Featured Star - Always visible, interactive */}
+      <button
+        className={`${styles.featuredStar} ${isFeatured ? styles.featured : ""}`}
+        onClick={handleStarClick}
+        title={isFeatured ? "Remove from featured" : "Mark as featured"}
+        aria-label={isFeatured ? "Remove from featured" : "Mark as featured"}
+      >
+        <i
+          className={`fa fa-star${isFeatured ? "" : "-o"}`}
+          aria-hidden="true"
+        ></i>
+      </button>
 
       {/* Project Image */}
       <div className={styles.cardImage}>
@@ -75,7 +91,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className={styles.cardButton}
-              onClick={(e) => handleLinkClick(e, project.github!)}
+              onClick={(e) => handleLinkClick(e)}
             >
               GitHub
             </a>
@@ -86,9 +102,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className={styles.cardButton}
-              onClick={(e) =>
-                handleLinkClick(e, project.demo || project.externalLink!)
-              }
+              onClick={handleLinkClick}
             >
               View
             </a>
