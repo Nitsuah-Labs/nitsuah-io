@@ -25,12 +25,14 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 ### Resume Page (`src/app/resume/page.tsx` - ~650 lines)
 
 **Current Issues:**
+
 - Massive inline styles throughout JSX (50+ style objects)
 - Repetitive button/link patterns with duplicate hover handlers
 - Mixed concerns: data formatting, rendering, and styling all in one file
 - Hard to maintain and prone to errors
 
 **Refactoring Plan:**
+
 - [ ] Extract `ResumeHeader` component (basics section)
 - [ ] Extract `WorkExperience` component with `WorkCard` sub-component
 - [ ] Extract `EducationSection` component
@@ -47,11 +49,13 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 ### About Page (`src/app/about/page.tsx` - ~212 lines)
 
 **Current Issues:**
+
 - Heavy inline styling for animations and layout
 - Scroll effects mixed with rendering logic
 - Fixed positioning calculations in JSX
 
 **Refactoring Plan:**
+
 - [ ] Extract `ProfileSection` component
 - [ ] Extract `ScrollIndicator` reusable component (also used in home page)
 - [ ] Create `about.module.css` for section-specific styles
@@ -64,11 +68,13 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 ### Home Page (`src/app/page.tsx` - ~323 lines)
 
 **Current Issues:**
+
 - Similar scroll/fade logic to about page (duplicate code)
 - Large inline style objects
 - Animation logic mixed with rendering
 
 **Refactoring Plan:**
+
 - [ ] Share `ScrollIndicator` component with about page
 - [ ] Share `useScrollOpacity` hook with about page
 - [ ] Extract `HeroSection` component
@@ -81,11 +87,13 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 ### Projects/Blogs (`src/app/projects/blogs/page.tsx` - ~484 lines)
 
 **Current Issues:**
+
 - Massive modal JSX embedded in main component
 - Inline styles everywhere
 - Filter/sort logic mixed with rendering
 
 **Refactoring Plan:**
+
 - [ ] Extract `BlogUploadModal` component
 - [ ] Extract `BlogFilters` component
 - [ ] Extract `BlogGrid` component
@@ -101,11 +109,13 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 Create shared components to reduce duplication:
 
 ### Layout Components
+
 - [ ] `ScrollIndicator` - Animated scroll hint (home, about)
 - [ ] `PageHero` - Hero section pattern with title/description
 - [ ] `Section` - Wrapper with consistent padding/background
 
-### UI Components  
+### UI Components
+
 - [ ] `ActionButton` - Reusable button with hover states and icon support
 - [ ] `LinkButton` - External/internal link button with consistent styling
 - [ ] `Card` - Generic card container with hover effects
@@ -125,6 +135,7 @@ Create shared components to reduce duplication:
 ## 🎨 CSS Organization Strategy
 
 ### Current State
+
 - Inline styles scattered throughout JSX
 - Mix of CSS files and CSS modules
 - Duplicate style patterns across files
@@ -132,7 +143,7 @@ Create shared components to reduce duplication:
 
 ### Target Structure
 
-```
+```bash
 src/
 ├── app/
 │   ├── _components/
@@ -157,6 +168,7 @@ src/
 ```
 
 ### CSS Standards
+
 - [ ] Create `variables.css` with design tokens (colors, spacing, fonts)
 - [ ] Use CSS modules for component styles (`.module.css`)
 - [ ] Move all inline styles to CSS classes where possible
@@ -168,6 +180,7 @@ src/
 ## 🧹 Dead Code & File Cleanup
 
 ### Audit Process
+
 1. [ ] Run dependency analyzer to find unused npm packages
 2. [ ] Search for unused imports across all files
 3. [ ] Identify orphaned CSS/config files
@@ -175,6 +188,7 @@ src/
 5. [ ] Review `__mocks__/` directory for unused mocks
 
 ### Known Areas to Review
+
 - [ ] `__mocks__/` - Check if all mocks are actually used
 - [ ] Config files in root - Consolidate where possible
 - [ ] Unused Font Awesome imports (we switched to emojis)
@@ -188,6 +202,7 @@ src/
 Extract stateful logic into reusable hooks:
 
 ### Planned Hooks
+
 - [ ] `useScrollOpacity(fadeDistance)` - Scroll-based fade effect
 - [ ] `useScrollPosition()` - Track scroll Y position
 - [ ] `useDelayedVisibility(delay)` - Show element after delay
@@ -202,6 +217,7 @@ Extract stateful logic into reusable hooks:
 ## 📊 Metrics & Success Criteria
 
 ### Before (Current State)
+
 - Resume page: ~650 LOC
 - About page: ~212 LOC  
 - Home page: ~323 LOC
@@ -209,6 +225,7 @@ Extract stateful logic into reusable hooks:
 - **Total:** ~1,669 LOC for 4 key pages
 
 ### After (Target State)
+
 - Resume page: ~200 LOC (70% reduction)
 - About page: ~100 LOC (53% reduction)
 - Home page: ~150 LOC (54% reduction)
@@ -217,6 +234,7 @@ Extract stateful logic into reusable hooks:
 - **New:** ~15-20 reusable components (~1,500 LOC)
 
 ### Quality Metrics
+
 - [ ] No file over 300 lines
 - [ ] No component with more than 3 inline style objects
 - [ ] 90%+ of styles in CSS files (not inline)
@@ -226,54 +244,35 @@ Extract stateful logic into reusable hooks:
 
 ---
 
-## 🗺️ Implementation Phases
+### Phase 5: Cleanup (In Progress)
 
-### Phase 1: Foundation (Week 1)
-- [ ] Create component library structure (`src/components/ui/`)
-- [ ] Create hooks directory (`src/hooks/`)
-- [ ] Set up CSS variables and utilities
-- [ ] Create base UI components (Button, Card, Modal)
-
-### Phase 2: Resume Refactor (Week 2)
-- [ ] Break down resume page into components
-- [ ] Move inline styles to CSS modules
-- [ ] Extract utility functions
-- [ ] Test resume page functionality
-
-### Phase 3: Page Refactors (Week 3)
-- [ ] Refactor about page
-- [ ] Refactor home page
-- [ ] Share components between pages
-- [ ] Create custom hooks
-
-### Phase 4: Blogs & Projects (Week 4)
-- [ ] Refactor blogs page
-- [ ] Refactor clients page
-- [ ] Apply patterns to remaining project pages
-
-### Phase 5: Cleanup (Week 5)
 - [ ] Remove dead code
 - [ ] Clean up unused files
 - [ ] Remove unused dependencies
 - [ ] Update documentation
 
-### Phase 6: Testing & QA (Week 6)
+### Phase 6: Testing & QA (Pending)
+
 - [ ] Visual regression testing
 - [ ] Accessibility testing
 - [ ] Performance testing
 - [ ] Cross-browser testing
+
+## 🗺️ Implementation Phases
 
 ---
 
 ## 🚨 Risk Mitigation
 
 ### Breaking Changes
+
 - Refactor one page at a time
 - Maintain parallel branches for comparison
 - Use feature flags if needed
 - Extensive testing after each refactor
 
 ### Style Consistency
+
 - Document design system as we extract styles
 - Create style guide for new components
 - Use TypeScript for prop validation
