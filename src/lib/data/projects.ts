@@ -7,6 +7,7 @@ export type Project = {
   demo?: string;
   highlight: string;
   tags: string[];
+  category: "Apps" | "Web3" | "AI/ML" | "Design" | "Featured";
   status: "active" | "maintained" | "archived" | "planned";
   featured: boolean;
   icon?: any;
@@ -28,6 +29,7 @@ const projects: Project[] = [
     highlight:
       "Research-grade pipelines, comprehensive test suites, scoring heuristics",
     tags: ["python", "cryptography", "research", "algorithms"],
+    category: "Apps",
     status: "active",
     featured: true,
   },
@@ -41,6 +43,7 @@ const projects: Project[] = [
     demo: "",
     highlight: "CLI-style scripts, security configs, enterprise automation",
     tags: ["python", "gcp", "automation", "enterprise"],
+    category: "Apps",
     status: "maintained",
     featured: true,
   },
@@ -56,6 +59,7 @@ const projects: Project[] = [
     highlight:
       "Practical enterprise tooling, IT automation, workflow optimization",
     tags: ["powershell", "vba", "devops", "sysadmin"],
+    category: "Apps",
     status: "maintained",
     featured: true,
   },
@@ -69,6 +73,7 @@ const projects: Project[] = [
     demo: "https://nitsuah.io",
     highlight: "Web3 integration, modern React patterns, 3D graphics",
     tags: ["nextjs", "typescript", "portfolio", "react"],
+    category: "Apps",
     status: "active",
     featured: false,
   },
@@ -82,6 +87,7 @@ const projects: Project[] = [
     demo: "/labs/",
     highlight: "Web3 experiments and blockchain tools",
     tags: ["web3", "blockchain", "experiments"],
+    category: "Web3",
     status: "active",
     featured: false,
   },
@@ -94,6 +100,7 @@ const projects: Project[] = [
     externalLink: "https://darkmoon.dev",
     highlight: "Alternative portfolio and project showcase",
     tags: ["web3", "blockchain"],
+    category: "Web3",
     status: "active",
     featured: false,
   },

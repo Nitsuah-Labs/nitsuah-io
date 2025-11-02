@@ -128,11 +128,7 @@ const LabNav: React.FC<LabNavProps> = () => {
                 },
               }}
             >
-              <i
-                className="fa fa-home"
-                aria-hidden="true"
-                style={{ fontSize: "1.2rem" }}
-              ></i>
+              <span style={{ fontSize: "1.2rem" }}>🏠</span>
             </Button>
           </Box>
 
@@ -320,20 +316,16 @@ const LabNav: React.FC<LabNavProps> = () => {
                   },
                 }}
               >
-                <span
-                  style={{
+                <Box
+                  sx={{
                     display: "inline-flex",
                     alignItems: "center",
                   }}
                 >
-                  <i
-                    className="fa fa-user"
-                    aria-hidden="true"
-                    style={{ fontSize: "1.1rem" }}
-                  ></i>
-                  <span
+                  <span style={{ fontSize: "1.1rem" }}>👤</span>
+                  <Box
                     className="profile-text"
-                    style={{
+                    sx={{
                       maxWidth: 0,
                       overflow: "hidden",
                       opacity: 0,
@@ -342,8 +334,8 @@ const LabNav: React.FC<LabNavProps> = () => {
                     }}
                   >
                     Profile
-                  </span>
-                </span>
+                  </Box>
+                </Box>
               </Button>
             </Link>
             <Link href="/logout">
@@ -373,20 +365,16 @@ const LabNav: React.FC<LabNavProps> = () => {
                   },
                 }}
               >
-                <span
-                  style={{
+                <Box
+                  sx={{
                     display: "inline-flex",
                     alignItems: "center",
                   }}
                 >
-                  <i
-                    className="fa fa-sign-out"
-                    aria-hidden="true"
-                    style={{ fontSize: "1.1rem" }}
-                  ></i>
-                  <span
+                  <span style={{ fontSize: "1.1rem" }}>🚪</span>
+                  <Box
                     className="logout-text"
-                    style={{
+                    sx={{
                       maxWidth: 0,
                       overflow: "hidden",
                       opacity: 0,
@@ -395,8 +383,8 @@ const LabNav: React.FC<LabNavProps> = () => {
                     }}
                   >
                     Logout
-                  </span>
-                </span>
+                  </Box>
+                </Box>
               </Button>
             </Link>
           </Box>

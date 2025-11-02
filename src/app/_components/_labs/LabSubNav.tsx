@@ -87,11 +87,7 @@ const LabSubNav: React.FC = () => {
             title={page.isWIP ? `${page.label} (Work in Progress)` : page.label}
           >
             {page.isIcon ? (
-              <i
-                className={`fa ${page.icon}`}
-                aria-hidden="true"
-                style={{ fontSize: "1.1rem" }}
-              ></i>
+              <span style={{ fontSize: "1.1rem" }}>🏠</span>
             ) : (
               <>
                 {page.label}

@@ -9,14 +9,23 @@ import SplineScene from "../_components/_spline/spline-about";
 
 const AboutPage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [showScrollHint, setShowScrollHint] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
+    // Delay scroll hint by 2 seconds
+    const scrollHintTimer = setTimeout(() => {
+      setShowScrollHint(true);
+    }, 2000);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollHintTimer);
+    };
   }, []);
 
   // Calculate section 1 opacity based on scroll (fade out at 300px for consistency with home)
@@ -122,7 +131,7 @@ const AboutPage: React.FC = () => {
               style={{
                 marginTop: "2rem",
                 animation: "bounce 2s infinite",
-                opacity: scrollY > 100 ? 0 : 1,
+                opacity: scrollY > 100 || !showScrollHint ? 0 : 1,
                 transition: "opacity 0.3s ease",
               }}
             >
@@ -177,46 +186,6 @@ const AboutPage: React.FC = () => {
             <SplineScene />
           </div>
         </section>
-
-        {/* Back to Top Button */}
-        {scrollY > 300 && (
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            style={{
-              position: "fixed",
-              bottom: "2rem",
-              right: "2rem",
-              backgroundColor: "#f97316",
-              color: "white",
-              border: "none",
-              borderRadius: "50%",
-              width: "50px",
-              height: "50px",
-              fontSize: "1.5rem",
-              cursor: "pointer",
-              boxShadow: "0 4px 12px rgba(249, 115, 22, 0.4)",
-              zIndex: 1000,
-              transition: "all 0.3s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-3px)";
-              e.currentTarget.style.boxShadow =
-                "0 6px 16px rgba(249, 115, 22, 0.5)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow =
-                "0 4px 12px rgba(249, 115, 22, 0.4)";
-            }}
-            aria-label="Scroll to top"
-          >
-            ↑
-          </button>
-        )}
-
         <style jsx>{`
           @keyframes bounce {
             0%,

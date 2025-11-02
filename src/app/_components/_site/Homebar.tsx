@@ -192,39 +192,118 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               </Link>
               {pages.map((page) => {
                 const isActive = pathname === `/${page}`;
+                const isProjectsActive = pathname.startsWith("/projects");
                 return (
-                  <Link key={page} href={`/${page}`} legacyBehavior>
-                    <a
-                      aria-label={`Navigate to ${page}`}
-                      aria-current={isActive ? "page" : undefined}
-                      style={{
-                        color: isActive ? "#f97316" : "#fff",
-                        display: "block",
-                        padding: "12px 16px",
-                        textTransform: "none",
-                        backgroundColor: isActive
-                          ? "rgba(249, 115, 22, 0.2)"
-                          : "transparent",
-                        fontWeight: isActive ? 600 : 400,
-                        transition: "all 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.color = "#f97316";
-                        e.currentTarget.style.backgroundColor =
-                          "rgba(249, 115, 22, 0.1)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.color = isActive
-                          ? "#f97316"
-                          : "#fff";
-                        e.currentTarget.style.backgroundColor = isActive
-                          ? "rgba(249, 115, 22, 0.2)"
-                          : "transparent";
-                      }}
-                    >
-                      {page}
-                    </a>
-                  </Link>
+                  <React.Fragment key={page}>
+                    <Link href={`/${page}`} legacyBehavior>
+                      <a
+                        aria-label={`Navigate to ${page}`}
+                        aria-current={isActive ? "page" : undefined}
+                        style={{
+                          color: isActive ? "#f97316" : "#fff",
+                          display: "block",
+                          padding: "12px 16px",
+                          textTransform: "none",
+                          backgroundColor: isActive
+                            ? "rgba(249, 115, 22, 0.2)"
+                            : "transparent",
+                          fontWeight: isActive ? 600 : 400,
+                          transition: "all 0.2s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "#f97316";
+                          e.currentTarget.style.backgroundColor =
+                            "rgba(249, 115, 22, 0.1)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = isActive
+                            ? "#f97316"
+                            : "#fff";
+                          e.currentTarget.style.backgroundColor = isActive
+                            ? "rgba(249, 115, 22, 0.2)"
+                            : "transparent";
+                        }}
+                      >
+                        {page}
+                      </a>
+                    </Link>
+                    {page === "projects" && isProjectsActive && (
+                      <>
+                        <Link href="/projects/blogs" legacyBehavior>
+                          <a
+                            aria-label="Navigate to blogs"
+                            style={{
+                              color:
+                                pathname === "/projects/blogs"
+                                  ? "#f97316"
+                                  : "rgba(255, 255, 255, 0.8)",
+                              display: "block",
+                              padding: "8px 16px 8px 32px",
+                              fontSize: "0.9rem",
+                              backgroundColor:
+                                pathname === "/projects/blogs"
+                                  ? "rgba(249, 115, 22, 0.15)"
+                                  : "transparent",
+                              transition: "all 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = "#f97316";
+                              e.currentTarget.style.backgroundColor =
+                                "rgba(249, 115, 22, 0.1)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                pathname === "/projects/blogs"
+                                  ? "#f97316"
+                                  : "rgba(255, 255, 255, 0.8)";
+                              e.currentTarget.style.backgroundColor =
+                                pathname === "/projects/blogs"
+                                  ? "rgba(249, 115, 22, 0.15)"
+                                  : "transparent";
+                            }}
+                          >
+                            → blogs
+                          </a>
+                        </Link>
+                        <Link href="/projects/clients" legacyBehavior>
+                          <a
+                            aria-label="Navigate to clients"
+                            style={{
+                              color:
+                                pathname === "/projects/clients"
+                                  ? "#f97316"
+                                  : "rgba(255, 255, 255, 0.8)",
+                              display: "block",
+                              padding: "8px 16px 8px 32px",
+                              fontSize: "0.9rem",
+                              backgroundColor:
+                                pathname === "/projects/clients"
+                                  ? "rgba(249, 115, 22, 0.15)"
+                                  : "transparent",
+                              transition: "all 0.2s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.color = "#f97316";
+                              e.currentTarget.style.backgroundColor =
+                                "rgba(249, 115, 22, 0.1)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.color =
+                                pathname === "/projects/clients"
+                                  ? "#f97316"
+                                  : "rgba(255, 255, 255, 0.8)";
+                              e.currentTarget.style.backgroundColor =
+                                pathname === "/projects/clients"
+                                  ? "rgba(249, 115, 22, 0.15)"
+                                  : "transparent";
+                            }}
+                          >
+                            → clients
+                          </a>
+                        </Link>
+                      </>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </StyledMenu>
@@ -234,26 +313,97 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => {
               const isActive = pathname === `/${page}`;
+              const isProjectsActive = pathname.startsWith("/projects");
               return (
-                <Link key={page} href={`/${page}`} legacyBehavior>
-                  <a
-                    aria-label={`Navigate to ${page}`}
-                    aria-current={isActive ? "page" : undefined}
-                    style={{
-                      color: "white",
-                      margin: "0 12px",
-                      textDecoration: "none",
-                      textTransform: "none",
-                      borderBottom: isActive
-                        ? "2px solid #f97316"
-                        : "2px solid transparent",
-                      paddingBottom: "4px",
-                      transition: "border-color 0.2s ease",
-                    }}
-                  >
-                    {page}
-                  </a>
-                </Link>
+                <React.Fragment key={page}>
+                  <Link href={`/${page}`} legacyBehavior>
+                    <a
+                      aria-label={`Navigate to ${page}`}
+                      aria-current={isActive ? "page" : undefined}
+                      style={{
+                        color: "white",
+                        margin: "0 12px",
+                        textDecoration: "none",
+                        textTransform: "none",
+                        borderBottom: isActive
+                          ? "2px solid #f97316"
+                          : "2px solid transparent",
+                        paddingBottom: "4px",
+                        transition: "border-color 0.2s ease",
+                      }}
+                    >
+                      {page}
+                    </a>
+                  </Link>
+                  {page === "projects" && isProjectsActive && (
+                    <>
+                      <Link href="/projects/blogs" legacyBehavior>
+                        <a
+                          aria-label="Navigate to blogs"
+                          style={{
+                            color:
+                              pathname === "/projects/blogs"
+                                ? "#f97316"
+                                : "rgba(255, 255, 255, 0.7)",
+                            margin: "0 8px",
+                            textDecoration: "none",
+                            textTransform: "none",
+                            fontSize: "0.9rem",
+                            borderBottom:
+                              pathname === "/projects/blogs"
+                                ? "2px solid #f97316"
+                                : "2px solid transparent",
+                            paddingBottom: "4px",
+                            transition: "all 0.2s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "#f97316";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color =
+                              pathname === "/projects/blogs"
+                                ? "#f97316"
+                                : "rgba(255, 255, 255, 0.7)";
+                          }}
+                        >
+                          blogs
+                        </a>
+                      </Link>
+                      <Link href="/projects/clients" legacyBehavior>
+                        <a
+                          aria-label="Navigate to clients"
+                          style={{
+                            color:
+                              pathname === "/projects/clients"
+                                ? "#f97316"
+                                : "rgba(255, 255, 255, 0.7)",
+                            margin: "0 8px",
+                            textDecoration: "none",
+                            textTransform: "none",
+                            fontSize: "0.9rem",
+                            borderBottom:
+                              pathname === "/projects/clients"
+                                ? "2px solid #f97316"
+                                : "2px solid transparent",
+                            paddingBottom: "4px",
+                            transition: "all 0.2s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "#f97316";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color =
+                              pathname === "/projects/clients"
+                                ? "#f97316"
+                                : "rgba(255, 255, 255, 0.7)";
+                          }}
+                        >
+                          clients
+                        </a>
+                      </Link>
+                    </>
+                  )}
+                </React.Fragment>
               );
             })}
           </Box>
@@ -264,12 +414,13 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               <button
                 onClick={() => window.print()}
                 aria-label="Print resume or save as PDF"
+                className="export-pdf-button"
                 style={{
                   background:
                     "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
                   color: "#1a1a1a",
                   border: "2px solid #000",
-                  padding: "0.5rem 1rem",
+                  padding: "0.5rem",
                   fontSize: "0.9rem",
                   fontWeight: "700",
                   borderRadius: "8px",
@@ -279,20 +430,50 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                   gap: "0.5rem",
                   transition: "all 0.3s ease",
                   boxShadow: "0 4px 12px rgba(249, 115, 22, 0.3)",
+                  minWidth: "auto",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.boxShadow =
                     "0 6px 16px rgba(249, 115, 22, 0.4)";
+                  e.currentTarget.style.padding = "0.5rem 1rem";
+                  const textSpan = e.currentTarget.querySelector(
+                    ".pdf-text",
+                  ) as HTMLElement;
+                  if (textSpan) {
+                    textSpan.style.maxWidth = "150px";
+                    textSpan.style.marginLeft = "0.5rem";
+                    textSpan.style.opacity = "1";
+                  }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow =
                     "0 4px 12px rgba(249, 115, 22, 0.3)";
+                  e.currentTarget.style.padding = "0.5rem";
+                  const textSpan = e.currentTarget.querySelector(
+                    ".pdf-text",
+                  ) as HTMLElement;
+                  if (textSpan) {
+                    textSpan.style.maxWidth = "0";
+                    textSpan.style.marginLeft = "0";
+                    textSpan.style.opacity = "0";
+                  }
                 }}
               >
-                <i className="fa fa-file-pdf-o" aria-hidden="true"></i> Export
-                PDF
+                <span style={{ fontSize: "1.2rem" }}>💾</span>
+                <span
+                  className="pdf-text"
+                  style={{
+                    maxWidth: 0,
+                    overflow: "hidden",
+                    opacity: 0,
+                    transition: "all 0.3s ease",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Export PDF
+                </span>
               </button>
             </Box>
           )}

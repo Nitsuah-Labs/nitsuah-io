@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [showSpline, setShowSpline] = useState(false);
   const [showFullName, setShowFullName] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,15 +24,15 @@ const HomePage: React.FC = () => {
     // Show Spline on mount
     setShowSpline(true);
 
-    // Auto-animate to Austin H. after 1 second
-    const timer = setTimeout(() => {
-      setShowFullName(true);
-    }, 1000);
+    // Delay scroll hint by 2 seconds
+    const scrollHintTimer = setTimeout(() => {
+      setShowScrollHint(true);
+    }, 2000);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timer);
+      clearTimeout(scrollHintTimer);
     };
   }, []);
 
@@ -90,20 +90,16 @@ const HomePage: React.FC = () => {
                 marginBottom: "0.75rem",
                 lineHeight: "1.1",
                 color: "#ffffff",
-                cursor: "pointer",
                 transition: "all 0.5s ease",
-                borderBottom:
-                  showFullName || isHovering
-                    ? "3px solid #f97316"
-                    : "3px solid transparent",
+                borderBottom: "3px solid #f97316",
                 paddingBottom: "0.25rem",
                 display: "inline-block",
+                cursor: "pointer",
               }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              onClick={() => setShowFullName(!showFullName)}
+              onMouseEnter={() => setShowFullName(true)}
+              onMouseLeave={() => setShowFullName(false)}
             >
-              {showFullName || isHovering ? "Austin H." : "nitsuah"}
+              {showFullName ? "Austin H." : "nitsuah"}
             </h1>
             <h2
               style={{
@@ -192,12 +188,10 @@ const HomePage: React.FC = () => {
           {/* Scroll Indicator */}
           <div
             style={{
-              position: "absolute",
-              bottom: "2rem",
+              marginTop: "2rem",
               animation: "bounce 2s infinite",
-              opacity: scrollY > 50 ? 0 : 1,
+              opacity: scrollY > 100 || !showScrollHint ? 0 : 1,
               transition: "opacity 0.3s ease",
-              zIndex: 20,
             }}
           >
             <div
@@ -207,7 +201,7 @@ const HomePage: React.FC = () => {
                 marginBottom: "0.5rem",
               }}
             >
-              Scroll to explore
+              Scroll for more
             </div>
             <div
               style={{
