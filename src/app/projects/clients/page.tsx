@@ -218,7 +218,83 @@ const MintExample: React.FC = () => {
             >
               Professional service, freelance, and commercial app demonstrations
             </p>
+          </div>
 
+          {/* NFT Minting Demo - Show before filters */}
+          {showDemo === "nft-mint" && (
+            <div style={{ marginBottom: "3rem" }}>
+              <div style={{ marginBottom: "2rem", textAlign: "center" }}>
+                <h2
+                  style={{
+                    fontSize: "2rem",
+                    fontWeight: "600",
+                    color: "#10b981",
+                  }}
+                >
+                  Live NFT Minting Demo
+                </h2>
+                <p style={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                  Connect your wallet and interact with the live demo
+                </p>
+              </div>
+              <div
+                style={{
+                  background: "rgba(20, 20, 20, 0.8)",
+                  border: "2px solid rgba(16, 185, 129, 0.3)",
+                  borderRadius: "12px",
+                  padding: "2rem",
+                  maxWidth: "800px",
+                  margin: "0 auto",
+                }}
+              >
+                <div style={{ marginBottom: "1.5rem" }}>
+                  <Connect />
+                </div>
+                <Connected>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1.5rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <Account />
+                    </div>
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <MintNFT />
+                    </div>
+                    <div
+                      style={{
+                        padding: "1rem",
+                        background: "rgba(16, 185, 129, 0.1)",
+                        border: "1px solid rgba(16, 185, 129, 0.3)",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <NetworkSwitcher />
+                    </div>
+                  </div>
+                </Connected>
+              </div>
+            </div>
+          )}
+
+          <div>
             {/* Project Type Switcher */}
             <div
               style={{
@@ -291,28 +367,43 @@ const MintExample: React.FC = () => {
               <div
                 key={project.id}
                 style={{
-                  background: "rgba(20, 20, 20, 0.8)",
-                  border: "2px solid rgba(16, 185, 129, 0.3)",
+                  background:
+                    showDemo === project.id
+                      ? "rgba(20, 20, 20, 0.95)"
+                      : showDemo
+                        ? "rgba(20, 20, 20, 0.4)"
+                        : "rgba(20, 20, 20, 0.8)",
+                  border: `2px solid ${showDemo === project.id ? "rgba(16, 185, 129, 0.8)" : "rgba(16, 185, 129, 0.3)"}`,
                   borderRadius: "12px",
                   padding: "1.5rem",
                   transition: "all 0.3s ease",
                   cursor: "pointer",
+                  opacity: showDemo && showDemo !== project.id ? 0.5 : 1,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
                 onClick={() =>
                   setShowDemo(project.id === showDemo ? null : project.id)
                 }
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.8)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(16, 185, 129, 0.2)";
+                  if (!showDemo || showDemo === project.id) {
+                    e.currentTarget.style.borderColor =
+                      "rgba(16, 185, 129, 0.8)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 24px rgba(16, 185, 129, 0.2)";
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.3)";
+                  e.currentTarget.style.borderColor =
+                    showDemo === project.id
+                      ? "rgba(16, 185, 129, 0.8)"
+                      : "rgba(16, 185, 129, 0.3)";
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
+                {/* Header with title and status tag */}
                 <div
                   style={{
                     display: "flex",
@@ -327,6 +418,7 @@ const MintExample: React.FC = () => {
                       fontWeight: "600",
                       color: "#10b981",
                       margin: 0,
+                      textAlign: "left",
                     }}
                   >
                     {project.name}
@@ -349,22 +441,26 @@ const MintExample: React.FC = () => {
                           : project.status === "demo"
                             ? "#3b82f6"
                             : "#9ca3af",
+                      flexShrink: 0,
                     }}
                   >
                     {project.status.toUpperCase()}
                   </span>
                 </div>
 
+                {/* Description - left aligned */}
                 <p
                   style={{
                     color: "rgba(255, 255, 255, 0.7)",
                     marginBottom: "1rem",
+                    textAlign: "left",
                   }}
                 >
                   {project.description}
                 </p>
 
-                <div style={{ marginBottom: "1rem" }}>
+                {/* Technologies - left aligned */}
+                <div style={{ marginBottom: "1rem", textAlign: "left" }}>
                   <div
                     style={{
                       fontSize: "0.875rem",
@@ -396,7 +492,8 @@ const MintExample: React.FC = () => {
                   </div>
                 </div>
 
-                <div>
+                {/* Features - left aligned */}
+                <div style={{ marginBottom: "1rem", textAlign: "left" }}>
                   <div
                     style={{
                       fontSize: "0.875rem",
@@ -420,84 +517,38 @@ const MintExample: React.FC = () => {
                     ))}
                   </ul>
                 </div>
+
+                {/* Buttons - right aligned */}
+                {showDemo && showDemo !== project.id && (
+                  <div style={{ marginTop: "auto", textAlign: "right" }}>
+                    <button
+                      style={{
+                        padding: "0.5rem 1rem",
+                        background: "rgba(16, 185, 129, 0.2)",
+                        border: "1px solid rgba(16, 185, 129, 0.4)",
+                        borderRadius: "6px",
+                        color: "#10b981",
+                        fontWeight: "600",
+                        fontSize: "0.875rem",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background =
+                          "rgba(16, 185, 129, 0.3)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background =
+                          "rgba(16, 185, 129, 0.2)";
+                      }}
+                    >
+                      View More
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-
-          {/* NFT Minting Demo - Only show when selected */}
-          {showDemo === "nft-mint" && (
-            <div style={{ marginTop: "3rem" }}>
-              <div style={{ marginBottom: "2rem", textAlign: "center" }}>
-                <h2
-                  style={{
-                    fontSize: "2rem",
-                    fontWeight: "600",
-                    color: "#10b981",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Live Demo: NFT Minting Platform
-                </h2>
-                <p style={{ color: "rgba(255, 255, 255, 0.7)" }}>
-                  Connect your wallet and interact with the live demo
-                </p>
-              </div>
-              <div
-                style={{
-                  background: "rgba(20, 20, 20, 0.8)",
-                  border: "2px solid rgba(16, 185, 129, 0.3)",
-                  borderRadius: "12px",
-                  padding: "2rem",
-                  maxWidth: "800px",
-                  margin: "0 auto",
-                }}
-              >
-                <div style={{ marginBottom: "1.5rem" }}>
-                  <Connect />
-                </div>
-                <Connected>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "1.5rem",
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: "1rem",
-                        background: "rgba(16, 185, 129, 0.1)",
-                        border: "1px solid rgba(16, 185, 129, 0.3)",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <Account />
-                    </div>
-                    <div
-                      style={{
-                        padding: "1rem",
-                        background: "rgba(16, 185, 129, 0.1)",
-                        border: "1px solid rgba(16, 185, 129, 0.3)",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <MintNFT />
-                    </div>
-                    <div
-                      style={{
-                        padding: "1rem",
-                        background: "rgba(16, 185, 129, 0.1)",
-                        border: "1px solid rgba(16, 185, 129, 0.3)",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <NetworkSwitcher />
-                    </div>
-                  </div>
-                </Connected>
-              </div>
-            </div>
-          )}
         </div>
       </main>
       <Footer />
