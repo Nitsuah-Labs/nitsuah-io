@@ -22,6 +22,7 @@ export default function BlogPanel({ blog, onUpvote }) {
 
   const [isUpvoted, setIsUpvoted] = useState(false);
   const [currentUpvotes, setCurrentUpvotes] = useState(upvotes);
+  const [showCopyMessage, setShowCopyMessage] = useState(false);
 
   const handleUpvote = (e) => {
     e.stopPropagation();
@@ -33,18 +34,27 @@ export default function BlogPanel({ blog, onUpvote }) {
     }
   };
 
-  const handleShare = (e) => {
+  const handleShare = async (e) => {
     e.stopPropagation();
     if (navigator.share) {
-      navigator.share({
-        title: title,
-        text: description,
-        url: window.location.href,
-      });
+      try {
+        await navigator.share({
+          title: title,
+          text: description,
+          url: window.location.href,
+        });
+      } catch {
+        // User cancelled share, ignore
+      }
     } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copied to clipboard!");
+      // Fallback: copy to clipboard with toast message
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        setShowCopyMessage(true);
+        setTimeout(() => setShowCopyMessage(false), 2000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
     }
   };
 
@@ -115,9 +125,31 @@ export default function BlogPanel({ blog, onUpvote }) {
             onClick={handleShare}
             className={styles.blog_action_btn}
             aria-label="Share"
+            style={{ position: "relative" }}
           >
             <i className="fa fa-share-alt" aria-hidden="true"></i>
             <span>Share</span>
+            {showCopyMessage && (
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "100%",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  marginBottom: "0.5rem",
+                  padding: "0.5rem 1rem",
+                  background: "#10b981",
+                  color: "white",
+                  borderRadius: "6px",
+                  fontSize: "0.875rem",
+                  whiteSpace: "nowrap",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
+                  zIndex: 10,
+                }}
+              >
+                Link copied!
+              </div>
+            )}
           </button>
         </div>
       </div>
