@@ -145,18 +145,6 @@ function getProficiencyLevel(level?: string): number {
   return level ? levels[level] || 3 : 3;
 }
 
-function getNetworkIcon(network: string): string {
-  const icons: { [key: string]: string } = {
-    GitHub: "fa-github",
-    LinkedIn: "fa-linkedin",
-    Twitter: "fa-twitter",
-    X: "fa-twitter",
-    Website: "fa-globe",
-    Portfolio: "fa-briefcase",
-  };
-  return icons[network] || "fa-link";
-}
-
 export default function ResumePage() {
   const resume = getResumeData();
   const [showAllJobs, setShowAllJobs] = useState(false);
