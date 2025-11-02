@@ -131,7 +131,7 @@ const Projects = () => {
     );
   };
 
-  const categories = ["all", "Apps", "Web3", "AI/ML", "Design"];
+  const categories = ["all", "Featured", "Apps", "Web3", "AI/ML", "Design"];
 
   return (
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
