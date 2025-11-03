@@ -248,6 +248,24 @@ const CryptoPage = () => {
                 </div>
               </Grid>
             </Grid>
+
+            <p
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: "1.7",
+                color: "rgba(255, 255, 255, 0.85)",
+                marginTop: "2rem",
+                textAlign: "center",
+                fontStyle: "italic",
+                maxWidth: "800px",
+                margin: "2rem auto 0",
+              }}
+            >
+              For me, Web3 isn&apos;t about speculation—it&apos;s about building
+              a more transparent, accessible internet where users own their
+              digital identity and communities govern themselves without
+              intermediaries.
+            </p>
           </div>
           <p
             style={{
