@@ -28,11 +28,12 @@ test.describe("Projects Page Visual Tests", () => {
     const featuredButton = page.getByRole("button", { name: /⭐/ });
     await expect(featuredButton).toBeVisible();
 
-    // Check that project cards are visible
-    const projectCards = page.locator("[class*='projectCard']");
+    // Check that project cards are visible (using correct CSS module class)
+    const projectCards = page
+      .locator("[class*='card']")
+      .filter({ has: page.locator("h3") });
     await expect(projectCards.first()).toBeVisible();
   });
-
   test("project cards have icons and links", async ({ page }) => {
     await go(page, "/projects");
 
