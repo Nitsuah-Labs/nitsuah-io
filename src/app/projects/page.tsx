@@ -210,7 +210,7 @@ const Projects = () => {
                         selectedCategory === cat ? styles.active : ""
                       }`}
                     >
-                      {cat === "all" ? "All" : cat}
+                      {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
                     </button>
                   ))}
                 </div>

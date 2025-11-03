@@ -54,8 +54,8 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
           className={styles.profileButton}
           aria-label="Personal website"
           style={{
-            background: hoveredButton === "website" ? "#ea580c" : "#f97316",
-            borderColor: hoveredButton === "website" ? "#c2410c" : "#ea580c",
+            background: hoveredButton === "website" ? "#ea580c" : "transparent",
+            borderColor: "#f97316",
             transform:
               hoveredButton === "website"
                 ? "translateY(-2px)"

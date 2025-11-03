@@ -6,12 +6,11 @@
 
 ### Desktop
 
-- [ ] about/ page - the header "About Me" should have less space above it (and thus the scroll down for more is still hidden partway behind the footer) (pasted img 2)
-- [ ] about/ page - make the last section say "when im not coding that im usually working on my 78 corvette or my 81 silverado truck." or something like that.
-- [ ] resume/ page - under the about section, the button for "Projects" is missing, add it back please (or got removed? but should point to /projects)
-- [ ] resume/ page - buttons under about section, when on mobile should be stacked in a grid that scales them nicely to fit the available space. (pasted img 1)
-- [ ] resume/ page - there should be a bit of space between sections like about and work experience, currently the  follow each other with no space between.
-- [ ] resume/ page - the cards for work experience should not be auto-expanded by default, they should be collapsed by default (only when clicked on should they change). Right now it makes the page way too long and hard to navigate.(pasted img 3)
-- [ ] resume/ page - the work xp cards are missing their start & end dates, please add them back in. (pasted img 3)
-- [ ] resume/ page - the work xp cards should have the job title and company on one side, and the dates, orange bars, and time duration on the right side. (the left is fine, the other stuff is not) (pasted img 3)
-- [ ] the problems with the work xp cards happen on mobile as well as desktop. please evaluate fixes that consider both. (pasted img 4 for desktop view compared to others which were mobile)
+- [ ] resume/ page - on desktop/wider view on the work xp section for each card the start/end dates, orange bars, and time duration should be on the right side of the card. (the left/title/company is fine, the other stuff is currently at the bottom just aligned right) also put the text/indicator on the left of the bars instead of the right. should buy us some space and use up the dead space (pasted img 2 - with red lines for where things should be placed, order ie: put start/end on the bottom but move both to the upper right of the card, how mobile has it/shorter width mode order is fine)
+- [ ] crypto/ - on the cards you moved from projects you forgot to update the images.
+- [ ] projects/ there is a white section that appears behind the header when scrolling (but it appears by default on the page) (pasted img 1)
+- [ ] projects/ - The main filter section should have a "caret" like indicator that it can be expanded. we keep asking for this but its still not there.
+- [ ] projects/ Filters by Category - "Featured" should just be a "star" emoji/icon/logo instead of the full word "Featured"
+- [ ] project - Instead of the interactive circle on the project card make it a neat star that glows or otherwise stands out more (so tl;dr a star with colors like the coming soon card, but still have the same click on/off functionality)
+- [ ] projects/ - For "Filter by Tags" - the tags available to filter by should be dependent on the projects that are currently visible. so if you select "open source" only the tags that are in the open source projects should be available to select from. (currently all tags are always shown). may be heavy and dynamic but would be a nice touch and show prowess.
+- [ ] projects/ - The filter section should have a "caret" like indicator that it can be expanded. we keep asking for this but its still not there.

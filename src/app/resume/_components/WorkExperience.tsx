@@ -73,6 +73,11 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                         : "Present"}
                     </div>
                     <div className="duration-container">
+                      <div
+                        className={`duration-text ${isCurrent ? "current" : ""}`}
+                      >
+                        {extractDurationText(duration)}
+                      </div>
                       <div className="duration-bars">
                         {Array.from({ length: fullBars }).map((_, i) => (
                           <div key={i} className="duration-bar full" />
@@ -80,11 +85,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                         {partialBar > 0 && (
                           <div className="duration-bar partial" />
                         )}
-                      </div>
-                      <div
-                        className={`duration-text ${isCurrent ? "current" : ""}`}
-                      >
-                        {extractDurationText(duration)}
                       </div>
                     </div>
                   </div>
