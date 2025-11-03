@@ -62,6 +62,78 @@ const web3Data = [
     image: gaad,
     tags: ["POAP", "A11y"],
   },
+  {
+    title: "N+W S1",
+    description:
+      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
+    image: null,
+    tags: ["buildspace", "web3", "community"],
+  },
+  {
+    title: "ETH Core",
+    description:
+      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
+    image: null,
+    tags: ["ethereum", "solidity", "web3"],
+  },
+  {
+    title: "ETH dApp",
+    description:
+      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
+    image: null,
+    tags: ["ethereum", "nft", "web3", "dapp"],
+  },
+  {
+    title: "NFT Store",
+    description:
+      "Complete NFT storefront built on Solana with payment processing and collection management.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
+    image: null,
+    tags: ["nft", "solana", "web3", "marketplace"],
+  },
+  {
+    title: "SOL Core",
+    description:
+      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
+    link: "https://darkmoon.dev/about",
+    image: null,
+    tags: ["solana", "rust", "web3"],
+  },
+  {
+    title: "ENS NFT",
+    description:
+      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
+    image: null,
+    tags: ["nft", "ens", "polygon", "web3"],
+  },
+  {
+    title: "SOL dApp",
+    description:
+      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+    image: null,
+    tags: ["solana", "web3", "dapp"],
+  },
+  {
+    title: "DevDAO",
+    description:
+      "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
+    link: "/labs/dao",
+    image: null,
+    tags: ["dao", "web3", "javascript"],
+  },
+  {
+    title: "AutoGPT",
+    description:
+      "AI-powered writing assistant using GPT-3 API for automated content generation and creative writing support.",
+    link: "https://buildspace.so/@nitsuah",
+    image: null,
+    tags: ["ai", "gpt3", "automation"],
+  },
 ];
 
 const CryptoPage = () => {

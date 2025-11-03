@@ -1,6 +1,7 @@
 .profileButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border: 1px solid;
@@ -16,4 +17,5 @@
   font-size: 1.1rem;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
