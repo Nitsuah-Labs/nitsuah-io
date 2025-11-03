@@ -16,9 +16,11 @@ function renderOutput() {
   return (
     <main
       style={{
-        padding: "80px 20px 20px",
-        paddingBottom: "120px",
-        minHeight: "calc(100vh - 200px)",
+        padding: "80px 20px 60px",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        boxSizing: "border-box",
       }}
     >
       <div style={{ textAlign: "center", marginBottom: "40px" }}>

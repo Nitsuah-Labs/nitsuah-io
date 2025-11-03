@@ -6,9 +6,11 @@
 
 ### Desktop
 
-- [ ] resume/ page - work xp card content - i still dont like the order and position. figure it out, make it look nice when at either size (desktop/mobile). (pasted img 2)
-- [ ] resume/ - work experience should have a "total" bar at the top that sums up all the years worked across all jobs. (e.g. 10 years total). add this to the top of the work experience section. (pasted img 1)
-- [ ] crypto/ - on the cards you moved from projects originally they ARE MISSING THEIR ORIGINAL IMAGES! FIND THEM IN ASSET LOCATIONS THAT PROJECTS USES... (PASTED IMG 3)
-- [ ] projects/ - The main filter section should have a "caret" like indicator next to where it say "Filters" to indicate that it can be expanded. we keep asking for this but its still not there. QA IS SUPER UPSET ABOUT THIS MISSING FEATURE this is the 5th time youve missed it. (PASTED IMG 5)
-- [ ] projectS/ PAGE - THE "FEATURED" star looks like a square currently. IT NEEDS TO BE A STAR shape (but sort of looks like it works, just not visible when it is/isn't and needs to look like a star). (PASTED IMG 4)
-
+- [ ] resume/ - total experience card background should be grey like the other cards. the "total experience" text can be h6 or something to accent it enough.
+- [ ] crypto/ - add a small "blurb" about <3 why it matters to me in a sentence or two at the bottom of that main body/text section
+- [ ] crypto/ - headers and all text on the cards (and labels) should be a bit bigger/scale to be readable easily on bigger screens (but all of the card text is a bit too small on mobile too)
+- [ ] projects/ - View button should get a cool gradient style glow like the "coming soon" card.... instead of purple.
+- [ ] projects/clients - add an icon/placeholder image to the client cards to make them more visually appealing (can use emoji, opensource logo, image, icon to start)
+- [ ] resume/ - on total experience card on mobile the years bars are overflowing the card width - need to make them wrap or scale down better on small screens (both might work too)
+- [ ] labs/ - on home, network card, add the wallet connect button the "disconnected" status button we have there (when working we'll use that button to show us when a successful connection has occurred)
+- [ ] resume/ - Change total experience bar to subtle gray gradient with left orange border accent (its still white when it should be grey)
