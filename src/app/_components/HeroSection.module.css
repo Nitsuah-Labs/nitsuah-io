@@ -61,7 +61,7 @@
 }
 
 .primaryButton {
-  background-color: #f97316;
+  background-color: #ea580c;
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -73,7 +73,7 @@
 }
 
 .primaryButton:hover {
-  background-color: #ea580c;
+  background-color: #dc2626;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
 }
