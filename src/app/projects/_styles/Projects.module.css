@@ -277,14 +277,13 @@
   }
 }
 
-/* Featured Star - Interactive */
+/* Featured Star - Interactive glowing star */
 .featuredStar {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid rgba(249, 115, 22, 0.4);
-  border-radius: 50%;
+  background: transparent;
+  border: none;
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
@@ -293,30 +292,42 @@
   z-index: 10;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.4);
+  filter: drop-shadow(0 0 2px rgba(249, 115, 22, 0.3));
 }
 
 .featuredStar:hover {
-  background: rgba(0, 0, 0, 0.8);
-  border-color: #f97316;
-  transform: scale(1.1);
+  transform: scale(1.2);
   color: #f97316;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
 }
 
 .featuredStar.featured {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  border-color: #f97316;
-  color: #000;
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+  color: #f97316;
+  filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.8))
+    drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .featuredStar.featured:hover {
-  transform: scale(1.1) rotate(15deg);
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.6);
+  transform: scale(1.3) rotate(15deg);
+  filter: drop-shadow(0 0 16px rgba(249, 115, 22, 1))
+    drop-shadow(0 0 8px rgba(249, 115, 22, 0.8));
 }
 
 .featuredStar i {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(249, 115, 22, 1))
+      drop-shadow(0 0 8px rgba(249, 115, 22, 0.8));
+  }
 }
 
 /* Card Image */

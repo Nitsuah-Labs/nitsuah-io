@@ -8,46 +8,22 @@ import { ProjectCard } from "./_components/ProjectCard";
 import styles from "./_styles/Projects.module.css";
 
 // Import project images
-import dev from "../crypto/_assets/dao.png";
 import nitsuah from "./_assets/NITSUAH.png";
 import aiarf from "./_assets/arf-ai.png";
 import arfg from "./_assets/arf-guild.gif";
-import arf from "./_assets/arf.gif";
 import blendeth from "./_assets/blend-eth.gif";
-import buildspace from "./_assets/buildspace.png";
 import cat from "./_assets/cat.png";
 import darkmoon from "./_assets/darkmoon.gif";
-import polyens from "./_assets/ens.gif";
-import hedge from "./_assets/hedge-ref.png";
 import ngx from "./_assets/ng-game.png";
-import nwb from "./_assets/nights+weekends.png";
-import solApp from "./_assets/sol-dapp.gif";
-import solPay from "./_assets/sol-store.gif";
-import solana from "./_assets/solana-logo.png";
 import spline from "./_assets/spline.gif";
-import web3intro from "./_assets/web3-intro.png";
-import web3mint from "./_assets/web3-mint.png";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  github: cat,
   labs: nitsuah,
   darkmoon: darkmoon,
   spline3d: spline,
-  nextgen: ngx,
   clients: cat,
-  buildspace: buildspace,
-  "ens-nft": polyens,
-  "nft-store": solPay,
-  "nft-game": hedge,
-  "nights-weekends": nwb,
-  "eth-dapp": web3mint,
-  "sol-dapp": solApp,
   blender: blendeth,
-  autogpt: arf,
-  "eth-core": web3intro,
-  devdao: dev,
-  "sol-core": solana,
   paint3d: arfg,
   imagen: aiarf,
   kryptos: cat,
@@ -58,16 +34,7 @@ const projectImages: Record<string, any> = {
 };
 
 // GIF projects for unoptimized loading
-const gifProjects = new Set([
-  "darkmoon",
-  "spline3d",
-  "ens-nft",
-  "nft-store",
-  "sol-dapp",
-  "blender",
-  "autogpt",
-  "paint3d",
-]);
+const gifProjects = new Set(["darkmoon", "spline3d", "blender", "paint3d"]);
 
 const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -114,11 +81,11 @@ const Projects = () => {
     });
   }, [featuredProjects]);
 
-  // Get available tags based on currently filtered projects (by category only)
+  // Get available tags based on currently visible projects (category + selected tags)
   const availableTags = useMemo(() => {
     let projectsForTags = sortedProjects;
 
-    // Apply category filter only
+    // Apply category filter
     if (selectedCategory !== "all") {
       if (selectedCategory === "Featured") {
         projectsForTags = projectsForTags.filter((p) =>
@@ -131,12 +98,19 @@ const Projects = () => {
       }
     }
 
+    // Apply tag filters (only show tags from projects that match currently selected tags)
+    if (selectedTags.length > 0) {
+      projectsForTags = projectsForTags.filter((project) =>
+        selectedTags.every((tag) => project.tags.includes(tag)),
+      );
+    }
+
     const tagsSet = new Set<string>();
     projectsForTags.forEach((project) => {
       project.tags.forEach((tag) => tagsSet.add(tag));
     });
     return Array.from(tagsSet).sort();
-  }, [sortedProjects, selectedCategory, featuredProjects]);
+  }, [sortedProjects, selectedCategory, selectedTags, featuredProjects]);
 
   // Filter projects by category and tags
   const filteredProjects = useMemo(() => {
