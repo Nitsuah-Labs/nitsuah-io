@@ -61,11 +61,11 @@ test.describe("Resume Page Visual Tests", () => {
     await page.waitForLoadState("networkidle");
 
     // Find first work item and click to expand
-    const firstWorkToggle = page.locator(".work-toggle").first();
+    const firstWorkHeader = page.locator(".work-header").first();
     const firstWorkDetails = page.locator(".work-details").first();
 
-    // Click the label associated with the checkbox
-    await page.locator(".work-label").first().click();
+    // Click the header to toggle expansion
+    await firstWorkHeader.click();
 
     // Check that details are visible (via CSS)
     await expect(firstWorkDetails).toBeVisible();
@@ -98,9 +98,9 @@ test.describe("Resume Page Visual Tests", () => {
     const profiles = page.locator(".resume-profiles");
     await expect(profiles).toBeVisible();
 
-    // Verify profile links are present
-    const profileLinks = page.locator(".profile-link");
-    await expect(profileLinks.first()).toBeVisible();
+    // Verify profile buttons are present (using CSS module class pattern)
+    const profileButtons = page.locator("[class*='profileButton']");
+    await expect(profileButtons.first()).toBeVisible();
   });
 
   test("should render skills with proficiency bars", async ({ page }) => {
