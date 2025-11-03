@@ -52,10 +52,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         title={isFeatured ? "Remove from featured" : "Mark as featured"}
         aria-label={isFeatured ? "Remove from featured" : "Mark as featured"}
       >
-        <i
-          className={`fa fa-star${isFeatured ? "" : "-o"}`}
-          aria-hidden="true"
-        ></i>
+        {isFeatured ? "★" : "☆"}
       </button>
 
       {/* Project Image */}

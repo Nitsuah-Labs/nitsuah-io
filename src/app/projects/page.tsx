@@ -167,11 +167,12 @@ const Projects = () => {
                   <span>
                     <i className="fa fa-filter" aria-hidden="true"></i>
                     Filters
+                    <i
+                      className={`fa fa-chevron-${filtersExpanded ? "up" : "down"}`}
+                      aria-hidden="true"
+                      style={{ marginLeft: "0.5rem" }}
+                    ></i>
                   </span>
-                  <i
-                    className={`fa fa-chevron-${filtersExpanded ? "up" : "down"}`}
-                    aria-hidden="true"
-                  ></i>
                 </button>
 
                 {/* Category Filters Inline */}

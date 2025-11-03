@@ -14,6 +14,14 @@ import gaad from "./_assets/gaad-poap.gif";
 import ledger from "./_assets/ledger.png";
 import mint from "./_assets/mint.gif";
 
+// Import images for moved projects from projects/_assets
+import ensNft from "../projects/_assets/ens.gif";
+import nightsWeekends from "../projects/_assets/nights+weekends.png";
+import solDapp from "../projects/_assets/sol-dapp.gif";
+import solCore from "../projects/_assets/solana-logo.png";
+import ethIntro from "../projects/_assets/web3-intro.png";
+import nftStore from "../projects/_assets/web3-mint.png";
+
 const web3Data = [
   {
     title: "🌑DARKMOON",
@@ -67,7 +75,7 @@ const web3Data = [
     description:
       "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
-    image: null,
+    image: nightsWeekends,
     tags: ["buildspace", "web3", "community"],
   },
   {
@@ -75,7 +83,7 @@ const web3Data = [
     description:
       "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
-    image: null,
+    image: ethIntro,
     tags: ["ethereum", "solidity", "web3"],
   },
   {
@@ -83,7 +91,7 @@ const web3Data = [
     description:
       "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
-    image: null,
+    image: nftStore,
     tags: ["ethereum", "nft", "web3", "dapp"],
   },
   {
@@ -91,7 +99,7 @@ const web3Data = [
     description:
       "Complete NFT storefront built on Solana with payment processing and collection management.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
-    image: null,
+    image: nftStore,
     tags: ["nft", "solana", "web3", "marketplace"],
   },
   {
@@ -99,7 +107,7 @@ const web3Data = [
     description:
       "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
     link: "https://darkmoon.dev/about",
-    image: null,
+    image: solCore,
     tags: ["solana", "rust", "web3"],
   },
   {
@@ -107,7 +115,7 @@ const web3Data = [
     description:
       "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
-    image: null,
+    image: ensNft,
     tags: ["nft", "ens", "polygon", "web3"],
   },
   {
@@ -115,7 +123,7 @@ const web3Data = [
     description:
       "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
-    image: null,
+    image: solDapp,
     tags: ["solana", "web3", "dapp"],
   },
   {
@@ -123,7 +131,7 @@ const web3Data = [
     description:
       "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
     link: "/labs/dao",
-    image: null,
+    image: devDao,
     tags: ["dao", "web3", "javascript"],
   },
   {
@@ -131,7 +139,7 @@ const web3Data = [
     description:
       "AI-powered writing assistant using GPT-3 API for automated content generation and creative writing support.",
     link: "https://buildspace.so/@nitsuah",
-    image: null,
+    image: autoGpt,
     tags: ["ai", "gpt3", "automation"],
   },
 ];
