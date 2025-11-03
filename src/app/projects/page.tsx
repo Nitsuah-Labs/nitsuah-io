@@ -164,14 +164,10 @@ const Projects = () => {
                   className={styles.filterToggle}
                   onClick={() => setFiltersExpanded(!filtersExpanded)}
                 >
-                  <span>
-                    <i className="fa fa-filter" aria-hidden="true"></i>
-                    Filters
-                    <i
-                      className={`fa fa-chevron-${filtersExpanded ? "up" : "down"}`}
-                      aria-hidden="true"
-                      style={{ marginLeft: "0.5rem" }}
-                    ></i>
+                  <i className="fa fa-filter" aria-hidden="true"></i>
+                  <span>Filters</span>
+                  <span className={styles.expandIndicator}>
+                    {filtersExpanded ? "▲" : "▼"}
                   </span>
                 </button>
 

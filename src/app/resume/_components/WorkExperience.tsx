@@ -12,8 +12,12 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 5);
 
-  // Calculate total years across all jobs
+  // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
   const totalYears = work.reduce((sum, job) => {
+    // Skip subcontracted work to avoid double counting
+    if (job.name.toLowerCase().includes("sub.")) {
+      return sum;
+    }
     const duration = calculateDuration(job.startDate, job.endDate);
     const years = parseFloat(duration.match(/\(([^)]+) years\)/)?.[1] || "0");
     return sum + years;

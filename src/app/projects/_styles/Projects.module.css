@@ -86,6 +86,18 @@
   margin-right: 0.5rem;
 }
 
+.filterToggle span {
+  margin: 0 0.5rem;
+}
+
+.expandIndicator {
+  font-size: 0.9rem;
+  color: #f97316;
+  font-weight: bold;
+  margin-left: 0.25rem !important;
+  transition: transform 0.3s ease;
+}
+
 .categoryButtonsInline {
   display: flex;
   flex-wrap: wrap;
@@ -409,6 +421,29 @@
 .cardButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* View Button - "Coming Soon" style */
+.viewButton {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  border-color: #6d28d9;
+  color: #fff;
+}
+
+.viewButton:hover {
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+}
+
+/* GitHub Button - Dark style */
+.githubButton {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  border-color: #111827;
+  color: #fff;
+}
+
+.githubButton:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.5);
 }
 
 /* Mobile Responsive */

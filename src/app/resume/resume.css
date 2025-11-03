@@ -80,6 +80,20 @@
     border-color: #ff8c42 !important;
   }
 
+  .work-total-summary {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: #ff8c42 !important;
+  }
+
+  .total-label {
+    color: #e0e0e0 !important;
+  }
+
+  .total-duration-text {
+    color: #e0e0e0 !important;
+  }
+
   .work-header {
     background: rgba(255, 255, 255, 0.03) !important;
     border-left-color: #ff8c42 !important;
@@ -351,18 +365,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  border-left: 4px solid #f97316;
+  border-radius: 6px;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .total-label {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #000;
-  letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+  letter-spacing: 0.3px;
 }
 
 .total-duration-container {
@@ -374,13 +390,13 @@
 .total-duration-bars {
   display: flex;
   gap: 4px;
-  height: 28px;
+  height: 24px;
 }
 
 .total-duration-text {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #000;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #495057;
   white-space: nowrap;
 }
 

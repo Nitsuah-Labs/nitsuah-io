@@ -24,6 +24,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       window.open(project.externalLink, "_blank");
     } else if (project.demo) {
       window.open(project.demo, "_blank");
+    } else if (project.github) {
+      // If only GitHub link exists, use it as the card click target
+      window.open(project.github, "_blank");
     }
   };
 
@@ -82,26 +85,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Action Buttons */}
         <div className={styles.cardActions}>
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.cardButton}
-              onClick={(e) => handleLinkClick(e)}
-            >
-              GitHub
-            </a>
-          )}
           {(project.demo || project.externalLink) && (
             <a
               href={project.demo || project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.cardButton}
+              className={`${styles.cardButton} ${styles.viewButton}`}
               onClick={handleLinkClick}
             >
               View
+            </a>
+          )}
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.cardButton} ${styles.githubButton}`}
+              onClick={(e) => handleLinkClick(e)}
+            >
+              GitHub
             </a>
           )}
         </div>

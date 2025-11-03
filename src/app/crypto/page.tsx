@@ -24,14 +24,6 @@ import nftStore from "../projects/_assets/web3-mint.png";
 
 const web3Data = [
   {
-    title: "🌑DARKMOON",
-    description:
-      "A web3 NFT project exploring a 3D lunar setting with F2P & P2P modes",
-    link: "https://www.darkmoon.dev/",
-    image: null,
-    tags: ["NFT", "Solana", "3D Game"],
-  },
-  {
     title: "Crypto Trailblazer",
     description:
       "Early adopter NFT of Coinbassador education & activity program at Coinbase",
@@ -126,22 +118,6 @@ const web3Data = [
     image: solDapp,
     tags: ["solana", "web3", "dapp"],
   },
-  {
-    title: "DevDAO",
-    description:
-      "Decentralized Autonomous Organization (DAO) implementation using JavaScript for governance and voting mechanisms.",
-    link: "/labs/dao",
-    image: devDao,
-    tags: ["dao", "web3", "javascript"],
-  },
-  {
-    title: "AutoGPT",
-    description:
-      "AI-powered writing assistant using GPT-3 API for automated content generation and creative writing support.",
-    link: "https://buildspace.so/@nitsuah",
-    image: autoGpt,
-    tags: ["ai", "gpt3", "automation"],
-  },
 ];
 
 const CryptoPage = () => {
@@ -180,62 +156,106 @@ const CryptoPage = () => {
           >
             <h2
               style={{
-                fontSize: "1.5rem",
+                fontSize: "2rem",
                 fontWeight: "600",
-                marginBottom: "1rem",
+                marginBottom: "2.5rem",
                 color: "#f97316",
                 textAlign: "center",
               }}
             >
               Why Web3 Matters
             </h2>
-            <p
-              style={{
-                fontSize: "1.1rem",
-                lineHeight: "1.7",
-                marginBottom: "1rem",
-                color: "rgba(255, 255, 255, 0.9)",
-              }}
-            >
-              Web3 represents a fundamental shift from centralized platforms to
-              decentralized ownership and governance. It&apos;s about giving
-              users control over their data, identity, and digital assets
-              through blockchain technology.
-            </p>
-            <p
-              style={{
-                fontSize: "1.1rem",
-                lineHeight: "1.7",
-                marginBottom: "1rem",
-                color: "rgba(255, 255, 255, 0.9)",
-              }}
-            >
-              Beyond speculation, blockchain enables{" "}
-              <strong>trustless verification</strong>,{" "}
-              <strong>transparent governance</strong>, and{" "}
-              <strong>programmable value exchange</strong>. NFTs and POAPs
-              aren&apos;t just collectibles—they&apos;re proof of participation,
-              achievement, and community membership that no central authority
-              can revoke.
-            </p>
-            <p
-              style={{
-                fontSize: "1.1rem",
-                lineHeight: "1.7",
-                color: "rgba(255, 255, 255, 0.9)",
-              }}
-            >
-              My exploration of this space focuses on practical applications:
-              DAOs for decentralized decision-making, on-chain credentials for
-              verifiable achievements, and building tools that make Web3 more
-              accessible to developers and users alike.
-            </p>
+
+            <Grid container spacing={4} style={{ marginBottom: "2rem" }}>
+              <Grid item xs={12} md={4}>
+                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
+                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+                    🔐
+                  </div>
+                  <h3
+                    style={{
+                      color: "#f97316",
+                      fontSize: "1.4rem",
+                      marginBottom: "0.75rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Ownership
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: "1rem",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    Control your data, identity, and digital assets
+                  </p>
+                </div>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
+                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+                    ✅
+                  </div>
+                  <h3
+                    style={{
+                      color: "#f97316",
+                      fontSize: "1.4rem",
+                      marginBottom: "0.75rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Verification
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: "1rem",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    Trustless verification & transparent governance
+                  </p>
+                </div>
+              </Grid>
+
+              <Grid item xs={12} md={4}>
+                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
+                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+                    🛠️
+                  </div>
+                  <h3
+                    style={{
+                      color: "#f97316",
+                      fontSize: "1.4rem",
+                      marginBottom: "0.75rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Innovation
+                  </h3>
+                  <p
+                    style={{
+                      color: "rgba(255, 255, 255, 0.8)",
+                      fontSize: "1rem",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    Building practical DAOs, credentials & tools
+                  </p>
+                </div>
+              </Grid>
+            </Grid>
           </div>
           <p
             style={{
-              fontSize: "1.2rem",
-              fontWeight: "500",
-              color: "rgba(255, 255, 255, 0.8)",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+              color: "#f97316",
+              marginTop: "3rem",
+              marginBottom: "1.5rem",
             }}
           >
             NFTs, POAPs, and On-Chain Achievements
