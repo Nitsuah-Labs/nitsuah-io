@@ -81,7 +81,7 @@ Create shared components to reduce duplication:
 
 - See `FEEDBACK.md` for user-facing feature requests
 - See `ARCHITECTURE.md` for overall system design
-- See `DEVELOPER_GUIDE.md` for contribution guidelines
+- See `CONTRIBUTING.md` for contribution guidelines
 - See `TODO.md` for other backlog items
 
 ---
