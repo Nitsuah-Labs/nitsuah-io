@@ -423,15 +423,19 @@
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
 }
 
-/* View Button - "Coming Soon" style */
+/* View Button - Cool gradient glow style */
 .viewButton {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  border-color: #6d28d9;
-  color: #fff;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-color: #f97316;
+  color: #000;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .viewButton:hover {
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+  box-shadow:
+    0 6px 24px rgba(249, 115, 22, 0.6),
+    0 0 20px rgba(249, 115, 22, 0.4);
+  transform: translateY(-3px);
 }
 
 /* GitHub Button - Dark style */

@@ -8,6 +8,9 @@ import LabFooter from "../_components/_labs/LabFooter";
 import LabNav from "../_components/_labs/LabNav";
 import "../_components/_styles/labs.css";
 
+// WEB3 COMPONENTS
+import { Connect } from "../_components/_web3/Connect";
+
 // LAB ASSETS
 import mumbai from "../_components/_web3/_assets/mumbai.png";
 // polygonLogo and ethLogo not currently used in this page
@@ -40,19 +43,7 @@ function renderOutput() {
             <h2 className="labs-card-title">NETWORK</h2>
           </div>
           <div className="labs-card-body">
-            <button
-              className="labs-btn"
-              disabled
-              style={{
-                width: "100%",
-                margin: "0",
-                background: "rgba(255, 255, 255, 0.1)",
-                color: "rgba(255, 255, 255, 0.5)",
-                cursor: "not-allowed",
-              }}
-            >
-              DISCONNECTED
-            </button>
+            <Connect />
           </div>
         </div>
 

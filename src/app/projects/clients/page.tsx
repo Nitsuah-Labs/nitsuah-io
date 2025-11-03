@@ -174,6 +174,21 @@ const clientProjects: ClientProject[] = [
   },
 ];
 
+const getProjectIcon = (type: ProjectType): string => {
+  switch (type) {
+    case "web3":
+      return "🔗";
+    case "ecommerce":
+      return "🛒";
+    case "saas":
+      return "📊";
+    case "service":
+      return "🏢";
+    default:
+      return "💼";
+  }
+};
+
 const MintExample: React.FC = () => {
   const [selectedType, setSelectedType] = useState<ProjectType>("all");
   const [showDemo, setShowDemo] = useState<string | null>(null);
@@ -403,6 +418,17 @@ const MintExample: React.FC = () => {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
+                {/* Project Icon */}
+                <div
+                  style={{
+                    fontSize: "3rem",
+                    textAlign: "center",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {getProjectIcon(project.type)}
+                </div>
+
                 {/* Header with title and status tag */}
                 <div
                   style={{
