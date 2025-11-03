@@ -73,6 +73,28 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
         </a>
       )}
 
+      {/* Projects Button */}
+      <a
+        href="/projects"
+        className={styles.profileButton}
+        aria-label="View projects"
+        style={{
+          background: hoveredButton === "projects" ? "#ea580c" : "transparent",
+          borderColor: "#f97316",
+          transform:
+            hoveredButton === "projects" ? "translateY(-2px)" : "translateY(0)",
+          boxShadow:
+            hoveredButton === "projects"
+              ? "0 4px 12px rgba(249, 115, 22, 0.4)"
+              : "none",
+        }}
+        onMouseEnter={() => setHoveredButton("projects")}
+        onMouseLeave={() => setHoveredButton(null)}
+      >
+        <span className={styles.icon}>💼</span>
+        <span>Projects</span>
+      </a>
+
       {/* Profile Buttons */}
       {profiles &&
         profiles.map((profile, idx) => (

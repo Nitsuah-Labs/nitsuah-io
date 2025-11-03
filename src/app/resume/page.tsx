@@ -63,7 +63,9 @@ export default function ResumePage() {
 
           {/* Work Experience */}
           {resume.work && resume.work.length > 0 && (
-            <WorkExperience work={resume.work} />
+            <div style={{ marginTop: "2.5rem" }}>
+              <WorkExperience work={resume.work} />
+            </div>
           )}
 
           {/* Skills */}
