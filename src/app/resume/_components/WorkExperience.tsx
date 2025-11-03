@@ -33,7 +33,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                 type="checkbox"
                 id={`work-${idx}`}
                 className="work-toggle"
-                defaultChecked
               />
               <label htmlFor={`work-${idx}`} className="work-header">
                 <div className="work-header-content">
@@ -49,6 +48,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                             href={job.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                           >
                             {job.name}
                           </a>
@@ -59,6 +59,19 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                     </div>
                   </div>
                   <div className="work-duration">
+                    <div className="work-dates">
+                      {new Date(job.startDate).toLocaleDateString("en-US", {
+                        month: "short",
+                        year: "numeric",
+                      })}{" "}
+                      -{" "}
+                      {job.endDate
+                        ? new Date(job.endDate).toLocaleDateString("en-US", {
+                            month: "short",
+                            year: "numeric",
+                          })
+                        : "Present"}
+                    </div>
                     <div className="duration-container">
                       <div className="duration-bars">
                         {Array.from({ length: fullBars }).map((_, i) => (

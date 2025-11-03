@@ -46,9 +46,9 @@ export const ProfileSection: React.FC = () => {
             gap between complex technology and practical implementation.
           </p>
           <p>
-            When I&apos;m not coding, you&apos;ll find me exploring blockchain
-            technologies, contributing to open-source projects, and
-            experimenting with new ways to optimize development workflows.
+            When I&apos;m not coding, you&apos;ll find me working on my &apos;78
+            Corvette or my &apos;81 Silverado truck, exploring classic
+            automotive restoration and maintenance.
           </p>
         </div>
 
