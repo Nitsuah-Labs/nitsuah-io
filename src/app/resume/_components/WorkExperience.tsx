@@ -10,7 +10,7 @@ interface WorkExperienceProps {
 
 export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
-  const displayedJobs = showAllJobs ? work : work.slice(0, 5);
+  const displayedJobs = showAllJobs ? work : work.slice(0, 3);
 
   // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
   const totalYears = work.reduce((sum, job) => {
@@ -134,7 +134,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
           );
         })}
       </div>
-      {work.length > 5 && (
+      {work.length > 3 && (
         <div
           style={{ textAlign: "center", marginTop: "1.5rem" }}
           className="print-hide"
@@ -168,8 +168,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
               style={{ marginRight: "0.5rem" }}
             ></i>
             {showAllJobs
-              ? `Show Less (${work.length - 5} hidden)`
-              : `Show All (${work.length - 5} more)`}
+              ? `Show Less (${work.length - 3} hidden)`
+              : `Show All (${work.length - 3} more)`}
           </button>
         </div>
       )}
