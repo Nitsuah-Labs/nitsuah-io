@@ -58,30 +58,34 @@ export default function NotFound() {
 
       <style jsx>{`
         .not-found-container {
-          min-height: 70vh;
+          min-height: calc(100vh - 200px);
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 2rem;
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          margin-top: 80px;
+          margin-bottom: 80px;
         }
 
         .not-found-content {
-          max-width: 600px;
+          max-width: 700px;
           text-align: center;
-          background: white;
-          padding: 3rem;
+          background: rgba(249, 115, 22, 0.05);
+          border: 2px solid rgba(249, 115, 22, 0.3);
+          padding: 4rem 3rem;
           border-radius: 16px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 10px 40px rgba(249, 115, 22, 0.15);
         }
 
         .error-code {
           font-size: 8rem;
           font-weight: 900;
-          color: #f97316;
+          background: -webkit-linear-gradient(left, #f97316, #ea580c);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
           line-height: 1;
           margin-bottom: 0.5rem;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
           animation: pulse 2s ease-in-out infinite;
         }
 
@@ -94,13 +98,13 @@ export default function NotFound() {
         .error-title {
           font-size: 2.5rem;
           font-weight: 700;
-          color: #1a1a1a;
+          color: #ffffff;
           margin-bottom: 1rem;
         }
 
         .error-description {
           font-size: 1.2rem;
-          color: #6b7280;
+          color: rgba(255, 255, 255, 0.8);
           margin-bottom: 2rem;
           line-height: 1.6;
         }
@@ -108,7 +112,7 @@ export default function NotFound() {
         .error-joke {
           display: block;
           font-size: 1rem;
-          color: #9ca3af;
+          color: rgba(255, 255, 255, 0.6);
           margin-top: 0.5rem;
           font-style: italic;
         }
@@ -196,16 +200,17 @@ export default function NotFound() {
 
         .helpful-links {
           text-align: left;
-          background: #f8fafc;
-          padding: 2rem;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(249, 115, 22, 0.2);
+          padding: 1.25rem;
           border-radius: 12px;
-          margin-top: 2rem;
+          margin-top: 0;
         }
 
         .helpful-links h3 {
-          color: #374151;
-          margin-bottom: 1rem;
-          font-size: 1.1rem;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: 0.65rem;
+          font-size: 1rem;
         }
 
         .helpful-links ul {
@@ -215,58 +220,55 @@ export default function NotFound() {
         }
 
         .helpful-links li {
-          margin-bottom: 0.75rem;
+          margin-bottom: 0.5rem;
+          font-size: 0.9rem;
+        }
+
+        .helpful-links li:last-child {
+          margin-bottom: 0;
         }
 
         @media (max-width: 768px) {
           .not-found-content {
-            padding: 2rem;
+            padding: 1.5rem 1rem;
           }
 
           .error-code {
-            font-size: 6rem;
+            font-size: 4rem;
           }
 
           .error-title {
-            font-size: 2rem;
+            font-size: 1.5rem;
+          }
+
+          .error-description {
+            font-size: 0.9rem;
           }
 
           .error-actions {
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
+            gap: 0.5rem;
           }
 
           .primary-button,
           .secondary-button {
             width: 100%;
             justify-content: center;
-          }
-        }
-
-        @media (prefers-color-scheme: dark) {
-          .not-found-container {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-          }
-
-          .not-found-content {
-            background: #1f2937;
-            color: #f9fafb;
-          }
-
-          .error-title {
-            color: #f9fafb;
-          }
-
-          .error-description {
-            color: #d1d5db;
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
           }
 
           .helpful-links {
-            background: #374151;
+            padding: 1rem;
           }
 
           .helpful-links h3 {
-            color: #e5e7eb;
+            font-size: 0.9rem;
+          }
+
+          .helpful-links li {
+            font-size: 0.85rem;
           }
         }
       `}</style>

@@ -2,6 +2,7 @@
 "use client";
 import { Grid } from "@mui/material";
 import Image from "next/image";
+import { useMemo, useState } from "react";
 
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
@@ -187,38 +188,38 @@ const CryptoPage = () => {
       <main
         className="content-container"
         style={{
-          marginTop: "80px",
-          marginBottom: "80px",
-          paddingBottom: "200px", // Increased footer spacing buffer
+          marginTop: "60px",
+          marginBottom: "40px",
+          paddingBottom: "100px",
           minHeight: "calc(100vh - 200px)",
-          padding: "2rem 1rem",
+          padding: "1rem",
         }}
       >
         <div
           className="projects-header"
           style={{
-            marginBottom: "48px",
+            marginBottom: "24px",
             maxWidth: "900px",
-            margin: "0 auto 48px",
+            margin: "0 auto 24px",
             textAlign: "center",
           }}
         >
-          <h1 style={{ marginBottom: "1.5rem" }}>Web3 & Crypto</h1>
+          <h1 style={{ marginBottom: "1rem" }}>Web3 & Crypto</h1>
           <div
             style={{
               background: "rgba(249, 115, 22, 0.1)",
               border: "2px solid rgba(249, 115, 22, 0.3)",
               borderRadius: "12px",
-              padding: "2rem",
-              marginBottom: "2rem",
+              padding: "1.5rem",
+              marginBottom: "1.5rem",
               textAlign: "center",
             }}
           >
             <h2
               style={{
-                fontSize: "2rem",
+                fontSize: "1.5rem",
                 fontWeight: "600",
-                marginBottom: "2.5rem",
+                marginBottom: "0.75rem",
                 color: "#f97316",
                 textAlign: "center",
               }}
@@ -230,7 +231,7 @@ const CryptoPage = () => {
               style={{
                 textAlign: "center",
                 maxWidth: "600px",
-                margin: "0 auto 2rem",
+                margin: "0 auto 0.5rem",
               }}
             >
               <ul
@@ -243,12 +244,12 @@ const CryptoPage = () => {
               >
                 <li
                   style={{
-                    marginBottom: "1.5rem",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.6",
+                    marginBottom: "0.5rem",
+                    fontSize: "1rem",
+                    lineHeight: "1.5",
                   }}
                 >
-                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
+                  <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>
                     🔐
                   </span>
                   <strong style={{ color: "#f97316" }}>Ownership</strong> -
@@ -256,12 +257,12 @@ const CryptoPage = () => {
                 </li>
                 <li
                   style={{
-                    marginBottom: "1.5rem",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.6",
+                    marginBottom: "0.5rem",
+                    fontSize: "1rem",
+                    lineHeight: "1.5",
                   }}
                 >
-                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
+                  <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>
                     ✅
                   </span>
                   <strong style={{ color: "#f97316" }}>Verification</strong> -
@@ -269,12 +270,12 @@ const CryptoPage = () => {
                 </li>
                 <li
                   style={{
-                    marginBottom: "1.5rem",
-                    fontSize: "1.1rem",
-                    lineHeight: "1.6",
+                    marginBottom: "0.5rem",
+                    fontSize: "1rem",
+                    lineHeight: "1.5",
                   }}
                 >
-                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
+                  <span style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}>
                     🛠️
                   </span>
                   <strong style={{ color: "#f97316" }}>Innovation</strong> -
@@ -282,17 +283,16 @@ const CryptoPage = () => {
                 </li>
               </ul>
             </div>
-
             <p
               style={{
-                fontSize: "1.05rem",
-                lineHeight: "1.7",
+                fontSize: "0.95rem",
+                lineHeight: "1.5",
                 color: "rgba(255, 255, 255, 0.85)",
-                marginTop: "2rem",
+                marginTop: "1rem",
                 textAlign: "center",
                 fontStyle: "italic",
                 maxWidth: "800px",
-                margin: "2rem auto 0",
+                margin: "1rem auto 0",
               }}
             >
               For me, Web3 isn&apos;t about speculation—it&apos;s about building
@@ -303,11 +303,11 @@ const CryptoPage = () => {
           </div>
           <p
             style={{
-              fontSize: "1.3rem",
+              fontSize: "1.1rem",
               fontWeight: "600",
               color: "#f97316",
-              marginTop: "3rem",
-              marginBottom: "1.5rem",
+              marginTop: "2rem",
+              marginBottom: "1rem",
             }}
           >
             NFTs, POAPs, and On-Chain Achievements
@@ -316,10 +316,10 @@ const CryptoPage = () => {
           {/* Tag Filter */}
           <div
             style={{
-              marginBottom: "2rem",
+              marginBottom: "1.5rem",
               display: "flex",
               flexWrap: "wrap",
-              gap: "0.75rem",
+              gap: "0.5rem",
               justifyContent: "center",
             }}
           >
@@ -328,7 +328,7 @@ const CryptoPage = () => {
                 key={tag}
                 onClick={() => toggleTag(tag)}
                 style={{
-                  padding: "0.5rem 1rem",
+                  padding: "0.4rem 0.8rem",
                   borderRadius: "20px",
                   border: "2px solid",
                   borderColor: selectedTags.includes(tag)
@@ -361,9 +361,9 @@ const CryptoPage = () => {
           </div>
         </div>
 
-        <Grid container spacing={3} rowSpacing={6}>
+        <Grid container spacing={2} rowSpacing={3}>
           {" "}
-          {/* Increased rowSpacing from 4 to 6 for better separation */}
+          {/* Reduced spacing for more compact layout */}
           {filteredProjects.map((project, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <div
