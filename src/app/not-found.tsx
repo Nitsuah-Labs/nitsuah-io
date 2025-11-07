@@ -17,8 +17,9 @@ export default function NotFound() {
           <div className="error-emoji">🤔</div>
           <h1 className="error-title">Well, this is awkward...</h1>
           <p className="error-description">
-            Looks like you found a page that doesn&apos;t exist. Even the best
-            engineers hit 404s sometimes.
+            Looks like you found a page that doesn&apos;t exist.
+            <br />
+            Even the best engineers hit 404s sometimes.
             <br />
             <span className="error-joke">
               (Maybe it&apos;s still compiling? 😅)
@@ -36,20 +37,24 @@ export default function NotFound() {
 
           <div className="helpful-links">
             <h3>You might be looking for:</h3>
-            <ul>
-              <li>
-                <Link href="/about">About Austin</Link>
-              </li>
-              <li>
-                <Link href="/projects">Selected Projects</Link>
-              </li>
-              <li>
-                <Link href="/labs">Web3 Labs</Link>
-              </li>
-              <li>
-                <Link href="/projects/blogs">Blog Posts</Link>
-              </li>
-            </ul>
+            <div className="link-cards">
+              <Link href="/about" className="link-card">
+                <span className="card-emoji">👋</span>
+                <span className="card-text">About Austin</span>
+              </Link>
+              <Link href="/projects" className="link-card">
+                <span className="card-emoji">💼</span>
+                <span className="card-text">Selected Projects</span>
+              </Link>
+              <Link href="/labs" className="link-card">
+                <span className="card-emoji">🧪</span>
+                <span className="card-text">Web3 Labs</span>
+              </Link>
+              <Link href="/resume" className="link-card">
+                <span className="card-emoji">📄</span>
+                <span className="card-text">Resume</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -58,62 +63,62 @@ export default function NotFound() {
 
       <style jsx>{`
         .not-found-container {
-          min-height: calc(100vh - 200px);
+          min-height: calc(100vh - 150px);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 2rem;
-          margin-top: 80px;
-          margin-bottom: 80px;
+          padding: 1rem;
+          margin-top: 60px;
+          margin-bottom: 40px;
         }
 
         .not-found-content {
-          max-width: 700px;
+          max-width: 600px;
           text-align: center;
           background: rgba(249, 115, 22, 0.05);
           border: 2px solid rgba(249, 115, 22, 0.3);
-          padding: 4rem 3rem;
+          padding: 2rem 1.5rem;
           border-radius: 16px;
           box-shadow: 0 10px 40px rgba(249, 115, 22, 0.15);
         }
 
         .error-code {
-          font-size: 8rem;
+          font-size: 5rem;
           font-weight: 900;
           background: -webkit-linear-gradient(left, #f97316, #ea580c);
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           line-height: 1;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.25rem;
           animation: pulse 2s ease-in-out infinite;
         }
 
         .error-emoji {
-          font-size: 4rem;
-          margin-bottom: 1rem;
+          font-size: 2.5rem;
+          margin-bottom: 0.5rem;
           animation: bounce 1s ease-in-out infinite;
         }
 
         .error-title {
-          font-size: 2.5rem;
+          font-size: 1.75rem;
           font-weight: 700;
           color: #ffffff;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
         }
 
         .error-description {
-          font-size: 1.2rem;
+          font-size: 1rem;
           color: rgba(255, 255, 255, 0.8);
-          margin-bottom: 2rem;
-          line-height: 1.6;
+          margin-bottom: 1.5rem;
+          line-height: 1.5;
         }
 
         .error-joke {
           display: block;
-          font-size: 1rem;
+          font-size: 0.875rem;
           color: rgba(255, 255, 255, 0.6);
-          margin-top: 0.5rem;
+          margin-top: 0.25rem;
           font-style: italic;
         }
 
@@ -141,19 +146,20 @@ export default function NotFound() {
 
         .error-actions {
           display: flex;
-          gap: 1rem;
+          gap: 0.75rem;
           justify-content: center;
-          margin-bottom: 3rem;
+          margin-bottom: 1.5rem;
           flex-wrap: wrap;
         }
 
         .primary-button {
           background: #f97316;
           color: white;
-          padding: 1rem 2rem;
+          padding: 0.65rem 1.25rem;
           border-radius: 8px;
           text-decoration: none;
           font-weight: 600;
+          font-size: 0.9rem;
           transition: all 0.2s ease;
           display: inline-flex;
           align-items: center;
@@ -169,11 +175,12 @@ export default function NotFound() {
         .secondary-button {
           background: transparent;
           color: #f97316;
-          padding: 1rem 2rem;
+          padding: 0.65rem 1.25rem;
           border: 2px solid #f97316;
           border-radius: 8px;
           text-decoration: none;
           font-weight: 600;
+          font-size: 0.9rem;
           transition: all 0.2s ease;
           display: inline-flex;
           align-items: center;
@@ -186,20 +193,8 @@ export default function NotFound() {
           transform: translateY(-2px);
         }
 
-        .helpful-links a {
-          color: #f97316;
-          text-decoration: none;
-          font-weight: 500;
-          transition: color 0.2s ease;
-        }
-
-        .helpful-links a:hover {
-          color: #ea580c;
-          text-decoration: underline;
-        }
-
         .helpful-links {
-          text-align: left;
+          text-align: center;
           background: rgba(0, 0, 0, 0.3);
           border: 1px solid rgba(249, 115, 22, 0.2);
           padding: 1.25rem;
@@ -209,23 +204,46 @@ export default function NotFound() {
 
         .helpful-links h3 {
           color: rgba(255, 255, 255, 0.9);
-          margin-bottom: 0.65rem;
+          margin-bottom: 0.75rem;
           font-size: 1rem;
         }
 
-        .helpful-links ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+        .link-cards {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
         }
 
-        .helpful-links li {
-          margin-bottom: 0.5rem;
-          font-size: 0.9rem;
+        .link-card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.75rem 1rem;
+          background: #f97316;
+          border: 2px solid #f97316;
+          border-radius: 8px;
+          text-decoration: none;
+          color: #ffffff;
+          font-weight: 600;
+          font-size: 0.875rem;
+          transition: all 0.2s ease;
+          cursor: pointer;
         }
 
-        .helpful-links li:last-child {
-          margin-bottom: 0;
+        .link-card:hover {
+          background: #ea580c;
+          border-color: #ea580c;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+        }
+
+        .card-emoji {
+          font-size: 1.25rem;
+        }
+
+        .card-text {
+          text-align: center;
         }
 
         @media (max-width: 768px) {
@@ -267,8 +285,17 @@ export default function NotFound() {
             font-size: 0.9rem;
           }
 
-          .helpful-links li {
-            font-size: 0.85rem;
+          .link-cards {
+            grid-template-columns: 1fr;
+          }
+
+          .link-card {
+            font-size: 0.8rem;
+            padding: 0.6rem;
+          }
+
+          .card-emoji {
+            font-size: 1.1rem;
           }
         }
       `}</style>
