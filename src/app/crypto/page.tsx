@@ -30,6 +30,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259",
     image: trail,
     tags: ["NFT", "Polygon", "Coinbase"],
+    featured: true,
   },
   {
     title: "Ledger NFT",
@@ -37,6 +38,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376",
     image: ledger,
     tags: ["NFT", "Polygon", "Security"],
+    featured: false,
   },
   {
     title: "DAO NFT",
@@ -45,6 +47,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0",
     image: dao,
     tags: ["NFT", "DAO", "Governance", "CryptoU"],
+    featured: true,
   },
   {
     title: "#MintMadness",
@@ -53,6 +56,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2",
     image: mint,
     tags: ["NFT", "DALL·E", "CryptoU"],
+    featured: false,
   },
   {
     title: "#GAAD POAP",
@@ -61,6 +65,7 @@ const web3Data = [
     link: "https://app.poap.xyz/token/6633244",
     image: gaad,
     tags: ["POAP", "A11y"],
+    featured: false,
   },
   {
     title: "N+W S1",
@@ -69,6 +74,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
     image: nightsWeekends,
     tags: ["buildspace", "web3", "community"],
+    featured: false,
   },
   {
     title: "ETH Core",
@@ -77,6 +83,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
     image: ethIntro,
     tags: ["ethereum", "solidity", "web3"],
+    featured: false,
   },
   {
     title: "ETH dApp",
@@ -85,6 +92,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
     image: nftStore,
     tags: ["ethereum", "nft", "web3", "dapp"],
+    featured: false,
   },
   {
     title: "NFT Store",
@@ -93,6 +101,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
     image: nftStore,
     tags: ["nft", "solana", "web3", "marketplace"],
+    featured: false,
   },
   {
     title: "SOL Core",
@@ -101,6 +110,7 @@ const web3Data = [
     link: "https://darkmoon.dev/about",
     image: solCore,
     tags: ["solana", "rust", "web3"],
+    featured: false,
   },
   {
     title: "ENS NFT",
@@ -109,6 +119,7 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
     image: ensNft,
     tags: ["nft", "ens", "polygon", "web3"],
+    featured: false,
   },
   {
     title: "SOL dApp",
@@ -117,10 +128,59 @@ const web3Data = [
     link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
     image: solDapp,
     tags: ["solana", "web3", "dapp"],
+    featured: false,
   },
 ];
 
 const CryptoPage = () => {
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  // Sort projects: featured first
+  const sortedProjects = useMemo(() => {
+    return [...web3Data].sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return 0;
+    });
+  }, []);
+
+  // Get available tags from all projects
+  const availableTags = useMemo(() => {
+    let projectsForTags = sortedProjects;
+
+    // Filter by selected tags to show only relevant tags
+    if (selectedTags.length > 0) {
+      projectsForTags = projectsForTags.filter((project) =>
+        selectedTags.every((tag) => project.tags.includes(tag)),
+      );
+    }
+
+    const tagsSet = new Set<string>();
+    projectsForTags.forEach((project) => {
+      project.tags.forEach((tag) => tagsSet.add(tag));
+    });
+    return Array.from(tagsSet).sort();
+  }, [sortedProjects, selectedTags]);
+
+  // Filter projects by tags (AND logic)
+  const filteredProjects = useMemo(() => {
+    let filtered = sortedProjects;
+
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((project) =>
+        selectedTags.every((tag) => project.tags.includes(tag)),
+      );
+    }
+
+    return filtered;
+  }, [sortedProjects, selectedTags]);
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  };
+
   return (
     <div className="App">
       <HomeBar />
@@ -166,88 +226,62 @@ const CryptoPage = () => {
               Why Web3 Matters
             </h2>
 
-            <Grid container spacing={4} style={{ marginBottom: "2rem" }}>
-              <Grid item xs={12} md={4}>
-                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
-                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+            <div
+              style={{
+                textAlign: "center",
+                maxWidth: "600px",
+                margin: "0 auto 2rem",
+              }}
+            >
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  textAlign: "left",
+                  display: "inline-block",
+                }}
+              >
+                <li
+                  style={{
+                    marginBottom: "1.5rem",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
                     🔐
-                  </div>
-                  <h3
-                    style={{
-                      color: "#f97316",
-                      fontSize: "1.4rem",
-                      marginBottom: "0.75rem",
-                      fontWeight: "600",
-                    }}
-                  >
-                    Ownership
-                  </h3>
-                  <p
-                    style={{
-                      color: "rgba(255, 255, 255, 0.8)",
-                      fontSize: "1rem",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    Control your data, identity, and digital assets
-                  </p>
-                </div>
-              </Grid>
-
-              <Grid item xs={12} md={4}>
-                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
-                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+                  </span>
+                  <strong style={{ color: "#f97316" }}>Ownership</strong> -
+                  Control your data, identity, and digital assets
+                </li>
+                <li
+                  style={{
+                    marginBottom: "1.5rem",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
                     ✅
-                  </div>
-                  <h3
-                    style={{
-                      color: "#f97316",
-                      fontSize: "1.4rem",
-                      marginBottom: "0.75rem",
-                      fontWeight: "600",
-                    }}
-                  >
-                    Verification
-                  </h3>
-                  <p
-                    style={{
-                      color: "rgba(255, 255, 255, 0.8)",
-                      fontSize: "1rem",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    Trustless verification & transparent governance
-                  </p>
-                </div>
-              </Grid>
-
-              <Grid item xs={12} md={4}>
-                <div style={{ textAlign: "center", padding: "1.5rem 1rem" }}>
-                  <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>
+                  </span>
+                  <strong style={{ color: "#f97316" }}>Verification</strong> -
+                  Trustless verification & transparent governance
+                </li>
+                <li
+                  style={{
+                    marginBottom: "1.5rem",
+                    fontSize: "1.1rem",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <span style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}>
                     🛠️
-                  </div>
-                  <h3
-                    style={{
-                      color: "#f97316",
-                      fontSize: "1.4rem",
-                      marginBottom: "0.75rem",
-                      fontWeight: "600",
-                    }}
-                  >
-                    Innovation
-                  </h3>
-                  <p
-                    style={{
-                      color: "rgba(255, 255, 255, 0.8)",
-                      fontSize: "1rem",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    Building practical DAOs, credentials & tools
-                  </p>
-                </div>
-              </Grid>
-            </Grid>
+                  </span>
+                  <strong style={{ color: "#f97316" }}>Innovation</strong> -
+                  Building practical DAOs, credentials & tools
+                </li>
+              </ul>
+            </div>
 
             <p
               style={{
@@ -278,12 +312,59 @@ const CryptoPage = () => {
           >
             NFTs, POAPs, and On-Chain Achievements
           </p>
+
+          {/* Tag Filter */}
+          <div
+            style={{
+              marginBottom: "2rem",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.75rem",
+              justifyContent: "center",
+            }}
+          >
+            {availableTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                style={{
+                  padding: "0.5rem 1rem",
+                  borderRadius: "20px",
+                  border: "2px solid",
+                  borderColor: selectedTags.includes(tag)
+                    ? "#f97316"
+                    : "rgba(249, 115, 22, 0.3)",
+                  background: selectedTags.includes(tag)
+                    ? "#f97316"
+                    : "transparent",
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "0.875rem",
+                  fontWeight: "600",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (!selectedTags.includes(tag)) {
+                    e.currentTarget.style.borderColor = "#f97316";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!selectedTags.includes(tag)) {
+                    e.currentTarget.style.borderColor =
+                      "rgba(249, 115, 22, 0.3)";
+                  }
+                }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
         <Grid container spacing={3} rowSpacing={6}>
           {" "}
           {/* Increased rowSpacing from 4 to 6 for better separation */}
-          {web3Data.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <div
                 className="portfolio-card"

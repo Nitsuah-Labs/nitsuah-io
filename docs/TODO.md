@@ -7,7 +7,7 @@
 - [ ]  resume/ - work xp - just show the top 3 items by default (keep the existing "show more" button to expand the rest).
 - [ ]  projects/blogs - remove the "placeholder" blogs data for now so that the page doesnt have any active blogs posted. we'll get back to these later.
 - [ ]  labs/ home - the buttons in the "sqaures" should be in the center of each square, not the bottom. put it below the heading but above the description text.
-- [ ]  crypto/ - the "Ownership, Verification, Innovation" sections should just be a centered bullet list with icons too but not big segments on their own, just together as one bullet list.
+- [ ]  crypto/ - the "Ownership, Verification, Innovation" sections should just be a centered bullet list with icons too but not big segments on their own, just together as one bullet list. " - :emoji: **Bold Text** - description text"
 
 ## /docs
 
