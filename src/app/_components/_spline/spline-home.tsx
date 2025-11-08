@@ -8,11 +8,18 @@ const SPLINE_SCENE = `https://prod.spline.design/I53VLJ6OCdGVN8lr/scene.splineco
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
+  loading: () => (
+    <div className="spline-loading" aria-live="polite">
+      <div className="spinner" aria-hidden="true"></div>
+      <div className="spline-loading-text">Loading interactive scene...</div>
+    </div>
+  ),
 });
 
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
   const [shouldRender, setShouldRender] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Auto-hide loading after 10 seconds regardless of actual load state
   useEffect(() => {
@@ -43,6 +50,25 @@ export function SplineScene() {
     };
   }, []);
 
+  if (hasError) {
+    return (
+      <div
+        className="spline-container"
+        role="region"
+        aria-label="Interactive 3D scene unavailable"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "400px",
+          color: "rgba(255, 255, 255, 0.6)",
+        }}
+      >
+        <p>Interactive 3D scene temporarily unavailable</p>
+      </div>
+    );
+  }
+
   return (
     // Use the page-level spline container so the scene can sit behind header/footer
     <div
@@ -63,7 +89,14 @@ export function SplineScene() {
       {/* The Spline runtime injects a canvas; wrap it so we can force sizing via CSS */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
         {shouldRender ? (
-          <Spline scene={SPLINE_SCENE} onLoad={() => setIsLoading(false)} />
+          <Spline
+            scene={SPLINE_SCENE}
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setHasError(true);
+              setIsLoading(false);
+            }}
+          />
         ) : null}
       </div>
     </div>
