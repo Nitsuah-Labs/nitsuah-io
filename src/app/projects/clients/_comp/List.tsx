@@ -4,7 +4,7 @@ interface Props {
   style: React.CSSProperties;
 }
 
-export const List = ({ style }: Props): JSX.Element => {
+export const List = ({ style }: Props): React.ReactElement => {
   return (
     <svg
       className="list"

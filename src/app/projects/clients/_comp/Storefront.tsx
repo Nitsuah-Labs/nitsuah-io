@@ -5,7 +5,7 @@ interface Props {
   color?: string; // Add the color prop
 }
 
-export const Storefront = ({ style }: Props): JSX.Element => {
+export const Storefront = ({ style }: Props): React.ReactElement => {
   return (
     <svg
       className="storefront"
