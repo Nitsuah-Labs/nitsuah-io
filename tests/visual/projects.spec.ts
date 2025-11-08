@@ -24,13 +24,16 @@ test.describe("Projects Page Visual Tests", () => {
   test("projects page shows featured repositories", async ({ page }) => {
     await go(page, "/projects");
 
-    // Look for project cards or grid
-    const projectSection = page
-      .locator("section")
-      .filter({ hasText: /featured|repositories/i });
-    await expect(projectSection.first()).toBeVisible();
-  });
+    // Check that the Featured category button (star emoji) exists
+    const featuredButton = page.getByRole("button", { name: /⭐/ });
+    await expect(featuredButton).toBeVisible();
 
+    // Check that project cards are visible (using correct CSS module class)
+    const projectCards = page
+      .locator("[class*='card']")
+      .filter({ has: page.locator("h3") });
+    await expect(projectCards.first()).toBeVisible();
+  });
   test("project cards have icons and links", async ({ page }) => {
     await go(page, "/projects");
 

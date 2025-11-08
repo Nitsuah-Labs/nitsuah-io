@@ -86,6 +86,18 @@
   margin-right: 0.5rem;
 }
 
+.filterToggle span {
+  margin: 0 0.5rem;
+}
+
+.expandIndicator {
+  font-size: 0.9rem;
+  color: #f97316;
+  font-weight: bold;
+  margin-left: 0.25rem !important;
+  transition: transform 0.3s ease;
+}
+
 .categoryButtonsInline {
   display: flex;
   flex-wrap: wrap;
@@ -277,46 +289,65 @@
   }
 }
 
-/* Featured Star - Interactive */
+/* Featured Star - Interactive glowing star */
 .featuredStar {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid rgba(249, 115, 22, 0.4);
-  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   width: 2.5rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 20;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
+  border-radius: 6px;
 }
 
 .featuredStar:hover {
-  background: rgba(0, 0, 0, 0.8);
-  border-color: #f97316;
-  transform: scale(1.1);
+  transform: scale(1.15);
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(249, 115, 22, 0.6);
   color: #f97316;
+  filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.8));
 }
 
 .featuredStar.featured {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background: rgba(249, 115, 22, 0.15);
   border-color: #f97316;
-  color: #000;
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+  color: #f97316;
+  filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.8))
+    drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .featuredStar.featured:hover {
-  transform: scale(1.1) rotate(15deg);
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.6);
+  transform: scale(1.2) rotate(15deg);
+  background: rgba(249, 115, 22, 0.25);
+  filter: drop-shadow(0 0 16px rgba(249, 115, 22, 1))
+    drop-shadow(0 0 8px rgba(249, 115, 22, 0.8));
 }
 
-.featuredStar i {
-  font-size: 1.1rem;
+.featuredStar {
+  font-size: 1.75rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(249, 115, 22, 1))
+      drop-shadow(0 0 8px rgba(249, 115, 22, 0.8));
+  }
 }
 
 /* Card Image */
@@ -390,6 +421,33 @@
 .cardButton:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* View Button - Cool gradient glow style */
+.viewButton {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  border-color: #f97316;
+  color: #000;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+}
+
+.viewButton:hover {
+  box-shadow:
+    0 6px 24px rgba(249, 115, 22, 0.6),
+    0 0 20px rgba(249, 115, 22, 0.4);
+  transform: translateY(-3px);
+}
+
+/* GitHub Button - Dark style */
+.githubButton {
+  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  border-color: #111827;
+  color: #fff;
+}
+
+.githubButton:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+  box-shadow: 0 4px 12px rgba(55, 65, 81, 0.5);
 }
 
 /* Mobile Responsive */
