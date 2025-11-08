@@ -266,34 +266,34 @@
 }
 
 .portfolio-card-title {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #e5e7eb;
-  margin: 0 0 0.4rem 0;
-  line-height: 1.3;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
 }
 
 .portfolio-card-description {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: #9ca3af;
-  line-height: 1.4;
-  margin-bottom: 0.6rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
   flex: 1;
 }
 
 .portfolio-card-tags {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
 .portfolio-tag {
   background: #f3f4f6;
   color: #4b5563;
-  padding: 0.2rem 0.45rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 10px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 

@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import Footer from "../../../app/_components/_site/Footer";
 import HomeBar from "../../../app/_components/_site/Homebar";
+import { Modal } from "../../../components/ui/Modal";
+import { useBlogFilters, useModal } from "../../../hooks";
 import BlogPanel from "./_components/BlogPanel.jsx";
 import "./_styles/Blog.module.css";
 
@@ -23,59 +25,26 @@ interface Blog {
   views: number;
 }
 
-type SortOption = "recent" | "popular" | "views";
-
 const Blogsite = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<SortOption>("recent");
-  const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
+  const { isOpen, close } = useModal();
+  const {
+    filteredBlogs,
+    selectedCategory,
+    setSelectedCategory,
+    sortBy,
+    setSortBy,
+    categories,
+  } = useBlogFilters(blogs);
 
   useEffect(() => {
-    // Load blogs from static JSON file
     import("./_api/blogs.json").then((data) => {
       setBlogs(data.default);
-      setFilteredBlogs(data.default);
     });
   }, []);
 
-  useEffect(() => {
-    let filtered = [...blogs];
-
-    // Filter by category
-    if (selectedCategory !== "all") {
-      filtered = filtered.filter((blog) => blog.category === selectedCategory);
-    }
-
-    // Sort blogs
-    switch (sortBy) {
-      case "recent":
-        filtered.sort(
-          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-        );
-        break;
-      case "popular":
-        filtered.sort((a, b) => b.upvotes - a.upvotes);
-        break;
-      case "views":
-        filtered.sort((a, b) => b.views - a.views);
-        break;
-      default:
-        break;
-    }
-
-    setFilteredBlogs(filtered);
-  }, [selectedCategory, sortBy, blogs]);
-
-  const categories = [
-    "all",
-    ...Array.from(new Set(blogs.map((blog) => blog.category))),
-  ];
-
   const handleUpvote = (blogId: number, isUpvoted: boolean) => {
     console.log(`Blog ${blogId} ${isUpvoted ? "upvoted" : "downvoted"}`);
-    // In a real app, this would update the backend
   };
 
   return (
@@ -99,104 +68,64 @@ const Blogsite = () => {
                 background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                marginBottom: "0.5rem",
-              }}
-            >
-              BLOGS
-            </h1>
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.7)",
-                fontSize: "1.2rem",
                 marginBottom: "1rem",
               }}
             >
-              Technical insights, tutorials, and thoughts on web development
-            </p>
-            <button
-              onClick={() => setShowUploadModal(true)}
-              style={{
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                border: "2px solid #3b82f6",
-                background: "rgba(59, 130, 246, 0.1)",
-                color: "#3b82f6",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                marginTop: "1rem",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(59, 130, 246, 0.2)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(59, 130, 246, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
+              Blog & Articles
+            </h1>
+            <p
+              style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.1rem" }}
             >
-              <i
-                className="fa fa-plus"
-                aria-hidden="true"
-                style={{ marginRight: "0.5rem" }}
-              ></i>
-              Create New Post
-            </button>
+              Thoughts on Web3, development, and technology
+            </p>
           </div>
 
-          {/* Filters and Sorting */}
+          {/* Filters and Sort */}
           <div
             style={{
-              marginBottom: "2rem",
               display: "flex",
+              gap: "1rem",
+              marginBottom: "2rem",
+              flexWrap: "wrap",
               justifyContent: "space-between",
               alignItems: "center",
-              flexWrap: "wrap",
-              gap: "1rem",
             }}
           >
-            {/* Category Filter */}
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-              {categories.map((category) => (
+              {categories.map((cat) => (
                 <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
                   style={{
                     padding: "0.5rem 1rem",
-                    borderRadius: "6px",
-                    border:
-                      selectedCategory === category
-                        ? "2px solid #3b82f6"
-                        : "2px solid rgba(255, 255, 255, 0.2)",
-                    background:
-                      selectedCategory === category
-                        ? "rgba(59, 130, 246, 0.2)"
-                        : "rgba(20, 20, 20, 0.8)",
-                    color:
-                      selectedCategory === category
+                    borderRadius: "20px",
+                    border: "2px solid",
+                    borderColor:
+                      selectedCategory === cat
                         ? "#3b82f6"
-                        : "rgba(255, 255, 255, 0.7)",
-                    fontWeight: "600",
+                        : "rgba(59, 130, 246, 0.3)",
+                    background:
+                      selectedCategory === cat ? "#3b82f6" : "transparent",
+                    color: "#fff",
                     cursor: "pointer",
-                    transition: "all 0.3s ease",
                     fontSize: "0.875rem",
+                    transition: "all 0.2s ease",
                   }}
                 >
-                  {category === "all" ? "All" : category}
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </button>
               ))}
             </div>
 
-            {/* Sort Dropdown */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
+              onChange={(e) => setSortBy(e.target.value as any)}
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "6px",
-                border: "2px solid rgba(255, 255, 255, 0.2)",
-                background: "rgba(20, 20, 20, 0.8)",
-                color: "rgba(255, 255, 255, 0.7)",
+                border: "2px solid rgba(59, 130, 246, 0.3)",
+                background: "rgba(10, 10, 10, 0.8)",
+                color: "#fff",
                 fontWeight: "600",
                 cursor: "pointer",
                 fontSize: "0.875rem",
@@ -264,176 +193,49 @@ const Blogsite = () => {
           )}
         </div>
 
-        {/* Upload Modal */}
-        {showUploadModal && (
-          <div
+        {/* Upload Modal - Using reusable Modal component */}
+        <Modal
+          isOpen={isOpen}
+          onClose={close}
+          title="Create New Blog Post"
+          size="lg"
+        >
+          <p
             style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: "rgba(0, 0, 0, 0.8)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 1000,
-              padding: "2rem",
+              color: "rgba(255, 255, 255, 0.6)",
+              marginBottom: "1.5rem",
             }}
-            onClick={() => setShowUploadModal(false)}
           >
-            <div
-              style={{
-                background: "rgba(20, 20, 20, 0.95)",
-                border: "2px solid rgba(59, 130, 246, 0.5)",
-                borderRadius: "12px",
-                padding: "2rem",
-                maxWidth: "600px",
-                width: "100%",
-                maxHeight: "80vh",
-                overflowY: "auto",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div style={{ marginBottom: "1.5rem" }}>
-                <h2
-                  style={{
-                    color: "#3b82f6",
-                    fontSize: "1.5rem",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  Create New Blog Post
-                </h2>
-                <p
-                  style={{
-                    color: "rgba(255, 255, 255, 0.6)",
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  This is a mockup interface. In production, this would connect
-                  to a CMS or blockchain.
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1rem",
-                }}
-              >
-                <input
-                  type="text"
-                  placeholder="Blog Title"
-                  style={{
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: "2px solid rgba(59, 130, 246, 0.3)",
-                    background: "rgba(10, 10, 10, 0.8)",
-                    color: "#fff",
-                    fontSize: "1rem",
-                  }}
-                />
-                <select
-                  style={{
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: "2px solid rgba(59, 130, 246, 0.3)",
-                    background: "rgba(10, 10, 10, 0.8)",
-                    color: "#fff",
-                    fontSize: "1rem",
-                  }}
-                >
-                  <option>Select Category</option>
-                  <option>Web3</option>
-                  <option>Frontend</option>
-                  <option>Backend</option>
-                  <option>TypeScript</option>
-                  <option>CSS</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Tags (comma separated)"
-                  style={{
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: "2px solid rgba(59, 130, 246, 0.3)",
-                    background: "rgba(10, 10, 10, 0.8)",
-                    color: "#fff",
-                    fontSize: "1rem",
-                  }}
-                />
-                <textarea
-                  placeholder="Blog content..."
-                  rows={8}
-                  style={{
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: "2px solid rgba(59, 130, 246, 0.3)",
-                    background: "rgba(10, 10, 10, 0.8)",
-                    color: "#fff",
-                    fontSize: "1rem",
-                    resize: "vertical",
-                  }}
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  style={{
-                    padding: "0.75rem",
-                    borderRadius: "6px",
-                    border: "2px solid rgba(59, 130, 246, 0.3)",
-                    background: "rgba(10, 10, 10, 0.8)",
-                    color: "#fff",
-                    fontSize: "0.875rem",
-                  }}
-                />
-
-                <div
-                  style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}
-                >
-                  <button
-                    onClick={() => setShowUploadModal(false)}
-                    style={{
-                      flex: 1,
-                      padding: "0.75rem",
-                      borderRadius: "6px",
-                      border: "2px solid rgba(255, 255, 255, 0.2)",
-                      background: "rgba(20, 20, 20, 0.8)",
-                      color: "rgba(255, 255, 255, 0.7)",
-                      fontWeight: "600",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={() => {
-                      alert(
-                        "In production, this would publish to your chosen CMS or blockchain!",
-                      );
-                      setShowUploadModal(false);
-                    }}
-                    style={{
-                      flex: 1,
-                      padding: "0.75rem",
-                      borderRadius: "6px",
-                      border: "2px solid #3b82f6",
-                      background:
-                        "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-                      color: "#fff",
-                      fontWeight: "600",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Publish
-                  </button>
-                </div>
-              </div>
-            </div>
+            This is a mockup interface. In production, this would connect to a
+            CMS or blockchain.
+          </p>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+          >
+            <input
+              type="text"
+              placeholder="Blog Title"
+              className="blog-input"
+            />
+            <select className="blog-input">
+              <option>Select Category</option>
+              <option>Web3</option>
+              <option>Frontend</option>
+              <option>Backend</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Tags (comma separated)"
+              className="blog-input"
+            />
+            <textarea
+              placeholder="Blog content..."
+              rows={8}
+              className="blog-input"
+            />
+            <input type="file" accept="image/*" className="blog-input" />
           </div>
-        )}
+        </Modal>
       </main>
       <Footer />
     </div>

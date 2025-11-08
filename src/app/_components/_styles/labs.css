@@ -757,6 +757,12 @@ input:focus {
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
+  overflow: hidden;
+}
+
+.labs-card-body > * {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 /* Spacing Utilities */
