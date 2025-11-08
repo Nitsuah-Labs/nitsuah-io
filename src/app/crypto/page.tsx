@@ -189,8 +189,8 @@ const CryptoPage = () => {
         className="content-container"
         style={{
           marginTop: "60px",
-          marginBottom: "40px",
-          paddingBottom: "100px",
+          marginBottom: "100px",
+          paddingBottom: "60px",
           minHeight: "calc(100vh - 200px)",
           padding: "1rem",
         }}
@@ -309,9 +309,7 @@ const CryptoPage = () => {
               marginTop: "2rem",
               marginBottom: "1rem",
             }}
-          >
-            NFTs, POAPs, and On-Chain Achievements
-          </p>
+          ></p>
 
           {/* Tag Filter */}
           <div
