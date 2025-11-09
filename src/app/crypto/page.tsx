@@ -363,8 +363,11 @@ const CryptoPage = () => {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-            gap: "2rem",
+            gap: "3rem",
             marginTop: "2rem",
+            marginLeft: "0",
+            marginRight: "2rem",
+            marginBottom: "2rem",
           }}
         >
           {filteredProjects.map((project, index) => (
@@ -455,10 +458,13 @@ const CryptoPage = () => {
                         "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
                       color: "#000",
                       border: "2px solid #000",
-                      padding: "0.5rem 1rem",
+                      padding: "0.75rem 1rem",
                       borderRadius: "6px",
                       fontWeight: "600",
                       transition: "all 0.3s ease",
+                      width: "100%",
+                      textAlign: "center",
+                      display: "block",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px)";
