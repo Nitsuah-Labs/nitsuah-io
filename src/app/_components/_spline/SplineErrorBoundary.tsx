@@ -1,9 +1,9 @@
 "use client";
-import React, { Component, ReactNode } from "react";
+import React from "react";
 
 interface Props {
-  children: ReactNode;
-  fallback?: ReactNode;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
 }
 
 interface State {
@@ -11,7 +11,7 @@ interface State {
   error?: Error;
 }
 
-export class SplineErrorBoundary extends Component<Props, State> {
+export class SplineErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
