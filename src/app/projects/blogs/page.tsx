@@ -1,51 +1,46 @@
 "use client";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import Footer from "../../../app/_components/_site/Footer";
 import HomeBar from "../../../app/_components/_site/Homebar";
-import { Modal } from "../../../components/ui/Modal";
-import { useBlogFilters, useModal } from "../../../hooks";
-import BlogPanel from "./_components/BlogPanel.jsx";
+import { blogPosts } from "../../../lib/data/blogs";
 import "./_styles/Blog.module.css";
 
-interface Blog {
-  id: number;
-  title: string;
-  slug?: string;
-  excerpt?: string;
-  description?: string;
-  content?: string;
-  author: string;
-  date: string;
-  readTime: string;
-  category: string;
-  tags: string[];
-  image_url: string;
-  upvotes: number;
-  comments: number;
-  views: number;
-}
-
 const Blogsite = () => {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const { isOpen, close } = useModal();
-  const {
-    filteredBlogs,
-    selectedCategory,
-    setSelectedCategory,
-    sortBy,
-    setSortBy,
-    categories,
-  } = useBlogFilters(blogs);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<"recent" | "az">("recent");
 
-  useEffect(() => {
-    import("./_api/blogs.json").then((data) => {
-      setBlogs(data.default);
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = new Set<string>(["all"]);
+    blogPosts.forEach((post) => {
+      if (post.published) cats.add(post.category.toLowerCase());
     });
+    return Array.from(cats);
   }, []);
 
-  const handleUpvote = (blogId: number, isUpvoted: boolean) => {
-    console.log(`Blog ${blogId} ${isUpvoted ? "upvoted" : "downvoted"}`);
-  };
+  // Filter and sort blogs
+  const filteredBlogs = useMemo(() => {
+    let filtered = blogPosts.filter((post) => post.published);
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter(
+        (post) => post.category.toLowerCase() === selectedCategory,
+      );
+    }
+
+    // Sort
+    if (sortBy === "recent") {
+      filtered.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+      );
+    } else if (sortBy === "az") {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    return filtered;
+  }, [selectedCategory, sortBy]);
 
   return (
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
@@ -71,7 +66,7 @@ const Blogsite = () => {
                 marginBottom: "1rem",
               }}
             >
-              Blog & Articles
+              BLOGS
             </h1>
             <p
               style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "1.1rem" }}
@@ -119,7 +114,7 @@ const Blogsite = () => {
 
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as "recent" | "az")}
               style={{
                 padding: "0.5rem 1rem",
                 borderRadius: "6px",
@@ -132,8 +127,7 @@ const Blogsite = () => {
               }}
             >
               <option value="recent">Most Recent</option>
-              <option value="popular">Most Popular</option>
-              <option value="views">Most Viewed</option>
+              <option value="az">A-Z</option>
             </select>
           </div>
 
@@ -146,30 +140,132 @@ const Blogsite = () => {
             }}
           >
             {filteredBlogs.map((blog) => (
-              <div
+              <Link
                 key={blog.id}
-                style={{
-                  background: "rgba(20, 20, 20, 0.8)",
-                  border: "2px solid rgba(59, 130, 246, 0.3)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.8)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(59, 130, 246, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.3)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
+                href={`/projects/blogs/${blog.slug}`}
+                style={{ textDecoration: "none" }}
               >
-                <BlogPanel blog={blog} onUpvote={handleUpvote} />
-              </div>
+                <article
+                  style={{
+                    background: "rgba(20, 20, 20, 0.8)",
+                    border: "2px solid rgba(59, 130, 246, 0.3)",
+                    borderRadius: "12px",
+                    padding: "1.5rem",
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(59, 130, 246, 0.8)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 24px rgba(59, 130, 246, 0.2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(59, 130, 246, 0.3)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {/* Category Badge */}
+                  <div
+                    style={{
+                      display: "inline-block",
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "12px",
+                      background: "rgba(59, 130, 246, 0.2)",
+                      border: "1px solid rgba(59, 130, 246, 0.4)",
+                      color: "#3b82f6",
+                      fontSize: "0.75rem",
+                      fontWeight: "600",
+                      marginBottom: "1rem",
+                      width: "fit-content",
+                    }}
+                  >
+                    {blog.category}
+                  </div>
+
+                  {/* Title */}
+                  <h2
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                      color: "#fff",
+                      marginBottom: "0.75rem",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    {blog.title}
+                  </h2>
+
+                  {/* Excerpt */}
+                  <p
+                    style={{
+                      color: "rgba(255, 255, 255, 0.7)",
+                      fontSize: "0.95rem",
+                      lineHeight: "1.6",
+                      marginBottom: "1.5rem",
+                      flexGrow: 1,
+                    }}
+                  >
+                    {blog.excerpt}
+                  </p>
+
+                  {/* Tags */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.5rem",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                    {blog.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          borderRadius: "8px",
+                          background: "rgba(255, 255, 255, 0.05)",
+                          color: "rgba(255, 255, 255, 0.5)",
+                          fontSize: "0.75rem",
+                        }}
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Meta */}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      paddingTop: "1rem",
+                      borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+                      fontSize: "0.875rem",
+                      color: "rgba(255, 255, 255, 0.5)",
+                    }}
+                  >
+                    <span>{blog.author}</span>
+                    <span>•</span>
+                    <span>{blog.readTime}</span>
+                    <span>•</span>
+                    <span>
+                      {new Date(blog.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
 
@@ -181,61 +277,12 @@ const Blogsite = () => {
                 color: "rgba(255, 255, 255, 0.5)",
               }}
             >
-              <i
-                className="fa fa-file-text-o"
-                aria-hidden="true"
-                style={{ fontSize: "4rem", marginBottom: "1rem" }}
-              ></i>
               <p style={{ fontSize: "1.2rem" }}>
                 No blogs found in this category.
               </p>
             </div>
           )}
         </div>
-
-        {/* Upload Modal - Using reusable Modal component */}
-        <Modal
-          isOpen={isOpen}
-          onClose={close}
-          title="Create New Blog Post"
-          size="lg"
-        >
-          <p
-            style={{
-              color: "rgba(255, 255, 255, 0.6)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            This is a mockup interface. In production, this would connect to a
-            CMS or blockchain.
-          </p>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
-            <input
-              type="text"
-              placeholder="Blog Title"
-              className="blog-input"
-            />
-            <select className="blog-input">
-              <option>Select Category</option>
-              <option>Web3</option>
-              <option>Frontend</option>
-              <option>Backend</option>
-            </select>
-            <input
-              type="text"
-              placeholder="Tags (comma separated)"
-              className="blog-input"
-            />
-            <textarea
-              placeholder="Blog content..."
-              rows={8}
-              className="blog-input"
-            />
-            <input type="file" accept="image/*" className="blog-input" />
-          </div>
-        </Modal>
       </main>
       <Footer />
     </div>

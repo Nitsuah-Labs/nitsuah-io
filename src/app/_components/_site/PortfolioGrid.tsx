@@ -1,5 +1,5 @@
 import InfoIcon from "@mui/icons-material/Info";
-import { Grid, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { portfolioProjects } from "../../../lib/data/projects";
@@ -57,16 +57,20 @@ const PortfolioGrid: React.FC = () => {
         <p>Additional work, experiments, and learning projects</p>
       </div>
 
-      <Grid container spacing={3} rowSpacing={6}>
-        {" "}
-        {/* Increased rowSpacing from 4 to 6 for better separation */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gap: "3rem",
+        }}
+      >
         {portfolioProjects.map((project) => {
           const image = projectImages[project.id] || cat;
           const primaryLink =
             project.demo || project.externalLink || project.github;
 
           return (
-            <Grid key={project.id} item xs={12} sm={6} md={4} lg={3}>
+            <div key={project.id}>
               <div className="portfolio-card">
                 <div
                   className="portfolio-card-image"
@@ -166,10 +170,10 @@ const PortfolioGrid: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </Grid>
+            </div>
           );
         })}
-      </Grid>
+      </div>
     </section>
   );
 };
