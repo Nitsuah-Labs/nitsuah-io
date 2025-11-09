@@ -73,36 +73,35 @@ const HomeBar: React.FC<HomeBarProps> = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/" legacyBehavior>
-            <a
-              style={{ textDecoration: "none", color: "inherit" }}
-              aria-label="Austin H home - Navigate to homepage"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+          <Link
+            href="/"
+            style={{ textDecoration: "none", color: "inherit" }}
+            aria-label="Austin H home - Navigate to homepage"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="span"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "#f97316",
+                textDecoration: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                },
+              }}
             >
-              <Typography
-                variant="h6"
-                noWrap
-                component="span"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "#f97316",
-                  textDecoration: "none",
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                  },
-                }}
-              >
-                {showFullName || isHovering ? "AUSTIN H." : "NITSUAH"}
-              </Typography>
-            </a>
+              {showFullName || isHovering ? "AUSTIN H." : "NITSUAH"}
+            </Typography>
           </Link>
 
           <Box
@@ -122,33 +121,32 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Link href="/" legacyBehavior>
-              <a
-                style={{
-                  textDecoration: "none",
+            <Link
+              href="/"
+              style={{
+                textDecoration: "none",
+                color: "#f97316",
+                marginLeft: "16px",
+                transition: "all 0.3s ease",
+              }}
+              aria-label="Austin H home - Navigate to homepage"
+            >
+              <Typography
+                variant="h6"
+                noWrap
+                component="span"
+                sx={{
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
                   color: "#f97316",
-                  marginLeft: "16px",
-                  transition: "all 0.3s ease",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
                 }}
-                aria-label="Austin H home - Navigate to homepage"
               >
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="span"
-                  sx={{
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    color: "#f97316",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    textShadow: "0 2px 10px rgba(249, 115, 22, 0.5)",
-                  }}
-                >
-                  AUSTIN H.
-                </Typography>
-              </a>
+                AUSTIN H.
+              </Typography>
             </Link>
             <StyledMenu
               id="menu-appbar"
