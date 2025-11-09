@@ -197,11 +197,22 @@ const getProjectIcon = (type: ProjectType): string => {
 const MintExample: React.FC = () => {
   const [selectedType, setSelectedType] = useState<ProjectType>("all");
   const [showDemo, setShowDemo] = useState<string | null>(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const filteredProjects =
     selectedType === "all"
       ? clientProjects
       : clientProjects.filter((p) => p.type === selectedType);
+
+  // Carousel navigation
+  const scrollCarousel = (direction: "left" | "right") => {
+    const maxIndex = Math.max(0, filteredProjects.length - 3);
+    if (direction === "left") {
+      setCarouselIndex(Math.max(0, carouselIndex - 1));
+    } else {
+      setCarouselIndex(Math.min(maxIndex, carouselIndex + 1));
+    }
+  };
 
   // Helper function to render the appropriate demo
   const renderDemo = (projectId: string) => {
@@ -287,95 +298,27 @@ const MintExample: React.FC = () => {
     })();
 
     return (
-      <div style={{ marginBottom: "3rem" }}>
-        {/* Demo Container with Title Inside */}
+      <div
+        style={{
+          background: "rgba(10, 10, 10, 0.6)",
+          border: "2px solid rgba(16, 185, 129, 0.5)",
+          borderRadius: "16px",
+          padding: "2rem",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          animation: "fadeIn 0.3s ease",
+        }}
+      >
+        {/* Demo Content Area */}
         <div
           style={{
-            background: "rgba(20, 20, 20, 0.9)",
-            border: "2px solid rgba(16, 185, 129, 0.5)",
-            borderRadius: "16px",
-            padding: "2rem",
-            maxWidth: "900px",
-            margin: "0 auto",
-            overflow: "hidden",
-            position: "relative",
+            maxHeight: "70vh",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "0.5rem",
           }}
         >
-          {/* Demo Title - Part of the Demo */}
-          <div
-            style={{
-              marginBottom: "2rem",
-              textAlign: "center",
-              borderBottom: "2px solid rgba(16, 185, 129, 0.3)",
-              paddingBottom: "1rem",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "2rem",
-                fontWeight: "600",
-                color: "#10b981",
-                margin: "0 0 0.5rem 0",
-              }}
-            >
-              {getProjectIcon(project.type)} {project.name}
-            </h2>
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.7)",
-                margin: 0,
-                fontSize: "0.95rem",
-              }}
-            >
-              {project.description}
-            </p>
-          </div>
-
-          {/* Demo Content Area */}
-          <div
-            style={{
-              maxHeight: "600px",
-              overflowY: "auto",
-              overflowX: "hidden",
-              padding: "0.5rem",
-            }}
-          >
-            {demoContent}
-          </div>
-
-          {/* Close Demo Button */}
-          <div
-            style={{
-              marginTop: "1.5rem",
-              textAlign: "center",
-              borderTop: "2px solid rgba(16, 185, 129, 0.3)",
-              paddingTop: "1rem",
-            }}
-          >
-            <button
-              onClick={() => setShowDemo(null)}
-              style={{
-                padding: "0.75rem 1.5rem",
-                background: "rgba(16, 185, 129, 0.2)",
-                border: "2px solid rgba(16, 185, 129, 0.4)",
-                borderRadius: "8px",
-                color: "#10b981",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(16, 185, 129, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.6)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(16, 185, 129, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.4)";
-              }}
-            >
-              Close Demo
-            </button>
-          </div>
+          {demoContent}
         </div>
       </div>
     );
@@ -393,36 +336,45 @@ const MintExample: React.FC = () => {
           padding: "2rem 1rem",
         }}
       >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "3rem", textAlign: "center" }}>
+        <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+          {/* Header - Collapses when demo is active */}
+          <div
+            style={{
+              marginBottom: showDemo ? "1.5rem" : "3rem",
+              textAlign: "center",
+              transition: "all 0.3s ease",
+              opacity: showDemo ? 0.7 : 1,
+            }}
+          >
             <h1
               style={{
-                fontSize: "3rem",
+                fontSize: showDemo ? "2rem" : "3rem",
                 fontWeight: "700",
                 background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 marginBottom: "0.5rem",
+                transition: "all 0.3s ease",
               }}
             >
               CLIENT PROJECTS
             </h1>
-            <p
-              style={{
-                color: "rgba(255, 255, 255, 0.7)",
-                fontSize: "1.2rem",
-                marginBottom: "2rem",
-              }}
-            >
-              Professional service, freelance, and commercial app demonstrations
-            </p>
+            {!showDemo && (
+              <p
+                style={{
+                  color: "rgba(255, 255, 255, 0.7)",
+                  fontSize: "1.2rem",
+                  marginBottom: "0",
+                }}
+              >
+                Professional service, freelance, and commercial app
+                demonstrations
+              </p>
+            )}
           </div>
 
-          {/* NFT Minting Demo - Show before filters */}
-          {showDemo && renderDemo(showDemo)}
-
-          <div>
-            {/* Project Type Switcher */}
+          {/* Filters - Collapses when demo is active */}
+          {!showDemo && (
             <div
               style={{
                 display: "flex",
@@ -441,7 +393,10 @@ const MintExample: React.FC = () => {
               ].map(({ type, label, color }) => (
                 <button
                   key={type}
-                  onClick={() => setSelectedType(type as ProjectType)}
+                  onClick={() => {
+                    setSelectedType(type as ProjectType);
+                    setCarouselIndex(0);
+                  }}
                   style={{
                     padding: "0.75rem 1.5rem",
                     borderRadius: "8px",
@@ -479,267 +434,259 @@ const MintExample: React.FC = () => {
                 </button>
               ))}
             </div>
-          </div>
+          )}
 
-          {/* Projects Grid */}
+          {/* Carousel - Compact when demo is active */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-              gap: "2rem",
-              marginBottom: "3rem",
+              position: "relative",
+              marginBottom: showDemo ? "2rem" : "3rem",
             }}
           >
-            {filteredProjects.map((project) => {
-              const isMinimal = showDemo && showDemo !== project.id;
-
-              return (
-                <div
-                  key={project.id}
+            {/* Carousel Navigation */}
+            {filteredProjects.length > 3 && (
+              <>
+                <button
+                  onClick={() => scrollCarousel("left")}
+                  disabled={carouselIndex === 0}
                   style={{
-                    background:
-                      showDemo === project.id
-                        ? "rgba(20, 20, 20, 0.95)"
-                        : isMinimal
-                          ? "rgba(20, 20, 20, 0.6)"
-                          : "rgba(20, 20, 20, 0.8)",
-                    border: `2px solid ${showDemo === project.id ? "rgba(16, 185, 129, 0.8)" : "rgba(16, 185, 129, 0.3)"}`,
-                    borderRadius: "12px",
-                    padding: isMinimal ? "1rem" : "1.5rem",
-                    transition: "all 0.3s ease",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: isMinimal ? "center" : "stretch",
+                    position: "absolute",
+                    left: "-20px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "rgba(16, 185, 129, 0.2)",
+                    border: "2px solid rgba(16, 185, 129, 0.4)",
+                    color: "#10b981",
+                    fontSize: "1.5rem",
+                    cursor: carouselIndex === 0 ? "not-allowed" : "pointer",
+                    opacity: carouselIndex === 0 ? 0.3 : 1,
+                    zIndex: 10,
+                    transition: "all 0.2s ease",
                   }}
-                  onClick={() =>
-                    setShowDemo(project.id === showDemo ? null : project.id)
-                  }
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor =
-                      "rgba(16, 185, 129, 0.8)";
-                    e.currentTarget.style.transform = "translateY(-4px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 8px 24px rgba(16, 185, 129, 0.2)";
+                    if (carouselIndex > 0) {
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.3)";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor =
-                      showDemo === project.id
-                        ? "rgba(16, 185, 129, 0.8)"
-                        : "rgba(16, 185, 129, 0.3)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.background =
+                      "rgba(16, 185, 129, 0.2)";
                   }}
                 >
-                  {/* Minimal Card View */}
-                  {isMinimal ? (
-                    <>
-                      {/* Icon */}
-                      <div
-                        style={{
-                          fontSize: "2.5rem",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        {getProjectIcon(project.type)}
-                      </div>
+                  ‹
+                </button>
+                <button
+                  onClick={() => scrollCarousel("right")}
+                  disabled={carouselIndex >= filteredProjects.length - 3}
+                  style={{
+                    position: "absolute",
+                    right: "-20px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    background: "rgba(16, 185, 129, 0.2)",
+                    border: "2px solid rgba(16, 185, 129, 0.4)",
+                    color: "#10b981",
+                    fontSize: "1.5rem",
+                    cursor:
+                      carouselIndex >= filteredProjects.length - 3
+                        ? "not-allowed"
+                        : "pointer",
+                    opacity:
+                      carouselIndex >= filteredProjects.length - 3 ? 0.3 : 1,
+                    zIndex: 10,
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (carouselIndex < filteredProjects.length - 3) {
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.3)";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background =
+                      "rgba(16, 185, 129, 0.2)";
+                  }}
+                >
+                  ›
+                </button>
+              </>
+            )}
 
-                      {/* Name */}
-                      <h3
-                        style={{
-                          fontSize: "1.1rem",
-                          fontWeight: "600",
-                          color: "#10b981",
-                          margin: "0 0 0.5rem 0",
-                          textAlign: "center",
-                        }}
-                      >
-                        {project.name}
-                      </h3>
+            {/* Carousel Container */}
+            <div
+              style={{
+                overflow: "hidden",
+                padding: "0 40px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  gap: "1.5rem",
+                  transform: `translateX(-${carouselIndex * (100 / 3 + 1.5)}%)`,
+                  transition: "transform 0.4s ease",
+                }}
+              >
+                {filteredProjects.map((project) => (
+                  <div
+                    key={project.id}
+                    style={{
+                      minWidth: showDemo
+                        ? "calc(25% - 1.125rem)"
+                        : "calc(33.333% - 1rem)",
+                      background:
+                        showDemo === project.id
+                          ? "rgba(16, 185, 129, 0.2)"
+                          : "rgba(20, 20, 20, 0.8)",
+                      border: `2px solid ${
+                        showDemo === project.id
+                          ? "rgba(16, 185, 129, 0.8)"
+                          : "rgba(16, 185, 129, 0.3)"
+                      }`,
+                      borderRadius: "12px",
+                      padding: showDemo ? "1rem" : "1.5rem",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                    onClick={() =>
+                      setShowDemo(project.id === showDemo ? null : project.id)
+                    }
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor =
+                        "rgba(16, 185, 129, 0.8)";
+                      e.currentTarget.style.transform = "translateY(-4px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor =
+                        showDemo === project.id
+                          ? "rgba(16, 185, 129, 0.8)"
+                          : "rgba(16, 185, 129, 0.3)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }}
+                  >
+                    {/* Icon */}
+                    <div
+                      style={{
+                        fontSize: showDemo ? "2rem" : "2.5rem",
+                        textAlign: "center",
+                        marginBottom: "0.75rem",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      {getProjectIcon(project.type)}
+                    </div>
 
-                      {/* Type Badge */}
+                    {/* Title */}
+                    <h3
+                      style={{
+                        fontSize: showDemo ? "1rem" : "1.25rem",
+                        fontWeight: "600",
+                        color: "#10b981",
+                        margin: "0 0 0.5rem 0",
+                        textAlign: "center",
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      {project.name}
+                    </h3>
+
+                    {/* Type Badge */}
+                    <div
+                      style={{ textAlign: "center", marginBottom: "0.75rem" }}
+                    >
                       <span
                         style={{
                           padding: "0.25rem 0.75rem",
                           borderRadius: "4px",
                           fontSize: "0.75rem",
                           fontWeight: "600",
-                          background: "rgba(16, 185, 129, 0.1)",
-                          color: "#10b981",
-                          marginBottom: "0.75rem",
+                          background:
+                            project.status === "live"
+                              ? "#10b98120"
+                              : project.status === "demo"
+                                ? "#3b82f620"
+                                : "#6b728020",
+                          color:
+                            project.status === "live"
+                              ? "#10b981"
+                              : project.status === "demo"
+                                ? "#3b82f6"
+                                : "#9ca3af",
                           textTransform: "capitalize",
                         }}
                       >
-                        {project.type}
+                        {project.status}
                       </span>
+                    </div>
 
-                      {/* View More Button */}
-                      <button
-                        style={{
-                          padding: "0.5rem 1rem",
-                          background: "rgba(16, 185, 129, 0.2)",
-                          border: "1px solid rgba(16, 185, 129, 0.4)",
-                          borderRadius: "6px",
-                          color: "#10b981",
-                          fontWeight: "600",
-                          fontSize: "0.875rem",
-                          cursor: "pointer",
-                          transition: "all 0.2s ease",
-                        }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowDemo(project.id);
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(16, 185, 129, 0.3)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(16, 185, 129, 0.2)";
-                        }}
-                      >
-                        View More
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      {/* Full Card View */}
-                      {/* Project Icon */}
-                      <div
-                        style={{
-                          fontSize: "3rem",
-                          textAlign: "center",
-                          marginBottom: "1rem",
-                        }}
-                      >
-                        {getProjectIcon(project.type)}
-                      </div>
-
-                      {/* Header with title and status tag */}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "start",
-                          marginBottom: "1rem",
-                        }}
-                      >
-                        <h3
-                          style={{
-                            fontSize: "1.5rem",
-                            fontWeight: "600",
-                            color: "#10b981",
-                            margin: 0,
-                            textAlign: "left",
-                          }}
-                        >
-                          {project.name}
-                        </h3>
-                        <span
-                          style={{
-                            padding: "0.25rem 0.75rem",
-                            borderRadius: "4px",
-                            fontSize: "0.75rem",
-                            fontWeight: "600",
-                            background:
-                              project.status === "live"
-                                ? "#10b98120"
-                                : project.status === "demo"
-                                  ? "#3b82f620"
-                                  : "#6b728020",
-                            color:
-                              project.status === "live"
-                                ? "#10b981"
-                                : project.status === "demo"
-                                  ? "#3b82f6"
-                                  : "#9ca3af",
-                            flexShrink: 0,
-                          }}
-                        >
-                          {project.status.toUpperCase()}
-                        </span>
-                      </div>
-
-                      {/* Description - left aligned */}
+                    {/* Description - Only show when no demo is active */}
+                    {!showDemo && (
                       <p
                         style={{
                           color: "rgba(255, 255, 255, 0.7)",
-                          marginBottom: "1rem",
-                          textAlign: "left",
+                          fontSize: "0.875rem",
+                          textAlign: "center",
+                          margin: "0 0 0.75rem 0",
+                          lineHeight: "1.5",
                         }}
                       >
                         {project.description}
                       </p>
+                    )}
 
-                      {/* Technologies - left aligned */}
-                      <div style={{ marginBottom: "1rem", textAlign: "left" }}>
-                        <div
-                          style={{
-                            fontSize: "0.875rem",
-                            color: "#10b981",
-                            marginBottom: "0.5rem",
-                            fontWeight: "600",
-                          }}
-                        >
-                          Technologies:
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          {project.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              style={{
-                                padding: "0.25rem 0.5rem",
-                                background: "rgba(16, 185, 129, 0.1)",
-                                border: "1px solid rgba(16, 185, 129, 0.3)",
-                                borderRadius: "4px",
-                                fontSize: "0.75rem",
-                                color: "rgba(255, 255, 255, 0.8)",
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Features - left aligned */}
-                      <div style={{ marginBottom: "1rem", textAlign: "left" }}>
-                        <div
-                          style={{
-                            fontSize: "0.875rem",
-                            color: "#10b981",
-                            marginBottom: "0.5rem",
-                            fontWeight: "600",
-                          }}
-                        >
-                          Key Features:
-                        </div>
-                        <ul
-                          style={{
-                            margin: 0,
-                            paddingLeft: "1.25rem",
-                            color: "rgba(255, 255, 255, 0.6)",
-                            fontSize: "0.875rem",
-                          }}
-                        >
-                          {project.features.slice(0, 3).map((feature) => (
-                            <li key={feature}>{feature}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )}
-                </div>
-              );
-            })}
+                    {/* Action Button */}
+                    <button
+                      style={{
+                        padding: "0.5rem 1rem",
+                        background:
+                          showDemo === project.id
+                            ? "rgba(16, 185, 129, 0.3)"
+                            : "rgba(16, 185, 129, 0.2)",
+                        border: "1px solid rgba(16, 185, 129, 0.4)",
+                        borderRadius: "6px",
+                        color: "#10b981",
+                        fontWeight: "600",
+                        fontSize: "0.875rem",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        marginTop: "auto",
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDemo(
+                          project.id === showDemo ? null : project.id,
+                        );
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background =
+                          "rgba(16, 185, 129, 0.4)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background =
+                          showDemo === project.id
+                            ? "rgba(16, 185, 129, 0.3)"
+                            : "rgba(16, 185, 129, 0.2)";
+                      }}
+                    >
+                      {showDemo === project.id ? "Close Demo" : "Launch Demo"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+
+          {/* Demo Area - Takes center stage */}
+          {showDemo && renderDemo(showDemo)}
         </div>
       </main>
       <Footer />
