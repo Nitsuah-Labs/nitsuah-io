@@ -3,11 +3,14 @@
 import React, { useState } from "react";
 
 export const ServicesDemo: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<"home" | "menu" | "booking">(
-    "home",
-  );
+  const [currentPage, setCurrentPage] = useState<
+    "home" | "menu" | "booking" | "pickup"
+  >("home");
   const [reservationDate, setReservationDate] = useState("");
   const [guests, setGuests] = useState(2);
+  const [pickupPhone, setPickupPhone] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
+  const [cart, setCart] = useState<{ [key: string]: number }>({});
 
   const menuItems = [
     { name: "Margherita Pizza", price: "$18", category: "Mains", icon: "🍕" },
@@ -47,22 +50,24 @@ export const ServicesDemo: React.FC = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "1rem",
+          gap: "0.5rem",
           padding: "1rem",
           background: "rgba(236, 72, 153, 0.1)",
           borderBottom: "2px solid rgba(236, 72, 153, 0.3)",
+          flexWrap: "wrap",
         }}
       >
         {[
           { id: "home", label: "Home", icon: "🏠" },
           { id: "menu", label: "Menu", icon: "📋" },
+          { id: "pickup", label: "Mobile Pickup", icon: "📱" },
           { id: "booking", label: "Reservations", icon: "📅" },
         ].map((item) => (
           <button
             key={item.id}
             onClick={() => setCurrentPage(item.id as any)}
             style={{
-              padding: "0.75rem 1.5rem",
+              padding: "0.75rem 1rem",
               background:
                 currentPage === item.id
                   ? "rgba(236, 72, 153, 0.3)"
@@ -81,6 +86,7 @@ export const ServicesDemo: React.FC = () => {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
+              fontSize: "0.875rem",
             }}
           >
             <span>{item.icon}</span>
@@ -239,6 +245,303 @@ export const ServicesDemo: React.FC = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {currentPage === "pickup" && (
+          <div>
+            <h2
+              style={{
+                fontSize: "2rem",
+                fontWeight: "700",
+                color: "#ec4899",
+                marginBottom: "1rem",
+                textAlign: "center",
+              }}
+            >
+              📱 Mobile Pickup Order
+            </h2>
+            <p
+              style={{
+                textAlign: "center",
+                color: "rgba(255, 255, 255, 0.7)",
+                marginBottom: "2rem",
+              }}
+            >
+              Order ahead and pick up at your convenience!
+            </p>
+
+            {/* Menu Items with Add to Cart */}
+            <div style={{ maxWidth: "700px", margin: "0 auto 2rem" }}>
+              <h3
+                style={{
+                  color: "#ec4899",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                }}
+              >
+                Select Items
+              </h3>
+              {menuItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    background: "rgba(236, 72, 153, 0.1)",
+                    border: "2px solid rgba(236, 72, 153, 0.3)",
+                    borderRadius: "8px",
+                    padding: "1rem",
+                    marginBottom: "0.75rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      flex: "1 1 200px",
+                    }}
+                  >
+                    <span style={{ fontSize: "1.5rem" }}>{item.icon}</span>
+                    <div>
+                      <div
+                        style={{
+                          fontWeight: "600",
+                          color: "#fff",
+                          fontSize: "0.95rem",
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "0.875rem",
+                          color: "rgba(255, 255, 255, 0.6)",
+                        }}
+                      >
+                        {item.category} • {item.price}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <button
+                      onClick={() => {
+                        const qty = cart[item.name] || 0;
+                        if (qty > 0) {
+                          setCart({ ...cart, [item.name]: qty - 1 });
+                        }
+                      }}
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "4px",
+                        background: "rgba(236, 72, 153, 0.2)",
+                        border: "1px solid rgba(236, 72, 153, 0.4)",
+                        color: "#ec4899",
+                        cursor: "pointer",
+                        fontWeight: "700",
+                      }}
+                    >
+                      −
+                    </button>
+                    <span
+                      style={{
+                        color: "#ec4899",
+                        fontWeight: "600",
+                        minWidth: "20px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {cart[item.name] || 0}
+                    </span>
+                    <button
+                      onClick={() => {
+                        const qty = cart[item.name] || 0;
+                        setCart({ ...cart, [item.name]: qty + 1 });
+                      }}
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "4px",
+                        background: "rgba(236, 72, 153, 0.3)",
+                        border: "1px solid rgba(236, 72, 153, 0.4)",
+                        color: "#ec4899",
+                        cursor: "pointer",
+                        fontWeight: "700",
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pickup Details Form */}
+            <div
+              style={{
+                maxWidth: "500px",
+                margin: "0 auto",
+                background: "rgba(236, 72, 153, 0.1)",
+                border: "2px solid rgba(236, 72, 153, 0.3)",
+                borderRadius: "12px",
+                padding: "1.5rem",
+              }}
+            >
+              <h3
+                style={{
+                  color: "#ec4899",
+                  fontWeight: "600",
+                  marginBottom: "1rem",
+                  textAlign: "center",
+                }}
+              >
+                Pickup Details
+              </h3>
+
+              <div style={{ marginBottom: "1rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    color: "#ec4899",
+                    fontWeight: "600",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  Phone Number (for SMS notification)
+                </label>
+                <input
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  value={pickupPhone}
+                  onChange={(e) => setPickupPhone(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    background: "rgba(0, 0, 0, 0.3)",
+                    border: "2px solid rgba(236, 72, 153, 0.3)",
+                    borderRadius: "6px",
+                    color: "#fff",
+                    fontSize: "1rem",
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: "1.5rem" }}>
+                <label
+                  style={{
+                    display: "block",
+                    color: "#ec4899",
+                    fontWeight: "600",
+                    marginBottom: "0.5rem",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  Pickup Time
+                </label>
+                <input
+                  type="time"
+                  value={pickupTime}
+                  onChange={(e) => setPickupTime(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    background: "rgba(0, 0, 0, 0.3)",
+                    border: "2px solid rgba(236, 72, 153, 0.3)",
+                    borderRadius: "6px",
+                    color: "#fff",
+                    fontSize: "1rem",
+                  }}
+                />
+              </div>
+
+              {/* Order Summary */}
+              {Object.keys(cart).some((k) => cart[k] > 0) && (
+                <div
+                  style={{
+                    marginBottom: "1.5rem",
+                    padding: "1rem",
+                    background: "rgba(236, 72, 153, 0.05)",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#ec4899",
+                      fontWeight: "600",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    Order Summary
+                  </div>
+                  {Object.entries(cart).map(
+                    ([item, qty]) =>
+                      qty > 0 && (
+                        <div
+                          key={item}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            color: "rgba(255, 255, 255, 0.7)",
+                            fontSize: "0.875rem",
+                            marginBottom: "0.25rem",
+                          }}
+                        >
+                          <span>
+                            {item} x{qty}
+                          </span>
+                        </div>
+                      ),
+                  )}
+                </div>
+              )}
+
+              <button
+                style={{
+                  width: "100%",
+                  padding: "1rem",
+                  background:
+                    "linear-gradient(135deg, #ec4899 0%, #be185d 100%)",
+                  border: "none",
+                  color: "#fff",
+                  borderRadius: "8px",
+                  fontSize: "1.1rem",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.02)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              >
+                Place Pickup Order
+              </button>
+
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "rgba(255, 255, 255, 0.6)",
+                  fontSize: "0.75rem",
+                  marginTop: "1rem",
+                  marginBottom: 0,
+                }}
+              >
+                You'll receive an SMS when your order is ready
+              </p>
             </div>
           </div>
         )}

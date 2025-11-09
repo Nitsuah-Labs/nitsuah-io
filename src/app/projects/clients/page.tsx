@@ -5,19 +5,22 @@ import Footer from "../../_components/_site/Footer";
 import HomeBar from "../../_components/_site/Homebar";
 import "./_styles/client.css";
 
-// WEB3
-import { Account } from "../../_components/_web3/Account";
-import { Connect } from "../../_components/_web3/Connect";
-import { Connected } from "../../_components/_web3/Connected";
-import { MintNFT } from "../../_components/_web3/MintNFT";
-import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
-
 // Demo Components
 import { ECommerceDemo } from "./_comp/ECommerceDemo";
+import { NFTDemo } from "./_comp/NFTDemo";
+import { PortfolioDemo } from "./_comp/PortfolioDemo";
+import { RealEstateDemo } from "./_comp/RealEstateDemo";
+import { ResumeSiteDemo } from "./_comp/ResumeSiteDemo";
 import { SaaSDemo } from "./_comp/SaaSDemo";
 import { ServicesDemo } from "./_comp/ServicesDemo";
 
-type ProjectType = "web3" | "ecommerce" | "saas" | "service" | "all";
+type ProjectType =
+  | "web3"
+  | "ecommerce"
+  | "saas"
+  | "service"
+  | "portfolio"
+  | "all";
 
 interface ClientProject {
   id: string;
@@ -58,7 +61,7 @@ const clientProjects: ClientProject[] = [
       "Payment Integration",
       "Order Management",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "restaurant",
@@ -73,7 +76,7 @@ const clientProjects: ClientProject[] = [
       "Online Ordering",
       "Reviews",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "dashboard",
@@ -103,7 +106,7 @@ const clientProjects: ClientProject[] = [
       "Virtual Tours",
       "Agent Profiles",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "crm",
@@ -123,7 +126,7 @@ const clientProjects: ClientProject[] = [
   {
     id: "portfolio",
     name: "Creative Portfolio",
-    type: "service",
+    type: "portfolio",
     description: "Portfolio showcase for photographers, designers, and artists",
     technologies: ["Next.js", "Framer Motion", "Cloudinary"],
     features: [
@@ -132,7 +135,22 @@ const clientProjects: ClientProject[] = [
       "Project Details",
       "Contact Form",
     ],
-    status: "mockup",
+    status: "demo",
+  },
+  {
+    id: "resume-site",
+    name: "Resume Website",
+    type: "portfolio",
+    description:
+      "Professional resume template with clean layout and downloadable PDF",
+    technologies: ["Next.js", "TypeScript", "CSS Grid"],
+    features: [
+      "Work History",
+      "Skills Showcase",
+      "PDF Download",
+      "Contact Section",
+    ],
+    status: "demo",
   },
   {
     id: "booking",
@@ -189,6 +207,8 @@ const getProjectIcon = (type: ProjectType): string => {
       return "📊";
     case "service":
       return "🏢";
+    case "portfolio":
+      return "🎨";
     default:
       return "💼";
   }
@@ -206,7 +226,8 @@ const MintExample: React.FC = () => {
 
   // Carousel navigation
   const scrollCarousel = (direction: "left" | "right") => {
-    const maxIndex = Math.max(0, filteredProjects.length - 3);
+    const cardsVisible = 3;
+    const maxIndex = Math.max(0, filteredProjects.length - cardsVisible);
     if (direction === "left") {
       setCarouselIndex(Math.max(0, carouselIndex - 1));
     } else {
@@ -223,61 +244,19 @@ const MintExample: React.FC = () => {
       switch (projectId) {
         case "nft-mint":
         case "marketplace":
-          return (
-            <>
-              <div style={{ marginBottom: "1.5rem" }}>
-                <Connect />
-              </div>
-              <Connected>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1.5rem",
-                  }}
-                >
-                  <div
-                    style={{
-                      padding: "1rem",
-                      background: "rgba(16, 185, 129, 0.1)",
-                      border: "1px solid rgba(16, 185, 129, 0.3)",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <Account />
-                  </div>
-                  <div
-                    style={{
-                      padding: "1rem",
-                      background: "rgba(16, 185, 129, 0.1)",
-                      border: "1px solid rgba(16, 185, 129, 0.3)",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <MintNFT />
-                  </div>
-                  <div
-                    style={{
-                      padding: "1rem",
-                      background: "rgba(16, 185, 129, 0.1)",
-                      border: "1px solid rgba(16, 185, 129, 0.3)",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <NetworkSwitcher />
-                  </div>
-                </div>
-              </Connected>
-            </>
-          );
+          return <NFTDemo />;
         case "storefront":
           return <ECommerceDemo />;
         case "dashboard":
         case "crm":
           return <SaaSDemo />;
-        case "restaurant":
-        case "realestate":
         case "portfolio":
+          return <PortfolioDemo />;
+        case "resume-site":
+          return <ResumeSiteDemo />;
+        case "realestate":
+          return <RealEstateDemo />;
+        case "restaurant":
         case "booking":
         case "blog-cms":
           return <ServicesDemo />;
@@ -333,27 +312,27 @@ const MintExample: React.FC = () => {
           marginBottom: "60px",
           paddingBottom: "80px",
           minHeight: "calc(100vh - 140px)",
-          padding: "2rem 1rem",
+          padding: showDemo ? "1rem 1rem" : "2rem 1rem",
+          transition: "padding 0.3s ease",
         }}
       >
         <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
           {/* Header - Collapses when demo is active */}
           <div
             style={{
-              marginBottom: showDemo ? "1.5rem" : "3rem",
+              marginBottom: showDemo ? "1rem" : "2rem",
               textAlign: "center",
               transition: "all 0.3s ease",
-              opacity: showDemo ? 0.7 : 1,
             }}
           >
             <h1
               style={{
-                fontSize: showDemo ? "2rem" : "3rem",
+                fontSize: showDemo ? "1.5rem" : "3rem",
                 fontWeight: "700",
                 background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                marginBottom: "0.5rem",
+                marginBottom: showDemo ? "0" : "0.5rem",
                 transition: "all 0.3s ease",
               }}
             >
@@ -373,74 +352,75 @@ const MintExample: React.FC = () => {
             )}
           </div>
 
-          {/* Filters - Collapses when demo is active */}
-          {!showDemo && (
-            <div
-              style={{
-                display: "flex",
-                gap: "1rem",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                marginBottom: "2rem",
-              }}
-            >
-              {[
-                { type: "all", label: "All Projects", color: "#10b981" },
-                { type: "web3", label: "Web3", color: "#8b5cf6" },
-                { type: "ecommerce", label: "E-Commerce", color: "#f59e0b" },
-                { type: "saas", label: "SaaS", color: "#3b82f6" },
-                { type: "service", label: "Services", color: "#ec4899" },
-              ].map(({ type, label, color }) => (
-                <button
-                  key={type}
-                  onClick={() => {
-                    setSelectedType(type as ProjectType);
-                    setCarouselIndex(0);
-                  }}
-                  style={{
-                    padding: "0.75rem 1.5rem",
-                    borderRadius: "8px",
-                    border:
-                      selectedType === type
-                        ? `2px solid ${color}`
-                        : "2px solid rgba(255, 255, 255, 0.2)",
-                    background:
-                      selectedType === type
-                        ? `${color}20`
-                        : "rgba(20, 20, 20, 0.8)",
-                    color:
-                      selectedType === type
-                        ? color
-                        : "rgba(255, 255, 255, 0.7)",
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (selectedType !== type) {
-                      e.currentTarget.style.borderColor = `${color}80`;
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (selectedType !== type) {
-                      e.currentTarget.style.borderColor =
-                        "rgba(255, 255, 255, 0.2)";
-                      e.currentTarget.style.transform = "translateY(0)";
-                    }
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* Filters - Always visible but more compact when demo active */}
+          <div
+            style={{
+              display: "flex",
+              gap: showDemo ? "0.5rem" : "1rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              marginBottom: showDemo ? "1rem" : "2rem",
+              transition: "all 0.3s ease",
+            }}
+          >
+            {[
+              { type: "all", label: "All Projects", color: "#10b981" },
+              { type: "web3", label: "Web3", color: "#8b5cf6" },
+              { type: "ecommerce", label: "E-Commerce", color: "#f59e0b" },
+              { type: "saas", label: "SaaS", color: "#3b82f6" },
+              { type: "service", label: "Services", color: "#ec4899" },
+              { type: "portfolio", label: "Portfolio", color: "#a855f7" },
+            ].map(({ type, label, color }) => (
+              <button
+                key={type}
+                onClick={() => {
+                  setSelectedType(type as ProjectType);
+                  setCarouselIndex(0);
+                }}
+                style={{
+                  padding: showDemo ? "0.5rem 1rem" : "0.75rem 1.5rem",
+                  borderRadius: "8px",
+                  border:
+                    selectedType === type
+                      ? `2px solid ${color}`
+                      : "2px solid rgba(255, 255, 255, 0.2)",
+                  background:
+                    selectedType === type
+                      ? `${color}20`
+                      : "rgba(20, 20, 20, 0.8)",
+                  color:
+                    selectedType === type ? color : "rgba(255, 255, 255, 0.7)",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  fontSize: showDemo ? "0.875rem" : "1rem",
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedType !== type) {
+                    e.currentTarget.style.borderColor = `${color}80`;
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedType !== type) {
+                    e.currentTarget.style.borderColor =
+                      "rgba(255, 255, 255, 0.2)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
 
           {/* Carousel - Compact when demo is active */}
           <div
             style={{
               position: "relative",
-              marginBottom: showDemo ? "2rem" : "3rem",
+              marginBottom: showDemo ? "1.5rem" : "3rem",
+              paddingTop: showDemo ? "0.5rem" : "1rem",
+              transition: "all 0.3s ease",
             }}
           >
             {/* Carousel Navigation */}
@@ -451,20 +431,20 @@ const MintExample: React.FC = () => {
                   disabled={carouselIndex === 0}
                   style={{
                     position: "absolute",
-                    left: "-20px",
+                    left: showDemo ? "0" : "-20px",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    width: "40px",
-                    height: "40px",
+                    width: showDemo ? "32px" : "40px",
+                    height: showDemo ? "32px" : "40px",
                     borderRadius: "50%",
                     background: "rgba(16, 185, 129, 0.2)",
                     border: "2px solid rgba(16, 185, 129, 0.4)",
                     color: "#10b981",
-                    fontSize: "1.5rem",
+                    fontSize: showDemo ? "1.2rem" : "1.5rem",
                     cursor: carouselIndex === 0 ? "not-allowed" : "pointer",
                     opacity: carouselIndex === 0 ? 0.3 : 1,
                     zIndex: 10,
-                    transition: "all 0.2s ease",
+                    transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
                     if (carouselIndex > 0) {
@@ -484,16 +464,16 @@ const MintExample: React.FC = () => {
                   disabled={carouselIndex >= filteredProjects.length - 3}
                   style={{
                     position: "absolute",
-                    right: "-20px",
+                    right: showDemo ? "0" : "-20px",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    width: "40px",
-                    height: "40px",
+                    width: showDemo ? "32px" : "40px",
+                    height: showDemo ? "32px" : "40px",
                     borderRadius: "50%",
                     background: "rgba(16, 185, 129, 0.2)",
                     border: "2px solid rgba(16, 185, 129, 0.4)",
                     color: "#10b981",
-                    fontSize: "1.5rem",
+                    fontSize: showDemo ? "1.2rem" : "1.5rem",
                     cursor:
                       carouselIndex >= filteredProjects.length - 3
                         ? "not-allowed"
@@ -501,7 +481,7 @@ const MintExample: React.FC = () => {
                     opacity:
                       carouselIndex >= filteredProjects.length - 3 ? 0.3 : 1,
                     zIndex: 10,
-                    transition: "all 0.2s ease",
+                    transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
                     if (carouselIndex < filteredProjects.length - 3) {
@@ -523,15 +503,16 @@ const MintExample: React.FC = () => {
             <div
               style={{
                 overflow: "hidden",
-                padding: "0 40px",
+                padding: showDemo ? "0 36px" : "0 40px",
+                transition: "padding 0.3s ease",
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  gap: "1.5rem",
-                  transform: `translateX(-${carouselIndex * (100 / 3 + 1.5)}%)`,
-                  transition: "transform 0.4s ease",
+                  gap: showDemo ? "0.75rem" : "1.5rem",
+                  transform: `translateX(-${carouselIndex * 33.8}%)`,
+                  transition: "all 0.4s ease",
                 }}
               >
                 {filteredProjects.map((project) => (
@@ -539,7 +520,7 @@ const MintExample: React.FC = () => {
                     key={project.id}
                     style={{
                       minWidth: showDemo
-                        ? "calc(25% - 1.125rem)"
+                        ? "calc(20% - 0.6rem)"
                         : "calc(33.333% - 1rem)",
                       background:
                         showDemo === project.id
@@ -550,12 +531,15 @@ const MintExample: React.FC = () => {
                           ? "rgba(16, 185, 129, 0.8)"
                           : "rgba(16, 185, 129, 0.3)"
                       }`,
-                      borderRadius: "12px",
-                      padding: showDemo ? "1rem" : "1.5rem",
+                      borderRadius: showDemo ? "8px" : "12px",
+                      padding: showDemo ? "0.5rem" : "1.5rem",
                       cursor: "pointer",
                       transition: "all 0.3s ease",
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: showDemo ? "row" : "column",
+                      alignItems: showDemo ? "center" : "stretch",
+                      gap: showDemo ? "0.5rem" : "0",
+                      position: "relative",
                     }}
                     onClick={() =>
                       setShowDemo(project.id === showDemo ? null : project.id)
@@ -563,7 +547,9 @@ const MintExample: React.FC = () => {
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor =
                         "rgba(16, 185, 129, 0.8)";
-                      e.currentTarget.style.transform = "translateY(-4px)";
+                      if (!showDemo) {
+                        e.currentTarget.style.transform = "translateY(-4px)";
+                      }
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor =
@@ -573,41 +559,22 @@ const MintExample: React.FC = () => {
                       e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
-                    {/* Icon */}
+                    {/* Status Badge - Top Right */}
                     <div
                       style={{
-                        fontSize: showDemo ? "2rem" : "2.5rem",
-                        textAlign: "center",
-                        marginBottom: "0.75rem",
-                        transition: "all 0.3s ease",
+                        position: "absolute",
+                        top: showDemo ? "0.25rem" : "0.75rem",
+                        right: showDemo ? "0.25rem" : "0.75rem",
+                        zIndex: 5,
                       }}
-                    >
-                      {getProjectIcon(project.type)}
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      style={{
-                        fontSize: showDemo ? "1rem" : "1.25rem",
-                        fontWeight: "600",
-                        color: "#10b981",
-                        margin: "0 0 0.5rem 0",
-                        textAlign: "center",
-                        transition: "all 0.3s ease",
-                      }}
-                    >
-                      {project.name}
-                    </h3>
-
-                    {/* Type Badge */}
-                    <div
-                      style={{ textAlign: "center", marginBottom: "0.75rem" }}
                     >
                       <span
                         style={{
-                          padding: "0.25rem 0.75rem",
+                          padding: showDemo
+                            ? "0.125rem 0.375rem"
+                            : "0.25rem 0.75rem",
                           borderRadius: "4px",
-                          fontSize: "0.75rem",
+                          fontSize: showDemo ? "0.625rem" : "0.75rem",
                           fontWeight: "600",
                           background:
                             project.status === "live"
@@ -622,63 +589,106 @@ const MintExample: React.FC = () => {
                                 ? "#3b82f6"
                                 : "#9ca3af",
                           textTransform: "capitalize",
+                          border: `1px solid ${
+                            project.status === "live"
+                              ? "#10b98140"
+                              : project.status === "demo"
+                                ? "#3b82f640"
+                                : "#6b728040"
+                          }`,
+                          transition: "all 0.3s ease",
                         }}
                       >
                         {project.status}
                       </span>
                     </div>
 
-                    {/* Description - Only show when no demo is active */}
-                    {!showDemo && (
-                      <p
-                        style={{
-                          color: "rgba(255, 255, 255, 0.7)",
-                          fontSize: "0.875rem",
-                          textAlign: "center",
-                          margin: "0 0 0.75rem 0",
-                          lineHeight: "1.5",
-                        }}
-                      >
-                        {project.description}
-                      </p>
-                    )}
-
-                    {/* Action Button */}
-                    <button
+                    {/* Icon - Left side when demo active, center when not */}
+                    <div
                       style={{
-                        padding: "0.5rem 1rem",
-                        background:
-                          showDemo === project.id
-                            ? "rgba(16, 185, 129, 0.3)"
-                            : "rgba(16, 185, 129, 0.2)",
-                        border: "1px solid rgba(16, 185, 129, 0.4)",
-                        borderRadius: "6px",
-                        color: "#10b981",
-                        fontWeight: "600",
-                        fontSize: "0.875rem",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        marginTop: "auto",
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowDemo(
-                          project.id === showDemo ? null : project.id,
-                        );
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background =
-                          "rgba(16, 185, 129, 0.4)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background =
-                          showDemo === project.id
-                            ? "rgba(16, 185, 129, 0.3)"
-                            : "rgba(16, 185, 129, 0.2)";
+                        fontSize: showDemo ? "1.5rem" : "2.5rem",
+                        textAlign: showDemo ? "left" : "center",
+                        marginBottom: showDemo ? "0" : "0.75rem",
+                        marginTop: showDemo ? "0" : "1.5rem",
+                        flexShrink: 0,
+                        transition: "all 0.3s ease",
                       }}
                     >
-                      {showDemo === project.id ? "Close Demo" : "Launch Demo"}
-                    </button>
+                      {getProjectIcon(project.type)}
+                    </div>
+
+                    {/* Title and Content Container */}
+                    <div
+                      style={{
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        minWidth: 0,
+                      }}
+                    >
+                      <h3
+                        style={{
+                          fontSize: showDemo ? "0.75rem" : "1.25rem",
+                          fontWeight: "600",
+                          color: "#10b981",
+                          margin: 0,
+                          textAlign: showDemo ? "left" : "center",
+                          transition: "all 0.3s ease",
+                          whiteSpace: showDemo ? "nowrap" : "normal",
+                          overflow: showDemo ? "hidden" : "visible",
+                          textOverflow: showDemo ? "ellipsis" : "clip",
+                        }}
+                      >
+                        {project.name}
+                      </h3>
+
+                      {/* Description - Only show when no demo is active */}
+                      {!showDemo && (
+                        <p
+                          style={{
+                            color: "rgba(255, 255, 255, 0.7)",
+                            fontSize: "0.875rem",
+                            textAlign: "center",
+                            margin: "0.5rem 0 0.75rem 0",
+                            lineHeight: "1.5",
+                          }}
+                        >
+                          {project.description}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Action Button - Icon only when demo active */}
+                    {!showDemo && (
+                      <button
+                        style={{
+                          padding: "0.5rem 1rem",
+                          background: "rgba(16, 185, 129, 0.2)",
+                          border: "1px solid rgba(16, 185, 129, 0.4)",
+                          borderRadius: "6px",
+                          color: "#10b981",
+                          fontWeight: "600",
+                          fontSize: "0.875rem",
+                          cursor: "pointer",
+                          transition: "all 0.2s ease",
+                          marginTop: "auto",
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDemo(project.id);
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(16, 185, 129, 0.4)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background =
+                            "rgba(16, 185, 129, 0.2)";
+                        }}
+                      >
+                        Launch Demo
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
