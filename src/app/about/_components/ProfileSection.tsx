@@ -46,9 +46,9 @@ export const ProfileSection: React.FC = () => {
             gap between complex technology and practical implementation.
           </p>
           <p>
-            When I&apos;m not coding, you&apos;ll find me working on my &apos;78
-            Corvette or my &apos;81 Silverado truck, exploring classic
-            automotive restoration and maintenance.
+            When I&apos;m not coding, you&apos;ll find me in the garage working
+            on my &apos;78 Corvette or &apos;81 Silverado LS swap, exploring
+            classic automotive restoration and maintenance.
           </p>
         </div>
 
