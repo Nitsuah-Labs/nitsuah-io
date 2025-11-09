@@ -136,8 +136,61 @@ export const StorefrontDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .store-nav {
+            flex-direction: column;
+            align-items: stretch !important;
+          }
+          
+          .store-nav-buttons {
+            width: 100%;
+            justify-content: space-around;
+          }
+          
+          .store-product-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .store-bundle-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .store-cart-items {
+            padding: 1rem !important;
+          }
+          
+          .store-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .store-product-detail {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .store-product-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .store-nav button {
+            font-size: 0.75rem !important;
+            padding: 0.4rem 0.8rem !important;
+          }
+          
+          .store-cart-items {
+            padding: 0.75rem !important;
+          }
+          
+          .store-product-card {
+            padding: 1rem !important;
+          }
+        }
+      `}</style>
       {/* Navigation Bar */}
       <nav
+        className="store-nav"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -150,6 +203,7 @@ export const StorefrontDemo: React.FC = () => {
         }}
       >
         <div
+          className="store-nav-buttons"
           style={{
             display: "flex",
             gap: "1rem",
@@ -258,6 +312,7 @@ export const StorefrontDemo: React.FC = () => {
               💎 Exclusive Bundles
             </h2>
             <div
+              className="store-bundle-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
@@ -341,6 +396,7 @@ export const StorefrontDemo: React.FC = () => {
               All Products
             </h2>
             <div
+              className="store-product-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
@@ -350,6 +406,7 @@ export const StorefrontDemo: React.FC = () => {
               {products.map((product) => (
                 <div
                   key={product.id}
+                  className="store-product-card"
                   style={{
                     background: "rgba(245, 158, 11, 0.1)",
                     border: "2px solid rgba(245, 158, 11, 0.3)",
@@ -455,6 +512,7 @@ export const StorefrontDemo: React.FC = () => {
                   </button>
 
                   <div
+                    className="store-product-detail"
                     style={{
                       background: "rgba(245, 158, 11, 0.1)",
                       border: "2px solid rgba(245, 158, 11, 0.3)",
@@ -606,6 +664,7 @@ export const StorefrontDemo: React.FC = () => {
                   return (
                     <div
                       key={id}
+                      className="store-cart-items"
                       style={{
                         background: "rgba(245, 158, 11, 0.1)",
                         border: "2px solid rgba(245, 158, 11, 0.3)",
@@ -835,6 +894,7 @@ export const StorefrontDemo: React.FC = () => {
               </div>
 
               <div
+                className="store-form-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
