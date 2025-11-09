@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 // Use standard <img> to avoid requiring next/image types in this build context
-import { Grid, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import Image from "next/image";
 import {
   useAccount,
@@ -194,8 +194,14 @@ const RegisterSite = () => {
           <p style={{ marginBottom: "16px" }}>
             You can even include a message to contact me directly.
           </p>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={8}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr",
+              gap: "1rem",
+            }}
+          >
+            <div>
               <TextField
                 fullWidth
                 variant="filled"
@@ -207,8 +213,8 @@ const RegisterSite = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-            </Grid>
-            <Grid item xs={12} sm={4}>
+            </div>
+            <div>
               <div
                 style={{ display: "flex", flexDirection: "column", gap: "8px" }}
               >
@@ -226,8 +232,8 @@ const RegisterSite = () => {
                   View on PolygonScan
                 </button>
               </div>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
           {isRegistered && (
             <p style={{ marginTop: "16px", color: "#10b981" }}>
               Successfully registered!

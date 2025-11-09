@@ -1,6 +1,5 @@
 // DOMAINS - src/app/labs/domains/page.tsx
 "use client";
-import { Grid } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -358,8 +357,14 @@ const DomainSite = () => {
           <button className="labs-btn labs-btn-danger">Not connected</button>
         )}
         <div className="zero-row">
-          <Grid container spacing={2}>
-            <Grid item xs={16} sm={10}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "3fr 1fr",
+              gap: "1rem",
+            }}
+          >
+            <div>
               {/* If the editing variable is true, return the "Set record" and "Cancel" button */}
               {editing ? (
                 <div className="zero-row">
@@ -391,8 +396,8 @@ const DomainSite = () => {
                   </button>
                 </div>
               )}
-            </Grid>
-            <Grid item xs={16} sm={10}>
+            </div>
+            <div>
               <button
                 className="labs-btn labs-btn-secondary"
                 style={{ width: "100%", marginBottom: "10px" }}
@@ -407,8 +412,8 @@ const DomainSite = () => {
               >
                 OpenSea
               </button>
-            </Grid>
-          </Grid>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -1,0 +1,109 @@
+/* Blog Post Content Styles */
+.blog-content {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  scroll-margin-top: 100px;
+}
+
+.blog-content pre {
+  position: relative;
+}
+
+.blog-content pre code {
+  display: block;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.blog-content a:hover {
+  border-bottom-color: #3b82f6;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-left: 1.5rem;
+}
+
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.blog-content th,
+.blog-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  text-align: left;
+}
+
+.blog-content th {
+  background: rgba(59, 130, 246, 0.1);
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+.blog-content td {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .blog-content {
+    font-size: 1rem;
+  }
+
+  .blog-content pre {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .blog-content h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .blog-content h3 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Syntax highlighting for code blocks */
+.blog-content code {
+  tab-size: 2;
+}
+
+/* Checkmark lists */
+.blog-content li:has(input[type="checkbox"]) {
+  list-style: none;
+  margin-left: -1.5rem;
+}
+
+/* Horizontal rules */
+.blog-content hr {
+  border: none;
+  border-top: 2px solid rgba(59, 130, 246, 0.3);
+  margin: 2rem 0;
+}
+
+/* Images */
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+}
