@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { HeroSection } from "./_components/HeroSection";
 import Footer from "./_components/_site/Footer";
 import HomeBar from "./_components/_site/Homebar";
+import { SplineErrorBoundary } from "./_components/_spline/SplineErrorBoundary";
 import SplineScene from "./_components/_spline/spline-home";
 
 const HomePage: React.FC = () => {
@@ -79,7 +80,9 @@ const HomePage: React.FC = () => {
                   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
                 }}
               >
-                <SplineScene />
+                <SplineErrorBoundary>
+                  <SplineScene />
+                </SplineErrorBoundary>
               </div>
             </div>
           </section>

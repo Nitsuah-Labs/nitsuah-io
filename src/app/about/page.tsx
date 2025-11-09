@@ -3,6 +3,7 @@
 import React from "react";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
+import { SplineErrorBoundary } from "../_components/_spline/SplineErrorBoundary";
 import SplineScene from "../_components/_spline/spline-about";
 import { ProfileSection } from "./_components";
 
@@ -25,7 +26,9 @@ const AboutPage: React.FC = () => {
           }}
         >
           <div className="spline-container">
-            <SplineScene />
+            <SplineErrorBoundary>
+              <SplineScene />
+            </SplineErrorBoundary>
           </div>
         </section>
       </main>
