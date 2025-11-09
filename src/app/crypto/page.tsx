@@ -1,6 +1,5 @@
 // app/cryto/page.tsx
 "use client";
-import { Grid } from "@mui/material";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -359,119 +358,125 @@ const CryptoPage = () => {
           </div>
         </div>
 
-        <Grid container spacing={2} rowSpacing={3}>
-          {" "}
-          {/* Reduced spacing for more compact layout */}
+        {/* Projects Grid */}
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+            gap: "2rem",
+            marginTop: "2rem",
+          }}
+        >
           {filteredProjects.map((project, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4}>
-              <div
-                className="portfolio-card"
-                onClick={() => window.open(project.link, "_blank")}
-                style={{
-                  cursor: "pointer",
-                  background: "rgba(20, 20, 20, 0.8)",
-                  border: "2px solid rgba(249, 115, 22, 0.3)",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.8)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(249, 115, 22, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.3)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div className="portfolio-card-image">
-                  {project.image ? (
-                    <Image
-                      alt={project.title}
-                      src={project.image}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      unoptimized={
-                        project.image === dao ||
-                        project.image === gaad ||
-                        project.image === mint
-                      }
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background:
-                          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                        color: "white",
-                        fontSize: "1.5rem",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {project.title}
-                    </div>
-                  )}
-                </div>
-
-                <div className="portfolio-card-content">
-                  <h2 className="portfolio-card-title">{project.title}</h2>
-
-                  {project.description && (
-                    <p className="portfolio-card-description">
-                      {project.description}
-                    </p>
-                  )}
-
-                  {project.tags && project.tags.length > 0 && (
-                    <div className="portfolio-card-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="portfolio-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="portfolio-card-links">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-link portfolio-link-primary"
-                      onClick={(e) => e.stopPropagation()}
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                        color: "#000",
-                        border: "2px solid #000",
-                        padding: "0.5rem 1rem",
-                        borderRadius: "6px",
-                        fontWeight: "600",
-                        transition: "all 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                        e.currentTarget.style.boxShadow =
-                          "0 4px 12px rgba(249, 115, 22, 0.4)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow = "none";
-                      }}
-                    >
-                      View on Chain
-                    </a>
+            <div
+              key={index}
+              className="portfolio-card"
+              onClick={() => window.open(project.link, "_blank")}
+              style={{
+                cursor: "pointer",
+                background: "rgba(20, 20, 20, 0.8)",
+                border: "2px solid rgba(249, 115, 22, 0.3)",
+                transition: "all 0.3s ease",
+                width: "100%",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.8)";
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 24px rgba(249, 115, 22, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.3)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div className="portfolio-card-image">
+                {project.image ? (
+                  <Image
+                    alt={project.title}
+                    src={project.image}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    unoptimized={
+                      project.image === dao ||
+                      project.image === gaad ||
+                      project.image === mint
+                    }
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      color: "white",
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {project.title}
                   </div>
+                )}
+              </div>
+
+              <div className="portfolio-card-content">
+                <h2 className="portfolio-card-title">{project.title}</h2>
+
+                {project.description && (
+                  <p className="portfolio-card-description">
+                    {project.description}
+                  </p>
+                )}
+
+                {project.tags && project.tags.length > 0 && (
+                  <div className="portfolio-card-tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="portfolio-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="portfolio-card-links">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="portfolio-link portfolio-link-primary"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                      color: "#000",
+                      border: "2px solid #000",
+                      padding: "0.5rem 1rem",
+                      borderRadius: "6px",
+                      fontWeight: "600",
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(249, 115, 22, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    View on Chain
+                  </a>
                 </div>
               </div>
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </section>
       </main>
       <Footer />
     </div>
