@@ -161,8 +161,65 @@ export const AppointmentDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .appt-header-title {
+            font-size: 1.25rem !important;
+          }
+          
+          .appt-header-subtitle {
+            font-size: 0.75rem !important;
+          }
+          
+          .appt-header-actions {
+            flex-direction: column !important;
+            width: 100%;
+            gap: 0.25rem !important;
+          }
+          
+          .appt-header-btn {
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.75rem !important;
+          }
+          
+          .appt-tab {
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.75rem !important;
+          }
+          
+          .appt-type-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .appt-form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .appt-header {
+            flex-direction: column !important;
+            gap: 1rem !important;
+          }
+          
+          .appt-type-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .appt-card-content {
+            flex-direction: column !important;
+            gap: 1rem !important;
+          }
+          
+          .appt-card-actions {
+            flex-direction: row !important;
+            width: 100% !important;
+          }
+        }
+      `}</style>
       {/* Header */}
       <div
+        className="appt-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -176,11 +233,13 @@ export const AppointmentDemo: React.FC = () => {
           <span style={{ fontSize: "2rem" }}>🦷</span>
           <div>
             <div
+              className="appt-header-title"
               style={{ fontSize: "1.5rem", fontWeight: "700", color: "#fff" }}
             >
               SmileCare Dental
             </div>
             <div
+              className="appt-header-subtitle"
               style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.9)" }}
             >
               Schedule & Patient Management
@@ -188,6 +247,7 @@ export const AppointmentDemo: React.FC = () => {
           </div>
         </div>
         <div
+          className="appt-header-actions"
           style={{
             display: "flex",
             gap: "0.5rem",
@@ -196,6 +256,7 @@ export const AppointmentDemo: React.FC = () => {
           }}
         >
           <button
+            className="appt-header-btn"
             style={{
               background: "rgba(255, 255, 255, 0.2)",
               border: "1px solid rgba(255, 255, 255, 0.4)",
@@ -210,6 +271,7 @@ export const AppointmentDemo: React.FC = () => {
             📞 Call Patient
           </button>
           <button
+            className="appt-header-btn"
             style={{
               background: "#fff",
               border: "none",
@@ -261,7 +323,8 @@ export const AppointmentDemo: React.FC = () => {
           📅 Calendar
         </button>
         <button
-          onClick={() => setCurrentView("patients")}
+          onClick={() => setCurrentView("calendar")}
+          className="appt-tab"
           style={{
             background:
               currentView === "patients"
@@ -286,6 +349,7 @@ export const AppointmentDemo: React.FC = () => {
         </button>
         <button
           onClick={() => setCurrentView("book")}
+          className="appt-tab"
           style={{
             background:
               currentView === "book"
@@ -518,6 +582,7 @@ export const AppointmentDemo: React.FC = () => {
                   }}
                 >
                   <div
+                    className="appt-card-content"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
@@ -555,6 +620,7 @@ export const AppointmentDemo: React.FC = () => {
                       </div>
                     </div>
                     <div
+                      className="appt-card-actions"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -664,6 +730,7 @@ export const AppointmentDemo: React.FC = () => {
                     Appointment Type
                   </label>
                   <div
+                    className="appt-type-grid"
                     style={{
                       display: "grid",
                       gridTemplateColumns:
@@ -725,6 +792,7 @@ export const AppointmentDemo: React.FC = () => {
 
                 {/* Date & Time */}
                 <div
+                  className="appt-form-grid"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr",

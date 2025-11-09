@@ -234,6 +234,56 @@ export const CRMDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .crm-metrics-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.75rem !important;
+          }
+          
+          .crm-pipeline-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 0.5rem !important;
+          }
+          
+          .crm-header-actions {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          
+          .crm-sync-text {
+            display: none !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .crm-metrics-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .crm-pipeline-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .crm-nav-tabs {
+            gap: 0.25rem !important;
+          }
+          
+          .crm-nav-tab {
+            padding: 0.4rem 0.75rem !important;
+            font-size: 0.75rem !important;
+          }
+          
+          .crm-contact-card {
+            padding: 1rem !important;
+          }
+          
+          .crm-card-content {
+            flex-direction: column !important;
+            gap: 1rem !important;
+          }
+        }
+      `}</style>
       {/* Navigation Bar */}
       <nav
         style={{
@@ -246,6 +296,7 @@ export const CRMDemo: React.FC = () => {
         }}
       >
         <div
+          className="crm-nav-tabs"
           style={{
             display: "flex",
             gap: "0.5rem",
@@ -265,6 +316,7 @@ export const CRMDemo: React.FC = () => {
           </span>
           <button
             onClick={() => setCurrentView("dashboard")}
+            className="crm-nav-tab"
             style={{
               background:
                 currentView === "dashboard"
@@ -283,6 +335,7 @@ export const CRMDemo: React.FC = () => {
           </button>
           <button
             onClick={() => setCurrentView("contacts")}
+            className="crm-nav-tab"
             style={{
               background:
                 currentView === "contacts"
@@ -301,6 +354,7 @@ export const CRMDemo: React.FC = () => {
           </button>
           <button
             onClick={() => setCurrentView("deals")}
+            className="crm-nav-tab"
             style={{
               background:
                 currentView === "deals"
@@ -319,6 +373,7 @@ export const CRMDemo: React.FC = () => {
           </button>
           <button
             onClick={() => setCurrentView("tasks")}
+            className="crm-nav-tab"
             style={{
               background:
                 currentView === "tasks"
@@ -366,6 +421,7 @@ export const CRMDemo: React.FC = () => {
 
             {/* Key Metrics */}
             <div
+              className="crm-metrics-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -476,6 +532,7 @@ export const CRMDemo: React.FC = () => {
                 Sales Pipeline
               </h3>
               <div
+                className="crm-pipeline-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
@@ -666,6 +723,7 @@ export const CRMDemo: React.FC = () => {
               {filteredContacts.map((contact) => (
                 <div
                   key={contact.id}
+                  className="crm-contact-card"
                   style={{
                     background: "rgba(79, 70, 229, 0.1)",
                     border: "2px solid rgba(79, 70, 229, 0.3)",
@@ -686,6 +744,7 @@ export const CRMDemo: React.FC = () => {
                   }}
                 >
                   <div
+                    className="crm-card-content"
                     style={{
                       display: "flex",
                       justifyContent: "space-between",

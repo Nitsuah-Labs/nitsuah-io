@@ -220,21 +220,71 @@ const MintExample: React.FC = () => {
   const [selectedType, setSelectedType] = useState<ProjectType>("all");
   const [showDemo, setShowDemo] = useState<string | null>(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [cardsVisible, setCardsVisible] = useState(3);
+
+  // Update cards visible based on screen size (only matters when demo is active)
+  React.useEffect(() => {
+    const updateCardsVisible = () => {
+      if (!showDemo) {
+        setCardsVisible(3); // Default, doesn't matter for grid
+        return;
+      }
+
+      const width = window.innerWidth;
+      if (width <= 480) {
+        // Mobile: 2 cards when demo active
+        setCardsVisible(2);
+      } else if (width <= 768) {
+        // Tablet: 3 cards when demo active
+        setCardsVisible(3);
+      } else if (width <= 1200) {
+        // Small desktop: 4 cards when demo active
+        setCardsVisible(4);
+      } else {
+        // Large desktop: 5 cards when demo active
+        setCardsVisible(5);
+      }
+    };
+
+    updateCardsVisible();
+    window.addEventListener("resize", updateCardsVisible);
+    return () => window.removeEventListener("resize", updateCardsVisible);
+  }, [showDemo]);
 
   const filteredProjects =
     selectedType === "all"
       ? clientProjects
       : clientProjects.filter((p) => p.type === selectedType);
 
+  // Reset carousel index only when filters change (not when demo toggles)
+  React.useEffect(() => {
+    setCarouselIndex(0);
+  }, [selectedType]);
+
+  // Ensure carousel index is within bounds when cards visible changes
+  React.useEffect(() => {
+    if (showDemo) {
+      const maxIndex = Math.max(0, filteredProjects.length - cardsVisible);
+      if (carouselIndex > maxIndex) {
+        setCarouselIndex(maxIndex);
+      }
+    }
+  }, [cardsVisible, showDemo, filteredProjects.length, carouselIndex]);
+
   // Carousel navigation
   const scrollCarousel = (direction: "left" | "right") => {
-    const cardsVisible = 3;
     const maxIndex = Math.max(0, filteredProjects.length - cardsVisible);
     if (direction === "left") {
       setCarouselIndex(Math.max(0, carouselIndex - 1));
     } else {
       setCarouselIndex(Math.min(maxIndex, carouselIndex + 1));
     }
+  };
+
+  // Calculate transform percentage based on cards visible
+  const getTransformPercent = () => {
+    const cardWidthPercent = 100 / cardsVisible;
+    return carouselIndex * cardWidthPercent;
   };
 
   // Helper function to render the appropriate demo
@@ -309,6 +359,87 @@ const MintExample: React.FC = () => {
 
   return (
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+      <style>{`
+        /* Grid layout for no demo mode */
+        .projects-grid {
+          display: grid;
+          gap: 1.5rem;
+        }
+        
+        @media (min-width: 1024px) {
+          .projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        
+        @media (max-width: 767px) {
+          .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+        }
+        
+        /* Carousel - only used when demo is active */
+        @media (max-width: 768px) {
+          .carousel-wrapper.demo-active {
+            --cards-visible: 3;
+          }
+          
+          .carousel-nav-btn {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1.25rem !important;
+          }
+          
+          .carousel-container {
+            padding: 0 40px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .carousel-wrapper.demo-active {
+            --cards-visible: 2;
+          }
+          
+          .client-filter-btn {
+            padding: 0.4rem 0.6rem !important;
+            font-size: 0.75rem !important;
+            flex: 0 0 auto;
+          }
+          
+          .filter-container {
+            gap: 0.4rem !important;
+            padding: 0 0.5rem;
+          }
+          
+          .carousel-nav-btn {
+            width: 32px !important;
+            height: 32px !important;
+            font-size: 1.1rem !important;
+            left: 4px !important;
+          }
+          
+          .carousel-nav-btn:last-of-type {
+            right: 4px !important;
+            left: auto !important;
+          }
+          
+          .carousel-container {
+            padding: 0 36px !important;
+          }
+          
+          .client-card.demo-active {
+            padding: 0.4rem !important;
+            font-size: 0.75rem !important;
+          }
+        }
+      `}</style>
       <HomeBar />
       <main
         style={{
@@ -358,6 +489,7 @@ const MintExample: React.FC = () => {
 
           {/* Filters - Always visible but more compact when demo active */}
           <div
+            className="filter-container"
             style={{
               display: "flex",
               gap: showDemo ? "0.5rem" : "1rem",
@@ -377,6 +509,7 @@ const MintExample: React.FC = () => {
             ].map(({ type, label, color }) => (
               <button
                 key={type}
+                className="client-filter-btn"
                 onClick={() => {
                   setSelectedType(type as ProjectType);
                   setCarouselIndex(0);
@@ -418,290 +551,367 @@ const MintExample: React.FC = () => {
             ))}
           </div>
 
-          {/* Carousel - Compact when demo is active */}
-          <div
-            style={{
-              position: "relative",
-              marginBottom: showDemo ? "1.5rem" : "3rem",
-              paddingTop: showDemo ? "0.5rem" : "1rem",
-              transition: "all 0.3s ease",
-            }}
-          >
-            {/* Carousel Navigation */}
-            {filteredProjects.length > 3 && (
-              <>
-                <button
-                  onClick={() => scrollCarousel("left")}
-                  disabled={carouselIndex === 0}
-                  style={{
-                    position: "absolute",
-                    left: showDemo ? "0" : "-20px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: showDemo ? "32px" : "40px",
-                    height: showDemo ? "32px" : "40px",
-                    borderRadius: "50%",
-                    background: "rgba(16, 185, 129, 0.2)",
-                    border: "2px solid rgba(16, 185, 129, 0.4)",
-                    color: "#10b981",
-                    fontSize: showDemo ? "1.2rem" : "1.5rem",
-                    cursor: carouselIndex === 0 ? "not-allowed" : "pointer",
-                    opacity: carouselIndex === 0 ? 0.3 : 1,
-                    zIndex: 10,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (carouselIndex > 0) {
-                      e.currentTarget.style.background =
-                        "rgba(16, 185, 129, 0.3)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "rgba(16, 185, 129, 0.2)";
-                  }}
-                >
-                  ‹
-                </button>
-                <button
-                  onClick={() => scrollCarousel("right")}
-                  disabled={carouselIndex >= filteredProjects.length - 3}
-                  style={{
-                    position: "absolute",
-                    right: showDemo ? "0" : "-20px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: showDemo ? "32px" : "40px",
-                    height: showDemo ? "32px" : "40px",
-                    borderRadius: "50%",
-                    background: "rgba(16, 185, 129, 0.2)",
-                    border: "2px solid rgba(16, 185, 129, 0.4)",
-                    color: "#10b981",
-                    fontSize: showDemo ? "1.2rem" : "1.5rem",
-                    cursor:
-                      carouselIndex >= filteredProjects.length - 3
-                        ? "not-allowed"
-                        : "pointer",
-                    opacity:
-                      carouselIndex >= filteredProjects.length - 3 ? 0.3 : 1,
-                    zIndex: 10,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (carouselIndex < filteredProjects.length - 3) {
-                      e.currentTarget.style.background =
-                        "rgba(16, 185, 129, 0.3)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background =
-                      "rgba(16, 185, 129, 0.2)";
-                  }}
-                >
-                  ›
-                </button>
-              </>
-            )}
-
-            {/* Carousel Container */}
+          {/* Project Cards - Grid when no demo, Carousel when demo active */}
+          {!showDemo ? (
+            // GRID LAYOUT - No demo active
             <div
               style={{
-                overflow: "hidden",
-                padding: showDemo ? "0 32px" : "0 40px",
-                transition: "padding 0.3s ease",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gap: "1.5rem",
+                marginBottom: "3rem",
+                paddingTop: "1rem",
+              }}
+              className="projects-grid"
+            >
+              {filteredProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="client-card"
+                  style={{
+                    background: "rgba(20, 20, 20, 0.8)",
+                    border: "2px solid rgba(16, 185, 129, 0.3)",
+                    borderRadius: "12px",
+                    padding: "1.5rem",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    display: "flex",
+                    flexDirection: "column",
+                    position: "relative",
+                  }}
+                  onClick={() => setShowDemo(project.id)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(16, 185, 129, 0.8)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 8px 16px rgba(16, 185, 129, 0.2)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor =
+                      "rgba(16, 185, 129, 0.3)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  {/* Status Badge */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "0.75rem",
+                      right: "0.75rem",
+                      zIndex: 5,
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: "0.25rem 0.75rem",
+                        borderRadius: "4px",
+                        fontSize: "0.75rem",
+                        fontWeight: "600",
+                        background:
+                          project.status === "live"
+                            ? "#10b98120"
+                            : project.status === "demo"
+                              ? "#3b82f620"
+                              : "#6b728020",
+                        color:
+                          project.status === "live"
+                            ? "#10b981"
+                            : project.status === "demo"
+                              ? "#3b82f6"
+                              : "#9ca3af",
+                        textTransform: "capitalize",
+                        border: `1px solid ${
+                          project.status === "live"
+                            ? "#10b98140"
+                            : project.status === "demo"
+                              ? "#3b82f640"
+                              : "#6b728040"
+                        }`,
+                      }}
+                    >
+                      {project.status}
+                    </span>
+                  </div>
+
+                  {/* Icon */}
+                  <div
+                    style={{
+                      fontSize: "2.5rem",
+                      textAlign: "center",
+                      marginBottom: "0.75rem",
+                      marginTop: "1.5rem",
+                    }}
+                  >
+                    {getProjectIcon(project.type)}
+                  </div>
+
+                  {/* Title */}
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: "600",
+                      color: "#10b981",
+                      textAlign: "center",
+                      margin: "0 0 0.5rem 0",
+                    }}
+                  >
+                    {project.name}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    style={{
+                      color: "rgba(255, 255, 255, 0.7)",
+                      fontSize: "0.875rem",
+                      textAlign: "center",
+                      margin: "0.5rem 0 0.75rem 0",
+                      lineHeight: "1.5",
+                      flex: 1,
+                    }}
+                  >
+                    {project.description}
+                  </p>
+
+                  {/* Action Button */}
+                  <button
+                    style={{
+                      padding: "0.5rem 1rem",
+                      background: "rgba(16, 185, 129, 0.2)",
+                      border: "1px solid rgba(16, 185, 129, 0.4)",
+                      borderRadius: "6px",
+                      color: "#10b981",
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                      marginTop: "auto",
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowDemo(project.id);
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.2)";
+                    }}
+                  >
+                    Launch Demo
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            // CAROUSEL LAYOUT - Demo is active
+            <div
+              className={`carousel-wrapper demo-active`}
+              style={{
+                position: "relative",
+                marginBottom: "1.5rem",
+                paddingTop: "0.5rem",
+                transition: "all 0.3s ease",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  gap: showDemo ? "0.75rem" : "1.5rem",
-                  transform: `translateX(-${carouselIndex * (showDemo ? 20.5 : 34)}%)`,
-                  transition: "all 0.4s ease",
-                }}
-              >
-                {filteredProjects.map((project) => (
-                  <div
-                    key={project.id}
+              {/* Carousel Navigation */}
+              {filteredProjects.length > cardsVisible && (
+                <>
+                  <button
+                    className="carousel-nav-btn"
+                    onClick={() => scrollCarousel("left")}
+                    disabled={carouselIndex === 0}
                     style={{
-                      minWidth: showDemo
-                        ? "calc(20% - 0.6rem)"
-                        : "calc(33.333% - 1rem)",
-                      maxWidth: showDemo
-                        ? "calc(20% - 0.6rem)"
-                        : "calc(33.333% - 1rem)",
-                      flexShrink: 0,
-                      background:
-                        showDemo === project.id
-                          ? "rgba(16, 185, 129, 0.2)"
-                          : "rgba(20, 20, 20, 0.8)",
-                      border: `2px solid ${
-                        showDemo === project.id
-                          ? "rgba(16, 185, 129, 0.8)"
-                          : "rgba(16, 185, 129, 0.3)"
-                      }`,
-                      borderRadius: showDemo ? "8px" : "12px",
-                      padding: showDemo ? "0.5rem" : "1.5rem",
-                      cursor: "pointer",
+                      position: "absolute",
+                      left: "0",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "rgba(16, 185, 129, 0.2)",
+                      border: "2px solid rgba(16, 185, 129, 0.4)",
+                      color: "#10b981",
+                      fontSize: "1.2rem",
+                      cursor: carouselIndex === 0 ? "not-allowed" : "pointer",
+                      opacity: carouselIndex === 0 ? 0.3 : 1,
+                      zIndex: 10,
                       transition: "all 0.3s ease",
-                      display: "flex",
-                      flexDirection: showDemo ? "row" : "column",
-                      alignItems: showDemo ? "center" : "stretch",
-                      gap: showDemo ? "0.5rem" : "0",
-                      position: "relative",
                     }}
-                    onClick={() =>
-                      setShowDemo(project.id === showDemo ? null : project.id)
-                    }
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor =
-                        "rgba(16, 185, 129, 0.8)";
-                      if (!showDemo) {
-                        e.currentTarget.style.transform = "translateY(-4px)";
+                      if (carouselIndex > 0) {
+                        e.currentTarget.style.background =
+                          "rgba(16, 185, 129, 0.3)";
                       }
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor =
-                        showDemo === project.id
-                          ? "rgba(16, 185, 129, 0.8)"
-                          : "rgba(16, 185, 129, 0.3)";
-                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.2)";
                     }}
                   >
-                    {/* Status Badge - Top Right */}
-                    {!showDemo && (
+                    ‹
+                  </button>
+                  <button
+                    className="carousel-nav-btn"
+                    onClick={() => scrollCarousel("right")}
+                    disabled={
+                      carouselIndex >= filteredProjects.length - cardsVisible
+                    }
+                    style={{
+                      position: "absolute",
+                      right: "0",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "rgba(16, 185, 129, 0.2)",
+                      border: "2px solid rgba(16, 185, 129, 0.4)",
+                      color: "#10b981",
+                      fontSize: "1.2rem",
+                      cursor:
+                        carouselIndex >= filteredProjects.length - cardsVisible
+                          ? "not-allowed"
+                          : "pointer",
+                      opacity:
+                        carouselIndex >= filteredProjects.length - cardsVisible
+                          ? 0.3
+                          : 1,
+                      zIndex: 10,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (
+                        carouselIndex <
+                        filteredProjects.length - cardsVisible
+                      ) {
+                        e.currentTarget.style.background =
+                          "rgba(16, 185, 129, 0.3)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background =
+                        "rgba(16, 185, 129, 0.2)";
+                    }}
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+
+              {/* Carousel Container */}
+              <div
+                className="carousel-container"
+                style={{
+                  overflow: "hidden",
+                  padding: "0 48px",
+                  transition: "padding 0.3s ease",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "0.5rem",
+                    transform: `translateX(-${getTransformPercent()}%)`,
+                    transition: "all 0.4s ease",
+                  }}
+                >
+                  {filteredProjects.map((project) => {
+                    // Calculate gap offset per card
+                    const gapSize = 0.5;
+                    const totalGap = gapSize * (cardsVisible - 1);
+                    const gapPerCard = totalGap / cardsVisible;
+
+                    return (
                       <div
+                        key={project.id}
+                        className="client-card demo-active"
                         style={{
-                          position: "absolute",
-                          top: "0.75rem",
-                          right: "0.75rem",
-                          zIndex: 5,
-                        }}
-                      >
-                        <span
-                          style={{
-                            padding: "0.25rem 0.75rem",
-                            borderRadius: "4px",
-                            fontSize: "0.75rem",
-                            fontWeight: "600",
-                            background:
-                              project.status === "live"
-                                ? "#10b98120"
-                                : project.status === "demo"
-                                  ? "#3b82f620"
-                                  : "#6b728020",
-                            color:
-                              project.status === "live"
-                                ? "#10b981"
-                                : project.status === "demo"
-                                  ? "#3b82f6"
-                                  : "#9ca3af",
-                            textTransform: "capitalize",
-                            border: `1px solid ${
-                              project.status === "live"
-                                ? "#10b98140"
-                                : project.status === "demo"
-                                  ? "#3b82f640"
-                                  : "#6b728040"
-                            }`,
-                            transition: "all 0.3s ease",
-                          }}
-                        >
-                          {project.status}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Icon - Left side when demo active, center when not */}
-                    <div
-                      style={{
-                        fontSize: showDemo ? "1.5rem" : "2.5rem",
-                        textAlign: showDemo ? "left" : "center",
-                        marginBottom: showDemo ? "0" : "0.75rem",
-                        marginTop: showDemo ? "0" : "1.5rem",
-                        flexShrink: 0,
-                        transition: "all 0.3s ease",
-                      }}
-                    >
-                      {getProjectIcon(project.type)}
-                    </div>
-
-                    {/* Title and Content Container */}
-                    <div
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        minWidth: 0,
-                      }}
-                    >
-                      <h3
-                        style={{
-                          fontSize: showDemo ? "0.75rem" : "1.25rem",
-                          fontWeight: "600",
-                          color: "#10b981",
-                          margin: 0,
-                          textAlign: showDemo ? "left" : "center",
-                          transition: "all 0.3s ease",
-                          whiteSpace: showDemo ? "nowrap" : "normal",
-                          overflow: showDemo ? "hidden" : "visible",
-                          textOverflow: showDemo ? "ellipsis" : "clip",
-                        }}
-                      >
-                        {project.name}
-                      </h3>
-
-                      {/* Description - Only show when no demo is active */}
-                      {!showDemo && (
-                        <p
-                          style={{
-                            color: "rgba(255, 255, 255, 0.7)",
-                            fontSize: "0.875rem",
-                            textAlign: "center",
-                            margin: "0.5rem 0 0.75rem 0",
-                            lineHeight: "1.5",
-                          }}
-                        >
-                          {project.description}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Action Button - Icon only when demo active */}
-                    {!showDemo && (
-                      <button
-                        style={{
-                          padding: "0.5rem 1rem",
-                          background: "rgba(16, 185, 129, 0.2)",
-                          border: "1px solid rgba(16, 185, 129, 0.4)",
-                          borderRadius: "6px",
-                          color: "#10b981",
-                          fontWeight: "600",
-                          fontSize: "0.875rem",
+                          minWidth:
+                            filteredProjects.length === 1
+                              ? "100%"
+                              : `calc(${100 / cardsVisible}% - ${gapPerCard}rem)`,
+                          maxWidth:
+                            filteredProjects.length === 1
+                              ? "100%"
+                              : `calc(${100 / cardsVisible}% - ${gapPerCard}rem)`,
+                          flexShrink: 0,
+                          background:
+                            showDemo === project.id
+                              ? "rgba(16, 185, 129, 0.2)"
+                              : "rgba(20, 20, 20, 0.8)",
+                          border: `2px solid ${
+                            showDemo === project.id
+                              ? "rgba(16, 185, 129, 0.8)"
+                              : "rgba(16, 185, 129, 0.3)"
+                          }`,
+                          borderRadius: "8px",
+                          padding: "0.5rem",
                           cursor: "pointer",
-                          transition: "all 0.2s ease",
-                          marginTop: "auto",
+                          transition: "all 0.3s ease",
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                          position: "relative",
                         }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowDemo(project.id);
-                        }}
+                        onClick={() =>
+                          setShowDemo(
+                            project.id === showDemo ? null : project.id,
+                          )
+                        }
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(16, 185, 129, 0.4)";
+                          e.currentTarget.style.borderColor =
+                            "rgba(16, 185, 129, 0.8)";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background =
-                            "rgba(16, 185, 129, 0.2)";
+                          e.currentTarget.style.borderColor =
+                            showDemo === project.id
+                              ? "rgba(16, 185, 129, 0.8)"
+                              : "rgba(16, 185, 129, 0.3)";
                         }}
                       >
-                        Launch Demo
-                      </button>
-                    )}
-                  </div>
-                ))}
+                        {/* Icon - Compact for carousel */}
+                        <div
+                          style={{
+                            fontSize: "1.5rem",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {getProjectIcon(project.type)}
+                        </div>
+
+                        {/* Title - Compact */}
+                        <div
+                          style={{
+                            flex: 1,
+                            minWidth: 0,
+                          }}
+                        >
+                          <h3
+                            style={{
+                              fontSize: "0.875rem",
+                              fontWeight: "600",
+                              color: "#10b981",
+                              margin: 0,
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {project.name}
+                          </h3>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Demo Area - Takes center stage */}
           {showDemo && renderDemo(showDemo)}

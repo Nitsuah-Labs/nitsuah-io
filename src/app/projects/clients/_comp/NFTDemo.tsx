@@ -101,6 +101,7 @@ export const NFTDemo: React.FC = () => {
           </div>
           <Connected>
             <div
+              className="nft-wallet-grid"
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -146,8 +147,53 @@ export const NFTDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .nft-header {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          .nft-header h1 {
+            font-size: 1.75rem !important;
+          }
+          
+          .nft-nav {
+            flex-direction: column;
+            gap: 0.5rem !important;
+          }
+          
+          .nft-nav button {
+            width: 100%;
+            justify-content: center !important;
+          }
+          
+          .nft-gallery-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          
+          .nft-wallet-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .nft-gallery-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .nft-card {
+            padding: 1rem !important;
+          }
+          
+          .nft-nav button {
+            font-size: 0.813rem !important;
+            padding: 0.6rem 1rem !important;
+          }
+        }
+      `}</style>
       {/* Header */}
       <div
+        className="nft-header"
         style={{
           background: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
           padding: "2rem 1.5rem",
@@ -178,6 +224,7 @@ export const NFTDemo: React.FC = () => {
 
       {/* Navigation */}
       <nav
+        className="nft-nav"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -233,6 +280,7 @@ export const NFTDemo: React.FC = () => {
               Trending NFTs
             </h2>
             <div
+              className="nft-gallery-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
@@ -244,6 +292,7 @@ export const NFTDemo: React.FC = () => {
               {nftCollection.map((nft) => (
                 <div
                   key={nft.id}
+                  className="nft-card"
                   style={{
                     background: "rgba(139, 92, 246, 0.1)",
                     border: "2px solid rgba(139, 92, 246, 0.3)",
