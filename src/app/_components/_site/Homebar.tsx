@@ -187,24 +187,61 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               >
                 HOME
               </Link>
-              {pages.map((page) => {
+              {pages.flatMap((page) => {
                 const isActive = pathname === `/${page}`;
                 const isProjectsActive = pathname.startsWith("/projects");
-                return (
-                  <React.Fragment key={page}>
+                const items = [
+                  <Link
+                    key={page}
+                    href={`/${page}`}
+                    aria-label={`Navigate to ${page}`}
+                    aria-current={isActive ? "page" : undefined}
+                    style={{
+                      color: isActive ? "#f97316" : "#fff",
+                      display: "block",
+                      padding: "12px 16px",
+                      textTransform: "none",
+                      backgroundColor: isActive
+                        ? "rgba(249, 115, 22, 0.2)"
+                        : "transparent",
+                      fontWeight: isActive ? 600 : 400,
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#f97316";
+                      e.currentTarget.style.backgroundColor =
+                        "rgba(249, 115, 22, 0.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = isActive
+                        ? "#f97316"
+                        : "#fff";
+                      e.currentTarget.style.backgroundColor = isActive
+                        ? "rgba(249, 115, 22, 0.2)"
+                        : "transparent";
+                    }}
+                  >
+                    {page}
+                  </Link>,
+                ];
+                if (page === "projects" && isProjectsActive) {
+                  items.push(
                     <Link
-                      href={`/${page}`}
-                      aria-label={`Navigate to ${page}`}
-                      aria-current={isActive ? "page" : undefined}
+                      key="projects-blogs"
+                      href="/projects/blogs"
+                      aria-label="Navigate to blogs"
                       style={{
-                        color: isActive ? "#f97316" : "#fff",
+                        color:
+                          pathname === "/projects/blogs"
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.8)",
                         display: "block",
-                        padding: "12px 16px",
-                        textTransform: "none",
-                        backgroundColor: isActive
-                          ? "rgba(249, 115, 22, 0.2)"
-                          : "transparent",
-                        fontWeight: isActive ? 600 : 400,
+                        padding: "8px 16px 8px 32px",
+                        fontSize: "0.9rem",
+                        backgroundColor:
+                          pathname === "/projects/blogs"
+                            ? "rgba(249, 115, 22, 0.15)"
+                            : "transparent",
                         transition: "all 0.2s ease",
                       }}
                       onMouseEnter={(e) => {
@@ -213,92 +250,57 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                           "rgba(249, 115, 22, 0.1)";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.color = isActive
-                          ? "#f97316"
-                          : "#fff";
-                        e.currentTarget.style.backgroundColor = isActive
-                          ? "rgba(249, 115, 22, 0.2)"
-                          : "transparent";
+                        e.currentTarget.style.color =
+                          pathname === "/projects/blogs"
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.8)";
+                        e.currentTarget.style.backgroundColor =
+                          pathname === "/projects/blogs"
+                            ? "rgba(249, 115, 22, 0.15)"
+                            : "transparent";
                       }}
                     >
-                      {page}
-                    </Link>
-                    {page === "projects" && isProjectsActive && (
-                      <>
-                        <Link
-                          href="/projects/blogs"
-                          aria-label="Navigate to blogs"
-                          style={{
-                            color:
-                              pathname === "/projects/blogs"
-                                ? "#f97316"
-                                : "rgba(255, 255, 255, 0.8)",
-                            display: "block",
-                            padding: "8px 16px 8px 32px",
-                            fontSize: "0.9rem",
-                            backgroundColor:
-                              pathname === "/projects/blogs"
-                                ? "rgba(249, 115, 22, 0.15)"
-                                : "transparent",
-                            transition: "all 0.2s ease",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.color = "#f97316";
-                            e.currentTarget.style.backgroundColor =
-                              "rgba(249, 115, 22, 0.1)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.color =
-                              pathname === "/projects/blogs"
-                                ? "#f97316"
-                                : "rgba(255, 255, 255, 0.8)";
-                            e.currentTarget.style.backgroundColor =
-                              pathname === "/projects/blogs"
-                                ? "rgba(249, 115, 22, 0.15)"
-                                : "transparent";
-                          }}
-                        >
-                          → blogs
-                        </Link>
-                        <Link
-                          href="/projects/clients"
-                          aria-label="Navigate to clients"
-                          style={{
-                            color:
-                              pathname === "/projects/clients"
-                                ? "#f97316"
-                                : "rgba(255, 255, 255, 0.8)",
-                            display: "block",
-                            padding: "8px 16px 8px 32px",
-                            fontSize: "0.9rem",
-                            backgroundColor:
-                              pathname === "/projects/clients"
-                                ? "rgba(249, 115, 22, 0.15)"
-                                : "transparent",
-                            transition: "all 0.2s ease",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.color = "#f97316";
-                            e.currentTarget.style.backgroundColor =
-                              "rgba(249, 115, 22, 0.1)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.color =
-                              pathname === "/projects/clients"
-                                ? "#f97316"
-                                : "rgba(255, 255, 255, 0.8)";
-                            e.currentTarget.style.backgroundColor =
-                              pathname === "/projects/clients"
-                                ? "rgba(249, 115, 22, 0.15)"
-                                : "transparent";
-                          }}
-                        >
-                          → clients
-                        </Link>
-                      </>
-                    )}
-                  </React.Fragment>
-                );
+                      → blogs
+                    </Link>,
+                    <Link
+                      key="projects-clients"
+                      href="/projects/clients"
+                      aria-label="Navigate to clients"
+                      style={{
+                        color:
+                          pathname === "/projects/clients"
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.8)",
+                        display: "block",
+                        padding: "8px 16px 8px 32px",
+                        fontSize: "0.9rem",
+                        backgroundColor:
+                          pathname === "/projects/clients"
+                            ? "rgba(249, 115, 22, 0.15)"
+                            : "transparent",
+                        transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "#f97316";
+                        e.currentTarget.style.backgroundColor =
+                          "rgba(249, 115, 22, 0.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color =
+                          pathname === "/projects/clients"
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.8)";
+                        e.currentTarget.style.backgroundColor =
+                          pathname === "/projects/clients"
+                            ? "rgba(249, 115, 22, 0.15)"
+                            : "transparent";
+                      }}
+                    >
+                      → clients
+                    </Link>,
+                  );
+                }
+                return items;
               })}
             </StyledMenu>
           </Box>
