@@ -6,13 +6,15 @@ import HomeBar from "../../_components/_site/Homebar";
 import "./_styles/client.css";
 
 // Demo Components
-import { ECommerceDemo } from "./_comp/ECommerceDemo";
+import { AppointmentDemo } from "./_comp/AppointmentDemo";
+import { CRMDemo } from "./_comp/CRMDemo";
 import { NFTDemo } from "./_comp/NFTDemo";
 import { PortfolioDemo } from "./_comp/PortfolioDemo";
 import { RealEstateDemo } from "./_comp/RealEstateDemo";
 import { ResumeSiteDemo } from "./_comp/ResumeSiteDemo";
 import { SaaSDemo } from "./_comp/SaaSDemo";
 import { ServicesDemo } from "./_comp/ServicesDemo";
+import { StorefrontDemo } from "./_comp/StorefrontDemo";
 
 type ProjectType =
   | "web3"
@@ -91,7 +93,7 @@ const clientProjects: ClientProject[] = [
       "Data Visualization",
       "Export Tools",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "realestate",
@@ -110,18 +112,18 @@ const clientProjects: ClientProject[] = [
   },
   {
     id: "crm",
-    name: "Customer CRM System",
+    name: "Customer CRM",
     type: "saas",
     description:
-      "Customer relationship management system for sales and support teams",
-    technologies: ["React", "GraphQL", "MongoDB"],
+      "Salesforce-style CRM with contacts, pipeline, tasks, and deals tracking",
+    technologies: ["React", "TypeScript", "Real-time Sync"],
     features: [
       "Contact Management",
       "Sales Pipeline",
       "Task Tracking",
-      "Email Integration",
+      "Deal Flow",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "portfolio",
@@ -154,18 +156,18 @@ const clientProjects: ClientProject[] = [
   },
   {
     id: "booking",
-    name: "Appointment Booking",
+    name: "Dental Appointments",
     type: "service",
     description:
-      "Booking system for service providers with calendar and reminders",
+      "Dentist office appointment booking with patient management and SMS reminders",
     technologies: ["React", "Calendar API", "Twilio"],
     features: [
-      "Calendar Sync",
+      "Calendar Schedule",
+      "Patient Records",
       "SMS Reminders",
-      "Payment Processing",
-      "Cancellation Policy",
+      "Insurance Processing",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "marketplace",
@@ -179,12 +181,12 @@ const clientProjects: ClientProject[] = [
       "Wallet Integration",
       "Gas Optimization",
     ],
-    status: "mockup",
+    status: "demo",
   },
   {
     id: "blog-cms",
     name: "Content Management",
-    type: "service",
+    type: "saas",
     description: "Blog CMS with markdown support, SEO tools, and analytics",
     technologies: ["Next.js", "MDX", "Vercel Analytics"],
     features: [
@@ -193,7 +195,7 @@ const clientProjects: ClientProject[] = [
       "Draft System",
       "Analytics Dashboard",
     ],
-    status: "mockup",
+    status: "demo",
   },
 ];
 
@@ -246,10 +248,11 @@ const MintExample: React.FC = () => {
         case "marketplace":
           return <NFTDemo />;
         case "storefront":
-          return <ECommerceDemo />;
+          return <StorefrontDemo />;
         case "dashboard":
-        case "crm":
           return <SaaSDemo />;
+        case "crm":
+          return <CRMDemo />;
         case "portfolio":
           return <PortfolioDemo />;
         case "resume-site":
@@ -257,9 +260,10 @@ const MintExample: React.FC = () => {
         case "realestate":
           return <RealEstateDemo />;
         case "restaurant":
-        case "booking":
         case "blog-cms":
           return <ServicesDemo />;
+        case "booking":
+          return <AppointmentDemo />;
         default:
           return (
             <div
@@ -503,7 +507,7 @@ const MintExample: React.FC = () => {
             <div
               style={{
                 overflow: "hidden",
-                padding: showDemo ? "0 36px" : "0 40px",
+                padding: showDemo ? "0 32px" : "0 40px",
                 transition: "padding 0.3s ease",
               }}
             >
@@ -511,7 +515,7 @@ const MintExample: React.FC = () => {
                 style={{
                   display: "flex",
                   gap: showDemo ? "0.75rem" : "1.5rem",
-                  transform: `translateX(-${carouselIndex * 33.8}%)`,
+                  transform: `translateX(-${carouselIndex * (showDemo ? 20.5 : 34)}%)`,
                   transition: "all 0.4s ease",
                 }}
               >
@@ -522,6 +526,10 @@ const MintExample: React.FC = () => {
                       minWidth: showDemo
                         ? "calc(20% - 0.6rem)"
                         : "calc(33.333% - 1rem)",
+                      maxWidth: showDemo
+                        ? "calc(20% - 0.6rem)"
+                        : "calc(33.333% - 1rem)",
+                      flexShrink: 0,
                       background:
                         showDemo === project.id
                           ? "rgba(16, 185, 129, 0.2)"
@@ -560,48 +568,48 @@ const MintExample: React.FC = () => {
                     }}
                   >
                     {/* Status Badge - Top Right */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: showDemo ? "0.25rem" : "0.75rem",
-                        right: showDemo ? "0.25rem" : "0.75rem",
-                        zIndex: 5,
-                      }}
-                    >
-                      <span
+                    {!showDemo && (
+                      <div
                         style={{
-                          padding: showDemo
-                            ? "0.125rem 0.375rem"
-                            : "0.25rem 0.75rem",
-                          borderRadius: "4px",
-                          fontSize: showDemo ? "0.625rem" : "0.75rem",
-                          fontWeight: "600",
-                          background:
-                            project.status === "live"
-                              ? "#10b98120"
-                              : project.status === "demo"
-                                ? "#3b82f620"
-                                : "#6b728020",
-                          color:
-                            project.status === "live"
-                              ? "#10b981"
-                              : project.status === "demo"
-                                ? "#3b82f6"
-                                : "#9ca3af",
-                          textTransform: "capitalize",
-                          border: `1px solid ${
-                            project.status === "live"
-                              ? "#10b98140"
-                              : project.status === "demo"
-                                ? "#3b82f640"
-                                : "#6b728040"
-                          }`,
-                          transition: "all 0.3s ease",
+                          position: "absolute",
+                          top: "0.75rem",
+                          right: "0.75rem",
+                          zIndex: 5,
                         }}
                       >
-                        {project.status}
-                      </span>
-                    </div>
+                        <span
+                          style={{
+                            padding: "0.25rem 0.75rem",
+                            borderRadius: "4px",
+                            fontSize: "0.75rem",
+                            fontWeight: "600",
+                            background:
+                              project.status === "live"
+                                ? "#10b98120"
+                                : project.status === "demo"
+                                  ? "#3b82f620"
+                                  : "#6b728020",
+                            color:
+                              project.status === "live"
+                                ? "#10b981"
+                                : project.status === "demo"
+                                  ? "#3b82f6"
+                                  : "#9ca3af",
+                            textTransform: "capitalize",
+                            border: `1px solid ${
+                              project.status === "live"
+                                ? "#10b98140"
+                                : project.status === "demo"
+                                  ? "#3b82f640"
+                                  : "#6b728040"
+                            }`,
+                            transition: "all 0.3s ease",
+                          }}
+                        >
+                          {project.status}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Icon - Left side when demo active, center when not */}
                     <div
