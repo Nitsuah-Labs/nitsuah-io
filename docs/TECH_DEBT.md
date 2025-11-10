@@ -21,13 +21,88 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 
 ---
 
-## 🔥 High Priority - Bloated Pages
+## 🔥 High Priority - Bloated Files
+
+### Critical Refactoring Targets (>1000 LOC)
+
+**Total Impact:** 3 files, ~5,380 LOC
+
+1. **ServicesDemo.tsx** - 2,604 LOC ✅ WRAPPERS CREATED
+   - **Status:** Wrapper components created (RestaurantDemo.tsx, BlogCMSDemo.tsx)
+   - **Current State:** Both wrap ServicesDemo with type prop ("restaurant" | "blog-cms")
+   - **Future Work:** Full extraction to standalone components (~800 LOC each + shared utils)
+   - **Impact:** Contains 2 complete applications (Italian restaurant + blog CMS), extensive inline styles
+   - **Can Use:** DemoCard, DemoHeader, DemoButton, DemoSection, DemoTable components
+   - **Location:** `src/app/projects/clients/_comp/`
+
+2. **StorefrontDemo.tsx** - 1,715 LOC ⚠️ HIGH PRIORITY NEXT
+   - **Contains:** Full ecommerce demo (product gallery, cart, checkout, product details)
+   - **Split Into:** ProductGallery, ShoppingCart, CheckoutFlow, ProductDetails
+   - **Can Use:** DemoCard, DemoButton, DemoTable for product listings
+   - **Location:** `src/app/projects/clients/_comp/`
+
+3. **CRMDemo.tsx** - 1,065 LOC ⚠️ HIGH PRIORITY
+   - **Contains:** Complete CRM system (contacts, pipeline, tasks, deals)
+   - **Split Into:** ContactsView, PipelineView, TasksView, DealsView
+   - **Can Use:** DemoTable (perfect for contact/deal lists), DemoCard, DemoSection
+   - **Location:** `src/app/projects/clients/_comp/`
+
+### High Priority Files (500-1000 LOC)
+
+4. **RealEstateDemo.tsx** - 978 LOC
+   - **Contains:** Property listings, search, agent profiles
+   - **Can Use:** DemoCard for property cards, DemoTable for listings
+
+5. **AppointmentDemo.tsx** - 840 LOC
+   - **Contains:** Calendar, booking system, appointment management
+   - **Can Use:** DemoTable for appointments, DemoButton for actions
+
+6. **PortfolioDemo.tsx** - 684 LOC
+   - **Contains:** Project showcase, about section, contact form
+   - **Can Use:** DemoCard for projects, DemoSection for content areas
+
+7. **ClientsDemo.tsx** - 613 LOC
+   - **Contains:** Client management interface
+   - **Can Use:** DemoTable for client list, DemoCard for client cards
+
+8. **NFTDemo.tsx** - 592 LOC
+   - **Contains:** NFT gallery, minting interface
+   - **Can Use:** DemoCard for NFT cards, DemoButton for minting
+
+9. **SaaSDemo.tsx** - 522 LOC
+   - **Contains:** SaaS dashboard, feature showcase
+   - **Can Use:** DemoCard, DemoSection for feature areas
+
+**Refactoring Strategy:**
+1. ✅ Create shared demo component library (COMPLETED)
+2. ✅ Start with largest file - ServicesDemo wrappers created
+3. Next: Extract StorefrontDemo and CRMDemo using demo components
+4. Apply patterns to remaining 6 files
+5. Extract inline styles to CSS modules
+6. Document component usage patterns
 
 ---
 
 ## 🔧 Reusable Component Library
 
 Create shared components to reduce duplication:
+
+### Demo Components ✅ COMPLETED
+
+**Location:** `src/components/demos/`
+
+Created reusable demo patterns to reduce duplication across 10+ demo files (~10,000 LOC total):
+
+- [x] `DemoCard` (44 LOC) - Reusable card with hover effects, onClick handler, customizable styles
+- [x] `DemoHeader` (63 LOC) - Title, subtitle, icon, and actions slot with responsive wrapping
+- [x] `DemoButton` (89 LOC) - 5 variants (primary/secondary/success/danger/ghost), 3 sizes, disabled state
+- [x] `DemoSection` (63 LOC) - Optional title, collapsible sections, custom styles
+- [x] `DemoTable` (133 LOC) - Generic table with TypeScript generics, column config, row clicks, hover, striped rows
+- [x] `index.ts` - Barrel exports for clean imports
+
+**Impact:** ~400 LOC of reusable patterns that will reduce duplication in ServicesDemo (2,604 LOC), StorefrontDemo (1,715 LOC), CRMDemo (1,065 LOC), and 7 other demo files.
+
+**Next Steps:** Refactor demo files to use these components, extract inline styles to CSS modules.
 
 ### Layout Components
 

@@ -7,13 +7,14 @@ import "./_styles/client.css";
 
 // Demo Components
 import { AppointmentDemo } from "./_comp/AppointmentDemo";
+import { BlogCMSDemo } from "./_comp/BlogCMSDemo";
 import { CRMDemo } from "./_comp/CRMDemo";
 import { NFTDemo } from "./_comp/NFTDemo";
 import { PortfolioDemo } from "./_comp/PortfolioDemo";
 import { RealEstateDemo } from "./_comp/RealEstateDemo";
+import { RestaurantDemo } from "./_comp/RestaurantDemo";
 import { ResumeSiteDemo } from "./_comp/ResumeSiteDemo";
 import { SaaSDemo } from "./_comp/SaaSDemo";
-import { ServicesDemo } from "./_comp/ServicesDemo";
 import { StorefrontDemo } from "./_comp/StorefrontDemo";
 
 type ProjectType =
@@ -328,9 +329,9 @@ const MintExample: React.FC = () => {
         case "realestate":
           return <RealEstateDemo />;
         case "restaurant":
-          return <ServicesDemo type="restaurant" />;
+          return <RestaurantDemo />;
         case "blog-cms":
-          return <ServicesDemo type="blog-cms" />;
+          return <BlogCMSDemo />;
         case "booking":
           return <AppointmentDemo />;
         default:
