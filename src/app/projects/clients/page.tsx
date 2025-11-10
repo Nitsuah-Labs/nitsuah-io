@@ -523,8 +523,8 @@ const MintExample: React.FC = () => {
               { type: "web3", label: "Web3", color: "#8b5cf6" },
               { type: "ecommerce", label: "E-Commerce", color: "#f59e0b" },
               { type: "saas", label: "SaaS", color: "#3b82f6" },
-              { type: "service", label: "Services", color: "#ec4899" },
-              { type: "portfolio", label: "Portfolio", color: "#a855f7" },
+              { type: "service", label: "Services", color: "#22c55e" },
+              { type: "portfolio", label: "Portfolio", color: "#ec4899" },
             ].map(({ type, label, color }) => (
               <button
                 key={type}
