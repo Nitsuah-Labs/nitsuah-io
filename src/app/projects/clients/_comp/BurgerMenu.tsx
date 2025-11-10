@@ -4,7 +4,7 @@ interface Props {
   style: React.CSSProperties;
 }
 
-export const BurgerMenu = ({ style }: Props): JSX.Element => {
+export const BurgerMenu = ({ style }: Props): React.ReactElement => {
   return (
     <svg
       className="burger-menu"

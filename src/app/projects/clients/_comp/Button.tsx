@@ -7,7 +7,7 @@ interface Props {
   hasLeftIcon: boolean;
   hasText: boolean;
   text: string;
-  icon?: JSX.Element;
+  icon?: React.ReactElement;
   property1:
     | "primary-filled"
     | "secondary-outlined"
@@ -24,7 +24,7 @@ export const Button = ({
   text = "Button",
   property1,
   style,
-}: Props): JSX.Element => {
+}: Props): React.ReactElement => {
   return (
     <div className={`button ${property1}`} style={style}>
       {hasLeftIcon && (
