@@ -17,7 +17,7 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 4. **Remove Dead Code** - Identify and remove unused files, functions, and dependencies
 5. **Improve Readability** - Make files easier to navigate and understand at a glance
 6. **Reorganize Code Structure** - Move code from cluttered directories into more logical structures or update folder structure or file structure as needed (just consider the impacts and updates needed, test to ensure breakages get fixed)
-7. **Best Practices** - Follow established coding conventions, use meaningful names, and document complex logic in `docs/`
+7. **Best Practices** - Follow established coding conventions, use meaningful names, and read/write information or document complex logic in `docs/`
 
 ---
 
@@ -33,6 +33,11 @@ Create shared components to reduce duplication:
 
 - [ ] `Section` - Wrapper with consistent padding/background (future)
 
+### UI Components ✅ Enhanced
+
+- [x] `FilterButton` - Reusable filter button with category-based color coding
+- [x] `ProjectTypeFilter` - Project type filter component for client projects page
+
 ### Form Components (Future Enhancement)
 
 - [ ] `Input` - Styled text input
@@ -40,7 +45,7 @@ Create shared components to reduce duplication:
 - [ ] `Select` - Styled dropdown
 - [ ] `FileUpload` - Styled file input
 
-**Location:** `src/components/ui/` ✅ Created
+**Location:** `src/components/ui/` ✅ Created and expanded
 
 ### Phase 6: Testing & QA (Future - See TODO.md)
 
