@@ -55,8 +55,41 @@ export const PortfolioDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .portfolio-nav {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          
+          .portfolio-nav-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            min-height: 44px !important;
+          }
+          
+          .portfolio-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .portfolio-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .portfolio-header {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          .portfolio-header h1 {
+            font-size: 1.75rem !important;
+          }
+        }
+      `}</style>
       {/* Header */}
       <div
+        className="portfolio-header"
         style={{
           background: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
           padding: "2rem 1.5rem",
@@ -87,6 +120,7 @@ export const PortfolioDemo: React.FC = () => {
 
       {/* Navigation */}
       <nav
+        className="portfolio-nav"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -103,6 +137,7 @@ export const PortfolioDemo: React.FC = () => {
         ].map((item) => (
           <button
             key={item.id}
+            className="portfolio-nav-btn"
             onClick={() => setCurrentView(item.id as any)}
             style={{
               padding: "0.75rem 1.5rem",

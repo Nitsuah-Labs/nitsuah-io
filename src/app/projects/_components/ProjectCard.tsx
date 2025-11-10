@@ -10,6 +10,7 @@ interface ProjectCardProps {
   isFeatured?: boolean;
   isGif?: boolean;
   onToggleFeatured?: (projectId: string) => void;
+  getTagColors?: (tag: string) => { bg: string; border: string; text: string };
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -18,6 +19,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   isFeatured = false,
   isGif = false,
   onToggleFeatured,
+  getTagColors,
 }) => {
   const handleCardClick = () => {
     if (project.externalLink) {
@@ -76,11 +78,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Tags */}
         <div className={styles.cardTags}>
-          {project.tags.map((tag) => (
-            <span key={tag} className={styles.cardTag}>
-              {tag}
-            </span>
-          ))}
+          {project.tags.map((tag) => {
+            const colors = getTagColors ? getTagColors(tag) : null;
+            return (
+              <span
+                key={tag}
+                className={styles.cardTag}
+                style={
+                  colors
+                    ? {
+                        backgroundColor: colors.bg,
+                        borderColor: colors.border,
+                        color: colors.text,
+                      }
+                    : undefined
+                }
+              >
+                {tag}
+              </span>
+            );
+          })}
         </div>
 
         {/* Action Buttons */}

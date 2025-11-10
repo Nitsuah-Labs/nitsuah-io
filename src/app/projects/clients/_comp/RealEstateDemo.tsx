@@ -8,6 +8,14 @@ export const RealEstateDemo: React.FC = () => {
   );
   const [selectedProperty, setSelectedProperty] = useState(0);
   const [filterType, setFilterType] = useState<"all" | "sale" | "rent">("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [priceRange, setPriceRange] = useState<"all" | "low" | "mid" | "high">(
+    "all",
+  );
+  const [bedrooms, setBedrooms] = useState<"all" | "1" | "2" | "3" | "4+">(
+    "all",
+  );
+  const [layoutView, setLayoutView] = useState<"grid" | "list">("grid");
 
   const properties = [
     {
@@ -15,51 +23,231 @@ export const RealEstateDemo: React.FC = () => {
       title: "Modern Downtown Loft",
       type: "sale",
       price: "$850,000",
+      priceNum: 850000,
       beds: 2,
       baths: 2,
       sqft: "1,200",
       icon: "🏢",
       location: "Downtown",
+      description:
+        "Stunning modern loft with floor-to-ceiling windows, hardwood floors, and city views. Open concept living with chef's kitchen.",
+      features: [
+        "Granite Counters",
+        "Stainless Appliances",
+        "Parking Included",
+        "Pet Friendly",
+      ],
     },
     {
       id: 2,
       title: "Suburban Family Home",
       type: "sale",
       price: "$625,000",
+      priceNum: 625000,
       beds: 4,
       baths: 3,
       sqft: "2,500",
       icon: "🏡",
       location: "Suburbs",
+      description:
+        "Spacious family home with large backyard, updated kitchen, and finished basement. Great schools nearby.",
+      features: [
+        "Large Yard",
+        "Updated Kitchen",
+        "Finished Basement",
+        "2-Car Garage",
+      ],
     },
     {
       id: 3,
       title: "Luxury Penthouse",
       type: "rent",
       price: "$4,500/mo",
+      priceNum: 4500,
       beds: 3,
       baths: 3,
       sqft: "2,100",
       icon: "🏙️",
       location: "City Center",
+      description:
+        "Exclusive penthouse with panoramic city views, private terrace, and premium finishes throughout.",
+      features: [
+        "Rooftop Terrace",
+        "Concierge Service",
+        "Gym Access",
+        "City Views",
+      ],
     },
     {
       id: 4,
       title: "Cozy Studio Apartment",
       type: "rent",
       price: "$1,800/mo",
+      priceNum: 1800,
       beds: 1,
       baths: 1,
       sqft: "650",
       icon: "🏠",
       location: "Midtown",
+      description:
+        "Efficient studio with modern amenities, perfect for young professionals. Walking distance to transit.",
+      features: [
+        "In-Unit Laundry",
+        "Fitness Center",
+        "Near Transit",
+        "Modern Kitchen",
+      ],
+    },
+    {
+      id: 5,
+      title: "Beachfront Villa",
+      type: "sale",
+      price: "$1,200,000",
+      priceNum: 1200000,
+      beds: 5,
+      baths: 4,
+      sqft: "3,800",
+      icon: "🏖️",
+      location: "Coastal",
+      description:
+        "Magnificent beachfront property with private beach access, infinity pool, and spectacular ocean views.",
+      features: ["Ocean Views", "Private Beach", "Pool", "Guest House"],
+    },
+    {
+      id: 6,
+      title: "Historic Brownstone",
+      type: "sale",
+      price: "$975,000",
+      priceNum: 975000,
+      beds: 3,
+      baths: 2,
+      sqft: "2,200",
+      icon: "🏛️",
+      location: "Old Town",
+      description:
+        "Charming historic brownstone with original details, updated systems, and private garden.",
+      features: [
+        "Historic Details",
+        "Private Garden",
+        "Updated Systems",
+        "Original Hardwood",
+      ],
+    },
+    {
+      id: 7,
+      title: "Mountain Cabin",
+      type: "rent",
+      price: "$2,800/mo",
+      priceNum: 2800,
+      beds: 2,
+      baths: 2,
+      sqft: "1,400",
+      icon: "⛰️",
+      location: "Mountain View",
+      description:
+        "Peaceful mountain retreat with stunning views, wood-burning fireplace, and outdoor deck.",
+      features: ["Mountain Views", "Fireplace", "Deck", "Hiking Trails"],
+    },
+    {
+      id: 8,
+      title: "Urban Townhouse",
+      type: "sale",
+      price: "$725,000",
+      priceNum: 725000,
+      beds: 3,
+      baths: 2,
+      sqft: "1,800",
+      icon: "🏘️",
+      location: "Arts District",
+      description:
+        "Contemporary townhouse in trendy arts district. Modern finishes, rooftop deck, attached garage.",
+      features: [
+        "Rooftop Deck",
+        "Attached Garage",
+        "Modern Kitchen",
+        "Walk Score 95",
+      ],
+    },
+    {
+      id: 9,
+      title: "Garden Apartment",
+      type: "rent",
+      price: "$2,200/mo",
+      priceNum: 2200,
+      beds: 2,
+      baths: 1,
+      sqft: "950",
+      icon: "🌳",
+      location: "Park Side",
+      description:
+        "Ground floor apartment with private patio, garden access, and abundant natural light.",
+      features: [
+        "Private Patio",
+        "Garden Access",
+        "Pet Friendly",
+        "Park Views",
+      ],
+    },
+    {
+      id: 10,
+      title: "Modern Condo",
+      type: "sale",
+      price: "$485,000",
+      priceNum: 485000,
+      beds: 2,
+      baths: 2,
+      sqft: "1,100",
+      icon: "🏢",
+      location: "Financial District",
+      description:
+        "Sleek modern condo with stainless appliances, granite counters, and building amenities.",
+      features: ["Pool", "Gym", "Doorman", "Storage"],
     },
   ];
 
-  const filteredProperties =
-    filterType === "all"
-      ? properties
-      : properties.filter((p) => p.type === filterType);
+  const filteredProperties = properties.filter((p) => {
+    // Type filter
+    if (filterType !== "all" && p.type !== filterType) return false;
+
+    // Search filter
+    if (
+      searchTerm &&
+      !p.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !p.location.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      return false;
+    }
+
+    // Price range filter
+    if (priceRange === "low" && p.priceNum > 500000 && p.type === "sale")
+      return false;
+    if (priceRange === "low" && p.priceNum > 2000 && p.type === "rent")
+      return false;
+    if (
+      priceRange === "mid" &&
+      (p.priceNum < 500000 || p.priceNum > 900000) &&
+      p.type === "sale"
+    )
+      return false;
+    if (
+      priceRange === "mid" &&
+      (p.priceNum < 2000 || p.priceNum > 3500) &&
+      p.type === "rent"
+    )
+      return false;
+    if (priceRange === "high" && p.priceNum < 900000 && p.type === "sale")
+      return false;
+    if (priceRange === "high" && p.priceNum < 3500 && p.type === "rent")
+      return false;
+
+    // Bedrooms filter
+    if (bedrooms === "1" && p.beds !== 1) return false;
+    if (bedrooms === "2" && p.beds !== 2) return false;
+    if (bedrooms === "3" && p.beds !== 3) return false;
+    if (bedrooms === "4+" && p.beds < 4) return false;
+
+    return true;
+  });
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
@@ -118,47 +306,190 @@ export const RealEstateDemo: React.FC = () => {
       {/* Filter Bar */}
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "1rem 1.5rem",
+          padding: "1.5rem",
           background: "rgba(16, 185, 129, 0.1)",
           borderBottom: "2px solid rgba(16, 185, 129, 0.3)",
         }}
       >
-        <div style={{ display: "flex", gap: "0.75rem" }}>
-          {[
-            { id: "all", label: "All" },
-            { id: "sale", label: "For Sale" },
-            { id: "rent", label: "For Rent" },
-          ].map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setFilterType(filter.id as any)}
+        {/* Search Bar */}
+        <div style={{ marginBottom: "1rem" }}>
+          <input
+            type="text"
+            placeholder="🔍 Search by location or property name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "0.75rem 1rem",
+              background: "rgba(0, 0, 0, 0.3)",
+              border: "2px solid rgba(16, 185, 129, 0.3)",
+              borderRadius: "8px",
+              color: "#fff",
+              fontSize: "1rem",
+            }}
+          />
+        </div>
+
+        {/* Filters Row */}
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            {[
+              { id: "all", label: "All" },
+              { id: "sale", label: "For Sale" },
+              { id: "rent", label: "For Rent" },
+            ].map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setFilterType(filter.id as any)}
+                style={{
+                  padding: "0.5rem 1rem",
+                  background:
+                    filterType === filter.id
+                      ? "rgba(16, 185, 129, 0.3)"
+                      : "transparent",
+                  border:
+                    filterType === filter.id
+                      ? "2px solid #10b981"
+                      : "2px solid rgba(16, 185, 129, 0.3)",
+                  color:
+                    filterType === filter.id
+                      ? "#10b981"
+                      : "rgba(255, 255, 255, 0.7)",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                  fontSize: "0.875rem",
+                }}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </div>
+
+          <select
+            value={bedrooms}
+            onChange={(e) => setBedrooms(e.target.value as any)}
+            style={{
+              padding: "0.5rem 1rem",
+              background: "rgba(0, 0, 0, 0.3)",
+              border: "2px solid rgba(16, 185, 129, 0.3)",
+              borderRadius: "6px",
+              color: "#fff",
+              fontSize: "0.875rem",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+          >
+            <option value="all">All Bedrooms</option>
+            <option value="1">1 Bed</option>
+            <option value="2">2 Beds</option>
+            <option value="3">3 Beds</option>
+            <option value="4+">4+ Beds</option>
+          </select>
+
+          <select
+            value={priceRange}
+            onChange={(e) => setPriceRange(e.target.value as any)}
+            style={{
+              padding: "0.5rem 1rem",
+              background: "rgba(0, 0, 0, 0.3)",
+              border: "2px solid rgba(16, 185, 129, 0.3)",
+              borderRadius: "6px",
+              color: "#fff",
+              fontSize: "0.875rem",
+              fontWeight: "600",
+              cursor: "pointer",
+            }}
+          >
+            <option value="all">All Prices</option>
+            <option value="low">
+              {filterType === "rent" ? "< $2,000/mo" : "< $500k"}
+            </option>
+            <option value="mid">
+              {filterType === "rent" ? "$2k-$3.5k/mo" : "$500k-$900k"}
+            </option>
+            <option value="high">
+              {filterType === "rent" ? "> $3,500/mo" : "> $900k"}
+            </option>
+          </select>
+
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+            }}
+          >
+            <span
               style={{
-                padding: "0.5rem 1rem",
+                color: "rgba(255, 255, 255, 0.7)",
+                fontSize: "0.875rem",
+                marginRight: "0.5rem",
+              }}
+            >
+              View:
+            </span>
+            <button
+              onClick={() => setLayoutView("grid")}
+              style={{
+                padding: "0.5rem 0.75rem",
                 background:
-                  filterType === filter.id
+                  layoutView === "grid"
                     ? "rgba(16, 185, 129, 0.3)"
                     : "transparent",
                 border:
-                  filterType === filter.id
+                  layoutView === "grid"
                     ? "2px solid #10b981"
                     : "2px solid rgba(16, 185, 129, 0.3)",
-                color:
-                  filterType === filter.id
-                    ? "#10b981"
-                    : "rgba(255, 255, 255, 0.7)",
                 borderRadius: "6px",
                 cursor: "pointer",
-                fontWeight: "600",
-                fontSize: "0.875rem",
+                fontSize: "1.25rem",
               }}
             >
-              {filter.label}
+              ⊞
             </button>
-          ))}
+            <button
+              onClick={() => setLayoutView("list")}
+              style={{
+                padding: "0.5rem 0.75rem",
+                background:
+                  layoutView === "list"
+                    ? "rgba(16, 185, 129, 0.3)"
+                    : "transparent",
+                border:
+                  layoutView === "list"
+                    ? "2px solid #10b981"
+                    : "2px solid rgba(16, 185, 129, 0.3)",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "1.25rem",
+              }}
+            >
+              ☰
+            </button>
+          </div>
         </div>
+      </div>
+
+      {/* View Navigation Buttons */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.5rem",
+          padding: "1rem 1.5rem",
+          background: "rgba(16, 185, 129, 0.05)",
+          borderBottom: "2px solid rgba(16, 185, 129, 0.2)",
+        }}
+      >
         <div style={{ display: "flex", gap: "0.5rem" }}>
           <button
             onClick={() => setCurrentView("listings")}
@@ -202,110 +533,126 @@ export const RealEstateDemo: React.FC = () => {
       {/* Content */}
       <div style={{ padding: "2rem 1.5rem", minHeight: "450px" }}>
         {currentView === "listings" && (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {filteredProperties.map((property) => (
-              <div
-                key={property.id}
-                style={{
-                  background: "rgba(16, 185, 129, 0.1)",
-                  border: "2px solid rgba(16, 185, 129, 0.3)",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  transition: "all 0.3s",
-                }}
-                onClick={() => {
-                  setSelectedProperty(property.id - 1);
-                  setCurrentView("detail");
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.borderColor = "#10b981";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.3)";
-                }}
-              >
+          <>
+            <div
+              style={{
+                marginBottom: "1rem",
+                color: "rgba(255, 255, 255, 0.7)",
+              }}
+            >
+              Showing {filteredProperties.length} properties
+            </div>
+            <div
+              style={{
+                display: layoutView === "grid" ? "grid" : "flex",
+                gridTemplateColumns:
+                  layoutView === "grid"
+                    ? "repeat(auto-fill, minmax(280px, 1fr))"
+                    : undefined,
+                flexDirection: layoutView === "list" ? "column" : undefined,
+                gap: "1.5rem",
+              }}
+            >
+              {filteredProperties.map((property) => (
                 <div
+                  key={property.id}
                   style={{
-                    fontSize: "6rem",
-                    textAlign: "center",
-                    padding: "2rem 1rem",
-                    background: "rgba(16, 185, 129, 0.05)",
+                    background: "rgba(16, 185, 129, 0.1)",
+                    border: "2px solid rgba(16, 185, 129, 0.3)",
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    transition: "all 0.3s",
+                  }}
+                  onClick={() => {
+                    setSelectedProperty(property.id - 1);
+                    setCurrentView("detail");
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.borderColor = "#10b981";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(16, 185, 129, 0.3)";
                   }}
                 >
-                  {property.icon}
-                </div>
-                <div style={{ padding: "1rem" }}>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "start",
-                      marginBottom: "0.5rem",
+                      fontSize: "6rem",
+                      textAlign: "center",
+                      padding: "2rem 1rem",
+                      background: "rgba(16, 185, 129, 0.05)",
                     }}
                   >
-                    <h3
+                    {property.icon}
+                  </div>
+                  <div style={{ padding: "1rem" }}>
+                    <div
                       style={{
-                        fontSize: "1.1rem",
-                        fontWeight: "600",
-                        color: "#fff",
-                        margin: 0,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "start",
+                        marginBottom: "0.5rem",
                       }}
                     >
-                      {property.title}
-                    </h3>
-                    <span
+                      <h3
+                        style={{
+                          fontSize: "1.1rem",
+                          fontWeight: "600",
+                          color: "#fff",
+                          margin: 0,
+                        }}
+                      >
+                        {property.title}
+                      </h3>
+                      <span
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          background:
+                            property.type === "sale"
+                              ? "rgba(16, 185, 129, 0.2)"
+                              : "rgba(59, 130, 246, 0.2)",
+                          border: `1px solid ${property.type === "sale" ? "#10b981" : "#3b82f6"}`,
+                          color:
+                            property.type === "sale" ? "#10b981" : "#3b82f6",
+                          borderRadius: "4px",
+                          fontSize: "0.75rem",
+                          fontWeight: "600",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {property.type}
+                      </span>
+                    </div>
+                    <div
                       style={{
-                        padding: "0.25rem 0.5rem",
-                        background:
-                          property.type === "sale"
-                            ? "rgba(16, 185, 129, 0.2)"
-                            : "rgba(59, 130, 246, 0.2)",
-                        border: `1px solid ${property.type === "sale" ? "#10b981" : "#3b82f6"}`,
-                        color: property.type === "sale" ? "#10b981" : "#3b82f6",
-                        borderRadius: "4px",
-                        fontSize: "0.75rem",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
+                        fontSize: "1.5rem",
+                        fontWeight: "700",
+                        color: "#10b981",
+                        marginBottom: "0.75rem",
                       }}
                     >
-                      {property.type}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "1.5rem",
-                      fontWeight: "700",
-                      color: "#10b981",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    {property.price}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "1rem",
-                      fontSize: "0.875rem",
-                      color: "rgba(255, 255, 255, 0.7)",
-                    }}
-                  >
-                    <span>🛏️ {property.beds} beds</span>
-                    <span>🚿 {property.baths} baths</span>
-                    <span>📏 {property.sqft} sqft</span>
+                      {property.price}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "1rem",
+                        fontSize: "0.875rem",
+                        color: "rgba(255, 255, 255, 0.7)",
+                      }}
+                    >
+                      <span>🛏️ {property.beds} beds</span>
+                      <span>🚿 {property.baths} baths</span>
+                      <span>📏 {property.sqft} sqft</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </>
         )}
 
         {currentView === "detail" && (
@@ -488,21 +835,58 @@ export const RealEstateDemo: React.FC = () => {
                       marginBottom: "0.75rem",
                     }}
                   >
-                    Property Features
+                    Description
                   </h3>
-                  <ul
+                  <p
                     style={{
-                      color: "rgba(255, 255, 255, 0.7)",
-                      lineHeight: "1.8",
-                      paddingLeft: "1.5rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      lineHeight: "1.7",
+                      margin: 0,
                     }}
                   >
-                    <li>Modern kitchen with stainless steel appliances</li>
-                    <li>Hardwood floors throughout</li>
-                    <li>In-unit washer/dryer</li>
-                    <li>Central heating and A/C</li>
-                    <li>Walking distance to public transit</li>
-                  </ul>
+                    {filteredProperties[selectedProperty]?.description}
+                  </p>
+                </div>
+
+                <div style={{ marginBottom: "1.5rem" }}>
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: "600",
+                      color: "#10b981",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    Property Features
+                  </h3>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(2, 1fr)",
+                      gap: "0.75rem",
+                    }}
+                  >
+                    {filteredProperties[selectedProperty]?.features.map(
+                      (feature, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                            color: "rgba(255, 255, 255, 0.8)",
+                          }}
+                        >
+                          <span
+                            style={{ color: "#10b981", fontSize: "1.25rem" }}
+                          >
+                            ✓
+                          </span>
+                          {feature}
+                        </div>
+                      ),
+                    )}
+                  </div>
                 </div>
 
                 <button

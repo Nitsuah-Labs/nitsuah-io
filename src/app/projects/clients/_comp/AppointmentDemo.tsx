@@ -180,11 +180,13 @@ export const AppointmentDemo: React.FC = () => {
           .appt-header-btn {
             padding: 0.4rem 0.75rem !important;
             font-size: 0.75rem !important;
+            min-height: 44px !important;
           }
           
           .appt-tab {
-            padding: 0.4rem 0.75rem !important;
-            font-size: 0.75rem !important;
+            padding: 0.5rem 1rem !important;
+            font-size: 0.85rem !important;
+            min-height: 44px !important;
           }
           
           .appt-type-grid {
@@ -194,12 +196,21 @@ export const AppointmentDemo: React.FC = () => {
           .appt-form-grid {
             grid-template-columns: 1fr !important;
           }
+          
+          .appt-calendar {
+            padding: 1rem !important;
+          }
+          
+          .appt-patient-list {
+            gap: 0.75rem !important;
+          }
         }
         
         @media (max-width: 480px) {
           .appt-header {
             flex-direction: column !important;
             gap: 1rem !important;
+            padding: 1rem !important;
           }
           
           .appt-type-grid {
@@ -209,11 +220,28 @@ export const AppointmentDemo: React.FC = () => {
           .appt-card-content {
             flex-direction: column !important;
             gap: 1rem !important;
+            align-items: stretch !important;
           }
           
           .appt-card-actions {
             flex-direction: row !important;
             width: 100% !important;
+            justify-content: stretch !important;
+          }
+          
+          .appt-card-actions button {
+            flex: 1 !important;
+            min-height: 44px !important;
+          }
+          
+          .appt-tabs {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          
+          .appt-tab {
+            width: 100% !important;
+            justify-content: center !important;
           }
         }
       `}</style>

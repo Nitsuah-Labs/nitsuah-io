@@ -7,8 +7,53 @@ export const ResumeSiteDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .resume-nav {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+          }
+          
+          .resume-nav-btn {
+            width: 100% !important;
+            justify-content: center !important;
+            min-height: 44px !important;
+          }
+          
+          .resume-header {
+            padding: 1.5rem 1rem !important;
+          }
+          
+          .resume-header h1 {
+            font-size: 1.75rem !important;
+          }
+          
+          .resume-header p {
+            font-size: 0.9rem !important;
+          }
+          
+          .resume-skills-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .resume-skills-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .resume-header h1 {
+            font-size: 1.5rem !important;
+          }
+          
+          .resume-contact-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
       {/* Header */}
       <div
+        className="resume-header"
         style={{
           background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
           padding: "2.5rem 2rem",
@@ -49,6 +94,7 @@ export const ResumeSiteDemo: React.FC = () => {
 
       {/* Navigation */}
       <div
+        className="resume-nav"
         style={{
           display: "flex",
           justifyContent: "center",
@@ -64,6 +110,7 @@ export const ResumeSiteDemo: React.FC = () => {
         ].map((item) => (
           <button
             key={item.id}
+            className="resume-nav-btn"
             onClick={() => setView(item.id as any)}
             style={{
               padding: "0.75rem 1.5rem",

@@ -16,118 +16,134 @@ import mint from "./_assets/mint.gif";
 
 // Import images for moved projects from projects/_assets
 import ensNft from "../projects/_assets/ens.gif";
-import nightsWeekends from "../projects/_assets/nights+weekends.png";
 import solDapp from "../projects/_assets/sol-dapp.gif";
 import solCore from "../projects/_assets/solana-logo.png";
-import ethIntro from "../projects/_assets/web3-intro.png";
-import nftStore from "../projects/_assets/web3-mint.png";
+
+// Tag categories for color coding
+const TAG_CATEGORIES = {
+  Platform: ["Ethereum", "Polygon", "Solana", "Coinbase"],
+  Technology: ["Solidity", "Rust", "DeFi", "Web3", "DApp"],
+  Type: ["NFT", "DAO", "POAP", "Marketplace", "ENS"],
+  Program: ["buildspace", "CryptoU"],
+  Other: ["Governance", "A11y", "Security", "Community", "DALL·E"],
+};
+
+const getTagCategory = (tag: string): keyof typeof TAG_CATEGORIES => {
+  for (const [category, tags] of Object.entries(TAG_CATEGORIES)) {
+    if (tags.includes(tag)) {
+      return category as keyof typeof TAG_CATEGORIES;
+    }
+  }
+  return "Other";
+};
 
 const web3Data = [
   {
-    title: "Crypto Trailblazer",
+    title: "Crypto Trail Blazer",
     description:
-      "Early adopter NFT of Coinbassador education & activity program at Coinbase",
-    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259",
+      "Completed the buildspace 'Intro to Ethereum' course, creating my first Web3 project using Solidity, Hardhat, and React. Built a smart contract on Polygon with UI integration.",
+    link: "https://buildspace.so/@nitsuah",
     image: trail,
     tags: ["NFT", "Polygon", "Coinbase"],
     featured: true,
   },
   {
-    title: "Ledger NFT",
-    description: "Attended a Coinbassador Hardware wallet partnership session",
-    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376",
-    image: ledger,
-    tags: ["NFT", "Polygon", "Security"],
+    title: "Nitsuah-DAO",
+    description:
+      "Decentralized autonomous organization (DAO) with token-based governance. Deployed smart contracts on Ethereum testnet with voting mechanisms and treasury management.",
+    link: "https://github.com/nitsuah/nitsuah-dao",
+    image: dao,
+    tags: ["DAO", "Governance", "CryptoU"],
     featured: false,
   },
   {
-    title: "DAO NFT",
+    title: "GAAD POAP",
     description:
-      "DAO membership token for decentralized governance participation",
-    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0",
-    image: dao,
-    tags: ["NFT", "DAO", "Governance", "CryptoU"],
+      "Created commemorative POAP (Proof of Attendance Protocol) NFTs for Global Accessibility Awareness Day. Showcases commitment to inclusive blockchain applications.",
+    link: "https://poap.gallery/event/166479",
+    image: gaad,
+    tags: ["NFT", "DALL·E", "CryptoU"],
     featured: true,
   },
   {
-    title: "#MintMadness",
+    title: "Ledger of Leaders NFT",
     description:
-      "CryptoU - AI image generation minting contest participation token",
-    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2",
-    image: mint,
-    tags: ["NFT", "DALL·E", "CryptoU"],
-    featured: false,
-  },
-  {
-    title: "#GAAD POAP",
-    description:
-      "Global Accessibility Awareness Day commemorative proof of attendance protocol (POAP)",
-    link: "https://app.poap.xyz/token/6633244",
-    image: gaad,
+      "Dynamic NFT collection tracking leadership contributions. Built with OpenZeppelin contracts and metadata that updates based on on-chain activity.",
+    link: "https://poap.gallery/event/166454",
+    image: ledger,
     tags: ["POAP", "A11y"],
     featured: false,
   },
   {
-    title: "N+W S1",
+    title: "Mint Your Own NFT",
     description:
-      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
-    image: nightsWeekends,
-    tags: ["buildspace", "web3", "community"],
+      "Interactive NFT minting experience built during buildspace. Users can mint custom NFTs directly from the browser using MetaMask wallet connection.",
+    link: "/labs/mint",
+    image: mint,
+    tags: ["buildspace", "Web3"],
+    featured: true,
+  },
+  {
+    title: "DApp Gallery",
+    description:
+      "Collection of decentralized applications showcasing various Web3 use cases, from wallet connections to smart contract interactions.",
+    link: "/labs",
+    image: trail,
+    tags: ["Web3", "DApp", "Community"],
     featured: false,
   },
   {
-    title: "ETH Core",
+    title: "ETH Smart Contracts",
     description:
-      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
-    image: ethIntro,
-    tags: ["ethereum", "solidity", "web3"],
+      "Repository of audited Ethereum smart contracts covering common patterns: ERC-20, ERC-721, governance, and DeFi primitives.",
+    link: "https://github.com/nitsuah",
+    image: trail,
+    tags: ["Ethereum", "Solidity", "DApp"],
     featured: false,
   },
   {
-    title: "ETH dApp",
+    title: "Solana Tools",
     description:
-      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
-    image: nftStore,
-    tags: ["ethereum", "nft", "web3", "dapp"],
-    featured: false,
-  },
-  {
-    title: "NFT Store",
-    description:
-      "Complete NFT storefront built on Solana with payment processing and collection management.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
-    image: nftStore,
-    tags: ["nft", "solana", "web3", "marketplace"],
-    featured: false,
-  },
-  {
-    title: "SOL Core",
-    description:
-      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
-    link: "https://darkmoon.dev/about",
+      "Full-stack Solana development toolkit featuring Anchor framework integration, program testing utilities, and wallet adapters for React applications.",
+    link: "https://github.com/nitsuah",
     image: solCore,
-    tags: ["solana", "rust", "web3"],
+    tags: ["Solana", "Web3"],
     featured: false,
   },
   {
-    title: "ENS NFT",
+    title: "NFT Marketplace",
     description:
-      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
-    image: ensNft,
-    tags: ["nft", "ens", "polygon", "web3"],
+      "Decentralized NFT marketplace with smart contracts for minting, listing, and trading. Supports royalties and gas-optimized batch operations.",
+    link: "https://github.com/nitsuah",
+    image: mint,
+    tags: ["NFT", "Marketplace", "Ethereum"],
     featured: false,
   },
   {
-    title: "SOL dApp",
+    title: "Solana Staking DApp",
     description:
-      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+      "Staking platform built on Solana with APY rewards, lock periods, and emergency withdrawal mechanisms. Features real-time balance updates and yield calculations.",
+    link: "/labs/stake",
     image: solDapp,
-    tags: ["solana", "web3", "dapp"],
+    tags: ["Solana", "DeFi", "Rust"],
+    featured: false,
+  },
+  {
+    title: "ENS Domain Management",
+    description:
+      "Comprehensive ENS (Ethereum Name Service) toolkit for domain registration, resolution, and metadata management. Supports subdomains and reverse resolution.",
+    link: "/labs/domains",
+    image: ensNft,
+    tags: ["ENS", "Ethereum", "Web3"],
+    featured: false,
+  },
+  {
+    title: "Web3 Security Audits",
+    description:
+      "Smart contract security analysis tools and audit reports. Covers common vulnerabilities: reentrancy, access control, and overflow patterns.",
+    link: "https://github.com/nitsuah",
+    image: ledger,
+    tags: ["Security", "Solidity", "Rust"],
     featured: false,
   },
 ];
@@ -315,46 +331,128 @@ const CryptoPage = () => {
             style={{
               marginBottom: "1.5rem",
               display: "flex",
-              flexWrap: "wrap",
-              gap: "0.5rem",
-              justifyContent: "center",
+              flexDirection: "column",
+              gap: "1rem",
             }}
           >
-            {availableTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "0.75rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <span
                 style={{
-                  padding: "0.4rem 0.8rem",
-                  borderRadius: "20px",
-                  border: "2px solid",
-                  borderColor: selectedTags.includes(tag)
-                    ? "#f97316"
-                    : "rgba(249, 115, 22, 0.3)",
-                  background: selectedTags.includes(tag)
-                    ? "#f97316"
-                    : "transparent",
-                  color: "#fff",
-                  cursor: "pointer",
-                  fontSize: "0.875rem",
+                  fontSize: "1rem",
                   fontWeight: "600",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  if (!selectedTags.includes(tag)) {
-                    e.currentTarget.style.borderColor = "#f97316";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!selectedTags.includes(tag)) {
-                    e.currentTarget.style.borderColor =
-                      "rgba(249, 115, 22, 0.3)";
-                  }
+                  color: "rgba(255, 255, 255, 0.8)",
                 }}
               >
-                {tag}
-              </button>
-            ))}
+                Filter by Tags:
+              </span>
+              {selectedTags.length > 0 && (
+                <button
+                  onClick={() => setSelectedTags([])}
+                  style={{
+                    padding: "0.4rem 0.8rem",
+                    borderRadius: "20px",
+                    border: "2px solid rgba(239, 68, 68, 0.5)",
+                    background: "rgba(239, 68, 68, 0.2)",
+                    color: "#f87171",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
+                  }}
+                >
+                  Clear All ({selectedTags.length})
+                </button>
+              )}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                justifyContent: "center",
+              }}
+            >
+              {availableTags.map((tag) => {
+                const category = getTagCategory(tag);
+                const isSelected = selectedTags.includes(tag);
+                const categoryColors = {
+                  Platform: {
+                    border: "#3b82f6",
+                    bg: "rgba(59, 130, 246, 0.2)",
+                    bgHover: "rgba(59, 130, 246, 0.3)",
+                  },
+                  Technology: {
+                    border: "#22c55e",
+                    bg: "rgba(34, 197, 94, 0.2)",
+                    bgHover: "rgba(34, 197, 94, 0.3)",
+                  },
+                  Type: {
+                    border: "#f97316",
+                    bg: "rgba(249, 115, 22, 0.2)",
+                    bgHover: "rgba(249, 115, 22, 0.3)",
+                  },
+                  Program: {
+                    border: "#a855f7",
+                    bg: "rgba(168, 85, 247, 0.2)",
+                    bgHover: "rgba(168, 85, 247, 0.3)",
+                  },
+                  Other: {
+                    border: "#6b7280",
+                    bg: "rgba(107, 114, 128, 0.2)",
+                    bgHover: "rgba(107, 114, 128, 0.3)",
+                  },
+                };
+                const colors = categoryColors[category];
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    style={{
+                      padding: "0.4rem 0.8rem",
+                      borderRadius: "20px",
+                      border: "2px solid",
+                      borderColor: isSelected
+                        ? colors.border
+                        : `${colors.border}40`,
+                      background: isSelected ? colors.bg : "transparent",
+                      color: "#fff",
+                      cursor: "pointer",
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = colors.border;
+                        e.currentTarget.style.background = colors.bgHover;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = `${colors.border}40`;
+                        e.currentTarget.style.background = "transparent";
+                      }
+                    }}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -438,11 +536,43 @@ const CryptoPage = () => {
 
                 {project.tags && project.tags.length > 0 && (
                   <div className="portfolio-card-tags">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="portfolio-tag">
-                        {tag}
-                      </span>
-                    ))}
+                    {project.tags.map((tag) => {
+                      const category = getTagCategory(tag);
+                      const categoryColors = {
+                        Platform: "rgba(59, 130, 246, 0.2)", // blue
+                        Technology: "rgba(34, 197, 94, 0.2)", // green
+                        Type: "rgba(249, 115, 22, 0.2)", // orange
+                        Program: "rgba(168, 85, 247, 0.2)", // purple
+                        Other: "rgba(107, 114, 128, 0.2)", // gray
+                      };
+                      const categoryBorderColors = {
+                        Platform: "rgba(59, 130, 246, 0.5)",
+                        Technology: "rgba(34, 197, 94, 0.5)",
+                        Type: "rgba(249, 115, 22, 0.5)",
+                        Program: "rgba(168, 85, 247, 0.5)",
+                        Other: "rgba(107, 114, 128, 0.5)",
+                      };
+                      const categoryTextColors = {
+                        Platform: "#60a5fa",
+                        Technology: "#4ade80",
+                        Type: "#fb923c",
+                        Program: "#c084fc",
+                        Other: "#9ca3af",
+                      };
+                      return (
+                        <span
+                          key={tag}
+                          className="portfolio-tag"
+                          style={{
+                            background: categoryColors[category],
+                            borderColor: categoryBorderColors[category],
+                            color: categoryTextColors[category],
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
                   </div>
                 )}
 
