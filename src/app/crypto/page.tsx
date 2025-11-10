@@ -15,9 +15,13 @@ import ledger from "./_assets/ledger.png";
 import mint from "./_assets/mint.gif";
 
 // Import images for moved projects from projects/_assets
+import blendEth from "../projects/_assets/blend-eth.gif";
 import ensNft from "../projects/_assets/ens.gif";
+import nightsWeekends from "../projects/_assets/nights+weekends.png";
 import solDapp from "../projects/_assets/sol-dapp.gif";
+import solStore from "../projects/_assets/sol-store.gif";
 import solCore from "../projects/_assets/solana-logo.png";
+import web3Mint from "../projects/_assets/web3-mint.png";
 
 // Tag categories for color coding
 const TAG_CATEGORIES = {
@@ -39,111 +43,110 @@ const getTagCategory = (tag: string): keyof typeof TAG_CATEGORIES => {
 
 const web3Data = [
   {
-    title: "Crypto Trail Blazer",
+    title: "Crypto Trailblazer",
     description:
-      "Completed the buildspace 'Intro to Ethereum' course, creating my first Web3 project using Solidity, Hardhat, and React. Built a smart contract on Polygon with UI integration.",
-    link: "https://buildspace.so/@nitsuah",
+      "Early adopter NFT of Coinbassador education & activity program at Coinbase",
+    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259",
     image: trail,
     tags: ["NFT", "Polygon", "Coinbase"],
     featured: true,
   },
   {
-    title: "Nitsuah-DAO",
+    title: "Ledger NFT",
+    description: "Attended a Coinbassador Hardware wallet partnership session",
+    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376",
+    image: ledger,
+    tags: ["NFT", "Polygon", "Security", "Coinbase"],
+    featured: false,
+  },
+  {
+    title: "DAO NFT",
     description:
-      "Decentralized autonomous organization (DAO) with token-based governance. Deployed smart contracts on Ethereum testnet with voting mechanisms and treasury management.",
-    link: "https://github.com/nitsuah/nitsuah-dao",
+      "DAO membership token for decentralized governance participation",
+    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0",
     image: dao,
-    tags: ["DAO", "Governance", "CryptoU"],
+    tags: ["NFT", "DAO", "Governance", "CryptoU", "Coinbase"],
     featured: false,
   },
   {
-    title: "GAAD POAP",
+    title: "#MintMadness",
     description:
-      "Created commemorative POAP (Proof of Attendance Protocol) NFTs for Global Accessibility Awareness Day. Showcases commitment to inclusive blockchain applications.",
-    link: "https://poap.gallery/event/166479",
+      "CryptoU - AI image generation minting contest participation token",
+    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2",
+    image: mint,
+    tags: ["NFT", "DALL·E", "CryptoU", "Coinbase"],
+    featured: false,
+  },
+  {
+    title: "#GAAD POAP",
+    description:
+      "Global Accessibility Awareness Day commemorative proof of attendance protocol (POAP)",
+    link: "https://app.poap.xyz/token/6633244",
     image: gaad,
-    tags: ["NFT", "DALL·E", "CryptoU"],
+    tags: ["POAP", "A11y", "Coinbase"],
     featured: true,
   },
   {
-    title: "Ledger of Leaders NFT",
+    title: "N+W S1",
     description:
-      "Dynamic NFT collection tracking leadership contributions. Built with OpenZeppelin contracts and metadata that updates based on on-chain activity.",
-    link: "https://poap.gallery/event/166454",
-    image: ledger,
-    tags: ["POAP", "A11y"],
+      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
+    image: nightsWeekends,
+    tags: ["buildspace", "Web3", "Community"],
     featured: false,
   },
   {
-    title: "Mint Your Own NFT",
+    title: "ETH Core",
     description:
-      "Interactive NFT minting experience built during buildspace. Users can mint custom NFTs directly from the browser using MetaMask wallet connection.",
-    link: "/labs/mint",
-    image: mint,
-    tags: ["buildspace", "Web3"],
-    featured: true,
-  },
-  {
-    title: "DApp Gallery",
-    description:
-      "Collection of decentralized applications showcasing various Web3 use cases, from wallet connections to smart contract interactions.",
-    link: "/labs",
-    image: trail,
-    tags: ["Web3", "DApp", "Community"],
+      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
+    image: blendEth,
+    tags: ["Ethereum", "Solidity", "Web3", "buildspace"],
     featured: false,
   },
   {
-    title: "ETH Smart Contracts",
+    title: "ETH dApp",
     description:
-      "Repository of audited Ethereum smart contracts covering common patterns: ERC-20, ERC-721, governance, and DeFi primitives.",
-    link: "https://github.com/nitsuah",
-    image: trail,
-    tags: ["Ethereum", "Solidity", "DApp"],
+      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
+    image: web3Mint,
+    tags: ["Ethereum", "NFT", "Web3", "DApp", "buildspace"],
     featured: false,
   },
   {
-    title: "Solana Tools",
+    title: "NFT Store",
     description:
-      "Full-stack Solana development toolkit featuring Anchor framework integration, program testing utilities, and wallet adapters for React applications.",
-    link: "https://github.com/nitsuah",
+      "Complete NFT storefront built on Solana with payment processing and collection management.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
+    image: solStore,
+    tags: ["NFT", "Solana", "Web3", "Marketplace", "buildspace"],
+    featured: false,
+  },
+  {
+    title: "SOL Core",
+    description:
+      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
+    link: "https://darkmoon.dev/about",
     image: solCore,
-    tags: ["Solana", "Web3"],
+    tags: ["Solana", "Rust", "Web3", "buildspace"],
     featured: false,
   },
   {
-    title: "NFT Marketplace",
+    title: "ENS NFT",
     description:
-      "Decentralized NFT marketplace with smart contracts for minting, listing, and trading. Supports royalties and gas-optimized batch operations.",
-    link: "https://github.com/nitsuah",
-    image: mint,
-    tags: ["NFT", "Marketplace", "Ethereum"],
-    featured: false,
-  },
-  {
-    title: "Solana Staking DApp",
-    description:
-      "Staking platform built on Solana with APY rewards, lock periods, and emergency withdrawal mechanisms. Features real-time balance updates and yield calculations.",
-    link: "/labs/stake",
-    image: solDapp,
-    tags: ["Solana", "DeFi", "Rust"],
-    featured: false,
-  },
-  {
-    title: "ENS Domain Management",
-    description:
-      "Comprehensive ENS (Ethereum Name Service) toolkit for domain registration, resolution, and metadata management. Supports subdomains and reverse resolution.",
-    link: "/labs/domains",
+      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
     image: ensNft,
-    tags: ["ENS", "Ethereum", "Web3"],
+    tags: ["NFT", "ENS", "Polygon", "Web3", "buildspace"],
     featured: false,
   },
   {
-    title: "Web3 Security Audits",
+    title: "SOL dApp",
     description:
-      "Smart contract security analysis tools and audit reports. Covers common vulnerabilities: reentrancy, access control, and overflow patterns.",
-    link: "https://github.com/nitsuah",
-    image: ledger,
-    tags: ["Security", "Solidity", "Rust"],
+      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
+    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
+    image: solDapp,
+    tags: ["Solana", "Web3", "DApp", "buildspace"],
     featured: false,
   },
 ];
