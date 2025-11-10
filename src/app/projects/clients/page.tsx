@@ -102,22 +102,6 @@ const clientProjects: ClientProject[] = [
     icon: "🦷",
   },
   {
-    id: "crm",
-    name: "Customer CRM",
-    type: "saas",
-    description:
-      "Salesforce-style CRM with contacts, pipeline, tasks, and deals tracking",
-    technologies: ["React", "TypeScript", "Real-time Sync"],
-    features: [
-      "Contact Management",
-      "Sales Pipeline",
-      "Task Tracking",
-      "Deal Flow",
-    ],
-    status: "demo",
-    icon: "📈",
-  },
-  {
     id: "portfolio",
     name: "Creative Portfolio",
     type: "portfolio",
@@ -178,6 +162,22 @@ const clientProjects: ClientProject[] = [
     ],
     status: "demo",
     icon: "🖼️",
+  },
+  {
+    id: "crm",
+    name: "Customer CRM",
+    type: "saas",
+    description:
+      "Salesforce-style CRM with contacts, pipeline, tasks, and deals tracking",
+    technologies: ["React", "TypeScript", "Real-time Sync"],
+    features: [
+      "Contact Management",
+      "Sales Pipeline",
+      "Task Tracking",
+      "Deal Flow",
+    ],
+    status: "demo",
+    icon: "📈",
   },
   {
     id: "blog-cms",
