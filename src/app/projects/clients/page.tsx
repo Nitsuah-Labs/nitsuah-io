@@ -85,22 +85,6 @@ const clientProjects: ClientProject[] = [
     icon: "🍝",
   },
   {
-    id: "dashboard",
-    name: "SaaS Analytics",
-    type: "saas",
-    description:
-      "Analytics dashboard for tracking KPIs, metrics, and business insights",
-    technologies: ["React", "D3.js", "Chart.js", "REST API"],
-    features: [
-      "Real-time Analytics",
-      "Custom Reports",
-      "Data Visualization",
-      "Export Tools",
-    ],
-    status: "demo",
-    icon: "📊",
-  },
-  {
     id: "realestate",
     name: "Real Estate",
     type: "service",
@@ -196,7 +180,7 @@ const clientProjects: ClientProject[] = [
   },
   {
     id: "blog-cms",
-    name: "Content Management",
+    name: "Content Mgmt",
     type: "saas",
     description: "Blog CMS with markdown support, SEO tools, and analytics",
     technologies: ["Next.js", "MDX", "Vercel Analytics"],
@@ -208,6 +192,22 @@ const clientProjects: ClientProject[] = [
     ],
     status: "demo",
     icon: "📝",
+  },
+  {
+    id: "dashboard",
+    name: "SaaS Analytics",
+    type: "saas",
+    description:
+      "Analytics dashboard for tracking KPIs, metrics, and business insights",
+    technologies: ["React", "D3.js", "Chart.js", "REST API"],
+    features: [
+      "Real-time Analytics",
+      "Custom Reports",
+      "Data Visualization",
+      "Export Tools",
+    ],
+    status: "demo",
+    icon: "📊",
   },
 ];
 
@@ -613,7 +613,61 @@ const MintExample: React.FC = () => {
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  {/* Status Badge */}
+                  {/* Type Badge - Upper Left */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "0.75rem",
+                      left: "0.75rem",
+                      zIndex: 5,
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: "0.35rem 0.85rem",
+                        borderRadius: "6px",
+                        fontSize: "0.8rem",
+                        fontWeight: "600",
+                        background:
+                          project.type === "web3"
+                            ? "rgba(147, 51, 234, 0.2)"
+                            : project.type === "ecommerce"
+                              ? "rgba(249, 115, 22, 0.2)"
+                              : project.type === "saas"
+                                ? "rgba(59, 130, 246, 0.2)"
+                                : project.type === "service"
+                                  ? "rgba(34, 197, 94, 0.2)"
+                                  : "rgba(236, 72, 153, 0.2)",
+                        color:
+                          project.type === "web3"
+                            ? "#c084fc"
+                            : project.type === "ecommerce"
+                              ? "#fb923c"
+                              : project.type === "saas"
+                                ? "#60a5fa"
+                                : project.type === "service"
+                                  ? "#4ade80"
+                                  : "#f472b6",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.5px",
+                        border: `1px solid ${
+                          project.type === "web3"
+                            ? "rgba(147, 51, 234, 0.4)"
+                            : project.type === "ecommerce"
+                              ? "rgba(249, 115, 22, 0.4)"
+                              : project.type === "saas"
+                                ? "rgba(59, 130, 246, 0.4)"
+                                : project.type === "service"
+                                  ? "rgba(34, 197, 94, 0.4)"
+                                  : "rgba(236, 72, 153, 0.4)"
+                        }`,
+                      }}
+                    >
+                      {project.type}
+                    </span>
+                  </div>
+
+                  {/* Status Badge - Upper Right */}
                   <div
                     style={{
                       position: "absolute",
@@ -664,59 +718,6 @@ const MintExample: React.FC = () => {
                     }}
                   >
                     {getProjectIcon(project)}
-                  </div>
-
-                  {/* Type Badge */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: "0.75rem",
-                    }}
-                  >
-                    <span
-                      style={{
-                        padding: "0.35rem 0.85rem",
-                        borderRadius: "6px",
-                        fontSize: "0.8rem",
-                        fontWeight: "600",
-                        background:
-                          project.type === "web3"
-                            ? "rgba(147, 51, 234, 0.2)"
-                            : project.type === "ecommerce"
-                              ? "rgba(249, 115, 22, 0.2)"
-                              : project.type === "saas"
-                                ? "rgba(59, 130, 246, 0.2)"
-                                : project.type === "service"
-                                  ? "rgba(34, 197, 94, 0.2)"
-                                  : "rgba(236, 72, 153, 0.2)",
-                        color:
-                          project.type === "web3"
-                            ? "#c084fc"
-                            : project.type === "ecommerce"
-                              ? "#fb923c"
-                              : project.type === "saas"
-                                ? "#60a5fa"
-                                : project.type === "service"
-                                  ? "#4ade80"
-                                  : "#f472b6",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.5px",
-                        border: `1px solid ${
-                          project.type === "web3"
-                            ? "rgba(147, 51, 234, 0.4)"
-                            : project.type === "ecommerce"
-                              ? "rgba(249, 115, 22, 0.4)"
-                              : project.type === "saas"
-                                ? "rgba(59, 130, 246, 0.4)"
-                                : project.type === "service"
-                                  ? "rgba(34, 197, 94, 0.4)"
-                                  : "rgba(236, 72, 153, 0.4)"
-                        }`,
-                      }}
-                    >
-                      {project.type}
-                    </span>
                   </div>
 
                   {/* Title */}
@@ -798,30 +799,36 @@ const MintExample: React.FC = () => {
                     disabled={carouselIndex === 0}
                     style={{
                       position: "absolute",
-                      left: "0",
+                      left: "8px",
                       top: "50%",
                       transform: "translateY(-50%)",
-                      width: "32px",
-                      height: "32px",
+                      width: "36px",
+                      height: "36px",
                       borderRadius: "50%",
                       background: "rgba(16, 185, 129, 0.2)",
                       border: "2px solid rgba(16, 185, 129, 0.4)",
                       color: "#10b981",
-                      fontSize: "1.2rem",
+                      fontSize: "1.4rem",
                       cursor: carouselIndex === 0 ? "not-allowed" : "pointer",
                       opacity: carouselIndex === 0 ? 0.3 : 1,
                       zIndex: 10,
                       transition: "all 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                     onMouseEnter={(e) => {
                       if (carouselIndex > 0) {
                         e.currentTarget.style.background =
-                          "rgba(16, 185, 129, 0.3)";
+                          "rgba(16, 185, 129, 0.4)";
+                        e.currentTarget.style.transform =
+                          "translateY(-50%) scale(1.1)";
                       }
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background =
                         "rgba(16, 185, 129, 0.2)";
+                      e.currentTarget.style.transform = "translateY(-50%)";
                     }}
                   >
                     ‹
@@ -834,16 +841,16 @@ const MintExample: React.FC = () => {
                     }
                     style={{
                       position: "absolute",
-                      right: "0",
+                      right: "8px",
                       top: "50%",
                       transform: "translateY(-50%)",
-                      width: "32px",
-                      height: "32px",
+                      width: "36px",
+                      height: "36px",
                       borderRadius: "50%",
                       background: "rgba(16, 185, 129, 0.2)",
                       border: "2px solid rgba(16, 185, 129, 0.4)",
                       color: "#10b981",
-                      fontSize: "1.2rem",
+                      fontSize: "1.4rem",
                       cursor:
                         carouselIndex >= filteredProjects.length - cardsVisible
                           ? "not-allowed"
@@ -854,6 +861,9 @@ const MintExample: React.FC = () => {
                           : 1,
                       zIndex: 10,
                       transition: "all 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                     onMouseEnter={(e) => {
                       if (
@@ -861,12 +871,15 @@ const MintExample: React.FC = () => {
                         filteredProjects.length - cardsVisible
                       ) {
                         e.currentTarget.style.background =
-                          "rgba(16, 185, 129, 0.3)";
+                          "rgba(16, 185, 129, 0.4)";
+                        e.currentTarget.style.transform =
+                          "translateY(-50%) scale(1.1)";
                       }
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background =
                         "rgba(16, 185, 129, 0.2)";
+                      e.currentTarget.style.transform = "translateY(-50%)";
                     }}
                   >
                     ›
@@ -879,7 +892,10 @@ const MintExample: React.FC = () => {
                 className="carousel-container"
                 style={{
                   overflow: "hidden",
-                  padding: "0 48px",
+                  padding:
+                    filteredProjects.length > cardsVisible
+                      ? "0 52px"
+                      : "0 52px",
                   transition: "padding 0.3s ease",
                 }}
               >
@@ -892,24 +908,19 @@ const MintExample: React.FC = () => {
                   }}
                 >
                   {filteredProjects.map((project) => {
-                    // Calculate gap offset per card
-                    const gapSize = 0.5;
-                    const totalGap = gapSize * (cardsVisible - 1);
-                    const gapPerCard = totalGap / cardsVisible;
+                    // Better card width calculation
+                    const isSingleCard = filteredProjects.length === 1;
+                    const cardWidth = isSingleCard
+                      ? "calc(100% - 2rem)" // Single card: max width with margin
+                      : `calc(${100 / cardsVisible}% - 0.5rem)`;
 
                     return (
                       <div
                         key={project.id}
                         className="client-card demo-active"
                         style={{
-                          minWidth:
-                            filteredProjects.length === 1
-                              ? "100%"
-                              : `calc(${100 / cardsVisible}% - ${gapPerCard}rem)`,
-                          maxWidth:
-                            filteredProjects.length === 1
-                              ? "100%"
-                              : `calc(${100 / cardsVisible}% - ${gapPerCard}rem)`,
+                          minWidth: cardWidth,
+                          maxWidth: cardWidth,
                           flexShrink: 0,
                           background:
                             showDemo === project.id
@@ -929,6 +940,7 @@ const MintExample: React.FC = () => {
                           alignItems: "center",
                           gap: "0.5rem",
                           position: "relative",
+                          margin: isSingleCard ? "0 auto" : "0",
                         }}
                         onClick={() =>
                           setShowDemo(

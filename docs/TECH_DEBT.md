@@ -17,6 +17,7 @@ Strategic plan for reducing code bloat, improving maintainability, and establish
 4. **Remove Dead Code** - Identify and remove unused files, functions, and dependencies
 5. **Improve Readability** - Make files easier to navigate and understand at a glance
 6. **Reorganize Code Structure** - Move code from cluttered directories into more logical structures or update folder structure or file structure as needed (just consider the impacts and updates needed, test to ensure breakages get fixed)
+7. **Best Practices** - Follow established coding conventions, use meaningful names, and document complex logic in `docs/`
 
 ---
 
