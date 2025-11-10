@@ -85,6 +85,22 @@ const clientProjects: ClientProject[] = [
     icon: "🏠",
   },
   {
+    id: "booking",
+    name: "Dental Office",
+    type: "service",
+    description:
+      "Dentist office appointment booking with patient management and SMS reminders",
+    technologies: ["React", "Calendar API", "Twilio"],
+    features: [
+      "Calendar Schedule",
+      "Patient Records",
+      "SMS Reminders",
+      "Insurance Processing",
+    ],
+    status: "demo",
+    icon: "🦷",
+  },
+  {
     id: "crm",
     name: "Customer CRM",
     type: "saas",
@@ -130,22 +146,6 @@ const clientProjects: ClientProject[] = [
     ],
     status: "demo",
     icon: "📄",
-  },
-  {
-    id: "booking",
-    name: "Dental Office",
-    type: "service",
-    description:
-      "Dentist office appointment booking with patient management and SMS reminders",
-    technologies: ["React", "Calendar API", "Twilio"],
-    features: [
-      "Calendar Schedule",
-      "Patient Records",
-      "SMS Reminders",
-      "Insurance Processing",
-    ],
-    status: "demo",
-    icon: "🦷",
   },
   {
     id: "nft-mint",
@@ -364,7 +364,7 @@ const MintExample: React.FC = () => {
         {/* Demo Content Area */}
         <div
           style={{
-            maxHeight: "70vh",
+            maxHeight: "50vh",
             overflowY: "auto",
             overflowX: "hidden",
             padding: "0.5rem",

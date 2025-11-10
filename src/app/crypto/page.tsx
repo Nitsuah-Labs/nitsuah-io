@@ -1,4 +1,4 @@
-// app/cryto/page.tsx
+// app/crypto/page.tsx
 "use client";
 import Image from "next/image";
 import { useMemo, useState } from "react";
@@ -60,16 +60,16 @@ const CryptoPage = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <HomeBar />
       <main
         className="content-container"
         style={{
-          marginTop: "60px",
-          marginBottom: "100px",
-          paddingBottom: "60px",
-          minHeight: "calc(100vh - 200px)",
-          padding: "1rem",
+          marginTop: "80px",
+          marginBottom: "60px",
+          paddingBottom: "80px",
+          minHeight: "calc(100vh - 140px)",
+          padding: "2rem 1rem",
         }}
       >
         <div

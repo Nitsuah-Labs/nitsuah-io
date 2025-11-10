@@ -67,7 +67,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   return (
     <AppBar
       position="fixed"
-      sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)" }}
+      sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)", zIndex: 1000 }}
       component="header"
       role="banner"
     >
