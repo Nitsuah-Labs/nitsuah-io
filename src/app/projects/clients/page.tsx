@@ -37,22 +37,6 @@ interface ClientProject {
 
 const clientProjects: ClientProject[] = [
   {
-    id: "nft-mint",
-    name: "NFT Minting",
-    type: "web3",
-    description:
-      "Web3 NFT minting demo with wallet connection and network switching",
-    technologies: ["React", "wagmi", "Web3", "Ethereum"],
-    features: [
-      "Wallet Connect",
-      "NFT Minting",
-      "Network Switching",
-      "Account Management",
-    ],
-    status: "demo",
-    icon: "✨",
-  },
-  {
     id: "storefront",
     name: "Storefront",
     type: "ecommerce",
@@ -162,6 +146,22 @@ const clientProjects: ClientProject[] = [
     ],
     status: "demo",
     icon: "🦷",
+  },
+  {
+    id: "nft-mint",
+    name: "NFT Minting",
+    type: "web3",
+    description:
+      "Web3 NFT minting demo with wallet connection and network switching",
+    technologies: ["React", "wagmi", "Web3", "Ethereum"],
+    features: [
+      "Wallet Connect",
+      "NFT Minting",
+      "Network Switching",
+      "Account Management",
+    ],
+    status: "demo",
+    icon: "✨",
   },
   {
     id: "marketplace",
