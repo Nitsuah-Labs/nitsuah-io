@@ -38,7 +38,7 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   />
 );
 
-const pages = ["about", "resume", "crypto", "projects", "labs"];
+const pages = ["about", "resume", "crypto", "projects"];
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const pathname = usePathname();
@@ -189,7 +189,9 @@ const HomeBar: React.FC<HomeBarProps> = () => {
               </Link>
               {pages.flatMap((page) => {
                 const isActive = pathname === `/${page}`;
-                const isProjectsActive = pathname.startsWith("/projects");
+                const isProjectsActive =
+                  pathname.startsWith("/projects") ||
+                  pathname.startsWith("/labs");
                 const items = [
                   <Link
                     key={page}
@@ -298,6 +300,41 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                     >
                       → clients
                     </Link>,
+                    <Link
+                      key="projects-labs"
+                      href="/labs"
+                      aria-label="Navigate to labs"
+                      style={{
+                        color: pathname.startsWith("/labs")
+                          ? "#f97316"
+                          : "rgba(255, 255, 255, 0.8)",
+                        display: "block",
+                        padding: "8px 16px 8px 32px",
+                        fontSize: "0.9rem",
+                        backgroundColor: pathname.startsWith("/labs")
+                          ? "rgba(249, 115, 22, 0.15)"
+                          : "transparent",
+                        transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = "#f97316";
+                        e.currentTarget.style.backgroundColor =
+                          "rgba(249, 115, 22, 0.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = pathname.startsWith(
+                          "/labs",
+                        )
+                          ? "#f97316"
+                          : "rgba(255, 255, 255, 0.8)";
+                        e.currentTarget.style.backgroundColor =
+                          pathname.startsWith("/labs")
+                            ? "rgba(249, 115, 22, 0.15)"
+                            : "transparent";
+                      }}
+                    >
+                      → labs
+                    </Link>,
                   );
                 }
                 return items;
@@ -309,7 +346,9 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => {
               const isActive = pathname === `/${page}`;
-              const isProjectsActive = pathname.startsWith("/projects");
+              const isProjectsActive =
+                pathname.startsWith("/projects") ||
+                pathname.startsWith("/labs");
               return (
                 <React.Fragment key={page}>
                   <Link
@@ -393,6 +432,36 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                         }}
                       >
                         clients
+                      </Link>
+                      <Link
+                        href="/labs"
+                        aria-label="Navigate to labs"
+                        style={{
+                          color: pathname.startsWith("/labs")
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.7)",
+                          margin: "0 8px",
+                          textDecoration: "none",
+                          textTransform: "none",
+                          fontSize: "0.9rem",
+                          borderBottom: pathname.startsWith("/labs")
+                            ? "2px solid #f97316"
+                            : "2px solid transparent",
+                          paddingBottom: "4px",
+                          transition: "all 0.2s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "#f97316";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = pathname.startsWith(
+                            "/labs",
+                          )
+                            ? "#f97316"
+                            : "rgba(255, 255, 255, 0.7)";
+                        }}
+                      >
+                        labs
                       </Link>
                     </>
                   )}
