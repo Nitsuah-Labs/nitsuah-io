@@ -32,12 +32,13 @@ interface ClientProject {
   technologies: string[];
   features: string[];
   status: "live" | "demo" | "mockup";
+  icon?: string; // Custom icon for each project
 }
 
 const clientProjects: ClientProject[] = [
   {
     id: "nft-mint",
-    name: "NFT Minting Platform",
+    name: "NFT Minting",
     type: "web3",
     description:
       "Web3 NFT minting demo with wallet connection and network switching",
@@ -49,10 +50,11 @@ const clientProjects: ClientProject[] = [
       "Account Management",
     ],
     status: "demo",
+    icon: "✨",
   },
   {
     id: "storefront",
-    name: "E-Commerce Storefront",
+    name: "Storefront",
     type: "ecommerce",
     description:
       "Modern e-commerce platform with cart, checkout, and inventory management",
@@ -64,25 +66,27 @@ const clientProjects: ClientProject[] = [
       "Order Management",
     ],
     status: "demo",
+    icon: "🛒",
   },
   {
     id: "restaurant",
-    name: "Restaurant & Booking",
+    name: "Restaurant",
     type: "service",
     description:
-      "Restaurant website with online menu, reservations, and ordering system",
+      "Italian restaurant website with menu, reservations, and gallery",
     technologies: ["React", "Node.js", "PostgreSQL"],
     features: [
       "Menu Display",
       "Table Reservations",
       "Online Ordering",
-      "Reviews",
+      "Photo Gallery",
     ],
     status: "demo",
+    icon: "🍝",
   },
   {
     id: "dashboard",
-    name: "SaaS Analytics Dashboard",
+    name: "SaaS Analytics",
     type: "saas",
     description:
       "Analytics dashboard for tracking KPIs, metrics, and business insights",
@@ -94,13 +98,14 @@ const clientProjects: ClientProject[] = [
       "Export Tools",
     ],
     status: "demo",
+    icon: "📊",
   },
   {
     id: "realestate",
-    name: "Real Estate Listings",
+    name: "Real Estate",
     type: "service",
     description:
-      "Property listing platform with search, filters, and virtual tours",
+      "Property listing platform with search, filters, and map views",
     technologies: ["Next.js", "Mapbox", "Sanity CMS"],
     features: [
       "Property Search",
@@ -109,6 +114,7 @@ const clientProjects: ClientProject[] = [
       "Agent Profiles",
     ],
     status: "demo",
+    icon: "🏠",
   },
   {
     id: "crm",
@@ -124,6 +130,7 @@ const clientProjects: ClientProject[] = [
       "Deal Flow",
     ],
     status: "demo",
+    icon: "📈",
   },
   {
     id: "portfolio",
@@ -138,6 +145,7 @@ const clientProjects: ClientProject[] = [
       "Contact Form",
     ],
     status: "demo",
+    icon: "🎨",
   },
   {
     id: "resume-site",
@@ -153,10 +161,11 @@ const clientProjects: ClientProject[] = [
       "Contact Section",
     ],
     status: "demo",
+    icon: "📄",
   },
   {
     id: "booking",
-    name: "Dental Appointments",
+    name: "Dental Office",
     type: "service",
     description:
       "Dentist office appointment booking with patient management and SMS reminders",
@@ -168,6 +177,7 @@ const clientProjects: ClientProject[] = [
       "Insurance Processing",
     ],
     status: "demo",
+    icon: "🦷",
   },
   {
     id: "marketplace",
@@ -182,6 +192,7 @@ const clientProjects: ClientProject[] = [
       "Gas Optimization",
     ],
     status: "demo",
+    icon: "🖼️",
   },
   {
     id: "blog-cms",
@@ -196,11 +207,17 @@ const clientProjects: ClientProject[] = [
       "Analytics Dashboard",
     ],
     status: "demo",
+    icon: "📝",
   },
 ];
 
-const getProjectIcon = (type: ProjectType): string => {
-  switch (type) {
+const getProjectIcon = (project: ClientProject): string => {
+  // Use custom icon if available, otherwise fall back to type-based icon
+  if (project.icon) {
+    return project.icon;
+  }
+
+  switch (project.type) {
     case "web3":
       return "🔗";
     case "ecommerce":
@@ -295,6 +312,7 @@ const MintExample: React.FC = () => {
     const demoContent = (() => {
       switch (projectId) {
         case "nft-mint":
+          return <NFTDemo initialView="mint" />;
         case "marketplace":
           return <NFTDemo />;
         case "storefront":
@@ -310,8 +328,9 @@ const MintExample: React.FC = () => {
         case "realestate":
           return <RealEstateDemo />;
         case "restaurant":
+          return <ServicesDemo type="restaurant" />;
         case "blog-cms":
-          return <ServicesDemo />;
+          return <ServicesDemo type="blog-cms" />;
         case "booking":
           return <AppointmentDemo />;
         default:
@@ -644,7 +663,60 @@ const MintExample: React.FC = () => {
                       marginTop: "1.5rem",
                     }}
                   >
-                    {getProjectIcon(project.type)}
+                    {getProjectIcon(project)}
+                  </div>
+
+                  {/* Type Badge */}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    <span
+                      style={{
+                        padding: "0.35rem 0.85rem",
+                        borderRadius: "6px",
+                        fontSize: "0.8rem",
+                        fontWeight: "600",
+                        background:
+                          project.type === "web3"
+                            ? "rgba(147, 51, 234, 0.2)"
+                            : project.type === "ecommerce"
+                              ? "rgba(249, 115, 22, 0.2)"
+                              : project.type === "saas"
+                                ? "rgba(59, 130, 246, 0.2)"
+                                : project.type === "service"
+                                  ? "rgba(34, 197, 94, 0.2)"
+                                  : "rgba(236, 72, 153, 0.2)",
+                        color:
+                          project.type === "web3"
+                            ? "#c084fc"
+                            : project.type === "ecommerce"
+                              ? "#fb923c"
+                              : project.type === "saas"
+                                ? "#60a5fa"
+                                : project.type === "service"
+                                  ? "#4ade80"
+                                  : "#f472b6",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.5px",
+                        border: `1px solid ${
+                          project.type === "web3"
+                            ? "rgba(147, 51, 234, 0.4)"
+                            : project.type === "ecommerce"
+                              ? "rgba(249, 115, 22, 0.4)"
+                              : project.type === "saas"
+                                ? "rgba(59, 130, 246, 0.4)"
+                                : project.type === "service"
+                                  ? "rgba(34, 197, 94, 0.4)"
+                                  : "rgba(236, 72, 153, 0.4)"
+                        }`,
+                      }}
+                    >
+                      {project.type}
+                    </span>
                   </div>
 
                   {/* Title */}
@@ -881,7 +953,7 @@ const MintExample: React.FC = () => {
                             flexShrink: 0,
                           }}
                         >
-                          {getProjectIcon(project.type)}
+                          {getProjectIcon(project)}
                         </div>
 
                         {/* Title - Compact */}

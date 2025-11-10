@@ -7,8 +7,14 @@ import { Connected } from "../../../_components/_web3/Connected";
 import { MintNFT } from "../../../_components/_web3/MintNFT";
 import { NetworkSwitcher } from "../../../_components/_web3/NetworkSwitcher";
 
-export const NFTDemo: React.FC = () => {
-  const [view, setView] = useState<"gallery" | "mint">("gallery");
+interface NFTDemoProps {
+  initialView?: "gallery" | "mint";
+}
+
+export const NFTDemo: React.FC<NFTDemoProps> = ({
+  initialView = "gallery",
+}) => {
+  const [view, setView] = useState<"gallery" | "mint">(initialView);
   const [walletView, setWalletView] = useState(false);
 
   const nftCollection = [

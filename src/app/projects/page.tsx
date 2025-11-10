@@ -7,6 +7,90 @@ import HomeBar from "../_components/_site/Homebar";
 import { ProjectCard } from "./_components/ProjectCard";
 import styles from "./_styles/Projects.module.css";
 
+// Tag categories for color coding
+const TAG_CATEGORIES = {
+  Platform: ["Ethereum", "Polygon", "Solana", "GCP"],
+  Technology: [
+    "Python",
+    "TypeScript",
+    "JavaScript",
+    "Solidity",
+    "Rust",
+    "PowerShell",
+    "NextJS",
+    "React",
+  ],
+  Type: [
+    "NFT",
+    "DAO",
+    "DApp",
+    "Blockchain",
+    "Web3",
+    "3D",
+    "AI",
+    "ML",
+    "Games",
+    "Portfolio",
+    "Clients",
+  ],
+  Domain: [
+    "Cryptography",
+    "Research",
+    "Automation",
+    "DevOps",
+    "Sysadmin",
+    "Enterprise",
+    "Graphics",
+    "Animation",
+    "Image-Generation",
+    "Art",
+    "Modeling",
+  ],
+  Other: ["Algorithms", "Canvas", "Spline", "Blender", "Coming-Soon", "VBA"],
+};
+
+const getTagCategory = (tag: string): keyof typeof TAG_CATEGORIES => {
+  const normalizedTag =
+    tag.charAt(0).toUpperCase() + tag.slice(1).toLowerCase();
+  for (const [category, tags] of Object.entries(TAG_CATEGORIES)) {
+    if (tags.some((t) => t.toLowerCase() === normalizedTag.toLowerCase())) {
+      return category as keyof typeof TAG_CATEGORIES;
+    }
+  }
+  return "Other";
+};
+
+const getCategoryColors = (category: keyof typeof TAG_CATEGORIES) => {
+  const colorMap = {
+    Platform: {
+      bg: "rgba(59, 130, 246, 0.2)",
+      border: "rgba(59, 130, 246, 0.5)",
+      text: "#60a5fa",
+    },
+    Technology: {
+      bg: "rgba(34, 197, 94, 0.2)",
+      border: "rgba(34, 197, 94, 0.5)",
+      text: "#4ade80",
+    },
+    Type: {
+      bg: "rgba(249, 115, 22, 0.2)",
+      border: "rgba(249, 115, 22, 0.5)",
+      text: "#fb923c",
+    },
+    Domain: {
+      bg: "rgba(168, 85, 247, 0.2)",
+      border: "rgba(168, 85, 247, 0.5)",
+      text: "#c084fc",
+    },
+    Other: {
+      bg: "rgba(107, 114, 128, 0.2)",
+      border: "rgba(107, 114, 128, 0.5)",
+      text: "#9ca3af",
+    },
+  };
+  return colorMap[category];
+};
+
 // Import project images
 import nitsuah from "./_assets/NITSUAH.png";
 import aiarf from "./_assets/arf-ai.png";
@@ -201,17 +285,46 @@ const Projects = () => {
                     )}
                   </label>
                   <div className={styles.tagButtons}>
-                    {availableTags.map((tag) => (
-                      <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`${styles.tagButton} ${
-                          selectedTags.includes(tag) ? styles.selected : ""
-                        }`}
-                      >
-                        {tag}
-                      </button>
-                    ))}
+                    {availableTags.map((tag) => {
+                      const category = getTagCategory(tag);
+                      const colors = getCategoryColors(category);
+                      const isSelected = selectedTags.includes(tag);
+                      return (
+                        <button
+                          key={tag}
+                          onClick={() => toggleTag(tag)}
+                          className={`${styles.tagButton} ${
+                            isSelected ? styles.selected : ""
+                          }`}
+                          style={{
+                            backgroundColor: isSelected
+                              ? colors.bg
+                              : "transparent",
+                            borderColor: isSelected
+                              ? colors.border
+                              : `${colors.border}80`,
+                            color: isSelected
+                              ? colors.text
+                              : "rgba(255, 255, 255, 0.6)",
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!isSelected) {
+                              e.currentTarget.style.borderColor = colors.border;
+                              e.currentTarget.style.color = colors.text;
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!isSelected) {
+                              e.currentTarget.style.borderColor = `${colors.border}80`;
+                              e.currentTarget.style.color =
+                                "rgba(255, 255, 255, 0.6)";
+                            }
+                          }}
+                        >
+                          {tag}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -260,6 +373,10 @@ const Projects = () => {
                   isFeatured={isFeatured}
                   isGif={isGif}
                   onToggleFeatured={handleToggleFeatured}
+                  getTagColors={(tag: string) => {
+                    const category = getTagCategory(tag);
+                    return getCategoryColors(category);
+                  }}
                 />
               );
             })}

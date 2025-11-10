@@ -24,12 +24,42 @@ interface Bundle {
   img: string;
 }
 
+interface CartItem {
+  productId: number;
+  quantity: number;
+}
+
+interface CheckoutInfo {
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  zip: string;
+  cardNumber: string;
+}
+
 export const StorefrontDemo: React.FC = () => {
   const [cart, setCart] = useState<{ [key: number]: number }>({});
   const [currentPage, setCurrentPage] = useState<
-    "home" | "cart" | "product" | "upload"
+    | "home"
+    | "cart"
+    | "product"
+    | "upload"
+    | "bundle"
+    | "checkout"
+    | "confirmation"
   >("home");
   const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
+  const [selectedBundle, setSelectedBundle] = useState<string | null>(null);
+  const [checkoutInfo, setCheckoutInfo] = useState<CheckoutInfo>({
+    name: "",
+    email: "",
+    address: "",
+    city: "",
+    zip: "",
+    cardNumber: "",
+  });
+  const [orderNumber, setOrderNumber] = useState<string>("");
 
   const products: Product[] = [
     {
@@ -118,6 +148,31 @@ export const StorefrontDemo: React.FC = () => {
     setCart({ ...cart, [productId]: (cart[productId] || 0) + 1 });
   };
 
+  const addBundleToCart = (bundleId: string) => {
+    const bundle = bundles.find((b) => b.id === bundleId);
+    if (!bundle) return;
+
+    const newCart = { ...cart };
+    bundle.products.forEach((productId) => {
+      newCart[productId] = (newCart[productId] || 0) + 1;
+    });
+    setCart(newCart);
+  };
+
+  const updateCartQuantity = (productId: number, quantity: number) => {
+    if (quantity <= 0) {
+      const newCart = { ...cart };
+      delete newCart[productId];
+      setCart(newCart);
+    } else {
+      setCart({ ...cart, [productId]: quantity });
+    }
+  };
+
+  const clearCart = () => {
+    setCart({});
+  };
+
   const getTotalItems = () => {
     return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
   };
@@ -132,6 +187,22 @@ export const StorefrontDemo: React.FC = () => {
   const viewProduct = (productId: number) => {
     setSelectedProduct(productId);
     setCurrentPage("product");
+  };
+
+  const viewBundle = (bundleId: string) => {
+    setSelectedBundle(bundleId);
+    setCurrentPage("bundle");
+  };
+
+  const proceedToCheckout = () => {
+    setCurrentPage("checkout");
+  };
+
+  const completeOrder = () => {
+    const orderNum = `ORD-${Date.now().toString().slice(-8)}`;
+    setOrderNumber(orderNum);
+    setCurrentPage("confirmation");
+    clearCart();
   };
 
   return (
@@ -323,6 +394,7 @@ export const StorefrontDemo: React.FC = () => {
               {bundles.map((bundle) => (
                 <div
                   key={bundle.id}
+                  onClick={() => viewBundle(bundle.id)}
                   style={{
                     background: "rgba(245, 158, 11, 0.1)",
                     border: "2px solid rgba(245, 158, 11, 0.3)",
@@ -795,6 +867,7 @@ export const StorefrontDemo: React.FC = () => {
                     <span>${getCartTotal()}</span>
                   </div>
                   <button
+                    onClick={proceedToCheckout}
                     style={{
                       width: "100%",
                       padding: "1rem",
@@ -813,6 +886,659 @@ export const StorefrontDemo: React.FC = () => {
                 </div>
               </>
             )}
+          </div>
+        )}
+
+        {currentPage === "bundle" && selectedBundle && (
+          <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+            {(() => {
+              const bundle = bundles.find((b) => b.id === selectedBundle);
+              if (!bundle) return null;
+
+              const bundleProducts = products.filter((p) =>
+                bundle.products.includes(p.id),
+              );
+
+              return (
+                <>
+                  <button
+                    onClick={() => setCurrentPage("home")}
+                    style={{
+                      padding: "0.5rem 1rem",
+                      background: "rgba(245, 158, 11, 0.2)",
+                      border: "1px solid rgba(245, 158, 11, 0.4)",
+                      color: "#f59e0b",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      marginBottom: "1.5rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    ← Back to Store
+                  </button>
+
+                  <div
+                    style={{
+                      background: "rgba(245, 158, 11, 0.1)",
+                      border: "2px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "12px",
+                      padding: "2rem",
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "4rem",
+                        textAlign: "center",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      {bundle.img}
+                    </div>
+                    <h2
+                      style={{
+                        fontSize: "2rem",
+                        fontWeight: "700",
+                        color: "#f59e0b",
+                        marginBottom: "1rem",
+                        textAlign: "center",
+                      }}
+                    >
+                      {bundle.name}
+                    </h2>
+
+                    <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+                      <div
+                        style={{
+                          fontSize: "2rem",
+                          fontWeight: "700",
+                          color: "#f59e0b",
+                          marginBottom: "0.5rem",
+                        }}
+                      >
+                        ${bundle.price}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "1.25rem",
+                          color: "#10b981",
+                          fontWeight: "600",
+                        }}
+                      >
+                        💰 Save ${bundle.savings}!
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "0.9rem",
+                          color: "rgba(255, 255, 255, 0.6)",
+                          marginTop: "0.5rem",
+                        }}
+                      >
+                        Bundle includes {bundle.products.length} premium items
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        addBundleToCart(bundle.id);
+                        setCurrentPage("cart");
+                      }}
+                      style={{
+                        width: "100%",
+                        padding: "1rem",
+                        background:
+                          "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                        border: "none",
+                        color: "#fff",
+                        borderRadius: "8px",
+                        fontSize: "1.1rem",
+                        fontWeight: "700",
+                        cursor: "pointer",
+                      }}
+                    >
+                      🛒 Add Bundle to Cart
+                    </button>
+                  </div>
+
+                  <h3
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                      color: "#f59e0b",
+                      marginBottom: "1.5rem",
+                    }}
+                  >
+                    Included Products
+                  </h3>
+
+                  <div style={{ display: "grid", gap: "1rem" }}>
+                    {bundleProducts.map((product) => (
+                      <div
+                        key={product.id}
+                        style={{
+                          background: "rgba(245, 158, 11, 0.05)",
+                          border: "1px solid rgba(245, 158, 11, 0.2)",
+                          borderRadius: "8px",
+                          padding: "1.5rem",
+                          display: "flex",
+                          gap: "1.5rem",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div style={{ fontSize: "3rem", flexShrink: 0 }}>
+                          {product.img}
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <h4
+                            style={{
+                              fontWeight: "600",
+                              color: "#f59e0b",
+                              marginBottom: "0.5rem",
+                            }}
+                          >
+                            {product.name}
+                          </h4>
+                          <p
+                            style={{
+                              color: "rgba(255, 255, 255, 0.7)",
+                              fontSize: "0.9rem",
+                              marginBottom: "0.5rem",
+                            }}
+                          >
+                            {product.description}
+                          </p>
+                          <div
+                            style={{
+                              color: "rgba(255, 255, 255, 0.5)",
+                              fontSize: "0.85rem",
+                            }}
+                          >
+                            Category: {product.category}
+                          </div>
+                        </div>
+                        <div style={{ textAlign: "right", flexShrink: 0 }}>
+                          <div
+                            style={{
+                              fontWeight: "700",
+                              color: "#f59e0b",
+                              fontSize: "1.25rem",
+                            }}
+                          >
+                            ${product.price}
+                          </div>
+                          <div
+                            style={{
+                              fontSize: "0.75rem",
+                              color: "#10b981",
+                              marginTop: "0.25rem",
+                            }}
+                          >
+                            ✓ In Stock
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        )}
+
+        {currentPage === "checkout" && (
+          <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+            <button
+              onClick={() => setCurrentPage("cart")}
+              style={{
+                padding: "0.5rem 1rem",
+                background: "rgba(245, 158, 11, 0.2)",
+                border: "1px solid rgba(245, 158, 11, 0.4)",
+                color: "#f59e0b",
+                borderRadius: "6px",
+                cursor: "pointer",
+                marginBottom: "1.5rem",
+                fontWeight: "600",
+              }}
+            >
+              ← Back to Cart
+            </button>
+
+            <h2
+              style={{
+                fontSize: "2rem",
+                fontWeight: "700",
+                color: "#f59e0b",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Checkout
+            </h2>
+
+            <div
+              style={{
+                background: "rgba(245, 158, 11, 0.1)",
+                border: "2px solid rgba(245, 158, 11, 0.3)",
+                borderRadius: "12px",
+                padding: "2rem",
+                marginBottom: "2rem",
+              }}
+            >
+              <h3
+                style={{
+                  color: "#f59e0b",
+                  marginBottom: "1.5rem",
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                }}
+              >
+                Shipping Information
+              </h3>
+              <div
+                className="store-form-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "1rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      color: "#f59e0b",
+                      marginBottom: "0.5rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    value={checkoutInfo.name}
+                    onChange={(e) =>
+                      setCheckoutInfo({ ...checkoutInfo, name: e.target.value })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      background: "rgba(0, 0, 0, 0.3)",
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      fontSize: "1rem",
+                    }}
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      color: "#f59e0b",
+                      marginBottom: "0.5rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={checkoutInfo.email}
+                    onChange={(e) =>
+                      setCheckoutInfo({
+                        ...checkoutInfo,
+                        email: e.target.value,
+                      })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      background: "rgba(0, 0, 0, 0.3)",
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      fontSize: "1rem",
+                    }}
+                    placeholder="john@example.com"
+                  />
+                </div>
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      color: "#f59e0b",
+                      marginBottom: "0.5rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    value={checkoutInfo.address}
+                    onChange={(e) =>
+                      setCheckoutInfo({
+                        ...checkoutInfo,
+                        address: e.target.value,
+                      })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      background: "rgba(0, 0, 0, 0.3)",
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      fontSize: "1rem",
+                    }}
+                    placeholder="123 Main St"
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      color: "#f59e0b",
+                      marginBottom: "0.5rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    value={checkoutInfo.city}
+                    onChange={(e) =>
+                      setCheckoutInfo({ ...checkoutInfo, city: e.target.value })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      background: "rgba(0, 0, 0, 0.3)",
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      fontSize: "1rem",
+                    }}
+                    placeholder="New York"
+                  />
+                </div>
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      color: "#f59e0b",
+                      marginBottom: "0.5rem",
+                      fontWeight: "500",
+                    }}
+                  >
+                    ZIP Code
+                  </label>
+                  <input
+                    type="text"
+                    value={checkoutInfo.zip}
+                    onChange={(e) =>
+                      setCheckoutInfo({ ...checkoutInfo, zip: e.target.value })
+                    }
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      background: "rgba(0, 0, 0, 0.3)",
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "6px",
+                      color: "#fff",
+                      fontSize: "1rem",
+                    }}
+                    placeholder="10001"
+                  />
+                </div>
+              </div>
+
+              <h3
+                style={{
+                  color: "#f59e0b",
+                  marginBottom: "1.5rem",
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                }}
+              >
+                Payment Information
+              </h3>
+              <div>
+                <label
+                  style={{
+                    display: "block",
+                    color: "#f59e0b",
+                    marginBottom: "0.5rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Card Number
+                </label>
+                <input
+                  type="text"
+                  value={checkoutInfo.cardNumber}
+                  onChange={(e) =>
+                    setCheckoutInfo({
+                      ...checkoutInfo,
+                      cardNumber: e.target.value,
+                    })
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    background: "rgba(0, 0, 0, 0.3)",
+                    border: "1px solid rgba(245, 158, 11, 0.3)",
+                    borderRadius: "6px",
+                    color: "#fff",
+                    fontSize: "1rem",
+                  }}
+                  placeholder="**** **** **** 1234"
+                />
+              </div>
+            </div>
+
+            <div
+              style={{
+                background: "rgba(245, 158, 11, 0.1)",
+                border: "2px solid rgba(245, 158, 11, 0.3)",
+                borderRadius: "12px",
+                padding: "1.5rem",
+                marginBottom: "2rem",
+              }}
+            >
+              <h3
+                style={{
+                  color: "#f59e0b",
+                  marginBottom: "1rem",
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                }}
+              >
+                Order Summary
+              </h3>
+
+              {Object.entries(cart).map(([id, qty]) => {
+                const product = products.find((p) => p.id === Number(id));
+                if (!product || qty === 0) return null;
+
+                return (
+                  <div
+                    key={id}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginBottom: "0.75rem",
+                      paddingBottom: "0.75rem",
+                      borderBottom: "1px solid rgba(245, 158, 11, 0.2)",
+                    }}
+                  >
+                    <div>
+                      <div style={{ color: "#fff", fontWeight: "500" }}>
+                        {product.name} × {qty}
+                      </div>
+                    </div>
+                    <div style={{ color: "#f59e0b", fontWeight: "600" }}>
+                      ${product.price * qty}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "1rem",
+                  paddingTop: "1rem",
+                  borderTop: "2px solid rgba(245, 158, 11, 0.3)",
+                  fontSize: "1.5rem",
+                  fontWeight: "700",
+                  color: "#f59e0b",
+                }}
+              >
+                <span>Total:</span>
+                <span>${getCartTotal()}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={completeOrder}
+              style={{
+                width: "100%",
+                padding: "1rem",
+                background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                border: "none",
+                color: "#fff",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "700",
+                cursor: "pointer",
+              }}
+            >
+              Complete Purchase
+            </button>
+          </div>
+        )}
+
+        {currentPage === "confirmation" && (
+          <div
+            style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}
+          >
+            <div style={{ fontSize: "5rem", marginBottom: "1.5rem" }}>✅</div>
+            <h2
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: "700",
+                color: "#10b981",
+                marginBottom: "1rem",
+              }}
+            >
+              Order Confirmed!
+            </h2>
+            <p
+              style={{
+                fontSize: "1.1rem",
+                color: "rgba(255, 255, 255, 0.8)",
+                marginBottom: "2rem",
+              }}
+            >
+              Thank you for your purchase!
+            </p>
+
+            <div
+              style={{
+                background: "rgba(16, 185, 129, 0.1)",
+                border: "2px solid rgba(16, 185, 129, 0.3)",
+                borderRadius: "12px",
+                padding: "2rem",
+                marginBottom: "2rem",
+              }}
+            >
+              <div style={{ marginBottom: "1.5rem" }}>
+                <div
+                  style={{
+                    color: "rgba(255, 255, 255, 0.6)",
+                    fontSize: "0.9rem",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Order Number
+                </div>
+                <div
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "700",
+                    color: "#10b981",
+                  }}
+                >
+                  {orderNumber}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: "1rem" }}>
+                <div
+                  style={{
+                    color: "rgba(255, 255, 255, 0.6)",
+                    fontSize: "0.9rem",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Delivery Address
+                </div>
+                <div style={{ color: "#fff" }}>
+                  {checkoutInfo.name}
+                  <br />
+                  {checkoutInfo.address}
+                  <br />
+                  {checkoutInfo.city}, {checkoutInfo.zip}
+                </div>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "1.5rem",
+                  paddingTop: "1.5rem",
+                  borderTop: "1px solid rgba(16, 185, 129, 0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    color: "rgba(255, 255, 255, 0.8)",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  📧 Confirmation email sent to: {checkoutInfo.email}
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setCurrentPage("home");
+                setCheckoutInfo({
+                  name: "",
+                  email: "",
+                  address: "",
+                  city: "",
+                  zip: "",
+                  cardNumber: "",
+                });
+              }}
+              style={{
+                padding: "1rem 2rem",
+                background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                border: "none",
+                color: "#fff",
+                borderRadius: "8px",
+                fontSize: "1.1rem",
+                fontWeight: "700",
+                cursor: "pointer",
+              }}
+            >
+              Continue Shopping
+            </button>
           </div>
         )}
 
