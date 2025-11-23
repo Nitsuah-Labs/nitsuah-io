@@ -49,7 +49,7 @@ This document tracks which demos and projects need updated screenshots or images
 
 ## Projects Page (`/projects`)
 
-### Projects Needing Screenshots
+### Projects Needs Screenshots
 
 1. **Kryptos** 🟡
    - Current: Using cat.png (placeholder)
@@ -70,7 +70,7 @@ This document tracks which demos and projects need updated screenshots or images
    - Current: Coming soon card (intentional placeholder)
    - Needed: None (placeholder is intentional for planned project)
 
-### Projects with Good Images ✅
+### Projects with Great Images ✅
 
 - Portfolio Site (NITSUAH.png)
 - /labs (NITSUAH.png)
@@ -192,4 +192,4 @@ This document tracks which demos and projects need updated screenshots or images
 - [ ] Clients - Dental office images (5+)
 - [ ] Clients - Portfolio project images (6+)
 
-**Last Updated**: 2025-01-XX
+**Last Updated**: 2025-11-23

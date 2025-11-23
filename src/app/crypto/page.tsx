@@ -63,6 +63,7 @@ const CryptoPage = () => {
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <HomeBar />
       <main
+        role="main"
         className="content-container"
         style={{
           marginTop: "80px",

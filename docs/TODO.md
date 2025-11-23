@@ -1,13 +1,36 @@
 # TODO
 
-## Data Backend
+## Manual Tasks for Phase A
 
-- [ ] projects/clients - SaaS Dashboard - this should be a dashboard based upon the other demo apps and tools so it should be more of a "data" focused dashboard with charts, stats, user management, settings, etc. similar to the other SaaS apps we have but more fleshed out. It could even use those other sites as "connectors" to pull in data from them to show in the dashboard (vs they may have "simple" dashboards but this one is more of a "meta" dashboard that pulls in data from them all to show in one place across "many" apps, come up with a strategy for that and eventually once we start to hook up everything we'll build the data platform ontop of that too). so tl;dr eventually once we build some sort of backend or hook stuff up to data sources we'll build this dashboard app to visualize that data from all of our demos. think on this. maybe we should do a mini-db or whatever netlify has for data storage options or support (ie local postgres, sqlite, etc) and use that as a data source for this dashboard app, but have that be the backbone for all of the other apps that we start to build out? so once we figure out the backend we can build this out more as a "meta" dashboard for all of our apps, but also maybe a "query" interface so we can run "safe" SELECT queries against our data for more custom reports and stuff. think on this more for v2 of clients where we kick this up to the next step but his is a dependency first. so yeah lets discover which data platform we want, but for now hook into /lib/data and create a SQL query window of sorts to interact with our "data". we'll use static data like that for now until we find the right db.
-- [ ] `SCREENSHOT-REQUIREMENTS.md` - go back through and identify which projects need new/better screenshots and create a list of those with details on what is needed (ie: resolution, content, etc) so we can create or capture those as needed for better visual appeal across the site.
+### Web3 / Wallet Setup
+- [ ] **Wallet Testing Setup** - Manual setup for MetaMask or embedded wallet components from wagmi for local testing
+- [ ] **Network Context** - Review wallet provider options and set up network detection context
+- [ ] **Contract Deployer** - Track down contract deployer repo, find contract IDs and wallet addresses
+- [ ] **Mumbai → Amoy Migration** - Polygon testnet migration (contract redeployment may be needed)
+
+### Visual Assets
+- [ ] **Screenshot Requirements** - See `SCREENSHOT-REQUIREMENTS.md` for full list of needed assets:
+  - Crypto page: 4 projects need screenshots (DApp Gallery, ETH Contracts, NFT Marketplace, Security Audits)
+  - Projects page: 3 projects need screenshots (Kryptos, GCP Tools, Stash)
+  - Client demos: Multiple demos need product/content images (Restaurant: 22+ food photos, E-Commerce: 12+ products, Real Estate: 30-50 property photos, etc.)
+
+### Testing Infrastructure
+- [ ] **Docker Setup** - Setup Docker for visual regression tests to handle CI/local environment differences
+- [ ] **Visual Test Re-enablement** - Once Docker is configured, re-enable skipped Playwright visual tests
+
+### Future Enhancements
+- [ ] **Dark Mode** - Implement theme toggle (shows CSS/accessibility best practices)
+- [ ] **Data Backend Strategy** - SaaS Dashboard meta-dashboard concept:
+  - Hook into /lib/data for static data initially
+  - Create SQL query window interface
+  - Research Netlify data storage options (postgres, sqlite)
+  - Plan "meta" dashboard to pull data from all demos
+  - Design connector strategy for demo apps
 
 ## /docs
 
+_For pre-phase work see `PREP-PHASE-A.md`_
 _For feature requests see `FEEDBACK.md`_
 _For security status see `SECURITY_FIXES.md`_
-_For phase items see `PHASE*.md`_
-_For Tech debt objectives see `TECH_DEBT.md`_
+_For phase items see `PHASE-A.md`_
+_For completed tech debt see `TECH_DEBT.md`_
