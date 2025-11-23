@@ -64,3 +64,56 @@ export function getCalendarWeek(startDate: Date): Date[] {
   }
   return week;
 }
+
+/**
+ * Get color for CRM status (contacts, deals, tasks)
+ */
+export function getCRMStatusColor(status: string): string {
+  const colors: Record<string, string> = {
+    customer: "#10b981",
+    won: "#10b981",
+    completed: "#10b981",
+    prospect: "#3b82f6",
+    negotiation: "#3b82f6",
+    lead: "#f59e0b",
+    proposal: "#f59e0b",
+    pending: "#f59e0b",
+    qualified: "#8b5cf6",
+    lost: "#ef4444",
+  };
+  return colors[status] || "#6b7280";
+}
+
+/**
+ * Calculate pipeline statistics from deals
+ */
+export function getPipelineStats(
+  deals: Array<{ stage: string; value: number }>,
+) {
+  const byStage = deals.reduce(
+    (acc, deal) => {
+      acc[deal.stage] = (acc[deal.stage] || 0) + deal.value;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  return {
+    totalValue: deals.reduce((sum, d) => sum + d.value, 0),
+    avgDealSize: deals.reduce((sum, d) => sum + d.value, 0) / deals.length,
+    wonDeals: deals.filter((d) => d.stage === "won").length,
+    byStage,
+  };
+}
+
+/**
+ * Format currency for display
+ */
+export function formatCurrency(amount: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
