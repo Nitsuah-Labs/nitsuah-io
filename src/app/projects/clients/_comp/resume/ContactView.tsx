@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 
-export const ContactForm: React.FC = () => {
+export const ContactView: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    projectType: "",
+    subject: "",
     message: "",
   });
 
-  const projectTypes = [
-    "Branding",
-    "Photography",
-    "Design",
-    "Web Development",
-    "Other",
-  ];
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,45 +21,24 @@ export const ContactForm: React.FC = () => {
     // Handle form submission
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   return (
-    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
       <h2
         style={{
           fontSize: "2rem",
           fontWeight: "700",
-          color: "#8b5cf6",
-          marginBottom: "0.5rem",
+          color: "#6366f1",
+          marginBottom: "1.5rem",
           textAlign: "center",
         }}
       >
-        Let's Work Together
+        Get In Touch
       </h2>
-      <p
-        style={{
-          fontSize: "1rem",
-          color: "rgba(255, 255, 255, 0.7)",
-          marginBottom: "2rem",
-          textAlign: "center",
-        }}
-      >
-        Have a project in mind? I'd love to hear about it. Fill out the form
-        below and I'll get back to you soon.
-      </p>
-
       <form
         onSubmit={handleSubmit}
         style={{
-          background: "rgba(139, 92, 246, 0.1)",
-          border: "2px solid rgba(139, 92, 246, 0.3)",
+          background: "rgba(99, 102, 241, 0.1)",
+          border: "2px solid rgba(99, 102, 241, 0.3)",
           borderRadius: "12px",
           padding: "2rem",
         }}
@@ -70,13 +48,12 @@ export const ContactForm: React.FC = () => {
             htmlFor="name"
             style={{
               display: "block",
-              fontSize: "0.875rem",
+              color: "#6366f1",
               fontWeight: "600",
-              color: "#8b5cf6",
               marginBottom: "0.5rem",
             }}
           >
-            Your Name
+            Name
           </label>
           <input
             type="text"
@@ -84,17 +61,17 @@ export const ContactForm: React.FC = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Your name"
             required
             style={{
               width: "100%",
               padding: "0.75rem",
               background: "rgba(0, 0, 0, 0.3)",
-              border: "1px solid rgba(139, 92, 246, 0.4)",
-              borderRadius: "8px",
+              border: "2px solid rgba(99, 102, 241, 0.3)",
+              borderRadius: "6px",
               color: "#fff",
               fontSize: "1rem",
             }}
-            placeholder="John Doe"
           />
         </div>
 
@@ -103,13 +80,12 @@ export const ContactForm: React.FC = () => {
             htmlFor="email"
             style={{
               display: "block",
-              fontSize: "0.875rem",
+              color: "#6366f1",
               fontWeight: "600",
-              color: "#8b5cf6",
               marginBottom: "0.5rem",
             }}
           >
-            Email Address
+            Email
           </label>
           <input
             type="email"
@@ -117,56 +93,50 @@ export const ContactForm: React.FC = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="your@email.com"
             required
             style={{
               width: "100%",
               padding: "0.75rem",
               background: "rgba(0, 0, 0, 0.3)",
-              border: "1px solid rgba(139, 92, 246, 0.4)",
-              borderRadius: "8px",
+              border: "2px solid rgba(99, 102, 241, 0.3)",
+              borderRadius: "6px",
               color: "#fff",
               fontSize: "1rem",
             }}
-            placeholder="john@example.com"
           />
         </div>
 
         <div style={{ marginBottom: "1.5rem" }}>
           <label
-            htmlFor="projectType"
+            htmlFor="subject"
             style={{
               display: "block",
-              fontSize: "0.875rem",
+              color: "#6366f1",
               fontWeight: "600",
-              color: "#8b5cf6",
               marginBottom: "0.5rem",
             }}
           >
-            Project Type
+            Subject
           </label>
-          <select
-            id="projectType"
-            name="projectType"
-            value={formData.projectType}
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            value={formData.subject}
             onChange={handleChange}
+            placeholder="What's this about?"
             required
             style={{
               width: "100%",
               padding: "0.75rem",
               background: "rgba(0, 0, 0, 0.3)",
-              border: "1px solid rgba(139, 92, 246, 0.4)",
-              borderRadius: "8px",
+              border: "2px solid rgba(99, 102, 241, 0.3)",
+              borderRadius: "6px",
               color: "#fff",
               fontSize: "1rem",
             }}
-          >
-            <option value="">Select a project type</option>
-            {projectTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          />
         </div>
 
         <div style={{ marginBottom: "1.5rem" }}>
@@ -174,32 +144,32 @@ export const ContactForm: React.FC = () => {
             htmlFor="message"
             style={{
               display: "block",
-              fontSize: "0.875rem",
+              color: "#6366f1",
               fontWeight: "600",
-              color: "#8b5cf6",
               marginBottom: "0.5rem",
             }}
           >
-            Tell Me About Your Project
+            Message
           </label>
           <textarea
             id="message"
             name="message"
             value={formData.message}
             onChange={handleChange}
+            rows={5}
+            placeholder="Tell me more..."
             required
-            rows={6}
             style={{
               width: "100%",
               padding: "0.75rem",
               background: "rgba(0, 0, 0, 0.3)",
-              border: "1px solid rgba(139, 92, 246, 0.4)",
-              borderRadius: "8px",
+              border: "2px solid rgba(99, 102, 241, 0.3)",
+              borderRadius: "6px",
               color: "#fff",
               fontSize: "1rem",
+              fontFamily: "system-ui, sans-serif",
               resize: "vertical",
             }}
-            placeholder="Describe your project, goals, and timeline..."
           />
         </div>
 
@@ -208,13 +178,20 @@ export const ContactForm: React.FC = () => {
           style={{
             width: "100%",
             padding: "1rem",
-            background: "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
+            background: "linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)",
             border: "none",
             color: "#fff",
             borderRadius: "8px",
             fontSize: "1.1rem",
             fontWeight: "700",
             cursor: "pointer",
+            transition: "transform 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.02)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
           }}
         >
           Send Message
@@ -225,8 +202,8 @@ export const ContactForm: React.FC = () => {
         style={{
           marginTop: "2rem",
           padding: "1.5rem",
-          background: "rgba(139, 92, 246, 0.1)",
-          border: "2px solid rgba(139, 92, 246, 0.3)",
+          background: "rgba(99, 102, 241, 0.1)",
+          border: "2px solid rgba(99, 102, 241, 0.3)",
           borderRadius: "12px",
           textAlign: "center",
         }}
@@ -244,11 +221,23 @@ export const ContactForm: React.FC = () => {
           style={{
             fontSize: "1.1rem",
             fontWeight: "600",
-            color: "#8b5cf6",
+            color: "#6366f1",
+            margin: "0 0 0.5rem 0",
           }}
         >
-          hello@creative.studio
+          person@email.com
         </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+            marginTop: "1rem",
+          }}
+        >
+          <span style={{ color: "rgba(255, 255, 255, 0.8)" }}>💼 LinkedIn</span>
+          <span style={{ color: "rgba(255, 255, 255, 0.8)" }}>🐙 GitHub</span>
+        </div>
       </div>
     </div>
   );
