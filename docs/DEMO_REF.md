@@ -99,7 +99,7 @@ import { DemoCard, DemoHeader, DemoButton, DemoSection, DemoTable } from '@/comp
 
 #### ServicesDemo → RestaurantDemo + BlogCMSDemo
 
-```
+```bash
 src/app/projects/clients/_comp/
 ├── RestaurantDemo.tsx    (wrapper for type="restaurant")
 └── BlogCMSDemo.tsx       (wrapper for type="blog-cms")
@@ -107,7 +107,7 @@ src/app/projects/clients/_comp/
 
 #### StorefrontDemo → storefront/
 
-```
+```bash
 src/app/projects/clients/_comp/storefront/
 ├── ProductGallery.tsx    (~400 LOC target)
 ├── ShoppingCart.tsx      (~350 LOC target)
@@ -117,7 +117,7 @@ src/app/projects/clients/_comp/storefront/
 
 #### CRMDemo → crm/
 
-```
+```bash
 src/app/projects/clients/_comp/crm/
 ├── DashboardView.tsx     (~250 LOC target)
 ├── ContactsView.tsx      (~150 LOC target)
