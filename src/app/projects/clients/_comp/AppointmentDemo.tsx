@@ -1,27 +1,16 @@
 // Appointment Booking Demo - Dentist Office Theme
 "use client";
+import {
+  appointmentTypes,
+  mockAppointments,
+  mockPatients,
+  timeSlots,
+} from "@/lib/data/demos/appointment-data";
+import {
+  getAppointmentStatusColor,
+  getAppointmentTypeColor,
+} from "@/lib/utils/demo-helpers";
 import React, { useState } from "react";
-
-interface Patient {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  lastVisit: string;
-  nextAppointment?: string;
-  insuranceProvider?: string;
-}
-
-interface Appointment {
-  id: number;
-  patientId: number;
-  date: string;
-  time: string;
-  type: "checkup" | "cleaning" | "filling" | "emergency" | "consultation";
-  dentist: string;
-  status: "confirmed" | "pending" | "completed" | "cancelled";
-  notes?: string;
-}
 
 export const AppointmentDemo: React.FC = () => {
   const [currentView, setCurrentView] = useState<
@@ -30,134 +19,9 @@ export const AppointmentDemo: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState("2025-01-15");
   const [selectedPatient, setSelectedPatient] = useState<number | null>(null);
 
-  const patients: Patient[] = [
-    {
-      id: 1,
-      name: "Emma Wilson",
-      phone: "(555) 123-4567",
-      email: "emma.w@email.com",
-      lastVisit: "2024-12-10",
-      nextAppointment: "2025-01-15 10:00 AM",
-      insuranceProvider: "Delta Dental",
-    },
-    {
-      id: 2,
-      name: "James Anderson",
-      phone: "(555) 234-5678",
-      email: "j.anderson@email.com",
-      lastVisit: "2024-11-22",
-      insuranceProvider: "Cigna",
-    },
-    {
-      id: 3,
-      name: "Sophia Martinez",
-      phone: "(555) 345-6789",
-      email: "sophia.m@email.com",
-      lastVisit: "2024-12-28",
-      nextAppointment: "2025-01-15 2:00 PM",
-      insuranceProvider: "Aetna",
-    },
-  ];
-
-  const appointments: Appointment[] = [
-    {
-      id: 1,
-      patientId: 1,
-      date: "2025-01-15",
-      time: "10:00 AM",
-      type: "checkup",
-      dentist: "Dr. Sarah Johnson",
-      status: "confirmed",
-      notes: "6-month checkup",
-    },
-    {
-      id: 2,
-      patientId: 3,
-      date: "2025-01-15",
-      time: "2:00 PM",
-      type: "cleaning",
-      dentist: "Dr. Michael Chen",
-      status: "confirmed",
-      notes: "Deep cleaning needed",
-    },
-    {
-      id: 3,
-      patientId: 2,
-      date: "2025-01-16",
-      time: "11:00 AM",
-      type: "filling",
-      dentist: "Dr. Sarah Johnson",
-      status: "pending",
-      notes: "Cavity on lower left molar",
-    },
-  ];
-
-  const appointmentTypes = [
-    {
-      value: "checkup",
-      label: "Routine Checkup",
-      duration: "30 min",
-      icon: "🔍",
-    },
-    {
-      value: "cleaning",
-      label: "Teeth Cleaning",
-      duration: "45 min",
-      icon: "✨",
-    },
-    { value: "filling", label: "Filling", duration: "60 min", icon: "🦷" },
-    { value: "emergency", label: "Emergency", duration: "90 min", icon: "🚨" },
-    {
-      value: "consultation",
-      label: "Consultation",
-      duration: "30 min",
-      icon: "💬",
-    },
-  ];
-
-  const timeSlots = [
-    "9:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:00 PM",
-    "1:00 PM",
-    "2:00 PM",
-    "3:00 PM",
-    "4:00 PM",
-    "5:00 PM",
-  ];
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "checkup":
-        return "#14b8a6";
-      case "cleaning":
-        return "#06b6d4";
-      case "filling":
-        return "#f59e0b";
-      case "emergency":
-        return "#ef4444";
-      case "consultation":
-        return "#8b5cf6";
-      default:
-        return "#6b7280";
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "confirmed":
-        return "#10b981";
-      case "pending":
-        return "#f59e0b";
-      case "completed":
-        return "#6b7280";
-      case "cancelled":
-        return "#ef4444";
-      default:
-        return "#6b7280";
-    }
-  };
+  // Use imported data
+  const patients = mockPatients;
+  const appointments = mockAppointments;
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
@@ -452,8 +316,8 @@ export const AppointmentDemo: React.FC = () => {
                       key={apt.id}
                       style={{
                         background: "rgba(20, 184, 166, 0.1)",
-                        border: `2px solid ${getTypeColor(apt.type)}`,
-                        borderLeft: `6px solid ${getTypeColor(apt.type)}`,
+                        border: `2px solid ${getAppointmentTypeColor(apt.type)}`,
+                        borderLeft: `6px solid ${getAppointmentTypeColor(apt.type)}`,
                         borderRadius: "8px",
                         padding: "1.5rem",
                         display: "flex",
@@ -519,8 +383,8 @@ export const AppointmentDemo: React.FC = () => {
                             borderRadius: "4px",
                             fontSize: "0.75rem",
                             fontWeight: "600",
-                            background: `${getStatusColor(apt.status)}20`,
-                            color: getStatusColor(apt.status),
+                            background: `${getAppointmentStatusColor(apt.status)}20`,
+                            color: getAppointmentStatusColor(apt.status),
                             textTransform: "capitalize",
                           }}
                         >
