@@ -5,7 +5,7 @@ interface Contact {
   id: number;
   name: string;
   company: string;
-  role: string;
+  role?: string;
   email: string;
   phone: string;
   status: string;

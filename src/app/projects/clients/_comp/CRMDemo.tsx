@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { ContactsList } from "./crm/ContactsList";
 import { Dashboard } from "./crm/Dashboard";
 import { DealsView } from "./crm/DealsView";
+import { TasksView } from "./crm/TasksView";
 
 export const CRMDemo: React.FC = () => {
   const [currentView, setCurrentView] = useState<
@@ -214,7 +215,7 @@ export const CRMDemo: React.FC = () => {
             contacts={filteredContacts}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
-            onSelectContact={setSelectedContact}
+            onSelectContact={(contact) => setSelectedContact(contact.id)}
             getStatusColor={getCRMStatusColor}
           />
         )}
