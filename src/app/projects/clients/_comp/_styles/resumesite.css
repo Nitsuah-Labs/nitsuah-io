@@ -1,0 +1,43 @@
+/* Resume Site Demo Styles */
+@media (max-width: 768px) {
+  .resume-nav {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  .resume-nav-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  .resume-header {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .resume-header h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .resume-header p {
+    font-size: 0.9rem !important;
+  }
+
+  .resume-skills-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .resume-header h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .resume-contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

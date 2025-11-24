@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import "../_styles/global.css";
+import { navStyles, pages } from "./homebarConfig";
 
 // Replace empty interface with object type
 type HomeBarProps = object;
@@ -37,8 +38,6 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
     }}
   />
 );
-
-const pages = ["about", "resume", "crypto", "projects"];
 
 const HomeBar: React.FC<HomeBarProps> = () => {
   const pathname = usePathname();
@@ -67,7 +66,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   return (
     <AppBar
       position="fixed"
-      sx={{ backgroundColor: "rgba(24, 24, 24, 0.9)", zIndex: 1000 }}
+      sx={navStyles.appBar}
       component="header"
       role="banner"
     >

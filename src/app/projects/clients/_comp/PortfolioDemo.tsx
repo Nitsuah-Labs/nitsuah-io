@@ -2,6 +2,7 @@
 "use client";
 import { mockProjects } from "@/lib/data/demos/portfolio-data";
 import React, { useState } from "react";
+import "./_styles/portfolio.css";
 
 export const PortfolioDemo: React.FC = () => {
   const [currentView, setCurrentView] = useState<
@@ -13,38 +14,6 @@ export const PortfolioDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif" }}>
-      <style>{`
-        @media (max-width: 768px) {
-          .portfolio-nav {
-            flex-direction: column !important;
-            gap: 0.5rem !important;
-          }
-          
-          .portfolio-nav-btn {
-            width: 100% !important;
-            justify-content: center !important;
-            min-height: 44px !important;
-          }
-          
-          .portfolio-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .portfolio-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .portfolio-header {
-            padding: 1.5rem 1rem !important;
-          }
-          
-          .portfolio-header h1 {
-            font-size: 1.75rem !important;
-          }
-        }
-      `}</style>
       {/* Header */}
       <div
         className="portfolio-header"
