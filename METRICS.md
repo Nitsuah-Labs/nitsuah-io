@@ -1,10 +1,10 @@
 # Metrics
 
-| Metric        | Value                          |
-| ------------- | ------------------------------ |
-| Code Coverage | 97.41%                         |
-| Build Time    | Failed (Turbopack build error) |
-| Bundle Size   | N/A (build failed)             |
+| Metric        | Value                                      |
+| ------------- | ------------------------------------------ |
+| Code Coverage | 97.41%                                     |
+| Build Time    | 35.13s (local, PowerShell Measure-Command) |
+| Bundle Size   | 324.90 MB (.next folder total)             |
 
 ## Health
 
