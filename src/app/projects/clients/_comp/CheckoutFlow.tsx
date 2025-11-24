@@ -28,6 +28,9 @@ interface CheckoutFlowProps {
   onContinueShopping: () => void;
 }
 
+import OrderSummary from "./checkout/OrderSummary";
+import ShippingForm from "./checkout/ShippingForm";
+
 export const CheckoutFlow: React.FC<CheckoutFlowProps> = ({
   currentPage,
   checkoutInfo,
@@ -80,294 +83,24 @@ export const CheckoutFlow: React.FC<CheckoutFlowProps> = ({
 
         <div
           style={{
-            background: "rgba(0, 0, 0, 0.3)",
-            border: "2px solid rgba(245, 158, 11, 0.3)",
+            background: "rgba(0,0,0,0.3)",
+            border: "2px solid rgba(245,158,11,0.3)",
             borderRadius: "12px",
             padding: "2rem",
             marginBottom: "2rem",
           }}
         >
-          <h3
-            style={{
-              color: "#f59e0b",
-              marginBottom: "1.5rem",
-              fontSize: "1.25rem",
-              fontWeight: "600",
-            }}
-          >
-            Shipping Information
-          </h3>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
-              marginBottom: "1.5rem",
-            }}
-          >
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  color: "#f59e0b",
-                  marginBottom: "0.5rem",
-                  fontWeight: "500",
-                }}
-              >
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={checkoutInfo.name}
-                onChange={(e) =>
-                  onUpdateInfo({ ...checkoutInfo, name: e.target.value })
-                }
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  background: "rgba(0, 0, 0, 0.3)",
-                  border: "1px solid rgba(245, 158, 11, 0.3)",
-                  borderRadius: "6px",
-                  color: "#fff",
-                  fontSize: "1rem",
-                }}
-                placeholder="John Doe"
-              />
-            </div>
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  color: "#f59e0b",
-                  marginBottom: "0.5rem",
-                  fontWeight: "500",
-                }}
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                value={checkoutInfo.email}
-                onChange={(e) =>
-                  onUpdateInfo({ ...checkoutInfo, email: e.target.value })
-                }
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  background: "rgba(0, 0, 0, 0.3)",
-                  border: "1px solid rgba(245, 158, 11, 0.3)",
-                  borderRadius: "6px",
-                  color: "#fff",
-                  fontSize: "1rem",
-                }}
-                placeholder="john@example.com"
-              />
-            </div>
-          </div>
-          <div style={{ marginBottom: "1.5rem" }}>
-            <label
-              style={{
-                display: "block",
-                color: "#f59e0b",
-                marginBottom: "0.5rem",
-                fontWeight: "500",
-              }}
-            >
-              Address
-            </label>
-            <input
-              type="text"
-              value={checkoutInfo.address}
-              onChange={(e) =>
-                onUpdateInfo({ ...checkoutInfo, address: e.target.value })
-              }
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                background: "rgba(0, 0, 0, 0.3)",
-                border: "1px solid rgba(245, 158, 11, 0.3)",
-                borderRadius: "6px",
-                color: "#fff",
-                fontSize: "1rem",
-              }}
-              placeholder="123 Main St"
-            />
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
-            }}
-          >
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  color: "#f59e0b",
-                  marginBottom: "0.5rem",
-                  fontWeight: "500",
-                }}
-              >
-                City
-              </label>
-              <input
-                type="text"
-                value={checkoutInfo.city}
-                onChange={(e) =>
-                  onUpdateInfo({ ...checkoutInfo, city: e.target.value })
-                }
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  background: "rgba(0, 0, 0, 0.3)",
-                  border: "1px solid rgba(245, 158, 11, 0.3)",
-                  borderRadius: "6px",
-                  color: "#fff",
-                  fontSize: "1rem",
-                }}
-                placeholder="New York"
-              />
-            </div>
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  color: "#f59e0b",
-                  marginBottom: "0.5rem",
-                  fontWeight: "500",
-                }}
-              >
-                ZIP Code
-              </label>
-              <input
-                type="text"
-                value={checkoutInfo.zip}
-                onChange={(e) =>
-                  onUpdateInfo({ ...checkoutInfo, zip: e.target.value })
-                }
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  background: "rgba(0, 0, 0, 0.3)",
-                  border: "1px solid rgba(245, 158, 11, 0.3)",
-                  borderRadius: "6px",
-                  color: "#fff",
-                  fontSize: "1rem",
-                }}
-                placeholder="10001"
-              />
-            </div>
-          </div>
-
-          <h3
-            style={{
-              color: "#f59e0b",
-              marginBottom: "1.5rem",
-              marginTop: "2rem",
-              fontSize: "1.25rem",
-              fontWeight: "600",
-            }}
-          >
-            Payment Information
-          </h3>
-          <div>
-            <label
-              style={{
-                display: "block",
-                color: "#f59e0b",
-                marginBottom: "0.5rem",
-                fontWeight: "500",
-              }}
-            >
-              Card Number
-            </label>
-            <input
-              type="text"
-              value={checkoutInfo.cardNumber}
-              onChange={(e) =>
-                onUpdateInfo({
-                  ...checkoutInfo,
-                  cardNumber: e.target.value,
-                })
-              }
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                background: "rgba(0, 0, 0, 0.3)",
-                border: "1px solid rgba(245, 158, 11, 0.3)",
-                borderRadius: "6px",
-                color: "#fff",
-                fontSize: "1rem",
-              }}
-              placeholder="**** **** **** 1234"
-            />
-          </div>
+          <ShippingForm
+            checkoutInfo={checkoutInfo}
+            onUpdateInfo={onUpdateInfo}
+          />
         </div>
 
-        <div
-          style={{
-            background: "rgba(245, 158, 11, 0.1)",
-            border: "2px solid rgba(245, 158, 11, 0.3)",
-            borderRadius: "12px",
-            padding: "1.5rem",
-            marginBottom: "2rem",
-          }}
-        >
-          <h3
-            style={{
-              color: "#f59e0b",
-              marginBottom: "1rem",
-              fontSize: "1.25rem",
-              fontWeight: "600",
-            }}
-          >
-            Order Summary
-          </h3>
-
-          {Object.entries(cart).map(([id, qty]) => {
-            const product = products.find((p) => p.id === Number(id));
-            if (!product || qty === 0) return null;
-
-            return (
-              <div
-                key={id}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "0.75rem",
-                  paddingBottom: "0.75rem",
-                  borderBottom: "1px solid rgba(245, 158, 11, 0.2)",
-                }}
-              >
-                <div>
-                  <div style={{ color: "#fff", fontWeight: "500" }}>
-                    {product.name} × {qty}
-                  </div>
-                </div>
-                <div style={{ color: "#f59e0b", fontWeight: "600" }}>
-                  ${product.price * qty}
-                </div>
-              </div>
-            );
-          })}
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "1rem",
-              paddingTop: "1rem",
-              borderTop: "2px solid rgba(245, 158, 11, 0.3)",
-              fontSize: "1.5rem",
-              fontWeight: "700",
-              color: "#f59e0b",
-            }}
-          >
-            <span>Total:</span>
-            <span>${getCartTotal()}</span>
-          </div>
-        </div>
+        <OrderSummary
+          cart={cart}
+          products={products}
+          getCartTotal={getCartTotal}
+        />
 
         <button
           onClick={onCompleteOrder}
