@@ -4,14 +4,18 @@ import { Project } from "./ProjectGallery";
 
 export const ProjectModal: React.FC<{
   project: Project | undefined;
-  onClose: () => void;
-}> = ({ project, onClose }) => {
+  // prefer onCloseAction (Next.js Server Action naming), but accept legacy onClose for callers
+  onCloseAction?: () => void;
+  onClose?: () => void;
+}> = ({ project, onCloseAction, onClose }) => {
   if (!project) return null;
+
+  const handleClose = onCloseAction ?? onClose ?? (() => {});
 
   return (
     <div style={{ maxWidth: "900px", margin: "0 auto" }}>
       <button
-        onClick={onClose}
+        onClick={handleClose}
         style={{
           padding: "0.5rem 1rem",
           background: "transparent",

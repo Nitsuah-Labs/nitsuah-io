@@ -110,6 +110,7 @@ export const PortfolioDemo: React.FC = () => {
             project={
               projects.find((p) => p.id === selectedProject) ?? undefined
             }
+            onCloseAction={() => setSelectedProject(null)}
             onClose={() => setSelectedProject(null)}
           />
         )}

@@ -23,6 +23,7 @@
     ],
     "target": "ES2017",
     "baseUrl": ".",
+    "types": ["jest", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["src/*"],
       "@/components/*": ["src/app/_components/*"],
