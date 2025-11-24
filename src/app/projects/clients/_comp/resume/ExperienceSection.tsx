@@ -36,28 +36,11 @@ export const ExperienceSection: React.FC = () => {
   ];
 
   return (
-    <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <div className="resume-container">
       {/* Professional Summary */}
-      <section style={{ marginBottom: "2rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            color: "#6366f1",
-            marginBottom: "0.75rem",
-            borderBottom: "2px solid rgba(99, 102, 241, 0.3)",
-            paddingBottom: "0.5rem",
-          }}
-        >
-          Professional Summary
-        </h2>
-        <p
-          style={{
-            color: "rgba(255, 255, 255, 0.8)",
-            lineHeight: "1.6",
-            margin: 0,
-          }}
-        >
+      <section className="resume-section">
+        <h2 className="resume-section-title">Professional Summary</h2>
+        <p className="resume-summary">
           Experienced software engineer with 8+ years building scalable web
           applications. Specialized in React, TypeScript, and cloud
           architecture. Passionate about creating efficient, user-friendly
@@ -66,86 +49,21 @@ export const ExperienceSection: React.FC = () => {
       </section>
 
       {/* Work Experience */}
-      <section style={{ marginBottom: "2rem" }}>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            color: "#6366f1",
-            marginBottom: "1rem",
-            borderBottom: "2px solid rgba(99, 102, 241, 0.3)",
-            paddingBottom: "0.5rem",
-          }}
-        >
-          Work Experience
-        </h2>
+      <section className="resume-section">
+        <h2 className="resume-section-title">Work Experience</h2>
         <div
           style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >
           {jobs.map((job, idx) => (
-            <div
-              key={idx}
-              style={{
-                background: "rgba(99, 102, 241, 0.05)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                borderRadius: "8px",
-                padding: "1.25rem",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: "0.75rem",
-                  flexWrap: "wrap",
-                  gap: "0.5rem",
-                }}
-              >
+            <div key={idx} className="resume-card">
+              <div className="resume-card-job">
                 <div>
-                  <h3
-                    style={{
-                      fontSize: "1.1rem",
-                      fontWeight: "600",
-                      color: "#fff",
-                      margin: "0 0 0.25rem 0",
-                    }}
-                  >
-                    {job.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "0.95rem",
-                      color: "#6366f1",
-                      margin: 0,
-                      fontWeight: "500",
-                    }}
-                  >
-                    {job.company}
-                  </p>
+                  <h3 className="job-title">{job.title}</h3>
+                  <p className="company-name">{job.company}</p>
                 </div>
-                <span
-                  style={{
-                    padding: "0.25rem 0.75rem",
-                    background: "rgba(99, 102, 241, 0.2)",
-                    border: "1px solid rgba(99, 102, 241, 0.4)",
-                    borderRadius: "12px",
-                    fontSize: "0.875rem",
-                    color: "#6366f1",
-                    fontWeight: "600",
-                  }}
-                >
-                  {job.period}
-                </span>
+                <span className="period-pill">{job.period}</span>
               </div>
-              <ul
-                style={{
-                  margin: 0,
-                  paddingLeft: "1.25rem",
-                  color: "rgba(255, 255, 255, 0.7)",
-                  lineHeight: "1.6",
-                }}
-              >
+              <ul className="resume-ul">
                 {job.points.map((point, pidx) => (
                   <li key={pidx} style={{ marginBottom: "0.25rem" }}>
                     {point}
@@ -159,59 +77,11 @@ export const ExperienceSection: React.FC = () => {
 
       {/* Education */}
       <section>
-        <h2
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            color: "#6366f1",
-            marginBottom: "1rem",
-            borderBottom: "2px solid rgba(99, 102, 241, 0.3)",
-            paddingBottom: "0.5rem",
-          }}
-        >
-          Education
-        </h2>
-        <div
-          style={{
-            background: "rgba(99, 102, 241, 0.05)",
-            border: "1px solid rgba(99, 102, 241, 0.2)",
-            borderRadius: "8px",
-            padding: "1.25rem",
-          }}
-        >
-          <h3
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "#fff",
-              margin: "0 0 0.25rem 0",
-            }}
-          >
-            Bachelor of Science in Computer Science
-          </h3>
-          <p
-            style={{
-              fontSize: "0.95rem",
-              color: "#6366f1",
-              margin: "0 0 0.5rem 0",
-              fontWeight: "500",
-            }}
-          >
-            University of California, Berkeley
-          </p>
-          <span
-            style={{
-              padding: "0.25rem 0.75rem",
-              background: "rgba(99, 102, 241, 0.2)",
-              border: "1px solid rgba(99, 102, 241, 0.4)",
-              borderRadius: "12px",
-              fontSize: "0.875rem",
-              color: "#6366f1",
-              fontWeight: "600",
-            }}
-          >
-            2012 - 2016
-          </span>
+        <h2 className="resume-section-title">Education</h2>
+        <div className="resume-card">
+          <h3 className="job-title">Bachelor of Science in Computer Science</h3>
+          <p className="company-name">University of California, Berkeley</p>
+          <span className="period-pill">2012 - 2016</span>
         </div>
       </section>
     </div>

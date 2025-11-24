@@ -19,40 +19,15 @@ export const SkillsSection: React.FC = () => {
   ];
 
   return (
-    <section style={{ marginBottom: "2rem" }}>
-      <h2
-        style={{
-          fontSize: "1.5rem",
-          fontWeight: "700",
-          color: "#6366f1",
-          marginBottom: "1rem",
-          borderBottom: "2px solid rgba(99, 102, 241, 0.3)",
-          paddingBottom: "0.5rem",
-        }}
-      >
-        Technical Skills
-      </h2>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-          gap: "1rem",
-        }}
-      >
+    <section className="resume-section">
+      <h2 className="resume-section-title">Technical Skills</h2>
+      <div className="resume-skills-grid">
         {groups.map((group, idx) => (
-          <div
-            key={idx}
-            style={{
-              background: "rgba(99, 102, 241, 0.05)",
-              border: "1px solid rgba(99, 102, 241, 0.2)",
-              borderRadius: "8px",
-              padding: "1rem",
-            }}
-          >
+          <div key={idx} className="skill-card">
             <h3
               style={{
                 fontSize: "1rem",
-                fontWeight: "600",
+                fontWeight: 600,
                 color: "#6366f1",
                 marginBottom: "0.75rem",
               }}
@@ -61,18 +36,7 @@ export const SkillsSection: React.FC = () => {
             </h3>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
               {group.skills.map((skill) => (
-                <span
-                  key={skill}
-                  style={{
-                    padding: "0.375rem 0.75rem",
-                    background: "rgba(99, 102, 241, 0.15)",
-                    border: "1px solid rgba(99, 102, 241, 0.3)",
-                    borderRadius: "16px",
-                    fontSize: "0.875rem",
-                    color: "rgba(255, 255, 255, 0.9)",
-                    fontWeight: "500",
-                  }}
-                >
+                <span key={skill} className="skill-pill">
                   {skill}
                 </span>
               ))}
