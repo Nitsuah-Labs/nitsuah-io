@@ -42,7 +42,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         Sales Dashboard
       </h2>
 
-      {/* Key Metrics */}
       <div
         className="crm-metrics-grid"
         style={{
@@ -136,7 +135,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* Sales Pipeline */}
       <div style={{ marginBottom: "2rem" }}>
         <h3
           style={{
@@ -202,7 +200,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* Recent Activity */}
       <div>
         <h3
           style={{
