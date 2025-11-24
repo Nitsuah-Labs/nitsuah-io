@@ -18,7 +18,7 @@ import {
   DemoHeader,
   DemoSection,
 } from "../../../../components/demos";
-import styles from "../_styles/restaurant.module.css";
+import styles from "./_styles/restaurant.module.css";
 import FeatureCard from "./restaurant/FeatureCard";
 import GalleryItem from "./restaurant/GalleryItem";
 import { MenuSection } from "./restaurant/MenuSection";
