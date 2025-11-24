@@ -160,12 +160,25 @@ export const TasksView: React.FC<TasksViewProps> = ({
                           <span style={{ color: "rgba(255,255,255,0.6)" }}>
                             Due: {task.dueDate}
                           </span>
-                          <span style={{ color: "rgba(255,255,255,0.6)" }}>
-                            
-                          </span>
-                          <span style={{ color: "rgba(255,255,255,0.6)" }}>
-                            {task.assignedTo ?? task.relatedTo ?? "—"}
-                          </span>
+                          {/* Assigned / Related info */}
+                          {task.assignedTo || task.relatedTo ? (
+                            <>
+                              <span style={{ color: "rgba(255,255,255,0.6)" }}>
+                                Assigned to: {task.assignedTo ?? "—"}
+                              </span>
+                              {task.relatedTo ? (
+                                <span
+                                  style={{ color: "rgba(255,255,255,0.6)" }}
+                                >
+                                  Related to: {task.relatedTo}
+                                </span>
+                              ) : null}
+                            </>
+                          ) : (
+                            <span style={{ color: "rgba(255,255,255,0.6)" }}>
+                              —
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
