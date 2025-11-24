@@ -5,234 +5,19 @@ import Footer from "../../_components/_site/Footer";
 import HomeBar from "../../_components/_site/Homebar";
 import "./_styles/client.css";
 
-// Demo Components
-import { AppointmentDemo } from "./_comp/AppointmentDemo";
-import { BlogCMSDemo } from "./_comp/BlogCMSDemo";
-import { CRMDemo } from "./_comp/CRMDemo";
-import { NFTDemo } from "./_comp/NFTDemo";
-import { PortfolioDemo } from "./_comp/PortfolioDemo";
-import { RealEstateDemo } from "./_comp/RealEstateDemo";
-import { RestaurantDemo } from "./_comp/RestaurantDemo";
-import { ResumeSiteDemo } from "./_comp/ResumeSiteDemo";
-import { SaaSDemo } from "./_comp/SaaSDemo";
-import { StorefrontDemo } from "./_comp/StorefrontDemo";
-
-type ProjectType =
-  | "web3"
-  | "ecommerce"
-  | "saas"
-  | "service"
-  | "portfolio"
-  | "all";
-
-interface ClientProject {
-  id: string;
-  name: string;
-  type: ProjectType;
-  description: string;
-  technologies: string[];
-  features: string[];
-  status: "live" | "demo" | "mockup";
-  icon?: string; // Custom icon for each project
-}
-
-const clientProjects: ClientProject[] = [
-  {
-    id: "storefront",
-    name: "Storefront",
-    type: "ecommerce",
-    description:
-      "Modern e-commerce platform with cart, checkout, and inventory management",
-    technologies: ["Next.js", "Stripe", "Headless CMS"],
-    features: [
-      "Product Catalog",
-      "Shopping Cart",
-      "Payment Integration",
-      "Order Management",
-    ],
-    status: "demo",
-    icon: "🛒",
-  },
-  {
-    id: "restaurant",
-    name: "Restaurant",
-    type: "service",
-    description:
-      "Italian restaurant website with menu, reservations, and gallery",
-    technologies: ["React", "Node.js", "PostgreSQL"],
-    features: [
-      "Menu Display",
-      "Table Reservations",
-      "Online Ordering",
-      "Photo Gallery",
-    ],
-    status: "demo",
-    icon: "🍝",
-  },
-  {
-    id: "realestate",
-    name: "Real Estate",
-    type: "service",
-    description:
-      "Property listing platform with search, filters, and map views",
-    technologies: ["Next.js", "Mapbox", "Sanity CMS"],
-    features: [
-      "Property Search",
-      "Map Integration",
-      "Virtual Tours",
-      "Agent Profiles",
-    ],
-    status: "demo",
-    icon: "🏠",
-  },
-  {
-    id: "booking",
-    name: "Dental Office",
-    type: "service",
-    description:
-      "Dentist office appointment booking with patient management and SMS reminders",
-    technologies: ["React", "Calendar API", "Twilio"],
-    features: [
-      "Calendar Schedule",
-      "Patient Records",
-      "SMS Reminders",
-      "Insurance Processing",
-    ],
-    status: "demo",
-    icon: "🦷",
-  },
-  {
-    id: "portfolio",
-    name: "Creative Portfolio",
-    type: "portfolio",
-    description: "Portfolio showcase for photographers, designers, and artists",
-    technologies: ["Next.js", "Framer Motion", "Cloudinary"],
-    features: [
-      "Gallery Grid",
-      "Lightbox View",
-      "Project Details",
-      "Contact Form",
-    ],
-    status: "demo",
-    icon: "🎨",
-  },
-  {
-    id: "resume-site",
-    name: "Resume Website",
-    type: "portfolio",
-    description:
-      "Professional resume template with clean layout and downloadable PDF",
-    technologies: ["Next.js", "TypeScript", "CSS Grid"],
-    features: [
-      "Work History",
-      "Skills Showcase",
-      "PDF Download",
-      "Contact Section",
-    ],
-    status: "demo",
-    icon: "📄",
-  },
-  {
-    id: "nft-mint",
-    name: "NFT Minting",
-    type: "web3",
-    description:
-      "Web3 NFT minting demo with wallet connection and network switching",
-    technologies: ["React", "wagmi", "Web3", "Ethereum"],
-    features: [
-      "Wallet Connect",
-      "NFT Minting",
-      "Network Switching",
-      "Account Management",
-    ],
-    status: "demo",
-    icon: "✨",
-  },
-  {
-    id: "marketplace",
-    name: "NFT Marketplace",
-    type: "web3",
-    description: "Decentralized marketplace for buying and selling NFTs",
-    technologies: ["React", "Solidity", "IPFS", "ethers.js"],
-    features: [
-      "NFT Listing",
-      "Auction System",
-      "Wallet Integration",
-      "Gas Optimization",
-    ],
-    status: "demo",
-    icon: "🖼️",
-  },
-  {
-    id: "crm",
-    name: "Customer CRM",
-    type: "saas",
-    description:
-      "Salesforce-style CRM with contacts, pipeline, tasks, and deals tracking",
-    technologies: ["React", "TypeScript", "Real-time Sync"],
-    features: [
-      "Contact Management",
-      "Sales Pipeline",
-      "Task Tracking",
-      "Deal Flow",
-    ],
-    status: "demo",
-    icon: "📈",
-  },
-  {
-    id: "blog-cms",
-    name: "Content Mgmt",
-    type: "saas",
-    description: "Blog CMS with markdown support, SEO tools, and analytics",
-    technologies: ["Next.js", "MDX", "Vercel Analytics"],
-    features: [
-      "Rich Text Editor",
-      "SEO Tools",
-      "Draft System",
-      "Analytics Dashboard",
-    ],
-    status: "demo",
-    icon: "📝",
-  },
-  {
-    id: "dashboard",
-    name: "SaaS Analytics",
-    type: "saas",
-    description:
-      "Analytics dashboard for tracking KPIs, metrics, and business insights",
-    technologies: ["React", "D3.js", "Chart.js", "REST API"],
-    features: [
-      "Real-time Analytics",
-      "Custom Reports",
-      "Data Visualization",
-      "Export Tools",
-    ],
-    status: "demo",
-    icon: "📊",
-  },
-];
-
-const getProjectIcon = (project: ClientProject): string => {
-  // Use custom icon if available, otherwise fall back to type-based icon
-  if (project.icon) {
-    return project.icon;
-  }
-
-  switch (project.type) {
-    case "web3":
-      return "🔗";
-    case "ecommerce":
-      return "🛒";
-    case "saas":
-      return "📊";
-    case "service":
-      return "🏢";
-    case "portfolio":
-      return "🎨";
-    default:
-      return "💼";
-  }
-};
+// Data and Config
+import { clientProjects, type ProjectType } from "@/lib/data/client-projects";
+import { getDemo } from "@/lib/data/demo-registry";
+import { projectFilters } from "@/lib/data/project-filters";
+import {
+  getProjectIcon,
+  getProjectTypeBackground,
+  getProjectTypeBorder,
+  getProjectTypeColor,
+  getStatusBackground,
+  getStatusBorder,
+  getStatusColor,
+} from "@/lib/utils/project-helpers";
 
 const MintExample: React.FC = () => {
   const [selectedType, setSelectedType] = useState<ProjectType>("all");
@@ -305,50 +90,10 @@ const MintExample: React.FC = () => {
     return carouselIndex * cardWidthPercent;
   };
 
-  // Helper function to render the appropriate demo
+  // Render demo with styled wrapper
   const renderDemo = (projectId: string) => {
     const project = clientProjects.find((p) => p.id === projectId);
     if (!project) return null;
-
-    const demoContent = (() => {
-      switch (projectId) {
-        case "nft-mint":
-          return <NFTDemo initialView="mint" />;
-        case "marketplace":
-          return <NFTDemo />;
-        case "storefront":
-          return <StorefrontDemo />;
-        case "dashboard":
-          return <SaaSDemo />;
-        case "crm":
-          return <CRMDemo />;
-        case "portfolio":
-          return <PortfolioDemo />;
-        case "resume-site":
-          return <ResumeSiteDemo />;
-        case "realestate":
-          return <RealEstateDemo />;
-        case "restaurant":
-          return <RestaurantDemo />;
-        case "blog-cms":
-          return <BlogCMSDemo />;
-        case "booking":
-          return <AppointmentDemo />;
-        default:
-          return (
-            <div
-              style={{
-                textAlign: "center",
-                padding: "3rem",
-                color: "rgba(255, 255, 255, 0.7)",
-              }}
-            >
-              <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>🚧</div>
-              <p>Demo coming soon...</p>
-            </div>
-          );
-      }
-    })();
 
     return (
       <div
@@ -371,7 +116,7 @@ const MintExample: React.FC = () => {
             padding: "0.5rem",
           }}
         >
-          {demoContent}
+          {getDemo(projectId)}
         </div>
       </div>
     );
@@ -379,87 +124,6 @@ const MintExample: React.FC = () => {
 
   return (
     <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
-      <style>{`
-        /* Grid layout for no demo mode */
-        .projects-grid {
-          display: grid;
-          gap: 1.5rem;
-        }
-        
-        @media (min-width: 1024px) {
-          .projects-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-        
-        @media (min-width: 768px) and (max-width: 1023px) {
-          .projects-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        
-        @media (max-width: 767px) {
-          .projects-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-        }
-        
-        /* Carousel - only used when demo is active */
-        @media (max-width: 768px) {
-          .carousel-wrapper.demo-active {
-            --cards-visible: 3;
-          }
-          
-          .carousel-nav-btn {
-            width: 36px !important;
-            height: 36px !important;
-            font-size: 1.25rem !important;
-          }
-          
-          .carousel-container {
-            padding: 0 40px !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .carousel-wrapper.demo-active {
-            --cards-visible: 2;
-          }
-          
-          .client-filter-btn {
-            padding: 0.4rem 0.6rem !important;
-            font-size: 0.75rem !important;
-            flex: 0 0 auto;
-          }
-          
-          .filter-container {
-            gap: 0.4rem !important;
-            padding: 0 0.5rem;
-          }
-          
-          .carousel-nav-btn {
-            width: 32px !important;
-            height: 32px !important;
-            font-size: 1.1rem !important;
-            left: 4px !important;
-          }
-          
-          .carousel-nav-btn:last-of-type {
-            right: 4px !important;
-            left: auto !important;
-          }
-          
-          .carousel-container {
-            padding: 0 36px !important;
-          }
-          
-          .client-card.demo-active {
-            padding: 0.4rem !important;
-            font-size: 0.75rem !important;
-          }
-        }
-      `}</style>
       <HomeBar />
       <main
         style={{
@@ -519,14 +183,7 @@ const MintExample: React.FC = () => {
               transition: "all 0.3s ease",
             }}
           >
-            {[
-              { type: "all", label: "All Projects", color: "#10b981" },
-              { type: "web3", label: "Web3", color: "#8b5cf6" },
-              { type: "ecommerce", label: "E-Commerce", color: "#f59e0b" },
-              { type: "saas", label: "SaaS", color: "#3b82f6" },
-              { type: "service", label: "Services", color: "#22c55e" },
-              { type: "portfolio", label: "Portfolio", color: "#ec4899" },
-            ].map(({ type, label, color }) => (
+            {projectFilters.map(({ type, label, color }) => (
               <button
                 key={type}
                 className="client-filter-btn"
@@ -629,39 +286,11 @@ const MintExample: React.FC = () => {
                         borderRadius: "6px",
                         fontSize: "0.8rem",
                         fontWeight: "600",
-                        background:
-                          project.type === "web3"
-                            ? "rgba(147, 51, 234, 0.2)"
-                            : project.type === "ecommerce"
-                              ? "rgba(249, 115, 22, 0.2)"
-                              : project.type === "saas"
-                                ? "rgba(59, 130, 246, 0.2)"
-                                : project.type === "service"
-                                  ? "rgba(34, 197, 94, 0.2)"
-                                  : "rgba(236, 72, 153, 0.2)",
-                        color:
-                          project.type === "web3"
-                            ? "#c084fc"
-                            : project.type === "ecommerce"
-                              ? "#fb923c"
-                              : project.type === "saas"
-                                ? "#60a5fa"
-                                : project.type === "service"
-                                  ? "#4ade80"
-                                  : "#f472b6",
+                        background: getProjectTypeBackground(project.type),
+                        color: getProjectTypeColor(project.type),
                         textTransform: "uppercase",
                         letterSpacing: "0.5px",
-                        border: `1px solid ${
-                          project.type === "web3"
-                            ? "rgba(147, 51, 234, 0.4)"
-                            : project.type === "ecommerce"
-                              ? "rgba(249, 115, 22, 0.4)"
-                              : project.type === "saas"
-                                ? "rgba(59, 130, 246, 0.4)"
-                                : project.type === "service"
-                                  ? "rgba(34, 197, 94, 0.4)"
-                                  : "rgba(236, 72, 153, 0.4)"
-                        }`,
+                        border: `1px solid ${getProjectTypeBorder(project.type)}`,
                       }}
                     >
                       {project.type}
@@ -683,26 +312,10 @@ const MintExample: React.FC = () => {
                         borderRadius: "4px",
                         fontSize: "0.75rem",
                         fontWeight: "600",
-                        background:
-                          project.status === "live"
-                            ? "#10b98120"
-                            : project.status === "demo"
-                              ? "#3b82f620"
-                              : "#6b728020",
-                        color:
-                          project.status === "live"
-                            ? "#10b981"
-                            : project.status === "demo"
-                              ? "#3b82f6"
-                              : "#9ca3af",
+                        background: getStatusBackground(project.status),
+                        color: getStatusColor(project.status),
                         textTransform: "capitalize",
-                        border: `1px solid ${
-                          project.status === "live"
-                            ? "#10b98140"
-                            : project.status === "demo"
-                              ? "#3b82f640"
-                              : "#6b728040"
-                        }`,
+                        border: `1px solid ${getStatusBorder(project.status)}`,
                       }}
                     >
                       {project.status}

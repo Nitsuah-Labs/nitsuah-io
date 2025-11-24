@@ -536,3 +536,96 @@
 .footer.mobile .divider {
   min-width: 315px;
 }
+
+/* Client Projects Page Styles */
+
+/* Grid layout for no demo mode */
+.projects-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Carousel - only used when demo is active */
+@media (max-width: 768px) {
+  .carousel-wrapper.demo-active {
+    --cards-visible: 3;
+  }
+
+  .carousel-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .carousel-container {
+    padding: 0 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-wrapper.demo-active {
+    --cards-visible: 2;
+  }
+
+  .client-filter-btn {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.75rem !important;
+    flex: 0 0 auto;
+  }
+
+  .filter-container {
+    gap: 0.4rem !important;
+    padding: 0 0.5rem;
+  }
+
+  .carousel-nav-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.1rem !important;
+    left: 4px !important;
+  }
+
+  .carousel-nav-btn:last-of-type {
+    right: 4px !important;
+    left: auto !important;
+  }
+
+  .carousel-container {
+    padding: 0 36px !important;
+  }
+
+  .client-card.demo-active {
+    padding: 0.4rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
