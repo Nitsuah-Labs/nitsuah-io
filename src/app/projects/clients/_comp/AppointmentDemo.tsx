@@ -6,18 +6,16 @@ import {
   mockPatients,
   timeSlots,
 } from "@/lib/data/demos/appointment-data";
-import {
-  getAppointmentStatusColor,
-  getAppointmentTypeColor,
-} from "@/lib/utils/demo-helpers";
 import React, { useState } from "react";
+import { AppointmentForm } from "./appointment/AppointmentForm";
+import { CalendarView } from "./appointment/CalendarView";
+import { PatientList } from "./appointment/PatientList";
 
 export const AppointmentDemo: React.FC = () => {
   const [currentView, setCurrentView] = useState<
     "calendar" | "patients" | "book"
   >("calendar");
   const [selectedDate, setSelectedDate] = useState("2025-01-15");
-  const [selectedPatient, setSelectedPatient] = useState<number | null>(null);
 
   // Use imported data
   const patients = mockPatients;
@@ -25,93 +23,8 @@ export const AppointmentDemo: React.FC = () => {
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
-      <style>{`
-        @media (max-width: 768px) {
-          .appt-header-title {
-            font-size: 1.25rem !important;
-          }
-          
-          .appt-header-subtitle {
-            font-size: 0.75rem !important;
-          }
-          
-          .appt-header-actions {
-            flex-direction: column !important;
-            width: 100%;
-            gap: 0.25rem !important;
-          }
-          
-          .appt-header-btn {
-            padding: 0.4rem 0.75rem !important;
-            font-size: 0.75rem !important;
-            min-height: 44px !important;
-          }
-          
-          .appt-tab {
-            padding: 0.5rem 1rem !important;
-            font-size: 0.85rem !important;
-            min-height: 44px !important;
-          }
-          
-          .appt-type-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          
-          .appt-form-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .appt-calendar {
-            padding: 1rem !important;
-          }
-          
-          .appt-patient-list {
-            gap: 0.75rem !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .appt-header {
-            flex-direction: column !important;
-            gap: 1rem !important;
-            padding: 1rem !important;
-          }
-          
-          .appt-type-grid {
-            grid-template-columns: 1fr !important;
-          }
-          
-          .appt-card-content {
-            flex-direction: column !important;
-            gap: 1rem !important;
-            align-items: stretch !important;
-          }
-          
-          .appt-card-actions {
-            flex-direction: row !important;
-            width: 100% !important;
-            justify-content: stretch !important;
-          }
-          
-          .appt-card-actions button {
-            flex: 1 !important;
-            min-height: 44px !important;
-          }
-          
-          .appt-tabs {
-            flex-direction: column !important;
-            width: 100% !important;
-          }
-          
-          .appt-tab {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-        }
-      `}</style>
       {/* Header */}
       <div
-        className="appt-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -124,14 +37,10 @@ export const AppointmentDemo: React.FC = () => {
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <span style={{ fontSize: "2rem" }}>🦷</span>
           <div>
-            <div
-              className="appt-header-title"
-              style={{ fontSize: "1.5rem", fontWeight: "700", color: "#fff" }}
-            >
+            <div style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff" }}>
               SmileCare Dental
             </div>
             <div
-              className="appt-header-subtitle"
               style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.9)" }}
             >
               Schedule & Patient Management
@@ -139,7 +48,6 @@ export const AppointmentDemo: React.FC = () => {
           </div>
         </div>
         <div
-          className="appt-header-actions"
           style={{
             display: "flex",
             gap: "0.5rem",
@@ -148,30 +56,28 @@ export const AppointmentDemo: React.FC = () => {
           }}
         >
           <button
-            className="appt-header-btn"
             style={{
-              background: "rgba(255, 255, 255, 0.2)",
-              border: "1px solid rgba(255, 255, 255, 0.4)",
+              background: "rgba(255,255,255,0.2)",
+              border: "1px solid rgba(255,255,255,0.4)",
               color: "#fff",
               padding: "0.5rem 1rem",
-              borderRadius: "6px",
+              borderRadius: 6,
               cursor: "pointer",
               fontSize: "0.875rem",
-              fontWeight: "600",
+              fontWeight: 600,
             }}
           >
             📞 Call Patient
           </button>
           <button
-            className="appt-header-btn"
             style={{
               background: "#fff",
               border: "none",
               color: "#14b8a6",
               padding: "0.5rem 1rem",
-              borderRadius: "6px",
+              borderRadius: 6,
               cursor: "pointer",
-              fontWeight: "600",
+              fontWeight: 600,
               fontSize: "0.875rem",
             }}
           >
@@ -202,21 +108,18 @@ export const AppointmentDemo: React.FC = () => {
                 ? "2px solid #14b8a6"
                 : "2px solid transparent",
             color:
-              currentView === "calendar"
-                ? "#14b8a6"
-                : "rgba(255, 255, 255, 0.7)",
+              currentView === "calendar" ? "#14b8a6" : "rgba(255,255,255,0.7)",
             padding: "0.5rem 1rem",
-            borderRadius: "6px",
+            borderRadius: 6,
             cursor: "pointer",
-            fontWeight: "600",
+            fontWeight: 600,
             fontSize: "0.875rem",
           }}
         >
           📅 Calendar
         </button>
         <button
-          onClick={() => setCurrentView("calendar")}
-          className="appt-tab"
+          onClick={() => setCurrentView("patients")}
           style={{
             background:
               currentView === "patients"
@@ -227,13 +130,11 @@ export const AppointmentDemo: React.FC = () => {
                 ? "2px solid #14b8a6"
                 : "2px solid transparent",
             color:
-              currentView === "patients"
-                ? "#14b8a6"
-                : "rgba(255, 255, 255, 0.7)",
+              currentView === "patients" ? "#14b8a6" : "rgba(255,255,255,0.7)",
             padding: "0.5rem 1rem",
-            borderRadius: "6px",
+            borderRadius: 6,
             cursor: "pointer",
-            fontWeight: "600",
+            fontWeight: 600,
             fontSize: "0.875rem",
           }}
         >
@@ -241,7 +142,6 @@ export const AppointmentDemo: React.FC = () => {
         </button>
         <button
           onClick={() => setCurrentView("book")}
-          className="appt-tab"
           style={{
             background:
               currentView === "book"
@@ -251,12 +151,11 @@ export const AppointmentDemo: React.FC = () => {
               currentView === "book"
                 ? "2px solid #14b8a6"
                 : "2px solid transparent",
-            color:
-              currentView === "book" ? "#14b8a6" : "rgba(255, 255, 255, 0.7)",
+            color: currentView === "book" ? "#14b8a6" : "rgba(255,255,255,0.7)",
             padding: "0.5rem 1rem",
-            borderRadius: "6px",
+            borderRadius: 6,
             cursor: "pointer",
-            fontWeight: "600",
+            fontWeight: 600,
             fontSize: "0.875rem",
           }}
         >
@@ -266,561 +165,23 @@ export const AppointmentDemo: React.FC = () => {
 
       {/* Main Content */}
       <div style={{ padding: "1.5rem", maxHeight: "450px", overflowY: "auto" }}>
-        {/* CALENDAR VIEW */}
         {currentView === "calendar" && (
-          <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "1.5rem",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "1.75rem",
-                  fontWeight: "700",
-                  color: "#14b8a6",
-                  margin: 0,
-                }}
-              >
-                Today's Schedule
-              </h2>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                style={{
-                  padding: "0.5rem 1rem",
-                  borderRadius: "6px",
-                  border: "2px solid rgba(20, 184, 166, 0.3)",
-                  background: "rgba(0,0,0,0.3)",
-                  color: "#fff",
-                  fontSize: "0.875rem",
-                }}
-              />
-            </div>
-
-            {/* Appointments Timeline */}
-            <div style={{ display: "grid", gap: "1rem" }}>
-              {appointments
-                .filter((apt) => apt.date === selectedDate)
-                .map((apt) => {
-                  const patient = patients.find((p) => p.id === apt.patientId);
-                  const typeInfo = appointmentTypes.find(
-                    (t) => t.value === apt.type,
-                  );
-                  return (
-                    <div
-                      key={apt.id}
-                      style={{
-                        background: "rgba(20, 184, 166, 0.1)",
-                        border: `2px solid ${getAppointmentTypeColor(apt.type)}`,
-                        borderLeft: `6px solid ${getAppointmentTypeColor(apt.type)}`,
-                        borderRadius: "8px",
-                        padding: "1.5rem",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <div style={{ flex: 1 }}>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "0.75rem",
-                            marginBottom: "0.75rem",
-                          }}
-                        >
-                          <span style={{ fontSize: "1.5rem" }}>
-                            {typeInfo?.icon}
-                          </span>
-                          <div>
-                            <h3
-                              style={{
-                                fontSize: "1.25rem",
-                                fontWeight: "600",
-                                color: "#14b8a6",
-                                margin: 0,
-                              }}
-                            >
-                              {patient?.name}
-                            </h3>
-                            <div
-                              style={{
-                                fontSize: "0.875rem",
-                                color: "rgba(255,255,255,0.7)",
-                              }}
-                            >
-                              {typeInfo?.label} • {typeInfo?.duration}
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            display: "grid",
-                            gap: "0.5rem",
-                            fontSize: "0.875rem",
-                            color: "rgba(255,255,255,0.8)",
-                          }}
-                        >
-                          <div>⏰ {apt.time}</div>
-                          <div>👨‍⚕️ {apt.dentist}</div>
-                          <div>📧 {patient?.email}</div>
-                          <div>📞 {patient?.phone}</div>
-                          {patient?.insuranceProvider && (
-                            <div>🏥 Insurance: {patient.insuranceProvider}</div>
-                          )}
-                          {apt.notes && <div>📝 {apt.notes}</div>}
-                        </div>
-                      </div>
-                      <div style={{ textAlign: "right" }}>
-                        <span
-                          style={{
-                            padding: "0.25rem 0.75rem",
-                            borderRadius: "4px",
-                            fontSize: "0.75rem",
-                            fontWeight: "600",
-                            background: `${getAppointmentStatusColor(apt.status)}20`,
-                            color: getAppointmentStatusColor(apt.status),
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          {apt.status}
-                        </span>
-                        <div
-                          style={{
-                            marginTop: "1rem",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.5rem",
-                          }}
-                        >
-                          <button
-                            style={{
-                              padding: "0.375rem 0.75rem",
-                              background: "#14b8a6",
-                              border: "none",
-                              color: "#fff",
-                              borderRadius: "4px",
-                              cursor: "pointer",
-                              fontSize: "0.75rem",
-                              fontWeight: "600",
-                            }}
-                          >
-                            Send Reminder
-                          </button>
-                          <button
-                            style={{
-                              padding: "0.375rem 0.75rem",
-                              background: "rgba(20, 184, 166, 0.2)",
-                              border: "1px solid #14b8a6",
-                              color: "#14b8a6",
-                              borderRadius: "4px",
-                              cursor: "pointer",
-                              fontSize: "0.75rem",
-                              fontWeight: "600",
-                            }}
-                          >
-                            Reschedule
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-
-            {appointments.filter((apt) => apt.date === selectedDate).length ===
-              0 && (
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "3rem",
-                  color: "rgba(255,255,255,0.6)",
-                }}
-              >
-                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📅</div>
-                <div>No appointments scheduled for this date</div>
-              </div>
-            )}
-          </div>
+          <CalendarView
+            appointments={appointments}
+            patients={patients}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
         )}
 
-        {/* PATIENTS VIEW */}
-        {currentView === "patients" && (
-          <div>
-            <h2
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: "700",
-                color: "#14b8a6",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Patient Records
-            </h2>
-            <div style={{ display: "grid", gap: "1rem" }}>
-              {patients.map((patient) => (
-                <div
-                  key={patient.id}
-                  style={{
-                    background: "rgba(20, 184, 166, 0.1)",
-                    border: "2px solid rgba(20, 184, 166, 0.3)",
-                    borderRadius: "8px",
-                    padding: "1.5rem",
-                  }}
-                >
-                  <div
-                    className="appt-card-content"
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div style={{ flex: 1 }}>
-                      <h3
-                        style={{
-                          fontSize: "1.25rem",
-                          fontWeight: "600",
-                          color: "#14b8a6",
-                          marginBottom: "0.75rem",
-                        }}
-                      >
-                        {patient.name}
-                      </h3>
-                      <div
-                        style={{
-                          display: "grid",
-                          gap: "0.5rem",
-                          fontSize: "0.875rem",
-                          color: "rgba(255,255,255,0.8)",
-                        }}
-                      >
-                        <div>📧 {patient.email}</div>
-                        <div>📞 {patient.phone}</div>
-                        <div>🏥 {patient.insuranceProvider}</div>
-                        <div>🗓️ Last Visit: {patient.lastVisit}</div>
-                        {patient.nextAppointment && (
-                          <div style={{ color: "#14b8a6", fontWeight: "600" }}>
-                            📅 Next: {patient.nextAppointment}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div
-                      className="appt-card-actions"
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                      }}
-                    >
-                      <button
-                        style={{
-                          padding: "0.5rem 1rem",
-                          background: "#14b8a6",
-                          border: "none",
-                          color: "#fff",
-                          borderRadius: "6px",
-                          cursor: "pointer",
-                          fontSize: "0.875rem",
-                          fontWeight: "600",
-                        }}
-                      >
-                        View History
-                      </button>
-                      <button
-                        style={{
-                          padding: "0.5rem 1rem",
-                          background: "rgba(20, 184, 166, 0.2)",
-                          border: "1px solid #14b8a6",
-                          color: "#14b8a6",
-                          borderRadius: "6px",
-                          cursor: "pointer",
-                          fontSize: "0.875rem",
-                          fontWeight: "600",
-                        }}
-                      >
-                        Book Appointment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {currentView === "patients" && <PatientList patients={patients} />}
 
-        {/* BOOK NEW APPOINTMENT VIEW */}
         {currentView === "book" && (
-          <div>
-            <h2
-              style={{
-                fontSize: "1.75rem",
-                fontWeight: "700",
-                color: "#14b8a6",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Schedule New Appointment
-            </h2>
-            <div
-              style={{
-                background: "rgba(20, 184, 166, 0.1)",
-                border: "2px solid rgba(20, 184, 166, 0.3)",
-                borderRadius: "8px",
-                padding: "2rem",
-              }}
-            >
-              <form style={{ display: "grid", gap: "1.5rem" }}>
-                {/* Patient Selection */}
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      color: "#14b8a6",
-                      fontWeight: "600",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Patient
-                  </label>
-                  <select
-                    style={{
-                      width: "100%",
-                      padding: "0.75rem",
-                      borderRadius: "6px",
-                      border: "2px solid rgba(20, 184, 166, 0.3)",
-                      background: "rgba(0,0,0,0.3)",
-                      color: "#fff",
-                      fontSize: "0.875rem",
-                    }}
-                  >
-                    <option value="">Select patient...</option>
-                    {patients.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Appointment Type */}
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      color: "#14b8a6",
-                      fontWeight: "600",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Appointment Type
-                  </label>
-                  <div
-                    className="appt-type-grid"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns:
-                        "repeat(auto-fit, minmax(150px, 1fr))",
-                      gap: "0.75rem",
-                    }}
-                  >
-                    {appointmentTypes.map((type) => (
-                      <button
-                        key={type.value}
-                        type="button"
-                        style={{
-                          padding: "0.75rem",
-                          background: "rgba(20, 184, 166, 0.1)",
-                          border: "2px solid rgba(20, 184, 166, 0.3)",
-                          borderRadius: "6px",
-                          color: "#fff",
-                          cursor: "pointer",
-                          textAlign: "center",
-                          transition: "all 0.2s",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "#14b8a6";
-                          e.currentTarget.style.background =
-                            "rgba(20, 184, 166, 0.2)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor =
-                            "rgba(20, 184, 166, 0.3)";
-                          e.currentTarget.style.background =
-                            "rgba(20, 184, 166, 0.1)";
-                        }}
-                      >
-                        <div
-                          style={{
-                            fontSize: "1.5rem",
-                            marginBottom: "0.25rem",
-                          }}
-                        >
-                          {type.icon}
-                        </div>
-                        <div
-                          style={{ fontSize: "0.875rem", fontWeight: "600" }}
-                        >
-                          {type.label}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: "0.75rem",
-                            color: "rgba(255,255,255,0.6)",
-                          }}
-                        >
-                          {type.duration}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Date & Time */}
-                <div
-                  className="appt-form-grid"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "1rem",
-                  }}
-                >
-                  <div>
-                    <label
-                      style={{
-                        display: "block",
-                        color: "#14b8a6",
-                        fontWeight: "600",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      Date
-                    </label>
-                    <input
-                      type="date"
-                      style={{
-                        width: "100%",
-                        padding: "0.75rem",
-                        borderRadius: "6px",
-                        border: "2px solid rgba(20, 184, 166, 0.3)",
-                        background: "rgba(0,0,0,0.3)",
-                        color: "#fff",
-                        fontSize: "0.875rem",
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      style={{
-                        display: "block",
-                        color: "#14b8a6",
-                        fontWeight: "600",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      Time
-                    </label>
-                    <select
-                      style={{
-                        width: "100%",
-                        padding: "0.75rem",
-                        borderRadius: "6px",
-                        border: "2px solid rgba(20, 184, 166, 0.3)",
-                        background: "rgba(0,0,0,0.3)",
-                        color: "#fff",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      <option value="">Select time...</option>
-                      {timeSlots.map((slot) => (
-                        <option key={slot} value={slot}>
-                          {slot}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Notes */}
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      color: "#14b8a6",
-                      fontWeight: "600",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    Special Instructions / Notes
-                  </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Any special requirements or notes..."
-                    style={{
-                      width: "100%",
-                      padding: "0.75rem",
-                      borderRadius: "6px",
-                      border: "2px solid rgba(20, 184, 166, 0.3)",
-                      background: "rgba(0,0,0,0.3)",
-                      color: "#fff",
-                      fontSize: "0.875rem",
-                      fontFamily: "system-ui, sans-serif",
-                      resize: "vertical",
-                    }}
-                  />
-                </div>
-
-                {/* SMS Reminder Option */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    id="sms-reminder"
-                    style={{ width: "20px", height: "20px", cursor: "pointer" }}
-                  />
-                  <label
-                    htmlFor="sms-reminder"
-                    style={{
-                      color: "rgba(255,255,255,0.9)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    📱 Send SMS reminder 24 hours before appointment
-                  </label>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  style={{
-                    padding: "1rem",
-                    background:
-                      "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
-                    border: "none",
-                    color: "#fff",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    fontWeight: "700",
-                    fontSize: "1rem",
-                    marginTop: "1rem",
-                  }}
-                >
-                  Schedule Appointment
-                </button>
-              </form>
-            </div>
-          </div>
+          <AppointmentForm
+            patients={patients}
+            appointmentTypes={appointmentTypes}
+            timeSlots={timeSlots}
+          />
         )}
       </div>
 
@@ -830,7 +191,7 @@ export const AppointmentDemo: React.FC = () => {
           textAlign: "center",
           padding: "1rem",
           borderTop: "2px solid rgba(20, 184, 166, 0.3)",
-          color: "rgba(255, 255, 255, 0.6)",
+          color: "rgba(255,255,255,0.6)",
           fontSize: "0.875rem",
         }}
       >
