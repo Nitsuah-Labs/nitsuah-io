@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import React from "react";
 
 interface DomainFormProps {
@@ -15,9 +15,9 @@ interface DomainFormProps {
   network: string;
   handleSwitchNetwork: () => void;
   currentAccount?: string | null;
-  icons180: string;
-  polygonLogo: string;
-  ethLogo: string;
+  icons180: string | StaticImageData;
+  polygonLogo: string | StaticImageData;
+  ethLogo: string | StaticImageData;
   tld: string;
   SCAN_LINK: string;
   OPENSEA_LINK: string;
