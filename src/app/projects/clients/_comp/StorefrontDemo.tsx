@@ -14,6 +14,7 @@ import {
 import React, { useState } from "react";
 
 // Subcomponents
+import { CartView } from "./storefront/CartView";
 import { HomePage } from "./storefront/HomePage";
 
 export const StorefrontDemo: React.FC = () => {
