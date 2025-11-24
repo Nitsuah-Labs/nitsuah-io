@@ -18,6 +18,9 @@ import {
   DemoHeader,
   DemoSection,
 } from "../../../../components/demos";
+import { MenuSection } from "./restaurant/MenuSection";
+import { OrderCart } from "./restaurant/OrderCart";
+import { ReservationForm } from "./restaurant/ReservationForm";
 
 type PageType = "home" | "menu" | "booking" | "pickup";
 
@@ -33,10 +36,7 @@ export const RestaurantDemo: React.FC = () => {
   const menuData = mockRestaurantMenu;
 
   const addToCart = (itemName: string) => {
-    setCart((prev) => ({
-      ...prev,
-      [itemName]: (prev[itemName] || 0) + 1,
-    }));
+    setCart((prev) => ({ ...prev, [itemName]: (prev[itemName] || 0) + 1 }));
   };
 
   const removeFromCart = (itemName: string) => {
@@ -57,9 +57,7 @@ export const RestaurantDemo: React.FC = () => {
       const item = menuData
         .flatMap((cat) => cat.items)
         .find((i) => i.name === itemName);
-      if (item) {
-        total += parseFloat(item.price.substring(1)) * quantity;
-      }
+      if (item) total += parseFloat(item.price.substring(1)) * quantity;
     });
     return total.toFixed(2);
   };
@@ -68,7 +66,6 @@ export const RestaurantDemo: React.FC = () => {
     selectedCategory === "All"
       ? menuData
       : menuData.filter((cat) => cat.name === selectedCategory);
-
   const categories = ["All", ...menuData.map((cat) => cat.name)];
 
   return (
@@ -344,474 +341,34 @@ export const RestaurantDemo: React.FC = () => {
 
       {/* Menu Page */}
       {currentPage === "menu" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <DemoSection title="Our Menu">
-            {/* Category Filters */}
-            <div
-              style={{
-                display: "flex",
-                gap: "0.5rem",
-                marginBottom: "2rem",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              {categories.map((cat) => (
-                <DemoButton
-                  key={cat}
-                  variant={selectedCategory === cat ? "primary" : "secondary"}
-                  size="small"
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat}
-                </DemoButton>
-              ))}
-            </div>
-
-            {/* Menu Categories */}
-            {filteredMenu.map((category) => (
-              <div key={category.name} style={{ marginBottom: "3rem" }}>
-                <h3
-                  style={{
-                    fontSize: "1.75rem",
-                    fontWeight: "700",
-                    color: "#ec4899",
-                    marginBottom: "1.5rem",
-                    textAlign: "center",
-                  }}
-                >
-                  {category.name}
-                </h3>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                      "repeat(auto-fill, minmax(300px, 1fr))",
-                    gap: "1rem",
-                  }}
-                >
-                  {category.items.map((item) => (
-                    <DemoCard
-                      key={item.name}
-                      style={{
-                        background: "rgba(236, 72, 153, 0.05)",
-                        border: "2px solid rgba(236, 72, 153, 0.2)",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <div style={{ flex: 1 }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "0.5rem",
-                              marginBottom: "0.25rem",
-                            }}
-                          >
-                            <span style={{ fontSize: "1.5rem" }}>
-                              {item.emoji}
-                            </span>
-                            <h4
-                              style={{
-                                fontWeight: "700",
-                                color: "#ec4899",
-                                fontSize: "1.1rem",
-                              }}
-                            >
-                              {item.name}
-                            </h4>
-                          </div>
-                          <p
-                            style={{
-                              color: "rgba(255, 255, 255, 0.7)",
-                              fontSize: "0.9rem",
-                              marginBottom: "0.75rem",
-                            }}
-                          >
-                            {item.description}
-                          </p>
-                        </div>
-                        <span
-                          style={{
-                            fontWeight: "700",
-                            color: "#ec4899",
-                            fontSize: "1.2rem",
-                            marginLeft: "1rem",
-                          }}
-                        >
-                          {item.price}
-                        </span>
-                      </div>
-                      <DemoButton
-                        variant="primary"
-                        size="small"
-                        onClick={() => addToCart(item.name)}
-                        style={{ width: "100%" }}
-                      >
-                        Add to Pickup Order
-                      </DemoButton>
-                    </DemoCard>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </DemoSection>
-        </div>
+        <MenuSection
+          menuData={menuData}
+          categories={["All", ...menuData.map((c) => c.name)]}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          addToCart={addToCart}
+        />
       )}
 
       {/* Booking Page */}
       {currentPage === "booking" && (
-        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-          <DemoSection title="Reserve a Table">
-            <DemoCard>
-              <div style={{ marginBottom: "1.5rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    color: "#ec4899",
-                    fontWeight: "600",
-                  }}
-                >
-                  Date & Time
-                </label>
-                <input
-                  type="datetime-local"
-                  value={reservationDate}
-                  onChange={(e) => setReservationDate(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "0.75rem",
-                    background: "rgba(236, 72, 153, 0.1)",
-                    border: "2px solid rgba(236, 72, 153, 0.3)",
-                    borderRadius: "8px",
-                    color: "white",
-                    fontSize: "1rem",
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: "1.5rem" }}>
-                <label
-                  style={{
-                    display: "block",
-                    marginBottom: "0.5rem",
-                    color: "#ec4899",
-                    fontWeight: "600",
-                  }}
-                >
-                  Number of Guests
-                </label>
-                <select
-                  value={guests}
-                  onChange={(e) => setGuests(parseInt(e.target.value))}
-                  style={{
-                    width: "100%",
-                    padding: "0.75rem",
-                    background: "rgba(236, 72, 153, 0.1)",
-                    border: "2px solid rgba(236, 72, 153, 0.3)",
-                    borderRadius: "8px",
-                    color: "white",
-                    fontSize: "1rem",
-                  }}
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                    <option key={num} value={num}>
-                      {num} {num === 1 ? "Guest" : "Guests"}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div
-                style={{
-                  background: "rgba(236, 72, 153, 0.1)",
-                  border: "2px solid rgba(236, 72, 153, 0.3)",
-                  borderRadius: "8px",
-                  padding: "1rem",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                <h4
-                  style={{
-                    color: "#ec4899",
-                    marginBottom: "0.5rem",
-                    fontWeight: "700",
-                  }}
-                >
-                  📝 Reservation Details
-                </h4>
-                <p style={{ color: "rgba(255, 255, 255, 0.8)" }}>
-                  <strong>Date:</strong>{" "}
-                  {reservationDate
-                    ? new Date(reservationDate).toLocaleString()
-                    : "Not selected"}
-                </p>
-                <p style={{ color: "rgba(255, 255, 255, 0.8)" }}>
-                  <strong>Guests:</strong> {guests}
-                </p>
-              </div>
-
-              <DemoButton
-                variant="success"
-                onClick={() =>
-                  alert(
-                    `Reservation confirmed!\nDate: ${new Date(reservationDate).toLocaleString()}\nGuests: ${guests}`,
-                  )
-                }
-                disabled={!reservationDate}
-                style={{ width: "100%" }}
-              >
-                Confirm Reservation
-              </DemoButton>
-            </DemoCard>
-          </DemoSection>
-        </div>
+        <ReservationForm
+          reservationDate={reservationDate}
+          setReservationDate={setReservationDate}
+          guests={guests}
+          setGuests={setGuests}
+        />
       )}
 
       {/* Pickup Order Page */}
       {currentPage === "pickup" && (
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <DemoSection title="Pickup Order">
-            {Object.keys(cart).length === 0 ? (
-              <DemoCard style={{ textAlign: "center", padding: "3rem" }}>
-                <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>🛒</div>
-                <h3
-                  style={{
-                    color: "#ec4899",
-                    marginBottom: "1rem",
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  Your cart is empty
-                </h3>
-                <p
-                  style={{
-                    color: "rgba(255, 255, 255, 0.7)",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  Browse our menu and add items to get started
-                </p>
-                <DemoButton
-                  variant="primary"
-                  onClick={() => setCurrentPage("menu")}
-                >
-                  View Menu
-                </DemoButton>
-              </DemoCard>
-            ) : (
-              <>
-                <DemoCard style={{ marginBottom: "1.5rem" }}>
-                  <h3
-                    style={{
-                      color: "#ec4899",
-                      marginBottom: "1rem",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    Your Order
-                  </h3>
-                  {Object.entries(cart).map(([itemName, quantity]) => {
-                    const item = menuData
-                      .flatMap((cat) => cat.items)
-                      .find((i) => i.name === itemName);
-                    if (!item) return null;
-                    return (
-                      <div
-                        key={itemName}
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          padding: "1rem",
-                          background: "rgba(236, 72, 153, 0.05)",
-                          border: "2px solid rgba(236, 72, 153, 0.2)",
-                          borderRadius: "8px",
-                          marginBottom: "0.5rem",
-                        }}
-                      >
-                        <div>
-                          <div style={{ fontWeight: "700", color: "#ec4899" }}>
-                            {item.emoji} {item.name}
-                          </div>
-                          <div
-                            style={{
-                              color: "rgba(255, 255, 255, 0.7)",
-                              fontSize: "0.9rem",
-                            }}
-                          >
-                            {item.price} × {quantity}
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "0.5rem",
-                            alignItems: "center",
-                          }}
-                        >
-                          <DemoButton
-                            variant="danger"
-                            size="small"
-                            onClick={() => removeFromCart(itemName)}
-                          >
-                            −
-                          </DemoButton>
-                          <span
-                            style={{
-                              color: "#ec4899",
-                              fontWeight: "700",
-                              minWidth: "2rem",
-                              textAlign: "center",
-                            }}
-                          >
-                            {quantity}
-                          </span>
-                          <DemoButton
-                            variant="success"
-                            size="small"
-                            onClick={() => addToCart(itemName)}
-                          >
-                            +
-                          </DemoButton>
-                        </div>
-                      </div>
-                    );
-                  })}
-                  <div
-                    style={{
-                      marginTop: "1rem",
-                      paddingTop: "1rem",
-                      borderTop: "2px solid rgba(236, 72, 153, 0.3)",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "1.5rem",
-                        fontWeight: "700",
-                        color: "#ec4899",
-                      }}
-                    >
-                      Total:
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "1.5rem",
-                        fontWeight: "700",
-                        color: "#ec4899",
-                      }}
-                    >
-                      ${cartTotal()}
-                    </span>
-                  </div>
-                </DemoCard>
-
-                <DemoCard>
-                  <h3
-                    style={{
-                      color: "#ec4899",
-                      marginBottom: "1rem",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    Pickup Details
-                  </h3>
-                  <div style={{ marginBottom: "1rem" }}>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "0.5rem",
-                        color: "#ec4899",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      value={pickupPhone}
-                      onChange={(e) => setPickupPhone(e.target.value)}
-                      placeholder="(555) 123-4567"
-                      style={{
-                        width: "100%",
-                        padding: "0.75rem",
-                        background: "rgba(236, 72, 153, 0.1)",
-                        border: "2px solid rgba(236, 72, 153, 0.3)",
-                        borderRadius: "8px",
-                        color: "white",
-                        fontSize: "1rem",
-                      }}
-                    />
-                  </div>
-
-                  <div style={{ marginBottom: "1.5rem" }}>
-                    <label
-                      style={{
-                        display: "block",
-                        marginBottom: "0.5rem",
-                        color: "#ec4899",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Pickup Time
-                    </label>
-                    <select
-                      value={pickupTime}
-                      onChange={(e) => setPickupTime(e.target.value)}
-                      style={{
-                        width: "100%",
-                        padding: "0.75rem",
-                        background: "rgba(236, 72, 153, 0.1)",
-                        border: "2px solid rgba(236, 72, 153, 0.3)",
-                        borderRadius: "8px",
-                        color: "white",
-                        fontSize: "1rem",
-                      }}
-                    >
-                      <option value="">Select a time</option>
-                      <option value="ASAP">ASAP (30-45 min)</option>
-                      <option value="12:00 PM">12:00 PM</option>
-                      <option value="12:30 PM">12:30 PM</option>
-                      <option value="1:00 PM">1:00 PM</option>
-                      <option value="1:30 PM">1:30 PM</option>
-                      <option value="6:00 PM">6:00 PM</option>
-                      <option value="6:30 PM">6:30 PM</option>
-                      <option value="7:00 PM">7:00 PM</option>
-                      <option value="7:30 PM">7:30 PM</option>
-                    </select>
-                  </div>
-
-                  <DemoButton
-                    variant="success"
-                    onClick={() => {
-                      alert(
-                        `Order placed!\nTotal: $${cartTotal()}\nPickup: ${pickupTime}\nPhone: ${pickupPhone}`,
-                      );
-                      setCart({});
-                      setPickupPhone("");
-                      setPickupTime("");
-                    }}
-                    disabled={!pickupPhone || !pickupTime}
-                    style={{ width: "100%" }}
-                  >
-                    Place Order
-                  </DemoButton>
-                </DemoCard>
-              </>
-            )}
-          </DemoSection>
-        </div>
+        <OrderCart
+          cart={cart}
+          menuData={menuData}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          cartTotal={cartTotal}
+        />
       )}
 
       {/* Footer */}

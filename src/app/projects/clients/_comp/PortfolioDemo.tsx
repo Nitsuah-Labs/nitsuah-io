@@ -3,6 +3,8 @@
 import { mockProjects } from "@/lib/data/demos/portfolio-data";
 import React, { useState } from "react";
 import "./_styles/portfolio.css";
+import ProjectGallery from "./portfolio/ProjectGallery";
+import ProjectModal from "./portfolio/ProjectModal";
 
 export const PortfolioDemo: React.FC = () => {
   const [currentView, setCurrentView] = useState<
@@ -97,270 +99,19 @@ export const PortfolioDemo: React.FC = () => {
       {/* Content */}
       <div style={{ padding: "2rem 1.5rem", minHeight: "450px" }}>
         {currentView === "gallery" && selectedProject === null && (
-          <div>
-            <h2
-              style={{
-                fontSize: "2rem",
-                fontWeight: "700",
-                color: "#8b5cf6",
-                marginBottom: "1.5rem",
-                textAlign: "center",
-              }}
-            >
-              Featured Work
-            </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-                gap: "1.5rem",
-              }}
-            >
-              {projects.map((project) => (
-                <div
-                  key={project.id}
-                  style={{
-                    background: "rgba(139, 92, 246, 0.1)",
-                    border: "2px solid rgba(139, 92, 246, 0.3)",
-                    borderRadius: "12px",
-                    overflow: "hidden",
-                    cursor: "pointer",
-                    transition: "all 0.3s",
-                  }}
-                  onClick={() => setSelectedProject(project.id)}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-8px)";
-                    e.currentTarget.style.borderColor = "#8b5cf6";
-                    e.currentTarget.style.boxShadow =
-                      "0 12px 24px rgba(139, 92, 246, 0.3)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.borderColor =
-                      "rgba(139, 92, 246, 0.3)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "5rem",
-                      textAlign: "center",
-                      padding: "2rem 1rem",
-                      background:
-                        "linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(109, 40, 217, 0.2) 100%)",
-                    }}
-                  >
-                    {project.icon}
-                  </div>
-                  <div style={{ padding: "1rem" }}>
-                    <div
-                      style={{
-                        display: "inline-block",
-                        padding: "0.25rem 0.75rem",
-                        background: "rgba(139, 92, 246, 0.2)",
-                        border: "1px solid rgba(139, 92, 246, 0.4)",
-                        borderRadius: "12px",
-                        fontSize: "0.75rem",
-                        fontWeight: "600",
-                        color: "#8b5cf6",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {project.category}
-                    </div>
-                    <h3
-                      style={{
-                        fontSize: "1.1rem",
-                        fontWeight: "600",
-                        color: "#fff",
-                        margin: "0 0 0.5rem 0",
-                      }}
-                    >
-                      {project.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "0.875rem",
-                        color: "rgba(255, 255, 255, 0.7)",
-                        margin: 0,
-                      }}
-                    >
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ProjectGallery
+            projects={projects}
+            onSelectProject={setSelectedProject}
+          />
         )}
 
         {selectedProject !== null && (
-          <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-            <button
-              onClick={() => setSelectedProject(null)}
-              style={{
-                padding: "0.5rem 1rem",
-                background: "transparent",
-                border: "2px solid rgba(139, 92, 246, 0.3)",
-                color: "#8b5cf6",
-                borderRadius: "6px",
-                cursor: "pointer",
-                marginBottom: "1.5rem",
-                fontWeight: "600",
-              }}
-            >
-              ← Back to Gallery
-            </button>
-
-            <div
-              style={{
-                background: "rgba(139, 92, 246, 0.1)",
-                border: "2px solid rgba(139, 92, 246, 0.3)",
-                borderRadius: "12px",
-                overflow: "hidden",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "12rem",
-                  textAlign: "center",
-                  padding: "3rem",
-                  background:
-                    "linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(109, 40, 217, 0.2) 100%)",
-                }}
-              >
-                {projects.find((p) => p.id === selectedProject)?.icon}
-              </div>
-              <div style={{ padding: "2rem" }}>
-                <div
-                  style={{
-                    display: "inline-block",
-                    padding: "0.375rem 1rem",
-                    background: "rgba(139, 92, 246, 0.2)",
-                    border: "1px solid rgba(139, 92, 246, 0.4)",
-                    borderRadius: "16px",
-                    fontSize: "0.875rem",
-                    fontWeight: "600",
-                    color: "#8b5cf6",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {projects.find((p) => p.id === selectedProject)?.category}
-                </div>
-                <h2
-                  style={{
-                    fontSize: "2.5rem",
-                    fontWeight: "700",
-                    color: "#fff",
-                    margin: "0 0 1rem 0",
-                  }}
-                >
-                  {projects.find((p) => p.id === selectedProject)?.title}
-                </h2>
-                <p
-                  style={{
-                    fontSize: "1.1rem",
-                    color: "rgba(255, 255, 255, 0.7)",
-                    marginBottom: "2rem",
-                    lineHeight: "1.6",
-                  }}
-                >
-                  {projects.find((p) => p.id === selectedProject)?.description}
-                </p>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
-                    gap: "1rem",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  {[
-                    { label: "Client", value: "Acme Corp" },
-                    { label: "Year", value: "2025" },
-                    { label: "Duration", value: "3 weeks" },
-                  ].map((detail, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: "1rem",
-                        background: "rgba(139, 92, 246, 0.05)",
-                        borderRadius: "8px",
-                        textAlign: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "0.875rem",
-                          color: "rgba(255, 255, 255, 0.6)",
-                          marginBottom: "0.25rem",
-                        }}
-                      >
-                        {detail.label}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "1.1rem",
-                          fontWeight: "600",
-                          color: "#fff",
-                        }}
-                      >
-                        {detail.value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: "600",
-                    color: "#8b5cf6",
-                    marginBottom: "0.75rem",
-                  }}
-                >
-                  Project Details
-                </h3>
-                <p
-                  style={{
-                    color: "rgba(255, 255, 255, 0.7)",
-                    lineHeight: "1.6",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  This project involved a comprehensive approach to creating a
-                  unique visual identity. We focused on modern design principles
-                  while maintaining brand consistency across all deliverables.
-                  The final result exceeded client expectations and received
-                  positive feedback from their target audience.
-                </p>
-
-                <button
-                  style={{
-                    width: "100%",
-                    padding: "1rem",
-                    background:
-                      "linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)",
-                    border: "none",
-                    color: "#fff",
-                    borderRadius: "8px",
-                    fontSize: "1.1rem",
-                    fontWeight: "700",
-                    cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.02)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                >
-                  Hire Me for Similar Project
-                </button>
-              </div>
-            </div>
-          </div>
+          <ProjectModal
+            project={
+              projects.find((p) => p.id === selectedProject) ?? undefined
+            }
+            onClose={() => setSelectedProject(null)}
+          />
         )}
 
         {currentView === "about" && (

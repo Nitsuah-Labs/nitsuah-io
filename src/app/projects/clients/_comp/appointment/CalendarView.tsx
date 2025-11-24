@@ -1,6 +1,6 @@
-import React from "react";
 import type { Appointment, Patient } from "@/lib/data/demos/appointment-data";
 import { getAppointmentTypeColor } from "@/lib/utils/demo-helpers";
+import React from "react";
 
 interface CalendarViewProps {
   appointments: Appointment[];
