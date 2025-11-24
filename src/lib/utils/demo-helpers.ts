@@ -117,3 +117,24 @@ export function formatCurrency(amount: number): string {
     maximumFractionDigits: 0,
   }).format(amount);
 }
+
+/**
+ * Cart helper functions for e-commerce demos
+ */
+export function calculateCartTotal(
+  cart: { [key: number]: number },
+  products: Array<{ id: number; price: number }>,
+): number {
+  return Object.entries(cart).reduce((sum, [id, qty]) => {
+    const product = products.find((p) => p.id === Number(id));
+    return sum + (product?.price || 0) * qty;
+  }, 0);
+}
+
+export function getTotalCartItems(cart: { [key: number]: number }): number {
+  return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+}
+
+export function generateOrderNumber(): string {
+  return `ORD-${Date.now().toString().slice(-8)}`;
+}

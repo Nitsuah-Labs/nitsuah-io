@@ -6,6 +6,11 @@ import {
   mockProducts,
   type CheckoutInfo,
 } from "@/lib/data/demos/storefront-data";
+import {
+  calculateCartTotal,
+  generateOrderNumber,
+  getTotalCartItems,
+} from "@/lib/utils/demo-helpers";
 import React, { useState } from "react";
 
 export const StorefrontDemo: React.FC = () => {
@@ -58,17 +63,6 @@ export const StorefrontDemo: React.FC = () => {
     setCart({});
   };
 
-  const getTotalItems = () => {
-    return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-  };
-
-  const getCartTotal = () => {
-    return Object.entries(cart).reduce((sum, [id, qty]) => {
-      const product = products.find((p) => p.id === Number(id));
-      return sum + (product?.price || 0) * qty;
-    }, 0);
-  };
-
   const viewProduct = (productId: number) => {
     setSelectedProduct(productId);
     setCurrentPage("product");
@@ -84,7 +78,7 @@ export const StorefrontDemo: React.FC = () => {
   };
 
   const completeOrder = () => {
-    const orderNum = `ORD-${Date.now().toString().slice(-8)}`;
+    const orderNum = generateOrderNumber();
     setOrderNumber(orderNum);
     setCurrentPage("confirmation");
     clearCart();
@@ -226,7 +220,7 @@ export const StorefrontDemo: React.FC = () => {
             fontSize: "0.875rem",
           }}
         >
-          Cart ({getTotalItems()})
+          Cart ({getTotalCartItems(cart)})
         </button>
       </nav>
 
@@ -589,7 +583,7 @@ export const StorefrontDemo: React.FC = () => {
               Shopping Cart
             </h2>
 
-            {getTotalItems() === 0 ? (
+            {getTotalCartItems(cart) === 0 ? (
               <div style={{ textAlign: "center", padding: "3rem" }}>
                 <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>🛒</div>
                 <p style={{ color: "rgba(255, 255, 255, 0.7)" }}>
@@ -749,7 +743,7 @@ export const StorefrontDemo: React.FC = () => {
                     }}
                   >
                     <span>Total:</span>
-                    <span>${getCartTotal()}</span>
+                    <span>${calculateCartTotal(cart, products)}</span>
                   </div>
                   <button
                     onClick={proceedToCheckout}
@@ -1284,7 +1278,7 @@ export const StorefrontDemo: React.FC = () => {
                 }}
               >
                 <span>Total:</span>
-                <span>${getCartTotal()}</span>
+                <span>${calculateCartTotal(cart, products)}</span>
               </div>
             </div>
 
