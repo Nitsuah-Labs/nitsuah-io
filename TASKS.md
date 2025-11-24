@@ -1,6 +1,6 @@
-# TODO
+# TASKS
 
-## Manual Tasks for Phase A
+## Tasks for Phase A
 
 ### Web3 / Wallet Setup
 
@@ -56,3 +56,12 @@ _For feature requests see `FEEDBACK.md`_
 _For security status see `SECURITY_FIXES.md`_
 _For phase items see `PHASE-A.md`_
 _For completed tech debt see `TECH_DEBT.md`_
+
+<!--
+AGENT INSTRUCTIONS:
+This file tracks specific actionable tasks.
+1. Categorize tasks into "Todo", "In Progress", and "Done".
+2. Add new tasks identified during code analysis or planning.
+3. Mark tasks as [x] when verified as complete.
+4. Keep task descriptions concise but actionable.
+-->
