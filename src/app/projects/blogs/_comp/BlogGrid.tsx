@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import Link from "next/link";
+import React from "react";
 
 const BlogGrid: React.FC<{ filteredBlogs: any[] }> = ({ filteredBlogs }) => {
   return (
