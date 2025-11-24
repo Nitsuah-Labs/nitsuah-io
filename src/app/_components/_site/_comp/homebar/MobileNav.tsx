@@ -30,6 +30,31 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             </Link>
           </MenuItem>
         ))}
+        {/* Projects subitems for mobile */}
+        <MenuItem onClick={() => setAnchorEl(null)}>
+          <Link
+            href="/projects"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            All Projects
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)}>
+          <Link
+            href="/projects/clients"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            Clients
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={() => setAnchorEl(null)}>
+          <Link
+            href="/projects/blogs"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            Blogs
+          </Link>
+        </MenuItem>
       </Menu>
     </div>
   );

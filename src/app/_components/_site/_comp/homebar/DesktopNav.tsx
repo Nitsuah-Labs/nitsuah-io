@@ -1,16 +1,13 @@
 "use client";
 import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import React from "react";
 
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [projectsOpen, setProjectsOpen] = React.useState(false);
 
   return (
-    <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+    <nav style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
       {pages.map((p) => (
         <Link
           key={p}
@@ -21,38 +18,36 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         </Link>
       ))}
 
-      <div>
-        <Button color="inherit" onClick={(e) => setAnchorEl(e.currentTarget)}>
+      {/* Projects inline toggle - expands sublinks inside the same nav bar */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <Button
+          color="inherit"
+          aria-expanded={projectsOpen}
+          aria-controls="projects-inline"
+          onClick={() => setProjectsOpen((s) => !s)}
+        >
           Projects
         </Button>
-        <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
-          <MenuItem onClick={() => setAnchorEl(null)}>
-            <Link
-              href="/projects"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              All Projects
+
+        {projectsOpen && (
+          <div
+            id="projects-inline"
+            role="menu"
+            style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
+          >
+            <Link href="/projects" style={{ textDecoration: "none" }}>
+              <Button color="inherit">All Projects</Button>
             </Link>
-          </MenuItem>
-          <MenuItem onClick={() => setAnchorEl(null)}>
-            <Link
-              href="/projects/clients"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              Clients
+            <Link href="/projects/clients" style={{ textDecoration: "none" }}>
+              <Button color="inherit">Clients</Button>
             </Link>
-          </MenuItem>
-          <MenuItem onClick={() => setAnchorEl(null)}>
-            <Link
-              href="/projects/blogs"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              Blogs
+            <Link href="/projects/blogs" style={{ textDecoration: "none" }}>
+              <Button color="inherit">Blogs</Button>
             </Link>
-          </MenuItem>
-        </Menu>
+          </div>
+        )}
       </div>
-    </div>
+    </nav>
   );
 };
 

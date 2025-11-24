@@ -12,6 +12,10 @@ export default function SkipLink(): React.ReactElement {
       if (!main.hasAttribute("tabindex")) {
         main.setAttribute("tabindex", "-1");
       }
+      // Ensure there is a matching id for the skip link target
+      if (!main.id) {
+        main.id = "main";
+      }
       main.focus();
     }
   };
@@ -19,6 +23,14 @@ export default function SkipLink(): React.ReactElement {
   // Small runtime helper: ensure <img> elements have an alt attribute so
   // Playwright accessibility checks that read DOM attributes don't time out.
   React.useEffect(() => {
+    // Ensure first main has id="main" and is focusable so skip link has a target
+    const main = document.querySelector<HTMLElement>("main, [role='main']");
+    if (main) {
+      if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+      if (!main.id) main.id = "main";
+    }
+
+    // Small runtime helper: ensure <img> elements have an alt attribute
     const imgs = Array.from(document.querySelectorAll<HTMLImageElement>("img"));
     imgs.forEach((img) => {
       if (!img.hasAttribute("alt")) img.setAttribute("alt", "");

@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import "../_styles/global.css";
 import GitHubButton from "./GitHubButton";
-import Search from "./Search";
+// Search intentionally removed per UX feedback
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./_comp/homebar/Brand";
 import DesktopNav from "./_comp/homebar/DesktopNav";
@@ -59,7 +59,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <Search />
             <ThemeToggle />
             <ExportPDF visible={pathname === "/resume"} />
             <GitHubButton />
