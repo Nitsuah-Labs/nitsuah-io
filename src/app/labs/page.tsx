@@ -25,6 +25,7 @@ function renderOutput() {
         flexDirection: "column",
         boxSizing: "border-box",
       }}
+      tabIndex={-1}
     >
       <div style={{ textAlign: "center", marginBottom: "40px" }}>
         <h1 style={{ fontSize: "2.5rem", margin: "0 0 10px" }}>WEB3 LABS</h1>

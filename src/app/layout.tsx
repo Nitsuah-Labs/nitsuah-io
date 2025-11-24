@@ -1,12 +1,14 @@
-import { Providers } from "./providers";
+import type { Metadata } from "next";
 import {
-  generatePersonSchema,
-  generateOrganizationSchema,
-  generateWebSiteSchema,
   generateBreadcrumbSchema,
+  generateOrganizationSchema,
+  generatePersonSchema,
+  generateWebSiteSchema,
 } from "../lib/schema";
+import SkipLink from "./_components/SkipLink";
+import { Providers } from "./providers";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Austin J. Hardy | Developer & Researcher | nitsuah.io",
   description:
     "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments. Austin J. Hardy's selected projects and technical work.",
@@ -98,7 +100,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <SkipLink />
+          {children}
+        </Providers>
       </body>
     </html>
   );

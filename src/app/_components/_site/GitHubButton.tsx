@@ -7,7 +7,7 @@ import React from "react";
 export default function GitHubButton(): React.ReactElement {
   return (
     <a
-      href="#"
+      href="https://github.com/nitsuah"
       aria-label="Open GitHub"
       title="GitHub"
       style={{

@@ -45,7 +45,7 @@ export default function ResumePage() {
       <div className="print-hide">
         <HomeBar />
       </div>
-      <main className="resume-container">
+      <main className="resume-container" tabIndex={-1}>
         <div className="resume-content">
           {/* Header Section */}
           <ResumeHeader basics={resume.basics} />
