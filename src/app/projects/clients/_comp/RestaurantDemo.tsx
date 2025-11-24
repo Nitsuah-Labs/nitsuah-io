@@ -18,6 +18,9 @@ import {
   DemoHeader,
   DemoSection,
 } from "../../../../components/demos";
+import styles from "../_styles/restaurant.module.css";
+import FeatureCard from "./restaurant/FeatureCard";
+import GalleryItem from "./restaurant/GalleryItem";
 import { MenuSection } from "./restaurant/MenuSection";
 import { OrderCart } from "./restaurant/OrderCart";
 import { ReservationForm } from "./restaurant/ReservationForm";
@@ -207,14 +210,7 @@ export const RestaurantDemo: React.FC = () => {
             >
               Gallery
             </h3>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                gap: "1rem",
-                marginBottom: "3rem",
-              }}
-            >
+            <div className={styles.galleryGrid}>
               {[
                 { emoji: "🍝", label: "Fresh Pasta" },
                 { emoji: "🍕", label: "Wood-Fired Pizza" },
@@ -223,34 +219,7 @@ export const RestaurantDemo: React.FC = () => {
                 { emoji: "🏛️", label: "Dining Room" },
                 { emoji: "🕯️", label: "Romantic Ambiance" },
               ].map((item, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    background: "rgba(236, 72, 153, 0.05)",
-                    border: "2px solid rgba(236, 72, 153, 0.2)",
-                    borderRadius: "8px",
-                    padding: "2rem 1rem",
-                    textAlign: "center",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "#ec4899";
-                    e.currentTarget.style.transform = "scale(1.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor =
-                      "rgba(236, 72, 153, 0.2)";
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                >
-                  <div style={{ fontSize: "4rem", marginBottom: "0.5rem" }}>
-                    {item.emoji}
-                  </div>
-                  <div style={{ fontWeight: "600", color: "#ec4899" }}>
-                    {item.label}
-                  </div>
-                </div>
+                <GalleryItem key={idx} emoji={item.emoji} label={item.label} />
               ))}
             </div>
 
@@ -266,13 +235,7 @@ export const RestaurantDemo: React.FC = () => {
             >
               Why Choose Bella Vista
             </h3>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: "1rem",
-              }}
-            >
+            <div className={styles.featureGrid}>
               {[
                 {
                   icon: "👨‍🍳",
@@ -305,34 +268,7 @@ export const RestaurantDemo: React.FC = () => {
                   desc: "Beautiful space for your special occasions",
                 },
               ].map((feature, idx) => (
-                <DemoCard
-                  key={idx}
-                  style={{
-                    background: "rgba(236, 72, 153, 0.1)",
-                    border: "2px solid rgba(236, 72, 153, 0.3)",
-                  }}
-                >
-                  <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
-                    {feature.icon}
-                  </div>
-                  <h4
-                    style={{
-                      fontWeight: "700",
-                      color: "#ec4899",
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {feature.title}
-                  </h4>
-                  <p
-                    style={{
-                      color: "rgba(255, 255, 255, 0.7)",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    {feature.desc}
-                  </p>
-                </DemoCard>
+                <FeatureCard key={idx} {...feature} />
               ))}
             </div>
           </DemoSection>
