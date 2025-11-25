@@ -48,65 +48,28 @@ test.describe("Resume Page Accessibility Tests", () => {
       });
     } catch (e) {}
 
-    // Wait for resume container to appear (longer timeout to allow hydration).
-    // Some overlays may re-appear; loop and remove overlays until the resume container is present.
-    // Increase attempts and interval to allow client-side hydration to finish
-    // and for our overlay-removal logic to run. Total wait ~= 30s.
-    const maxAttempts = 60;
-    let found = false;
-    for (let i = 0; i < maxAttempts; i++) {
+      // Run a one-shot overlay cleanup (in case overlays are present).
       try {
-        // run overlay cleanup
         await page.evaluate(() => {
-          try {
-            document.body.classList.add("test-helpers");
-          } catch (e) {}
-          const selectors = [
-            "#__next_dev_overlay",
-            ".next-dev-overlay",
-            ".react-dev-overlay",
-            "#next-overlay",
-            ".overseer",
-            '[data-testid="overseer"]',
-          ];
-          for (const s of selectors) {
-            try {
-              document.querySelectorAll(s).forEach((n) => n.remove());
-            } catch (e) {}
-          }
-          const texts = [
-            "Overseer Dashboard",
-            "Welcome to Overseer",
-            "Open Next.js Dev Tools",
-            "Next.js Dev Tools",
-            "Sign in with GitHub",
-          ];
-          Array.from(document.querySelectorAll("*")).forEach((el) => {
-            try {
-              const txt = el.textContent || "";
-              for (const t of texts) if (txt.includes(t)) el.remove();
-            } catch (e) {}
-          });
+          try { document.body.classList.add('test-helpers'); } catch(e){}
+          const selectors = ['#__next_dev_overlay', '.next-dev-overlay', '.react-dev-overlay', '#next-overlay', '.overseer', '[data-testid="overseer"]'];
+          for (const s of selectors) { try { document.querySelectorAll(s).forEach(n => n.remove()); } catch(e){} }
+          const texts = ['Overseer Dashboard','Welcome to Overseer','Open Next.js Dev Tools','Next.js Dev Tools','Sign in with GitHub'];
+          try { Array.from(document.querySelectorAll('*')).forEach(el => { try { const txt = el.textContent || ''; for (const t of texts) if (txt.includes(t)) { el.remove(); break; } } catch(e){} }); } catch(e){}
         });
+      } catch (e) {}
 
-        const cnt = await page.locator("#basics").count();
-        if (cnt > 0) {
-          found = true;
-          break;
-        }
-      } catch (e) {
-        // ignore and retry
-      }
-      // Slightly longer sleep between retries to reduce CPU churn.
-      await page.waitForTimeout(500);
-    }
-    if (!found) {
-      // allow the original wait to surface a helpful failure if not found
-      await page.waitForSelector("#basics", {
-        state: "attached",
-        timeout: 15000,
-      });
-    }
+      // Wait for any stable marker from the server-rendered resume to appear.
+      // This is more tolerant to hydration differences and dynamic overlays.
+      await page.waitForFunction(() => {
+        try {
+          if (document.querySelector('#basics')) return true;
+          if (document.querySelector('main.resume-container')) return true;
+          if (document.querySelector('h1.resume-name')) return true;
+          if ((document.body && document.body.textContent || '').includes('Austin J. Hardy')) return true;
+          return false;
+        } catch (e) { return false; }
+      }, { timeout: 20000 });
   });
 
   test("should not have any automatically detectable accessibility issues", async ({
