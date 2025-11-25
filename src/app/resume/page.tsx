@@ -1,5 +1,3 @@
-"use client";
-
 import resumeDataImport from "../../../public/assets/resume.json";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";

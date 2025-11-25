@@ -15,8 +15,9 @@ export default defineConfig({
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("./tests/global-setup"),
 
-  // Maximum time one test can run - increased for visual tests with Spline
-  timeout: 30 * 1000,
+  // Maximum time one test can run - increased for visual tests and for
+  // overlay-removal retries during development runs.
+  timeout: 120 * 1000,
 
   // Test configuration
   fullyParallel: true,
