@@ -29,8 +29,8 @@ export default defineConfig({
 
   // Shared settings for all projects
   use: {
-    // Base URL for tests
-    baseURL: process.env.BASE_URL || "http://localhost:3000",
+    // Base URL for tests (match webServer.url)
+    baseURL: process.env.BASE_URL || "http://localhost:3001",
 
     // Collect trace on first retry
     trace: "on-first-retry",

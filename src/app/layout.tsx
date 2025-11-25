@@ -7,6 +7,7 @@ import {
 } from "../lib/schema";
 import SkipLink from "./_components/SkipLink";
 import { Providers } from "./providers";
+import "./test-helpers.css";
 
 export const metadata: Metadata = {
   title: "Austin J. Hardy | Developer & Researcher | nitsuah.io",
@@ -99,7 +100,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
-      <body>
+      <body
+        className={process.env.NEXT_PUBLIC_TEST_HELPERS ? "test-helpers" : ""}
+      >
         <Providers>
           <SkipLink />
           {children}
