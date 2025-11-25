@@ -28,7 +28,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const cfg = getWagmiConfig();
     setClientConfig(cfg);
   }, []);
-
   if (!mounted || !clientConfig) return null;
 
   return (

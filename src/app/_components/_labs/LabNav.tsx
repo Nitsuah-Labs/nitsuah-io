@@ -101,7 +101,11 @@ const LabNav: React.FC<LabNavProps> = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#181818" }}>
+    // Use fixed position so header remains in view and matches visual/e2e tests
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: "#181818", top: 0, left: 0, right: 0 }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Home Button with Double-Click - MOVED TO LEFT */}
