@@ -78,6 +78,10 @@ const HomeBar: React.FC<HomeBarProps> = () => {
                 <div
                   role="menu"
                   id="labs-popout-right"
+                  tabIndex={-1}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") setLabsOpenRight(false);
+                  }}
                   style={{
                     position: "absolute",
                     right: 0,

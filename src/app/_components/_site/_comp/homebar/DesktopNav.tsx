@@ -7,6 +7,7 @@ import { navStyles, projectsSub } from "../../homebarConfig";
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [projectsOpen, setProjectsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const projectsRef = React.useRef<HTMLDivElement | null>(null);
 
   // Close when clicking outside or pressing Escape (for projects menu)
   React.useEffect(() => {
@@ -71,6 +72,31 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             id="projects-inline"
             role="menu"
             style={navStyles.inlinePopout as any}
+            ref={projectsRef}
+            tabIndex={-1}
+            onKeyDown={(e) => {
+              const root = projectsRef.current;
+              if (!root) return;
+              const buttons = Array.from(
+                root.querySelectorAll<HTMLButtonElement>("button"),
+              );
+              if (!buttons.length) return;
+              const active = document.activeElement as HTMLElement | null;
+              let idx = buttons.findIndex((b) => b === active);
+              if (e.key === "ArrowRight") {
+                e.preventDefault();
+                const next =
+                  buttons[(idx + 1 + buttons.length) % buttons.length];
+                next?.focus();
+              } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
+                const prev =
+                  buttons[(idx - 1 + buttons.length) % buttons.length];
+                prev?.focus();
+              } else if (e.key === "Escape") {
+                setProjectsOpen(false);
+              }
+            }}
           >
             {projectsSub.map((item) => (
               <Link
