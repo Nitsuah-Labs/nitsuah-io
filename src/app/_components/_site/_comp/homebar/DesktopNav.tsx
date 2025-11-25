@@ -2,7 +2,7 @@
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import React from "react";
-import { navStyles, projectsSub } from "../../homebarConfig";
+import { navStyles, portfolioSub } from "../../homebarConfig";
 
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [projectsOpen, setProjectsOpen] = React.useState(false);
@@ -38,7 +38,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   return (
     <nav style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
       {pages
-        .filter((p) => p !== "projects" && p !== "labs")
+        .filter((p) => p !== "portfolio")
         .map((p) => (
           <Link key={p} href={`/${p}`} style={{ ...(navStyles.link as any) }}>
             <Button
@@ -64,7 +64,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           }}
           sx={{ color: (navStyles.link as any).color || undefined }}
         >
-          Projects
+          Portfolio
         </Button>
 
         {projectsOpen && (
@@ -98,7 +98,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
               }
             }}
           >
-            {projectsSub.map((item) => (
+            {portfolioSub.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

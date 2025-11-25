@@ -1,18 +1,11 @@
 // Navigation configuration for Homebar
-export const pages = [
-  "about",
-  "resume",
-  "crypto",
-  "projects",
-  "blogs",
-  "clients",
-  "labs",
-];
+export const pages = ["about", "resume", "crypto", "portfolio"];
 
-export const projectsSub = [
-  { href: "/projects", label: "All Projects" },
+export const portfolioSub = [
+  { href: "/projects", label: "Projects" },
   { href: "/projects/clients", label: "Clients" },
   { href: "/projects/blogs", label: "Blogs" },
+  { href: "/labs", label: "Labs" },
 ];
 
 export const labsSub = [

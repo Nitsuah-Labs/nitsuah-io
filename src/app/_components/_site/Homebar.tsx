@@ -60,7 +60,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <ThemeToggle />
             <ExportPDF visible={pathname === "/resume"} />
 
             <div style={{ position: "relative" }}>
@@ -110,6 +109,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             </div>
 
             <GitHubButton />
+            <ThemeToggle />
             <div className="mobileOnly">
               <MobileNav pages={pages} />
             </div>

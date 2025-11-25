@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import React from "react";
-import { labsSub, navStyles } from "../../homebarConfig";
+import { labsSub, navStyles, portfolioSub } from "../../homebarConfig";
 
 const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -34,40 +34,20 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             </Link>
           </MenuItem>
         ))}
-        {/* Projects subitems for mobile */}
-        <MenuItem onClick={() => setAnchorEl(null)}>
-          <Link
-            href="/projects"
-            style={{
-              textDecoration: "none",
-              color: (navStyles.link as any).color,
-            }}
-          >
-            All Projects
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)}>
-          <Link
-            href="/projects/clients"
-            style={{
-              textDecoration: "none",
-              color: (navStyles.link as any).color,
-            }}
-          >
-            Clients
-          </Link>
-        </MenuItem>
-        <MenuItem onClick={() => setAnchorEl(null)}>
-          <Link
-            href="/projects/blogs"
-            style={{
-              textDecoration: "none",
-              color: (navStyles.link as any).color,
-            }}
-          >
-            Blogs
-          </Link>
-        </MenuItem>
+        {/* Portfolio subitems for mobile */}
+        {portfolioSub.map((item) => (
+          <MenuItem key={item.href} onClick={() => setAnchorEl(null)}>
+            <Link
+              href={item.href}
+              style={{
+                textDecoration: "none",
+                color: (navStyles.link as any).color,
+              }}
+            >
+              {item.label}
+            </Link>
+          </MenuItem>
+        ))}
         {/* Labs subitems for mobile */}
         {labsSub.map((item) => (
           <MenuItem key={item.href} onClick={() => setAnchorEl(null)}>

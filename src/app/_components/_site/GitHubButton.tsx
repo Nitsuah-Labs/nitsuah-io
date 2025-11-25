@@ -10,6 +10,8 @@ export default function GitHubButton(): React.ReactElement {
       href="https://github.com/nitsuah"
       aria-label="Open GitHub"
       title="GitHub"
+      target="_blank"
+      rel="noopener noreferrer"
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -18,6 +20,7 @@ export default function GitHubButton(): React.ReactElement {
         textDecoration: "none",
         background: "#7c3aed",
         color: "#fff",
+        boxShadow: "0 4px 12px rgba(124,58,237,0.18)",
       }}
     >
       {/* Simple SVG octocat-like placeholder */}
