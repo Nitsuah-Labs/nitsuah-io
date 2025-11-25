@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { go } from "../_utils/playwright-helpers";
 
-test.describe.skip("Labs Pages Visual Tests", () => {
+test.describe("Labs Pages Visual Tests", () => {
   const labsPages = [
     { path: "/labs", name: "Labs Hub" },
     { path: "/labs/register", name: "Register Domain" },

@@ -90,7 +90,9 @@ export default defineConfig({
     timeout: 120 * 1000,
     // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
     env: {
-      NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
+      // Force test helpers on the dev server started by Playwright so components
+      // that read NEXT_PUBLIC_TEST_HELPERS render test-only UI consistently.
+      NEXT_PUBLIC_TEST_HELPERS: "1",
       PORT: process.env.PORT ?? "3001",
     },
   },
