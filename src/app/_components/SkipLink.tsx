@@ -29,12 +29,6 @@ export default function SkipLink(): React.ReactElement {
       if (!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
       if (!main.id) main.id = "main";
     }
-
-    // Small runtime helper: ensure <img> elements have an alt attribute
-    const imgs = Array.from(document.querySelectorAll<HTMLImageElement>("img"));
-    imgs.forEach((img) => {
-      if (!img.hasAttribute("alt")) img.setAttribute("alt", "");
-    });
   }, []);
 
   return (

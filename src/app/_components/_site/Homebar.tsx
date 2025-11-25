@@ -9,12 +9,14 @@ import React from "react";
 import "../_styles/global.css";
 import GitHubButton from "./GitHubButton";
 // Search intentionally removed per UX feedback
+import Button from "@mui/material/Button";
+import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./_comp/homebar/Brand";
 import DesktopNav from "./_comp/homebar/DesktopNav";
 import ExportPDF from "./_comp/homebar/ExportPDF";
 import MobileNav from "./_comp/homebar/MobileNav";
-import { navStyles, pages } from "./homebarConfig";
+import { labsSub, navStyles, pages } from "./homebarConfig";
 
 // Replace empty interface with object type
 type HomeBarProps = object;
@@ -23,6 +25,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   const pathname = usePathname();
   const [showFullName, setShowFullName] = React.useState(false);
   const [isHovering, setIsHovering] = React.useState(false);
+  const [labsOpenRight, setLabsOpenRight] = React.useState(false);
 
   React.useEffect(() => {
     // Auto-animate to Austin H. after 3 seconds in nav
@@ -59,6 +62,49 @@ const HomeBar: React.FC<HomeBarProps> = () => {
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <ThemeToggle />
             <ExportPDF visible={pathname === "/resume"} />
+
+            <div style={{ position: "relative" }}>
+              <Button
+                color="inherit"
+                sx={{ color: (navStyles.link as any).color }}
+                aria-expanded={labsOpenRight}
+                aria-haspopup="true"
+                onClick={() => setLabsOpenRight((s) => !s)}
+              >
+                Labs
+              </Button>
+
+              {labsOpenRight && (
+                <div
+                  role="menu"
+                  id="labs-popout-right"
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    top: "2.5rem",
+                    zIndex: 1200,
+                    ...(navStyles.inlinePopout as any),
+                  }}
+                >
+                  {labsSub.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Button
+                        color="inherit"
+                        sx={{ color: (navStyles.link as any).color }}
+                        onClick={() => setLabsOpenRight(false)}
+                      >
+                        {item.label}
+                      </Button>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <GitHubButton />
             <div className="mobileOnly">
               <MobileNav pages={pages} />

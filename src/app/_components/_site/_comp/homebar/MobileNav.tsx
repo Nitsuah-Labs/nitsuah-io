@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import React from "react";
-import { labsSub } from "../../homebarConfig";
+import { labsSub, navStyles } from "../../homebarConfig";
 
 const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -25,7 +25,10 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           <MenuItem key={p} onClick={() => setAnchorEl(null)}>
             <Link
               href={`/${p}`}
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{
+                textDecoration: "none",
+                color: (navStyles.link as any).color,
+              }}
             >
               {p}
             </Link>
@@ -35,7 +38,10 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         <MenuItem onClick={() => setAnchorEl(null)}>
           <Link
             href="/projects"
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{
+              textDecoration: "none",
+              color: (navStyles.link as any).color,
+            }}
           >
             All Projects
           </Link>
@@ -43,7 +49,10 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         <MenuItem onClick={() => setAnchorEl(null)}>
           <Link
             href="/projects/clients"
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{
+              textDecoration: "none",
+              color: (navStyles.link as any).color,
+            }}
           >
             Clients
           </Link>
@@ -51,7 +60,10 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         <MenuItem onClick={() => setAnchorEl(null)}>
           <Link
             href="/projects/blogs"
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{
+              textDecoration: "none",
+              color: (navStyles.link as any).color,
+            }}
           >
             Blogs
           </Link>
@@ -61,7 +73,10 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           <MenuItem key={item.href} onClick={() => setAnchorEl(null)}>
             <Link
               href={item.href}
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{
+                textDecoration: "none",
+                color: (navStyles.link as any).color,
+              }}
             >
               {item.label}
             </Link>

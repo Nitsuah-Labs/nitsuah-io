@@ -16,6 +16,8 @@ export default function GitHubButton(): React.ReactElement {
         padding: "0.25rem 0.5rem",
         borderRadius: 6,
         textDecoration: "none",
+        background: "#7c3aed",
+        color: "#fff",
       }}
     >
       {/* Simple SVG octocat-like placeholder */}

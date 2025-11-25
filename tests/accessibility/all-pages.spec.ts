@@ -106,7 +106,7 @@ test.describe("Screen Reader Support", () => {
 
     // Wait for first image to be visible (helps with lazy-loaded images)
     try {
-      await images.first().waitFor({ state: "visible", timeout: 5000 });
+      await images.first().waitFor({ state: "visible", timeout: 10000 });
     } catch (err) {
       // If not visible quickly, attempt a gentle scroll to trigger lazy-loading
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -124,16 +124,41 @@ test.describe("Screen Reader Support", () => {
     const finalImages = page.locator("img");
     const finalCount = await finalImages.count();
 
+    // Ensure at least one of the final images is attached/visible before looping
+    if (finalCount > 0) {
+      try {
+        await finalImages
+          .first()
+          .waitFor({ state: "attached", timeout: 10000 });
+      } catch (err) {
+        // best-effort: continue but log that first image didn't attach in time
+        console.warn("finalImages.first() did not attach in time", err);
+      }
+    }
+
     for (let i = 0; i < finalCount; i++) {
       const img = finalImages.nth(i);
       try {
+        // Ensure the node is attached before attempting to read attributes
+        await img.waitFor({ state: "attached", timeout: 3000 });
         const alt = await img.getAttribute("alt");
         // Alt attribute should exist (can be empty for decorative images)
         expect(alt).not.toBeNull();
       } catch (error) {
-        // Add index to error for easier debugging
-        console.error(`Image at index ${i} caused error while reading 'alt':`, error);
-        throw new Error(`Image at index ${i} failed alt check: ${String(error)}`);
+        // Add index and a short outerHTML snippet to error for easier debugging
+        let outer = "";
+        try {
+          outer = await img.evaluate((n) => n.outerHTML.slice(0, 500));
+        } catch (e) {
+          outer = "<could not read outerHTML>";
+        }
+        console.error(
+          `Image at index ${i} caused error while reading 'alt'. outerHTML snippet: ${outer}`,
+          error
+        );
+        throw new Error(
+          `Image at index ${i} failed alt check: ${String(error)}`
+        );
       }
     }
   });
