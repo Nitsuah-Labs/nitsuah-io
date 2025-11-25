@@ -2,14 +2,16 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { go } from "../_utils/playwright-helpers";
 
-if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
-  test.skip(true, "Skipping resume axe scans in test-helpers/dev mode");
-}
+// Tests should run in test-helpers mode (Playwright starts a production
+// server when NEXT_PUBLIC_TEST_HELPERS=1) to avoid dev overlays. Do not skip
+// these specs — instead run them against the production server for stable
+// axe scans.
 
 // Allow longer time for the resume page to fully hydrate and for our
 // overlay-removal logic to run in CI/dev. This file needs more time
 // than the global 30s timeout during some runs.
-test.setTimeout(120000);
+// Allow more time for the resume page to fully render/hydrate in CI
+test.setTimeout(180000);
 
 test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -95,25 +97,49 @@ test.describe("Resume Page Accessibility Tests", () => {
 
     // Wait for any stable marker from the server-rendered resume to appear.
     // This is more tolerant to hydration differences and dynamic overlays.
-    await page.waitForFunction(
-      () => {
-        try {
-          if (document.querySelector("#basics")) return true;
-          if (document.querySelector("main.resume-container")) return true;
-          if (document.querySelector("h1.resume-name")) return true;
-          if (
-            ((document.body && document.body.textContent) || "").includes(
-              "Austin J. Hardy"
-            )
-          )
-            return true;
-          return false;
-        } catch (e) {
-          return false;
+    // Some pages render server-side but then hydrate; overlays or client JS
+    // can obscure or mutate the DOM. Poll the page HTML for the server-rendered
+    // marker `id="basics"` as a robust indicator the content was sent from
+    // the server. Fall back to querying the live DOM if needed.
+    const start = Date.now();
+    const timeout = 60000;
+    let found = false;
+    while (Date.now() - start < timeout) {
+      try {
+        const html = await page.content();
+        if (html.includes('id="basics"')) {
+          found = true;
+          break;
         }
-      },
-      { timeout: 30000 }
-    );
+        // fallback to live DOM checks
+        const exists = await page.evaluate(() => {
+          try {
+            if (document.querySelector("#basics")) return true;
+            if (document.querySelector("main.resume-container")) return true;
+            if (document.querySelector("h1.resume-name")) return true;
+            if (
+              ((document.body && document.body.textContent) || "").includes(
+                "Austin J. Hardy"
+              )
+            )
+              return true;
+            return false;
+          } catch (e) {
+            return false;
+          }
+        });
+        if (exists) {
+          found = true;
+          break;
+        }
+      } catch (e) {}
+      await page.waitForTimeout(250);
+    }
+    if (!found) {
+      throw new Error(
+        "Timed out waiting for resume server-rendered marker #basics"
+      );
+    }
   });
 
   test("should not have any automatically detectable accessibility issues", async ({
@@ -124,52 +150,20 @@ test.describe("Resume Page Accessibility Tests", () => {
       state: "attached",
       timeout: 15000,
     });
-    // Inject axe into the page and run it scoped to #basics for more stability
+    // Use @axe-core/playwright's AxeBuilder which is more tolerant of frame
+    // contexts and will inject/execute axe appropriately. Scope to the basics
+    // section to minimize unrelated noise.
+    let accessibilityScanResults;
     try {
-      const fs = require("fs");
-      try {
-        await page.addScriptTag({
-          path: require.resolve("axe-core/axe.min.js"),
-        });
-      } catch (err) {
-        try {
-          const content = fs.readFileSync(
-            require.resolve("axe-core/axe.min.js"),
-            "utf8"
-          );
-          await page.addScriptTag({ content });
-        } catch (err2) {
-          const content = fs.readFileSync(
-            require.resolve("axe-core/axe.min.js"),
-            "utf8"
-          );
-          await page.evaluate(content);
-        }
-      }
-      await page.waitForFunction(() => !!(window as any).axe, {
-        timeout: 3000,
-      });
-    } catch (e) {}
-
-    const accessibilityScanResults = await page.evaluate(async () => {
-      try {
-        // @ts-ignore
-        const node =
-          document.querySelector("#basics") || document.documentElement;
-        // @ts-ignore
-        const results = await (window as any).axe.run(node, {
-          runOnly: {
-            type: "tag",
-            values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
-          },
-        });
-        return results;
-      } catch (e) {
-        return {
-          violations: [{ id: "axe-in-page-error", description: String(e) }],
-        };
-      }
-    });
+      accessibilityScanResults = await new AxeBuilder({ page })
+        .include("#basics")
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+    } catch (e) {
+      accessibilityScanResults = {
+        violations: [{ id: "axe-in-page-error", description: String(e) }],
+      };
+    }
 
     expect(accessibilityScanResults.violations).toEqual([]);
   });

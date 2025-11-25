@@ -1,12 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { go } from "../_utils/playwright-helpers";
-// When Playwright starts the dev server it sets NEXT_PUBLIC_TEST_HELPERS=1.
-// In that mode dev overlays and portals can interfere with axe so skip
-// heavy axe scans during interactive dev test runs and run them in CI instead.
-if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
-  test.skip(true, "Skipping axe scans in test-helpers/dev mode");
-}
+// Note: we used to skip heavy axe scans in test-helpers/dev mode because
+// dev overlays could interfere. Those skips were removed so tests run
+// deterministically against the production server started by Playwright.
 
 /**
  * Accessibility tests for all pages using axe-core
@@ -114,56 +111,33 @@ for (const pageInfo of pages) {
       });
     } catch (e) {}
 
-    // Inject axe into the page and run it scoped to main to avoid traversing
-    // devtool frames/portals which can throw when analyzed.
-    // Use a robust injection: try path first, then fallback to reading the
-    // axe bundle content and injecting via content. This avoids issues on
-    // some environments where addScriptTag(path) can silently fail.
+    // Ensure any frames/devtools are removed right before analysis. Some apps
+    // create transient iframes which can cause axe to attempt to traverse a
+    // missing document and throw. Remove them again here as a last-resort.
     try {
-      const fs = require("fs");
-      try {
-        await page.addScriptTag({
-          path: require.resolve("axe-core/axe.min.js"),
-        });
-      } catch (err) {
-        // fallback: read file and inject content
+      await page.evaluate(() => {
         try {
-          const content = fs.readFileSync(
-            require.resolve("axe-core/axe.min.js"),
-            "utf8"
-          );
-          await page.addScriptTag({ content });
-        } catch (err2) {
-          // last resort: evaluate the script text directly
-          const content = fs.readFileSync(
-            require.resolve("axe-core/axe.min.js"),
-            "utf8"
-          );
-          await page.evaluate(content);
-        }
-      }
-      // Wait for axe to be available on window
-      await page.waitForFunction(() => !!(window as any).axe, {
-        timeout: 3000,
+          document.querySelectorAll("iframe").forEach((f) => f.remove());
+        } catch (e) {}
       });
-    } catch (e) {
-      // Injection failed; we'll catch this during evaluation and return a helpful error
-    }
+      // give the page a moment to settle
+      await page.waitForTimeout(200);
+    } catch (e) {}
 
-    const accessibilityScanResults = await page.evaluate(async () => {
-      try {
-        const node =
-          document.querySelector('main, [role="main"]') ||
-          document.documentElement;
-        // @ts-ignore - axe is injected into window
-        const results = await (window as any).axe.run(node);
-        return results;
-      } catch (e) {
-        return {
-          violations: [{ id: "axe-in-page-error", description: String(e) }],
-        };
-      }
-    });
+    // Use @axe-core/playwright's AxeBuilder which handles frames/contexts more
+    // robustly than directly injecting and calling window.axe.run. Scope the
+    // analysis to the page main content to avoid traversing devtool frames.
+    let accessibilityScanResults;
+    try {
+      accessibilityScanResults = await new AxeBuilder({ page })
+        .include('main, [role="main"]')
+        .analyze();
+    } catch (e) {
+      // Normalize to the same shape the tests expect
+      accessibilityScanResults = {
+        violations: [{ id: "axe-in-page-error", description: String(e) }],
+      };
+    }
 
     // Assert no violations
     expect(accessibilityScanResults.violations).toEqual([]);
@@ -222,8 +196,7 @@ test.describe("Screen Reader Support", () => {
     // Ensure at least one image is present and visible before proceeding
     if (count === 0) {
       // No images on page — fail early with helpful message
-      expect(count).toBeGreaterThan(
-        0,
+      throw new Error(
         "No <img> elements found on the page — nothing to validate for alt attributes"
       );
     }
