@@ -5,6 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import React from "react";
+import { labsSub } from "../../homebarConfig";
 
 const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -55,6 +56,17 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             Blogs
           </Link>
         </MenuItem>
+        {/* Labs subitems for mobile */}
+        {labsSub.map((item) => (
+          <MenuItem key={item.href} onClick={() => setAnchorEl(null)}>
+            <Link
+              href={item.href}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {item.label}
+            </Link>
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );

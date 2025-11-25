@@ -2,26 +2,30 @@
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import React from "react";
+import { labsSub, navStyles, projectsSub } from "../../homebarConfig";
 
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [projectsOpen, setProjectsOpen] = React.useState(false);
+  const [labsOpen, setLabsOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-  // Close when clicking outside
+  // Close when clicking outside or pressing Escape (for either menu)
   React.useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (
-        projectsOpen &&
+        (projectsOpen || labsOpen) &&
         containerRef.current &&
         !containerRef.current.contains(e.target as Node)
       ) {
         setProjectsOpen(false);
+        setLabsOpen(false);
       }
     }
 
     function handleKey(e: KeyboardEvent) {
-      if (projectsOpen && e.key === "Escape") {
+      if ((projectsOpen || labsOpen) && e.key === "Escape") {
         setProjectsOpen(false);
+        setLabsOpen(false);
       }
     }
 
@@ -31,19 +35,17 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
       document.removeEventListener("click", handleClick);
       document.removeEventListener("keydown", handleKey);
     };
-  }, [projectsOpen]);
+  }, [projectsOpen, labsOpen]);
 
   return (
     <nav style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-      {pages.map((p) => (
-        <Link
-          key={p}
-          href={`/${p}`}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <Button color="inherit">{p}</Button>
-        </Link>
-      ))}
+      {pages
+        .filter((p) => p !== "projects" && p !== "labs")
+        .map((p) => (
+          <Link key={p} href={`/${p}`} style={navStyles.link as any}>
+            <Button color="inherit">{p}</Button>
+          </Link>
+        ))}
 
       {/* Projects inline toggle - expands sublinks inside the same nav bar */}
       <div
@@ -54,7 +56,10 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           color="inherit"
           aria-expanded={projectsOpen}
           aria-controls="projects-inline"
-          onClick={() => setProjectsOpen((s) => !s)}
+          onClick={() => {
+            setProjectsOpen((s) => !s);
+            setLabsOpen(false);
+          }}
         >
           Projects
         </Button>
@@ -65,21 +70,50 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             role="menu"
             style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
           >
-            <Link href="/projects" style={{ textDecoration: "none" }}>
-              <Button color="inherit" onClick={() => setProjectsOpen(false)}>
-                All Projects
-              </Button>
-            </Link>
-            <Link href="/projects/clients" style={{ textDecoration: "none" }}>
-              <Button color="inherit" onClick={() => setProjectsOpen(false)}>
-                Clients
-              </Button>
-            </Link>
-            <Link href="/projects/blogs" style={{ textDecoration: "none" }}>
-              <Button color="inherit" onClick={() => setProjectsOpen(false)}>
-                Blogs
-              </Button>
-            </Link>
+            {projectsSub.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{ textDecoration: "none" }}
+              >
+                <Button color="inherit" onClick={() => setProjectsOpen(false)}>
+                  {item.label}
+                </Button>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Labs inline toggle */}
+        <Button
+          color="inherit"
+          aria-expanded={labsOpen}
+          aria-controls="labs-inline"
+          onClick={() => {
+            setLabsOpen((s) => !s);
+            setProjectsOpen(false);
+          }}
+        >
+          Labs
+        </Button>
+
+        {labsOpen && (
+          <div
+            id="labs-inline"
+            role="menu"
+            style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
+          >
+            {labsSub.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{ textDecoration: "none" }}
+              >
+                <Button color="inherit" onClick={() => setLabsOpen(false)}>
+                  {item.label}
+                </Button>
+              </Link>
+            ))}
           </div>
         )}
       </div>

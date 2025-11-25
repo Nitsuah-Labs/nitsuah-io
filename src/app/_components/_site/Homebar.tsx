@@ -1,11 +1,9 @@
 // src/components/Homebar.tsx
 "use client";
 import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
 import { usePathname } from "next/navigation";
 import React from "react";
 import "../_styles/global.css";
@@ -62,9 +60,6 @@ const HomeBar: React.FC<HomeBarProps> = () => {
             <ThemeToggle />
             <ExportPDF visible={pathname === "/resume"} />
             <GitHubButton />
-            <Tooltip title="View profile">
-              <Avatar alt="Austin" src="/avatar.jpg" />
-            </Tooltip>
             <div className="mobileOnly">
               <MobileNav pages={pages} />
             </div>
