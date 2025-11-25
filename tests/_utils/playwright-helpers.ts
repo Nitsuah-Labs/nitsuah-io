@@ -7,9 +7,9 @@ export async function go(page: Page, path: string) {
   try {
     // if path looks like a full URL preserve it, else append testHelpers query
     if (!/^https?:\/\//i.test(path)) {
-      url = path.includes("?")
-        ? `${path}&testHelpers=1`
-        : `${path}?testHelpers=1`;
+      const base = process.env.TEST_BASE_URL || "http://localhost:3001";
+      const sep = path.includes("?") ? "&" : "?";
+      url = base.replace(/\/$/, "") + path + sep + "testHelpers=1";
     }
   } catch {
     url = path;
