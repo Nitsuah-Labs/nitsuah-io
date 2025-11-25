@@ -429,7 +429,13 @@ input[type="range"]::-webkit-slider-thumb:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
+  /* Keep footer fixed so visual tests and pages always show it */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 0;
+  z-index: 1000;
 }
 
 .twitter-logo {

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import ape from "../../../../public/images/ape.png";
@@ -13,7 +15,7 @@ const LabFooter: React.FC = () => {
   };
 
   return (
-    <footer>
+    <footer data-testid="labs-footer">
       <div className="footer-container" onClick={handleImageClick}>
         <Image
           alt="ape 24px"
