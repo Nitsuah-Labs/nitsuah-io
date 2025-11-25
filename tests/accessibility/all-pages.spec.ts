@@ -1,12 +1,12 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 // When Playwright starts the dev server it sets NEXT_PUBLIC_TEST_HELPERS=1.
 // In that mode dev overlays and portals can interfere with axe so skip
 // heavy axe scans during interactive dev test runs and run them in CI instead.
 if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
   test.skip(true, "Skipping axe scans in test-helpers/dev mode");
 }
-import { go } from "../_utils/playwright-helpers";
 
 /**
  * Accessibility tests for all pages using axe-core
@@ -116,9 +116,40 @@ for (const pageInfo of pages) {
 
     // Inject axe into the page and run it scoped to main to avoid traversing
     // devtool frames/portals which can throw when analyzed.
+    // Use a robust injection: try path first, then fallback to reading the
+    // axe bundle content and injecting via content. This avoids issues on
+    // some environments where addScriptTag(path) can silently fail.
     try {
-      await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
-    } catch (e) {}
+      const fs = require("fs");
+      try {
+        await page.addScriptTag({
+          path: require.resolve("axe-core/axe.min.js"),
+        });
+      } catch (err) {
+        // fallback: read file and inject content
+        try {
+          const content = fs.readFileSync(
+            require.resolve("axe-core/axe.min.js"),
+            "utf8"
+          );
+          await page.addScriptTag({ content });
+        } catch (err2) {
+          // last resort: evaluate the script text directly
+          const content = fs.readFileSync(
+            require.resolve("axe-core/axe.min.js"),
+            "utf8"
+          );
+          await page.evaluate(content);
+        }
+      }
+      // Wait for axe to be available on window
+      await page.waitForFunction(() => !!(window as any).axe, {
+        timeout: 3000,
+      });
+    } catch (e) {
+      // Injection failed; we'll catch this during evaluation and return a helpful error
+    }
+
     const accessibilityScanResults = await page.evaluate(async () => {
       try {
         const node =

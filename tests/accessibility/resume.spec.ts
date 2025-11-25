@@ -1,10 +1,10 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { go } from "../_utils/playwright-helpers";
 
 if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
   test.skip(true, "Skipping resume axe scans in test-helpers/dev mode");
 }
-import { go } from "../_utils/playwright-helpers";
 
 // Allow longer time for the resume page to fully hydrate and for our
 // overlay-removal logic to run in CI/dev. This file needs more time
@@ -112,7 +112,7 @@ test.describe("Resume Page Accessibility Tests", () => {
           return false;
         }
       },
-      { timeout: 20000 }
+      { timeout: 30000 }
     );
   });
 
@@ -126,8 +126,31 @@ test.describe("Resume Page Accessibility Tests", () => {
     });
     // Inject axe into the page and run it scoped to #basics for more stability
     try {
-      await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+      const fs = require("fs");
+      try {
+        await page.addScriptTag({
+          path: require.resolve("axe-core/axe.min.js"),
+        });
+      } catch (err) {
+        try {
+          const content = fs.readFileSync(
+            require.resolve("axe-core/axe.min.js"),
+            "utf8"
+          );
+          await page.addScriptTag({ content });
+        } catch (err2) {
+          const content = fs.readFileSync(
+            require.resolve("axe-core/axe.min.js"),
+            "utf8"
+          );
+          await page.evaluate(content);
+        }
+      }
+      await page.waitForFunction(() => !!(window as any).axe, {
+        timeout: 3000,
+      });
     } catch (e) {}
+
     const accessibilityScanResults = await page.evaluate(async () => {
       try {
         // @ts-ignore
