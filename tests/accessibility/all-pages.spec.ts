@@ -83,19 +83,58 @@ test.describe("Keyboard Navigation", () => {
 
 test.describe("Screen Reader Support", () => {
   test("images have alt text", async ({ page }) => {
+    // Increase timeout for possible lazy-loaded images
+    test.setTimeout(60000);
+
     await page.goto("/");
+
+    // Wait for network idle so images begin loading
+    await page.waitForLoadState("networkidle");
 
     // Get all images
     const images = page.locator("img");
     const count = await images.count();
 
-    // Check each image has alt attribute
-    for (let i = 0; i < count; i++) {
-      const img = images.nth(i);
-      const alt = await img.getAttribute("alt");
+    // Ensure at least one image is present and visible before proceeding
+    if (count === 0) {
+      // No images on page — fail early with helpful message
+      expect(count).toBeGreaterThan(
+        0,
+        "No <img> elements found on the page — nothing to validate for alt attributes"
+      );
+    }
 
-      // Alt attribute should exist (can be empty for decorative images)
-      expect(alt).not.toBeNull();
+    // Wait for first image to be visible (helps with lazy-loaded images)
+    try {
+      await images.first().waitFor({ state: "visible", timeout: 5000 });
+    } catch (err) {
+      // If not visible quickly, attempt a gentle scroll to trigger lazy-loading
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(500);
+    }
+
+    // Extra scroll pass to encourage loading of offscreen images
+    await page.evaluate(() => {
+      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: document.body.scrollHeight });
+    });
+    await page.waitForTimeout(500);
+
+    // Recompute image count after possible lazy-load
+    const finalImages = page.locator("img");
+    const finalCount = await finalImages.count();
+
+    for (let i = 0; i < finalCount; i++) {
+      const img = finalImages.nth(i);
+      try {
+        const alt = await img.getAttribute("alt");
+        // Alt attribute should exist (can be empty for decorative images)
+        expect(alt).not.toBeNull();
+      } catch (error) {
+        // Add index to error for easier debugging
+        console.error(`Image at index ${i} caused error while reading 'alt':`, error);
+        throw new Error(`Image at index ${i} failed alt check: ${String(error)}`);
+      }
     }
   });
 
