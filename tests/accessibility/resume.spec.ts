@@ -48,28 +48,68 @@ test.describe("Resume Page Accessibility Tests", () => {
       });
     } catch (e) {}
 
-      // Run a one-shot overlay cleanup (in case overlays are present).
-      try {
-        await page.evaluate(() => {
-          try { document.body.classList.add('test-helpers'); } catch(e){}
-          const selectors = ['#__next_dev_overlay', '.next-dev-overlay', '.react-dev-overlay', '#next-overlay', '.overseer', '[data-testid="overseer"]'];
-          for (const s of selectors) { try { document.querySelectorAll(s).forEach(n => n.remove()); } catch(e){} }
-          const texts = ['Overseer Dashboard','Welcome to Overseer','Open Next.js Dev Tools','Next.js Dev Tools','Sign in with GitHub'];
-          try { Array.from(document.querySelectorAll('*')).forEach(el => { try { const txt = el.textContent || ''; for (const t of texts) if (txt.includes(t)) { el.remove(); break; } } catch(e){} }); } catch(e){}
-        });
-      } catch (e) {}
-
-      // Wait for any stable marker from the server-rendered resume to appear.
-      // This is more tolerant to hydration differences and dynamic overlays.
-      await page.waitForFunction(() => {
+    // Run a one-shot overlay cleanup (in case overlays are present).
+    try {
+      await page.evaluate(() => {
         try {
-          if (document.querySelector('#basics')) return true;
-          if (document.querySelector('main.resume-container')) return true;
-          if (document.querySelector('h1.resume-name')) return true;
-          if ((document.body && document.body.textContent || '').includes('Austin J. Hardy')) return true;
+          document.body.classList.add("test-helpers");
+        } catch (e) {}
+        const selectors = [
+          "#__next_dev_overlay",
+          ".next-dev-overlay",
+          ".react-dev-overlay",
+          "#next-overlay",
+          ".overseer",
+          '[data-testid="overseer"]',
+        ];
+        for (const s of selectors) {
+          try {
+            document.querySelectorAll(s).forEach((n) => n.remove());
+          } catch (e) {}
+        }
+        const texts = [
+          "Overseer Dashboard",
+          "Welcome to Overseer",
+          "Open Next.js Dev Tools",
+          "Next.js Dev Tools",
+          "Sign in with GitHub",
+        ];
+        try {
+          Array.from(document.querySelectorAll("*")).forEach((el) => {
+            try {
+              const txt = el.textContent || "";
+              for (const t of texts)
+                if (txt.includes(t)) {
+                  el.remove();
+                  break;
+                }
+            } catch (e) {}
+          });
+        } catch (e) {}
+      });
+    } catch (e) {}
+
+    // Wait for any stable marker from the server-rendered resume to appear.
+    // This is more tolerant to hydration differences and dynamic overlays.
+    await page.waitForFunction(
+      () => {
+        try {
+          if (document.querySelector("#basics")) return true;
+          if (document.querySelector("main.resume-container")) return true;
+          if (document.querySelector("h1.resume-name")) return true;
+          if (
+            ((document.body && document.body.textContent) || "").includes(
+              "Austin J. Hardy"
+            )
+          )
+            return true;
           return false;
-        } catch (e) { return false; }
-      }, { timeout: 20000 });
+        } catch (e) {
+          return false;
+        }
+      },
+      { timeout: 20000 }
+    );
   });
 
   test("should not have any automatically detectable accessibility issues", async ({
@@ -80,10 +120,29 @@ test.describe("Resume Page Accessibility Tests", () => {
       state: "attached",
       timeout: 15000,
     });
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .include("#basics")
-      .analyze();
+    // Inject axe into the page and run it scoped to #basics for more stability
+    try {
+      await page.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
+    } catch (e) {}
+    const accessibilityScanResults = await page.evaluate(async () => {
+      try {
+        // @ts-ignore
+        const node =
+          document.querySelector("#basics") || document.documentElement;
+        // @ts-ignore
+        const results = await (window as any).axe.run(node, {
+          runOnly: {
+            type: "tag",
+            values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+          },
+        });
+        return results;
+      } catch (e) {
+        return {
+          violations: [{ id: "axe-in-page-error", description: String(e) }],
+        };
+      }
+    });
 
     expect(accessibilityScanResults.violations).toEqual([]);
   });
