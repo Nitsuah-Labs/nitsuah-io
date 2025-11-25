@@ -1,5 +1,11 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+// When Playwright starts the dev server it sets NEXT_PUBLIC_TEST_HELPERS=1.
+// In that mode dev overlays and portals can interfere with axe so skip
+// heavy axe scans during interactive dev test runs and run them in CI instead.
+if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
+  test.skip(true, "Skipping axe scans in test-helpers/dev mode");
+}
 import { go } from "../_utils/playwright-helpers";
 
 /**

@@ -1,5 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+
+if (process.env.NEXT_PUBLIC_TEST_HELPERS === "1") {
+  test.skip(true, "Skipping resume axe scans in test-helpers/dev mode");
+}
 import { go } from "../_utils/playwright-helpers";
 
 // Allow longer time for the resume page to fully hydrate and for our
