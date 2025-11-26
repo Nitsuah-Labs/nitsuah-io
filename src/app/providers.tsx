@@ -18,26 +18,12 @@ const queryClient = new QueryClient({
   },
 });
 
+// Get config immediately - getWagmiConfig handles SSR vs client differences internally
+const wagmiConfig = getWagmiConfig();
+
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-  const [clientConfig, setClientConfig] = React.useState<any | null>(null);
-
-  React.useEffect(() => {
-    setMounted(true);
-    // Only create the Wagmi config on the client
-    const cfg = getWagmiConfig();
-    setClientConfig(cfg);
-  }, []);
-
-  // Render children immediately to avoid hydration issues
-  // Web3 features will be available after client-side hydration
-  if (!mounted || !clientConfig) {
-    // During SSR or initial mount, render children without Web3 providers
-    return <>{children}</>;
-  }
-
   return (
-    <WagmiProvider config={clientConfig}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <ToastProvider />
         {children}

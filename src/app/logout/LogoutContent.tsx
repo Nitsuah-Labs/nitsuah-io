@@ -1,14 +1,28 @@
 "use client";
 
-export const dynamic = "error";
-
-import dynamic_import from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDisconnect } from "wagmi";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 
-const LogoutContent = dynamic_import(() => import("./LogoutContent"), {
-  ssr: false,
-  loading: () => (
+export default function LogoutContent() {
+  const router = useRouter();
+  const { disconnect } = useDisconnect();
+
+  useEffect(() => {
+    // Disconnect wallet
+    disconnect();
+
+    // Redirect to homepage after a brief delay
+    const timer = setTimeout(() => {
+      router.push("/");
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [disconnect, router]);
+
+  return (
     <div className="App">
       <div className="container">
         <div className="header">
@@ -31,15 +45,19 @@ const LogoutContent = dynamic_import(() => import("./LogoutContent"), {
               fontWeight: "600",
             }}
           >
-            Loading...
+            Disconnecting...
+          </div>
+          <div
+            style={{
+              fontSize: "1rem",
+              color: "#6b7280",
+            }}
+          >
+            Taking you back home
           </div>
         </div>
         <Footer />
       </div>
     </div>
-  ),
-});
-
-export default function LogoutPage() {
-  return <LogoutContent />;
+  );
 }

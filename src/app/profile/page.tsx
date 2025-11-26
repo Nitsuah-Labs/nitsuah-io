@@ -1,5 +1,9 @@
 "use client";
 
+// This tells Next.js not to prerender this page at build time
+export const dynamic = "error";
+export const dynamicParams = true;
+
 import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";

@@ -1,6 +1,8 @@
 // Token - src/app/labs/token/page.tsx //TODO
 "use client";
 
+export const dynamic = "error";
+
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
