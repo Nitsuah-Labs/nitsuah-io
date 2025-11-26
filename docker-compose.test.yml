@@ -1,5 +1,5 @@
 # Docker Compose for running tests in isolated environment
-version: '3.8'
+version: "3.8"
 
 services:
   playwright:
@@ -20,7 +20,7 @@ services:
     # Override command for different test suites
     command: npx playwright test
     # Allocate enough resources for browser testing
-    shm_size: '2gb'
+    shm_size: "2gb"
 
 volumes:
   node_modules:
