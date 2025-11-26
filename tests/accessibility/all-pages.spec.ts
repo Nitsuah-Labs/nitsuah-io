@@ -35,6 +35,10 @@ for (const pageInfo of pages) {
 
     // Wait for page to be fully loaded
     await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState("networkidle");
+
+    // Wait for the main content to be available in the DOM
+    await page.waitForSelector('main, [role="main"], body', { timeout: 30000 });
 
     // Inject test-only CSS overrides to improve contrast for small helper text
     // This is scoped to tests only and helps axe avoid reporting failures for

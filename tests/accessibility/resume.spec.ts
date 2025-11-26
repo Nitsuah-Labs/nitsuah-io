@@ -17,6 +17,15 @@ test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
     // Ensure the resume page is fully loaded before each test to avoid flakiness
     await go(page, "/resume");
+
+    // Wait for network to be idle to ensure all content is loaded
+    await page.waitForLoadState("networkidle");
+
+    // Wait for the main resume content to be present
+    await page.waitForSelector("#basics, main.resume-container", {
+      timeout: 30000,
+    });
+
     // Some dev overlays may appear; proactively add the test-helpers body class and
     // remove noisy dev overlays so tests can find the resume content reliably.
     try {
@@ -95,50 +104,13 @@ test.describe("Resume Page Accessibility Tests", () => {
       });
     } catch (e) {}
 
-    // Wait for any stable marker from the server-rendered resume to appear.
-    // This is more tolerant to hydration differences and dynamic overlays.
-    // Some pages render server-side but then hydrate; overlays or client JS
-    // can obscure or mutate the DOM. Poll the page HTML for the server-rendered
-    // marker `id="basics"` as a robust indicator the content was sent from
-    // the server. Fall back to querying the live DOM if needed.
-    const start = Date.now();
-    const timeout = 60000;
-    let found = false;
-    while (Date.now() - start < timeout) {
-      try {
-        const html = await page.content();
-        if (html.includes('id="basics"')) {
-          found = true;
-          break;
-        }
-        // fallback to live DOM checks
-        const exists = await page.evaluate(() => {
-          try {
-            if (document.querySelector("#basics")) return true;
-            if (document.querySelector("main.resume-container")) return true;
-            if (document.querySelector("h1.resume-name")) return true;
-            if (
-              ((document.body && document.body.textContent) || "").includes(
-                "Austin J. Hardy"
-              )
-            )
-              return true;
-            return false;
-          } catch (e) {
-            return false;
-          }
-        });
-        if (exists) {
-          found = true;
-          break;
-        }
-      } catch (e) {}
-      await page.waitForTimeout(250);
-    }
-    if (!found) {
-      throw new Error(
-        "Timed out waiting for resume server-rendered marker #basics"
-      );
+    // Verify the resume content is present
+    const basicsExists = await page
+      .locator("#basics")
+      .isVisible()
+      .catch(() => false);
+    if (!basicsExists) {
+      throw new Error("Resume content (#basics) not found after waiting");
     }
   });
 
