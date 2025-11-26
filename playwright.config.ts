@@ -80,26 +80,17 @@ export default defineConfig({
 
   // Run local dev server before starting tests
   webServer: {
-    // If running in CI or when Playwright forces test helpers on the dev
-    // server (NEXT_PUBLIC_TEST_HELPERS=1), prefer building and starting the
-    // production server. This avoids Next.js dev overlays and devtools UIs
-    // which are injected only during `next dev` and can interfere with
-    // automated accessibility scans and visual tests.
-    command:
-      process.env.CI || process.env.NEXT_PUBLIC_TEST_HELPERS === "1"
-        ? "npm run build:ci && npm run start"
-        : "npm run dev",
+    // If running in CI, build and start production server.
+    // Otherwise use dev server which includes HMR and better debugging.
+    command: process.env.CI
+      ? "npm run build:ci && npm run start"
+      : "npm run dev",
     url: "http://localhost:3001",
-    // If test helpers are enabled, force Playwright to start its own dev server
-    // If test helpers are enabled, force Playwright to start its own dev server
-    reuseExistingServer:
-      process.env.NEXT_PUBLIC_TEST_HELPERS === "1" ? false : !process.env.CI,
+    // Only reuse server in non-CI environments when not forcing a fresh build
+    reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
-    // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
+    // Set PORT for the dev/prod server
     env: {
-      // Force test helpers on the dev server started by Playwright so components
-      // that read NEXT_PUBLIC_TEST_HELPERS render test-only UI consistently.
-      NEXT_PUBLIC_TEST_HELPERS: "1",
       PORT: process.env.PORT ?? "3001",
     },
   },

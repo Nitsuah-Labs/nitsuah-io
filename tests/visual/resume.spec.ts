@@ -75,8 +75,10 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check PDF export button exists
-    const pdfButton = page.locator('button:has-text("Export PDF")');
+    // Check PDF export button exists (specifically the one in resume content)
+    const pdfButton = page.locator(
+      '.resume-content button:has-text("Export PDF")'
+    );
     await expect(pdfButton).toBeVisible();
     await expect(pdfButton).toBeEnabled();
   });
