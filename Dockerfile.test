@@ -1,0 +1,29 @@
+# Dockerfile for running Playwright tests in a consistent environment
+# This eliminates dev/CI rendering differences and makes visual tests stable
+
+FROM mcr.microsoft.com/playwright:v1.49.1-noble
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy project files
+COPY . .
+
+# Build the application
+RUN npm run build:ci
+
+# Set environment variables for tests
+ENV CI=true
+ENV NODE_ENV=production
+
+# Expose port for dev server (if needed)
+EXPOSE 3000
+
+# Default command runs all tests
+CMD ["npx", "playwright", "test"]

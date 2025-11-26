@@ -31,7 +31,7 @@ export default defineConfig({
   // Shared settings for all projects
   use: {
     // Base URL for tests (match webServer.url)
-    baseURL: process.env.BASE_URL || "http://localhost:3001",
+    baseURL: process.env.BASE_URL || "http://localhost:3000",
 
     // Collect trace on first retry
     trace: "on-first-retry",
@@ -85,13 +85,14 @@ export default defineConfig({
     command: process.env.CI
       ? "npm run build:ci && npm run start"
       : "npm run dev",
-    url: "http://localhost:3001",
-    // Only reuse server in non-CI environments when not forcing a fresh build
-    reuseExistingServer: !process.env.CI,
+    url: "http://localhost:3000",
+    // If test helpers are enabled, force Playwright to start its own dev server
+    reuseExistingServer:
+      process.env.NEXT_PUBLIC_TEST_HELPERS === "1" ? false : !process.env.CI,
     timeout: 120 * 1000,
-    // Set PORT for the dev/prod server
+    // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
     env: {
-      PORT: process.env.PORT ?? "3001",
+      NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
     },
   },
 });
