@@ -1,6 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { go } from "../_utils/playwright-helpers";
 // Note: we used to skip heavy axe scans in test-helpers/dev mode because
 // dev overlays could interfere. Those skips were removed so tests run
 // deterministically against the production server started by Playwright.
@@ -31,117 +30,18 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-    await go(page, pageInfo.path);
+    await page.goto(pageInfo.path);
 
     // Wait for page to be fully loaded
     await page.waitForLoadState("domcontentloaded");
-    await page.waitForLoadState("networkidle");
-
-    // Wait for the main content to be available in the DOM
-    await page.waitForSelector('main, [role="main"], body', { timeout: 30000 });
-
-    // Inject test-only CSS overrides to improve contrast for small helper text
-    // This is scoped to tests only and helps axe avoid reporting failures for
-    // decorative helper text. Kept minimal and non-invasive.
-    await page.evaluate(() => {
-      try {
-        const css = `.text-xs, .text-xs.text-slate-500 { color: #9fb1c8 !important; }`;
-        const s = document.createElement("style");
-        s.setAttribute("data-test-inject", "1");
-        s.appendChild(document.createTextNode(css));
-        document.head.appendChild(s);
-      } catch (e) {
-        // ignore failures to inject test-only styles
-      }
-    });
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
       await page.waitForTimeout(3000);
     }
 
-    // Remove any iframes (devtools or third-party) which can cause axe to
-    // attempt to traverse frames and throw when a frame document is missing.
-    try {
-      await page.evaluate(() => {
-        try {
-          document.querySelectorAll("iframe").forEach((f) => f.remove());
-        } catch (e) {}
-      });
-    } catch (e) {}
-
-    // Run a one-shot overlay cleanup to remove dev overlays that can interfere
-    // with axe (they may create frames or DOM nodes that axe can't traverse).
-    try {
-      await page.evaluate(() => {
-        try {
-          document.body.classList.add("test-helpers");
-        } catch (e) {}
-        const selectors = [
-          "[data-nextjs-dev-overlay]",
-          "nextjs-portal",
-          "[data-nextjs-devtools]",
-          "#__next_dev_overlay",
-          ".next-dev-overlay",
-          ".react-dev-overlay",
-          "#next-overlay",
-          ".overseer",
-          '[data-testid="overseer"]',
-        ];
-        for (const s of selectors) {
-          try {
-            document.querySelectorAll(s).forEach((n) => n.remove());
-          } catch (e) {}
-        }
-        const texts = [
-          "Overseer Dashboard",
-          "Welcome to Overseer",
-          "Open Next.js Dev Tools",
-          "Next.js Dev Tools",
-          "Sign in with GitHub",
-        ];
-        try {
-          Array.from(document.querySelectorAll("*")).forEach((el) => {
-            try {
-              const txt = el.textContent || "";
-              for (const t of texts)
-                if (txt.includes(t)) {
-                  el.remove();
-                  break;
-                }
-            } catch (e) {}
-          });
-        } catch (e) {}
-      });
-    } catch (e) {}
-
-    // Ensure any frames/devtools are removed right before analysis. Some apps
-    // create transient iframes which can cause axe to attempt to traverse a
-    // missing document and throw. Remove them again here as a last-resort.
-    try {
-      await page.evaluate(() => {
-        try {
-          document.querySelectorAll("iframe").forEach((f) => f.remove());
-        } catch (e) {}
-      });
-      // give the page a moment to settle
-      await page.waitForTimeout(200);
-    } catch (e) {}
-
-    // Use @axe-core/playwright's AxeBuilder which handles frames/contexts more
-    // robustly than directly injecting and calling window.axe.run. Scope the
-    // analysis to the page main content to avoid traversing devtool frames.
-    let accessibilityScanResults;
-    try {
-      accessibilityScanResults = await new AxeBuilder({ page })
-        .include('main, [role="main"]')
-        .analyze();
-    } catch (e) {
-      // Normalize to the same shape the tests expect
-      accessibilityScanResults = {
-        violations: [{ id: "axe-in-page-error", description: String(e) }],
-      };
-    }
+    // Run axe accessibility scan
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
     // Assert no violations
     expect(accessibilityScanResults.violations).toEqual([]);

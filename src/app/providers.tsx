@@ -28,7 +28,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
     const cfg = getWagmiConfig();
     setClientConfig(cfg);
   }, []);
-  if (!mounted || !clientConfig) return null;
+
+  // Render children immediately to avoid hydration issues
+  // Web3 features will be available after client-side hydration
+  if (!mounted || !clientConfig) {
+    // During SSR or initial mount, render children without Web3 providers
+    return <>{children}</>;
+  }
 
   return (
     <WagmiProvider config={clientConfig}>
