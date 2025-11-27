@@ -1,0 +1,26 @@
+# Docker Compose for running tests in isolated environment
+version: "3.8"
+
+services:
+  playwright:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+      # Mount source code for live updates during development
+      - .:/app
+      # Use named volume for node_modules to avoid conflicts with host
+      - node_modules:/app/node_modules
+      # Mount test results directory
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+    environment:
+      - CI=true
+      - NODE_ENV=production
+    # Override command for different test suites
+    command: npx playwright test
+    # Allocate enough resources for browser testing
+    shm_size: "2gb"
+
+volumes:
+  node_modules:

@@ -14,7 +14,7 @@ interface Props {
   property1: "navigation-tablet" | "navigation-desktop" | "navigation-mobile";
   style: React.CSSProperties;
   NFTMarketplace: string;
-  buttonIcon: JSX.Element;
+  buttonIcon: React.ReactElement;
 }
 
 export const Navigation = ({
@@ -30,7 +30,7 @@ export const Navigation = ({
       }}
     />
   ),
-}: Props): JSX.Element => {
+}: Props): React.ReactElement => {
   return (
     <div className={`navigation ${property1}`} style={style}>
       <div className="nav-logo">

@@ -1,6 +1,5 @@
-// app/cryto/page.tsx
+// app/crypto/page.tsx
 "use client";
-import { Grid } from "@mui/material";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -9,136 +8,14 @@ import HomeBar from "../_components/_site/Homebar";
 import "../_components/_styles/global.css";
 import "../_components/_styles/SelectedProjects.css";
 
-import trail from "./_assets/cbtb.png";
-import dao from "./_assets/dao.gif";
-import gaad from "./_assets/gaad-poap.gif";
-import ledger from "./_assets/ledger.png";
-import mint from "./_assets/mint.gif";
-
-// Import images for moved projects from projects/_assets
-import ensNft from "../projects/_assets/ens.gif";
-import nightsWeekends from "../projects/_assets/nights+weekends.png";
-import solDapp from "../projects/_assets/sol-dapp.gif";
-import solCore from "../projects/_assets/solana-logo.png";
-import ethIntro from "../projects/_assets/web3-intro.png";
-import nftStore from "../projects/_assets/web3-mint.png";
-
-const web3Data = [
-  {
-    title: "Crypto Trailblazer",
-    description:
-      "Early adopter NFT of Coinbassador education & activity program at Coinbase",
-    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/259",
-    image: trail,
-    tags: ["NFT", "Polygon", "Coinbase"],
-    featured: true,
-  },
-  {
-    title: "Ledger NFT",
-    description: "Attended a Coinbassador Hardware wallet partnership session",
-    link: "https://opensea.io/assets/matic/0xb62c2b82a8fe234c96ab1a4c9d50305fd19ef079/376",
-    image: ledger,
-    tags: ["NFT", "Polygon", "Security"],
-    featured: false,
-  },
-  {
-    title: "DAO NFT",
-    description:
-      "DAO membership token for decentralized governance participation",
-    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/0",
-    image: dao,
-    tags: ["NFT", "DAO", "Governance", "CryptoU"],
-    featured: true,
-  },
-  {
-    title: "#MintMadness",
-    description:
-      "CryptoU - AI image generation minting contest participation token",
-    link: "https://opensea.io/assets/matic/0xc94a4a1a6c12f9c9f56894ba00d99f766a800e39/2",
-    image: mint,
-    tags: ["NFT", "DALL·E", "CryptoU"],
-    featured: false,
-  },
-  {
-    title: "#GAAD POAP",
-    description:
-      "Global Accessibility Awareness Day commemorative proof of attendance protocol (POAP)",
-    link: "https://app.poap.xyz/token/6633244",
-    image: gaad,
-    tags: ["POAP", "A11y"],
-    featured: false,
-  },
-  {
-    title: "N+W S1",
-    description:
-      "Participation in Buildspace's Nights + Weekends Season 1 program, building Web3 projects in a community setting.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/22083",
-    image: nightsWeekends,
-    tags: ["buildspace", "web3", "community"],
-    featured: false,
-  },
-  {
-    title: "ETH Core",
-    description:
-      "Foundational Ethereum smart contract development project covering Solidity programming and Web3 integration.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18457",
-    image: ethIntro,
-    tags: ["ethereum", "solidity", "web3"],
-    featured: false,
-  },
-  {
-    title: "ETH dApp",
-    description:
-      "Full-featured Ethereum dApp for minting NFT collections with smart contract integration.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18857",
-    image: nftStore,
-    tags: ["ethereum", "nft", "web3", "dapp"],
-    featured: false,
-  },
-  {
-    title: "NFT Store",
-    description:
-      "Complete NFT storefront built on Solana with payment processing and collection management.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19051",
-    image: nftStore,
-    tags: ["nft", "solana", "web3", "marketplace"],
-    featured: false,
-  },
-  {
-    title: "SOL Core",
-    description:
-      "Core Solana blockchain development course covering Rust, Anchor framework, and Solana program architecture.",
-    link: "https://darkmoon.dev/about",
-    image: solCore,
-    tags: ["solana", "rust", "web3"],
-    featured: false,
-  },
-  {
-    title: "ENS NFT",
-    description:
-      "ENS (Ethereum Name Service) subdomain NFT implementation on Polygon, allowing users to mint custom subdomain names as NFTs.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/18179",
-    image: ensNft,
-    tags: ["nft", "ens", "polygon", "web3"],
-    featured: false,
-  },
-  {
-    title: "SOL dApp",
-    description:
-      "Decentralized application built on Solana blockchain with wallet integration and on-chain interactions.",
-    link: "https://opensea.io/assets/matic/0x3cd266509d127d0eac42f4474f57d0526804b44e/19995",
-    image: solDapp,
-    tags: ["solana", "web3", "dapp"],
-    featured: false,
-  },
-];
+import { cryptoProjects, getTagCategory } from "../../lib/data/crypto";
 
 const CryptoPage = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Sort projects: featured first
   const sortedProjects = useMemo(() => {
-    return [...web3Data].sort((a, b) => {
+    return [...cryptoProjects].sort((a, b) => {
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
       return 0;
@@ -183,16 +60,17 @@ const CryptoPage = () => {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
       <HomeBar />
       <main
+        role="main"
         className="content-container"
         style={{
-          marginTop: "60px",
-          marginBottom: "100px",
-          paddingBottom: "60px",
-          minHeight: "calc(100vh - 200px)",
-          padding: "1rem",
+          marginTop: "80px",
+          marginBottom: "60px",
+          paddingBottom: "80px",
+          minHeight: "calc(100vh - 140px)",
+          padding: "2rem 1rem",
         }}
       >
         <div
@@ -316,162 +194,287 @@ const CryptoPage = () => {
             style={{
               marginBottom: "1.5rem",
               display: "flex",
-              flexWrap: "wrap",
-              gap: "0.5rem",
-              justifyContent: "center",
+              flexDirection: "column",
+              gap: "1rem",
             }}
           >
-            {availableTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "0.75rem",
+                flexWrap: "wrap",
+              }}
+            >
+              <span
                 style={{
-                  padding: "0.4rem 0.8rem",
-                  borderRadius: "20px",
-                  border: "2px solid",
-                  borderColor: selectedTags.includes(tag)
-                    ? "#f97316"
-                    : "rgba(249, 115, 22, 0.3)",
-                  background: selectedTags.includes(tag)
-                    ? "#f97316"
-                    : "transparent",
-                  color: "#fff",
-                  cursor: "pointer",
-                  fontSize: "0.875rem",
+                  fontSize: "1rem",
                   fontWeight: "600",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  if (!selectedTags.includes(tag)) {
-                    e.currentTarget.style.borderColor = "#f97316";
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!selectedTags.includes(tag)) {
-                    e.currentTarget.style.borderColor =
-                      "rgba(249, 115, 22, 0.3)";
-                  }
+                  color: "rgba(255, 255, 255, 0.8)",
                 }}
               >
-                {tag}
-              </button>
-            ))}
+                Filter by Tags:
+              </span>
+              {selectedTags.length > 0 && (
+                <button
+                  onClick={() => setSelectedTags([])}
+                  style={{
+                    padding: "0.4rem 0.8rem",
+                    borderRadius: "20px",
+                    border: "2px solid rgba(239, 68, 68, 0.5)",
+                    background: "rgba(239, 68, 68, 0.2)",
+                    color: "#f87171",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    fontWeight: "600",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(239, 68, 68, 0.2)";
+                  }}
+                >
+                  Clear All ({selectedTags.length})
+                </button>
+              )}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+                justifyContent: "center",
+              }}
+            >
+              {availableTags.map((tag) => {
+                const category = getTagCategory(tag);
+                const isSelected = selectedTags.includes(tag);
+                const categoryColors = {
+                  Platform: {
+                    border: "#3b82f6",
+                    bg: "rgba(59, 130, 246, 0.2)",
+                    bgHover: "rgba(59, 130, 246, 0.3)",
+                  },
+                  Technology: {
+                    border: "#22c55e",
+                    bg: "rgba(34, 197, 94, 0.2)",
+                    bgHover: "rgba(34, 197, 94, 0.3)",
+                  },
+                  Type: {
+                    border: "#f97316",
+                    bg: "rgba(249, 115, 22, 0.2)",
+                    bgHover: "rgba(249, 115, 22, 0.3)",
+                  },
+                  Program: {
+                    border: "#a855f7",
+                    bg: "rgba(168, 85, 247, 0.2)",
+                    bgHover: "rgba(168, 85, 247, 0.3)",
+                  },
+                  Other: {
+                    border: "#6b7280",
+                    bg: "rgba(107, 114, 128, 0.2)",
+                    bgHover: "rgba(107, 114, 128, 0.3)",
+                  },
+                };
+                const colors = categoryColors[category];
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    style={{
+                      padding: "0.4rem 0.8rem",
+                      borderRadius: "20px",
+                      border: "2px solid",
+                      borderColor: isSelected
+                        ? colors.border
+                        : `${colors.border}40`,
+                      background: isSelected ? colors.bg : "transparent",
+                      color: "#fff",
+                      cursor: "pointer",
+                      fontSize: "0.875rem",
+                      fontWeight: "600",
+                      transition: "all 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = colors.border;
+                        e.currentTarget.style.background = colors.bgHover;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) {
+                        e.currentTarget.style.borderColor = `${colors.border}40`;
+                        e.currentTarget.style.background = "transparent";
+                      }
+                    }}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <Grid container spacing={2} rowSpacing={3}>
-          {" "}
-          {/* Reduced spacing for more compact layout */}
+        {/* Projects Grid */}
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+            gap: "3rem",
+            marginTop: "2rem",
+            marginLeft: "0",
+            marginRight: "2rem",
+            marginBottom: "2rem",
+          }}
+        >
           {filteredProjects.map((project, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4}>
-              <div
-                className="portfolio-card"
-                onClick={() => window.open(project.link, "_blank")}
-                style={{
-                  cursor: "pointer",
-                  background: "rgba(20, 20, 20, 0.8)",
-                  border: "2px solid rgba(249, 115, 22, 0.3)",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.8)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(249, 115, 22, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.3)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div className="portfolio-card-image">
-                  {project.image ? (
-                    <Image
-                      alt={project.title}
-                      src={project.image}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      unoptimized={
-                        project.image === dao ||
-                        project.image === gaad ||
-                        project.image === mint
-                      }
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        background:
-                          "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                        color: "white",
-                        fontSize: "1.5rem",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {project.title}
-                    </div>
-                  )}
-                </div>
+            <div
+              key={index}
+              className="portfolio-card"
+              onClick={() => window.open(project.link, "_blank")}
+              style={{
+                cursor: "pointer",
+                background: "rgba(20, 20, 20, 0.8)",
+                border: "2px solid rgba(249, 115, 22, 0.3)",
+                transition: "all 0.3s ease",
+                width: "100%",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.8)";
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow =
+                  "0 8px 24px rgba(249, 115, 22, 0.2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.3)";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div className="portfolio-card-image">
+                {project.image ? (
+                  <Image
+                    alt={project.title}
+                    src={project.image}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    unoptimized={
+                      typeof project.image === "object" &&
+                      project.image.src?.endsWith(".gif")
+                    }
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background:
+                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                      color: "white",
+                      fontSize: "1.5rem",
+                      fontWeight: "700",
+                    }}
+                  >
+                    {project.title}
+                  </div>
+                )}
+              </div>
 
-                <div className="portfolio-card-content">
-                  <h2 className="portfolio-card-title">{project.title}</h2>
+              <div className="portfolio-card-content">
+                <h2 className="portfolio-card-title">{project.title}</h2>
 
-                  {project.description && (
-                    <p className="portfolio-card-description">
-                      {project.description}
-                    </p>
-                  )}
+                {project.description && (
+                  <p className="portfolio-card-description">
+                    {project.description}
+                  </p>
+                )}
 
-                  {project.tags && project.tags.length > 0 && (
-                    <div className="portfolio-card-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="portfolio-tag">
+                {project.tags && project.tags.length > 0 && (
+                  <div className="portfolio-card-tags">
+                    {project.tags.map((tag) => {
+                      const category = getTagCategory(tag);
+                      const categoryColors = {
+                        Platform: "rgba(59, 130, 246, 0.2)", // blue
+                        Technology: "rgba(34, 197, 94, 0.2)", // green
+                        Type: "rgba(249, 115, 22, 0.2)", // orange
+                        Program: "rgba(168, 85, 247, 0.2)", // purple
+                        Other: "rgba(107, 114, 128, 0.2)", // gray
+                      };
+                      const categoryBorderColors = {
+                        Platform: "rgba(59, 130, 246, 0.5)",
+                        Technology: "rgba(34, 197, 94, 0.5)",
+                        Type: "rgba(249, 115, 22, 0.5)",
+                        Program: "rgba(168, 85, 247, 0.5)",
+                        Other: "rgba(107, 114, 128, 0.5)",
+                      };
+                      const categoryTextColors = {
+                        Platform: "#60a5fa",
+                        Technology: "#4ade80",
+                        Type: "#fb923c",
+                        Program: "#c084fc",
+                        Other: "#9ca3af",
+                      };
+                      return (
+                        <span
+                          key={tag}
+                          className="portfolio-tag"
+                          style={{
+                            background: categoryColors[category],
+                            borderColor: categoryBorderColors[category],
+                            color: categoryTextColors[category],
+                          }}
+                        >
                           {tag}
                         </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="portfolio-card-links">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="portfolio-link portfolio-link-primary"
-                      onClick={(e) => e.stopPropagation()}
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                        color: "#000",
-                        border: "2px solid #000",
-                        padding: "0.5rem 1rem",
-                        borderRadius: "6px",
-                        fontWeight: "600",
-                        transition: "all 0.3s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                        e.currentTarget.style.boxShadow =
-                          "0 4px 12px rgba(249, 115, 22, 0.4)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = "translateY(0)";
-                        e.currentTarget.style.boxShadow = "none";
-                      }}
-                    >
-                      View on Chain
-                    </a>
+                      );
+                    })}
                   </div>
+                )}
+
+                <div className="portfolio-card-links">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="portfolio-link portfolio-link-primary"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      background:
+                        "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                      color: "#000",
+                      border: "2px solid #000",
+                      padding: "0.75rem 1rem",
+                      borderRadius: "6px",
+                      fontWeight: "600",
+                      transition: "all 0.3s ease",
+                      width: "100%",
+                      textAlign: "center",
+                      display: "block",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow =
+                        "0 4px 12px rgba(249, 115, 22, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "none";
+                    }}
+                  >
+                    View on Chain
+                  </a>
                 </div>
               </div>
-            </Grid>
+            </div>
           ))}
-        </Grid>
+        </section>
       </main>
       <Footer />
     </div>

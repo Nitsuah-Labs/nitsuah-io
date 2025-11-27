@@ -15,18 +15,30 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "ES2017",
+    "baseUrl": ".",
+    "types": ["jest", "@testing-library/jest-dom"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components/*": ["src/app/_components/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/styles/*": ["src/app/_components/_styles/*"],
+      "@/types/*": ["src/types/*"],
+      "@/utils/*": ["src/utils/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

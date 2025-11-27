@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export function middleware() {
+export function proxy() {
   const response = NextResponse.next();
 
   // Add security headers (backup to Netlify headers)

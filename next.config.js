@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable SWC minification (faster than Terser)
-  swcMinify: true,
-
   // Optimize compilation
   compiler: {
     // Remove console.logs in production
@@ -30,21 +27,9 @@ const nextConfig = {
   // Enable React strict mode for better development
   reactStrictMode: true,
 
-  // Suppress false-positive module warnings from third-party packages
-  // These are optional peer dependencies for React Native/Node.js environments
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Ignore optional dependencies that aren't needed in browser
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        "@react-native-async-storage/async-storage": false,
-        "pino-pretty": false,
-        lokijs: false,
-        encoding: false,
-      };
-    }
-    return config;
-  },
+  // Turbopack config (Next.js 16+ uses Turbopack by default)
+  // Empty config to silence the webpack -> turbopack migration warning
+  turbopack: {},
 
   // Improve image optimization
   images: {

@@ -3,12 +3,15 @@
     "name": "Austin J. Hardy",
     "title": "Senior Systems Engineer",
     "website": "https://nitsuah.io",
+    "email": "contact@nitsuah.io",
+    "phone": "+1 (555) 123-4567",
     "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
     "summary": "Ut prosim. Ready for any challenge or opportunity from over 15 years in Enterprise IT.",
     "location": {
       "countryCode": "US",
       "address": "United States",
-      "city": "Sevierville"
+      "city": "Sevierville",
+      "region": "TN"
     },
     "profiles": [
       {

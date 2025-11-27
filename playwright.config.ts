@@ -15,8 +15,9 @@ export default defineConfig({
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("./tests/global-setup"),
 
-  // Maximum time one test can run - increased for visual tests with Spline
-  timeout: 30 * 1000,
+  // Maximum time one test can run - increased for visual tests and for
+  // overlay-removal retries during development runs.
+  timeout: 120 * 1000,
 
   // Test configuration
   fullyParallel: true,
@@ -29,7 +30,7 @@ export default defineConfig({
 
   // Shared settings for all projects
   use: {
-    // Base URL for tests
+    // Base URL for tests (match webServer.url)
     baseURL: process.env.BASE_URL || "http://localhost:3000",
 
     // Collect trace on first retry
@@ -79,6 +80,8 @@ export default defineConfig({
 
   // Run local dev server before starting tests
   webServer: {
+    // If running in CI, build and start production server.
+    // Otherwise use dev server which includes HMR and better debugging.
     command: process.env.CI
       ? "npm run build:ci && npm run start"
       : "npm run dev",

@@ -399,7 +399,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100; /* Ensure footer is above Spline */
+  z-index: 1000; /* Ensure footer is above content and aligned with header */
   background-color: rgba(24, 24, 24, 0.9); /* Semi-transparent background */
   padding: 1rem 0;
   backdrop-filter: blur(10px); /* Add blur effect */

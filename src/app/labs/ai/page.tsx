@@ -1,5 +1,8 @@
 // IMAGEN - src/app/labs/ai/imagen/page.tsx // TODO
 "use client";
+
+export const dynamic = "error";
+
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
 import LabSubNav from "../../_components/_labs/LabSubNav";

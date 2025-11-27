@@ -19,7 +19,8 @@
     "jsx": "preserve",
     "incremental": true,
     "typeRoots": [
-      "../node_modules/@types"
+      "../node_modules/@types",
+      "../src/types"
     ],
     "plugins": [
       {
@@ -49,7 +50,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../src/types/images.d.ts"
+    "../src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",

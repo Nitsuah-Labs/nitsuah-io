@@ -1,11 +1,10 @@
-"use client";
-
 import resumeDataImport from "../../../public/assets/resume.json";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
   EducationSection,
+  ExportPDFButton,
   LanguagesSection,
   ProfileButtons,
   ResumeHeader,
@@ -45,8 +44,16 @@ export default function ResumePage() {
       <div className="print-hide">
         <HomeBar />
       </div>
-      <main className="resume-container">
+      <main className="resume-container" tabIndex={-1}>
         <div className="resume-content">
+          {/* PDF Export Button */}
+          <div
+            className="print-hide"
+            style={{ textAlign: "right", marginBottom: "1rem" }}
+          >
+            <ExportPDFButton />
+          </div>
+
           {/* Header Section */}
           <ResumeHeader basics={resume.basics} />
 

@@ -4,7 +4,7 @@ interface Props {
   style: React.CSSProperties;
 }
 
-export const UserProfile = ({ style }: Props): JSX.Element => {
+export const UserProfile = ({ style }: Props): React.ReactElement => {
   return (
     <svg
       className="user"

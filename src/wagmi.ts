@@ -65,11 +65,8 @@ export function getWagmiConfig() {
     );
     connectors.push(metaMask());
     connectors.push(safe());
-  } else {
-    // On server, provide minimal fallback connectors so imports don't fail
-    connectors.push(metaMask());
-    connectors.push(safe());
   }
+  // Don't add connectors on server-side at all to avoid initialization errors
 
   _clientConfig = createConfig({
     chains: typedChains,

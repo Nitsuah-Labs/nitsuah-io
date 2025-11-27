@@ -8,6 +8,12 @@ const SPLINE_SCENE = `https://prod.spline.design/kkSOmPWkIvdc1562/scene.splineco
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
+  loading: () => (
+    <div className="spline-loading" aria-live="polite">
+      <div className="spinner" aria-hidden="true"></div>
+      <div className="spline-loading-text">Loading interactive scene...</div>
+    </div>
+  ),
 });
 
 export function SplineScene() {

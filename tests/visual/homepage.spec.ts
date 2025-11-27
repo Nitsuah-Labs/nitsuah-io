@@ -88,15 +88,27 @@ test.describe("Homepage Visual Tests", () => {
   test("homepage navigation links are clickable", async ({ page }) => {
     await page.goto("/");
 
-    // Check key navigation links exist (use .first() to avoid strict mode issues with footer links)
-    await expect(
-      page.getByRole("link", { name: /about/i }).first()
-    ).toBeVisible();
-    await expect(
-      page.getByRole("link", { name: /projects/i }).first()
-    ).toBeVisible();
-    await expect(
-      page.getByRole("link", { name: /labs/i }).first()
-    ).toBeVisible();
+    // Wait for header to be fully loaded
+    await expect(page.locator("header")).toBeVisible();
+
+    // Check main navigation links exist on homepage
+    // Note: "labs" is NOT a top-level nav item - it's nested under "projects"
+    // So we test for the actual top-level navigation items: about, resume, crypto, projects
+    const aboutLink = page.getByRole("link", { name: /about/i }).first();
+    const resumeLink = page.getByRole("link", { name: /resume/i }).first();
+    const cryptoLink = page.getByRole("link", { name: /crypto/i }).first();
+    const projectsLink = page.locator('a[href="/projects"]').first();
+
+    // Verify all top-level navigation links are visible
+    await expect(aboutLink).toBeVisible();
+    await expect(resumeLink).toBeVisible();
+    await expect(cryptoLink).toBeVisible();
+    await expect(projectsLink).toBeVisible();
+
+    // Verify links have correct href attributes
+    await expect(aboutLink).toHaveAttribute("href", "/about");
+    await expect(resumeLink).toHaveAttribute("href", "/resume");
+    await expect(cryptoLink).toHaveAttribute("href", "/crypto");
+    await expect(projectsLink).toHaveAttribute("href", "/projects");
   });
 });

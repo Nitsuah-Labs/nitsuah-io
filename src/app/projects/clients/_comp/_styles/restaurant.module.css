@@ -1,0 +1,29 @@
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.galleryItem {
+  background: rgba(236, 72, 153, 0.05);
+  border: 2px solid rgba(236, 72, 153, 0.2);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.featureCard {
+  padding: 1rem;
+  background: rgba(236, 72, 153, 0.1);
+  border: 2px solid rgba(236, 72, 153, 0.3);
+  border-radius: 8px;
+}

@@ -1,6 +1,8 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { go } from "../_utils/playwright-helpers";
+// Note: we used to skip heavy axe scans in test-helpers/dev mode because
+// dev overlays could interfere. Those skips were removed so tests run
+// deterministically against the production server started by Playwright.
 
 /**
  * Accessibility tests for all pages using axe-core
@@ -28,7 +30,7 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-    await go(page, pageInfo.path);
+    await page.goto(pageInfo.path);
 
     // Wait for page to be fully loaded
     await page.waitForLoadState("domcontentloaded");
@@ -83,19 +85,82 @@ test.describe("Keyboard Navigation", () => {
 
 test.describe("Screen Reader Support", () => {
   test("images have alt text", async ({ page }) => {
+    // Increase timeout for possible lazy-loaded images
+    test.setTimeout(60000);
+
     await page.goto("/");
+
+    // Wait for network idle so images begin loading
+    await page.waitForLoadState("networkidle");
 
     // Get all images
     const images = page.locator("img");
     const count = await images.count();
 
-    // Check each image has alt attribute
-    for (let i = 0; i < count; i++) {
-      const img = images.nth(i);
-      const alt = await img.getAttribute("alt");
+    // Ensure at least one image is present and visible before proceeding
+    if (count === 0) {
+      // No images on page — fail early with helpful message
+      throw new Error(
+        "No <img> elements found on the page — nothing to validate for alt attributes"
+      );
+    }
 
-      // Alt attribute should exist (can be empty for decorative images)
-      expect(alt).not.toBeNull();
+    // Wait for first image to be visible (helps with lazy-loaded images)
+    try {
+      await images.first().waitFor({ state: "visible", timeout: 10000 });
+    } catch (err) {
+      // If not visible quickly, attempt a gentle scroll to trigger lazy-loading
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(500);
+    }
+
+    // Extra scroll pass to encourage loading of offscreen images
+    await page.evaluate(() => {
+      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: document.body.scrollHeight });
+    });
+    await page.waitForTimeout(500);
+
+    // Recompute image count after possible lazy-load
+    const finalImages = page.locator("img");
+    const finalCount = await finalImages.count();
+
+    // Ensure at least one of the final images is attached/visible before looping
+    if (finalCount > 0) {
+      try {
+        await finalImages
+          .first()
+          .waitFor({ state: "attached", timeout: 10000 });
+      } catch (err) {
+        // best-effort: continue but log that first image didn't attach in time
+        console.warn("finalImages.first() did not attach in time", err);
+      }
+    }
+
+    for (let i = 0; i < finalCount; i++) {
+      const img = finalImages.nth(i);
+      try {
+        // Ensure the node is attached before attempting to read attributes
+        await img.waitFor({ state: "attached", timeout: 3000 });
+        const alt = await img.getAttribute("alt");
+        // Alt attribute should exist (can be empty for decorative images)
+        expect(alt).not.toBeNull();
+      } catch (error) {
+        // Add index and a short outerHTML snippet to error for easier debugging
+        let outer = "";
+        try {
+          outer = await img.evaluate((n) => n.outerHTML.slice(0, 500));
+        } catch (e) {
+          outer = "<could not read outerHTML>";
+        }
+        console.error(
+          `Image at index ${i} caused error while reading 'alt'. outerHTML snippet: ${outer}`,
+          error
+        );
+        throw new Error(
+          `Image at index ${i} failed alt check: ${String(error)}`
+        );
+      }
     }
   });
 

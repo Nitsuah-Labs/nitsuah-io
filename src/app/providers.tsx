@@ -18,21 +18,12 @@ const queryClient = new QueryClient({
   },
 });
 
+// Get config immediately - getWagmiConfig handles SSR vs client differences internally
+const wagmiConfig = getWagmiConfig();
+
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false);
-  const [clientConfig, setClientConfig] = React.useState<any | null>(null);
-
-  React.useEffect(() => {
-    setMounted(true);
-    // Only create the Wagmi config on the client
-    const cfg = getWagmiConfig();
-    setClientConfig(cfg);
-  }, []);
-
-  if (!mounted || !clientConfig) return null;
-
   return (
-    <WagmiProvider config={clientConfig}>
+    <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <ToastProvider />
         {children}

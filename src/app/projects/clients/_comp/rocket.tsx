@@ -5,7 +5,7 @@ interface Props {
   color?: string;
 }
 
-export const RocketLaunch = ({ style }: Props): JSX.Element => {
+export const RocketLaunch = ({ style }: Props): React.ReactElement => {
   return (
     <svg
       className="rocket-launch"

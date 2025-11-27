@@ -9,14 +9,14 @@ import { Storefront } from "./Storefront";
 interface Props {
   screen: "desktop" | "tablet" | "mobile";
   style: React.CSSProperties;
-  subscribeWidget: JSX.Element;
+  subscribeWidget: React.ReactElement;
 }
 
 export const Footer = ({
   screen,
   style,
   subscribeWidget, // add this prop
-}: Props): JSX.Element => {
+}: Props): React.ReactElement => {
   return (
     <div className={`footer ${screen}`} style={style}>
       <div className="footer-info">
