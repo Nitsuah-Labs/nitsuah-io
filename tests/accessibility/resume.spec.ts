@@ -35,14 +35,6 @@ test.describe.skip("Resume Page Accessibility Tests", () => {
     // Wait for network to be idle to ensure all content is loaded
     await page.waitForLoadState("networkidle");
 
-    // DEBUG: Check what's actually on the page
-    const html = await page.content();
-    console.log("=== PAGE HTML LENGTH:", html.length);
-    console.log("=== PAGE HTML CONTENT:", html);
-    console.log("=== PAGE TITLE:", await page.title());
-    console.log("=== MAIN ELEMENTS:", await page.locator("main").count());
-    console.log("=== BASICS ELEMENTS:", await page.locator("#basics").count());
-
     // Wait for the main resume content to be present
     await page.waitForSelector("#basics, main.resume-container", {
       timeout: 30000,

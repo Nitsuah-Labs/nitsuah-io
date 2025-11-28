@@ -33,15 +33,6 @@ for (const pageInfo of pages) {
     await page.goto(pageInfo.path);
 
     // Wait for page to be fully loaded
-    // Debug: log computed color of the text element that may cause contrast issues
-    const problematicColor = await page.evaluate(() => {
-      const el = document.querySelector('.text-xs.text-slate-500');
-      if (!el) return 'not found';
-      const style = getComputedStyle(el);
-      return style.color;
-    });
-    console.log('Problematic element color:', problematicColor);
-
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
@@ -56,10 +47,6 @@ for (const pageInfo of pages) {
       // Additional wait to ensure cards are rendered
       await page.waitForTimeout(1000);
     }
-
-    // Debug: Print body classes
-    const bodyClasses = await page.evaluate(() => document.body.className);
-    console.log(`Body classes: "${bodyClasses}"`);
 
     // Run axe accessibility scan
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
