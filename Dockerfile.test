@@ -1,7 +1,7 @@
 # Dockerfile for running Playwright tests in a consistent environment
 # This eliminates dev/CI rendering differences and makes visual tests stable
 
-FROM mcr.microsoft.com/playwright:v1.49.1-noble
+FROM mcr.microsoft.com/playwright:v1.56.1-noble
 
 # Set working directory
 WORKDIR /app

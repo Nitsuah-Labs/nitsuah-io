@@ -11,6 +11,10 @@
   color: #9fb1c8 !important;
 }
 
+.test-helpers .text-slate-500 {
+  color: #9fb1c8 !important;
+}
+
 /* Ensure footer is visible in test runs even if some runtime script hides it */
 .test-helpers footer {
   display: block !important;

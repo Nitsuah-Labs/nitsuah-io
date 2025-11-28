@@ -49,6 +49,10 @@ for (const pageInfo of pages) {
       await page.waitForTimeout(1000);
     }
 
+    // Debug: Print body classes
+    const bodyClasses = await page.evaluate(() => document.body.className);
+    console.log(`Body classes: "${bodyClasses}"`);
+
     // Run axe accessibility scan
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
