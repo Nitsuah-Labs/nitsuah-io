@@ -1,8 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Homepage Visual Tests", () => {
-  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
-  test.skip("homepage renders correctly on desktop", async ({ page }) => {
+  test("homepage renders correctly on desktop", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
 
     // Wait for critical content to be visible (not Spline)
@@ -27,9 +26,7 @@ test.describe("Homepage Visual Tests", () => {
     });
   });
 
-  // SKIPPED: Mobile visual test has 82px height differences between Windows/Linux environments
-  // due to font rendering. Desktop test provides sufficient visual coverage.
-  test.skip("homepage renders correctly on mobile", async ({ page }) => {
+  test("homepage renders correctly on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE
     await page.goto("/", { waitUntil: "networkidle" });
 

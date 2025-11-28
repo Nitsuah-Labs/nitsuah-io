@@ -2,8 +2,7 @@ import { expect, test } from "@playwright/test";
 import { go } from "../_utils/playwright-helpers";
 
 test.describe("Projects Page Visual Tests", () => {
-  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
-  test.skip("projects page renders correctly", async ({ page }) => {
+  test("projects page renders correctly", async ({ page }) => {
     await go(page, "/projects");
 
     // Check header and footer are visible

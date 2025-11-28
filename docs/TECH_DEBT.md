@@ -8,7 +8,8 @@
 
 ## Identified Technical Debt
 
-- TBD
+- [ ] Screenshot Updates
+  - execute all screenshot gathering manually or design an automated script that outputs it (playwright?)
 
 ## � Reference Documentation
 
