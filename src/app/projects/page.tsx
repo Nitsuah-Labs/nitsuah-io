@@ -264,6 +264,7 @@ const Projects = () => {
                       className={`${styles.categoryButton} ${
                         selectedCategory === cat ? styles.active : ""
                       }`}
+                      aria-label={cat === "Featured" ? "⭐ Featured" : cat}
                     >
                       {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
                     </button>

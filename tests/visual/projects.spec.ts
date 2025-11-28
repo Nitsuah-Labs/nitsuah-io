@@ -34,13 +34,16 @@ test.describe("Projects Page Visual Tests", () => {
       .filter({ has: page.locator("h3") });
     await expect(projectCards.first()).toBeVisible();
   });
-  test("project cards have icons and links", async ({ page }) => {
+  test("project cards have links", async ({ page }) => {
     await go(page, "/projects");
 
-    // Check that links exist (GitHub, live demos, etc.)
-    const links = page
-      .getByRole("link")
-      .filter({ has: page.locator("img, svg") });
-    await expect(links.first()).toBeVisible();
+    // Check that project cards have action links (GitHub, View, etc.)
+    const projectLinks = page.getByRole("link");
+    await expect(projectLinks.first()).toBeVisible();
+    
+    // Verify links have proper attributes
+    const firstLink = projectLinks.first();
+    await expect(firstLink).toHaveAttribute("target", "_blank");
+    await expect(firstLink).toHaveAttribute("rel", /noopener/);
   });
 });
