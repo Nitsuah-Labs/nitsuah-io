@@ -26,6 +26,16 @@
 
 ### Testing Infrastructure
 
+- [x] **Accessibility Fixes** - Fixed main landmark violations across all pages:
+  - Added `id="main"` to all Labs pages (lookup, stake, token, dao, ai, register, mint, domains, hub)
+  - Added `id="main"` to main pages (homepage, about, projects, crypto)
+  - Fixed aria-prohibited-attr violation in wallet Connect component
+  - Result: 20/28 accessibility tests passing (71% → 100% of page-specific tests)
+- [ ] **Resume Page Test Investigation** - Resume page builds and renders correctly in browser but returns empty HTML in Playwright tests:
+  - Moved resume.json from public/assets to src/data for proper imports
+  - All 8 Resume accessibility tests timeout waiting for selectors
+  - Page works manually, issue is specific to test environment
+  - Needs: Debug why Playwright webServer returns empty response for /resume route
 - [ ] **Docker Setup** - Setup Docker for visual regression tests to handle CI/local environment differences
 - [ ] **Visual Test Re-enablement** - Once Docker is configured, re-enable 3 skipped Playwright visual tests:
   - `tests/visual/homepage.spec.ts:5` - homepage desktop rendering
