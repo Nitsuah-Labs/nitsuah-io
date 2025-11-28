@@ -23,10 +23,13 @@ test.describe("Projects Page Visual Tests", () => {
   test("projects page shows featured repositories", async ({ page }) => {
     await go(page, "/projects");
 
+    // Wait for main content to load
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(2000); // Give time for React hydration
+
     // Wait for projects section to load
-    await page.waitForSelector("[data-testid='projects-section']", {
-      timeout: 10000,
-    });
+    const projectsSection = page.locator("[data-testid='projects-section']");
+    await projectsSection.waitFor({ state: "visible", timeout: 15000 });
 
     // Check that the Featured category button (star emoji) exists
     // The button displays "⭐" but has an aria-label with text
@@ -42,10 +45,13 @@ test.describe("Projects Page Visual Tests", () => {
   test("project cards have links", async ({ page }) => {
     await go(page, "/projects");
 
+    // Wait for main content to load
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(2000); // Give time for React hydration
+
     // Wait for projects section to load
-    await page.waitForSelector("[data-testid='projects-section']", {
-      timeout: 10000,
-    });
+    const projectsSection = page.locator("[data-testid='projects-section']");
+    await projectsSection.waitFor({ state: "visible", timeout: 15000 });
 
     // Check that project cards with action links exist
     // Note: Not all projects may have links (e.g., "Coming Soon" projects)
