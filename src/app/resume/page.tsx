@@ -1,4 +1,4 @@
-import resumeDataImport from "../../../public/assets/resume.json";
+import resumeDataImport from "../../data/resume.json";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";

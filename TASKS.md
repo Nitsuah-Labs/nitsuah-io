@@ -4,11 +4,11 @@
 
 ### Dependency Fixes
 
-- chore(deps): bump next from 16.0.1 to 16.0.5 
-- chore(deps): bump @splinetool/runtime from 1.10.99 to 1.12.4 
-- chore(deps-dev): bump @types/react from 19.2.2 to 19.2.7 
-- chore(deps-dev): bump @wagmi/cli from 2.7.1 to 2.8.0 
-- chore(deps-dev): bump js-yaml from 3.14.1 to 3.14.2 
+- chore(deps): bump next from 16.0.1 to 16.0.5
+- chore(deps): bump @splinetool/runtime from 1.10.99 to 1.12.4
+- chore(deps-dev) bump @types/react from 19.2.2 to 19.2.7
+- chore(deps-dev): bump @wagmi/cli from 2.7.1 to 2.8.0
+- chore(deps-dev): bump js-yaml from 3.14.1 to 3.14.2
 
 ### Web3 / Wallet Setup
 
