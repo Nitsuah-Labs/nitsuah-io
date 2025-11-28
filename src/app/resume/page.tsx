@@ -1,5 +1,3 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
@@ -14,36 +12,16 @@ import {
 } from "./_components";
 import "./resume.css";
 
-async function getResumeData(): Promise<ResumeData> {
-  try {
-    // Read JSON file from the filesystem (works in both dev and production)
-    const filePath = path.join(process.cwd(), "src", "data", "resume.json");
-    const fileContents = await fs.readFile(filePath, "utf8");
-    const data = JSON.parse(fileContents);
-    // Type assertion needed due to minor schema differences (title vs label)
-    return data as unknown as ResumeData;
-  } catch (err) {
-    console.error("Failed to load resume.json", err);
-    return {
-      basics: {
-        name: "Austin J. Hardy",
-        label: "Systems Engineer",
-        title: "Systems Engineer",
-        email: "",
-        summary: "",
-        location: { city: "", countryCode: "US", region: "" },
-        profiles: [],
-      },
-      work: [],
-      skills: [],
-      education: [],
-      languages: [],
-    } as ResumeData;
-  }
+// Import resume data directly - Next.js will bundle this at build time
+import resumeData from "../../data/resume.json";
+
+function getResumeData(): ResumeData {
+  // Type assertion needed due to minor schema differences (title vs label)
+  return resumeData as unknown as ResumeData;
 }
 
-export default async function ResumePage() {
-  const resume = await getResumeData();
+export default function ResumePage() {
+  const resume = getResumeData();
 
   return (
     <div style={{ background: "#1a1a1a", minHeight: "100vh" }}>
