@@ -18,7 +18,12 @@ const DaoSite = () => {
     <div className="App">
       <LabNav />
       <LabSubNav />
-      <main style={{ paddingBottom: "80px" }}>
+      <main
+        id="main"
+        role="main"
+        aria-label="DAO Content"
+        style={{ paddingBottom: "80px" }}
+      >
         <h1>DAO HERE!</h1>
         <div className="form-container">
           <div className="labs-card labs-spacing-md">
