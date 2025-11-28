@@ -13,20 +13,20 @@ import { go } from "../_utils/playwright-helpers";
 // Allow more time for the resume page to fully render/hydrate in CI
 test.setTimeout(180000);
 
-// SKIP: Resume page returns empty HTML in Playwright test environment despite successful
-// build and browser rendering. Issue persists in both local Windows and Docker Linux
-// environments. Page works correctly when accessed manually. Investigation needed:
-// - Resume.json import from src/data/ may not be bundled correctly in test webServer
-// - Next.js production build may be stripping the page during test build
-// - Server component may be failing silently during SSR in test mode
-// TODO: Debug why Playwright webServer returns empty response for /resume route
-test.describe.skip("Resume Page Accessibility Tests", () => {
+test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
     // Ensure the resume page is fully loaded before each test to avoid flakiness
     await go(page, "/resume");
 
     // Wait for network to be idle to ensure all content is loaded
     await page.waitForLoadState("networkidle");
+
+    // DEBUG: Check what's actually on the page
+    const html = await page.content();
+    console.log("=== PAGE HTML LENGTH:", html.length);
+    console.log("=== PAGE TITLE:", await page.title());
+    console.log("=== MAIN ELEMENTS:", await page.locator("main").count());
+    console.log("=== BASICS ELEMENTS:", await page.locator("#basics").count());
 
     // Wait for the main resume content to be present
     await page.waitForSelector("#basics, main.resume-container", {

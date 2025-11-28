@@ -1,4 +1,5 @@
-import resumeDataImport from "../../data/resume.json";
+import { promises as fs } from "fs";
+import path from "path";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
@@ -13,11 +14,16 @@ import {
 } from "./_components";
 import "./resume.css";
 
-function getResumeData(): ResumeData {
+async function getResumeData(): Promise<ResumeData> {
   try {
-    return resumeDataImport as unknown as ResumeData;
+    // Read JSON file from the filesystem (works in both dev and production)
+    const filePath = path.join(process.cwd(), "src", "data", "resume.json");
+    const fileContents = await fs.readFile(filePath, "utf8");
+    const data = JSON.parse(fileContents);
+    // Type assertion needed due to minor schema differences (title vs label)
+    return data as unknown as ResumeData;
   } catch (err) {
-    console.warn("Could not load resume.json; using fallback data", err);
+    console.error("Failed to load resume.json", err);
     return {
       basics: {
         name: "Austin J. Hardy",
@@ -36,8 +42,8 @@ function getResumeData(): ResumeData {
   }
 }
 
-export default function ResumePage() {
-  const resume = getResumeData();
+export default async function ResumePage() {
+  const resume = await getResumeData();
 
   return (
     <div style={{ background: "#1a1a1a", minHeight: "100vh" }}>
