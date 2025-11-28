@@ -44,7 +44,13 @@ export default function ResumePage() {
       <div className="print-hide">
         <HomeBar />
       </div>
-      <main className="resume-container" tabIndex={-1}>
+      <main
+        id="main"
+        className="resume-container"
+        tabIndex={-1}
+        role="main"
+        aria-label="Resume Content"
+      >
         <div className="resume-content">
           {/* PDF Export Button */}
           <div

@@ -33,7 +33,15 @@ for (const pageInfo of pages) {
     await page.goto(pageInfo.path);
 
     // Wait for page to be fully loaded
-    await page.waitForLoadState("domcontentloaded");
+    // Debug: log computed color of the text element that may cause contrast issues
+    const problematicColor = await page.evaluate(() => {
+      const el = document.querySelector('.text-xs.text-slate-500');
+      if (!el) return 'not found';
+      const style = getComputedStyle(el);
+      return style.color;
+    });
+    console.log('Problematic element color:', problematicColor);
+
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {

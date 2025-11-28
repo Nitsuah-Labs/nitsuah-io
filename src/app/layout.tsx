@@ -260,7 +260,10 @@ export default function RootLayout({
         className={process.env.NEXT_PUBLIC_TEST_HELPERS ? "test-helpers" : ""}
       >
         <Providers>
-          <SkipLink />
+          {/* Skip link placed early; pages must supply a single <main id="main"> */}
+          <nav aria-label="Skip navigation" style={{ position: "relative" }}>
+            <SkipLink />
+          </nav>
           {children}
         </Providers>
       </body>
