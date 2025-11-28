@@ -33,8 +33,8 @@
 
 ## OKRs
 
-- [x] **Docker Testing Infrastructure** - Built Docker image (mcr.microsoft.com/playwright:v1.56.1-noble) for consistent CI/local testing environment (5.5min build, 332s)
-- [ ] **Resume Page Tests** - Investigate why resume page returns empty HTML in Playwright tests despite successful build and browser rendering
+- [x] **Docker Testing Infrastructure** - Built Docker image (mcr.microsoft.com/playwright:v1.56.1-noble) for consistent CI/local testing environment (5.5min build, 332s). ✅ Successfully integrated into CI/CD pipeline with 97.41% code coverage.
+- [ ] **PRIORITY: Playwright Client-Side Page Rendering** - Investigate why client-side pages (resume, projects, labs) return empty HTML in Playwright locally. Root cause: "Unexpected identifier 'overseer'" JavaScript error. Tests worked at commit ce4724c, broke afterwards. 21 tests skipped locally, restored and pushed to CI for Docker validation. See `docs/TECH_DEBT.md` for full investigation plan.
 - [ ] Manual setup step - will setup metamask or another wallet or lets review embedded components that may ship by default with wagmi or whatever provider we have. but enough to get us started again on testing locally.
 - [ ] **Network Auto-Switch** - Auto-detect wrong network (most wallets do this automatically but once we confirm connection we can add some wallet ui elements to the nav bar and pages for interaction - ie: wallet connect handles this alot but need to set context on intendend chains for a page and prompt user to switch if on wrong one which is often a message back to the wallet app itself to do so.)
 - [ ] **Contract Testing** - Local testnet debugging

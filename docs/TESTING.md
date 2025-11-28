@@ -212,38 +212,56 @@ npx playwright show-report playwright-report
 
 ## Test Status (Current)
 
-| Test Suite         | Status       | Count | Notes                            |
-| ------------------ | ------------ | ----- | -------------------------------- |
-| Unit Tests         | ✅ Passing    | 14/14 | Jest + React Testing Library     |
-| A11y Tests         | ✅ Passing    | 20/20 | All non-resume pages WCAG 2.1 AA |
-| Resume Tests       | ❌ Blocked    | 0/8   | Docker investigation in progress |
-| Visual Tests       | ⏸️ Skipped   | 0/3   | Awaiting Docker validation       |
-| E2E Wallet Flow    | ✅ Passing    | 3/3   | Web3 connection and interaction  |
+| Test Suite         | Status       | Count | Notes                                   |
+| ------------------ | ------------ | ----- | --------------------------------------- |
+| Unit Tests         | ✅ Passing    | 14/14 | Jest + React Testing Library            |
+| A11y Tests         | ✅ Passing    | 20/20 | Server-rendered pages WCAG 2.1 AA       |
+| Resume Tests       | ⏸️ Skipped   | 0/8   | Client-side rendering blocked locally   |
+| Visual Tests       | ⏸️ Skipped   | 0/3   | Client-side rendering blocked locally   |
+| E2E Wallet Flow    | ⏸️ Skipped   | 0/10  | Client-side rendering blocked locally   |
+| E2E Navigation     | ✅ Passing    | 1/1   | Main nav links test working             |
+
+**Summary:** 39/60 Playwright tests passing locally (65%), 21 skipped due to client-side page rendering issue. All skipped tests restored from working commit and pushed to CI for Docker validation.
+
+**Coverage:** 97.41% statement coverage (1393/1430), 55.42% branches, 54.28% functions
 
 ## Troubleshooting
 
 ### Tests pass locally but fail in CI
+
 **Solution:** Use Docker to match CI environment exactly:
+
 ```bash
 npm run test:e2e:docker:build
 npm run test:e2e:docker
 ```
 
 ### Docker build is slow
+
 **Expected:** First build takes ~5 minutes. Subsequent builds use cache (~1-2 minutes).
 
 ### "Cannot find module" errors in Docker
+
 **Solution:** Rebuild image after package.json changes:
+
 ```bash
 npm run test:e2e:docker:build
 ```
 
-### Resume page returns empty HTML in tests
-**Status:** Under investigation. Page works in browser but fails in Playwright test environment.
-**Action:** Running tests in Docker to isolate Windows-specific issues.
+### Client-side pages return empty HTML in tests
+
+**Status:** Under investigation in CI/Docker environment.
+
+**Symptoms:** Pages like `/resume`, `/projects`, `/labs/*` return only 15 bytes locally with JavaScript error "Unexpected identifier 'overseer'".
+
+**Action:** Tests restored from working commit (ce4724c) and pushed to CI. Awaiting Docker validation results.
+
+**Workaround:** Tests properly skipped locally. See `docs/TECH_DEBT.md` for full investigation plan.
 
 ### Visual snapshots don't match
+
 **Solution:** Regenerate in Docker to match CI:
+
 ```bash
 docker-compose -f docker-compose.test.yml run --rm playwright \
   npx playwright test --update-snapshots
