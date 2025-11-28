@@ -360,6 +360,7 @@ const Projects = () => {
           <section
             className={styles.projectGrid}
             aria-label="Project Repositories"
+            data-testid="projects-section"
           >
             {filteredProjects.map((project) => {
               const image = projectImages[project.id] || cat;

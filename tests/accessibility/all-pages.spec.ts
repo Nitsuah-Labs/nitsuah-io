@@ -40,6 +40,15 @@ for (const pageInfo of pages) {
       await page.waitForTimeout(3000);
     }
 
+    // For projects page, wait for content to load
+    if (pageInfo.path === "/projects") {
+      await page.waitForSelector("[data-testid='projects-section']", {
+        timeout: 10000,
+      });
+      // Additional wait to ensure cards are rendered
+      await page.waitForTimeout(1000);
+    }
+
     // Run axe accessibility scan
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
