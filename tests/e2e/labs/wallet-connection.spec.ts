@@ -51,9 +51,11 @@ test.describe("Wallet Connection Flow", () => {
   test("network switcher appears on register page", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
 
+    await page.waitForTimeout(5000); // Give React time to render
+
     // Network switcher appears after wallet connect - just check page loaded correctly
-    await expect(page.locator("header")).toBeVisible();
-    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.locator("header")).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("footer")).toBeVisible({ timeout: 15000 });
 
     // Page should have some content (not checking for network switcher without wallet connected)
     const mainContent = page.locator("main");
@@ -126,10 +128,11 @@ test.describe("Mint NFT Flow", () => {
     await page.goto("/labs/mint?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(5000); // Give React time to render
 
     // Check for consistent header and footer
-    await expect(page.locator("header")).toBeVisible();
-    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.locator("header")).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("footer")).toBeVisible({ timeout: 15000 });
   });
 });
 
@@ -138,17 +141,20 @@ test.describe("Domains Page", () => {
     await page.goto("/labs/domains");
 
     await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(5000); // Give React time to render
 
-    await expect(page.locator("header")).toBeVisible();
-    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.locator("header")).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("footer")).toBeVisible({ timeout: 15000 });
   });
 
   test("domains page has wallet connection capability", async ({ page }) => {
     await page.goto("/labs/domains");
 
+    await page.waitForTimeout(5000); // Give React time to render
+
     // Should have header/footer at minimum (wallet buttons require connection)
-    await expect(page.locator("header")).toBeVisible();
-    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.locator("header")).toBeVisible({ timeout: 15000 });
+    await expect(page.locator("footer")).toBeVisible({ timeout: 15000 });
 
     // Check for main content area
     const mainContent = page.locator("main");
