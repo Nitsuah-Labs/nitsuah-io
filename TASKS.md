@@ -16,13 +16,19 @@
   - 136.88MB context size with proper volume mounting for test results
   - Status: Image built successfully, confirmed resume issue not Windows-specific
   - Eliminates Windows-specific test conflicts by matching CI environment exactly
-- [x] **Resume Page Test Investigation** - Resume page builds and renders correctly in browser but returns empty HTML in Playwright tests:
-  - Moved resume.json from public/assets to src/data for proper imports (commit 06cb2a1)
-  - All 8 Resume accessibility tests timeout waiting for selectors
-  - Page works manually, issue is specific to test environment
-  - Docker Confirmation: Same failure in Docker (not Windows-specific)
-  - Resolution: Skipped all 8 tests with detailed TODO comment in test file
-  - Future Work: Debug why Playwright webServer returns empty response for /resume route (possible Next.js SSR issue with JSON imports in test builds)
+- [x] **Resume Page Test Investigation** - RESOLVED: Resume data import path was incorrect:
+  - Root cause: Import path was `../../../data/resume.json` (doesn't exist)
+  - Fixed to: `../../data/resume.json` (correct path from src/app/resume/page.tsx)
+  - Also fixed: Missing NEXT_PUBLIC_TEST_HELPERS=1 env var in CI workflow
+  - Result: Build succeeds, page renders with actual data
+  - Commits: 7cba3de (path fix), 53fea7c (CI env var), 25858cc (final correction)
+- [ ] **Accessibility Test Failures** - ACTIVE: 47/59 tests failing with axe-core injection errors:
+  - Error: "Cannot read properties of null (reading 'documentElement')"
+  - Cause: axe-core running before React hydration completes
+  - Fix attempt: Added networkidle wait + error handling to all-pages.spec.ts
+  - Affects: All accessibility tests across homepage, labs pages, resume, keyboard nav
+  - Tests passing: 11 (keyboard nav skip links, some visual tests)
+  - Next: Verify fix, may need to add waitForSelector for main/body before axe scan
 - [ ] **Visual Test Re-enablement** - Once Docker resume investigation completes, re-enable 3 skipped Playwright visual tests:
   - `tests/visual/homepage.spec.ts:5` - homepage desktop rendering
   - `tests/visual/homepage.spec.ts:32` - homepage mobile rendering
@@ -37,6 +43,7 @@
 - [ ] chore(deps-dev): bump @wagmi/cli from 2.7.1 to 2.8.0
 - [ ] chore(deps-dev): bump js-yaml from 3.14.1 to 3.14.2
 - [ ] chore(deps-dev): bump baseline-browser-mapping to latest (currently >2 months old)
+- [ ] Verify all dependency updates do not introduce new test failures or accessibility issues and are up to date
 
 ### Web3 / Wallet Setup
 
@@ -60,31 +67,14 @@
   - NFT components (NFTGallery, MintingInterface)
 - [ ] **Type Safety** - Review and remove `any` types where possible
 - [ ] **JSDoc Comments** - Add documentation for complex functions
+- [ ] Run line of code scans for top 10 files and reduce LOC where possible by refactoring
 
 ### Documentation Updates
 
-- [x] **FEATURES.md** - Comprehensive feature documentation for portfolio site:
-  - Portfolio & Showcase (projects, 3D scenes, responsive design)
-  - Web3 Integration (wallet connection, multi-chain, smart contracts)
-  - Labs Section (8 experimental Web3 tools)
-  - User Experience (loading states, error handling, notifications)
-  - Accessibility (WCAG 2.1 AA compliance)
-  - Testing & Quality (Jest, Playwright, Docker, CI/CD)
-  - Performance (Next.js optimization, CDN, lazy loading)
-  - Developer Experience (TypeScript, ESLint, wagmi CLI)
-  - Deployment & CI/CD (Netlify, GitHub Actions)
-  - Security (dependency audits, CSP, HTTPS)
-- [x] **METRICS.md** - Updated project health metrics:
-  - Core metrics table (coverage, build time, bundle size, test files)
-  - Health table (issues, PRs, test status, security alerts)
-  - Test breakdown table (unit, a11y, resume, visual, E2E)
-  - Docker testing metrics (image, build time, context size)
-- [x] **ROADMAP.md** - Updated with Q1 2026 Docker completion:
-  - Marked Docker setup complete with implementation details
-  - Added resume page investigation as current priority
-- [ ] **ARCHITECTURE.md** - Update with Phase 3 component structure
-- [ ] **Component Style Guide** - Document shared component patterns
-- [ ] **Testing Best Practices** - Document testing conventions (partially in CONTRIBUTING.md)
+- [ ] As a `PM.md` task list, update documentation to reflect current architecture and best practices:
+  - [ ] **ARCHITECTURE.md** - Update with Phase 3 component structure
+  - [ ] **Component Style Guide** - Document shared component patterns
+  - [ ] **Testing Best Practices** - Document testing conventions (partially in CONTRIBUTING.md)
 
 ### Future Enhancements
 
@@ -92,9 +82,9 @@
 - [ ] **Data Backend Strategy** - SaaS Dashboard meta-dashboard concept:
   - Hook into /lib/data for static data initially
   - Create SQL query window interface
-  - Research Netlify data storage options (postgres, sqlite)
-  - Plan "meta" dashboard to pull data from all demos
-  - Design connector strategy for demo apps
+  - Research Netlify data storage options (neon db)
+  - Plan "meta" dashboard to pull data from all demos and start to bring them to life
+  - Design connector strategy for demo apps (where they all use shared db/api)
 
 ## /docs
 

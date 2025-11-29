@@ -20,7 +20,7 @@
 
 - [ ] User feedback integration
 - [ ] Performance improvements
-- [ ] **TECH DEBT** - any new Strategic codebase cleanup and refactoring remaining (see `TECH_DEBT.md` for full plan)
+- [ ] **TECH DEBT** - any new Strategic codebase cleanup and refactoring remaining (see `TECH_DEBT.md` for full plan, tl;dr clean up high loc files for refactoring)
 
 ## Q3 2026
 

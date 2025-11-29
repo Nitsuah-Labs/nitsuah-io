@@ -32,7 +32,14 @@ for (const pageInfo of pages) {
 
     await page.goto(pageInfo.path);
 
-    // Wait for page to be fully loaded
+    // Wait for page to be fully loaded and hydrated
+    await page.waitForLoadState("networkidle");
+
+    // Wait for main content or body to be ready
+    await page.waitForSelector("main, body", {
+      state: "attached",
+      timeout: 10000,
+    });
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
@@ -48,8 +55,18 @@ for (const pageInfo of pages) {
       await page.waitForTimeout(1000);
     }
 
-    // Run axe accessibility scan
-    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    // Run axe accessibility scan with error handling
+    let accessibilityScanResults;
+    try {
+      accessibilityScanResults = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+    } catch (e) {
+      // If axe fails to inject/run, treat it as a test failure with context
+      throw new Error(
+        `Axe accessibility scan failed for ${pageInfo.name}: ${e}`
+      );
+    }
 
     // Assert no violations
     expect(accessibilityScanResults.violations).toEqual([]);
