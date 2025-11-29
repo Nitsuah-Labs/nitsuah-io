@@ -60,8 +60,13 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
+    // Wait for work section to load
+    await page.waitForSelector("#work", { timeout: 10000 });
+
     // Find first work item and click to expand
     const firstWorkHeader = page.locator(".work-header").first();
+    await expect(firstWorkHeader).toBeVisible({ timeout: 10000 });
+
     const firstWorkDetails = page.locator(".work-details").first();
 
     // Click the header to toggle expansion
@@ -75,11 +80,14 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check PDF export button exists (specifically the one in resume content)
-    const pdfButton = page.locator(
-      '.resume-content button:has-text("Export PDF")'
-    );
-    await expect(pdfButton).toBeVisible();
+    // Wait for resume content to load
+    await page.waitForSelector(".resume-content", { timeout: 10000 });
+
+    // Check PDF export button exists in resume content - use specific aria-label
+    const pdfButton = page
+      .locator(".resume-content")
+      .getByRole("button", { name: "Export resume as PDF" });
+    await expect(pdfButton).toBeVisible({ timeout: 10000 });
     await expect(pdfButton).toBeEnabled();
   });
 
@@ -87,8 +95,14 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check contact section
-    await expect(page.locator(".resume-contact")).toBeVisible();
+    // Wait for basics section to load
+    await page.waitForSelector("#basics", { timeout: 10000 });
+
+    // Check contact section exists
+    const contactSection = page.locator(".resume-contact");
+    await expect(contactSection).toBeVisible({ timeout: 10000 });
+    
+    // Verify at least one contact item is present
     await expect(page.locator(".contact-item").first()).toBeVisible();
   });
 
@@ -96,9 +110,12 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check profiles section
+    // Wait for resume content to load
+    await page.waitForSelector(".resume-content", { timeout: 10000 });
+
+    // Check profiles section exists
     const profiles = page.locator(".resume-profiles");
-    await expect(profiles).toBeVisible();
+    await expect(profiles).toBeVisible({ timeout: 10000 });
 
     // Verify profile buttons are present (using CSS module class pattern)
     const profileButtons = page.locator("[class*='profileButton']");
@@ -109,9 +126,9 @@ test.describe("Resume Page Visual Tests", () => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
-    // Check skills section
+    // Wait for skills section to load
     const skillsSection = page.locator("#skills");
-    await expect(skillsSection).toBeVisible();
+    await expect(skillsSection).toBeVisible({ timeout: 10000 });
 
     // Verify skill items exist
     const skillItems = page.locator(".skill-item");
