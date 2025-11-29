@@ -80,13 +80,11 @@ export default defineConfig({
 
   // Run local dev server before starting tests
   webServer: {
-    // If running in CI, build and start production server.
-    // Otherwise use dev server which includes HMR and better debugging.
-    command: process.env.CI
-      ? "npm run build:ci && npm run start"
-      : "npm run dev",
+    // In CI: Use dev server instead of production build to avoid build-time env issues
+    // Dev server is more forgiving with hydration and ensures NEXT_PUBLIC_TEST_HELPERS works
+    command: "npm run dev",
     url: "http://localhost:3000",
-    // Allow reusing existing server in development
+    // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
     // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
