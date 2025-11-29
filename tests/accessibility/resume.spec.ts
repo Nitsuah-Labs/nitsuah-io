@@ -14,8 +14,8 @@ test.setTimeout(180000);
 
 test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate directly to avoid helper issues
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    // Navigate to resume page
+    await page.goto("/resume");
 
     // Wait for network to be idle to ensure all content is loaded
     await page.waitForLoadState("networkidle");

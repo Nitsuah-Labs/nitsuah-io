@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Resume Page Visual Tests", () => {
   test("should render resume page correctly on desktop", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Wait for key resume selectors to appear
@@ -26,7 +26,7 @@ test.describe("Resume Page Visual Tests", () => {
 
   test("should render resume page correctly on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Check responsive layout
@@ -45,7 +45,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display all resume sections", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Verify all major sections exist
@@ -57,7 +57,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should expand work experience details", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Find first work item and click to expand
@@ -72,7 +72,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should have working PDF export button", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Check PDF export button exists (specifically the one in resume content)
@@ -84,7 +84,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display contact information", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Check contact section
@@ -93,7 +93,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display social profiles", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Check profiles section
@@ -106,7 +106,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should render skills with proficiency bars", async ({ page }) => {
-    await page.goto("http://localhost:3000/resume?testHelpers=1");
+    await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Check skills section
