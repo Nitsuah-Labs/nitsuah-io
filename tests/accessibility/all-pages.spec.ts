@@ -10,19 +10,19 @@ import { expect, test } from "@playwright/test";
  */
 
 const pages = [
-  { path: "/", name: "Homepage" },
-  { path: "/about", name: "About" },
-  { path: "/projects", name: "Projects" },
-  { path: "/crypto", name: "Crypto" },
-  { path: "/labs", name: "Labs Hub" },
-  { path: "/labs/register", name: "Register Domain" },
-  { path: "/labs/mint", name: "Mint NFT" },
-  { path: "/labs/domains", name: "Domains" },
-  { path: "/labs/lookup", name: "Lookup" },
-  { path: "/labs/stake", name: "Stake" },
-  { path: "/labs/token", name: "Token" },
-  { path: "/labs/dao", name: "DAO" },
-  { path: "/labs/ai", name: "AI Lab" },
+  { path: "http://localhost:3000/?testHelpers=1", name: "Homepage" },
+  { path: "http://localhost:3000/about?testHelpers=1", name: "About" },
+  { path: "http://localhost:3000/projects?testHelpers=1", name: "Projects" },
+  { path: "http://localhost:3000/crypto?testHelpers=1", name: "Crypto" },
+  { path: "http://localhost:3000/labs?testHelpers=1", name: "Labs Hub" },
+  { path: "http://localhost:3000/labs/register?testHelpers=1", name: "Register Domain" },
+  { path: "http://localhost:3000/labs/mint?testHelpers=1", name: "Mint NFT" },
+  { path: "http://localhost:3000/labs/domains?testHelpers=1", name: "Domains" },
+  { path: "http://localhost:3000/labs/lookup?testHelpers=1", name: "Lookup" },
+  { path: "http://localhost:3000/labs/stake?testHelpers=1", name: "Stake" },
+  { path: "http://localhost:3000/labs/token?testHelpers=1", name: "Token" },
+  { path: "http://localhost:3000/labs/dao?testHelpers=1", name: "DAO" },
+  { path: "http://localhost:3000/labs/ai?testHelpers=1", name: "AI Lab" },
 ];
 
 for (const pageInfo of pages) {
@@ -58,7 +58,7 @@ for (const pageInfo of pages) {
 
 test.describe("Keyboard Navigation", () => {
   test("all interactive elements are keyboard accessible", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Tab through elements
     await page.keyboard.press("Tab");
@@ -73,7 +73,7 @@ test.describe("Keyboard Navigation", () => {
   });
 
   test("skip links work for keyboard users", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Press Tab to focus skip link (if exists)
     await page.keyboard.press("Tab");
@@ -96,7 +96,7 @@ test.describe("Screen Reader Support", () => {
     // Increase timeout for possible lazy-loaded images
     test.setTimeout(60000);
 
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Wait for network idle so images begin loading
     await page.waitForLoadState("networkidle");
@@ -173,7 +173,7 @@ test.describe("Screen Reader Support", () => {
   });
 
   test("buttons have accessible labels", async ({ page }) => {
-    await page.goto("/labs/register");
+    await page.goto("http://localhost:3000/labs/register?testHelpers=1");
 
     // Get all buttons
     const buttons = page.locator("button");
@@ -191,7 +191,7 @@ test.describe("Screen Reader Support", () => {
   });
 
   test("form inputs have labels", async ({ page }) => {
-    await page.goto("/labs/register");
+    await page.goto("http://localhost:3000/labs/register?testHelpers=1");
 
     // Get all inputs
     const inputs = page.locator('input[type="text"], input[type="email"]');
@@ -217,7 +217,7 @@ test.describe("Screen Reader Support", () => {
 
 test.describe("Color Contrast", () => {
   test("text has sufficient contrast", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Run axe with only color-contrast rule
     const accessibilityScanResults = await new AxeBuilder({ page })
@@ -231,7 +231,7 @@ test.describe("Color Contrast", () => {
 
 test.describe("ARIA Attributes", () => {
   test("live regions announce dynamic content", async ({ page }) => {
-    await page.goto("/labs/mint");
+    await page.goto("http://localhost:3000/labs/mint?testHelpers=1");
 
     // Check for aria-live regions (for loading states, errors, etc.)
     const liveRegions = page.locator("[aria-live]");

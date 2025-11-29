@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Homepage Visual Tests", () => {
   test("homepage renders correctly on desktop", async ({ page }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("http://localhost:3000/?testHelpers=1", { waitUntil: "networkidle" });
 
     // Wait for critical content to be visible (not Spline)
     await expect(page.locator("header")).toBeVisible();
@@ -25,7 +25,7 @@ test.describe("Homepage Visual Tests", () => {
 
   test("homepage renders correctly on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("http://localhost:3000/?testHelpers=1", { waitUntil: "networkidle" });
 
     await expect(page.locator("header")).toBeVisible();
 
@@ -46,7 +46,7 @@ test.describe("Homepage Visual Tests", () => {
   });
 
   test("homepage has visible header and footer", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Check header elements
     const header = page.locator("header");
@@ -60,7 +60,7 @@ test.describe("Homepage Visual Tests", () => {
   });
 
   test("homepage loads Spline component", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Wait for Spline container or loading state
     const splineContainer = page.locator(
@@ -77,7 +77,7 @@ test.describe("Homepage Visual Tests", () => {
   });
 
   test("homepage navigation links are clickable", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("http://localhost:3000/?testHelpers=1");
 
     // Wait for header to be fully loaded
     await expect(page.locator("header")).toBeVisible();

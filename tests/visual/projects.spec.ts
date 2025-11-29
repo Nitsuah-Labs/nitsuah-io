@@ -1,10 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { go } from "../_utils/playwright-helpers";
 
 test.describe("Projects Page Visual Tests", () => {
   // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
   test.skip("projects page renders correctly", async ({ page }) => {
-    await go(page, "/projects");
+    await page.goto("http://localhost:3000/projects?testHelpers=1");
 
     // Check header and footer are visible
     await expect(page.locator("header")).toBeVisible();
@@ -22,7 +21,7 @@ test.describe("Projects Page Visual Tests", () => {
   });
 
   test("projects page shows featured repositories", async ({ page }) => {
-    await go(page, "/projects");
+    await page.goto("http://localhost:3000/projects?testHelpers=1");
 
     // Check that the Featured category button (star emoji) exists
     const featuredButton = page.getByRole("button", { name: /⭐/ });
@@ -35,7 +34,7 @@ test.describe("Projects Page Visual Tests", () => {
     await expect(projectCards.first()).toBeVisible();
   });
   test("project cards have icons and links", async ({ page }) => {
-    await go(page, "/projects");
+    await page.goto("http://localhost:3000/projects?testHelpers=1");
 
     // Check that links exist (GitHub, live demos, etc.)
     const links = page
