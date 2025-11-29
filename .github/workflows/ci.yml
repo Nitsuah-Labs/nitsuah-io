@@ -82,6 +82,7 @@ jobs:
         run: npm run test:e2e
         env:
           PLAYWRIGHT_WORKERS: 4 # Parallel execution
+          NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
