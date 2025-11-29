@@ -101,7 +101,7 @@ test.describe("Resume Page Visual Tests", () => {
     // Check contact section exists
     const contactSection = page.locator(".resume-contact");
     await expect(contactSection).toBeVisible({ timeout: 10000 });
-    
+
     // Verify at least one contact item is present
     await expect(page.locator(".contact-item").first()).toBeVisible();
   });
