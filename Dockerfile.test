@@ -6,11 +6,11 @@ FROM mcr.microsoft.com/playwright:v1.56.1-noble
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better layer caching
 COPY package.json package-lock.json ./
 
-# Install dependencies (use install instead of ci to handle lock file discrepancies)
-RUN npm install --legacy-peer-deps
+# Install dependencies (use ci for faster installs with lock file)
+RUN npm ci --legacy-peer-deps --prefer-offline
 
 # Copy project files
 COPY . .
