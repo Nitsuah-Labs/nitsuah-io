@@ -13,7 +13,7 @@ import {
 import "./resume.css";
 
 // Import resume data directly - Next.js will bundle this at build time
-import resumeData from "../../data/resume.json";
+import resumeData from "../../../data/resume.json";
 
 function getResumeData(): ResumeData {
   // Type assertion needed due to minor schema differences (title vs label)
