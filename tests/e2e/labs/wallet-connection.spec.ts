@@ -60,6 +60,9 @@ test.describe("Wallet Connection Flow", () => {
 
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
 
     // Page should have some content (not checking for network switcher without wallet connected)
@@ -143,6 +146,9 @@ test.describe("Mint NFT Flow", () => {
 
     // Check for consistent header and footer
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
   });
 });
@@ -161,6 +167,9 @@ test.describe("Domains Page", () => {
     });
 
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
   });
 
@@ -176,6 +185,9 @@ test.describe("Domains Page", () => {
 
     // Should have header/footer at minimum (wallet buttons require connection)
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
 
     // Check for main content area
