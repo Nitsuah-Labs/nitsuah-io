@@ -16,6 +16,7 @@ services:
     environment:
       - CI=true
       - NODE_ENV=production
+      - NEXT_PUBLIC_TEST_HELPERS=1
     # Override command for different test suites
     command: npx playwright test
     # Allocate enough resources for browser testing

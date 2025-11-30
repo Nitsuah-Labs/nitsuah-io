@@ -78,10 +78,16 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
+      - name: Run diagnostic test first
+        run: npx playwright test tests/diagnostics/page-rendering.spec.ts --project=chromium-desktop --reporter=line
+        continue-on-error: true
+        env:
+          NEXT_PUBLIC_TEST_HELPERS: 1
+
       - name: Run Playwright tests (parallel)
         run: npm run test:e2e
         env:
-          PLAYWRIGHT_WORKERS: 4 # Parallel execution
+          PLAYWRIGHT_WORKERS: 1 # Reduced from 4 to avoid CI resource contention
           NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
 
       - name: Upload test results

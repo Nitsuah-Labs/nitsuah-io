@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 // Note: we used to skip heavy axe scans in test-helpers/dev mode because
 // dev overlays could interfere. Those skips were removed so tests run
 // deterministically against the production server started by Playwright.
@@ -30,16 +31,8 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-    await page.goto(pageInfo.path);
-
-    // Wait for page to be fully loaded and hydrated
-    await page.waitForLoadState("networkidle");
-
-    // Wait for main content or body to be ready
-    await page.waitForSelector("main, body", {
-      state: "attached",
-      timeout: 10000,
-    });
+    // Use new hydration-aware navigation
+    await gotoAndWaitForHydration(page, pageInfo.path, { timeout: 30000 });
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {

@@ -15,9 +15,8 @@ export default defineConfig({
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("./tests/global-setup"),
 
-  // Maximum time one test can run - increased for visual tests and for
-  // overlay-removal retries during development runs.
-  timeout: 120 * 1000,
+  // Maximum time one test can run - increased for CI stability
+  timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
 
   // Test configuration
   fullyParallel: true,
@@ -86,7 +85,7 @@ export default defineConfig({
     url: "http://localhost:3000",
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
+    timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
     // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
