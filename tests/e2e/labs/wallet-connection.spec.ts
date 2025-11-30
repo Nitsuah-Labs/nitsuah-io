@@ -65,10 +65,6 @@ test.describe("Wallet Connection Flow", () => {
     // Page should have some content (not checking for network switcher without wallet connected)
     const mainContent = page.locator("main");
     await expect(mainContent).toBeVisible();
-
-    // Page should have some content (not checking for network switcher without wallet connected)
-    const mainContent = page.locator("main");
-    await expect(mainContent).toBeVisible();
   });
 
   test("register page has form inputs for domain registration", async ({
