@@ -51,8 +51,12 @@ test.describe("Wallet Connection Flow", () => {
   test("network switcher appears on register page", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
     
-    // Wait for test helpers to activate
-    await page.waitForFunction(() => document.body.classList.contains('test-helpers'), { timeout: 5000 }).catch(() => {});
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
@@ -130,8 +134,12 @@ test.describe("Mint NFT Flow", () => {
 
     await page.waitForLoadState("networkidle");
     
-    // Wait for test helpers to activate
-    await page.waitForFunction(() => document.body.classList.contains('test-helpers'), { timeout: 5000 }).catch(() => {});
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Check for consistent header and footer
     await expect(page.locator("header")).toBeVisible();
@@ -145,8 +153,12 @@ test.describe("Domains Page", () => {
 
     await page.waitForLoadState("networkidle");
     
-    // Wait for test helpers to activate
-    await page.waitForFunction(() => document.body.classList.contains('test-helpers'), { timeout: 5000 }).catch(() => {});
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
@@ -155,8 +167,12 @@ test.describe("Domains Page", () => {
   test("domains page has wallet connection capability", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
     
-    // Wait for test helpers to activate
-    await page.waitForFunction(() => document.body.classList.contains('test-helpers'), { timeout: 5000 }).catch(() => {});
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Should have header/footer at minimum (wallet buttons require connection)
     await expect(page.locator("header")).toBeVisible();
