@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { go } from "../../_utils/playwright-helpers";
 
 /**
  * Mock wallet utilities for testing Web3 interactions
@@ -27,7 +28,7 @@ test.describe("Wallet Connection Flow", () => {
   });
 
   test("shows connect wallet button when disconnected", async ({ page }) => {
-    await page.goto("/labs/register");
+    await go(page, "/labs/register");
 
     // Look for connect wallet button or setup section
     const connectButton = page.getByRole("button", {
@@ -39,7 +40,7 @@ test.describe("Wallet Connection Flow", () => {
   test("wallet connection section exists on register page", async ({
     page,
   }) => {
-    await page.goto("/labs/register");
+    await go(page, "/labs/register");
 
     // Check for wallet setup section
     const walletSection = page.locator("section, div").filter({
@@ -49,7 +50,7 @@ test.describe("Wallet Connection Flow", () => {
   });
 
   test("network switcher appears on register page", async ({ page }) => {
-    await page.goto("/labs/register");
+    await go(page, "/labs/register");
 
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
@@ -63,7 +64,7 @@ test.describe("Wallet Connection Flow", () => {
   test("register page has form inputs for domain registration", async ({
     page,
   }) => {
-    await page.goto("/labs/register");
+    await go(page, "/labs/register");
     await page.waitForLoadState("networkidle");
 
     // With test helpers, should see the test helper panel OR actual domain input
@@ -80,7 +81,7 @@ test.describe("Wallet Connection Flow", () => {
 
 test.describe("Mint NFT Flow", () => {
   test("mint page shows wallet connection", async ({ page }) => {
-    await page.goto("/labs/mint");
+    await go(page, "/labs/mint");
     await page.waitForLoadState("networkidle");
 
     // Look for connect wallet or account display
@@ -100,7 +101,7 @@ test.describe("Mint NFT Flow", () => {
   });
 
   test("mint page has network switcher", async ({ page }) => {
-    await page.goto("/labs/mint");
+    await go(page, "/labs/mint");
     await page.waitForLoadState("networkidle");
 
     // Prefer deterministic test-helper label when present
@@ -123,7 +124,7 @@ test.describe("Mint NFT Flow", () => {
   test("mint page layout is consistent with design system", async ({
     page,
   }) => {
-    await page.goto("/labs/mint");
+    await go(page, "/labs/mint");
 
     await page.waitForLoadState("networkidle");
 
@@ -135,7 +136,7 @@ test.describe("Mint NFT Flow", () => {
 
 test.describe("Domains Page", () => {
   test("domains page renders correctly", async ({ page }) => {
-    await page.goto("/labs/domains");
+    await go(page, "/labs/domains");
 
     await page.waitForLoadState("networkidle");
 
@@ -144,7 +145,7 @@ test.describe("Domains Page", () => {
   });
 
   test("domains page has wallet connection capability", async ({ page }) => {
-    await page.goto("/labs/domains");
+    await go(page, "/labs/domains");
 
     // Should have header/footer at minimum (wallet buttons require connection)
     await expect(page.locator("header")).toBeVisible();
