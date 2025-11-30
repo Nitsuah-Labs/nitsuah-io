@@ -179,9 +179,5 @@ test.describe("Domains Page", () => {
     // Check for main content area
     const mainContent = page.locator("main");
     await expect(mainContent).toBeVisible();
-
-    // Check for main content area
-    const mainContent = page.locator("main");
-    await expect(mainContent).toBeVisible();
   });
 });
