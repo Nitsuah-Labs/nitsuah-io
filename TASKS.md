@@ -1,6 +1,6 @@
 # TASKS
 
-## Tasks for Phase A
+## Phase A
 
 ### Testing Infrastructure
 
@@ -59,7 +59,7 @@
   - Projects page: 3 projects need screenshots (Kryptos, GCP Tools, Stash)
   - Client demos: Multiple demos need product/content images (Restaurant: 22+ food photos, E-Commerce: 12+ products, Real Estate: 30-50 property photos, etc.)
 
-### Code Quality (Optional - Nice to Have)
+### Code Quality (Optional)
 
 - [ ] **Inline Styles Extraction** - Extract inline styles from demo components to CSS modules:
   - Portfolio components (ProjectGallery, AboutSection, ContactForm)

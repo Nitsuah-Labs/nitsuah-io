@@ -2,7 +2,7 @@
 
 **Updated:** November 28, 2025
 
-## Q1 2026
+## 2026Q1
 
 - [x] Core features
 - [x] Initial release
@@ -16,18 +16,18 @@
 - [ ] Screenshot requirements doc see `SCREENSHOT-REQUIREMENTS.md`
 - [ ] Dark mode implementation
 
-## Q2 2026
+## 2026Q2
 
 - [ ] User feedback integration
 - [ ] Performance improvements
-- [ ] **TECH DEBT** - any new Strategic codebase cleanup and refactoring remaining (see `TECH_DEBT.md` for full plan, tl;dr clean up high loc files for refactoring)
+- [ ] **TECH DEBT** - any new Strategic codebase cleanup and refactoring remaining (see `TECH_DEBT.md` for full plan)
 
-## Q3 2026
+## 2026Q3
 
 - [ ] Advanced features
 - [ ] Mobile support
 
-## Q4 2026
+## 2026Q4
 
 - [ ] Enterprise features
 

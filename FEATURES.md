@@ -13,7 +13,7 @@ Modern personal portfolio with curated project showcase and professional present
 - **About Page**: Personal introduction, skills matrix, and professional background
 - **Blog Platform**: Technical writing and project updates with markdown support
 
-### � Web3 Integration
+### ⛓️ Web3 Integration
 
 Full-stack blockchain features with multi-chain wallet support and smart contract interactions.
 

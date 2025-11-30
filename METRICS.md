@@ -16,8 +16,6 @@
 
 | Metric           | Value      | Notes                                   |
 | ---------------- | ---------- | --------------------------------------- |
-| Open Issues      | 0          | GitHub issues                           |
-| PR Turnaround    | 0 days     | Average merge time                      |
 | Passing Tests    | 37/42      | 88% (8 resume tests skipped)            |
 | Skipped Tests    | 8          | Resume page tests (known issue)         |
 | Security Alerts  | 0          | npm audit (zero high/critical)          |
