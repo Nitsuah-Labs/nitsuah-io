@@ -48,6 +48,8 @@ jobs:
       - name: Build application
         id: build
         run: npx next build
+        env:
+          NEXT_PUBLIC_TEST_HELPERS: 1
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
