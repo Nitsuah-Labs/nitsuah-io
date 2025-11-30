@@ -1,5 +1,5 @@
 # Dockerfile for running Playwright tests in a consistent environment
-# This eliminates dev/CI rendering differences and makes visual tests stable
+# Uses production build to ensure all pages are pre-compiled
 
 FROM mcr.microsoft.com/playwright:v1.56.1-noble
 
@@ -15,15 +15,16 @@ RUN npm ci --legacy-peer-deps --prefer-offline
 # Copy project files
 COPY . .
 
-# Don't build - Playwright will start dev server
-# This matches CI behavior where dev server is used
+# Build for production (pre-compiles all pages, more stable than dev mode)
+# Skip wagmi codegen since it requires API keys not available in test environment
+RUN npm run build:skip-wagmi
 
 # Set environment variables for tests
 ENV CI=true
-ENV NODE_ENV=test
+ENV NODE_ENV=production
 ENV NEXT_PUBLIC_TEST_HELPERS=1
 
-# Expose port for dev server (if needed)
+# Expose port for production server
 EXPOSE 3000
 
 # Default command runs all tests
