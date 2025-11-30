@@ -15,7 +15,7 @@ services:
       - ./playwright-report:/app/playwright-report
     environment:
       - CI=true
-      - NODE_ENV=production
+      - NODE_ENV=test
       - NEXT_PUBLIC_TEST_HELPERS=1
     # Override command for different test suites
     command: npx playwright test

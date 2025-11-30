@@ -81,14 +81,16 @@ export default defineConfig({
   webServer: {
     // In CI: Use dev server instead of production build to avoid build-time env issues
     // Dev server is more forgiving with hydration and ensures NEXT_PUBLIC_TEST_HELPERS works
-    command: "npm run dev",
+    // The script starts the dev server and waits for homepage compilation
+    command: "sh scripts/start-and-warmup.sh",
     url: "http://localhost:3000",
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
-    timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
+    timeout: process.env.CI ? 240 * 1000 : 180 * 1000, // Increased for warmup time
     // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
+      BASE_URL: "http://localhost:3000",
     },
   },
 });

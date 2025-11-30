@@ -8,15 +8,15 @@ test.describe("Page Rendering Diagnostics", () => {
   test("homepage - check if ANY HTML is rendered", async ({ page }) => {
     console.log("=== DIAGNOSTIC: Homepage rendering ===");
     
-    await page.goto("/");
+    // Just navigate and see what we get (no hydration wait)
+    const response = await page.goto("/", { waitUntil: "commit" });
+    console.log("Response status:", response?.status());
+    console.log("Response URL:", response?.url());
     
-    // Wait for page to load
-    await page.waitForLoadState("networkidle");
-    
-    // Get the entire HTML content
+    // Get the HTML immediately (before any JS runs)
     const html = await page.content();
     console.log("HTML length:", html.length);
-    console.log("HTML preview (first 500 chars):", html.substring(0, 500));
+    console.log("HTML preview (first 1000 chars):", html.substring(0, 1000));
     
     // Check if we got ANY HTML at all
     expect(html.length).toBeGreaterThan(100);

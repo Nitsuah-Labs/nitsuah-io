@@ -15,12 +15,13 @@ RUN npm ci --legacy-peer-deps --prefer-offline
 # Copy project files
 COPY . .
 
-# Build the application
-RUN npm run build:ci
+# Don't build - Playwright will start dev server
+# This matches CI behavior where dev server is used
 
 # Set environment variables for tests
 ENV CI=true
-ENV NODE_ENV=production
+ENV NODE_ENV=test
+ENV NEXT_PUBLIC_TEST_HELPERS=1
 
 # Expose port for dev server (if needed)
 EXPOSE 3000
