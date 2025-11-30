@@ -218,7 +218,12 @@ const DomainSite = (): React.ReactElement => {
     <div className="App">
       <LabNav />
       <LabSubNav />
-      <main style={{ paddingBottom: "80px" }}>
+      <main
+        id="main"
+        role="main"
+        aria-label="Domains Content"
+        style={{ paddingBottom: "80px" }}
+      >
         <h1>SUB-DOMAIN PORTAL</h1>
         <div className="form-container">
           <div className="mint-container">

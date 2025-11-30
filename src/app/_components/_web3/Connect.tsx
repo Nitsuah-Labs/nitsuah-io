@@ -47,7 +47,8 @@ export function Connect() {
 
   return (
     <div
-      aria-label="Connect to wallet"
+      role="region"
+      aria-label="Wallet connection controls"
       style={{ display: "flex", flexDirection: "column", gap: "12px" }}
     >
       {isConnected && (

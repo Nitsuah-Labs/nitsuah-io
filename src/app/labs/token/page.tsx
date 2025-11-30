@@ -17,7 +17,12 @@ const TokenSite = () => {
       <div className="container">
         <LabNav />
         <LabSubNav />
-        <main style={{ paddingBottom: "80px" }}>
+        <main
+          id="main"
+          role="main"
+          aria-label="Token Content"
+          style={{ paddingBottom: "80px" }}
+        >
           <h1>TOKEN MAKER HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

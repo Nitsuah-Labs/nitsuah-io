@@ -5,7 +5,7 @@ export async function go(page: Page, path: string) {
 
   const isAbsolute = path.startsWith("http://") || path.startsWith("https://");
   // Match Playwright webServer default port so tests hit the started dev server
-  const base = process.env.TEST_BASE_URL || "http://localhost:3001";
+  const base = process.env.TEST_BASE_URL || "http://localhost:3000";
   const url = isAbsolute
     ? path
     : `${base}${path.startsWith("/") ? "" : "/"}${path}`;

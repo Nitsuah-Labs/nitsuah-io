@@ -34,6 +34,12 @@ This document tracks which demos and projects need updated screenshots or images
    - Needed: Screenshot of audit report or security analysis
    - Resolution: 1200x800px minimum
 
+5. **Social Preview**
+
+6. **Favicon** - and other meta images 🟢
+   - Current: Using nitsuah.png (acceptable)
+   - Needed: None (current image is acceptable)
+
 ### Projects with Good Images ✅
 
 - Crypto Trail Blazer (cbtb.png)

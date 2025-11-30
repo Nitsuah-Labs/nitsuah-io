@@ -50,9 +50,19 @@ test.describe("Wallet Connection Flow", () => {
 
   test("network switcher appears on register page", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
+    
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
 
     // Page should have some content (not checking for network switcher without wallet connected)
@@ -126,28 +136,58 @@ test.describe("Mint NFT Flow", () => {
     await page.goto("/labs/mint?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
+    
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Check for consistent header and footer
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
   });
 });
 
 test.describe("Domains Page", () => {
   test("domains page renders correctly", async ({ page }) => {
-    await page.goto("/labs/domains");
+    await page.goto("/labs/domains?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
+    
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
   });
 
   test("domains page has wallet connection capability", async ({ page }) => {
-    await page.goto("/labs/domains");
+    await page.goto("/labs/domains?testHelpers=1");
+    
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Should have header/footer at minimum (wallet buttons require connection)
     await expect(page.locator("header")).toBeVisible();
+    
+    // Scroll footer into view before checking visibility
+    await page.locator("footer").scrollIntoViewIfNeeded().catch(() => {});
     await expect(page.locator("footer")).toBeVisible();
 
     // Check for main content area

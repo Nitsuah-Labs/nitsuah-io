@@ -206,15 +206,86 @@ npm run dev:wagmi
 
 ## Testing
 
+### Unit Tests (Jest)
+
 ```bash
-npm test                           # Jest unit tests
+npm test                           # All unit tests
 npm test -- --watch               # Watch mode
 npm test -- --coverage            # Coverage report
-npm run test:e2e                  # Playwright e2e tests
-npm run test:a11y:quick          # Accessibility tests
+npm test -- Connect.test.tsx      # Specific test file
+```
 
-# Run specific test
-npm test -- Connect.test.tsx
+### E2E & Accessibility Tests (Playwright)
+
+```bash
+# Quick local testing
+npm run test:e2e                  # All Playwright tests
+npm run test:a11y                 # Accessibility suite
+npm run test:a11y:quick          # Homepage, About, Projects only
+
+# Specific test suites
+npx playwright test tests/visual/projects.spec.ts
+npx playwright test tests/accessibility/all-pages.spec.ts --grep="Homepage"
+
+# UI mode for debugging
+npm run test:e2e:ui
+```
+
+### Docker Testing (CI-Consistent Environment)
+
+**Why Docker?** Local tests can pass but fail in CI due to OS/browser/build differences. Docker ensures consistency.
+
+```bash
+# Build image (first time or after dependency changes)
+npm run test:e2e:docker:build
+
+# Run tests in Docker (matches CI environment exactly)
+npm run test:e2e:docker
+
+# Run specific test file in Docker
+docker-compose -f docker-compose.test.yml run --rm playwright npx playwright test tests/accessibility/all-pages.spec.ts
+```
+
+**When to use Docker:**
+
+- Before pushing changes to visual components
+- After updating dependencies
+- When local tests pass but CI fails
+- To regenerate visual snapshots consistently
+
+### Test Writing Best Practices
+
+#### Use Stable Selectors
+
+```typescript
+// ✅ Good: data-testid for test-specific elements
+await page.waitForSelector("[data-testid='projects-section']");
+
+// ✅ Good: Semantic selectors
+const button = page.getByRole("button", { name: /featured/i });
+
+// ❌ Bad: Fragile CSS selectors
+const button = page.locator(".css-module-hash-button");
+```
+
+#### Add Proper Wait Conditions
+
+```typescript
+// ✅ Good: Wait for specific element
+await page.waitForSelector("[data-testid='content']", { timeout: 10000 });
+
+// ❌ Bad: Arbitrary timeout
+await page.waitForTimeout(5000);
+```
+
+#### Scope Locators Appropriately
+
+```typescript
+// ✅ Good: Scoped to specific region
+const links = page.locator("[class*='cardActions']").getByRole("link");
+
+// ❌ Bad: Too broad, matches unrelated elements
+const links = page.getByRole("link");
 ```
 
 ## Performance Targets

@@ -2,7 +2,8 @@
 import { chromium, FullConfig } from "@playwright/test";
 
 async function globalSetup(config: FullConfig) {
-  // Clear any cached browser state
+  console.log("🔧 Running global setup...");
+  
   const browser = await chromium.launch();
   const context = await browser.newContext();
 
@@ -21,6 +22,8 @@ async function globalSetup(config: FullConfig) {
 
   await context.close();
   await browser.close();
+  
+  console.log("✅ Global setup complete - webServer handles warmup");
 }
 
 export default globalSetup;

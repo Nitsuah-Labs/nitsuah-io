@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="App">
       <HomeBar />
-      <main tabIndex={-1}>
+      <main id="main" tabIndex={-1} role="main" aria-label="Homepage Content">
         {/* Hero Section - Fixed overlay that fades as you scroll */}
         <HeroSection />
 
