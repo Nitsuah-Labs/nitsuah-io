@@ -5,6 +5,7 @@ import * as React from "react";
 import { WagmiProvider } from "wagmi";
 
 // Import a client-only getter for config so WalletConnect is only created on the client
+import { ThemeProvider } from "../contexts/ThemeContext";
 import { getWagmiConfig } from "../wagmi";
 import { ToastProvider } from "./_components/_web3/ToastProvider";
 
@@ -23,11 +24,13 @@ const wagmiConfig = getWagmiConfig();
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ToastProvider />
-        {children}
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ThemeProvider>
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider />
+          {children}
+        </QueryClientProvider>
+      </WagmiProvider>
+    </ThemeProvider>
   );
 }

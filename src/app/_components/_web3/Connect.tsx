@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { WALLET_CONNECT_ID } from "../../../lib/constants/wallets";
 import { WalletConnectIcon } from "./_assets/wallets/WalletIcons";
+import styles from "./Connect.module.css";
 
 // Map connector IDs to their icons
 const walletIcons: Record<string, React.FC> = {
@@ -49,7 +50,7 @@ export function Connect() {
     <div
       role="region"
       aria-label="Wallet connection controls"
-      style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+      className={styles.container}
     >
       {isConnected && (
         <button
@@ -80,36 +81,16 @@ export function Connect() {
               aria-busy={isPending}
               aria-label={`Connect to ${x.name} wallet`}
               data-testid={`connector-${x.id}`}
-              className="labs-btn labs-btn-primary"
+              className={`labs-btn labs-btn-primary ${styles.button}`}
               disabled={!isReady || isPending}
               title={!isReady ? `${x.name} not available` : undefined}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                justifyContent: "center",
-                position: "relative",
-                opacity: !isReady ? 0.5 : 1,
-              }}
             >
               {!isPending && (
-                <span style={{ display: "flex", alignItems: "center" }}>
+                <span className={styles.iconWrapper}>
                   <IconComponent />
                 </span>
               )}
-              {isPending && (
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "16px",
-                    height: "16px",
-                    border: "2px solid rgba(255,255,255,0.3)",
-                    borderTop: "2px solid #fff",
-                    borderRadius: "50%",
-                    animation: "spin 0.6s linear infinite",
-                  }}
-                />
-              )}
+              {isPending && <span className={styles.spinner} />}
               <span>
                 {x.name}
                 {isPending && " (connecting...)"}
@@ -120,18 +101,7 @@ export function Connect() {
         })}
 
       {error && (
-        <div
-          role="alert"
-          aria-live="polite"
-          style={{
-            padding: "12px",
-            backgroundColor: "rgba(239, 68, 68, 0.1)",
-            border: "1px solid rgba(239, 68, 68, 0.3)",
-            borderRadius: "8px",
-            color: "#ef4444",
-            marginTop: "8px",
-          }}
-        >
+        <div role="alert" aria-live="polite" className={styles.errorAlert}>
           {(error as any)?.shortMessage ??
             (error as any)?.message ??
             `${error}`}

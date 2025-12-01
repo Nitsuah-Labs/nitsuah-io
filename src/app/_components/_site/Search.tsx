@@ -1,17 +1,14 @@
 "use client";
 import React from "react";
+import styles from "./Search.module.css";
 
 export default function Search(): React.ReactElement {
   return (
-    <div style={{ display: "inline-flex", alignItems: "center" }}>
+    <div className={styles.container}>
       <input
         aria-label="Search"
         placeholder="Search"
-        style={{
-          padding: "0.25rem 0.5rem",
-          borderRadius: 6,
-          border: "1px solid #ddd",
-        }}
+        className={styles.input}
       />
     </div>
   );

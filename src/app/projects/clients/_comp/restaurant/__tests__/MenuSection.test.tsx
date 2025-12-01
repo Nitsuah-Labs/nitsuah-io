@@ -59,4 +59,25 @@ describe("MenuSection", () => {
     fireEvent.click(addButtons[0]);
     expect(add).toHaveBeenCalled();
   });
+
+  it("filters menu items by selected category", () => {
+    const add = jest.fn();
+    const setCategory = jest.fn();
+
+    // Render with "Starters" selected
+    render(
+      <MenuSection
+        menuData={mockMenu as any}
+        categories={["All", "Starters", "Mains"]}
+        selectedCategory="Starters"
+        setSelectedCategory={setCategory}
+        addToCart={add}
+      />,
+    );
+
+    // Should show Starters items
+    expect(screen.getByText("Bruschetta")).toBeInTheDocument();
+    // Should NOT show Mains items when filtered
+    expect(screen.queryByText("Lasagna")).not.toBeInTheDocument();
+  });
 });

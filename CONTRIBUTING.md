@@ -208,6 +208,9 @@ npm run dev:wagmi
 
 ### Unit Tests (Jest)
 
+**Current Coverage:** 98% statements | 81% branches | 82% functions
+**Test Count:** 213 tests across 16 suites
+
 ```bash
 npm test                           # All unit tests
 npm test -- --watch               # Watch mode
@@ -216,6 +219,8 @@ npm test -- Connect.test.tsx      # Specific test file
 ```
 
 ### E2E & Accessibility Tests (Playwright)
+
+**Test Count:** 59 Playwright tests (20 accessibility, 6 visual, 33 E2E)
 
 ```bash
 # Quick local testing
@@ -233,7 +238,7 @@ npm run test:e2e:ui
 
 ### Docker Testing (CI-Consistent Environment)
 
-**Why Docker?** Local tests can pass but fail in CI due to OS/browser/build differences. Docker ensures consistency.
+**Why Docker?** Ensures tests match CI environment exactly.
 
 ```bash
 # Build image (first time or after dependency changes)
@@ -247,7 +252,6 @@ docker-compose -f docker-compose.test.yml run --rm playwright npx playwright tes
 ```
 
 **When to use Docker:**
-
 - Before pushing changes to visual components
 - After updating dependencies
 - When local tests pass but CI fails

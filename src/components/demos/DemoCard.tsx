@@ -1,4 +1,5 @@
 import React, { CSSProperties, ReactNode } from "react";
+import styles from "./DemoCard.module.css";
 
 interface DemoCardProps {
   children: ReactNode;
@@ -15,28 +16,17 @@ export const DemoCard: React.FC<DemoCardProps> = ({
   onClick,
   hover = true,
 }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
-
-  const defaultStyle: CSSProperties = {
-    background: "rgba(20, 20, 20, 0.8)",
-    border: "2px solid rgba(255, 255, 255, 0.1)",
-    borderRadius: "12px",
-    padding: "1.5rem",
-    transition: "all 0.3s ease",
-    cursor: onClick ? "pointer" : "default",
-    transform: hover && isHovered ? "translateY(-4px)" : "none",
-    boxShadow: hover && isHovered ? "0 8px 24px rgba(0, 0, 0, 0.3)" : "none",
-    ...style,
-  };
+  const cardClasses = [
+    styles.card,
+    onClick && styles.clickable,
+    hover && styles.hoverable,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div
-      className={className}
-      style={defaultStyle}
-      onClick={onClick}
-      onMouseEnter={() => hover && setIsHovered(true)}
-      onMouseLeave={() => hover && setIsHovered(false)}
-    >
+    <div className={cardClasses} style={style} onClick={onClick}>
       {children}
     </div>
   );

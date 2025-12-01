@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ContactForm from "../ContactForm";
 
 describe("ContactForm", () => {
@@ -12,5 +12,18 @@ describe("ContactForm", () => {
     expect(screen.getByPlaceholderText(/your@email.com/i)).toBeInTheDocument();
     // contact info value (phone)
     expect(screen.getByText(/\+1 \(555\) 123-4567/)).toBeInTheDocument();
+  });
+
+  it("handles button hover effects", () => {
+    render(<ContactForm />);
+    const button = screen.getByRole("button", { name: /Send Message/i });
+
+    // Hover on
+    fireEvent.mouseEnter(button);
+    expect(button.style.transform).toBe("scale(1.02)");
+
+    // Hover off
+    fireEvent.mouseLeave(button);
+    expect(button.style.transform).toBe("scale(1)");
   });
 });

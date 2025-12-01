@@ -1,6 +1,6 @@
 # Demo Component Quick Reference
 
-**Last Updated:** November 9, 2025
+**Last Updated:** December 1, 2025
 
 ## 🎨 Shared Component Library
 
@@ -264,8 +264,6 @@ Get-ChildItem -Recurse *.tsx | Sort-Object Length -Descending | Select-Object -F
 
 **Active Documentation:**
 
-- **PREP-PHASE-A.md** - Pre-Phase A completion checklist
-- **TECH_DEBT.md** - Tech debt tracking (includes Phase 3 completion)
-- **DEMO_QUICK_REFERENCE.md** - This file - component usage guide
-- **ARCHITECTURE.md** - Project architecture overview
-- **TODO.md** - Future work and manual tasks
+- **ARCH.md** - Project architecture overview
+- **DEMO_REF.md** - This file - component usage guide
+- **SCREENSHOTS.md** - Screenshot and visual asset requirements

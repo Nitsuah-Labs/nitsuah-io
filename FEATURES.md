@@ -8,7 +8,6 @@ Modern personal portfolio with curated project showcase and professional present
 
 - **Project Gallery**: Featured projects with live demos, GitHub links, and tech stack details
 - **Interactive 3D Scenes**: Spline-powered 3D graphics and animations for visual engagement
-- **Responsive Design**: Mobile-first approach with smooth transitions across all device sizes
 - **Professional Resume**: Structured CV with downloadable PDF option and contact information
 - **About Page**: Personal introduction, skills matrix, and professional background
 - **Blog Platform**: Technical writing and project updates with markdown support
@@ -47,7 +46,7 @@ Polished interface with attention to accessibility, performance, and user feedba
 - **Copy to Clipboard**: One-click address copying with visual confirmation
 - **Wallet Install Prompts**: Detect missing wallet extensions and guide users to installation
 - **Search Functionality**: Fast project search with fuzzy matching and keyboard navigation
-- **Theme Support**: Dark/light mode toggle with system preference detection (planned)
+- **Responsive Design**: Mobile-first approach with smooth transitions across all device sizes
 
 ### ♿ Accessibility
 
@@ -61,16 +60,25 @@ WCAG 2.1 AA compliance with comprehensive keyboard navigation and screen reader 
 - **Focus Management**: Visible focus indicators and logical tab order throughout site
 - **Alt Text**: Descriptive image alternatives for all visual content
 
+### 🎨 Dark Mode & Theming
+
+Complete theme system with user preference persistence and comprehensive design tokens.
+
+- **Theme Toggle**: Switch between light and dark modes with smooth transitions
+- **LocalStorage Persistence**: User preference saved across sessions
+- **CSS Custom Properties**: Comprehensive design tokens for colors, shadows, and transitions
+- **SSR-Safe Implementation**: Hydration-safe patterns prevent flash of unstyled content
+- **Theme Context**: React Context API for global theme state management
+
 ### 🧪 Testing & Quality
 
 Comprehensive test coverage with automated CI/CD and Docker-based testing infrastructure achieving 100% pass rate.
 
-- **Unit Tests**: Jest with React Testing Library for component and utility testing (97.41% coverage, 14/14 passing)
-- **E2E Tests**: Playwright for visual regression, user flows, and cross-browser compatibility (59/59 passing)
-- **Accessibility Tests**: axe-core integration with automated WCAG 2.1 AA compliance checks (20/20 passing)
-- **Visual Regression**: Screenshot comparison across browsers and viewports with Docker baselines (6/6 passing)
+- **Unit Tests**: Jest with React Testing Library for component and utility testing (98% coverage, 213 passing)
+- **E2E Tests**: Playwright for visual regression, user flows, and cross-browser compatibility (59 passing)
+- **Accessibility Tests**: axe-core integration with automated WCAG 2.1 AA compliance checks (20 passing)
+- **Visual Regression**: Screenshot comparison across browsers and viewports with Docker baselines (6 passing)
 - **Docker Testing**: Production build strategy ensures CI/local parity with Playwright Docker image
-- **Performance Monitoring**: Lighthouse CI integration tracking Core Web Vitals
 - **Pre-commit Hooks**: Auto-format, typecheck, and unit tests before commit (~3s)
 - **CI Pipeline**: GitHub Actions running full test suite, build verification, and deploy previews (100% pass rate)
 
@@ -81,10 +89,10 @@ Optimized for speed with modern build tools and delivery techniques.
 - **Next.js App Router**: Server-side rendering, static generation, and intelligent code splitting
 - **Image Optimization**: Automatic WebP/AVIF conversion with responsive sizing via next/image
 - **Bundle Analysis**: Tree-shaking and chunk optimization for minimal JavaScript payload
-- **Font Optimization**: Self-hosted fonts with preloading and font-display swap
 - **CDN Delivery**: Global Netlify CDN with edge caching and HTTP/2 push
 - **Lazy Loading**: Component-level code splitting with React.lazy and dynamic imports
 - **Build Performance**: Turbopack-powered builds (~35s) with incremental compilation
+- **Font Optimization**: Self-hosted fonts with preloading and font-display swap
 
 ### 🔧 Developer Experience
 
@@ -97,7 +105,7 @@ Modern development workflow with type safety, code quality tools, and comprehens
 - **Git Hooks**: Optimized pre-commit/pre-push validation with Husky and lint-staged
 - **Environment Config**: Centralized configuration in config/ directory for all build tools
 - **Hot Reload**: Fast refresh for React components with state preservation during edits
-- **Documentation**: Comprehensive guides (ARCHITECTURE.md, CONTRIBUTING.md, API docs)
+- **Documentation**: Comprehensive guides (ARCH.md, CONTRIBUTING.md, DEMO_REF.md)
 
 ### 🚀 Deployment & CI/CD
 
