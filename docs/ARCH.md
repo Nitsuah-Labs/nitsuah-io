@@ -133,62 +133,61 @@ The site is deployed to Netlify. The `netlify.toml` file in the project root con
 
 ### Unit Testing (Jest + React Testing Library)
 
-**Coverage:** 98.0% statements | 81.2% branches | 82.2% functions
+**Coverage:** 98% statements | 81% branches | 82% functions  
+**Test Count:** 213 tests across 16 suites
+
+```bash
+npm test                    # Run all unit tests
+npm test -- --coverage      # Generate coverage report
+npm test -- --watch         # Watch mode for development
+```
 
 **Test Suites:**
 
-- **Utilities:** `src/utils/__tests__/`
-  - `url.test.ts` - 54 tests covering URL manipulation, query strings, external link detection
-  - `validation.test.ts` - 112 tests covering email, URL, Ethereum address, color, GitHub username validation
-- **Hooks:** `src/hooks/__tests__/`
-  - `useHoverStyle.test.ts` - 33 tests covering hover state management and style merging
-- **Components:** Component-specific test files colocated with source
-  - Demo components (DemoButton, DemoCard, DemoTable, DemoHeader)
-  - Restaurant components (MenuSection, OrderCart)
-  - Resume components (ContactForm, ExperienceSection, SkillsSection)
-  - Web3 components (Connect, MintNFT)
-  - Site components (Brand)
+- **Utilities:** URL manipulation, validation functions, sanitization
+- **Hooks:** Custom hooks like `useHoverStyle`
+- **Components:** Demo, restaurant, resume, Web3, and site components
 
 **Testing Philosophy:**
-
 - Comprehensive edge case coverage
-- Real-world scenario testing
+- Real-world scenario testing  
 - Accessibility validation (ARIA labels, semantic HTML)
-- Error handling verification
 - Mock external dependencies (wagmi, viem)
 
 ### End-to-End Testing (Playwright)
 
+**Test Count:** 59 tests (20 accessibility, 6 visual regression, 33 E2E)
+
+```bash
+npm run test:e2e            # All Playwright tests
+npm run test:a11y           # Accessibility tests only
+npm run test:e2e:ui         # Interactive UI mode
+```
+
+**Docker Testing** (CI-consistent environment):
+
+```bash
+npm run test:e2e:docker:build    # Build Docker image
+npm run test:e2e:docker          # Run tests in Docker
+```
+
 **Test Coverage:**
-
-- Accessibility testing for all pages (axe-core integration)
-- Visual regression testing
-- User interaction flows
+- WCAG 2.1 AA compliance (axe-core)
+- Visual regression across devices
 - Cross-browser compatibility (Chromium, Firefox, WebKit)
-
-**Test Organization:**
-
-- `tests/` - E2E test suites
-- `tests/_utils/` - Shared test utilities
-- `playwright.config.ts` - Playwright configuration
-- Reports generated in `playwright-report/` (gitignored)
+- User interaction flows
 
 ### CI/CD Pipeline
 
-**GitHub Actions Workflow** (`.github/workflows/ci.yml`):
+**GitHub Actions** runs on every PR:
 
-1. **Lint:** ESLint checks for code quality
-2. **Typecheck:** TypeScript compilation validation
-3. **Unit Tests:** Jest test suite execution
-4. **Build:** Next.js production build verification
-5. **E2E Tests:** Playwright accessibility and interaction tests
+1. **Lint:** ESLint checks
+2. **Typecheck:** TypeScript validation
+3. **Unit Tests:** Jest suite (213 tests)
+4. **Build:** Next.js production build
+5. **E2E Tests:** Playwright suite (59 tests)
 
-**Quality Gates:**
-
-- All tests must pass
-- No TypeScript errors
-- No ESLint violations
-- Successful production build
+**Quality Gates:** All tests pass, no TypeScript errors, no ESLint violations
 
 ## Data Flow & State Management
 

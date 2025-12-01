@@ -42,10 +42,7 @@
 
 ---
 
-See `docs/TECH_DEBT.md` for completed work history.
-
-<!--
-AGENT INSTRUCTIONS:
+<!-- AGENT INSTRUCTIONS:
 This file tracks actionable tasks.
 1. Keep "Active Tasks" section focused on pending work
 2. Move completed items to "Completed" section with dates

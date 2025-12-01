@@ -4,11 +4,11 @@
 
 | Metric        | Value                                      | Notes                            |
 | ------------- | ------------------------------------------ | -------------------------------- |
-| Code Coverage | 97.41%                                     | Jest unit tests (14/14 passing)  |
+| Code Coverage | 98%                                        | Jest unit tests (213 passing)    |
 | Build Time    | 35.13s (local, PowerShell Measure-Command) | Next.js Turbopack build          |
 | Bundle Size   | 324.90 MB (.next folder total)             | Production build output          |
 | Test Files    | 34                                         | Playwright E2E + a11y + visual   |
-| Test Suites   | 11                                         | Jest unit test suites            |
+| Test Suites   | 16                                         | Jest unit test suites            |
 | TypeScript    | Strict mode                                | Zero errors                      |
 | Lines of Code | ~21.8K                                     | Excluding tests/generated/config |
 
@@ -26,12 +26,12 @@
 
 | Test Suite   | Status      | Count    | Notes                                |
 | ------------ | ----------- | -------- | ------------------------------------ |
-| Unit Tests   | ✅ Passing   | 14/14    | Jest + React Testing Library         |
-| A11y Tests   | ✅ Passing   | 20/20    | All pages WCAG 2.1 AA compliant      |
-| Resume Tests | ✅ Passing   | 8/8      | Fixed with production build in CI    |
-| Visual Tests | ✅ Passing   | 6/6      | Homepage, labs pages with baselines  |
-| E2E Tests    | ✅ Passing   | 11/11    | Wallet connection + navigation flows |
-| **Total**    | **✅ 59/59** | **100%** | **All tests passing**                |
+| Unit Tests   | ✅ Passing   | 213      | Jest + React Testing Library         |
+| A11y Tests   | ✅ Passing   | 20       | All pages WCAG 2.1 AA compliant      |
+| Resume Tests | ✅ Passing   | 8        | Fixed with production build in CI    |
+| Visual Tests | ✅ Passing   | 6        | Homepage, labs pages with baselines  |
+| E2E Tests    | ✅ Passing   | 11       | Wallet connection + navigation flows |
+| **Total**    | **✅ 272**   | **100%** | **All tests passing**                |
 
 ## Docker Testing
 
@@ -44,9 +44,9 @@
 
 ## Notes
 
-- **Code Coverage**: 97.41% measured via Jest coverage report (statement coverage). Comprehensive component and utility test coverage across 11 test suites.
+- **Code Coverage**: 98% measured via Jest coverage report (statement coverage). Comprehensive component and utility test coverage across 16 test suites with 213 tests.
 - **Build Performance**: 35.13s for production build using Next.js Turbopack (local PowerShell measurement).
-- **Test Status**: 59/59 tests passing (100%). All accessibility tests pass WCAG 2.1 AA compliance (20/20). All visual, resume, and E2E tests passing in CI with production build.
+- **Test Status**: 272 total tests passing (100%). Unit tests: 213 passing. Playwright E2E: 59 passing. All accessibility tests pass WCAG 2.1 AA compliance.
 - **Lines of Code**: 21,791 LOC (excluding tests, generated files, config, node_modules, build artifacts).
 - **Test Infrastructure**: Production build strategy resolved all test issues. Playwright uses `npm run start` instead of dev server to ensure proper React hydration and DOM rendering.
 - **Docker Strategy**: Built Docker image for CI-consistent testing. Successfully generates visual regression baselines matching CI exactly.
