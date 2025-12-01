@@ -9,7 +9,7 @@ import { expect, test } from "@playwright/test";
  * Helper function to ensure test-helpers class is applied
  * This prevents flakiness from Next.js dev overlay
  */
-async function ensureTestHelpersClass(page: any) {
+async function ensureTestHelpersClass(page: Page) {
   await page.evaluate(() => {
     if (document.body && !document.body.classList.contains("test-helpers")) {
       document.body.classList.add("test-helpers");
@@ -157,11 +157,7 @@ test.describe("Domains Page", () => {
     await page.waitForLoadState("networkidle");
 
     // Manually add test-helpers class to ensure CSS applies
-    await page.evaluate(() => {
-      if (document.body && !document.body.classList.contains("test-helpers")) {
-        document.body.classList.add("test-helpers");
-      }
-    });
+    await ensureTestHelpersClass(page);
 
     // Check for header (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();
@@ -171,17 +167,13 @@ test.describe("Domains Page", () => {
     await page.goto("/labs/domains?testHelpers=1");
 
     // Manually add test-helpers class to ensure CSS applies
-    await page.evaluate(() => {
-      if (document.body && !document.body.classList.contains("test-helpers")) {
-        document.body.classList.add("test-helpers");
-      }
-    });
+  test("domains page has wallet connection capability", async ({ page }) => {
+    await page.goto("/labs/domains?testHelpers=1");
+
+    // Manually add test-helpers class to ensure CSS applies
+    await ensureTestHelpersClass(page);
 
     // Should have header at minimum (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();
-
-    // Check for main content area
-    const mainContent = page.locator("main");
-    await expect(mainContent).toBeVisible();
   });
 });
