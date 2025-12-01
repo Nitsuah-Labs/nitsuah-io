@@ -24,14 +24,14 @@
 
 ## Test Breakdown
 
-| Test Suite   | Status      | Count    | Notes                                |
-| ------------ | ----------- | -------- | ------------------------------------ |
-| Unit Tests   | ✅ Passing   | 213      | Jest + React Testing Library         |
-| A11y Tests   | ✅ Passing   | 20       | All pages WCAG 2.1 AA compliant      |
-| Resume Tests | ✅ Passing   | 8        | Fixed with production build in CI    |
-| Visual Tests | ✅ Passing   | 6        | Homepage, labs pages with baselines  |
-| E2E Tests    | ✅ Passing   | 11       | Wallet connection + navigation flows |
-| **Total**    | **✅ 272**   | **100%** | **All tests passing**                |
+| Test Suite   | Status   | Count                                          | Notes |
+| ------------ | -------- | ---------------------------------------------- | ----- |
+| Unit Tests   | 213      | ✅ Passing Jest + React Testing Library         |
+| A11y Tests   | 20       | ✅ Passing All pages WCAG 2.1 AA compliant      |
+| Resume Tests | 8        | ✅ Passing Fixed with production build in CI    |
+| Visual Tests | 6        | ✅ Passing Homepage, labs pages with baselines  |
+| E2E Tests    | 11       | ✅ Passing Wallet connection + navigation flows |
+| **Total**    | **100%** | **✅ 272** **All tests passing**                |
 
 ## Docker Testing
 
