@@ -1,4 +1,3 @@
-import resumeDataImport from "../../../public/assets/resume.json";
 import { ResumeData } from "../../types/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
@@ -13,27 +12,12 @@ import {
 } from "./_components";
 import "./resume.css";
 
+// Import resume data directly - Next.js will bundle this at build time
+import resumeData from "../../data/resume.json";
+
 function getResumeData(): ResumeData {
-  try {
-    return resumeDataImport as unknown as ResumeData;
-  } catch (err) {
-    console.warn("Could not load resume.json; using fallback data", err);
-    return {
-      basics: {
-        name: "Austin J. Hardy",
-        label: "Systems Engineer",
-        title: "Systems Engineer",
-        email: "",
-        summary: "",
-        location: { city: "", countryCode: "US", region: "" },
-        profiles: [],
-      },
-      work: [],
-      skills: [],
-      education: [],
-      languages: [],
-    } as ResumeData;
-  }
+  // Type assertion needed due to minor schema differences (title vs label)
+  return resumeData as unknown as ResumeData;
 }
 
 export default function ResumePage() {
@@ -44,7 +28,13 @@ export default function ResumePage() {
       <div className="print-hide">
         <HomeBar />
       </div>
-      <main className="resume-container" tabIndex={-1}>
+      <main
+        id="main"
+        className="resume-container"
+        tabIndex={-1}
+        role="main"
+        aria-label="Resume Content"
+      >
         <div className="resume-content">
           {/* PDF Export Button */}
           <div

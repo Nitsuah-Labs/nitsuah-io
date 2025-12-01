@@ -18,6 +18,9 @@ import mumbai from "../_components/_web3/_assets/mumbai.png";
 function renderOutput() {
   return (
     <main
+      id="main"
+      role="main"
+      aria-label="Labs Hub Content"
       style={{
         padding: "80px 20px 60px",
         minHeight: "100vh",

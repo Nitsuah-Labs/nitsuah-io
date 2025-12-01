@@ -1,18 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Homepage Visual Tests", () => {
-  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
-  test.skip("homepage renders correctly on desktop", async ({ page }) => {
+  test("homepage renders correctly on desktop", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
 
     // Wait for critical content to be visible (not Spline)
     await expect(page.locator("header")).toBeVisible();
 
-    // Wait for main content sections to load
-    await expect(
-      page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
-    ).toBeVisible();
-
+    // Wait for main hero content (name is typed in dynamically as "Austin H.")
+    await expect(page.locator("h1")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
     // Wait a moment for layout to stabilize (don't wait for Spline)
@@ -27,19 +23,14 @@ test.describe("Homepage Visual Tests", () => {
     });
   });
 
-  // SKIPPED: Mobile visual test has 82px height differences between Windows/Linux environments
-  // due to font rendering. Desktop test provides sufficient visual coverage.
-  test.skip("homepage renders correctly on mobile", async ({ page }) => {
+  test("homepage renders correctly on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE
     await page.goto("/", { waitUntil: "networkidle" });
 
     await expect(page.locator("header")).toBeVisible();
 
-    // Wait for main content sections to load
-    await expect(
-      page.getByRole("heading", { name: /Hi, I'm Austin Hardy/i })
-    ).toBeVisible();
-
+    // Wait for main hero content (name is typed in dynamically as "Austin H.")
+    await expect(page.locator("h1")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
     await page.waitForTimeout(2000);

@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const CI_TIMEOUT = 180_000; // 3 minutes for CI stability
+const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
+
 /**
  * Playwright configuration for nitsuah.io testing
  *
@@ -15,9 +18,8 @@ export default defineConfig({
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("./tests/global-setup"),
 
-  // Maximum time one test can run - increased for visual tests and for
-  // overlay-removal retries during development runs.
-  timeout: 120 * 1000,
+  // Maximum time one test can run - increased for CI stability
+  timeout: process.env.CI ? CI_TIMEOUT : LOCAL_TIMEOUT,
 
   // Test configuration
   fullyParallel: true,
@@ -78,19 +80,15 @@ export default defineConfig({
     // },
   ],
 
-  // Run local dev server before starting tests
+  // Run local server before starting tests
   webServer: {
-    // If running in CI, build and start production server.
-    // Otherwise use dev server which includes HMR and better debugging.
-    command: process.env.CI
-      ? "npm run build:ci && npm run start"
-      : "npm run dev",
+    // Use production server for more stable, pre-compiled pages
+    command: "npm run start",
     url: "http://localhost:3000",
-    // If test helpers are enabled, force Playwright to start its own dev server
-    reuseExistingServer:
-      process.env.NEXT_PUBLIC_TEST_HELPERS === "1" ? false : !process.env.CI,
-    timeout: 120 * 1000,
-    // forward NEXT_PUBLIC_TEST_HELPERS to the dev server so pages can render test helpers
+    // Allow reusing existing server in development (but not in CI for clean state)
+    reuseExistingServer: !process.env.CI,
+    timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
+    // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
     },

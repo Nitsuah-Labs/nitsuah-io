@@ -10,7 +10,7 @@ const AboutPage: React.FC = () => {
   return (
     <div className="App">
       <HomeBar />
-      <main>
+      <main id="main" role="main" aria-label="About Page Content">
         {/* Section 1: Profile & Bio - Fades as you scroll */}
         <ProfileSection />
 

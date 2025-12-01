@@ -17,7 +17,12 @@ const ImagenSite = () => {
       <div className="container">
         <LabNav />
         <LabSubNav />
-        <main style={{ paddingBottom: "80px" }}>
+        <main
+          id="main"
+          role="main"
+          aria-label="AI Lab Content"
+          style={{ paddingBottom: "80px" }}
+        >
           <h1>IMAGEN AI HERE!</h1>
           <div className="form-container">
             <div className="labs-card labs-spacing-md">

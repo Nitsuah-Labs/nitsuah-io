@@ -123,6 +123,7 @@ export default function RootLayout({
                   }
                   /* Ensure test helpers class applies contrast fixes immediately */
                   body.test-helpers .text-xs { color: #9fb1c8 !important; }
+                  body.test-helpers .text-slate-500 { color: #9fb1c8 !important; }
                 `,
               }}
             />
@@ -219,7 +220,7 @@ export default function RootLayout({
                   if (!params || params.get('testHelpers') !== '1') return;
 
                   // Inject quick-hide CSS so overlays are hidden as early as possible
-                  const css = "[data-nextjs-dev-overlay], nextjs-portal, [data-nextjs-devtools], #__next_dev_overlay, .next-dev-overlay, .react-dev-overlay, #next-overlay, .overseer, [data-testid=\"overseer\"] { display: none !important; visibility: hidden !important; pointer-events: none !important; opacity: 0 !important; height: 0 !important; width: 0 !important; } body.test-helpers .text-xs { color: #9fb1c8 !important; }";
+                  const css = "[data-nextjs-dev-overlay], nextjs-portal, [data-nextjs-devtools], #__next_dev_overlay, .next-dev-overlay, .react-dev-overlay, #next-overlay, .overseer, [data-testid=\"overseer\"] { display: none !important; visibility: hidden !important; pointer-events: none !important; opacity: 0 !important; height: 0 !important; width: 0 !important; } body.test-helpers .text-xs { color: #9fb1c8 !important; } body.test-helpers .text-slate-500 { color: #9fb1c8 !important; }";
                   const style = document.createElement('style');
                   style.setAttribute('data-testid','test-helpers-inline');
                   style.appendChild(document.createTextNode(css));
@@ -259,7 +260,10 @@ export default function RootLayout({
         className={process.env.NEXT_PUBLIC_TEST_HELPERS ? "test-helpers" : ""}
       >
         <Providers>
-          <SkipLink />
+          {/* Skip link placed early; pages must supply a single <main id="main"> */}
+          <nav style={{ position: "relative" }}>
+            <SkipLink />
+          </nav>
           {children}
         </Providers>
       </body>

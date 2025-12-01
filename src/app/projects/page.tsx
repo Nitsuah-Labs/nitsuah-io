@@ -230,7 +230,12 @@ const Projects = () => {
   return (
     <div className={styles.pageWrapper}>
       <HomeBar />
-      <main className={styles.projectsPage}>
+      <main
+        id="main"
+        role="main"
+        aria-label="Projects Page Content"
+        className={styles.projectsPage}
+      >
         <div className={styles.container}>
           {/* Header */}
           <div className={styles.header}>
@@ -264,6 +269,7 @@ const Projects = () => {
                       className={`${styles.categoryButton} ${
                         selectedCategory === cat ? styles.active : ""
                       }`}
+                      aria-label={cat === "Featured" ? "⭐ Featured" : cat}
                     >
                       {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
                     </button>
@@ -359,6 +365,7 @@ const Projects = () => {
           <section
             className={styles.projectGrid}
             aria-label="Project Repositories"
+            data-testid="projects-section"
           >
             {filteredProjects.map((project) => {
               const image = projectImages[project.id] || cat;

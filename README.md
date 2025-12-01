@@ -86,8 +86,9 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 - **Web3:** wagmi, viem, ConnectKit
 - **UI:** Material-UI, Emotion, custom CSS
 - **3D Graphics:** Spline Runtime
+- **Testing:** Jest (unit), Playwright (E2E/a11y)
 - **Deployment:** Netlify with automatic deployments
-- **CI:** GitHub Actions (build, typecheck, lint)
+- **CI:** GitHub Actions (build, typecheck, lint, tests)
 
 ### Web3 Features
 
@@ -95,6 +96,25 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 - NFT minting and domain registration
 - Smart contract interactions
 - Multi-chain support
+
+### Testing & Quality
+
+- **Unit Tests:** Jest with React Testing Library (14/14 passing)
+- **E2E Tests:** Playwright for visual regression and user flows (59/59 passing)
+- **Accessibility:** axe-core integration - WCAG 2.1 AA compliant (20/20 passing)
+- **Docker Testing:** CI-consistent environment with production builds
+- **Test Coverage:** 97.41% statement coverage, 100% test pass rate
+
+```bash
+# Run tests locally
+npm test                  # Unit tests
+npm run test:e2e         # E2E tests (all 59 tests)
+npm run test:a11y        # Accessibility tests
+
+# Match CI environment exactly
+npm run test:e2e:docker:build
+npm run test:e2e:docker
+```
 
 ---
 

@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 // Note: we used to skip heavy axe scans in test-helpers/dev mode because
 // dev overlays could interfere. Those skips were removed so tests run
 // deterministically against the production server started by Playwright.
@@ -30,18 +31,35 @@ for (const pageInfo of pages) {
     // Increase timeout for pages with Spline components
     test.setTimeout(60000);
 
-    await page.goto(pageInfo.path);
-
-    // Wait for page to be fully loaded
-    await page.waitForLoadState("domcontentloaded");
+    // Use new hydration-aware navigation
+    await gotoAndWaitForHydration(page, pageInfo.path, { timeout: 30000 });
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
       await page.waitForTimeout(3000);
     }
 
-    // Run axe accessibility scan
-    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    // For projects page, wait for content to load
+    if (pageInfo.path === "/projects") {
+      await page.waitForSelector("[data-testid='projects-section']", {
+        timeout: 10000,
+      });
+      // Additional wait to ensure cards are rendered
+      await page.waitForTimeout(1000);
+    }
+
+    // Run axe accessibility scan with error handling
+    let accessibilityScanResults;
+    try {
+      accessibilityScanResults = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+    } catch (e) {
+      // If axe fails to inject/run, treat it as a test failure with context
+      throw new Error(
+        `Axe accessibility scan failed for ${pageInfo.name}: ${e}`
+      );
+    }
 
     // Assert no violations
     expect(accessibilityScanResults.violations).toEqual([]);
