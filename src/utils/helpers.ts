@@ -71,7 +71,14 @@ export function capitalize(text: string): string {
 }
 
 /**
- * Debounce function calls
+ * Debounce function calls - delays execution until after wait time has elapsed
+ * since the last call. Useful for rate-limiting expensive operations like API calls.
+ * @param func - Function to debounce
+ * @param wait - Wait time in milliseconds before executing
+ * @returns Debounced version of the function
+ * @example
+ * const debouncedSearch = debounce((query) => api.search(query), 300);
+ * debouncedSearch('test'); // Will only execute after 300ms of no calls
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
@@ -91,7 +98,14 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 /**
- * Throttle function calls
+ * Throttle function calls - ensures function is called at most once per time period.
+ * Useful for rate-limiting event handlers like scroll or resize.
+ * @param func - Function to throttle
+ * @param limit - Minimum time in milliseconds between calls
+ * @returns Throttled version of the function
+ * @example
+ * const throttledScroll = throttle(() => updateUI(), 100);
+ * window.addEventListener('scroll', throttledScroll);
  */
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
@@ -110,8 +124,10 @@ export function throttle<T extends (...args: any[]) => any>(
 
 /**
  * Check if value is empty (null, undefined, empty string, empty array, empty object)
+ * @param value - Value to check for emptiness
+ * @returns true if value is considered empty
  */
-export function isEmpty(value: any): boolean {
+export function isEmpty(value: unknown): boolean {
   if (value === null || value === undefined) return true;
   if (typeof value === "string") return value.trim().length === 0;
   if (Array.isArray(value)) return value.length === 0;
@@ -121,15 +137,17 @@ export function isEmpty(value: any): boolean {
 
 /**
  * Deep clone an object
+ * @param obj - Object to clone
+ * @returns Deep cloned copy of the object
  */
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== "object") return obj;
-  if (obj instanceof Date) return new Date(obj.getTime()) as any;
-  if (obj instanceof Array) return obj.map((item) => deepClone(item)) as any;
+  if (obj instanceof Date) return new Date(obj.getTime()) as T;
+  if (obj instanceof Array) return obj.map((item) => deepClone(item)) as T;
 
-  const clonedObj: any = {};
+  const clonedObj = {} as T;
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       clonedObj[key] = deepClone(obj[key]);
     }
   }
@@ -138,20 +156,36 @@ export function deepClone<T>(obj: T): T {
 
 /**
  * Wait for specified milliseconds (useful for async functions)
+ * @param ms - Milliseconds to wait
+ * @returns Promise that resolves after the specified time
+ * @example
+ * await sleep(1000); // Wait 1 second
+ * console.log('Executed after 1 second');
  */
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
- * Generate a random ID
+ * Generate a unique ID with optional prefix
+ * @param prefix - Prefix for the ID (default: 'id')
+ * @returns Unique ID string combining prefix, timestamp, and random string
+ * @example
+ * generateId('user'); // 'user-1638360000000-k3j8x9q'
+ * generateId(); // 'id-1638360000000-a2b5c8d'
  */
 export function generateId(prefix: string = "id"): string {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
 /**
- * Safely parse JSON with fallback
+ * Safely parse JSON with fallback value on error
+ * @param json - JSON string to parse
+ * @param fallback - Value to return if parsing fails
+ * @returns Parsed object or fallback value
+ * @example
+ * safeJsonParse('{"name":"John"}', {}) // { name: 'John' }
+ * safeJsonParse('invalid json', {}) // {}
  */
 export function safeJsonParse<T>(json: string, fallback: T): T {
   try {
@@ -163,8 +197,20 @@ export function safeJsonParse<T>(json: string, fallback: T): T {
 
 /**
  * Get value from nested object using dot notation path
- * Example: getNestedValue(obj, 'user.profile.name')
+ * @param obj - Object to retrieve value from
+ * @param path - Dot-separated path (e.g., 'user.profile.name')
+ * @returns Value at the specified path, or undefined if not found
+ * @example getNestedValue({ user: { profile: { name: 'John' } } }, 'user.profile.name') // 'John'
  */
-export function getNestedValue(obj: any, path: string): any {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+export function getNestedValue<T = unknown>(
+  obj: Record<string, unknown>,
+  path: string,
+): T | undefined {
+  return path.split(".").reduce<unknown>((acc, part) => {
+    return acc &&
+      typeof acc === "object" &&
+      part in (acc as Record<string, unknown>)
+      ? (acc as Record<string, unknown>)[part]
+      : undefined;
+  }, obj) as T | undefined;
 }

@@ -2,7 +2,7 @@
 
 **Created:** November 2, 2025  
 **Last Updated:** December 1, 2025  
-**Status:** Minimal - No critical technical debt
+**Status:** Ongoing
 
 ---
 
@@ -47,7 +47,7 @@ The package `baseline-browser-mapping` checks its own publication date and emits
 
 **Tasks:**
 
-- [ ] Design automated screenshot gathering script
+- [ ] Design automated screenshot gathering script (ex darkmoon.dev & nitsuah.io & others for social previews and card placement in the future)
 - [ ] Standardize baseline update workflow
 - [ ] Document when/how to update baselines
 - [ ] Consider using Docker for consistent screenshot generation
@@ -64,5 +64,3 @@ The package `baseline-browser-mapping` checks its own publication date and emits
 
 - **ARCHITECTURE.md** - High-level system architecture and design patterns
 - **DEMO_REF.md** - Component usage guide
-- **TESTING.md** - Test suite documentation and best practices
-- **TODO.md** - Future work and manual tasks

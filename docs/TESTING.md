@@ -4,7 +4,7 @@ Comprehensive end-to-end, visual regression, and accessibility testing suite for
 
 ## Test Structure
 
-```
+```text
 tests/
 ├── visual/               # Visual regression tests (screenshots)
 │   ├── homepage.spec.ts
@@ -68,6 +68,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 ```
 
 **When to use Docker:**
+
 - Before pushing changes to visual components
 - After updating dependencies
 - When local tests pass but CI fails
@@ -75,7 +76,8 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 - When debugging Windows-specific test failures
 
 **Docker Image Details:**
-- Base: `mcr.microsoft.com/playwright:v1.56.1-noble` (Ubuntu)
+
+- Base: `mcr.microsoft.com/playwright:v1.57.0-noble` (Ubuntu)
 - Build Time: ~5.5 minutes (332s) first build, faster with cache
 - Context Size: ~137MB (project files)
 - Volumes: Source code, node_modules, test-results, playwright-report
@@ -83,18 +85,21 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 ## Test Types
 
 ### Visual Regression Tests
+
 - Captures screenshots of pages across devices
 - Compares against baseline screenshots
 - Detects unintended visual changes
 - **Status:** All 6 visual tests passing with Docker baselines
 
 ### Functional Tests
+
 - Tests wallet connection flows
 - Validates navigation
 - Checks form interactions
 - Tests Web3 functionality (mocked)
 
 ### Accessibility Tests
+
 - WCAG 2.1 AA compliance checks
 - Color contrast validation
 - Keyboard navigation
@@ -116,6 +121,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 ```
 
 Review changes:
+
 ```bash
 git diff tests/**/*.png
 ```
@@ -123,13 +129,15 @@ git diff tests/**/*.png
 ## CI/CD Integration
 
 Tests run automatically on:
+
 - Pull requests (all tests)
 - Pushes to main/dev (build + validation)
 
 Results and screenshots are uploaded as artifacts.
 
 **CI Environment:**
-- Docker container (mcr.microsoft.com/playwright:v1.56.1-noble)
+
+- Docker container (mcr.microsoft.com/playwright:v1.57.0-noble)
 - NODE_ENV=production (uses production build, not dev server)
 - CI=true flag
 - Headless browsers only
@@ -138,6 +146,7 @@ Results and screenshots are uploaded as artifacts.
 ## Browser Support
 
 Tests run on:
+
 - **Desktop**: Chrome, Firefox, Safari
 - **Mobile**: Pixel 5, iPhone 12
 - **Tablet**: iPad Pro
@@ -145,18 +154,21 @@ Tests run on:
 ## Configuration
 
 See `playwright.config.ts` for:
+
 - Timeout settings
 - Device configurations
 - Screenshot options
 - CI/CD behavior
 
 See `docker-compose.test.yml` for:
+
 - Docker service configuration
 - Volume mounts
 - Environment variables
 - Resource limits (2GB shm_size)
 
 See `Dockerfile.test` for:
+
 - Base image configuration
 - Build steps
 - Dependency installation
@@ -174,17 +186,21 @@ sudo npx playwright install-deps
 **All Playwright tests MUST use production build, not dev server.**
 
 ### Why?
+
 Next.js Turbopack dev server causes JavaScript execution failures in Docker/CI:
+
 - HTML loads (8-9KB) but React never mounts
 - All DOM queries timeout
 - Tests pass locally but fail in CI
 
 ### Solution Implemented
+
 1. `Dockerfile.test` builds with `npm run build:skip-wagmi`
 2. `playwright.config.ts` uses `npm run start` (production server)
 3. CI downloads build artifacts before running tests
 
 ### Verification
+
 ```bash
 # Test in Docker (matches CI exactly)
 docker-compose -f docker-compose.test.yml build
@@ -198,6 +214,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 ## Debugging
 
 ### Visual Debugging
+
 ```bash
 # Local
 npx playwright test --debug
@@ -208,16 +225,19 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 ```
 
 ### Show Test Report
+
 ```bash
 npx playwright show-report
 ```
 
 ### View Trace
+
 ```bash
 npx playwright show-trace trace.zip
 ```
 
 ### Check Docker Test Output
+
 ```bash
 # View test results from Docker runs
 cat test-results/results.json
