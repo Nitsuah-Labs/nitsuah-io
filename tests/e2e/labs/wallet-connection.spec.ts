@@ -167,13 +167,13 @@ test.describe("Domains Page", () => {
     await page.goto("/labs/domains?testHelpers=1");
 
     // Manually add test-helpers class to ensure CSS applies
-  test("domains page has wallet connection capability", async ({ page }) => {
-    await page.goto("/labs/domains?testHelpers=1");
-
-    // Manually add test-helpers class to ensure CSS applies
     await ensureTestHelpersClass(page);
 
     // Should have header at minimum (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();
+
+    // Check for main content area
+    const mainContent = page.locator("main");
+    await expect(mainContent).toBeVisible();
   });
 });
