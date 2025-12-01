@@ -1,8 +1,8 @@
 # TASKS
 
-## Active Tasks
+## Todo
 
-### High Priority (Manual)
+### High Priority
 
 - [ ] **Wallet Testing Setup** - Setup MetaMask or embedded wallet for local Web3 testing
 - [ ] **Visual Assets** - See `SCREENSHOT-REQS.md` for needed screenshots:
