@@ -80,7 +80,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    // Return safe defaults during SSR or when outside provider
+    // This prevents build errors in edge cases like not-found.tsx
+    return {
+      theme: DEFAULT_THEME,
+      toggleTheme: () => {},
+      setTheme: () => {},
+    };
   }
   return context;
 }
