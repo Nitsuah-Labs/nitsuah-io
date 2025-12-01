@@ -5,18 +5,6 @@ import { expect, test } from "@playwright/test";
  * These tests simulate wallet behavior without requiring actual MetaMask
  */
 
-/**
- * Helper function to ensure test-helpers class is applied
- * This prevents flakiness from Next.js dev overlay
- */
-async function ensureTestHelpersClass(page: Page) {
-  await page.evaluate(() => {
-    if (document.body && !document.body.classList.contains("test-helpers")) {
-      document.body.classList.add("test-helpers");
-    }
-  });
-}
-
 test.describe("Wallet Connection Flow", () => {
   test.beforeEach(async ({ page }) => {
     // Mock MetaMask window.ethereum object
@@ -62,9 +50,13 @@ test.describe("Wallet Connection Flow", () => {
 
   test("network switcher appears on register page", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
-
+    
     // Manually add test-helpers class to ensure CSS applies
-    await ensureTestHelpersClass(page);
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Network switcher appears after wallet connect - just check page loaded correctly
     await expect(page.locator("header")).toBeVisible();
@@ -141,9 +133,13 @@ test.describe("Mint NFT Flow", () => {
     await page.goto("/labs/mint?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
-
+    
     // Manually add test-helpers class to ensure CSS applies
-    await ensureTestHelpersClass(page);
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Check for consistent header (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();
@@ -155,9 +151,13 @@ test.describe("Domains Page", () => {
     await page.goto("/labs/domains?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
-
+    
     // Manually add test-helpers class to ensure CSS applies
-    await ensureTestHelpersClass(page);
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Check for header (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();
@@ -165,9 +165,13 @@ test.describe("Domains Page", () => {
 
   test("domains page has wallet connection capability", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
-
+    
     // Manually add test-helpers class to ensure CSS applies
-    await ensureTestHelpersClass(page);
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Should have header at minimum (footer visibility tested in visual tests)
     await expect(page.locator("header")).toBeVisible();

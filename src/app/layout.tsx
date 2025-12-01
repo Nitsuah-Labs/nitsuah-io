@@ -5,6 +5,7 @@ import {
   generatePersonSchema,
   generateWebSiteSchema,
 } from "../lib/schema";
+import "../styles/theme.css";
 import SkipLink from "./_components/SkipLink";
 import { Providers } from "./providers";
 import "./test-helpers.css";

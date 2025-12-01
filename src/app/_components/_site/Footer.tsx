@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import cat from "../../../../public/images/cat.png";
 import "../_styles/global.css";
+import styles from "./Footer.module.css";
 
 // CONSTANTS
 const TWITTER_HANDLE = "nitsuah";
@@ -26,7 +27,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="footer-container" style={{ position: "fixed" }}>
+    <footer className={`footer-container ${styles.footer}`}>
       <a
         href="https://www.linkedin.com/in/austinjhardy"
         target="_blank"
@@ -55,32 +56,7 @@ const Footer: React.FC = () => {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          style={{
-            position: "absolute",
-            right: "2rem",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 10,
-            width: "0",
-            height: "0",
-            border: "none",
-            borderLeft: "20px solid transparent",
-            borderRight: "20px solid transparent",
-            borderBottom: "25px solid #f97316",
-            background: "transparent",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-            padding: 0,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderBottomColor = "#ea580c";
-            e.currentTarget.style.filter =
-              "drop-shadow(0 4px 8px rgba(249, 115, 22, 0.6))";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderBottomColor = "#f97316";
-            e.currentTarget.style.filter = "none";
-          }}
+          className={styles.backToTopButton}
         />
       )}
     </footer>

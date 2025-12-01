@@ -1,0 +1,88 @@
+/**
+ * Theme configuration and CSS custom properties
+ * Defines color tokens for light and dark modes
+ */
+
+:root {
+  /* Light mode colors (default) */
+  --color-background: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-elevated: #ffffff;
+  --color-border: #e1e4e8;
+  --color-border-hover: #d1d5da;
+
+  --color-text-primary: #24292e;
+  --color-text-secondary: #586069;
+  --color-text-tertiary: #6a737d;
+  --color-text-link: #0366d6;
+  --color-text-link-hover: #0256b8;
+
+  --color-accent: #0366d6;
+  --color-accent-hover: #0256b8;
+  --color-accent-light: #f1f8ff;
+
+  --color-success: #28a745;
+  --color-warning: #ffd33d;
+  --color-error: #d73a49;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* Dark mode colors */
+:root[data-theme="dark"],
+:root.dark {
+  --color-background: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-elevated: #21262d;
+  --color-border: #30363d;
+  --color-border-hover: #484f58;
+
+  --color-text-primary: #c9d1d9;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #6e7681;
+  --color-text-link: #58a6ff;
+  --color-text-link-hover: #79c0ff;
+
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-accent-light: #1c2d41;
+
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-error: #f85149;
+
+  /* Shadows (darker in dark mode) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Base theme application */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+/* Smooth color transitions for theme switching */
+* {
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+/* Prevent transition on page load */
+body.no-transition * {
+  transition: none !important;
+}
