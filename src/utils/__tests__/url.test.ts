@@ -53,7 +53,7 @@ describe("url utilities", () => {
     it("should handle path with query params", () => {
       process.env.NEXT_PUBLIC_SITE_URL = "https://nitsuah.io";
       expect(getAbsoluteUrl("/search?q=test")).toBe(
-        "https://nitsuah.io/search?q=test"
+        "https://nitsuah.io/search?q=test",
       );
     });
   });
@@ -77,7 +77,7 @@ describe("url utilities", () => {
 
     it("should append single query parameter", () => {
       expect(getCurrentUrl("/search", { q: "web3" })).toBe(
-        "https://nitsuah.io/search?q=web3"
+        "https://nitsuah.io/search?q=web3",
       );
     });
 

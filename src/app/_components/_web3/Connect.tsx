@@ -40,7 +40,7 @@ export function Connect() {
       toast.error(
         (error as any)?.shortMessage ||
           (error as any)?.message ||
-          "Failed to connect"
+          "Failed to connect",
       );
       setPendingId(null);
     }
