@@ -16,7 +16,7 @@ export default defineConfig({
   globalSetup: require.resolve("./tests/global-setup"),
 
   // Maximum time one test can run - increased for CI stability
-  timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
+  timeout: process.env.CI ? CI_TIMEOUT : LOCAL_TIMEOUT,
 
   // Test configuration
   fullyParallel: true,

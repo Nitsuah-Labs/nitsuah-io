@@ -261,7 +261,7 @@ export default function RootLayout({
       >
         <Providers>
           {/* Skip link placed early; pages must supply a single <main id="main"> */}
-          <nav aria-label="Skip navigation" style={{ position: "relative" }}>
+          <nav style={{ position: "relative" }}>
             <SkipLink />
           </nav>
           {children}

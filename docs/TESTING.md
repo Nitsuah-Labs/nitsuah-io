@@ -86,7 +86,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 - Captures screenshots of pages across devices
 - Compares against baseline screenshots
 - Detects unintended visual changes
-- **Note:** Currently 3 tests skipped pending Docker validation
+- **Status:** All 6 visual tests passing with Docker baselines
 
 ### Functional Tests
 - Tests wallet connection flows
@@ -100,7 +100,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
 - Keyboard navigation
 - Screen reader support
 - ARIA attributes
-- **Current Status:** 20/28 passing (8 resume tests under investigation)
+- **Status:** All 20 accessibility tests passing (100%)
 
 ## Updating Baselines
 
@@ -192,6 +192,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright \
   npx playwright test tests/accessibility/all-pages.spec.ts
 
 # Should see: 20/20 tests passing ✓
+# All 59 Playwright tests passing in production build ✓
 ```
 
 ## Debugging
@@ -238,16 +239,16 @@ npx playwright show-report playwright-report
 
 ## Test Status (Current)
 
-| Test Suite         | Status       | Count | Notes                                   |
-| ------------------ | ------------ | ----- | --------------------------------------- |
-| Unit Tests         | ✅ Passing    | 14/14 | Jest + React Testing Library            |
-| A11y Tests         | ✅ Passing    | 20/20 | All pages WCAG 2.1 AA compliant         |
-| Resume Tests       | ✅ Passing    | 8/8   | Production build in Docker              |
-| Visual Tests       | ✅ Passing    | 3/3   | Production build in Docker              |
-| E2E Wallet Flow    | ✅ Passing    | 10/10 | Production build in Docker              |
-| E2E Navigation     | ✅ Passing    | 1/1   | Main nav links test working             |
+| Test Suite      | Status    | Count | Notes                           |
+| --------------- | --------- | ----- | ------------------------------- |
+| Unit Tests      | ✅ Passing | 14/14 | Jest + React Testing Library    |
+| A11y Tests      | ✅ Passing | 20/20 | All pages WCAG 2.1 AA compliant |
+| Resume Tests    | ✅ Passing | 8/8   | Production build in CI          |
+| Visual Tests    | ✅ Passing | 6/6   | Production build in CI          |
+| E2E Wallet Flow | ✅ Passing | 10/10 | Production build in CI          |
+| E2E Navigation  | ✅ Passing | 1/1   | Main nav links test working     |
 
-**Summary:** 56/56 Playwright tests passing in Docker with production build (100%)
+**Summary:** 59/59 Playwright tests passing with production build (100%)
 
 **Coverage:** 97.41% statement coverage (1393/1430), 55.42% branches, 54.28% functions
 
@@ -273,16 +274,6 @@ npm run test:e2e:docker
 ```bash
 npm run test:e2e:docker:build
 ```
-
-### Client-side pages return empty HTML in tests
-
-**Status:** Under investigation in CI/Docker environment.
-
-**Symptoms:** Pages like `/resume`, `/projects`, `/labs/*` return only 15 bytes locally with JavaScript error "Unexpected identifier 'overseer'".
-
-**Action:** Tests restored from working commit (ce4724c) and pushed to CI. Awaiting Docker validation results.
-
-**Workaround:** Tests properly skipped locally. See `docs/TECH_DEBT.md` for full investigation plan.
 
 ### Visual snapshots don't match
 

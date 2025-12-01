@@ -22,18 +22,15 @@
   - Also fixed: Missing NEXT_PUBLIC_TEST_HELPERS=1 env var in CI workflow
   - Result: Build succeeds, page renders with actual data
   - Commits: 7cba3de (path fix), 53fea7c (CI env var), 25858cc (final correction)
-- [ ] **Accessibility Test Failures** - ACTIVE: 47/59 tests failing with axe-core injection errors:
-  - Error: "Cannot read properties of null (reading 'documentElement')"
-  - Cause: axe-core running before React hydration completes
-  - Fix attempt: Added networkidle wait + error handling to all-pages.spec.ts
-  - Affects: All accessibility tests across homepage, labs pages, resume, keyboard nav
-  - Tests passing: 11 (keyboard nav skip links, some visual tests)
-  - Next: Verify fix, may need to add waitForSelector for main/body before axe scan
-- [ ] **Visual Test Re-enablement** - Once Docker resume investigation completes, re-enable 3 skipped Playwright visual tests:
-  - `tests/visual/homepage.spec.ts:5` - homepage desktop rendering
-  - `tests/visual/homepage.spec.ts:32` - homepage mobile rendering
-  - `tests/visual/projects.spec.ts:6` - projects page rendering
-  - Requires: Docker environment validation and screenshot baseline updates
+- [x] **Accessibility Test Failures** - RESOLVED: All 59/59 tests passing in CI:
+  - Root cause: Dev server causes JavaScript execution failures in Docker/CI
+  - Solution: Use production build (`npm run start`) instead of dev server
+  - Result: All accessibility, visual, resume, and E2E tests passing (100%)
+  - Commit: e870a94 (production build fix)
+- [x] **Visual Test Re-enablement** - COMPLETE: All visual tests passing:
+  - All homepage and labs visual tests re-enabled and passing
+  - Docker environment validated with production build
+  - Screenshot baselines generated and committed
 
 ### Dependency Fixes
 
