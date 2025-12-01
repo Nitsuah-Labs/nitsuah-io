@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const CI_TIMEOUT = 180_000; // 3 minutes for CI stability
+const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
+
 /**
  * Playwright configuration for nitsuah.io testing
  *
