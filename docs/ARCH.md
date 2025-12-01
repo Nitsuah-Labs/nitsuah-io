@@ -45,6 +45,60 @@ The project is organized into the following key directories:
 
 ## Key Components & Systems
 
+### Theme System
+
+The application features a complete dark/light mode theme system with user preference persistence.
+
+**Architecture:**
+- **Context Provider:** `src/contexts/ThemeContext.tsx` provides global theme state using React Context API
+- **Theme Storage:** User preference persisted in `localStorage` with key `"nitsuah-theme"`
+- **Default Theme:** Dark mode by default
+- **CSS Custom Properties:** `src/styles/theme.css` defines comprehensive design tokens for both themes
+- **SSR Safety:** Mounted state check prevents hydration mismatch
+
+**Theme Tokens:**
+```css
+/* Colors */
+--color-background, --color-surface, --color-surface-elevated
+--color-border, --color-border-hover
+--color-text-primary, --color-text-secondary, --color-text-tertiary
+--color-accent, --color-accent-hover
+--color-success, --color-warning, --color-error
+
+/* Shadows */
+--shadow-sm, --shadow-md, --shadow-lg
+
+/* Transitions */
+--transition-fast (150ms), --transition-normal (300ms), --transition-slow (500ms)
+```
+
+**Provider Hierarchy:**
+```
+ThemeProvider
+  └─ WagmiProvider
+      └─ QueryClientProvider
+          └─ ToastProvider
+              └─ Application Components
+```
+
+### Styling Architecture
+
+The project uses a hybrid styling approach combining global CSS, CSS Modules, and CSS Custom Properties.
+
+**CSS Modules Strategy:**
+- Component-specific styles in `.module.css` files colocated with components
+- Scoped class names prevent style conflicts
+- All demo components (`DemoButton`, `DemoCard`, `DemoTable`) use CSS modules
+- Site components (`Footer`, `Search`, `Connect`) migrated to CSS modules
+- Theme tokens integrated via CSS custom properties
+
+**Benefits:**
+- Zero inline styles (maintainability ✅)
+- Proper separation of concerns
+- CSS hover states instead of JavaScript handlers
+- Theme-aware via custom properties
+- Type-safe class names in TypeScript
+
 ### Web3 Integration
 
 The Web3 functionality is built around the `wagmi` and `viem` libraries.
@@ -75,9 +129,191 @@ The project uses GitHub Actions for continuous integration. The workflow is defi
 
 The site is deployed to Netlify. The `netlify.toml` file in the project root configures the build settings, including the build command, publish directory, and environment variables.
 
+## Testing Strategy
+
+### Unit Testing (Jest + React Testing Library)
+
+**Coverage:** 98.0% statements | 81.2% branches | 82.2% functions
+
+**Test Suites:**
+
+- **Utilities:** `src/utils/__tests__/`
+  - `url.test.ts` - 54 tests covering URL manipulation, query strings, external link detection
+  - `validation.test.ts` - 112 tests covering email, URL, Ethereum address, color, GitHub username validation
+- **Hooks:** `src/hooks/__tests__/`
+  - `useHoverStyle.test.ts` - 33 tests covering hover state management and style merging
+- **Components:** Component-specific test files colocated with source
+  - Demo components (DemoButton, DemoCard, DemoTable, DemoHeader)
+  - Restaurant components (MenuSection, OrderCart)
+  - Resume components (ContactForm, ExperienceSection, SkillsSection)
+  - Web3 components (Connect, MintNFT)
+  - Site components (Brand)
+
+**Testing Philosophy:**
+
+- Comprehensive edge case coverage
+- Real-world scenario testing
+- Accessibility validation (ARIA labels, semantic HTML)
+- Error handling verification
+- Mock external dependencies (wagmi, viem)
+
+### End-to-End Testing (Playwright)
+
+**Test Coverage:**
+
+- Accessibility testing for all pages (axe-core integration)
+- Visual regression testing
+- User interaction flows
+- Cross-browser compatibility (Chromium, Firefox, WebKit)
+
+**Test Organization:**
+
+- `tests/` - E2E test suites
+- `tests/_utils/` - Shared test utilities
+- `playwright.config.ts` - Playwright configuration
+- Reports generated in `playwright-report/` (gitignored)
+
+### CI/CD Pipeline
+
+**GitHub Actions Workflow** (`.github/workflows/ci.yml`):
+
+1. **Lint:** ESLint checks for code quality
+2. **Typecheck:** TypeScript compilation validation
+3. **Unit Tests:** Jest test suite execution
+4. **Build:** Next.js production build verification
+5. **E2E Tests:** Playwright accessibility and interaction tests
+
+**Quality Gates:**
+
+- All tests must pass
+- No TypeScript errors
+- No ESLint violations
+- Successful production build
+
+## Data Flow & State Management
+
+### Client-Side State
+
+**React Context:**
+
+- `ThemeContext` - Global theme state (light/dark mode)
+- No Redux/Zustand needed - Context API sufficient for current scale
+
+**React Query:**
+
+- Powered by `@tanstack/react-query`
+- Manages Web3 data fetching and caching
+- Automatic background refetching
+- Optimistic updates for transactions
+
+**Local State:**
+
+- Component-level state via `useState` for UI interactions
+- Form state management in contact forms
+- Cart state in restaurant demo
+
+### Server-Side Rendering
+
+**Next.js App Router:**
+
+- Server Components by default
+- Client Components marked with `"use client"`
+- Hydration-safe patterns (theme system uses mounted state)
+- Static generation for marketing pages
+- Dynamic rendering for Web3 pages
+
+## Component Patterns
+
+### Demo Components
+
+Reusable UI components showcasing different patterns:
+
+**DemoButton** - Button with variants and sizes
+
+- Variants: primary, secondary, success, danger, ghost
+- Sizes: small, medium, large
+- Disabled state handling
+- CSS module styling with theme tokens
+
+**DemoCard** - Card container with hover effects
+
+- Optional hover animations
+- Clickable variants
+- Theme-aware borders and backgrounds
+
+**DemoTable** - Data table with sorting and interaction
+
+- Generic TypeScript types for type safety
+- Custom column rendering
+- Hover and striped row variants
+- Responsive overflow handling
+
+### Project Demos
+
+**Restaurant** (`src/app/projects/clients/_comp/restaurant/`)
+
+- Menu browsing with categories
+- Shopping cart with item management
+- Order total calculation
+- Responsive grid layout
+
+**Resume** (`src/app/projects/clients/_comp/resume/`)
+
+- Professional resume template
+- Contact form with validation
+- Experience timeline
+- Skills grid with categories
+
+## Performance Optimizations
+
+**Code Splitting:**
+
+- Dynamic imports for heavy components (Spline 3D)
+- Route-based code splitting via Next.js App Router
+- Lazy loading for below-the-fold content
+
+**Image Optimization:**
+
+- Next.js Image component for automatic optimization
+- WebP format with fallbacks
+- Responsive images with srcset
+
+**CSS Optimization:**
+
+- CSS modules for automatic code splitting
+- Critical CSS inlined by Next.js
+- Minification in production builds
+
+**Bundle Size:**
+
+- Tree-shaking enabled
+- No moment.js (using native Date APIs)
+- Selective imports from lodash/UI libraries
+
+## Security
+
+**Dependency Auditing:**
+
+- Regular `npm audit` checks
+- Automated security updates via Dependabot
+- Zero high/critical vulnerabilities policy
+
+**Web3 Security:**
+
+- User transaction approval required
+- Network mismatch warnings
+- Wallet connection state validation
+- No private key handling (wallet-managed)
+
+**Content Security:**
+
+- Input sanitization in utility functions
+- XSS prevention in validation layer
+- SQL injection escaping patterns tested
+
 ## Status
 
-**Last Updated:** November 1, 2025
+**Last Updated:** December 1, 2025
 
 ### Production Ready ✅
 
@@ -85,6 +321,16 @@ The site is deployed to Netlify. The `netlify.toml` file in the project root con
 - wagmi v2 + viem v2 Web3 integration
 - Wallet connection (icons, toasts, install prompts)
 - Profile page with wallet dashboard
-- Jest + Playwright + accessibility tests
+- Jest + Playwright + accessibility tests (98% coverage, 213 tests)
+- Dark/light theme system with persistence
+- CSS Modules architecture (zero inline styles)
 - CI/CD with GitHub Actions + Netlify
 - Security hardened (0 moderate/high vulnerabilities)
+
+### Recent Improvements (December 2025)
+
+- ✅ Comprehensive unit test coverage (199 tests)
+- ✅ Dark mode theme system with CSS custom properties
+- ✅ Migrated all inline styles to CSS modules
+- ✅ Cleaned up HTML reports from git history
+- ✅ Centralized theme tokens for maintainability

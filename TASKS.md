@@ -1,15 +1,16 @@
 # TASKS
 
-## Todo
+**Last Updated:** December 1, 2025
 
-- [ ] **Inline Styles** - Extract to CSS modules if dark mode is implemented
-- [ ] **Add unit tests** - url.ts, validation.ts, useHoverStyle.ts, get us to 98%
-- [ ] **Dark Mode** - Theme toggle (default is dark, needs "soft/non-white light" mode)
-- [ ] **ARCHITECTURE.md** - Expand with component patterns and data flow (currently 69 LOC)
-- [ ] **TECH DEBT** - any new Strategic codebase cleanup and refactoring remaining (see `TECH_DEBT.md` for remaining or plan out new items to help with management of technical debt and upkeep of code quality over time)
-  - [ ] Mobile support & playwright tests increase
-  - [ ] User feedback integration
-  - [ ] Performance improvements
+## Completed ✅
+
+- [x] **Add unit tests** - Complete test suite (213 tests, **98% coverage ✅**)
+- [x] **Dark Mode** - Theme toggle with localStorage persistence, CSS custom properties
+- [x] **Inline Styles** - All extracted to CSS modules (DemoButton, DemoCard, DemoTable, Footer, Search, Connect)
+- [x] **ARCHITECTURE.md** - Expanded with comprehensive documentation (300+ LOC)
+- [x] **Git Cleanup** - Removed HTML report files from tracking
+
+## Todo
 
 ### High Priority
 

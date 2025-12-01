@@ -41,4 +41,21 @@ describe("DemoTable", () => {
     render(<DemoTable data={[]} columns={columns} />);
     expect(screen.getByText(/No data available/)).toBeInTheDocument();
   });
+
+  it("handles custom column render function", () => {
+    const data: Row[] = [{ id: 1, name: "Test", value: 100 }];
+    const columns = [
+      { key: "id", header: "ID" },
+      {
+        key: "value",
+        header: "Value",
+        render: (item: Row, value: number) => `$${value}`,
+      },
+    ];
+
+    render(<DemoTable data={data} columns={columns} />);
+
+    // Custom render should format the value
+    expect(screen.getByText("$100")).toBeInTheDocument();
+  });
 });
