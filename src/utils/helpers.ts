@@ -175,7 +175,7 @@ export function sleep(ms: number): Promise<void> {
  * generateId(); // 'id-1638360000000-a2b5c8d'
  */
 export function generateId(prefix: string = "id"): string {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
 /**
