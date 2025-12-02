@@ -7,6 +7,7 @@ export const dynamicParams = true;
 import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { formatUnits } from "viem";
 import { useAccount, useBalance, useDisconnect, useEnsName } from "wagmi";
 import { getExplorerLink } from "../../lib/constants/networks";
 import LabNav from "../_components/_labs/LabNav";
@@ -287,7 +288,10 @@ const ProfilePage: React.FC = () => {
                   Balance
                 </h3>
                 <p style={{ fontSize: "1.5rem", fontWeight: "700" }}>
-                  {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
+                  {parseFloat(
+                    formatUnits(balance.value, balance.decimals),
+                  ).toFixed(4)}{" "}
+                  {balance.symbol}
                 </p>
               </div>
             )}

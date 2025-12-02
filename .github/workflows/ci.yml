@@ -29,7 +29,13 @@ jobs:
         run: npm ci
 
       - name: Generate wagmi hooks
-        run: npm run wagmi
+        run: |
+          if [ -n "$ETHERSCAN_API_KEY" ] || [ -n "$NEXT_PUBLIC_ALCHEMY_API_KEY" ]; then
+            npm run wagmi
+          else
+            echo "Skipping wagmi generation - no API keys available"
+            echo "This is expected in CI without secrets configured"
+          fi
         env:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
           NEXT_PUBLIC_ALCHEMY_API_KEY: ${{ secrets.NEXT_PUBLIC_ALCHEMY_API_KEY }}
