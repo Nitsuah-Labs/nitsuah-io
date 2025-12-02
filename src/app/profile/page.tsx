@@ -288,7 +288,10 @@ const ProfilePage: React.FC = () => {
                   Balance
                 </h3>
                 <p style={{ fontSize: "1.5rem", fontWeight: "700" }}>
-                  {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
+                  {parseFloat(
+                    formatUnits(balance.value, balance.decimals),
+                  ).toFixed(4)}{" "}
+                  {balance.symbol}
                 </p>
               </div>
             )}
