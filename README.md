@@ -16,7 +16,7 @@ A fast, modern Next.js + TypeScript personal website showcasing selected project
 
 ## What This Repo Contains
 
-- **Next.js 14** + TypeScript site with modern React components
+- **Next.js 16** + TypeScript site with modern React components
 - **Web3 Integration:** wagmi + ConnectKit for crypto/blockchain features
 - **Interactive Elements:** Spline 3D scenes and animations
 - **Labs Section:** Experimental Web3 tools (domains, minting, staking)
@@ -56,7 +56,7 @@ Collection of practical IT automation and enterprise tools
 
 ## Run Locally (3 Steps)
 
-Requires Node.js 18+ (recommended: 22+)
+Requires Node.js 22+
 
 ```bash
 # 1. Install dependencies
@@ -81,7 +81,7 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 
 ## Tech Stack & Features
 
-- **Framework:** Next.js 14 with App Router
+- **Framework:** Next.js 16 with App Router
 - **Language:** TypeScript
 - **Web3:** wagmi, viem, ConnectKit
 - **UI:** Material-UI, Emotion, custom CSS
@@ -179,7 +179,7 @@ src/
 
 ---
 
-## Development Notes
+### Development Notes
 
 ### Key Commands
 
@@ -193,7 +193,7 @@ npm run wagmi      # Generate Web3 hooks
 
 ### Environment Setup
 
-- Node.js 18+ required
+- Node.js 22+ required
 - Uses wagmi CLI for smart contract integration
 - Spline scenes loaded from external CDN
 

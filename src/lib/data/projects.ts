@@ -69,7 +69,7 @@ const projects: Project[] = [
     title: "Portfolio Site",
     short: "This portfolio website built with Next.js and Web3 integrations.",
     description:
-      "Modern portfolio website featuring Next.js 14, TypeScript, Web3 wallet integration, 3D Spline animations, and experimental blockchain tools in the labs section.",
+      "Modern portfolio website featuring Next.js 16, TypeScript, Web3 wallet integration, 3D Spline animations, and experimental blockchain tools in the labs section.",
     github: "https://github.com/Nitsuah-Labs/nitsuah-io",
     demo: "https://nitsuah.io",
     highlight: "Web3 integration, modern React patterns, 3D graphics",
