@@ -16,11 +16,11 @@ export interface BlogPost {
 export const mockBlogPosts: BlogPost[] = [
   {
     id: 1,
-    title: "Getting Started with Next.js 14",
+    title: "Getting Started with Next.js 16",
     excerpt:
-      "Learn the fundamentals of Next.js 14 and its App Router architecture",
+      "Learn the fundamentals of Next.js 16 and its App Router architecture",
     content:
-      "Next.js 14 brings powerful new features including improved performance, better developer experience, and enhanced routing capabilities...",
+      "Next.js 16 brings powerful new features including improved performance, better developer experience, and enhanced routing capabilities...",
     author: "John Developer",
     date: "2024-01-15",
     category: "Web Development",

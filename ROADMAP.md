@@ -1,6 +1,6 @@
 # ROADMAP.md
 
-**Updated:** December 1, 2025
+**Updated:** December 4, 2025
 
 ## 2025Q4
 

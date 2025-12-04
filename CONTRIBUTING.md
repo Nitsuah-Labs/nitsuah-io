@@ -119,7 +119,7 @@ git commit --no-verify
 
 - Use functional components with hooks
 - Keep components small and focused
-- Use Next.js 14 App Router conventions
+- Use Next.js 16 App Router conventions
 - Leverage server components when appropriate
 
 ### Styling

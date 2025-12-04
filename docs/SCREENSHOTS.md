@@ -198,4 +198,4 @@ This document tracks which demos and projects need updated screenshots or images
 - [ ] Clients - Dental office images (5+)
 - [ ] Clients - Portfolio project images (6+)
 
-**Last Updated**: 2025-11-23
+**Last Updated**: 2025-12-04
