@@ -1,0 +1,53 @@
+# CODEOWNERS
+
+> This file defines who owns and should review changes to specific files or directories.
+> Learn more: [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+
+# Global owners - these users will be requested for review on all PRs
+* @Nitsuah-Labs
+
+# Documentation
+# All markdown files should be reviewed by @Nitsuah-Labs
+*.md @Nitsuah-Labs
+/docs/ @Nitsuah-Labs
+
+# Configuration files
+# Configuration files need review by @Nitsuah-Labs
+*.json @Nitsuah-Labs
+*.yaml @Nitsuah-Labs
+*.yml @Nitsuah-Labs
+*.toml @Nitsuah-Labs
+
+# CI/CD workflows
+# All CI/CD workflows should be reviewed by @Nitsuah-Labs
+/.github/workflows/ @Nitsuah-Labs
+
+# Source code
+# Source code in these directories needs review by @Nitsuah-Labs
+/src/ @Nitsuah-Labs
+/lib/ @Nitsuah-Labs
+/app/ @Nitsuah-Labs
+/components/ @Nitsuah-Labs
+
+# Database
+# All database related files should be reviewed by @Nitsuah-Labs
+/database/ @Nitsuah-Labs
+*.sql @Nitsuah-Labs
+
+# Tests
+# All test-related files should be reviewed by @Nitsuah-Labs
+/tests/ @Nitsuah-Labs
+/test/ @Nitsuah-Labs
+*.test.* @Nitsuah-Labs
+*.spec.* @Nitsuah-Labs
+
+# Infrastructure & deployment
+# Infrastructure and deployment related files need review by @Nitsuah-Labs
+/infrastructure/ @Nitsuah-Labs
+/terraform/ @Nitsuah-Labs
+Dockerfile @Nitsuah-Labs
+docker-compose*.yml @Nitsuah-Labs
+
+# Security-sensitive files
+# Security-sensitive files need review by @Nitsuah-Labs
+/SECURITY.md @Nitsuah-Labs
