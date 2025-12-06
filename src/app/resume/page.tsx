@@ -3,7 +3,6 @@ import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
   EducationSection,
-  ExportPDFButton,
   LanguagesSection,
   ProfileButtons,
   ResumeHeader,
@@ -36,14 +35,6 @@ export default function ResumePage() {
         aria-label="Resume Content"
       >
         <div className="resume-content">
-          {/* PDF Export Button */}
-          <div
-            className="print-hide"
-            style={{ textAlign: "right", marginBottom: "1rem" }}
-          >
-            <ExportPDFButton />
-          </div>
-
           {/* Header Section */}
           <ResumeHeader basics={resume.basics} />
 
@@ -58,18 +49,6 @@ export default function ResumePage() {
             />
           )}
 
-          {/* Work Experience */}
-          {resume.work && resume.work.length > 0 && (
-            <div style={{ marginTop: "2.5rem" }}>
-              <WorkExperience work={resume.work} />
-            </div>
-          )}
-
-          {/* Skills */}
-          {resume.skills && resume.skills.length > 0 && (
-            <SkillsGrid skills={resume.skills} />
-          )}
-
           {/* Education & Languages Side-by-Side */}
           {((resume.education && resume.education.length > 0) ||
             (resume.languages && resume.languages.length > 0)) && (
@@ -78,6 +57,7 @@ export default function ResumePage() {
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "2rem",
+                marginTop: "2.5rem",
                 marginBottom: "2.5rem",
               }}
               className="education-languages-container"
@@ -89,6 +69,18 @@ export default function ResumePage() {
                 <LanguagesSection languages={resume.languages} />
               )}
             </div>
+          )}
+
+          {/* Work Experience */}
+          {resume.work && resume.work.length > 0 && (
+            <div style={{ marginTop: "2.5rem" }}>
+              <WorkExperience work={resume.work} />
+            </div>
+          )}
+
+          {/* Skills */}
+          {resume.skills && resume.skills.length > 0 && (
+            <SkillsGrid skills={resume.skills} />
           )}
         </div>
       </main>

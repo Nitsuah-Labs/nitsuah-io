@@ -2,16 +2,20 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import cat from "../../../../public/images/cat.png";
 import "../_styles/global.css";
 import styles from "./Footer.module.css";
+import GitHubButton from "./GitHubButton";
+import ThemeToggle from "./ThemeToggle";
 
 // CONSTANTS
 const TWITTER_HANDLE = "nitsuah";
 const TWITTER_LINK = `https://github.com/${TWITTER_HANDLE}`;
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
@@ -28,6 +32,10 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={`footer-container ${styles.footer}`}>
+      {/* Theme Toggle - Fixed to Left Side */}
+      <div className={styles.themeToggleWrapper}>
+        <ThemeToggle />
+      </div>
       <a
         href="https://www.linkedin.com/in/austinjhardy"
         target="_blank"
@@ -51,7 +59,18 @@ const Footer: React.FC = () => {
       >
         {`@${TWITTER_HANDLE}`}
       </a>
-      {/* Back to Top Button - Inside Footer */}
+      <GitHubButton />
+      {/* Export PDF Button - Only visible on resume page */}
+      {pathname === "/resume" && (
+        <button
+          onClick={() => window.print()}
+          aria-label="Export PDF"
+          className={styles.exportPdfButton}
+        >
+          Export PDF
+        </button>
+      )}
+      {/* Back to Top Button - Fixed to Right Side */}
       {showBackToTop && (
         <button
           onClick={scrollToTop}

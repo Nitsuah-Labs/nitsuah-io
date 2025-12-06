@@ -28,8 +28,23 @@ const nextConfig = {
   reactStrictMode: true,
 
   // Turbopack config (Next.js 16+ uses Turbopack by default)
-  // Empty config to silence the webpack -> turbopack migration warning
-  turbopack: {},
+  // Configure module resolution for problematic packages
+  turbopack: {
+    resolveAlias: {
+      // Prevent issues with phosphor-icons dynamic imports in dev
+      "@phosphor-icons/webcomponents":
+        "@phosphor-icons/webcomponents/dist/index.js",
+    },
+  },
+
+  // Webpack fallback for production builds (Turbopack is dev-only in Next.js 16)
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Optimize WalletConnect and related packages
+      config.externals.push("pino-pretty", "lokijs", "encoding");
+    }
+    return config;
+  },
 
   // Improve image optimization
   images: {

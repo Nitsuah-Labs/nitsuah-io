@@ -1,23 +1,24 @@
 // Navigation configuration for Homebar
 export const pages = ["about", "resume", "crypto", "portfolio"];
 
-export const portfolioSub = [
-  { href: "/projects", label: "Projects" },
-  { href: "/projects/clients", label: "Clients" },
-  { href: "/projects/blogs", label: "Blogs" },
-  { href: "/labs", label: "Labs" },
-];
-
 export const labsSub = [
   { href: "/labs", label: "Hub" },
   { href: "/labs/register", label: "Register" },
   { href: "/labs/mint", label: "Mint" },
   { href: "/labs/domains", label: "Domains" },
-  { href: "/labs/lookup", label: "Lookup" },
-  { href: "/labs/stake", label: "Stake" },
-  { href: "/labs/token", label: "Token" },
-  { href: "/labs/dao", label: "DAO" },
-  { href: "/labs/ai", label: "AI" },
+  // Disabled for now:
+  // { href: "/labs/lookup", label: "Lookup" },
+  // { href: "/labs/stake", label: "Stake" },
+  // { href: "/labs/token", label: "Token" },
+  // { href: "/labs/dao", label: "DAO" },
+  // { href: "/labs/ai", label: "AI" },
+];
+
+export const portfolioSub = [
+  { href: "/projects", label: "Projects" },
+  { href: "/projects/clients", label: "Clients" },
+  { href: "/projects/blogs", label: "Blogs" },
+  { label: "Labs", expandable: true, children: labsSub },
 ];
 
 export const navStyles = {

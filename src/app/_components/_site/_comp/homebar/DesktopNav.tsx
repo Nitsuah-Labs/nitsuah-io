@@ -6,6 +6,7 @@ import { navStyles, portfolioSub } from "../../homebarConfig";
 
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   const [projectsOpen, setProjectsOpen] = React.useState(false);
+  const [labsExpanded, setLabsExpanded] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const projectsRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -98,28 +99,83 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
               }
             }}
           >
-            {portfolioSub.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  textDecoration: "none",
-                  color: (navStyles.link as any).color,
-                }}
-              >
-                <Button
-                  color="inherit"
-                  sx={{ color: (navStyles.link as any).color }}
-                  onClick={() => setProjectsOpen(false)}
+            {portfolioSub.map((item) => {
+              if ((item as any).expandable && (item as any).children) {
+                return (
+                  <div key={item.label} style={{ position: "relative" }}>
+                    <Button
+                      color="inherit"
+                      sx={{ color: (navStyles.link as any).color }}
+                      onClick={() => setLabsExpanded(!labsExpanded)}
+                      aria-expanded={labsExpanded}
+                    >
+                      {item.label}
+                    </Button>
+                    {labsExpanded && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          marginTop: "0.5rem",
+                          ...(navStyles.inlinePopout as any),
+                          flexDirection: "column",
+                          minWidth: "150px",
+                          zIndex: 1300,
+                        }}
+                      >
+                        {(item as any).children.map((child: any) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            style={{
+                              textDecoration: "none",
+                              color: (navStyles.link as any).color,
+                            }}
+                          >
+                            <Button
+                              color="inherit"
+                              sx={{
+                                color: (navStyles.link as any).color,
+                                fontSize: "0.9em",
+                                width: "100%",
+                                justifyContent: "flex-start",
+                              }}
+                              onClick={() => {
+                                setProjectsOpen(false);
+                                setLabsExpanded(false);
+                              }}
+                            >
+                              {child.label}
+                            </Button>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={(item as any).href}
+                  style={{
+                    textDecoration: "none",
+                    color: (navStyles.link as any).color,
+                  }}
                 >
-                  {item.label}
-                </Button>
-              </Link>
-            ))}
+                  <Button
+                    color="inherit"
+                    sx={{ color: (navStyles.link as any).color }}
+                    onClick={() => setProjectsOpen(false)}
+                  >
+                    {item.label}
+                  </Button>
+                </Link>
+              );
+            })}
           </div>
         )}
-
-        {/* Labs intentionally omitted from left nav; shown on the right controls */}
       </div>
     </nav>
   );
