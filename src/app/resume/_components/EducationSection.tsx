@@ -1,4 +1,6 @@
+import Image from "next/image";
 import React from "react";
+import vtLogo from "../../../../public/images/vt-logo.png";
 import { ResumeData } from "../../../types/resume";
 import { formatDate } from "../../../utils/resume";
 
@@ -27,9 +29,30 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
               </div>
               <div className="education-institution">
                 {edu.url ? (
-                  <a href={edu.url} target="_blank" rel="noopener noreferrer">
-                    {edu.institution}
-                  </a>
+                  <>
+                    <a
+                      href={edu.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="education-logo-link print-hide"
+                    >
+                      <Image
+                        src={vtLogo}
+                        alt={edu.institution}
+                        width={120}
+                        height={40}
+                        style={{ objectFit: "contain" }}
+                      />
+                    </a>
+                    <a
+                      href={edu.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="education-text-link print-show"
+                    >
+                      {edu.institution}
+                    </a>
+                  </>
                 ) : (
                   edu.institution
                 )}

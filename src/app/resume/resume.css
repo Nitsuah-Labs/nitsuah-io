@@ -205,6 +205,22 @@
     color: #8ab9ff !important;
   }
 
+  .education-logo-link {
+    display: inline-block;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .education-logo-link:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+
+  .print-show {
+    display: none;
+  }
+
   .education-date,
   .education-score {
     color: #888 !important;
@@ -727,6 +743,32 @@
 
 .education-institution a:hover {
   text-decoration: underline;
+}
+
+.education-logo-link {
+  display: inline-block;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.education-logo-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.print-show {
+  display: none;
+}
+
+@media print {
+  .print-show {
+    display: inline !important;
+  }
+
+  .education-logo-link {
+    display: none !important;
+  }
 }
 
 .education-date {
