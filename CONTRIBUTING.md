@@ -419,7 +419,6 @@ Example: `feat: add dark mode toggle to navigation`
 - **Visual Testing**: `docs/VISUAL_REGRESSION.md` - Complete visual regression testing guide
 - **Screenshots**: `docs/SCREENSHOTS.md` - Required visual assets
 - **Feedback**: `FEEDBACK.md` - Known issues and improvement ideas
-- 🚀 **Performance**: Bundle size optimization
 
 ## Troubleshooting
 
