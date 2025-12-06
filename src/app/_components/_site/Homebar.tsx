@@ -26,14 +26,67 @@ const HomeBar: React.FC<HomeBarProps> = () => {
   const [showFullName, setShowFullName] = React.useState(false);
   const [isHovering, setIsHovering] = React.useState(false);
   const [labsOpenRight, setLabsOpenRight] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setMounted(true);
     // Auto-animate to Austin H. after 3 seconds in nav
     const timer = setTimeout(() => {
       setShowFullName(true);
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  // Prevent hydration mismatch by rendering consistent initial state
+  if (!mounted) {
+    return (
+      <AppBar
+        position="fixed"
+        sx={navStyles.appBar}
+        component="header"
+        role="banner"
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <Brand
+                showFullName={false}
+                isHovering={false}
+                setIsHovering={setIsHovering}
+              />
+
+              <Box
+                sx={{ display: { xs: "none", md: "flex" }, marginLeft: "1rem" }}
+                className="desktopOnly"
+              >
+                <DesktopNav pages={pages} />
+              </Box>
+            </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <ExportPDF visible={pathname === "/resume"} />
+
+              <div style={{ position: "relative" }}>
+                <Button
+                  color="inherit"
+                  sx={{ color: (navStyles.link as any).color }}
+                  aria-expanded={false}
+                  aria-haspopup="true"
+                  onClick={() => setLabsOpenRight((s) => !s)}
+                >
+                  Labs
+                </Button>
+              </div>
+
+              <ThemeToggle />
+              <GitHubButton />
+              <MobileNav pages={pages} labsSub={labsSub} />
+            </div>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    );
+  }
 
   return (
     <AppBar
