@@ -80,7 +80,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
 
               <ThemeToggle />
               <GitHubButton />
-              <MobileNav pages={pages} labsSub={labsSub} />
+              <MobileNav pages={pages} />
             </div>
           </Toolbar>
         </Container>
