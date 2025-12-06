@@ -10,18 +10,9 @@
   order: 999; /* Move to bottom on screen */
 }
 
-/* Hide print-only elements on screen */
-.print-only {
-  display: none;
-}
-
 @media print {
   .print-early-position {
     order: 0; /* Reset to natural order when printing */
-  }
-
-  .print-only {
-    display: flex; /* Show when printing */
   }
 }
 
@@ -397,13 +388,6 @@
   border-radius: 6px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Hide total experience in work section when printing (show the standalone one instead) */
-@media print {
-  .work .work-total-summary {
-    display: none;
-  }
 }
 
 .total-label {
@@ -870,6 +854,31 @@
   .profile-link:after,
   .contact-item a:after {
     content: "";
+  }
+
+  /* Show URLs for profile buttons in print */
+  .resume-profiles a[href]:not([href^="mailto:"]):after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.25rem;
+  }
+
+  /* For email, show 'Email' label and URL */
+  .resume-profiles a[href^="mailto:"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.25rem;
+  }
+
+  .resume-profiles a[href^="mailto:"] span:last-child {
+    display: none;
+  }
+
+  .resume-profiles a[href^="mailto:"]:before {
+    content: "Email";
+    margin-left: 0.25rem;
   }
 }
 

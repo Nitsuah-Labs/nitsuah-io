@@ -104,7 +104,7 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
           onMouseLeave={() => setHoveredButton(null)}
         >
           <span className={styles.icon}>✉️</span>
-          <span>{basics.email}</span>
+          <span>Email</span>
         </a>
       )}
 

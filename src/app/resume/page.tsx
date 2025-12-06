@@ -67,29 +67,6 @@ export default function ResumePage() {
             />
           )}
 
-          {/* Total Experience Summary - appears before Education in print */}
-          {resume.work && resume.work.length > 0 && (
-            <div
-              className="work-total-summary print-early-position print-only"
-              style={{ marginTop: "2.5rem" }}
-            >
-              <div className="total-label">Total Experience</div>
-              <div className="total-duration-container">
-                <div className="total-duration-bars">
-                  {Array.from({ length: totalFullBars }).map((_, i) => (
-                    <div key={i} className="duration-bar full" />
-                  ))}
-                  {totalPartialBar > 0 && (
-                    <div className="duration-bar partial" />
-                  )}
-                </div>
-                <div className="total-duration-text">
-                  {totalYears.toFixed(1)} years
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Education & Languages Side-by-Side */}
           {((resume.education && resume.education.length > 0) ||
             (resume.languages && resume.languages.length > 0)) && (
@@ -109,6 +86,26 @@ export default function ResumePage() {
               {resume.languages && resume.languages.length > 0 && (
                 <LanguagesSection languages={resume.languages} />
               )}
+            </div>
+          )}
+
+          {/* Total Experience Summary */}
+          {resume.work && resume.work.length > 0 && (
+            <div className="work-total-summary" style={{ marginTop: "2.5rem" }}>
+              <div className="total-label">Total Experience</div>
+              <div className="total-duration-container">
+                <div className="total-duration-bars">
+                  {Array.from({ length: totalFullBars }).map((_, i) => (
+                    <div key={i} className="duration-bar full" />
+                  ))}
+                  {totalPartialBar > 0 && (
+                    <div className="duration-bar partial" />
+                  )}
+                </div>
+                <div className="total-duration-text">
+                  {totalYears.toFixed(1)} years
+                </div>
+              </div>
             </div>
           )}
 

@@ -31,22 +31,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
         <i className="fa fa-briefcase" aria-hidden="true"></i> Work Experience
       </h2>
 
-      {/* Total Years Summary */}
-      <div className="work-total-summary">
-        <div className="total-label">Total Experience</div>
-        <div className="total-duration-container">
-          <div className="total-duration-bars">
-            {Array.from({ length: totalFullBars }).map((_, i) => (
-              <div key={i} className="duration-bar full" />
-            ))}
-            {totalPartialBar > 0 && <div className="duration-bar partial" />}
-          </div>
-          <div className="total-duration-text">
-            {totalYears.toFixed(1)} years
-          </div>
-        </div>
-      </div>
-
       <div className="work-items">
         {displayedJobs.map((job, idx) => {
           const duration = calculateDuration(job.startDate, job.endDate);
