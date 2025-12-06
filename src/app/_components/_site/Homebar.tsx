@@ -24,8 +24,10 @@ const NavigationContent: React.FC<{
   pathname: string;
 }> = ({ showFullName, isHovering, setIsHovering, pathname }) => {
   const [showMobileNav, setShowMobileNav] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setMounted(true);
     const checkWidth = () => {
       // Show mobile nav if window width is less than 50% of screen width
       const isNarrow = window.innerWidth < window.screen.width * 0.5;
@@ -36,6 +38,22 @@ const NavigationContent: React.FC<{
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  // Prevent hydration mismatch by not rendering nav until mounted
+  if (!mounted) {
+    return (
+      <>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <Brand
+            showFullName={showFullName}
+            isHovering={isHovering}
+            setIsHovering={setIsHovering}
+          />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }} />
+      </>
+    );
+  }
 
   return (
     <>
@@ -79,6 +97,10 @@ const HomeBar: React.FC<HomeBarProps> = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <AppBar
       position="fixed"
@@ -89,7 +111,7 @@ const HomeBar: React.FC<HomeBarProps> = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <NavigationContent
-            showFullName={mounted ? showFullName : false}
+            showFullName={showFullName}
             isHovering={isHovering}
             setIsHovering={setIsHovering}
             pathname={pathname}

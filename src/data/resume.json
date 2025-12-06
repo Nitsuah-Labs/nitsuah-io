@@ -3,7 +3,7 @@
     "name": "Austin J. Hardy",
     "title": "Senior Systems Engineer",
     "website": "https://nitsuah.io",
-    "email": "contact@nitsuah.io",
+    "email": "ajhardy4@vt.edu",
     "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
     "summary": "Ut prosim. Ready for any challenge or opportunity from over 15 years in Enterprise IT.",
     "location": {
@@ -172,7 +172,7 @@
   "skills": [
     {
       "name": "Atlassian Suite",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Jira",
         "Jira Service Management",
@@ -202,7 +202,7 @@
     },
     {
       "name": "AWS",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "EC2",
         "S3",
@@ -337,7 +337,7 @@
     },
     {
       "name": "Design",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Figma",
         "spline.design",
@@ -356,7 +356,7 @@
     },
     {
       "name": "Microsoft Suite",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Azure Active Directory (AD)",
         "PowerBI",
@@ -386,7 +386,7 @@
     },
     {
       "name": "Operating Systems (OS)",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Linux",
         "Ubuntu",
@@ -399,7 +399,7 @@
     },
     {
       "name": "OS cli/shell",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Powershell",
         "bat",
@@ -418,7 +418,7 @@
     },
     {
       "name": "Third Party SaaS",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Asana",
         "BugCrowd",
@@ -435,7 +435,7 @@
     },
     {
       "name": "Virtualization",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "AWS EC2",
         "Docker",
@@ -452,7 +452,7 @@
     },
     {
       "name": "Web Services",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "REST APIs",
         "Apache",

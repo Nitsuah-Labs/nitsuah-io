@@ -1,5 +1,30 @@
 /* Resume Page - StackOverflow Theme Adaptation */
 
+/* Education & Languages positioning - bottom on screen, early when printing */
+.resume-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.print-early-position {
+  order: 999; /* Move to bottom on screen */
+}
+
+/* Hide print-only elements on screen */
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-early-position {
+    order: 0; /* Reset to natural order when printing */
+  }
+
+  .print-only {
+    display: flex; /* Show when printing */
+  }
+}
+
 /* Screen reader only text */
 .sr-only {
   position: absolute;
@@ -331,11 +356,11 @@
 
 /* Profiles */
 .resume-profiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   margin-top: 1rem;
+  max-width: 100%;
 }
 
 .profile-link {
@@ -372,6 +397,13 @@
   border-radius: 6px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Hide total experience in work section when printing (show the standalone one instead) */
+@media print {
+  .work .work-total-summary {
+    display: none;
+  }
 }
 
 .total-label {

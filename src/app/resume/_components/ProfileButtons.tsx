@@ -8,12 +8,14 @@ interface ProfileButtonsProps {
   url?: string;
   website?: string;
   profiles: ResumeData["basics"]["profiles"];
+  basics: ResumeData["basics"];
 }
 
 export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
   url,
   website,
   profiles,
+  basics,
 }) => {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
@@ -32,7 +34,7 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
 
   const getProfileColor = (network: string): string => {
     const colors: { [key: string]: string } = {
-      GitHub: "#333",
+      GitHub: "#7c3aed",
       LinkedIn: "#0077b5",
       Twitter: "#1da1f2",
       X: "#000",
@@ -45,6 +47,139 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
 
   return (
     <div className="resume-profiles">
+      {/* LinkedIn Button */}
+      {profiles &&
+        profiles
+          .filter((p) => p.network === "LinkedIn")
+          .map((profile, idx) => (
+            <a
+              key={idx}
+              href={profile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.profileButton}
+              aria-label={`${profile.network} profile`}
+              style={{
+                background:
+                  hoveredButton === profile.network
+                    ? getProfileColor(profile.network)
+                    : "transparent",
+                borderColor: getProfileColor(profile.network),
+                transform:
+                  hoveredButton === profile.network
+                    ? "translateY(-2px)"
+                    : "translateY(0)",
+                boxShadow:
+                  hoveredButton === profile.network
+                    ? `0 4px 12px ${getProfileColor(profile.network)}66`
+                    : "none",
+              }}
+              onMouseEnter={() => setHoveredButton(profile.network)}
+              onMouseLeave={() => setHoveredButton(null)}
+            >
+              <span className={styles.icon}>
+                {getProfileIcon(profile.network)}
+              </span>
+              <span>{profile.network}</span>
+            </a>
+          ))}
+
+      {/* Email Button */}
+      {basics?.email && (
+        <a
+          href={`mailto:${basics.email}`}
+          className={styles.profileButton}
+          aria-label="Email"
+          style={{
+            background: hoveredButton === "email" ? "#d32f2f" : "transparent",
+            borderColor: "#ea4335",
+            transform:
+              hoveredButton === "email" ? "translateY(-2px)" : "translateY(0)",
+            boxShadow:
+              hoveredButton === "email"
+                ? "0 4px 12px rgba(234, 67, 53, 0.4)"
+                : "none",
+          }}
+          onMouseEnter={() => setHoveredButton("email")}
+          onMouseLeave={() => setHoveredButton(null)}
+        >
+          <span className={styles.icon}>✉️</span>
+          <span>{basics.email}</span>
+        </a>
+      )}
+
+      {/* Location Button */}
+      {basics?.location && (
+        <div
+          className={styles.profileButton}
+          aria-label="Location"
+          style={{
+            background:
+              hoveredButton === "location" ? "#388e3c" : "transparent",
+            borderColor: "#4caf50",
+            transform:
+              hoveredButton === "location"
+                ? "translateY(-2px)"
+                : "translateY(0)",
+            boxShadow:
+              hoveredButton === "location"
+                ? "0 4px 12px rgba(76, 175, 80, 0.4)"
+                : "none",
+            cursor: "default",
+          }}
+          onMouseEnter={() => setHoveredButton("location")}
+          onMouseLeave={() => setHoveredButton(null)}
+        >
+          <span className={styles.icon}>📍</span>
+          <span>
+            {[
+              basics.location.city,
+              basics.location.region,
+              basics.location.countryCode,
+            ]
+              .filter(Boolean)
+              .join(", ")}
+          </span>
+        </div>
+      )}
+
+      {/* GitHub Button */}
+      {profiles &&
+        profiles
+          .filter((p) => p.network === "GitHub")
+          .map((profile, idx) => (
+            <a
+              key={idx}
+              href={profile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.profileButton}
+              aria-label={`${profile.network} profile`}
+              style={{
+                background:
+                  hoveredButton === profile.network
+                    ? getProfileColor(profile.network)
+                    : "transparent",
+                borderColor: getProfileColor(profile.network),
+                transform:
+                  hoveredButton === profile.network
+                    ? "translateY(-2px)"
+                    : "translateY(0)",
+                boxShadow:
+                  hoveredButton === profile.network
+                    ? `0 4px 12px ${getProfileColor(profile.network)}66`
+                    : "none",
+              }}
+              onMouseEnter={() => setHoveredButton(profile.network)}
+              onMouseLeave={() => setHoveredButton(null)}
+            >
+              <span className={styles.icon}>
+                {getProfileIcon(profile.network)}
+              </span>
+              <span>{profile.network}</span>
+            </a>
+          ))}
+
       {/* Website Button */}
       {(url || website) && (
         <a
@@ -95,40 +230,42 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
         <span>Projects</span>
       </a>
 
-      {/* Profile Buttons */}
+      {/* Other Profile Buttons (Twitter, etc.) */}
       {profiles &&
-        profiles.map((profile, idx) => (
-          <a
-            key={idx}
-            href={profile.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.profileButton}
-            aria-label={`${profile.network} profile`}
-            style={{
-              background:
-                hoveredButton === profile.network
-                  ? getProfileColor(profile.network)
-                  : "transparent",
-              borderColor: getProfileColor(profile.network),
-              transform:
-                hoveredButton === profile.network
-                  ? "translateY(-2px)"
-                  : "translateY(0)",
-              boxShadow:
-                hoveredButton === profile.network
-                  ? `0 4px 12px ${getProfileColor(profile.network)}40`
-                  : "none",
-            }}
-            onMouseEnter={() => setHoveredButton(profile.network)}
-            onMouseLeave={() => setHoveredButton(null)}
-          >
-            <span className={styles.icon}>
-              {getProfileIcon(profile.network)}
-            </span>
-            <span>{profile.network}</span>
-          </a>
-        ))}
+        profiles
+          .filter((p) => p.network !== "LinkedIn" && p.network !== "GitHub")
+          .map((profile, idx) => (
+            <a
+              key={idx}
+              href={profile.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.profileButton}
+              aria-label={`${profile.network} profile`}
+              style={{
+                background:
+                  hoveredButton === profile.network
+                    ? getProfileColor(profile.network)
+                    : "transparent",
+                borderColor: getProfileColor(profile.network),
+                transform:
+                  hoveredButton === profile.network
+                    ? "translateY(-2px)"
+                    : "translateY(0)",
+                boxShadow:
+                  hoveredButton === profile.network
+                    ? `0 4px 12px ${getProfileColor(profile.network)}40`
+                    : "none",
+              }}
+              onMouseEnter={() => setHoveredButton(profile.network)}
+              onMouseLeave={() => setHoveredButton(null)}
+            >
+              <span className={styles.icon}>
+                {getProfileIcon(profile.network)}
+              </span>
+              <span>{profile.network}</span>
+            </a>
+          ))}
     </div>
   );
 };

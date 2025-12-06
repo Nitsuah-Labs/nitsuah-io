@@ -38,43 +38,6 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({ basics }) => {
           <p>{basics.summary}</p>
         </div>
       )}
-
-      <div className="resume-contact" data-testid="resume-contact">
-        {basics?.email && (
-          <div className="contact-item" data-testid="contact-email">
-            <span aria-hidden="true" className="icon email-icon">
-              ✉️
-            </span>
-            <a href={`mailto:${basics.email}`} className="contact-link">
-              {basics.email}
-            </a>
-          </div>
-        )}
-        {basics?.phone && (
-          <div className="contact-item" data-testid="contact-phone">
-            <span aria-hidden="true" className="icon phone-icon">
-              📞
-            </span>
-            <span>{basics.phone}</span>
-          </div>
-        )}
-        {basics?.location && (
-          <div className="contact-item" data-testid="contact-location">
-            <span aria-hidden="true" className="icon location-icon">
-              📍
-            </span>
-            <span>
-              {[
-                basics.location.city,
-                basics.location.region,
-                basics.location.countryCode,
-              ]
-                .filter(Boolean)
-                .join(", ")}
-            </span>
-          </div>
-        )}
-      </div>
     </section>
   );
 };
