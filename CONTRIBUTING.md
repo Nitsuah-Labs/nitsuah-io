@@ -227,6 +227,7 @@ npm test -- Connect.test.tsx      # Specific test file
 npm run test:e2e                  # All Playwright tests
 npm run test:a11y                 # Accessibility suite
 npm run test:a11y:quick          # Homepage, About, Projects only
+npm run test:visual              # Visual regression tests only
 
 # Specific test suites
 npx playwright test tests/visual/projects.spec.ts
@@ -235,6 +236,59 @@ npx playwright test tests/accessibility/all-pages.spec.ts --grep="Homepage"
 # UI mode for debugging
 npm run test:e2e:ui
 ```
+
+### Visual Regression Testing
+
+Visual regression tests capture screenshots and compare them against baseline images to detect unintended visual changes.
+
+#### Running Visual Tests
+
+```bash
+# Run visual regression tests
+npm run test:visual
+
+# View test report with diffs
+npx playwright show-report
+```
+
+#### Updating Baselines
+
+When you make **intentional** visual changes (colors, layouts, fonts), update the baseline screenshots:
+
+```bash
+# Local update (fast, for development iteration)
+npm run test:visual:update
+
+# Docker update (CI-matched, use before committing)
+npm run test:visual:update:docker
+
+# Update specific test only
+./scripts/update-visual-baselines.sh --docker --test homepage
+```
+
+**Important:** Always use Docker mode (`npm run test:visual:update:docker`) before committing to ensure baselines match CI exactly.
+
+#### When to Update Baselines
+
+✅ **Do update** when you've made intentional changes to:
+- Colors, fonts, or styling
+- Layouts or component positioning  
+- UI elements (added/removed/modified)
+- Images or icons
+
+❌ **Don't update** for:
+- Unintended regressions (fix the code instead!)
+- Random differences (investigate root cause)
+- CI failures without understanding why
+
+#### Best Practices
+
+- **Review diffs**: Always check `npx playwright show-report` before committing baselines
+- **Use Docker**: Run `npm run test:visual:update:docker` before final commit
+- **Mask dynamic content**: Canvas, animations, and timestamps should be masked
+- **Document changes**: Include visual changes in commit messages
+
+**Full Documentation:** See `docs/VISUAL_REGRESSION.md` for complete guide and troubleshooting.
 
 ### Docker Testing (CI-Consistent Environment)
 
@@ -252,6 +306,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright npx playwright tes
 ```
 
 **When to use Docker:**
+- Before committing visual baseline updates
 - Before pushing changes to visual components
 - After updating dependencies
 - When local tests pass but CI fails
@@ -341,6 +396,7 @@ Example: `feat: add dark mode toggle to navigation`
 - [ ] No linting errors (`npm run lint`)
 - [ ] Follows existing code style
 - [ ] Includes tests for new features
+- [ ] Visual baselines updated with Docker if UI changed (`npm run test:visual:update:docker`)
 
 ### PR Description Should Include
 
@@ -349,12 +405,20 @@ Example: `feat: add dark mode toggle to navigation`
 - Screenshots for UI changes
 - Breaking changes (if any)
 - Related issues
-
 ## Areas That Need Help
 
 - 🧪 **Testing**: E2E tests for wallet flows
 - 🔗 **Web3**: Contract debugging, Mumbai → Amoy migration
 - 📱 **Mobile**: Wallet connection optimization
+- 🚀 **Performance**: Bundle size optimization
+- 📸 **Visual Assets**: Product screenshots for crypto and client demo pages
+
+## Documentation
+
+- **Architecture**: `docs/ARCH.md` - Project structure and architecture
+- **Visual Testing**: `docs/VISUAL_REGRESSION.md` - Complete visual regression testing guide
+- **Screenshots**: `docs/SCREENSHOTS.md` - Required visual assets
+- **Feedback**: `FEEDBACK.md` - Known issues and improvement ideasn
 - 🚀 **Performance**: Bundle size optimization
 
 ## Troubleshooting
