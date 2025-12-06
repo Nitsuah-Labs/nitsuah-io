@@ -47,7 +47,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.14.1",
-    "@metamask/sdk": "^0.33.1",
+    "@metamask/sdk": "^0.34.0",
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "@safe-global/safe-apps-provider": "^0.18.6",
