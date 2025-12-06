@@ -17,7 +17,7 @@
 
 ## 2026Q1
 
-- [ ] **Visual Regression Automation** - Standardized screenshot update workflow
+- [x] **Visual Regression Automation** - Standardized screenshot update workflow
 - [ ] **Dark Mode Toggle** - UI component to switch themes on demand (shows CSS/a11y best practices)
 - [ ] **Manual Wallet Setup** - MetaMask or embedded wallet for local Web3 testing
 - [ ] **Contract Testing** - Local testnet debugging
