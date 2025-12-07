@@ -123,10 +123,6 @@ test.describe("Screen Reader Support", () => {
       return; // Pass the test if homepage intentionally has no images
     }
 
-    // Ensure at least one image is present and visible before proceeding
-    if (count === 0) {
-    }
-
     // Wait for first image to be visible (helps with lazy-loaded images)
     try {
       await images.first().waitFor({ state: "visible", timeout: 10000 });

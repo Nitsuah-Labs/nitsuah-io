@@ -802,19 +802,6 @@
   text-decoration: underline;
 }
 
-.education-logo-link {
-  display: inline-block;
-  flex-shrink: 0;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.education-logo-link:hover {
-  transform: scale(1.05);
-  opacity: 0.8;
-}
-
 .education-dates-section {
   text-align: right;
   flex-shrink: 0;
@@ -831,10 +818,6 @@
   color: #595959;
   margin-top: 0.25rem;
   white-space: nowrap;
-}
-
-.print-show {
-  display: none;
 }
 
 /* PDF Summary Cards - Only visible in print mode */
