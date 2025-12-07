@@ -1,5 +1,8 @@
 import { ResumeData } from "../../types/resume";
-import { getCompanyLogoUrl } from "../../utils/resume";
+import {
+  calculateTotalYearsOfExperience,
+  getCompanyLogoUrl,
+} from "../../utils/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
