@@ -82,9 +82,10 @@ const CryptoPage = () => {
             maxWidth: "900px",
             margin: "0 auto 24px",
             textAlign: "center",
+            paddingTop: "2rem",
           }}
         >
-          <h1 style={{ paddingTop: "2rem" }}>CRYPTO & WEB3</h1>
+          <h1>CRYPTO & WEB3</h1>
           <div
             style={{
               background: "rgba(249, 115, 22, 0.1)",
