@@ -18,6 +18,7 @@ export const portfolioSub = [
   { href: "/projects", label: "Projects" },
   { href: "/projects/clients", label: "Clients" },
   { href: "/projects/blogs", label: "Blogs" },
+  { href: "/crypto", label: "Crypto" },
   { label: "Labs", expandable: true, children: labsSub },
 ];
 

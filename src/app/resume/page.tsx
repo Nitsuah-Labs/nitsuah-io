@@ -75,111 +75,107 @@ export default function ResumePage() {
             />
           )}
 
-          {/* PDF Summary Cards - Only visible in print mode */}
-          <div className="pdf-summary-cards print-show">
-            <div className="pdf-summary-card">
-              <div className="pdf-card-icon">
-                <i className="fa fa-briefcase" aria-hidden="true"></i>
-              </div>
-              <div className="pdf-card-content">
-                <div className="pdf-card-label">Total Experience</div>
-                <div className="pdf-card-value">
-                  {totalYears.toFixed(1)} years
-                </div>
-              </div>
-            </div>
+          {/* PDF Experience Section - Two Column Layout - Only visible in print mode */}
+          <div className="print-show">
+            <h2 className="pdf-section-heading">
+              <i className="fa fa-briefcase" aria-hidden="true"></i> Experience
+            </h2>
+            <div className="pdf-experience-container">
+              {/* Left Column - Work History Cards */}
+              <div className="pdf-work-cards">
+                {resume.work?.slice(0, 3).map((job, idx) => {
+                  const startDate = new Date(job.startDate);
+                  const endDate = job.endDate
+                    ? new Date(job.endDate)
+                    : new Date();
+                  const years =
+                    (endDate.getTime() - startDate.getTime()) /
+                    (1000 * 60 * 60 * 24 * 365.25);
 
-            {/* Education Card */}
-            {resume.education && resume.education.length > 0 && (
-              <div className="pdf-summary-card pdf-education-card">
-                <div className="pdf-card-content">
-                  <div className="pdf-card-label">Education</div>
-                  <div className="pdf-card-value-small">
-                    {resume.education[0].studyType}
-                  </div>
-                  <div className="pdf-card-subtitle">
-                    {resume.education[0].area}
-                  </div>
-                  {resume.education[0].startDate &&
-                    resume.education[0].endDate && (
-                      <div className="pdf-card-duration">
-                        {new Date(resume.education[0].startDate).getFullYear()}{" "}
-                        - {new Date(resume.education[0].endDate).getFullYear()}
+                  // Get company logo URL
+                  const getCompanyLogoUrl = (companyName: string) => {
+                    const lowerName = companyName.toLowerCase();
+                    if (lowerName.includes("netflix"))
+                      return "https://logo.clearbit.com/netflix.com";
+                    if (lowerName.includes("coinbase"))
+                      return "https://logo.clearbit.com/coinbase.com";
+                    if (lowerName.includes("blackboard"))
+                      return "https://logo.clearbit.com/blackboard.com";
+                    return null;
+                  };
+
+                  const logoUrl = getCompanyLogoUrl(job.name);
+
+                  return (
+                    <div key={idx} className="pdf-work-card-full">
+                      {logoUrl && (
+                        <img
+                          src={logoUrl}
+                          alt={job.name}
+                          className="pdf-card-logo"
+                        />
+                      )}
+                      <div className="pdf-work-card-content">
+                        <div className="pdf-work-card-info">
+                          <div className="pdf-work-position">
+                            {job.position}
+                          </div>
+                          <div className="pdf-work-company">{job.name}</div>
+                        </div>
+                        <div className="pdf-work-duration">
+                          {years.toFixed(1)} years
+                        </div>
                       </div>
-                    )}
-                </div>
-                <img
-                  src="/images/vt-logo.png"
-                  alt="Virginia Tech"
-                  className="pdf-card-logo"
-                />
+                    </div>
+                  );
+                })}
               </div>
-            )}
 
-            {/* Languages Card */}
-            {resume.languages && resume.languages.length > 0 && (
-              <div className="pdf-summary-card pdf-languages-card">
-                <div className="pdf-card-icon">
-                  <i className="fa fa-language" aria-hidden="true"></i>
-                </div>
-                <div className="pdf-card-content">
-                  <div className="pdf-card-label">Languages</div>
-                  <div className="pdf-card-value-small">
-                    {resume.languages.map((lang) => lang.language).join(", ")}
+              {/* Right Column - Summary Cards */}
+              <div className="pdf-summary-cards">
+                <div className="pdf-summary-card">
+                  <div className="pdf-card-icon">
+                    <i className="fa fa-briefcase" aria-hidden="true"></i>
+                  </div>
+                  <div className="pdf-card-content">
+                    <div className="pdf-card-label">Total Experience</div>
+                    <div className="pdf-card-value">
+                      {totalYears.toFixed(1)} years
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
 
-          {/* PDF Work Experience Section - Only visible in print mode */}
-          <h2 className="pdf-section-heading print-show">
-            <i className="fa fa-briefcase" aria-hidden="true"></i> Recent
-            History
-          </h2>
-          <div className="pdf-work-cards print-show">
-            {resume.work?.slice(0, 3).map((job, idx) => {
-              const startDate = new Date(job.startDate);
-              const endDate = job.endDate ? new Date(job.endDate) : new Date();
-              const years =
-                (endDate.getTime() - startDate.getTime()) /
-                (1000 * 60 * 60 * 24 * 365.25);
-
-              // Get company logo URL
-              const getCompanyLogoUrl = (companyName: string) => {
-                const lowerName = companyName.toLowerCase();
-                if (lowerName.includes("netflix"))
-                  return "https://logo.clearbit.com/netflix.com";
-                if (lowerName.includes("coinbase"))
-                  return "https://logo.clearbit.com/coinbase.com";
-                if (lowerName.includes("blackboard"))
-                  return "https://logo.clearbit.com/blackboard.com";
-                return null;
-              };
-
-              const logoUrl = getCompanyLogoUrl(job.name);
-
-              return (
-                <div key={idx} className="pdf-work-card-full">
-                  {logoUrl && (
+                {/* Education Card */}
+                {resume.education && resume.education.length > 0 && (
+                  <div className="pdf-summary-card pdf-education-card">
+                    <div className="pdf-card-content">
+                      <div className="pdf-card-label">Education</div>
+                      <div className="pdf-card-value-small">
+                        {resume.education[0].studyType} -{" "}
+                        {resume.education[0].area}
+                      </div>
+                      {resume.education[0].startDate &&
+                        resume.education[0].endDate && (
+                          <div className="pdf-card-duration">
+                            {new Date(
+                              resume.education[0].startDate,
+                            ).getFullYear()}{" "}
+                            -{" "}
+                            {new Date(
+                              resume.education[0].endDate,
+                            ).getFullYear()}
+                          </div>
+                        )}
+                    </div>
                     <img
-                      src={logoUrl}
-                      alt={job.name}
+                      src="/images/vt-logo.png"
+                      alt="Virginia Tech"
                       className="pdf-card-logo"
                     />
-                  )}
-                  <div className="pdf-work-card-content">
-                    <div className="pdf-work-card-info">
-                      <div className="pdf-work-position">{job.position}</div>
-                      <div className="pdf-work-company">{job.name}</div>
-                    </div>
-                    <div className="pdf-work-duration">
-                      {years.toFixed(1)} years
-                    </div>
                   </div>
-                </div>
-              );
-            })}
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Education & Languages Side-by-Side */}

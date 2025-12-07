@@ -110,7 +110,10 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
 
       {/* Location Button */}
       {basics?.location && (
-        <div
+        <a
+          href={basics.location.url || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
           className={styles.profileButton}
           aria-label="Location"
           style={{
@@ -125,7 +128,7 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
               hoveredButton === "location"
                 ? "0 4px 12px rgba(76, 175, 80, 0.4)"
                 : "none",
-            cursor: "default",
+            cursor: basics.location.url ? "pointer" : "default",
           }}
           onMouseEnter={() => setHoveredButton("location")}
           onMouseLeave={() => setHoveredButton(null)}
@@ -140,7 +143,7 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
               .filter(Boolean)
               .join(", ")}
           </span>
-        </div>
+        </a>
       )}
 
       {/* GitHub Button */}
