@@ -149,9 +149,22 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                 {job.summary && <p className="work-summary">{job.summary}</p>}
                 {job.highlights && job.highlights.length > 0 && (
                   <ul className="work-highlights">
-                    {job.highlights.map((highlight, hidx) => (
-                      <li key={hidx}>{highlight}</li>
-                    ))}
+                    {job.highlights.map((highlight, hidx) => {
+                      // Check if highlight has a dash within the first 80 characters
+                      const dashIndex = highlight.indexOf(" - ");
+                      const shouldBold = dashIndex > 0 && dashIndex < 80;
+
+                      if (shouldBold) {
+                        const beforeDash = highlight.substring(0, dashIndex);
+                        const afterDash = highlight.substring(dashIndex + 3);
+                        return (
+                          <li key={hidx}>
+                            <strong>{beforeDash}</strong> - {afterDash}
+                          </li>
+                        );
+                      }
+                      return <li key={hidx}>{highlight}</li>;
+                    })}
                   </ul>
                 )}
               </div>

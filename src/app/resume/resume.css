@@ -842,6 +842,10 @@
   display: none;
 }
 
+.pdf-work-cards {
+  display: none;
+}
+
 @media print {
   .print-show {
     display: inline !important;
@@ -849,31 +853,52 @@
 
   .pdf-summary-cards {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     padding: 0;
+  }
+
+  .pdf-work-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0 0 1rem 0;
+    padding: 0;
+  }
+
+  .pdf-section-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b04115;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #dbeffd;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pdf-section-heading i {
+    font-size: 1.25rem;
   }
 
   .pdf-summary-card {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     background: #f8f9fa;
     border: 1px solid #dee2e6;
     border-left: 4px solid #f97316;
     border-radius: 6px;
   }
 
-  .pdf-card-icon {
-    font-size: 1.5rem;
-    color: #f97316;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .pdf-card-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
     flex-shrink: 0;
   }
 
@@ -892,39 +917,98 @@
   }
 
   .pdf-card-value {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #212529;
   }
 
-  .pdf-work-card {
-    border-left-color: #0095ff;
-  }
-
-  .pdf-work-card .pdf-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .pdf-work-position {
-    font-size: 0.875rem;
+  .pdf-card-value-small {
+    font-size: 0.95rem;
     font-weight: 700;
     color: #212529;
     line-height: 1.2;
   }
 
-  .pdf-work-company {
+  .pdf-card-subtitle {
     font-size: 0.75rem;
-    color: #495057;
+    color: #6c757d;
+    margin-top: 0.125rem;
+  }
+
+  .pdf-card-duration {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+    font-weight: 500;
+  }
+
+  .pdf-education-card {
+    border-left-color: #f97316;
+  }
+
+  .pdf-languages-card {
+    border-left-color: #f97316;
+  }
+
+  .pdf-skills-card {
+    border-left-color: #f97316;
+  }
+
+  .pdf-work-card-full {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    border-left: 4px solid #0095ff;
+    border-radius: 6px;
+  }
+
+  .pdf-work-card-full .pdf-card-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: #fff;
+    padding: 4px;
+  }
+
+  .pdf-work-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .pdf-work-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pdf-work-position {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .pdf-work-company {
+    font-size: 0.875rem;
+    color: #b0b0b0;
     font-weight: 500;
   }
 
   .pdf-work-duration {
     font-size: 0.875rem;
-    color: #f97316;
+    color: #888;
     font-weight: 600;
-    margin-top: 0.25rem;
+    white-space: nowrap;
   }
 
   .education-logo-link {
@@ -1012,7 +1096,10 @@
   }
 
   .print-hide,
-  .resume-actions {
+  .resume-actions,
+  .resume-section.education,
+  .resume-section.languages,
+  .pdf-languages-card {
     display: none !important;
   }
 
@@ -1045,6 +1132,11 @@
   .work-details {
     max-height: none;
     padding: 0.5rem 1rem;
+  }
+
+  .work-highlights li {
+    font-size: 9.5pt;
+    line-height: 1.4;
   }
 
   /* Show all URLs for links */
@@ -1092,8 +1184,7 @@
   }
 
   .education-languages-container {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    display: none !important;
   }
 
   .work-total-summary {
