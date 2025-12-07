@@ -220,7 +220,7 @@ npm test -- Connect.test.tsx      # Specific test file
 
 ### E2E & Accessibility Tests (Playwright)
 
-**Test Count:** 57 Playwright tests (20 accessibility, 6 visual, 31 E2E)
+**Test Count:** 61 Playwright tests (20 accessibility, 9 visual, 32 E2E)
 
 ```bash
 # Quick local testing
