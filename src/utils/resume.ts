@@ -43,3 +43,41 @@ export function getProficiencyLevel(level?: string): number {
   };
   return level ? levels[level] || 3 : 3;
 }
+
+/**
+ * Get company logo URL from Clearbit Logo API
+ * @param companyName - The company name to look up
+ * @returns Logo URL or null if not found
+ */
+export function getCompanyLogoUrl(companyName: string): string | null {
+  const lowerName = companyName.toLowerCase();
+
+  // Use Clearbit Logo API for high-quality company logos
+  if (lowerName.includes("netflix"))
+    return "https://logo.clearbit.com/netflix.com";
+  if (lowerName.includes("coinbase"))
+    return "https://logo.clearbit.com/coinbase.com";
+  if (lowerName.includes("blackboard"))
+    return "https://logo.clearbit.com/blackboard.com";
+
+  return null;
+}
+
+/**
+ * Get institution logo for education section
+ * @param institutionName - The institution name
+ * @returns Logo path or URL
+ */
+export function getInstitutionLogo(institutionName: string): string | null {
+  const lowerName = institutionName.toLowerCase();
+
+  // Map known institutions to their logo paths
+  if (lowerName.includes("virginia tech") || lowerName.includes("vt")) {
+    return "/assets/vt-logo.png";
+  }
+
+  // Could add more institutions here
+  // if (lowerName.includes("mit")) return "/assets/mit-logo.png";
+
+  return null;
+}

@@ -3,7 +3,11 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
-import { calculateDuration, extractDurationText } from "../../../utils/resume";
+import {
+  calculateDuration,
+  extractDurationText,
+  getCompanyLogoUrl,
+} from "../../../utils/resume";
 
 interface WorkExperienceProps {
   work: ResumeData["work"];
@@ -12,19 +16,6 @@ interface WorkExperienceProps {
 export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 3);
-
-  // Get company logo URL
-  const getCompanyLogoUrl = (companyName: string) => {
-    const lowerName = companyName.toLowerCase();
-    // Use Clearbit Logo API for high-quality company logos
-    if (lowerName.includes("netflix"))
-      return "https://logo.clearbit.com/netflix.com";
-    if (lowerName.includes("coinbase"))
-      return "https://logo.clearbit.com/coinbase.com";
-    if (lowerName.includes("blackboard"))
-      return "https://logo.clearbit.com/blackboard.com";
-    return null;
-  };
 
   // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
   const totalYears = work.reduce((sum, job) => {

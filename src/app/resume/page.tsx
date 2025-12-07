@@ -92,18 +92,6 @@ export default function ResumePage() {
                     (endDate.getTime() - startDate.getTime()) /
                     (1000 * 60 * 60 * 24 * 365.25);
 
-                  // Get company logo URL
-                  const getCompanyLogoUrl = (companyName: string) => {
-                    const lowerName = companyName.toLowerCase();
-                    if (lowerName.includes("netflix"))
-                      return "https://logo.clearbit.com/netflix.com";
-                    if (lowerName.includes("coinbase"))
-                      return "https://logo.clearbit.com/coinbase.com";
-                    if (lowerName.includes("blackboard"))
-                      return "https://logo.clearbit.com/blackboard.com";
-                    return null;
-                  };
-
                   const logoUrl = getCompanyLogoUrl(job.name);
 
                   return (
