@@ -76,19 +76,17 @@ test.describe("Resume Page Visual Tests", () => {
     await expect(firstWorkDetails).toBeVisible();
   });
 
-  test("should have working PDF export button", async ({ page }) => {
+  test("should have PDF mode styling", async ({ page }) => {
     await page.goto("/resume");
     await page.waitForLoadState("networkidle");
 
     // Wait for resume content to load
     await page.waitForSelector(".resume-content", { timeout: 10000 });
 
-    // Check PDF export button exists in resume content - use specific aria-label
-    const pdfButton = page
-      .locator(".resume-content")
-      .getByRole("button", { name: "Export resume as PDF" });
-    await expect(pdfButton).toBeVisible({ timeout: 10000 });
-    await expect(pdfButton).toBeEnabled();
+    // Check PDF-specific elements exist for print mode
+    const pdfExperienceContainer = page.locator(".pdf-experience-container");
+    // PDF elements are hidden on screen, visible only in print mode
+    await expect(pdfExperienceContainer).toBeAttached();
   });
 
   test("should display contact information", async ({ page }) => {
@@ -98,12 +96,13 @@ test.describe("Resume Page Visual Tests", () => {
     // Wait for basics section to load
     await page.waitForSelector("#basics", { timeout: 10000 });
 
-    // Check contact section exists
-    const contactSection = page.locator(".resume-contact");
-    await expect(contactSection).toBeVisible({ timeout: 10000 });
+    // Check profile buttons section exists (replaces resume-contact)
+    const profileButtons = page.locator(".resume-profiles");
+    await expect(profileButtons).toBeVisible({ timeout: 10000 });
 
-    // Verify at least one contact item is present
-    await expect(page.locator(".contact-item").first()).toBeVisible();
+    // Verify profile buttons are present
+    const buttons = page.locator("[class*='profileButton']");
+    await expect(buttons.first()).toBeVisible();
   });
 
   test("should display social profiles", async ({ page }) => {

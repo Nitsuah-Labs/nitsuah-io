@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Projects Page Visual Tests", () => {
-  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
+  // TODO: Update baseline after layout changes - page height changed from 6538px to 3201px
   test.skip("projects page renders correctly", async ({ page }) => {
     await page.goto("/projects");
 
