@@ -1,7 +1,21 @@
 // Navigation configuration for Homebar
+
+// Type definitions for menu items
+export interface MenuChild {
+  href?: string;
+  label: string;
+}
+
+export interface NavMenuItem {
+  href?: string;
+  label: string;
+  expandable?: boolean;
+  children?: MenuChild[];
+}
+
 export const pages = ["about", "resume", "portfolio"];
 
-export const labsSub = [
+export const labsSub: MenuChild[] = [
   { href: "/labs", label: "Hub" },
   { href: "/labs/register", label: "Register" },
   { href: "/labs/mint", label: "Mint" },
@@ -14,7 +28,7 @@ export const labsSub = [
   // { href: "/labs/ai", label: "AI" },
 ];
 
-export const portfolioSub = [
+export const portfolioSub: NavMenuItem[] = [
   { href: "/projects", label: "Projects" },
   { href: "/projects/clients", label: "Clients" },
   { href: "/projects/blogs", label: "Blogs" },

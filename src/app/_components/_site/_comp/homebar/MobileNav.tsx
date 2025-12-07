@@ -64,37 +64,35 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         {/* Portfolio subitems for mobile */}
         {portfolioSub.map((item, index) => {
           // Handle expandable Labs item - show its children instead
-          if ((item as any).expandable && (item as any).children) {
-            return (item as any).children.map(
-              (child: any, childIndex: number) => {
-                // Special styling for each labs item
-                let color = "rgba(168, 85, 247, 0.7)"; // Purple with transparency for sub-items
-                let label = child.label.toLowerCase();
-                let paddingLeft = "1rem"; // Default indent for sub-items
+          if (item.expandable && item.children) {
+            return item.children.map((child, childIndex) => {
+              // Special styling for each labs item
+              let color = "rgba(168, 85, 247, 0.7)"; // Purple with transparency for sub-items
+              let label = child.label.toLowerCase();
+              let paddingLeft = "1rem"; // Default indent for sub-items
 
-                // Hub becomes "labs" with test tube emoji at the end
-                if (child.label === "Hub") {
-                  label = "labs 🧪";
-                  color = "#a855f7"; // Solid purple for main labs
-                  paddingLeft = "0"; // No indent for labs
-                }
+              // Hub becomes "labs" with test tube emoji at the end
+              if (child.label === "Hub") {
+                label = "labs 🧪";
+                color = "#a855f7"; // Solid purple for main labs
+                paddingLeft = "0"; // No indent for labs
+              }
 
-                return (
-                  <MenuItem key={child.href} onClick={() => setAnchorEl(null)}>
-                    <Link
-                      href={child.href}
-                      style={{
-                        textDecoration: "none",
-                        color: color,
-                        paddingLeft: paddingLeft,
-                      }}
-                    >
-                      {label}
-                    </Link>
-                  </MenuItem>
-                );
-              },
-            );
+              return (
+                <MenuItem key={child.href} onClick={() => setAnchorEl(null)}>
+                  <Link
+                    href={child.href}
+                    style={{
+                      textDecoration: "none",
+                      color: color,
+                      paddingLeft: paddingLeft,
+                    }}
+                  >
+                    {label}
+                  </Link>
+                </MenuItem>
+              );
+            });
           }
 
           // Style for Projects, Clients, Blogs

@@ -136,9 +136,9 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                     {job.highlights.map((highlight, hidx) => {
                       // Check if highlight has a dash within the first 80 characters
                       const dashIndex = highlight.indexOf(" - ");
-                      const shouldBold = dashIndex > 0 && dashIndex < 80;
+                      const hasTitlePrefix = dashIndex > 0 && dashIndex < 80;
 
-                      if (shouldBold) {
+                      if (hasTitlePrefix) {
                         const beforeDash = highlight.substring(0, dashIndex);
                         const afterDash = highlight.substring(dashIndex + 3);
                         return (

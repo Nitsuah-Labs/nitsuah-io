@@ -176,7 +176,7 @@ update_baselines_local() {
 display_summary() {
   print_info "Scanning for updated snapshots..."
   
-  local snapshot_count=$(find tests -name "*.png" -path "*-snapshots/*" | wc -l)
+  local snapshot_count=$(find tests -name "*.png" -path "*-snapshots/*" -print0 | xargs -0 -I{} echo | wc -l)
   
   echo ""
   echo "═══════════════════════════════════════════════════════════"

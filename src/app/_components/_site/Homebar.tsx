@@ -28,10 +28,15 @@ const NavigationContent: React.FC<{
 
   React.useEffect(() => {
     setMounted(true);
+    // Mobile breakpoint constants
+    const MOBILE_BREAKPOINT_RATIO = 0.5; // 50% of screen width
+    const MOBILE_BREAKPOINT_PX = 900; // Fixed pixel breakpoint
+
     const checkWidth = () => {
       // Show mobile nav if window width is less than 50% of screen width
-      const isNarrow = window.innerWidth < window.screen.width * 0.5;
-      setShowMobileNav(isNarrow || window.innerWidth < 900); // Also show on actual mobile
+      const isNarrow =
+        window.innerWidth < window.screen.width * MOBILE_BREAKPOINT_RATIO;
+      setShowMobileNav(isNarrow || window.innerWidth < MOBILE_BREAKPOINT_PX); // Also show on actual mobile
     };
 
     checkWidth();
