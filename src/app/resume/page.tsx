@@ -1,5 +1,5 @@
 import { ResumeData } from "../../types/resume";
-import { getCompanyLogoUrl, SUBCONTRACT_IDENTIFIER } from "../../utils/resume";
+import { getCompanyLogoUrl } from "../../utils/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
@@ -24,19 +24,7 @@ export default function ResumePage() {
   const resume = getResumeData();
 
   // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
-  const totalYears =
-    resume.work?.reduce((sum, job) => {
-      // Skip subcontracted work to avoid double counting
-      if (job.name.toLowerCase().includes(SUBCONTRACT_IDENTIFIER)) {
-        return sum;
-      }
-      const startDate = new Date(job.startDate);
-      const endDate = job.endDate ? new Date(job.endDate) : new Date();
-      const years =
-        (endDate.getTime() - startDate.getTime()) /
-        (1000 * 60 * 60 * 24 * 365.25);
-      return sum + years;
-    }, 0) || 0;
+  const totalYears = calculateTotalYearsOfExperience(resume.work || [], true);
   const totalFullBars = Math.floor(totalYears);
   const totalPartialBar = totalYears - totalFullBars;
 

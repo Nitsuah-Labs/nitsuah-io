@@ -44,7 +44,35 @@ export function getProficiencyLevel(level?: string): number {
     Advanced: 3,
     Expert: 4,
   };
-  return level ? levels[level] || 3 : 3;
+  // Default to Intermediate (2) as middle of scale without Master level
+  return level ? levels[level] || 2 : 2;
+}
+
+/**
+ * Calculate total years of work experience
+ * @param work - Array of work experience entries
+ * @param excludeSubcontracted - Whether to exclude subcontracted positions to avoid double counting
+ * @returns Total years of experience
+ */
+export function calculateTotalYearsOfExperience(
+  work: Array<{ name: string; startDate: string; endDate?: string }>,
+  excludeSubcontracted = true,
+): number {
+  return work.reduce((sum, job) => {
+    // Skip subcontracted work if excludeSubcontracted is true
+    if (
+      excludeSubcontracted &&
+      job.name.toLowerCase().includes(SUBCONTRACT_IDENTIFIER)
+    ) {
+      return sum;
+    }
+    const startDate = new Date(job.startDate);
+    const endDate = job.endDate ? new Date(job.endDate) : new Date();
+    const years =
+      (endDate.getTime() - startDate.getTime()) /
+      (1000 * 60 * 60 * 24 * 365.25);
+    return sum + years;
+  }, 0);
 }
 
 /**

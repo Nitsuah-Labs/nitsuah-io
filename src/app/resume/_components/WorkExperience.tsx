@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
 import {
   calculateDuration,
+  calculateTotalYearsOfExperience,
   extractDurationText,
   getCompanyLogoUrl,
 } from "../../../utils/resume";
@@ -17,16 +18,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 3);
 
-  // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
-  const totalYears = work.reduce((sum, job) => {
-    // Skip subcontracted work to avoid double counting
-    if (job.name.toLowerCase().includes("sub.")) {
-      return sum;
-    }
-    const duration = calculateDuration(job.startDate, job.endDate);
-    const years = parseFloat(duration.match(/\(([^)]+) years\)/)?.[1] || "0");
-    return sum + years;
-  }, 0);
+  // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
+  const totalYears = calculateTotalYearsOfExperience(work, true);
   const totalFullBars = Math.floor(totalYears);
   const totalPartialBar = totalYears - totalFullBars;
 
