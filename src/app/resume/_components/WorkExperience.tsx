@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
 import { calculateDuration, extractDurationText } from "../../../utils/resume";
@@ -11,6 +12,19 @@ interface WorkExperienceProps {
 export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 3);
+
+  // Get company logo URL
+  const getCompanyLogoUrl = (companyName: string) => {
+    const lowerName = companyName.toLowerCase();
+    // Use Clearbit Logo API for high-quality company logos
+    if (lowerName.includes("netflix"))
+      return "https://logo.clearbit.com/netflix.com";
+    if (lowerName.includes("coinbase"))
+      return "https://logo.clearbit.com/coinbase.com";
+    if (lowerName.includes("blackboard"))
+      return "https://logo.clearbit.com/blackboard.com";
+    return null;
+  };
 
   // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
   const totalYears = work.reduce((sum, job) => {
@@ -55,8 +69,35 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                       <i className="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
                     <div className="work-info">
-                      <div className="work-position">{job.position}</div>
-                      <div className="work-company">
+                      <div className="work-position">
+                        {getCompanyLogoUrl(job.name) ? (
+                          <>
+                            <a
+                              href={job.url || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="company-logo-link print-hide"
+                              title={job.name}
+                            >
+                              <Image
+                                src={getCompanyLogoUrl(job.name)!}
+                                alt={job.name}
+                                width={48}
+                                height={48}
+                                style={{
+                                  objectFit: "contain",
+                                  borderRadius: "6px",
+                                }}
+                              />
+                            </a>
+                            <span>{job.position}</span>
+                          </>
+                        ) : (
+                          job.position
+                        )}
+                      </div>
+                      <div className="work-company print-show">
                         {job.url ? (
                           <a
                             href={job.url}

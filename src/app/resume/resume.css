@@ -582,10 +582,23 @@
 }
 
 .work-position {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-size: 1.125rem;
   font-weight: 600;
   color: #222;
   margin-bottom: 0.25rem;
+}
+
+.position-link {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.position-link:hover {
+  color: #0095ff;
 }
 
 .work-company {
@@ -600,6 +613,25 @@
 
 .work-company a:hover {
   text-decoration: underline;
+}
+
+.company-logo-link {
+  display: inline-block;
+  flex-shrink: 0;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.company-logo-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+@media print {
+  .company-logo-link {
+    display: none !important;
+  }
 }
 
 .work-details {
@@ -721,7 +753,32 @@
 }
 
 .education-header {
-  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.education-title-group {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.education-info {
+  flex: 1;
+}
+
+.education-degree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.education-degree-text {
+  flex: 1;
 }
 
 .education-degree {
@@ -747,6 +804,7 @@
 
 .education-logo-link {
   display: inline-block;
+  flex-shrink: 0;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
@@ -757,13 +815,116 @@
   opacity: 0.8;
 }
 
+.education-dates-section {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.education-date {
+  font-size: 0.875rem;
+  color: #595959;
+  white-space: nowrap;
+}
+
+.education-score {
+  font-size: 0.875rem;
+  color: #595959;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+}
+
 .print-show {
+  display: none;
+}
+
+/* PDF Summary Cards - Only visible in print mode */
+.pdf-summary-cards {
   display: none;
 }
 
 @media print {
   .print-show {
     display: inline !important;
+  }
+
+  .pdf-summary-cards {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 0;
+  }
+
+  .pdf-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-left: 4px solid #f97316;
+    border-radius: 6px;
+  }
+
+  .pdf-card-icon {
+    font-size: 1.5rem;
+    color: #f97316;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pdf-card-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pdf-card-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+
+  .pdf-card-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  .pdf-work-card {
+    border-left-color: #0095ff;
+  }
+
+  .pdf-work-card .pdf-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .pdf-work-position {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #212529;
+    line-height: 1.2;
+  }
+
+  .pdf-work-company {
+    font-size: 0.75rem;
+    color: #495057;
+    font-weight: 500;
+  }
+
+  .pdf-work-duration {
+    font-size: 0.875rem;
+    color: #f97316;
+    font-weight: 600;
+    margin-top: 0.25rem;
   }
 
   .education-logo-link {

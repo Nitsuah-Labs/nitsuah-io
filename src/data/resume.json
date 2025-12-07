@@ -26,6 +26,7 @@
   "work": [
     {
       "name": "Netflix, Inc.",
+      "url": "https://www.netflix.com/",
       "highlights": [
         "Ad Ops Pipeline Optimization - Developed comprehensive custom Jira project and automation rules for Netflix Ad Operations team, transforming campaign management workflows. Implemented custom fields, workflows, and real-time dashboards that enhanced visibility and reporting across $30M+ in advertising revenue, reducing manual effort by 70% and improving campaign tracking accuracy.",
         "Jira Cloud Mail Handler (JCMH) - Scaled a custom plugin to handle external email intake, replies, comments, and attachments across many federated Jira sites, streamlining organization-wide communication.",
@@ -45,6 +46,7 @@
     },
     {
       "name": "Coinbase Inc.",
+      "url": "https://www.coinbase.com/",
       "highlights": [
         "Product Launch Calendar - Transformed cross-functional approval & rollout process for tracking features, releases, and programs, benefiting millions of global customers.",
         "Rolling Intake - Streamlined IT Program Management with automated Insights self-service, enhancing efficiency for dynamic datasets.",
@@ -60,6 +62,7 @@
     },
     {
       "name": "Blackboard, Inc.",
+      "url": "https://www.blackboard.com/",
       "position": "Senior Systems Administrator",
       "startDate": "2018-04-09",
       "endDate": "2022-04-01",
