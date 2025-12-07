@@ -2,6 +2,9 @@
  * Resume utility functions
  */
 
+/** Identifier used in job names to mark subcontracted positions */
+export const SUBCONTRACT_IDENTIFIER = "sub.";
+
 export function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   const date = new Date(dateStr);
@@ -52,13 +55,19 @@ export function getProficiencyLevel(level?: string): number {
 export function getCompanyLogoUrl(companyName: string): string | null {
   const lowerName = companyName.toLowerCase();
 
+  // Map company substrings to their domains
+  const companyDomains: { [key: string]: string } = {
+    netflix: "netflix.com",
+    coinbase: "coinbase.com",
+    blackboard: "blackboard.com",
+  };
+
   // Use Clearbit Logo API for high-quality company logos
-  if (lowerName.includes("netflix"))
-    return "https://logo.clearbit.com/netflix.com";
-  if (lowerName.includes("coinbase"))
-    return "https://logo.clearbit.com/coinbase.com";
-  if (lowerName.includes("blackboard"))
-    return "https://logo.clearbit.com/blackboard.com";
+  for (const key in companyDomains) {
+    if (lowerName.includes(key)) {
+      return `https://logo.clearbit.com/${companyDomains[key]}`;
+    }
+  }
 
   return null;
 }

@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+// Allow ~2% pixel difference for dynamic animations (Spline 3D, etc.)
+// Calculated as approximately 100000 pixels for typical desktop viewport
+const MAX_VISUAL_DIFF_PIXELS = 100000;
+
 test.describe("Projects Page Visual Tests", () => {
   test("projects page renders correctly", async ({ page }) => {
     await page.goto("/projects");
@@ -17,7 +21,7 @@ test.describe("Projects Page Visual Tests", () => {
       fullPage: true,
       animations: "disabled",
       timeout: 30000,
-      maxDiffPixels: 100000, // Allow ~2% pixel difference for dynamic animations
+      maxDiffPixels: MAX_VISUAL_DIFF_PIXELS,
     });
   });
 

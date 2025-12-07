@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
       {pathname === "/resume" && (
         <button
           onClick={() => window.print()}
-          aria-label="Export PDF"
+          aria-label="Export resume as PDF"
           className={styles.exportPdfButton}
         >
           Export PDF

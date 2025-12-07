@@ -1,5 +1,5 @@
 import { ResumeData } from "../../types/resume";
-import { getCompanyLogoUrl } from "../../utils/resume";
+import { getCompanyLogoUrl, SUBCONTRACT_IDENTIFIER } from "../../utils/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
@@ -23,11 +23,11 @@ function getResumeData(): ResumeData {
 export default function ResumePage() {
   const resume = getResumeData();
 
-  // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
+  // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
   const totalYears =
     resume.work?.reduce((sum, job) => {
       // Skip subcontracted work to avoid double counting
-      if (job.name.toLowerCase().includes("sub.")) {
+      if (job.name.toLowerCase().includes(SUBCONTRACT_IDENTIFIER)) {
         return sum;
       }
       const startDate = new Date(job.startDate);
