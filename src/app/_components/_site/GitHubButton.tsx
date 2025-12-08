@@ -5,6 +5,8 @@ import React from "react";
 // it doesn't introduce additional dependencies. Replace with project
 // specific implementation if available.
 export default function GitHubButton(): React.ReactElement {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
     <a
       href="https://github.com/nitsuah"
@@ -12,21 +14,29 @@ export default function GitHubButton(): React.ReactElement {
       title="GitHub"
       target="_blank"
       rel="noopener noreferrer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
-        display: "inline-flex",
+        display: "flex",
         alignItems: "center",
-        padding: "0.25rem 0.5rem",
+        justifyContent: "center",
+        width: "1rem",
+        height: "1rem",
+        padding: "0.4rem",
         borderRadius: 6,
         textDecoration: "none",
+        border: "1px solid #7c3aed",
         background: "#7c3aed",
         color: "#fff",
-        boxShadow: "0 4px 12px rgba(124,58,237,0.18)",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+        boxShadow: isHovered ? "0 2px 8px rgba(124, 58, 237, 0.6)" : "none",
       }}
     >
       {/* Simple SVG octocat-like placeholder */}
       <svg
-        width="18"
-        height="18"
+        width="16"
+        height="16"
         viewBox="0 0 16 16"
         fill="currentColor"
         aria-hidden

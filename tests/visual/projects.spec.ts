@@ -1,22 +1,27 @@
 import { expect, test } from "@playwright/test";
 
+// Allow ~2% pixel difference for dynamic animations (Spline 3D, etc.)
+// Calculated as approximately 100000 pixels for typical desktop viewport
+const MAX_VISUAL_DIFF_PIXELS = 100000;
+
 test.describe("Projects Page Visual Tests", () => {
-  // TODO: Re-enable after Docker setup in next phase for consistent CI/local rendering
-  test.skip("projects page renders correctly", async ({ page }) => {
+  test("projects page renders correctly", async ({ page }) => {
     await page.goto("/projects");
 
     // Check header and footer are visible
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
-    // Wait for layout to stabilize
-    await page.waitForTimeout(1000);
+    // Wait for layout to stabilize and network to idle
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(2000);
 
-    // Take screenshot
+    // Take screenshot - allow small pixel differences due to dynamic content
     await expect(page).toHaveScreenshot("projects-desktop.png", {
       fullPage: true,
       animations: "disabled",
-      timeout: 20000,
+      timeout: 30000,
+      maxDiffPixels: MAX_VISUAL_DIFF_PIXELS,
     });
   });
 

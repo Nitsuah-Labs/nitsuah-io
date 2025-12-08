@@ -2,6 +2,9 @@
  * Resume utility functions
  */
 
+/** Identifier used in job names to mark subcontracted positions */
+export const SUBCONTRACT_IDENTIFIER = "sub.";
+
 export function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   const date = new Date(dateStr);
@@ -40,7 +43,78 @@ export function getProficiencyLevel(level?: string): number {
     Intermediate: 2,
     Advanced: 3,
     Expert: 4,
-    Master: 5,
   };
-  return level ? levels[level] || 3 : 3;
+  // Default to Intermediate (2) as middle of scale without Master level
+  return level ? levels[level] || 2 : 2;
+}
+
+/**
+ * Calculate total years of work experience
+ * @param work - Array of work experience entries
+ * @param excludeSubcontracted - Whether to exclude subcontracted positions to avoid double counting
+ * @returns Total years of experience
+ */
+export function calculateTotalYearsOfExperience(
+  work: Array<{ name: string; startDate: string; endDate?: string }>,
+  excludeSubcontracted = true,
+): number {
+  return work.reduce((sum, job) => {
+    // Skip subcontracted work if excludeSubcontracted is true
+    if (
+      excludeSubcontracted &&
+      job.name.toLowerCase().includes(SUBCONTRACT_IDENTIFIER)
+    ) {
+      return sum;
+    }
+    const startDate = new Date(job.startDate);
+    const endDate = job.endDate ? new Date(job.endDate) : new Date();
+    const years =
+      (endDate.getTime() - startDate.getTime()) /
+      (1000 * 60 * 60 * 24 * 365.25);
+    return sum + years;
+  }, 0);
+}
+
+/**
+ * Get company logo URL from Clearbit Logo API
+ * @param companyName - The company name to look up
+ * @returns Logo URL or null if not found
+ */
+export function getCompanyLogoUrl(companyName: string): string | null {
+  const lowerName = companyName.toLowerCase();
+
+  // Map company substrings to their domains
+  const companyDomains: { [key: string]: string } = {
+    netflix: "netflix.com",
+    coinbase: "coinbase.com",
+    blackboard: "blackboard.com",
+  };
+
+  // Use Clearbit Logo API for high-quality company logos
+  for (const key in companyDomains) {
+    if (lowerName.includes(key)) {
+      return `https://logo.clearbit.com/${companyDomains[key]}`;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Get institution logo for education section
+ * @param institutionName - The institution name
+ * @returns Logo path or URL
+ */
+export function getInstitutionLogo(institutionName: string): string | null {
+  const lowerName = institutionName.toLowerCase();
+
+  // Map known institutions to their logo paths
+  if (lowerName.includes("virginia tech") || lowerName.includes("vt")) {
+    return "/assets/vt-logo.png";
+  }
+
+  // Could add more institutions here
+  // if (lowerName.includes("mit")) return "/assets/mit-logo.png";
+
+  return null;
 }

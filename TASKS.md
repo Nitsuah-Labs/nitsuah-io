@@ -1,16 +1,12 @@
 # TASKS
 
-**Last Updated:** December 4, 2025
+**Last Updated:** December 6, 2025
 
 ## Todo
 
 ### High Priority
 
-- [ ] **Visual Regression Baselines** - Standardize baseline update workflow
-  - Design automated screenshot gathering script
-  - Document when/how to update baselines in Docker
-  - Ensure Docker-generated screenshots match CI exactly
-- [ ] **Wallet Testing Setup** - Setup MetaMask or embedded wallet for local Web3 testing
+- [ ] **Wallet Testing Setup** - Setup MetaMask for local Web3 testing (NEXT UP!)
 - [ ] **Contract Deployer** - Track down deployer repo, find contract IDs, etc.
 - [ ] **Mumbai → Amoy** - Polygon testnet migration
 - [ ] **Visual Assets** - See `docs/SCREENSHOTS.md` for needed screenshots:
@@ -18,6 +14,14 @@
   - Projects page: 3 projects need screenshots  
   - Client demos: 100+ product/content images needed?
   - avatar - maybe we need to update repo to scale this service for us?
+
+### Completed (December 2025)
+
+- [x] **Docker Test Environment** - Fully functional Docker setup for CI-consistent testing
+- [x] **Resume Page PDF Mode** - Two-column Experience layout with summary cards
+- [x] **Portfolio Navigation** - Added Crypto to portfolio dropdown menu
+- [x] **Location Links** - Made location clickable with URL support
+- [x] **TypeScript Types** - Added `url` property to location interface
 
 ---
 

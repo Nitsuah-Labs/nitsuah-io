@@ -80,7 +80,9 @@ test.describe("Resume Page Accessibility Tests", () => {
   }) => {
     // navigation handled in beforeEach
     // Check PDF export button has aria-label (use role to avoid overlays)
-    const pdfButton = page.getByRole("button", { name: /Export PDF/i }).first();
+    const pdfButton = page
+      .getByRole("button", { name: /Export resume as PDF/i })
+      .first();
     await expect(pdfButton).toHaveAttribute("aria-label");
   });
 

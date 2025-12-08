@@ -1,8 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
-import { calculateDuration, extractDurationText } from "../../../utils/resume";
+import {
+  calculateDuration,
+  calculateTotalYearsOfExperience,
+  extractDurationText,
+  getCompanyLogoUrl,
+} from "../../../utils/resume";
 
 interface WorkExperienceProps {
   work: ResumeData["work"];
@@ -12,16 +18,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 3);
 
-  // Calculate total years across all jobs (excluding "sub." companies to avoid double counting)
-  const totalYears = work.reduce((sum, job) => {
-    // Skip subcontracted work to avoid double counting
-    if (job.name.toLowerCase().includes("sub.")) {
-      return sum;
-    }
-    const duration = calculateDuration(job.startDate, job.endDate);
-    const years = parseFloat(duration.match(/\(([^)]+) years\)/)?.[1] || "0");
-    return sum + years;
-  }, 0);
+  // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
+  const totalYears = calculateTotalYearsOfExperience(work, true);
   const totalFullBars = Math.floor(totalYears);
   const totalPartialBar = totalYears - totalFullBars;
 
@@ -30,22 +28,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
       <h2 className="section-title">
         <i className="fa fa-briefcase" aria-hidden="true"></i> Work Experience
       </h2>
-
-      {/* Total Years Summary */}
-      <div className="work-total-summary">
-        <div className="total-label">Total Experience</div>
-        <div className="total-duration-container">
-          <div className="total-duration-bars">
-            {Array.from({ length: totalFullBars }).map((_, i) => (
-              <div key={i} className="duration-bar full" />
-            ))}
-            {totalPartialBar > 0 && <div className="duration-bar partial" />}
-          </div>
-          <div className="total-duration-text">
-            {totalYears.toFixed(1)} years
-          </div>
-        </div>
-      </div>
 
       <div className="work-items">
         {displayedJobs.map((job, idx) => {
@@ -71,8 +53,35 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                       <i className="fa fa-chevron-down" aria-hidden="true"></i>
                     </div>
                     <div className="work-info">
-                      <div className="work-position">{job.position}</div>
-                      <div className="work-company">
+                      <div className="work-position">
+                        {getCompanyLogoUrl(job.name) ? (
+                          <>
+                            <a
+                              href={job.url || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="company-logo-link print-hide"
+                              title={job.name}
+                            >
+                              <Image
+                                src={getCompanyLogoUrl(job.name)!}
+                                alt={job.name}
+                                width={48}
+                                height={48}
+                                style={{
+                                  objectFit: "contain",
+                                  borderRadius: "6px",
+                                }}
+                              />
+                            </a>
+                            <span>{job.position}</span>
+                          </>
+                        ) : (
+                          job.position
+                        )}
+                      </div>
+                      <div className="work-company print-show">
                         {job.url ? (
                           <a
                             href={job.url}
@@ -124,9 +133,22 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                 {job.summary && <p className="work-summary">{job.summary}</p>}
                 {job.highlights && job.highlights.length > 0 && (
                   <ul className="work-highlights">
-                    {job.highlights.map((highlight, hidx) => (
-                      <li key={hidx}>{highlight}</li>
-                    ))}
+                    {job.highlights.map((highlight, hidx) => {
+                      // Check if highlight has a dash within the first 80 characters
+                      const dashIndex = highlight.indexOf(" - ");
+                      const hasTitlePrefix = dashIndex > 0 && dashIndex < 80;
+
+                      if (hasTitlePrefix) {
+                        const beforeDash = highlight.substring(0, dashIndex);
+                        const afterDash = highlight.substring(dashIndex + 3);
+                        return (
+                          <li key={hidx}>
+                            <strong>{beforeDash}</strong> - {afterDash}
+                          </li>
+                        );
+                      }
+                      return <li key={hidx}>{highlight}</li>;
+                    })}
                   </ul>
                 )}
               </div>

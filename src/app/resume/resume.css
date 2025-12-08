@@ -1,5 +1,21 @@
 /* Resume Page - StackOverflow Theme Adaptation */
 
+/* Education & Languages positioning - bottom on screen, early when printing */
+.resume-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.print-early-position {
+  order: 999; /* Move to bottom on screen */
+}
+
+@media print {
+  .print-early-position {
+    order: 0; /* Reset to natural order when printing */
+  }
+}
+
 /* Screen reader only text */
 .sr-only {
   position: absolute;
@@ -189,6 +205,22 @@
     color: #8ab9ff !important;
   }
 
+  .education-logo-link {
+    display: inline-block;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .education-logo-link:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+
+  .print-show {
+    display: none;
+  }
+
   .education-date,
   .education-score {
     color: #888 !important;
@@ -331,11 +363,11 @@
 
 /* Profiles */
 .resume-profiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   margin-top: 1rem;
+  max-width: 100%;
 }
 
 .profile-link {
@@ -550,10 +582,23 @@
 }
 
 .work-position {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-size: 1.125rem;
   font-weight: 600;
   color: #222;
   margin-bottom: 0.25rem;
+}
+
+.position-link {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.position-link:hover {
+  color: #0095ff;
 }
 
 .work-company {
@@ -568,6 +613,25 @@
 
 .work-company a:hover {
   text-decoration: underline;
+}
+
+.company-logo-link {
+  display: inline-block;
+  flex-shrink: 0;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.company-logo-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+@media print {
+  .company-logo-link {
+    display: none !important;
+  }
 }
 
 .work-details {
@@ -689,7 +753,32 @@
 }
 
 .education-header {
-  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.education-title-group {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.education-info {
+  flex: 1;
+}
+
+.education-degree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.education-degree-text {
+  flex: 1;
 }
 
 .education-degree {
@@ -711,6 +800,214 @@
 
 .education-institution a:hover {
   text-decoration: underline;
+}
+
+.education-dates-section {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.education-date {
+  font-size: 0.875rem;
+  color: #595959;
+  white-space: nowrap;
+}
+
+.education-score {
+  font-size: 0.875rem;
+  color: #595959;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+}
+
+/* PDF Summary Cards - Only visible in print mode */
+.pdf-summary-cards {
+  display: none;
+}
+
+.pdf-work-cards {
+  display: none;
+}
+
+@media print {
+  .print-show {
+    display: inline !important;
+  }
+
+  .pdf-experience-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .pdf-summary-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .pdf-work-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  .pdf-section-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b04115;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #dbeffd;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pdf-section-heading i {
+    font-size: 1.25rem;
+  }
+
+  .pdf-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-left: 4px solid #f97316;
+    border-radius: 6px;
+  }
+
+  .pdf-card-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .pdf-card-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pdf-card-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+
+  .pdf-card-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  .pdf-card-value-small {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #212529;
+    line-height: 1.2;
+  }
+
+  .pdf-card-subtitle {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-top: 0.125rem;
+  }
+
+  .pdf-card-duration {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.25rem;
+    font-weight: 500;
+  }
+
+  .pdf-education-card {
+    border-left-color: #f97316;
+    padding: 0.75rem 1rem;
+  }
+
+  .pdf-education-card .pdf-card-logo {
+    width: 90px;
+    height: 90px;
+  }
+
+  .pdf-languages-card {
+    border-left-color: #f97316;
+  }
+
+  .pdf-skills-card {
+    border-left-color: #f97316;
+  }
+
+  .pdf-work-card-full {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #2d2d2d;
+    border: 1px solid #3d3d3d;
+    border-left: 4px solid #0095ff;
+    border-radius: 6px;
+  }
+
+  .pdf-work-card-full .pdf-card-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: #fff;
+    padding: 4px;
+  }
+
+  .pdf-work-card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .pdf-work-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .pdf-work-position {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .pdf-work-company {
+    font-size: 0.875rem;
+    color: #b0b0b0;
+    font-weight: 500;
+  }
+
+  .pdf-work-duration {
+    font-size: 0.875rem;
+    color: #888;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .education-logo-link {
+    display: none !important;
+  }
 }
 
 .education-date {
@@ -793,7 +1090,10 @@
   }
 
   .print-hide,
-  .resume-actions {
+  .resume-actions,
+  .resume-section.education,
+  .resume-section.languages,
+  .pdf-languages-card {
     display: none !important;
   }
 
@@ -828,6 +1128,41 @@
     padding: 0.5rem 1rem;
   }
 
+  .work-highlights li {
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  /* Skills optimization for print */
+  .skills-grid {
+    gap: 0.75rem;
+  }
+
+  .skill-item {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .skill-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-bar {
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-name {
+    font-size: 0.875rem;
+  }
+
+  .skill-level {
+    font-size: 0.75rem;
+  }
+
+  .skill-keywords {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+
   /* Show all URLs for links */
   a[href]:after {
     content: " (" attr(href) ")";
@@ -839,6 +1174,31 @@
   .contact-item a:after {
     content: "";
   }
+
+  /* Show URLs for profile buttons in print */
+  .resume-profiles a[href]:not([href^="mailto:"]):after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.25rem;
+  }
+
+  /* For email, show 'Email' label and URL */
+  .resume-profiles a[href^="mailto:"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 0.25rem;
+  }
+
+  .resume-profiles a[href^="mailto:"] span:last-child {
+    display: none;
+  }
+
+  .resume-profiles a[href^="mailto:"]:before {
+    content: "Email";
+    margin-left: 0.25rem;
+  }
 }
 
 /* Responsive Design */
@@ -848,8 +1208,7 @@
   }
 
   .education-languages-container {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    display: none !important;
   }
 
   .work-total-summary {

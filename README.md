@@ -100,7 +100,7 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 ### Testing & Quality
 
 - **Unit Tests:** Jest with React Testing Library (213 passing)
-- **E2E Tests:** Playwright for visual regression and user flows (59 passing)
+- **E2E Tests:** Playwright for visual regression and user flows (61 passing)
 - **Accessibility:** axe-core integration - WCAG 2.1 AA compliant (20 passing)
 - **Docker Testing:** CI-consistent environment with production builds
 - **Test Coverage:** 98% statement coverage, 100% test pass rate
@@ -109,7 +109,7 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 ```bash
 # Run tests locally
 npm test                  # Unit tests (213 tests)
-npm run test:e2e         # E2E tests (59 tests)
+npm run test:e2e         # E2E tests (61 tests)
 npm run test:a11y        # Accessibility tests (20 tests)
 
 # Match CI environment exactly

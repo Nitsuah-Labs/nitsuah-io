@@ -10,6 +10,8 @@ services:
       - .:/app
       # Use named volume for node_modules to avoid conflicts with host
       - node_modules:/app/node_modules
+      # Use named volume for .next to preserve the build from Dockerfile
+      - next_build:/app/.next
       # Mount test results directory
       - ./test-results:/app/test-results
       - ./playwright-report:/app/playwright-report
@@ -24,3 +26,4 @@ services:
 
 volumes:
   node_modules:
+  next_build:

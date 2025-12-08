@@ -4,13 +4,11 @@
     "title": "Senior Systems Engineer",
     "website": "https://nitsuah.io",
     "email": "contact@nitsuah.io",
-    "phone": "+1 (555) 123-4567",
-    "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
+    "picture": "/images/ajh.jpg",
     "summary": "Ut prosim. Ready for any challenge or opportunity from over 15 years in Enterprise IT.",
     "location": {
-      "countryCode": "US",
-      "address": "United States",
       "city": "Sevierville",
+      "url": "https://www.seviervilletn.org/",
       "region": "TN"
     },
     "profiles": [
@@ -29,6 +27,7 @@
   "work": [
     {
       "name": "Netflix, Inc.",
+      "url": "https://www.netflix.com/",
       "highlights": [
         "Ad Ops Pipeline Optimization - Developed comprehensive custom Jira project and automation rules for Netflix Ad Operations team, transforming campaign management workflows. Implemented custom fields, workflows, and real-time dashboards that enhanced visibility and reporting across $30M+ in advertising revenue, reducing manual effort by 70% and improving campaign tracking accuracy.",
         "Jira Cloud Mail Handler (JCMH) - Scaled a custom plugin to handle external email intake, replies, comments, and attachments across many federated Jira sites, streamlining organization-wide communication.",
@@ -48,6 +47,7 @@
     },
     {
       "name": "Coinbase Inc.",
+      "url": "https://www.coinbase.com/",
       "highlights": [
         "Product Launch Calendar - Transformed cross-functional approval & rollout process for tracking features, releases, and programs, benefiting millions of global customers.",
         "Rolling Intake - Streamlined IT Program Management with automated Insights self-service, enhancing efficiency for dynamic datasets.",
@@ -63,6 +63,7 @@
     },
     {
       "name": "Blackboard, Inc.",
+      "url": "https://www.blackboard.com/",
       "position": "Senior Systems Administrator",
       "startDate": "2018-04-09",
       "endDate": "2022-04-01",
@@ -173,7 +174,7 @@
   "skills": [
     {
       "name": "Atlassian Suite",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Jira",
         "Jira Service Management",
@@ -203,7 +204,7 @@
     },
     {
       "name": "AWS",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "EC2",
         "S3",
@@ -338,7 +339,7 @@
     },
     {
       "name": "Design",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Figma",
         "spline.design",
@@ -357,7 +358,7 @@
     },
     {
       "name": "Microsoft Suite",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Azure Active Directory (AD)",
         "PowerBI",
@@ -387,7 +388,7 @@
     },
     {
       "name": "Operating Systems (OS)",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Linux",
         "Ubuntu",
@@ -400,7 +401,7 @@
     },
     {
       "name": "OS cli/shell",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Powershell",
         "bat",
@@ -419,7 +420,7 @@
     },
     {
       "name": "Third Party SaaS",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "Asana",
         "BugCrowd",
@@ -436,7 +437,7 @@
     },
     {
       "name": "Virtualization",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "AWS EC2",
         "Docker",
@@ -453,7 +454,7 @@
     },
     {
       "name": "Web Services",
-      "level": "Master",
+      "level": "Expert",
       "keywords": [
         "REST APIs",
         "Apache",
@@ -472,6 +473,7 @@
   "education": [
     {
       "institution": "Virginia Tech",
+      "url": "https://www.vt.edu/",
       "area": "Psychology",
       "studyType": "Bachelor's Degree",
       "startDate": "2008-07-31",

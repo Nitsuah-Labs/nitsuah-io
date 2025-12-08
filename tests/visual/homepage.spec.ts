@@ -83,23 +83,23 @@ test.describe("Homepage Visual Tests", () => {
     await expect(page.locator("header")).toBeVisible();
 
     // Check main navigation links exist on homepage
-    // Note: "labs" is NOT a top-level nav item - it's nested under "projects"
-    // So we test for the actual top-level navigation items: about, resume, crypto, projects
+    // Top-level nav items: about, resume, portfolio (button/dropdown trigger)
+    // Note: "crypto" and "labs" are nested under "portfolio" dropdown
     const aboutLink = page.getByRole("link", { name: /about/i }).first();
     const resumeLink = page.getByRole("link", { name: /resume/i }).first();
-    const cryptoLink = page.getByRole("link", { name: /crypto/i }).first();
-    const projectsLink = page.locator('a[href="/projects"]').first();
+    // Portfolio is a button that triggers a dropdown menu, not a direct link
+    const portfolioButton = page
+      .getByRole("button", { name: /portfolio/i })
+      .first();
 
-    // Verify all top-level navigation links are visible
+    // Verify all top-level navigation elements are visible
     await expect(aboutLink).toBeVisible();
     await expect(resumeLink).toBeVisible();
-    await expect(cryptoLink).toBeVisible();
-    await expect(projectsLink).toBeVisible();
+    await expect(portfolioButton).toBeVisible();
 
     // Verify links have correct href attributes
     await expect(aboutLink).toHaveAttribute("href", "/about");
     await expect(resumeLink).toHaveAttribute("href", "/resume");
-    await expect(cryptoLink).toHaveAttribute("href", "/crypto");
-    await expect(projectsLink).toHaveAttribute("href", "/projects");
+    // Portfolio button triggers dropdown, doesn't have href
   });
 });

@@ -18,7 +18,13 @@ export function Connect() {
   const { disconnect } = useDisconnect();
   const [pendingId, setPendingId] = React.useState<string | null>(null);
   const [wasConnected, setWasConnected] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const cs: any[] = connectors as any[];
+
+  // Prevent hydration mismatch
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Show toast on connection/disconnection
   React.useEffect(() => {
@@ -45,6 +51,16 @@ export function Connect() {
       setPendingId(null);
     }
   }, [error]);
+
+  if (!mounted) {
+    return (
+      <div
+        role="region"
+        aria-label="Wallet connection controls"
+        className={styles.container}
+      />
+    );
+  }
 
   return (
     <div

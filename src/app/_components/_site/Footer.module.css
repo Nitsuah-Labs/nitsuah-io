@@ -2,25 +2,76 @@
   position: fixed;
 }
 
+.themeToggleWrapper {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.exportPdfButton {
+  position: absolute;
+  right: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 8px;
+  border: 1px solid #f97316;
+  background: #f97316;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.exportPdfButton:hover {
+  background: #ea580c;
+  border-color: #ea580c;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.6);
+}
+
 .backToTopButton {
   position: absolute;
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backToTopButton::before {
+  content: "";
   width: 0;
   height: 0;
-  border: none;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 25px solid #f97316;
-  background: transparent;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  padding: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid #f97316;
 }
 
 .backToTopButton:hover {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-border-hover);
+}
+
+.backToTopButton:hover::before {
   border-bottom-color: #ea580c;
-  filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.6));
+  filter: drop-shadow(0 2px 4px rgba(249, 115, 22, 0.6));
 }

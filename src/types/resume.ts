@@ -14,6 +14,7 @@ export interface ResumeData {
       city: string;
       countryCode: string;
       region: string;
+      url?: string;
     };
     profiles: Array<{
       network: string;

@@ -68,7 +68,6 @@ const CryptoPage = () => {
         aria-label="Crypto Projects Content"
         className="content-container"
         style={{
-          marginTop: "80px",
           marginBottom: "60px",
           paddingBottom: "80px",
           minHeight: "calc(100vh - 140px)",
@@ -79,12 +78,14 @@ const CryptoPage = () => {
           className="projects-header"
           style={{
             marginBottom: "24px",
+            marginTop: "8px",
             maxWidth: "900px",
             margin: "0 auto 24px",
             textAlign: "center",
+            paddingTop: "2rem",
           }}
         >
-          <h1 style={{ marginBottom: "1rem" }}>Web3 & Crypto</h1>
+          <h1>CRYPTO & WEB3</h1>
           <div
             style={{
               background: "rgba(249, 115, 22, 0.1)",
