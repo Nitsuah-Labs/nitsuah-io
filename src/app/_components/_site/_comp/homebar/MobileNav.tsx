@@ -40,7 +40,7 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
                 href={`/${p}`}
                 style={{
                   textDecoration: "none",
-                  color: (navStyles.link as any).color,
+                  color: navStyles.link.color,
                 }}
               >
                 {p}
@@ -96,7 +96,7 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           }
 
           // Style for Projects, Clients, Blogs
-          let color = (navStyles.link as any).color; // Default orange
+          let color = navStyles.link.color; // Default orange
           let label = item.label;
 
           if (item.label === "Projects") {
@@ -111,11 +111,11 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
 
           return (
             <MenuItem
-              key={(item as any).href || `portfolio-${index}`}
+              key={item.href || `portfolio-${index}`}
               onClick={() => setAnchorEl(null)}
             >
               <Link
-                href={(item as any).href}
+                href={item.href!}
                 style={{
                   textDecoration: "none",
                   color: color,
