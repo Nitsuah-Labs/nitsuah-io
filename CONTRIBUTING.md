@@ -271,12 +271,14 @@ npm run test:visual:update:docker
 #### When to Update Baselines
 
 ✅ **Do update** when you've made intentional changes to:
+
 - Colors, fonts, or styling
 - Layouts or component positioning  
 - UI elements (added/removed/modified)
 - Images or icons
 
 ❌ **Don't update** for:
+
 - Unintended regressions (fix the code instead!)
 - Random differences (investigate root cause)
 - CI failures without understanding why
@@ -306,6 +308,7 @@ docker-compose -f docker-compose.test.yml run --rm playwright npx playwright tes
 ```
 
 **When to use Docker:**
+
 - Before committing visual baseline updates
 - Before pushing changes to visual components
 - After updating dependencies
@@ -405,6 +408,7 @@ Example: `feat: add dark mode toggle to navigation`
 - Screenshots for UI changes
 - Breaking changes (if any)
 - Related issues
+
 ## Areas That Need Help
 
 - 🧪 **Testing**: E2E tests for wallet flows

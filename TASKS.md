@@ -1,6 +1,6 @@
 # TASKS
 
-**Last Updated:** December 6, 2025
+**Last Updated:** December 8, 2025
 
 ## Todo
 
@@ -15,7 +15,7 @@
   - Client demos: 100+ product/content images needed?
   - avatar - maybe we need to update repo to scale this service for us?
 
-### Completed (December 2025)
+### Done
 
 - [x] **Docker Test Environment** - Fully functional Docker setup for CI-consistent testing
 - [x] **Resume Page PDF Mode** - Two-column Experience layout with summary cards
