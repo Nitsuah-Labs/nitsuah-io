@@ -10,7 +10,7 @@
     "build:ci": "npm run build:skip-wagmi",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint",
+    "lint:fix": "next lint --fix",
     "wagmi": "node scripts/wagmi-generate.js",
     "typecheck": "tsc --project config/tsconfig.json --noEmit",
     "format": "prettier --config config/prettier.config.json --write \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
@@ -41,7 +41,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --config config/prettier.config.json --write"
+      "prettier --config config/prettier.config.json --write",
+      "eslint --fix"
     ],
     "src/**/*.{json,css}": [
       "prettier --config config/prettier.config.json --write"
@@ -63,8 +64,8 @@
     "@walletconnect/ethereum-provider": "^2.21.1",
     "bufferutil": "^4.0.9",
     "next": "^16.0.7",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-hot-toast": "^2.6.0",
     "sharp": "^0.34.1",
     "utf-8-validate": "^6.0.5",

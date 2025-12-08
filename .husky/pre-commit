@@ -4,16 +4,18 @@ export PATH="/c/Program Files/nodejs:$PATH"
 
 echo "🔍 Running pre-commit validation (fast checks with auto-fix)..."
 
-# Step 1: Lint with auto-fix FIRST (catches and fixes issues early)
-# Note: Skipping next lint due to Next.js 16 bug - build includes TypeScript/ESLint validation
-echo "1/4 Skipping lint (Next.js 16 bug - validation happens in build)..."
-
-# Step 2: Type checking
-echo "2/4 Checking types..."
+# Step 1: Type checking
+echo "1/4 Checking types..."
 npm run typecheck || exit 1
 
-# Step 3: Auto-formatting staged files
-echo "3/4 Auto-formatting staged files..."
+# Step 2: Linting (next lint doesn't support --fix, auto-fix happens in lint-staged)
+echo "2/4 Running linter..."
+npm run lint || {
+	echo "⚠️  Lint errors found. They will be auto-fixed in the next step if possible."
+}
+
+# Step 3: Auto-formatting and auto-fixing staged files
+echo "3/4 Auto-formatting and auto-fixing staged files..."
 npx lint-staged || {
 	echo "npx lint-staged failed or unavailable; falling back to project formatter..."
 	npm run format || exit 1
@@ -22,7 +24,10 @@ npx lint-staged || {
 
 # Step 4: Jest unit tests
 echo "4/4 Running Jest tests..."
-npm test || exit 1
+npm test || {
+	echo "⚠️  Tests failed. Please fix them before committing."
+	exit 1
+}
 
 echo "✅ All pre-commit checks passed! (accessibility tests will run on push)"
 

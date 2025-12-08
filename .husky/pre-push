@@ -2,14 +2,17 @@
 # Add Node.js to PATH for Git Bash on Windows
 export PATH="/c/Program Files/nodejs:$PATH"
 
-echo "🔍 Running pre-push validation (quick smoke test)..."
+echo "🔍 Running pre-push validation..."
 
-# Fast lint check catches most syntax/style issues
-# Note: Skipping next lint due to Next.js 16 bug - CI will validate with build
-echo "1/2 Skipping lint (Next.js 16 bug - CI validates in build)..."
-
-# Quick typecheck catches type errors before CI
-echo "2/2 Type checking..."
+# Type check
+echo "1/2 Type checking..."
 npm run typecheck || exit 1
 
-echo "✅ Pre-push checks passed! (~5-10s) CI will run full build + tests."
+# Run full test suite
+echo "2/2 Running full test suite..."
+npm test || {
+	echo "⚠️  Tests failed. Please fix them before pushing."
+	exit 1
+}
+
+echo "✅ Pre-push checks passed! CI will run linting, E2E and accessibility tests."
