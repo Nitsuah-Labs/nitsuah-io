@@ -11,9 +11,6 @@ import {
   useWriteContract,
 } from "wagmi";
 import registerABI from "../../_components/_labs/_utils/registerABI.json";
-import LabFooter from "../../_components/_labs/LabFooter";
-import LabNav from "../../_components/_labs/LabNav";
-import LabSubNav from "../../_components/_labs/LabSubNav";
 import "../../_components/_styles/labs.css";
 import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
 import mumbai from "../../_components/_web3/_assets/mumbai.png";
@@ -233,24 +230,13 @@ export default function RegisterContent() {
   };
 
   return (
-    <div className="App">
-      <LabNav />
-      <LabSubNav />
-      <main
-        id="main"
-        role="main"
-        aria-label="Register Domain Content"
-        style={{ paddingBottom: "80px" }}
-        tabIndex={-1}
-      >
-        <h1>REGISTRATION PORTAL</h1>
-        <div className="form-container">
-          <div className="mint-container">
-            {!isConnected ? renderNotConnectedContainer() : renderInput()}
-          </div>
+    <>
+      <h1>REGISTRATION PORTAL</h1>
+      <div className="form-container">
+        <div className="mint-container">
+          {!isConnected ? renderNotConnectedContainer() : renderInput()}
         </div>
-      </main>
-      <LabFooter />
-    </div>
+      </div>
+    </>
   );
 }
