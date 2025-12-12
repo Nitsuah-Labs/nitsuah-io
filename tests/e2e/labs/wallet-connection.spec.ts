@@ -28,6 +28,14 @@ test.describe("Wallet Connection Flow", () => {
 
   test("shows connect wallet button when disconnected", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
+    await page.waitForLoadState("networkidle");
+
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Look for connect wallet button or setup section
     const connectButton = page.getByRole("button", {
@@ -40,6 +48,14 @@ test.describe("Wallet Connection Flow", () => {
     page,
   }) => {
     await page.goto("/labs/register?testHelpers=1");
+    await page.waitForLoadState("networkidle");
+
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Check for wallet setup section
     const walletSection = page.locator("section, div").filter({
@@ -50,6 +66,7 @@ test.describe("Wallet Connection Flow", () => {
 
   test("network switcher appears on register page", async ({ page }) => {
     await page.goto("/labs/register?testHelpers=1");
+    await page.waitForLoadState("networkidle");
     
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
@@ -90,6 +107,13 @@ test.describe("Mint NFT Flow", () => {
     await page.goto("/labs/mint?testHelpers=1");
     await page.waitForLoadState("networkidle");
 
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
+
     // Look for connect wallet or account display
 
     // Prefer deterministic test-helper testids when present
@@ -109,6 +133,13 @@ test.describe("Mint NFT Flow", () => {
   test("mint page has network switcher", async ({ page }) => {
     await page.goto("/labs/mint?testHelpers=1");
     await page.waitForLoadState("networkidle");
+
+    // Manually add test-helpers class to ensure CSS applies
+    await page.evaluate(() => {
+      if (document.body && !document.body.classList.contains('test-helpers')) {
+        document.body.classList.add('test-helpers');
+      }
+    });
 
     // Prefer deterministic test-helper label when present
 
@@ -149,7 +180,6 @@ test.describe("Mint NFT Flow", () => {
 test.describe("Domains Page", () => {
   test("domains page renders correctly", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
-
     await page.waitForLoadState("networkidle");
     
     // Manually add test-helpers class to ensure CSS applies
@@ -165,6 +195,7 @@ test.describe("Domains Page", () => {
 
   test("domains page has wallet connection capability", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
+    await page.waitForLoadState("networkidle");
     
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
