@@ -728,3 +728,12 @@ input:focus {
     opacity: 0;
   }
 }
+
+/* WalletConnect Modal z-index fix */
+/* Ensure WalletConnect modal appears above footer and other fixed elements */
+wcm-modal,
+w3m-modal,
+[id^="wcm-"],
+[id^="w3m-"] {
+  z-index: 2147483647 !important;
+}
