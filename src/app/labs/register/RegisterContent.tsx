@@ -147,7 +147,7 @@ export default function RegisterContent() {
       </div>
       <div className="labs-card-body">
         <Connect />
-        {helpersEnabled && (
+        {testHelpersMode && (
           <div
             data-testid="register-test-helpers"
             style={{
