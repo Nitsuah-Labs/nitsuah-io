@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ResumeData } from "../../types/resume";
 import {
   calculateTotalYearsOfExperience,
@@ -89,9 +90,11 @@ export default function ResumePage() {
                   return (
                     <div key={idx} className="pdf-work-card-full">
                       {logoUrl && (
-                        <img
+                        <Image
                           src={logoUrl}
                           alt={job.name}
+                          width={48}
+                          height={48}
                           className="pdf-card-logo"
                         />
                       )}
