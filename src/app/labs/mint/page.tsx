@@ -25,11 +25,15 @@ import { NetworkSwitcher } from "../../_components/_web3/NetworkSwitcher";
 
 const MintSite: React.FC = () => {
   const [showTestHelpers, setShowTestHelpers] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+      }
     } catch {
       // ignore errors reading window.location in unusual runtimes
     }
@@ -38,6 +42,7 @@ const MintSite: React.FC = () => {
   const helpersEnabled =
     process.env.NEXT_PUBLIC_TEST_HELPERS === "1" || showTestHelpers;
 
+  // Always render layout even if there are errors
   return (
     <div className="App">
       <LabNav />
@@ -55,7 +60,7 @@ const MintSite: React.FC = () => {
               <h2 className="labs-card-title">Connect Your Wallet</h2>
             </div>
             <div className="labs-card-body">
-              <Connect />
+              {mounted ? <Connect /> : <div>Loading wallet...</div>}
             </div>
           </div>
 
@@ -83,34 +88,36 @@ const MintSite: React.FC = () => {
             </div>
           )}
 
-          <Connected>
-            <div className="labs-card">
-              <div className="labs-card-header">
-                <h2 className="labs-card-title">Account Details</h2>
+          {mounted && (
+            <Connected>
+              <div className="labs-card">
+                <div className="labs-card-header">
+                  <h2 className="labs-card-title">Account Details</h2>
+                </div>
+                <div className="labs-card-body">
+                  <Account />
+                </div>
               </div>
-              <div className="labs-card-body">
-                <Account />
-              </div>
-            </div>
 
-            <div className="labs-card">
-              <div className="labs-card-header">
-                <h2 className="labs-card-title">Mint NFT</h2>
+              <div className="labs-card">
+                <div className="labs-card-header">
+                  <h2 className="labs-card-title">Mint NFT</h2>
+                </div>
+                <div className="labs-card-body">
+                  <MintNFT />
+                </div>
               </div>
-              <div className="labs-card-body">
-                <MintNFT />
-              </div>
-            </div>
 
-            <div className="labs-card">
-              <div className="labs-card-header">
-                <h2 className="labs-card-title">Network Settings</h2>
+              <div className="labs-card">
+                <div className="labs-card-header">
+                  <h2 className="labs-card-title">Network Settings</h2>
+                </div>
+                <div className="labs-card-body">
+                  <NetworkSwitcher />
+                </div>
               </div>
-              <div className="labs-card-body">
-                <NetworkSwitcher />
-              </div>
-            </div>
-          </Connected>
+            </Connected>
+          )}
         </div>
       </main>
       <LabFooter />

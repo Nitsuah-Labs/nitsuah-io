@@ -45,6 +45,11 @@ const DomainSite = (): React.ReactElement => {
   const [record, setRecord] = useState("");
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   interface Mint {
     id: number;

@@ -25,11 +25,15 @@ const contractABI = registerABI.abi;
 
 export default function RegisterContent() {
   const [showTestHelpers, setShowTestHelpers] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+      }
     } catch {
       // ignore
     }
@@ -40,6 +44,24 @@ export default function RegisterContent() {
 
   const [message, setMessage] = useState("");
   const { address: currentAccount, isConnected, chain } = useAccount();
+
+  // Don't render wagmi-dependent content until mounted
+  if (!mounted) {
+    return (
+      <>
+        <h1>REGISTRATION PORTAL</h1>
+        <div className="form-container">
+          <div className="mint-container">
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Loading...</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
   const network = chain?.name || "";
 
