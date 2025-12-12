@@ -46,10 +46,22 @@ const DomainSite = (): React.ReactElement => {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showTestHelpers, setShowTestHelpers] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    try {
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("testHelpers") === "1") setShowTestHelpers(true);
+      }
+    } catch {
+      // ignore
+    }
   }, []);
+
+  const helpersEnabled =
+    process.env.NEXT_PUBLIC_TEST_HELPERS === "1" || showTestHelpers;
 
   interface Mint {
     id: number;
@@ -232,6 +244,11 @@ const DomainSite = (): React.ReactElement => {
         <h1>SUB-DOMAIN PORTAL</h1>
         <div className="form-container">
           <div className="mint-container">
+            {helpersEnabled && !mounted && (
+              <div data-testid="domains-test-helpers" style={{ marginTop: 12 }}>
+                <div data-testid="network-info">Network: testnet</div>
+              </div>
+            )}
             {!currentAccount && <DomainsNotConnected />}
             {currentAccount ? (
               <DomainForm

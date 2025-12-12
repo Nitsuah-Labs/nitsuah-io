@@ -64,7 +64,7 @@ const MintSite: React.FC = () => {
             </div>
           </div>
 
-          {/* Test helpers: small fallbacks to make wallet/network presence deterministic in e2e */}
+          {/* Test helpers: Always render these for e2e tests even before mounted */}
           {helpersEnabled && (
             <div
               data-testid="mint-test-helpers"
