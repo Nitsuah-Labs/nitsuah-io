@@ -54,6 +54,7 @@ export default function ResumePage() {
         <div className="resume-content">
           {/* Header Section */}
           <ResumeHeader basics={resume.basics} />
+
           {/* Profile Buttons */}
           {(resume.basics.profiles ||
             resume.basics.url ||
@@ -87,17 +88,13 @@ export default function ResumePage() {
 
                   return (
                     <div key={idx} className="pdf-work-card-full">
-                      {/* Temporarily disabled logo
                       {logoUrl && (
-                        <CompanyLogo
+                        <img
                           src={logoUrl}
                           alt={job.name}
-                          width={48}
-                          height={48}
                           className="pdf-card-logo"
                         />
                       )}
-                      */}
                       <div className="pdf-work-card-content">
                         <div className="pdf-work-card-info">
                           <div className="pdf-work-position">
@@ -182,6 +179,7 @@ export default function ResumePage() {
               )}
             </div>
           )}
+
           {/* Work Experience */}
           {resume.work && resume.work.length > 0 && (
             <div style={{ marginTop: "2.5rem" }}>
