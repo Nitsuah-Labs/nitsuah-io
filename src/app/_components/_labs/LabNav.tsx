@@ -44,11 +44,21 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   />
 );
 
+// Safe wallet info hook that never throws
+function useSafeWalletInfo() {
+  try {
+    const { address, isConnected } = useAccount();
+    return { address, isConnected };
+  } catch {
+    return { address: undefined, isConnected: false };
+  }
+}
+
 const LabNav: React.FC<LabNavProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useSafeWalletInfo();
   const [copied, setCopied] = React.useState(false);
   const [homeClickCount, setHomeClickCount] = React.useState(0);
   const [homeClickTimer, setHomeClickTimer] =
