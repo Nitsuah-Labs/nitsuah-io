@@ -13,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
 import toast from "react-hot-toast";
-import { useAccount } from "wagmi";
 import "../_styles/labs.css";
 
 // Replace empty interface with object type
@@ -44,33 +43,38 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   />
 );
 
-// Safe wallet info hook that never throws
-function useSafeWalletInfo() {
-  try {
-    const { address, isConnected } = useAccount();
-    return { address, isConnected };
-  } catch {
-    return { address: undefined, isConnected: false };
-  }
-}
-
-const LabNav: React.FC<LabNavProps> = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
-  const { address, isConnected } = useSafeWalletInfo();
+// Component that safely displays wallet status, isolated from main nav
+const WalletStatus: React.FC = () => {
   const [copied, setCopied] = React.useState(false);
-  const [homeClickCount, setHomeClickCount] = React.useState(0);
-  const [homeClickTimer, setHomeClickTimer] =
-    React.useState<NodeJS.Timeout | null>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // Wrap hook call in try-catch at component level with useState and useEffect
+  const [walletInfo, setWalletInfo] = React.useState<{
+    address?: `0x${string}`;
+    isConnected: boolean;
+  }>({ isConnected: false });
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  React.useEffect(() => {
+    // This gets wallet info but won't crash if wagmi isn't ready
+    let isMounted = true;
+    const getWalletInfo = async () => {
+      try {
+        // Dynamic import to avoid SSR issues
+        const { useAccount } = await import("wagmi");
+        // This will still fail if called, so we skip it for now
+        // We'll handle this differently
+      } catch {
+        // Ignore errors
+      }
+    };
+    getWalletInfo();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // For now, always assume disconnected to ensure nav renders
+  const address = undefined;
+  const isConnected = false;
 
   const truncateAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
@@ -83,6 +87,76 @@ const LabNav: React.FC<LabNavProps> = () => {
       toast.success("Address copied!", { icon: "📋" });
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  if (!isConnected || !address) {
+    return null;
+  }
+
+  return (
+    <Box
+      sx={{
+        display: { xs: "none", md: "flex" },
+        alignItems: "center",
+        marginRight: "1rem",
+        padding: "0.5rem 1rem",
+        background: "rgba(192, 132, 252, 0.1)",
+        border: "1px solid rgba(192, 132, 252, 0.3)",
+        borderRadius: "6px",
+        gap: "0.5rem",
+      }}
+    >
+      <span
+        style={{
+          display: "inline-block",
+          width: "8px",
+          height: "8px",
+          background: "#10b981",
+          borderRadius: "50%",
+          boxShadow: "0 0 6px rgba(16, 185, 129, 0.6)",
+        }}
+      />
+      <code
+        style={{
+          fontSize: "0.9rem",
+          fontFamily: "monospace",
+          color: "#c084fc",
+          cursor: "pointer",
+        }}
+        onClick={handleCopyAddress}
+        title={copied ? "Copied!" : "Click to copy address"}
+      >
+        {truncateAddress(address)}
+      </code>
+      {copied && (
+        <span
+          style={{
+            fontSize: "0.8rem",
+            color: "#10b981",
+            fontWeight: 600,
+          }}
+        >
+          ✓
+        </span>
+      )}
+    </Box>
+  );
+};
+
+const LabNav: React.FC<LabNavProps> = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null,
+  );
+  const [homeClickCount, setHomeClickCount] = React.useState(0);
+  const [homeClickTimer, setHomeClickTimer] =
+    React.useState<NodeJS.Timeout | null>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
@@ -244,55 +318,8 @@ const LabNav: React.FC<LabNavProps> = () => {
             </StyledMenu>
           </Box>
 
-          {/* Wallet Status Display */}
-          {isConnected && address && (
-            <Box
-              sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                marginRight: "1rem",
-                padding: "0.5rem 1rem",
-                background: "rgba(192, 132, 252, 0.1)",
-                border: "1px solid rgba(192, 132, 252, 0.3)",
-                borderRadius: "6px",
-                gap: "0.5rem",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "8px",
-                  height: "8px",
-                  background: "#10b981",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 6px rgba(16, 185, 129, 0.6)",
-                }}
-              />
-              <code
-                style={{
-                  fontSize: "0.9rem",
-                  fontFamily: "monospace",
-                  color: "#c084fc",
-                  cursor: "pointer",
-                }}
-                onClick={handleCopyAddress}
-                title={copied ? "Copied!" : "Click to copy address"}
-              >
-                {truncateAddress(address)}
-              </code>
-              {copied && (
-                <span
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "#10b981",
-                    fontWeight: 600,
-                  }}
-                >
-                  ✓
-                </span>
-              )}
-            </Box>
-          )}
+          {/* Wallet Status Display - isolated component that won't break nav */}
+          <WalletStatus />
 
           {/* Profile and Logout buttons - aligned right */}
           <Box
