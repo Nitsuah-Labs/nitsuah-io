@@ -40,7 +40,8 @@ const OPENSEA_LINK =
 const CONTRACT_ADDRESS =
   "0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163" as unknown as `0x${string}`;
 
-const DomainSite = (): React.ReactElement => {
+// Inner component that uses wagmi hooks
+const DomainsContent = (): React.ReactElement => {
   const [domain, setDomain] = useState("");
   const [record, setRecord] = useState("");
   const [editing, setEditing] = useState(false);
@@ -232,6 +233,54 @@ const DomainSite = (): React.ReactElement => {
   };
 
   return (
+    <>
+      <h1>SUB-DOMAIN PORTAL</h1>
+      <div className="form-container">
+        <div className="mint-container">
+          {helpersEnabled && !mounted && (
+            <div data-testid="domains-test-helpers" style={{ marginTop: 12 }}>
+              <div data-testid="network-info">Network: testnet</div>
+            </div>
+          )}
+          {!currentAccount && <DomainsNotConnected />}
+          {currentAccount ? (
+            <DomainForm
+              domain={domain}
+              setDomain={setDomain}
+              record={record}
+              setRecord={setRecord}
+              editing={editing}
+              setEditing={setEditing}
+              loading={loading}
+              mintDomain={mintDomain}
+              updateDomain={updateDomain}
+              network={network}
+              handleSwitchNetwork={handleSwitchNetwork}
+              currentAccount={currentAccount}
+              icons180={icons180}
+              polygonLogo={polygonLogo}
+              ethLogo={ethLogo}
+              tld={tld}
+              SCAN_LINK={SCAN_LINK}
+              OPENSEA_LINK={OPENSEA_LINK}
+            />
+          ) : null}
+          <MintsList
+            currentAccount={currentAccount}
+            mints={mints}
+            CONTRACT_ADDRESS={CONTRACT_ADDRESS}
+            tld={tld}
+            editRecord={editRecord}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+// Wrapper component that always renders layout
+const DomainSite = (): React.ReactElement => {
+  return (
     <div className="App">
       <LabNav />
       <LabSubNav />
@@ -241,46 +290,7 @@ const DomainSite = (): React.ReactElement => {
         aria-label="Domains Content"
         style={{ paddingBottom: "80px" }}
       >
-        <h1>SUB-DOMAIN PORTAL</h1>
-        <div className="form-container">
-          <div className="mint-container">
-            {helpersEnabled && !mounted && (
-              <div data-testid="domains-test-helpers" style={{ marginTop: 12 }}>
-                <div data-testid="network-info">Network: testnet</div>
-              </div>
-            )}
-            {!currentAccount && <DomainsNotConnected />}
-            {currentAccount ? (
-              <DomainForm
-                domain={domain}
-                setDomain={setDomain}
-                record={record}
-                setRecord={setRecord}
-                editing={editing}
-                setEditing={setEditing}
-                loading={loading}
-                mintDomain={mintDomain}
-                updateDomain={updateDomain}
-                network={network}
-                handleSwitchNetwork={handleSwitchNetwork}
-                currentAccount={currentAccount}
-                icons180={icons180}
-                polygonLogo={polygonLogo}
-                ethLogo={ethLogo}
-                tld={tld}
-                SCAN_LINK={SCAN_LINK}
-                OPENSEA_LINK={OPENSEA_LINK}
-              />
-            ) : null}
-            <MintsList
-              currentAccount={currentAccount}
-              mints={mints}
-              CONTRACT_ADDRESS={CONTRACT_ADDRESS}
-              tld={tld}
-              editRecord={editRecord}
-            />
-          </div>
-        </div>
+        <DomainsContent />
       </main>
       <LabFooter />
     </div>
