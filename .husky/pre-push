@@ -5,14 +5,23 @@ export PATH="/c/Program Files/nodejs:$PATH"
 echo "🔍 Running pre-push validation..."
 
 # Type check
-echo "1/2 Type checking..."
+echo "1/3 Type checking..."
 npm run typecheck || exit 1
 
-# Run full test suite
-echo "2/2 Running full test suite..."
+# Run unit tests
+echo "2/3 Running unit tests..."
 npm test || {
 	echo "⚠️  Tests failed. Please fix them before pushing."
 	exit 1
 }
 
-echo "✅ Pre-push checks passed! CI will run linting, E2E and accessibility tests."
+# Run production build + E2E tests to catch CI issues early
+echo "3/3 Building production and running E2E tests (this catches what CI will see)..."
+echo "   This ensures pages work in production mode before pushing to CI."
+npm run precheck || {
+	echo "⚠️  Production build or E2E tests failed."
+	echo "   This is what CI will test. Fix these issues before pushing."
+	exit 1
+}
+
+echo "✅ Pre-push checks passed! Your code is ready for CI."

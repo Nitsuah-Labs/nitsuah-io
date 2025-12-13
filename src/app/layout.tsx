@@ -223,7 +223,7 @@ export default function RootLayout({
                   // Inject quick-hide CSS so overlays are hidden as early as possible
                   const overlaySelectors = '[data-nextjs-dev-overlay], nextjs-portal, [data-nextjs-devtools], ' +
                     '#__next_dev_overlay, .next-dev-overlay, .react-dev-overlay, #next-overlay, ' +
-                    '.overseer, [data-testid=overseer]';
+                    '.overseer, [data-testid="overseer"]';
                   const overlayRules = ' { display: none !important; visibility: hidden !important; ' +
                     'pointer-events: none !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }';
                   const contrastRules = ' body.test-helpers .text-xs { color: #9fb1c8 !important; } ' +
@@ -238,7 +238,7 @@ export default function RootLayout({
                   try { document.body && document.body.classList.add('test-helpers'); } catch(e) {}
 
                   const texts = ['Overseer Dashboard','Welcome to Overseer','Open Next.js Dev Tools','Next.js Dev Tools','Sign in with GitHub'];
-                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid=overseer]'];
+                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid="overseer"]'];
 
                   const removeNow = () => {
                     selectors.forEach(s => { try { document.querySelectorAll(s).forEach(n => n.remove()); } catch(e){} });

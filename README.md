@@ -112,9 +112,12 @@ npm test                  # Unit tests (213 tests)
 npm run test:e2e         # E2E tests (61 tests)
 npm run test:a11y        # Accessibility tests (20 tests)
 
-# Match CI environment exactly
+# Before pushing - runs production build + E2E (catches CI issues early!)
+npm run precheck          # Build + test in production mode
+
+# Match CI environment exactly (Docker)
 npm run test:e2e:docker:build
-npm run test:e2e:docker
+npm run test:e2e:docker   # OR: npm run precheck:docker
 ```
 
 ---
