@@ -5,13 +5,7 @@ import { mainnet, polygon, polygonAmoy, sepolia } from "wagmi/chains";
 // Import connectors from the standalone package to ensure the bundler
 // resolves the correct ESM exports instead of a possibly-misaligned
 // internal path.
-import {
-  coinbaseWallet,
-  injected,
-  metaMask,
-  safe,
-  walletConnect,
-} from "@wagmi/connectors";
+import { injected, metaMask, safe, walletConnect } from "@wagmi/connectors";
 
 const walletConnectProjectId = "732797c00bb7ff1ca10685d9b9415cb6";
 
@@ -60,15 +54,6 @@ export function getWagmiConfig() {
   connectors.push(injected());
 
   if (isClient) {
-    // Coinbase Wallet (supports both mobile via Base and desktop)
-    connectors.push(
-      coinbaseWallet({
-        appName: "Nitsuah.io",
-        appLogoUrl: "https://nitsuah.io/icon.png",
-        preference: "all", // Supports both smartWalletOnly and eoaOnly
-      }),
-    );
-    // WalletConnect (universal connector for mobile wallets)
     connectors.push(
       walletConnect({
         projectId: walletConnectProjectId,
@@ -78,9 +63,7 @@ export function getWagmiConfig() {
         },
       }),
     );
-    // MetaMask (desktop and mobile browser extension)
     connectors.push(metaMask());
-    // Safe (Gnosis Safe multisig wallet)
     connectors.push(safe());
   }
   // Don't add connectors on server-side at all to avoid initialization errors

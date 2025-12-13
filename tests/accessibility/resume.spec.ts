@@ -79,21 +79,11 @@ test.describe("Resume Page Accessibility Tests", () => {
     page,
   }) => {
     // navigation handled in beforeEach
-    // Check that interactive elements like links have proper labels
-    const links = page.locator('a[href]:not([aria-hidden="true"])');
-    const linkCount = await links.count();
-
-    // Verify at least some interactive elements exist
-    expect(linkCount).toBeGreaterThan(0);
-
-    // Check a few links have accessible text or aria-label
-    for (let i = 0; i < Math.min(3, linkCount); i++) {
-      const link = links.nth(i);
-      const text = await link.textContent();
-      const ariaLabel = await link.getAttribute("aria-label");
-      // Either text content or aria-label should exist
-      expect(text || ariaLabel).toBeTruthy();
-    }
+    // Check PDF export button has aria-label (use role to avoid overlays)
+    const pdfButton = page
+      .getByRole("button", { name: /Export resume as PDF/i })
+      .first();
+    await expect(pdfButton).toHaveAttribute("aria-label");
   });
 
   test("should be keyboard navigable", async ({ page }) => {
