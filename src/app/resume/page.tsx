@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ResumeData } from "../../types/resume";
 import {
   calculateTotalYearsOfExperience,
@@ -7,6 +6,7 @@ import {
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
+  CompanyLogo,
   EducationSection,
   ExportPDFButton,
   LanguagesSection,
@@ -56,7 +56,6 @@ export default function ResumePage() {
         <div className="resume-content">
           {/* Header Section */}
           <ResumeHeader basics={resume.basics} />
-
           {/* Profile Buttons */}
           {(resume.basics.profiles ||
             resume.basics.url ||
@@ -68,15 +67,13 @@ export default function ResumePage() {
               basics={resume.basics}
             />
           )}
-
           {/* Export PDF Button */}
           <div
             className="print-hide"
-            style={{ marginTop: "1.5rem", textAlign: "center" }}
+            style={{ marginTop: "1.5rem", textAlign: "right" }}
           >
             <ExportPDFButton />
           </div>
-
           {/* PDF Experience Section - Two Column Layout - Only visible in print mode */}
           <div className="print-show">
             <h2 className="pdf-section-heading">
@@ -99,7 +96,7 @@ export default function ResumePage() {
                   return (
                     <div key={idx} className="pdf-work-card-full">
                       {logoUrl && (
-                        <Image
+                        <CompanyLogo
                           src={logoUrl}
                           alt={job.name}
                           width={48}
@@ -191,7 +188,6 @@ export default function ResumePage() {
               )}
             </div>
           )}
-
           {/* Work Experience */}
           {resume.work && resume.work.length > 0 && (
             <div style={{ marginTop: "2.5rem" }}>
