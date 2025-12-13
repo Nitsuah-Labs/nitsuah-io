@@ -12,7 +12,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
-import toast from "react-hot-toast";
 import "../_styles/labs.css";
 
 // Replace empty interface with object type
