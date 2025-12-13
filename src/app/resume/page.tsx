@@ -8,6 +8,7 @@ import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
   EducationSection,
+  ExportPDFButton,
   LanguagesSection,
   ProfileButtons,
   ResumeHeader,
@@ -67,6 +68,14 @@ export default function ResumePage() {
               basics={resume.basics}
             />
           )}
+
+          {/* Export PDF Button */}
+          <div
+            className="print-hide"
+            style={{ marginTop: "1.5rem", textAlign: "center" }}
+          >
+            <ExportPDFButton />
+          </div>
 
           {/* PDF Experience Section - Two Column Layout - Only visible in print mode */}
           <div className="print-show">
