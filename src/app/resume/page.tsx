@@ -6,9 +6,7 @@ import {
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
-  CompanyLogo,
   EducationSection,
-  ExportPDFButton,
   LanguagesSection,
   ProfileButtons,
   ResumeHeader,
@@ -67,13 +65,7 @@ export default function ResumePage() {
               basics={resume.basics}
             />
           )}
-          {/* Export PDF Button */}
-          <div
-            className="print-hide"
-            style={{ marginTop: "1.5rem", textAlign: "right" }}
-          >
-            <ExportPDFButton />
-          </div>
+
           {/* PDF Experience Section - Two Column Layout - Only visible in print mode */}
           <div className="print-show">
             <h2 className="pdf-section-heading">
@@ -95,6 +87,7 @@ export default function ResumePage() {
 
                   return (
                     <div key={idx} className="pdf-work-card-full">
+                      {/* Temporarily disabled logo
                       {logoUrl && (
                         <CompanyLogo
                           src={logoUrl}
@@ -104,6 +97,7 @@ export default function ResumePage() {
                           className="pdf-card-logo"
                         />
                       )}
+                      */}
                       <div className="pdf-work-card-content">
                         <div className="pdf-work-card-info">
                           <div className="pdf-work-position">
