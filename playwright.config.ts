@@ -93,7 +93,6 @@ export default defineConfig({
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
-      NODE_ENV: "production",
     },
     // Add stdout/stderr to see server logs
     stdout: "pipe",
