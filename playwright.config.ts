@@ -81,18 +81,20 @@ export default defineConfig({
   ],
 
   // Run local server before starting tests
-  webServer: {
-    // Use production server for more stable, pre-compiled pages
-    // Note: Requires .next build directory to exist (run `npm run build:skip-wagmi` first)
-    command: "npm run start",
-    url: "http://localhost:3000",
-    // Allow reusing existing server in development (but not in CI for clean state)
-    reuseExistingServer: !process.env.CI,
-    timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
-    // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
-    env: {
-      NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
-      NODE_ENV: "production",
-    },
-  },
+  webServer: process.env.CI_SKIP_WEBSERVER
+    ? undefined
+    : {
+        // Use production server for more stable, pre-compiled pages
+        // Note: Requires .next build directory to exist (run `npm run build:skip-wagmi` first)
+        command: "npm run start",
+        url: "http://localhost:3000",
+        // Allow reusing existing server in development (but not in CI for clean state)
+        reuseExistingServer: !process.env.CI,
+        timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
+        // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
+        env: {
+          NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
+          NODE_ENV: "production",
+        },
+      },
 });
