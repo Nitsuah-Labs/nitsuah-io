@@ -94,22 +94,12 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Start Next.js server in background
-        run: npm run start &
-        env:
-          NEXT_PUBLIC_TEST_HELPERS: 1
-          NODE_ENV: production
-
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:3000 --timeout 120000
-
       - name: Run Playwright tests (parallel)
         run: npm run test:e2e
         env:
           PLAYWRIGHT_WORKERS: 1 # Reduced from 4 to avoid CI resource contention
           NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
-          # Don't let playwright start its own server since we already started one
-          CI_SKIP_WEBSERVER: 1
+          NODE_ENV: production
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
