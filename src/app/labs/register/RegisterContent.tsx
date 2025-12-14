@@ -11,9 +11,6 @@ import {
   useWriteContract,
 } from "wagmi";
 import registerABI from "../../_components/_labs/_utils/registerABI.json";
-import LabFooter from "../../_components/_labs/LabFooter";
-import LabNav from "../../_components/_labs/LabNav";
-import LabSubNav from "../../_components/_labs/LabSubNav";
 import "../../_components/_styles/labs.css";
 import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
 import mumbai from "../../_components/_web3/_assets/mumbai.png";
@@ -27,21 +24,82 @@ const contractAddress =
 const contractABI = registerABI.abi;
 
 export default function RegisterContent() {
-  const [showTestHelpers, setShowTestHelpers] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("testHelpers") === "1") setShowTestHelpers(true);
-    } catch {
-      // ignore
-    }
+    setMounted(true);
   }, []);
 
-  const helpersEnabled =
-    process.env.NEXT_PUBLIC_TEST_HELPERS === "1" || showTestHelpers;
+  // Always check this - it's baked in at build time
+  const testHelpersMode = process.env.NEXT_PUBLIC_TEST_HELPERS === "1";
 
   const [message, setMessage] = useState("");
+
+  // Render test helpers UI immediately if in test mode - don't wait for wagmi
+  if (testHelpersMode && !mounted) {
+    return (
+      <>
+        <h1>REGISTRATION PORTAL</h1>
+        <div className="form-container">
+          <div className="mint-container">
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Connect Wallet</h2>
+              </div>
+              <div className="labs-card-body">
+                <div
+                  data-testid="register-test-helpers"
+                  style={{
+                    marginTop: "16px",
+                    display: "flex",
+                    gap: "12px",
+                    flexDirection: "column",
+                  }}
+                >
+                  <button
+                    className="labs-btn labs-btn-primary"
+                    aria-label="Connect Wallet"
+                    data-testid="register-connect-button"
+                    type="button"
+                  >
+                    Connect Wallet
+                  </button>
+                  <div data-testid="network-info">testnet</div>
+                  <input
+                    type="text"
+                    placeholder="domain"
+                    aria-label="domain-input"
+                    data-testid="domain-input"
+                    disabled
+                    style={{ padding: "8px", borderRadius: "6px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  // Regular loading state for non-test mode
+  if (!mounted) {
+    return (
+      <>
+        <h1>REGISTRATION PORTAL</h1>
+        <div className="form-container">
+          <div className="mint-container">
+            <div className="labs-card">
+              <div className="labs-card-header">
+                <h2 className="labs-card-title">Loading...</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const { address: currentAccount, isConnected, chain } = useAccount();
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
   const network = chain?.name || "";
@@ -89,7 +147,7 @@ export default function RegisterContent() {
       </div>
       <div className="labs-card-body">
         <Connect />
-        {helpersEnabled && (
+        {testHelpersMode && (
           <div
             data-testid="register-test-helpers"
             style={{
@@ -233,24 +291,13 @@ export default function RegisterContent() {
   };
 
   return (
-    <div className="App">
-      <LabNav />
-      <LabSubNav />
-      <main
-        id="main"
-        role="main"
-        aria-label="Register Domain Content"
-        style={{ paddingBottom: "80px" }}
-        tabIndex={-1}
-      >
-        <h1>REGISTRATION PORTAL</h1>
-        <div className="form-container">
-          <div className="mint-container">
-            {!isConnected ? renderNotConnectedContainer() : renderInput()}
-          </div>
+    <>
+      <h1>REGISTRATION PORTAL</h1>
+      <div className="form-container">
+        <div className="mint-container">
+          {!isConnected ? renderNotConnectedContainer() : renderInput()}
         </div>
-      </main>
-      <LabFooter />
-    </div>
+      </div>
+    </>
   );
 }
