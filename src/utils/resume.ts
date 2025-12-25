@@ -76,24 +76,24 @@ export function calculateTotalYearsOfExperience(
 }
 
 /**
- * Get company logo URL from local assets or CDN
+ * Get company logo URL from Logo.dev API
  * @param companyName - The company name to look up
  * @returns Logo URL or null if not found
  */
 export function getCompanyLogoUrl(companyName: string): string | null {
   const lowerName = companyName.toLowerCase();
 
-  // Map company substrings to their local logo paths or reliable CDN URLs
-  const companyLogos: { [key: string]: string } = {
-    netflix: "/images/companies/netflix.svg",
-    coinbase: "/images/companies/coinbase.svg",
-    blackboard: "/images/companies/blackboard.svg",
+  // Map company substrings to their domains for logo.dev API
+  const companyDomains: { [key: string]: string } = {
+    netflix: "netflix.com",
+    coinbase: "coinbase.com",
+    blackboard: "blackboard.com",
   };
 
-  // Return local logo path if available
-  for (const key in companyLogos) {
+  // Use Logo.dev API for company logos
+  for (const key in companyDomains) {
     if (lowerName.includes(key)) {
-      return companyLogos[key];
+      return `https://img.logo.dev/${companyDomains[key]}?token=pk_X-omega2IGScyLoz_Uw0Q&size=200`;
     }
   }
 
