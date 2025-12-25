@@ -3,13 +3,6 @@
 import { TextField } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import {
-  useAccount,
-  useSimulateContract,
-  useSwitchChain,
-  useWaitForTransactionReceipt,
-  useWriteContract,
-} from "wagmi";
 import registerABI from "../../_components/_labs/_utils/registerABI.json";
 import "../../_components/_styles/labs.css";
 import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
@@ -80,6 +73,15 @@ export default function RegisterContent() {
 
 // Separate component for production that uses wagmi hooks
 function RegisterContentProduction() {
+  // Import wagmi hooks only in production component
+  const {
+    useAccount,
+    useSimulateContract,
+    useSwitchChain,
+    useWaitForTransactionReceipt,
+    useWriteContract,
+  } = require("wagmi");
+
   const [mounted, setMounted] = useState(false);
   const [message, setMessage] = useState("");
 
