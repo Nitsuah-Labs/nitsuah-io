@@ -45,8 +45,18 @@ export async function gotoAndWaitForHydration(
 ) {
   const timeout = options?.timeout || 45000; // Increased from 30s to 45s for CI
 
-  await page.goto(url, { waitUntil: "commit" });
-  await page.waitForLoadState("networkidle", { timeout });
+  // Use domcontentloaded instead of networkidle in CI to avoid hanging
+  const waitUntil = process.env.CI ? "domcontentloaded" : "networkidle";
+  await page.goto(url, { waitUntil, timeout });
+  
+  // In CI, don't wait for networkidle if we already used domcontentloaded
+  if (!process.env.CI) {
+    await page.waitForLoadState("networkidle", { timeout }).catch(() => {
+      // Ignore networkidle timeout, proceed anyway
+      console.log("networkidle timeout - continuing anyway");
+    });
+  }
+  
   await waitForReactHydration(page, timeout);
   
   // Additional CI-specific wait
