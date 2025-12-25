@@ -76,24 +76,24 @@ export function calculateTotalYearsOfExperience(
 }
 
 /**
- * Get company logo URL from Clearbit Logo API
+ * Get company logo URL from local assets or CDN
  * @param companyName - The company name to look up
  * @returns Logo URL or null if not found
  */
 export function getCompanyLogoUrl(companyName: string): string | null {
   const lowerName = companyName.toLowerCase();
 
-  // Map company substrings to their domains
-  const companyDomains: { [key: string]: string } = {
-    netflix: "netflix.com",
-    coinbase: "coinbase.com",
-    blackboard: "blackboard.com",
+  // Map company substrings to their local logo paths or reliable CDN URLs
+  const companyLogos: { [key: string]: string } = {
+    netflix: "/images/companies/netflix.svg",
+    coinbase: "/images/companies/coinbase.svg",
+    blackboard: "/images/companies/blackboard.svg",
   };
 
-  // Use Clearbit Logo API for high-quality company logos
-  for (const key in companyDomains) {
+  // Return local logo path if available
+  for (const key in companyLogos) {
     if (lowerName.includes(key)) {
-      return `https://logo.clearbit.com/${companyDomains[key]}`;
+      return companyLogos[key];
     }
   }
 
