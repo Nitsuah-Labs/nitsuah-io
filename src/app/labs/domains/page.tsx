@@ -1,6 +1,5 @@
 // DOMAINS - cleaned implementation
 "use client";
-export const dynamicParams = true;
 
 import { useEffect, useState } from "react";
 import {

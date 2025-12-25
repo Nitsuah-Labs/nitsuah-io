@@ -24,19 +24,11 @@ const contractAddress =
 const contractABI = registerABI.abi;
 
 export default function RegisterContent() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   // Always check this - it's baked in at build time
   const testHelpersMode = process.env.NEXT_PUBLIC_TEST_HELPERS === "1";
 
-  const [message, setMessage] = useState("");
-
-  // Render test helpers UI immediately if in test mode - don't wait for wagmi
-  if (testHelpersMode && !mounted) {
+  // Render test helpers UI immediately if in test mode - don't call wagmi hooks
+  if (testHelpersMode) {
     return (
       <>
         <h1>REGISTRATION PORTAL</h1>
@@ -82,7 +74,20 @@ export default function RegisterContent() {
     );
   }
 
-  // Regular loading state for non-test mode
+  // Production mode - use real wagmi component
+  return <RegisterContentProduction />;
+}
+
+// Separate component for production that uses wagmi hooks
+function RegisterContentProduction() {
+  const [mounted, setMounted] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Regular loading state
   if (!mounted) {
     return (
       <>
@@ -147,42 +152,6 @@ export default function RegisterContent() {
       </div>
       <div className="labs-card-body">
         <Connect />
-        {testHelpersMode && (
-          <div
-            data-testid="register-test-helpers"
-            style={{
-              marginTop: "16px",
-              display: "flex",
-              gap: "12px",
-              flexDirection: "column",
-            }}
-          >
-            <button
-              className="labs-btn labs-btn-primary"
-              aria-label="Connect Wallet"
-              data-testid="register-connect-button"
-              onClick={() => {
-                const el = document.querySelector(
-                  "[data-testid^='connector-'], [aria-label^='Connect to']",
-                );
-                if (el) (el as HTMLElement).focus();
-              }}
-            >
-              Connect Wallet
-            </button>
-
-            <div data-testid="network-info">testnet</div>
-
-            <input
-              type="text"
-              placeholder="domain"
-              aria-label="domain-input"
-              data-testid="domain-input"
-              disabled
-              style={{ padding: "8px", borderRadius: "6px" }}
-            />
-          </div>
-        )}
       </div>
     </div>
   );
