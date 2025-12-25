@@ -2,7 +2,7 @@
 "use client";
 
 // This tells Next.js not to prerender this page at build time
-export const dynamic = "error";
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 import { useEffect, useState } from "react";

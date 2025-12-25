@@ -1,7 +1,7 @@
 // LOOKUP - src/app/labs/lookup/page.tsx  //TODO
 "use client";
 
-export const dynamic = "error";
+export const dynamic = "force-dynamic";
 
 // LAB STYLES
 import LabFooter from "../../_components/_labs/LabFooter";

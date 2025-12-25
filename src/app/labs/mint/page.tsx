@@ -1,7 +1,7 @@
 // MINT - src/app/labs/mint/page.tsx
 "use client";
 
-export const dynamic = "error";
+export const dynamic = "force-dynamic";
 
 import React from "react";
 import LabFooter from "../../_components/_labs/LabFooter";
