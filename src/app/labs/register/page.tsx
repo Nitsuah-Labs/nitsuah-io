@@ -1,8 +1,6 @@
 // REGISTER - src/app/labs/register/page.tsx
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import dynamic_import from "next/dynamic";
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
