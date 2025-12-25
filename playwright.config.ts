@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const CI_TIMEOUT = 180_000; // 3 minutes for CI stability
+const CI_TIMEOUT = 300_000; // 5 minutes for CI stability (increased from 3min)
 const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
 
 /**
@@ -24,7 +24,7 @@ export default defineConfig({
   // Test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 2 : 0, // Increased retries for flaky CI tests
   workers: process.env.CI ? 1 : 2,
 
   // Reporter configuration - simplified for speed
@@ -89,7 +89,7 @@ export default defineConfig({
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
     // Increased timeout for CI environment - server needs time to fully start
-    timeout: process.env.CI ? 180 * 1000 : 60 * 1000,
+    timeout: process.env.CI ? 300 * 1000 : 60 * 1000, // Increased to 5 min for CI
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",

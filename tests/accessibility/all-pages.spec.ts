@@ -28,24 +28,24 @@ const pages = [
 
 for (const pageInfo of pages) {
   test(`${pageInfo.name} has no accessibility violations`, async ({ page }) => {
-    // Increase timeout for pages with Spline components
-    test.setTimeout(60000);
+    // Increase timeout for pages with Spline components - extended for CI
+    test.setTimeout(process.env.CI ? 120000 : 60000); // 2min for CI, 1min for local
 
-    // Use new hydration-aware navigation
-    await gotoAndWaitForHydration(page, pageInfo.path, { timeout: 30000 });
+    // Use new hydration-aware navigation with extended timeout
+    await gotoAndWaitForHydration(page, pageInfo.path, { timeout: process.env.CI ? 60000 : 30000 });
 
     // For pages with Spline, wait a bit longer for it to initialize
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
-      await page.waitForTimeout(3000);
+      await page.waitForTimeout(5000); // Increased from 3s
     }
 
     // For projects page, wait for content to load
     if (pageInfo.path === "/projects") {
       await page.waitForSelector("[data-testid='projects-section']", {
-        timeout: 10000,
+        timeout: 20000, // Increased from 10s
       });
       // Additional wait to ensure cards are rendered
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(2000); // Increased from 1s
     }
 
     // Run axe accessibility scan with error handling

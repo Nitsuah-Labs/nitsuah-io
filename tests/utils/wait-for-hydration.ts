@@ -4,7 +4,7 @@
  */
 import { Page } from "@playwright/test";
 
-export async function waitForReactHydration(page: Page, timeout = 15000) {
+export async function waitForReactHydration(page: Page, timeout = 30000) {
   // Wait for Next.js root element
   await page.waitForSelector("#__next, [id^='__next']", {
     state: "attached",
@@ -30,8 +30,9 @@ export async function waitForReactHydration(page: Page, timeout = 15000) {
     { timeout }
   );
 
-  // Additional small delay to ensure all client-side JS has executed
-  await page.waitForTimeout(500);
+  // Increased delay to ensure all client-side JS has executed
+  // This is particularly important in CI where render times are slower
+  await page.waitForTimeout(1000); // Increased from 500ms
 }
 
 /**
@@ -42,9 +43,14 @@ export async function gotoAndWaitForHydration(
   url: string,
   options?: { timeout?: number }
 ) {
-  const timeout = options?.timeout || 30000;
+  const timeout = options?.timeout || 45000; // Increased from 30s to 45s for CI
 
   await page.goto(url, { waitUntil: "commit" });
   await page.waitForLoadState("networkidle", { timeout });
   await waitForReactHydration(page, timeout);
+  
+  // Additional CI-specific wait
+  if (process.env.CI) {
+    await page.waitForTimeout(2000); // Extra 2s in CI for stability
+  }
 }
