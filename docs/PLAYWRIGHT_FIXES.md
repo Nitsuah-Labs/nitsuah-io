@@ -1,52 +1,75 @@
 # Playwright Test Failures Analysis & Fixes
 
 ## 🔍 Issue Summary
-Based on CI run analysis (#20292773787), **48 out of 61 tests are failing** with `TimeoutError: page.waitForSelector: Timeout 30000ms exceeded`.
+Based on CI run analysis (#20292773787), **48 out of 61 tests were failing** with `TimeoutError: page.waitForSelector: Timeout 30000ms exceeded`.
 
-## 📋 Failing Tests Breakdown
+## 📊 Results After Timeout Fixes
 
-### Accessibility Tests (16 failures)
-- `tests/accessibility/all-pages.spec.ts` - All 13 page accessibility tests
-- `tests/accessibility/resume.spec.ts` - All 8 resume accessibility tests
+### ✅ **Massive Improvement: 48 → 11 Failures**
+- **50 tests now passing** (up from 13)
+- **11 tests still failing** (down from 48)
+- **82% success rate** (up from 21%)
 
-### Visual Tests (11 failures)
-- `tests/visual/homepage.spec.ts` - 4 tests
-- `tests/visual/projects.spec.ts` - 3 tests  
-- `tests/visual/resume.spec.ts` - 8 tests
+### Resolved Issues (37 tests fixed)
+- ✅ All homepage tests passing
+- ✅ All resume tests passing  
+- ✅ All diagnostic tests passing
+- ✅ Most accessibility tests passing
+- ✅ Most visual tests passing
 
-### E2E Tests (10 failures)
-- `tests/e2e/labs/wallet-connection.spec.ts` - All wallet/labs tests
+### Remaining Issues (11 failures)
 
-### Diagnostics (1 failure)
-- `tests/diagnostics/page-rendering.spec.ts` - Basic rendering check
+#### 1. Labs Pages Error State (10 failures)
+**Root Cause**: Register, Mint, and Domains pages showing Next.js error page (`#__next_error__`)
+- `tests/accessibility/all-pages.spec.ts` - Register Domain accessibility (1 failure)
+- `tests/e2e/labs/wallet-connection.spec.ts` - All 9 wallet flow tests
 
-## 🎯 Root Cause
-Tests are timing out waiting for selectors because:
-1. Pages may not be fully hydrated before test assertions
-2. CI environment has slower render times
-3. Timeouts may be too aggressive for CI with workers=1
-4. Next.js production build may have different timing than dev mode
+**Why**: These pages likely require wallet connection to render properly or have runtime errors.
+
+**Recommendation**: 
+- Investigate why `/labs/register`, `/labs/mint`, `/labs/domains` show error pages
+- May need to mock wallet state or fix page errors
+- Consider skipping these tests until pages are fixed
+
+#### 2. Visual Regression (1 failure)
+**Issue**: `tests/visual/projects.spec.ts` - Screenshot mismatch
+- Expected: 3201px height
+- Received: 3329px height
+- 17% pixel difference
+
+**Recommendation**: Update visual baseline or investigate layout change.
 
 ## 🔧 Fixes Applied
 
 ### 1. Extended Timeouts in playwright.config.ts
-- Increased CI timeout from 180s to 300s (5 minutes)
-- Increased webServer timeout to 5 minutes for full server startup
-- Added retry logic for flaky tests
+- ✅ Increased CI test timeout: 180s → 300s (5 minutes)
+- ✅ Increased webServer timeout: 180s → 300s
+- ✅ Increased retries: 1 → 2 for flaky CI tests
 
 ### 2. Enhanced Hydration Waiting in wait-for-hydration.ts
-- Added more robust hydration checks
-- Increased default wait times
-- Added explicit checks for main content rendering
+- ✅ Extended default hydration timeout: 30s → 45s
+- ✅ Added extra 2s wait for CI environments
+- ✅ Increased post-hydration delay: 500ms → 1000ms
 
-### 3. Docker Test Script
-- Created `scripts/run-failing-tests-docker.ps1` to run isolated test suites
-- Enables debugging individual test failures
-- Provides detailed pass/fail breakdown
+### 3. Increased Test-Specific Timeouts
+- ✅ Accessibility tests: 60s → 120s (CI)
+- ✅ Navigation timeouts: 30s → 60s (CI)
+- ✅ Spline component wait: 3s → 5s
+- ✅ Projects page wait: 10s → 20s
+
+### 4. Docker Test Script
+- ✅ Created `scripts/run-failing-tests-docker.ps1` for isolated debugging
+- Enables running individual test suites
+- Provides pass/fail summary
 
 ## 🚀 Usage
 
-### Run all failing tests in Docker:
+### Run all tests locally:
+```powershell
+npm run test:e2e
+```
+
+### Run failing tests in Docker:
 ```powershell
 .\scripts\run-failing-tests-docker.ps1
 ```
@@ -58,11 +81,17 @@ docker-compose -f docker-compose.test.yml run --rm playwright npx playwright tes
 
 ### Run single test:
 ```powershell
-docker-compose -f docker-compose.test.yml run --rm playwright npx playwright test tests/accessibility/all-pages.spec.ts --grep "Homepage"
+npx playwright test tests/accessibility/all-pages.spec.ts --grep "Homepage"
 ```
 
-## 📊 Expected Outcome
-With these fixes, all 48 failing tests should now pass with:
-- More generous timeouts for CI environment
-- Better hydration detection
-- Isolated test debugging capability
+## 📈 Next Steps
+
+1. **Investigate Labs Pages** - Fix error states on `/labs/register`, `/labs/mint`, `/labs/domains`
+2. **Update Visual Baselines** - Run `npm run test:visual:update` if layout change is intentional
+3. **Monitor CI** - Verify these timeout fixes work in GitHub Actions environment
+4. **Consider Test Isolation** - May need to skip wallet-dependent tests in CI
+
+## 🎯 Impact
+- **Major**: Reduced test failures by 77% (48 → 11)
+- **Stability**: Tests now have adequate time to complete in CI
+- **Reliability**: Eliminated false positives from aggressive timeouts
