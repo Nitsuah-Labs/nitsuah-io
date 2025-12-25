@@ -35,8 +35,8 @@ export default function RegisterContent() {
 
   const [message, setMessage] = useState("");
 
-  // Render test helpers UI immediately if in test mode - don't wait for wagmi
-  if (testHelpersMode && !mounted) {
+  // Render test helpers UI in test mode - persist after mount
+  if (testHelpersMode) {
     return (
       <>
         <h1>REGISTRATION PORTAL</h1>
