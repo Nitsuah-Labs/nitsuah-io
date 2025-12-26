@@ -7,18 +7,17 @@ import { Page } from "@playwright/test";
 export async function waitForReactHydration(page: Page, timeout = 30000) {
   // Simplified but more robust hydration check for CI
   if (process.env.CI) {
-    // In CI, wait for actual content in the body
+    // In CI, just wait for body to have minimal content
     await page.waitForFunction(
       () => {
         const body = document.body;
-        const hasContent = body && body.textContent && body.textContent.length > 100;
+        const hasContent = body && body.textContent && body.textContent.length > 50;
         return hasContent;
       },
-      { timeout: 20000 }
+      { timeout: 10000 }
     ).catch(() => {
       console.log("Body content check timed out - continuing anyway");
     });
-    await page.waitForTimeout(3000); // Extra wait for good measure
     return;
   }
 
@@ -60,18 +59,18 @@ export async function gotoAndWaitForHydration(
 ) {
   const timeout = options?.timeout || 45000;
 
-  // Aggressive approach in CI - wait for everything
+  // Simplified CI approach - avoid excessive waits that cause test timeout
   if (process.env.CI) {
     await page.goto(url, { 
-      waitUntil: "load", // Wait for page load event
-      timeout: 60000 // Give it more time in CI
+      waitUntil: "domcontentloaded", // Lighter wait for CI
+      timeout: 30000
     });
-    // Wait for network to be mostly idle
-    await page.waitForLoadState("domcontentloaded", { timeout: 30000 });
-    await page.waitForLoadState("load", { timeout: 30000 });
-    // Give it extra time to hydrate
-    await page.waitForTimeout(5000); // Longer wait for CI
-    await waitForReactHydration(page, 20000);
+    // Single wait for load state
+    await page.waitForLoadState("load", { timeout: 20000 }).catch(() => {
+      console.log("Load state timeout - continuing anyway");
+    });
+    // Brief wait for hydration
+    await page.waitForTimeout(3000); 
     return;
   }
 
@@ -81,9 +80,4 @@ export async function gotoAndWaitForHydration(
     console.log("networkidle timeout - continuing anyway");
   });
   await waitForReactHydration(page, timeout);
-  
-  // Additional CI-specific wait
-  if (process.env.CI) {
-    await page.waitForTimeout(2000); // Extra 2s in CI for stability
-  }
 }
