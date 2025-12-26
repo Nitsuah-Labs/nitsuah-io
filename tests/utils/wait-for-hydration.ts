@@ -5,16 +5,20 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // Simplified hydration check for CI to avoid timeouts
+  // Simplified but more robust hydration check for CI
   if (process.env.CI) {
-    // In CI, just wait for the Next.js root and a short delay
-    await page.waitForSelector("#__next, [id^='__next']", {
-      state: "attached",
-      timeout: 10000, // Shorter timeout in CI
-    }).catch(() => {
-      console.log("Next.js root not found - continuing anyway");
+    // In CI, wait for actual content in the body
+    await page.waitForFunction(
+      () => {
+        const body = document.body;
+        const hasContent = body && body.textContent && body.textContent.length > 100;
+        return hasContent;
+      },
+      { timeout: 20000 }
+    ).catch(() => {
+      console.log("Body content check timed out - continuing anyway");
     });
-    await page.waitForTimeout(2000); // Just wait 2 seconds in CI
+    await page.waitForTimeout(3000); // Extra wait for good measure
     return;
   }
 
@@ -56,13 +60,18 @@ export async function gotoAndWaitForHydration(
 ) {
   const timeout = options?.timeout || 45000;
 
-  // Simple approach in CI - just use domcontentloaded and move on
+  // Aggressive approach in CI - wait for everything
   if (process.env.CI) {
     await page.goto(url, { 
-      waitUntil: "domcontentloaded", 
-      timeout: 30000 // Shorter timeout in CI
+      waitUntil: "load", // Wait for page load event
+      timeout: 60000 // Give it more time in CI
     });
-    await waitForReactHydration(page, 10000); // Much shorter timeout
+    // Wait for network to be mostly idle
+    await page.waitForLoadState("domcontentloaded", { timeout: 30000 });
+    await page.waitForLoadState("load", { timeout: 30000 });
+    // Give it extra time to hydrate
+    await page.waitForTimeout(5000); // Longer wait for CI
+    await waitForReactHydration(page, 20000);
     return;
   }
 
