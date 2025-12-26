@@ -1,7 +1,7 @@
 # Dockerfile for running Playwright tests in a consistent environment
 # Uses production build to ensure all pages are pre-compiled
 
-FROM mcr.microsoft.com/playwright:v1.57.0-noble
+FROM mcr.microsoft.com/playwright:v1.56.1-noble
 
 # Set working directory
 WORKDIR /app
