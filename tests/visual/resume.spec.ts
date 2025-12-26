@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 
 test.describe("Resume Page Visual Tests", () => {
   test("should render resume page correctly on desktop", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Wait for key resume selectors to appear
     await expect(page.locator(".resume-name")).toBeVisible();
@@ -26,8 +26,7 @@ test.describe("Resume Page Visual Tests", () => {
 
   test("should render resume page correctly on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Check responsive layout
     await expect(page.locator(".resume-name")).toBeVisible();
@@ -45,8 +44,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display all resume sections", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Verify all major sections exist
     await expect(page.locator("#basics")).toBeVisible();
@@ -57,8 +55,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should expand work experience details", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Wait for work section to load
     await page.waitForSelector("#work", { timeout: 10000 });
@@ -77,8 +74,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should have PDF mode styling", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Wait for resume content to load
     await page.waitForSelector(".resume-content", { timeout: 10000 });
@@ -90,9 +86,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display contact information", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
-
+    await gotoAndWaitForHydration(page, "/resume");
     // Wait for basics section to load
     await page.waitForSelector("#basics", { timeout: 10000 });
 
@@ -106,10 +100,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should display social profiles", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
-
-    // Wait for resume content to load
+    await gotoAndWaitForHydration(page, "/resume");
     await page.waitForSelector(".resume-content", { timeout: 10000 });
 
     // Check profiles section exists
@@ -122,10 +113,7 @@ test.describe("Resume Page Visual Tests", () => {
   });
 
   test("should render skills with proficiency bars", async ({ page }) => {
-    await page.goto("/resume");
-    await page.waitForLoadState("networkidle");
-
-    // Wait for skills section to load
+    await gotoAndWaitForHydration(page, "/resume");
     const skillsSection = page.locator("#skills");
     await expect(skillsSection).toBeVisible({ timeout: 10000 });
 
