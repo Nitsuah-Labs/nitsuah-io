@@ -25,10 +25,10 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0, // Increased retries for flaky CI tests
-  workers: process.env.CI ? 1 : 2,
+  workers: process.env.CI ? 2 : "100%",
 
-  // Reporter configuration - simplified for speed
-  reporter: "list",
+  // Reporter configuration - include GitHub reporter for CI
+  reporter: process.env.CI ? [["list"], ["github"]] : "list",
 
   // Shared settings for all projects
   use: {

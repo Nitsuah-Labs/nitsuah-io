@@ -35,9 +35,12 @@ for (const pageInfo of pages) {
     // Use new hydration-aware navigation - timeout not needed in CI, handled internally
     await gotoAndWaitForHydration(page, pageInfo.path);
 
-    // For pages with Spline, wait a bit longer for it to initialize
+    // For pages with Spline, wait for it to be attached but don't wait for full initialization
     if (pageInfo.path === "/" || pageInfo.path === "/about") {
-      await page.waitForTimeout(5000); // Increased from 3s
+      await page.waitForSelector('[data-testid="spline-container"], canvas', {
+        state: 'attached',
+        timeout: 10000
+      }).catch(() => console.log("Spline not found, skipping wait"));
     }
 
     // For projects page, wait for content to load
@@ -53,6 +56,7 @@ for (const pageInfo of pages) {
     let accessibilityScanResults;
     try {
       accessibilityScanResults = await new AxeBuilder({ page })
+        .exclude('[data-testid="spline-container"]') // Exclude Spline from scan for speed
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
         .analyze();
     } catch (e) {

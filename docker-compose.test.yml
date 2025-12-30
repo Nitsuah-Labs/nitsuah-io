@@ -10,7 +10,8 @@ services:
       - .:/app
       # Use named volume for node_modules to avoid conflicts with host
       - node_modules:/app/node_modules
-      # Don't mount .next - use the build from Dockerfile for consistency
+      # Mask .next - use the build from Dockerfile for consistency
+      - /app/.next
       # Mount test results directory
       - ./test-results:/app/test-results
       - ./playwright-report:/app/playwright-report

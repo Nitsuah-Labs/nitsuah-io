@@ -59,19 +59,23 @@ export async function gotoAndWaitForHydration(
 ) {
   const timeout = options?.timeout || 45000;
 
-  // Simplified CI approach - use networkidle which works better in Docker
+  // Simplified CI approach - use load state which is faster than networkidle
   if (process.env.CI) {
-    await page.goto(url, { 
-      waitUntil: "networkidle",
-      timeout: 60000
+    await page.goto(url, {
+      waitUntil: "load", // Changed from networkidle
+      timeout: 30000    // Reduced from 60000
     });
     // Wait specifically for documentElement to exist (critical for axe scanner)
     await page.waitForFunction(
       () => document.documentElement !== null && document.body !== null,
-      { timeout: 30000 }
+      { timeout: 15000 }
     );
-    // Extra brief wait for React hydration
-    await page.waitForTimeout(3000); 
+    // Minimal wait for React to start mounting
+    await page.waitForFunction(
+      () => document.body.childElementCount > 0,
+      { timeout: 15000 }
+    ).catch(() => console.log("Body children check timed out - continuing"));
+
     return;
   }
 
