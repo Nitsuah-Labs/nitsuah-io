@@ -97,7 +97,7 @@ jobs:
       - name: Run Playwright tests (parallel)
         run: npm run test:e2e
         env:
-          PLAYWRIGHT_WORKERS: 1 # Reduced from 4 to avoid CI resource contention
+          PLAYWRIGHT_WORKERS: 2 # Increased from 1 to speed up test execution
           NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
           NODE_ENV: production
 
