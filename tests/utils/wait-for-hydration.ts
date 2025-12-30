@@ -21,27 +21,28 @@ export async function waitForReactHydration(page: Page, timeout = 30000) {
     return;
   }
 
-  // Full hydration check for local testing
-  await page.waitForSelector("#__next, [id^='__next']", {
-    state: "attached",
-    timeout,
-  });
+  // Hydration check that works for both App Router and Pages Router
+  // Wait for body to be present first
+  await page.waitForSelector("body", { state: "attached", timeout });
 
   // Wait for React to hydrate - check that body has actual content
+  // We look for either #__next (Pages) or a main element (App) with content
   await page.waitForFunction(
     () => {
       const main = document.querySelector("main");
+      const nextRoot = document.querySelector("#__next");
       const body = document.body;
 
-      // Check that we have either main or body with children
+      // Check that we have a significant number of children or content
       const hasContent =
         (main && main.childElementCount > 0) ||
-        (body && body.childElementCount > 1); // >1 to account for Next.js script tags (not actual content)
+        (nextRoot && nextRoot.childElementCount > 0) ||
+        (body && body.childElementCount > 2);
 
-      // Also check that documentElement is not null (prevents the null reading error)
+      // Also check that documentElement is not null
       const hasDocument = document.documentElement !== null;
 
-      return hasContent && hasDocument;
+      return !!(hasContent && hasDocument);
     },
     { timeout }
   );
