@@ -63,7 +63,7 @@
     "@wagmi/core": "^3.0.0",
     "@walletconnect/ethereum-provider": "^2.23.1",
     "bufferutil": "^4.0.9",
-    "next": "^16.0.10",
+    "next": "^16.1.1",
     "react": "^19.2.2",
     "react-dom": "^19.2.2",
     "react-hot-toast": "^2.6.0",
