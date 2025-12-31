@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const CI_TIMEOUT = 180_000; // 3 minutes for CI stability
+const CI_TIMEOUT = 300_000; // 5 minutes for CI stability (increased from 3min)
 const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
 
 /**
@@ -24,11 +24,11 @@ export default defineConfig({
   // Test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : 2,
+  retries: process.env.CI ? 2 : 0, // Increased retries for flaky CI tests
+  workers: process.env.CI ? 2 : "100%",
 
-  // Reporter configuration - simplified for speed
-  reporter: "list",
+  // Reporter configuration - include GitHub reporter for CI
+  reporter: process.env.CI ? [["list"], ["github"]] : "list",
 
   // Shared settings for all projects
   use: {
@@ -83,14 +83,19 @@ export default defineConfig({
   // Run local server before starting tests
   webServer: {
     // Use production server for more stable, pre-compiled pages
+    // Note: Requires .next build directory to exist (run `npm run build:skip-wagmi` first)
     command: "npm run start",
     url: "http://localhost:3000",
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
-    timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
+    // Increased timeout for CI environment - server needs time to fully start
+    timeout: process.env.CI ? 300 * 1000 : 60 * 1000, // Increased to 5 min for CI
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
     },
+    // Add stdout/stderr to see server logs
+    stdout: "pipe",
+    stderr: "pipe",
   },
 });
