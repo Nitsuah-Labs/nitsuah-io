@@ -85,17 +85,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        id: download-artifact
-        with:
-          name: build-files
-          path: .next/
-        continue-on-error: true
-
-      - name: Build application if artifact missing
-        if: steps.download-artifact.outcome != 'success'
-        run: npm run build:skip-wagmi
+      - name: Build application for tests
+        run: npm run build:ci
         env:
           NEXT_PUBLIC_TEST_HELPERS: 1
           NODE_ENV: production
@@ -106,7 +97,7 @@ jobs:
       - name: Run Playwright tests (parallel)
         run: npm run test:e2e
         env:
-          PLAYWRIGHT_WORKERS: 2 # Increased from 1 to speed up test execution
+          PLAYWRIGHT_WORKERS: 4 # Maximize parallelism to avoid long hangs
           NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
           NODE_ENV: production
 
