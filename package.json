@@ -81,7 +81,7 @@
     "@testing-library/react": "^16.3.1",
     "@types/aria-query": "^5.0.4",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.2.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.52.0",
