@@ -168,6 +168,7 @@ const DomainsContent = (): React.ReactElement => {
   const { data: registerSim } = useSimulateContract({
     ...contractConfig,
     functionName: "register",
+    account: currentAccount,
     args: [domain],
     value:
       domain.length === 1
@@ -178,7 +179,11 @@ const DomainsContent = (): React.ReactElement => {
             ? BigInt(2e17)
             : BigInt(1e17),
     query: {
-      enabled: !!domain && domain.length <= 6 && !containsSpecialChars(domain),
+      enabled:
+        !!currentAccount &&
+        !!domain &&
+        domain.length <= 6 &&
+        !containsSpecialChars(domain),
     },
   });
 
@@ -189,8 +194,9 @@ const DomainsContent = (): React.ReactElement => {
   const { data: setRecordSim } = useSimulateContract({
     ...contractConfig,
     functionName: "setRecord",
+    account: currentAccount,
     args: [domain, record],
-    query: { enabled: !!domain && !!record },
+    query: { enabled: !!currentAccount && !!domain && !!record },
   });
   const { writeContract: setRecordWrite, data: setRecordTx } =
     useWriteContract();
@@ -210,7 +216,7 @@ const DomainsContent = (): React.ReactElement => {
       return;
     }
     if (registerSim?.request) {
-      registerDomain(registerSim.request);
+      registerDomain(registerSim.request as any);
     }
   };
 
@@ -218,7 +224,7 @@ const DomainsContent = (): React.ReactElement => {
     if (!record || !domain) return;
     setLoading(true);
     if (setRecordSim?.request) {
-      setRecordWrite(setRecordSim.request);
+      setRecordWrite(setRecordSim.request as any);
     }
     setLoading(false);
   };
