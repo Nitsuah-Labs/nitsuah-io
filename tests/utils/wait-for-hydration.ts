@@ -56,7 +56,10 @@ export async function gotoAndWaitForHydration(
   url: string,
   options?: { timeout?: number }
 ) {
-  const timeout = options?.timeout || 30000;
+  // Use longer timeout for local (60s) to handle heavy pages like homepage with Spline
+  // CI uses faster strategies so 30s is sufficient there
+  const defaultTimeout = process.env.CI ? 30000 : 60000;
+  const timeout = options?.timeout || defaultTimeout;
 
   // Simplified CI approach - use load state which is faster than networkidle
   if (process.env.CI) {
