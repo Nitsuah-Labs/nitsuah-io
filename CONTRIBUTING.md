@@ -28,11 +28,17 @@ npm run dev
 # Quick commit (auto-formats + fast checks: ~3s)
 npm run commit:safe
 
-# Push (production build check: ~1min)
+# OPTIONAL: Before pushing, test production build + E2E tests locally
+# This catches what CI will test and prevents stallouts
+npm run precheck
+
+# Push (pre-push hook runs typecheck + tests + precheck automatically)
 git push
 
 # CI runs full test suite automatically
 ```
+
+**Note:** The pre-push hook now runs `npm run precheck` automatically, which builds the production bundle and runs E2E tests. This ensures you catch production-specific issues locally before pushing to CI.
 
 ### For Pull Requests
 

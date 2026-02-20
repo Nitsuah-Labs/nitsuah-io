@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 
 // Allow ~2% pixel difference for dynamic animations (Spline 3D, etc.)
 // Calculated as approximately 100000 pixels for typical desktop viewport
@@ -6,14 +7,13 @@ const MAX_VISUAL_DIFF_PIXELS = 100000;
 
 test.describe("Projects Page Visual Tests", () => {
   test("projects page renders correctly", async ({ page }) => {
-    await page.goto("/projects");
+    await gotoAndWaitForHydration(page, "/projects");
 
     // Check header and footer are visible
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("footer")).toBeVisible();
 
-    // Wait for layout to stabilize and network to idle
-    await page.waitForLoadState("networkidle");
+    // Wait for layout to stabilize
     await page.waitForTimeout(2000);
 
     // Take screenshot - allow small pixel differences due to dynamic content
@@ -26,7 +26,7 @@ test.describe("Projects Page Visual Tests", () => {
   });
 
   test("projects page shows featured repositories", async ({ page }) => {
-    await page.goto("/projects");
+    await gotoAndWaitForHydration(page, "/projects");
 
     // Check that the Featured category button (star emoji) exists
     const featuredButton = page.getByRole("button", { name: /⭐/ });
@@ -39,7 +39,7 @@ test.describe("Projects Page Visual Tests", () => {
     await expect(projectCards.first()).toBeVisible();
   });
   test("project cards have icons and links", async ({ page }) => {
-    await page.goto("/projects");
+    await gotoAndWaitForHydration(page, "/projects");
 
     // Check that links exist (GitHub, live demos, etc.)
     const links = page

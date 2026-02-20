@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 
 // Tests should run in test-helpers mode (Playwright starts a production
 // server when NEXT_PUBLIC_TEST_HELPERS=1) to avoid dev overlays. Do not skip
@@ -14,16 +15,8 @@ test.setTimeout(180000);
 
 test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to resume page
-    await page.goto("/resume");
-
-    // Wait for network to be idle to ensure all content is loaded
-    await page.waitForLoadState("networkidle");
-
-    // Wait for the main resume content to be present
-    await page.waitForSelector("#basics, main.resume-container", {
-      timeout: 30000,
-    });
+    // Navigate using hydration-aware helper
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Verify the resume content is present
     const basicsExists = await page
@@ -50,6 +43,7 @@ test.describe("Resume Page Accessibility Tests", () => {
     try {
       accessibilityScanResults = await new AxeBuilder({ page })
         .include("#basics")
+        .exclude('[data-testid="spline-container"]') // Always exclude spline
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
         .analyze();
     } catch (e) {

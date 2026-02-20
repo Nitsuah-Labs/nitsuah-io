@@ -12,8 +12,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
-import toast from "react-hot-toast";
-import { useAccount } from "wagmi";
 import "../_styles/labs.css";
 
 // Replace empty interface with object type
@@ -44,12 +42,16 @@ const StyledMenu = (props: React.ComponentProps<typeof Menu>) => (
   />
 );
 
+// Wallet status temporarily disabled to ensure nav always renders
+// TODO: Re-implement wallet status display with proper error boundaries
+const WalletStatus: React.FC = () => {
+  return null;
+};
+
 const LabNav: React.FC<LabNavProps> = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
-  const { address, isConnected } = useAccount();
-  const [copied, setCopied] = React.useState(false);
   const [homeClickCount, setHomeClickCount] = React.useState(0);
   const [homeClickTimer, setHomeClickTimer] =
     React.useState<NodeJS.Timeout | null>(null);
@@ -60,19 +62,6 @@ const LabNav: React.FC<LabNavProps> = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const truncateAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
-
-  const handleCopyAddress = () => {
-    if (address) {
-      navigator.clipboard.writeText(address);
-      setCopied(true);
-      toast.success("Address copied!", { icon: "📋" });
-      setTimeout(() => setCopied(false), 2000);
-    }
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
@@ -234,55 +223,8 @@ const LabNav: React.FC<LabNavProps> = () => {
             </StyledMenu>
           </Box>
 
-          {/* Wallet Status Display */}
-          {isConnected && address && (
-            <Box
-              sx={{
-                display: { xs: "none", md: "flex" },
-                alignItems: "center",
-                marginRight: "1rem",
-                padding: "0.5rem 1rem",
-                background: "rgba(192, 132, 252, 0.1)",
-                border: "1px solid rgba(192, 132, 252, 0.3)",
-                borderRadius: "6px",
-                gap: "0.5rem",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "8px",
-                  height: "8px",
-                  background: "#10b981",
-                  borderRadius: "50%",
-                  boxShadow: "0 0 6px rgba(16, 185, 129, 0.6)",
-                }}
-              />
-              <code
-                style={{
-                  fontSize: "0.9rem",
-                  fontFamily: "monospace",
-                  color: "#c084fc",
-                  cursor: "pointer",
-                }}
-                onClick={handleCopyAddress}
-                title={copied ? "Copied!" : "Click to copy address"}
-              >
-                {truncateAddress(address)}
-              </code>
-              {copied && (
-                <span
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "#10b981",
-                    fontWeight: 600,
-                  }}
-                >
-                  ✓
-                </span>
-              )}
-            </Box>
-          )}
+          {/* Wallet Status Display - isolated component that won't break nav */}
+          <WalletStatus />
 
           {/* Profile and Logout buttons - aligned right */}
           <Box

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
 import {
@@ -9,6 +8,7 @@ import {
   extractDurationText,
   getCompanyLogoUrl,
 } from "../../../utils/resume";
+import { CompanyLogo } from "./CompanyLogo";
 
 interface WorkExperienceProps {
   work: ResumeData["work"];
@@ -64,7 +64,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                               className="company-logo-link print-hide"
                               title={job.name}
                             >
-                              <Image
+                              <CompanyLogo
                                 src={getCompanyLogoUrl(job.name)!}
                                 alt={job.name}
                                 width={48}
