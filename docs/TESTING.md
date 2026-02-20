@@ -48,7 +48,7 @@ npm run precheck
 ✅ **Integrated into pre-push hook:**
 - Runs automatically when you `git push`
 - Catches production-specific issues early
-- Prevents CI stallouts
+- Prevents CI timeouts
 
 ❌ **Skip for:**
 - Documentation-only changes

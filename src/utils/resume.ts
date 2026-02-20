@@ -91,9 +91,12 @@ export function getCompanyLogoUrl(companyName: string): string | null {
   };
 
   // Use Logo.dev API for company logos
+  // Note: This is a public demo token. For production, move to NEXT_PUBLIC_LOGO_DEV_TOKEN env variable
+  const token =
+    process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN || "pk_X-omega2IGScyLoz_Uw0Q";
   for (const key in companyDomains) {
     if (lowerName.includes(key)) {
-      return `https://img.logo.dev/${companyDomains[key]}?token=pk_X-omega2IGScyLoz_Uw0Q&size=200`;
+      return `https://img.logo.dev/${companyDomains[key]}?token=${token}&size=200`;
     }
   }
 

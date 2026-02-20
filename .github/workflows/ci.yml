@@ -97,7 +97,7 @@ jobs:
       - name: Run Playwright tests (parallel)
         run: npm run test:e2e
         env:
-          PLAYWRIGHT_WORKERS: 4 # Maximize parallelism to avoid long hangs
+          PLAYWRIGHT_WORKERS: 2 # Limit parallelism in CI to avoid resource contention
           NEXT_PUBLIC_TEST_HELPERS: 1 # Enable test helper scripts
           NODE_ENV: production
 

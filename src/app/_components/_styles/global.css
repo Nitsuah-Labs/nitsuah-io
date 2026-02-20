@@ -735,5 +735,5 @@ wcm-modal,
 w3m-modal,
 [id^="wcm-"],
 [id^="w3m-"] {
-  z-index: 2147483647 !important;
+  z-index: 50000;
 }

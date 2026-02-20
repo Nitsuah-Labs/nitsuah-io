@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const CI_TIMEOUT = 300_000; // 5 minutes for CI stability (increased from 3min)
-const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
+const CI_TIMEOUT = 120_000; // 2 minutes for CI (reduced from 5min to fail fast)
+const LOCAL_TIMEOUT = 60_000; // 1 minute for local development
 
 /**
  * Playwright configuration for nitsuah.io testing
@@ -25,7 +25,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0, // Increased retries for flaky CI tests
-  workers: process.env.CI ? 2 : "100%",
+  // Use limited workers in CI to match GitHub Actions runners (2 cores)
+  // For local runs, use 50% of cores to prevent overwhelming high-core machines
+  workers: process.env.CI ? 2 : "50%",
 
   // Reporter configuration - include GitHub reporter for CI
   reporter: process.env.CI ? [["list"], ["github"]] : "list",

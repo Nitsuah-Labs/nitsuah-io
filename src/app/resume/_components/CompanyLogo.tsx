@@ -32,7 +32,7 @@ export const CompanyLogo: React.FC<CompanyLogoProps> = ({
       alt={alt}
       width={width}
       height={height}
-      unoptimized
+      unoptimized // Required for external logo.dev API - Next.js Image optimization doesn't support this domain
       onError={() => setHasError(true)}
       className={className}
       style={style}
