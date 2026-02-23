@@ -38,7 +38,7 @@ function containsSpecialChars(str: string): boolean {
   return specialChars.test(str);
 }
 
-export default function DomainsContentProduction(): React.ReactElement {
+export default function DomainsContentProduction(): JSX.Element {
   const [domain, setDomain] = useState("");
   const [record, setRecord] = useState("");
   const [editing, setEditing] = useState(false);

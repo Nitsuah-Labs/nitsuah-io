@@ -14,7 +14,7 @@ export async function waitForReactHydration(page: Page, timeout = 30000) {
         const hasContent = body && body.textContent && body.textContent.length > 50;
         return hasContent;
       },
-      { timeout: 10000 }
+      { timeout }
     );
     return;
   }
@@ -74,14 +74,14 @@ export async function gotoAndWaitForHydration(
       }
     };
 
-    page.once("pageerror", pageErrorHandler);
-    page.once("console", consoleErrorHandler);
+    page.on("pageerror", pageErrorHandler);
+    page.on("console", consoleErrorHandler);
 
-    console.log(`[CI] Navigating to ${url}...`);
+    if (process.env.DEBUG) console.log(`[CI] Navigating to ${url}...`);
     try {
       await page.goto(url, {
         waitUntil: "domcontentloaded",
-        timeout: 30000
+        timeout: timeout
       });
 
       // Wait specifically for documentElement to exist
@@ -91,7 +91,7 @@ export async function gotoAndWaitForHydration(
           const hasBody = document.body !== null;
           return hasDoc && hasBody;
         },
-        { timeout: 10000 }
+        { timeout: Math.floor(timeout / 3) }
       );
 
       // Wait for React to start mounting content
@@ -100,10 +100,10 @@ export async function gotoAndWaitForHydration(
           const rootElements = document.querySelectorAll('#__next, main, [data-testid]');
           return rootElements.length > 0 || document.body.childElementCount > 3;
         },
-        { timeout: 10000 }
+        { timeout: Math.floor(timeout / 3) }
       );
 
-      console.log(`[CI] Finished navigation/hydration for ${url}`);
+      if (process.env.DEBUG) console.log(`[CI] Finished navigation/hydration for ${url}`);
     } catch (e) {
       console.error(`[CI] Navigation/hydration failed for ${url}:`, e);
       const html = await page.content().catch(() => "N/A");

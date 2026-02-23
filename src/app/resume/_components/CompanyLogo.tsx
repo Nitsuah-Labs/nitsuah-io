@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type FC, type CSSProperties } from "react";
 
 interface CompanyLogoProps {
   src: string;
@@ -9,10 +9,10 @@ interface CompanyLogoProps {
   width?: number;
   height?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
-export const CompanyLogo: React.FC<CompanyLogoProps> = ({
+export const CompanyLogo: FC<CompanyLogoProps> = ({
   src,
   alt,
   width = 48,
@@ -32,7 +32,6 @@ export const CompanyLogo: React.FC<CompanyLogoProps> = ({
       alt={alt}
       width={width}
       height={height}
-      unoptimized // Required for external logo.dev API - Next.js Image optimization doesn't support this domain
       onError={() => setHasError(true)}
       className={className}
       style={style}

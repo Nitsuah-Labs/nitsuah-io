@@ -26,7 +26,7 @@ test.describe("Wallet Connection Flow", () => {
     await expect(connectButton.first()).toBeVisible({ timeout: 10000 });
   });
 
-  test.skip("wallet connection section exists on register page", async ({
+  test.skip("wallet connection section exists on mint page", async ({
     page,
   }) => {
     await page.goto("/labs/mint?testHelpers=1");
@@ -46,10 +46,10 @@ test.describe("Wallet Connection Flow", () => {
     await expect(walletSection.first()).toBeVisible();
   });
 
-  test.skip("network switcher appears on register page", async ({ page }) => {
+  test.skip("network switcher appears on mint page", async ({ page }) => {
     await page.goto("/labs/mint?testHelpers=1");
     await page.waitForLoadState("networkidle");
-    
+
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
       if (document.body && !document.body.classList.contains('test-helpers')) {
@@ -66,7 +66,7 @@ test.describe("Wallet Connection Flow", () => {
     await expect(mainContent).toBeVisible();
   });
 
-  test.skip("register page has form inputs for domain registration", async ({
+  test.skip("domains page has form inputs for domain registration", async ({
     page,
   }) => {
     // Skip register page - use domains page instead
@@ -148,7 +148,7 @@ test.describe("Mint NFT Flow", () => {
     await page.goto("/labs/mint?testHelpers=1");
 
     await page.waitForLoadState("networkidle");
-    
+
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
       if (document.body && !document.body.classList.contains('test-helpers')) {
@@ -166,7 +166,7 @@ test.describe("Domains Page", () => {
   test.skip("domains page renders correctly", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
     await page.waitForLoadState("networkidle");
-    
+
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
       if (document.body && !document.body.classList.contains('test-helpers')) {
@@ -181,7 +181,7 @@ test.describe("Domains Page", () => {
   test.skip("domains page has wallet connection capability", async ({ page }) => {
     await page.goto("/labs/domains?testHelpers=1");
     await page.waitForLoadState("networkidle");
-    
+
     // Manually add test-helpers class to ensure CSS applies
     await page.evaluate(() => {
       if (document.body && !document.body.classList.contains('test-helpers')) {

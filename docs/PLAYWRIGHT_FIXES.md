@@ -42,14 +42,14 @@ Based on CI run analysis (#20292773787), **48 out of 61 tests were failing** wit
 ## 🔧 Fixes Applied
 
 ### 1. Extended Timeouts in playwright.config.ts
-- ✅ Increased CI test timeout: 180s → 300s (5 minutes)
-- ✅ Increased webServer timeout: 180s → 300s
+- ✅ Set CI test timeout to 120s via `CI_TIMEOUT`
+- ✅ Aligned `webServer` timeout with CI timeout (120s)
 - ✅ Increased retries: 1 → 2 for flaky CI tests
 
 ### 2. Enhanced Hydration Waiting in wait-for-hydration.ts
-- ✅ Extended default hydration timeout: 30s → 45s
-- ✅ Added extra 2s wait for CI environments
-- ✅ Increased post-hydration delay: 500ms → 1000ms
+- ✅ Using default hydration timeout: 30s
+- ✅ Added explicit 10s hydration waits in CI environments
+- ✅ Tweaked post-hydration delay to improve stability
 
 ### 3. Increased Test-Specific Timeouts
 - ✅ Accessibility tests: 60s → 120s (CI)

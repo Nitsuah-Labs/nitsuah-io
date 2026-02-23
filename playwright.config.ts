@@ -91,7 +91,7 @@ export default defineConfig({
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
     // Increased timeout for CI environment - server needs time to fully start
-    timeout: process.env.CI ? 300 * 1000 : 60 * 1000, // Increased to 5 min for CI
+    timeout: process.env.CI ? 120 * 1000 : 60 * 1000, // Set to 2 min to match test timeout
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
