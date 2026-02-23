@@ -1,7 +1,7 @@
 // DOMAINS - cleaned implementation
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import "../../_components/_styles/labs.css";
 
 // LAB STYLES
@@ -11,7 +11,7 @@ import LabNav from "../../_components/_labs/LabNav";
 import LabSubNav from "../../_components/_labs/LabSubNav";
 
 // Test mode stub component
-const DomainsContentTest = (): JSX.Element => {
+const DomainsContentTest = (): ReactElement => {
   return (
     <>
       <h1>SUB-DOMAIN PORTAL</h1>
@@ -28,7 +28,7 @@ const DomainsContentTest = (): JSX.Element => {
 };
 
 // Inner component that conditionally loads production or test version
-const DomainsContent = (): JSX.Element => {
+const DomainsContent = (): ReactElement => {
   const [mounted, setMounted] = useState(false);
   const testHelpersMode = process.env.NEXT_PUBLIC_TEST_HELPERS === "1";
 
@@ -67,7 +67,7 @@ const DomainsContent = (): JSX.Element => {
 };
 
 // Wrapper component that always renders layout
-const DomainSite = (): JSX.Element => {
+const DomainSite = (): ReactElement => {
   return (
     <div className="App">
       <LabNav />

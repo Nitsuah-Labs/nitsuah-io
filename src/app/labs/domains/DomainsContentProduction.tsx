@@ -1,7 +1,7 @@
 // DOMAINS - production implementation with wagmi hooks
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import {
   useAccount,
   useReadContract,
@@ -38,7 +38,7 @@ function containsSpecialChars(str: string): boolean {
   return specialChars.test(str);
 }
 
-export default function DomainsContentProduction(): JSX.Element {
+export default function DomainsContentProduction(): ReactElement {
   const [domain, setDomain] = useState("");
   const [record, setRecord] = useState("");
   const [editing, setEditing] = useState(false);
