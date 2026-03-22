@@ -2,14 +2,16 @@
   "basics": {
     "name": "Austin J. Hardy",
     "title": "Senior Systems Engineer",
-    "website": "https://nitsuah.io",
     "email": "contact@nitsuah.io",
-    "picture": "/images/ajh.jpg",
-    "summary": "Ut prosim. Ready for any challenge or opportunity from over 15 years in Enterprise IT.",
+    "website": "https://nitsuah.io",
+    "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
+    "summary": "Developer Productivity & Integration Engineer with 15+ years connecting enterprise tools, automating workflows, and building platforms that empower thousands of engineers. Deep Atlassian expertise paired with hands-on GenAI tool development — MCP server architecture, Spring AI, and natural-language interfaces to internal systems. Known for being the technical authority others rely on when the systems need to actually work. Ut prosim.",
     "location": {
+      "countryCode": "US",
+      "address": "United States",
       "city": "Sevierville",
-      "url": "https://www.seviervilletn.org/",
-      "region": "TN"
+      "region": "TN",
+      "url": "https://www.seviervilletn.org/"
     },
     "profiles": [
       {
@@ -28,38 +30,34 @@
     {
       "name": "Netflix, Inc.",
       "url": "https://www.netflix.com/",
-      "highlights": [
-        "Ad Ops Pipeline Optimization - Developed comprehensive custom Jira project and automation rules for Netflix Ad Operations team, transforming campaign management workflows. Implemented custom fields, workflows, and real-time dashboards that enhanced visibility and reporting across $30M+ in advertising revenue, reducing manual effort by 70% and improving campaign tracking accuracy.",
-        "Jira Cloud Mail Handler (JCMH) - Scaled a custom plugin to handle external email intake, replies, comments, and attachments across many federated Jira sites, streamlining organization-wide communication.",
-        "Data-Driven Decisions - Built Global Agile Dashboards using Atlassian Analytics and SQL, enabling actionable insights for thousands of Workforce Engineering users.",
-        "M&A Migrations - Developed scalable Python scripts for replicating user identity access (AuthZ) during Atlassian migrations to a central Atlassian Cloud Org",
-        "Cloud SRE - Managed incidents and operational alerts and response runbooks, ensuring reliability with Atlassian tools and support. I disabled hundreds of unused webhooks and cleaned up resource-heavy legacy automation rules.",
-        "Jira Custom Plugins - Enhanced feature and operational support for JCMH and the Atlassian API Proxy, a mutual TLS authorization app for secure and seamless integrations of development systems.",
-        "Project Godzilla - Led Atlassian Data Center to Cloud migration for over 5000 external partners, ensuring operational continuity.",
-        "Games Work Translation - Implemented multi-language work translation system in Jira for Netflix Games division, enabling seamless global collaboration across 15+ languages. Enhanced bug tracking and issue management for international game development teams, improving cross-cultural communication and reducing resolution times by 35%.",
-        "Developer Productivity Tools - Led integration of AI-assisted development tools including GitHub Copilot in Slack channels, enabling collaborative coding sessions. Built and maintained 6+ production services supporting engineering workflows, achieving 76% test coverage improvement across legacy repositories.",
-        "Cross-Repository Excellence - Established systematic repository maintenance practices, standardizing build systems, pre-commit hooks, and CI/CD pipelines across Python/Java codebases. Reduced technical debt through automated dependency management and infrastructure hardening initiatives."
-      ],
       "position": "Senior Systems Engineer",
       "startDate": "2023-11-04",
-      "summary": "As a Senior Systems Engineer at Netflix, I streamline operations and automation within the Atlassian ecosystem, reducing manual efforts and enhancing efficiency for engineering and operations teams. I oversee incident management, drive cloud transitions, and deliver data-driven dashboards to empower strategic decision-making. By building knowledge bases, enabling integrations, and providing targeted support for major organizational transitions, I ensure that tools and processes align seamlessly with Netflix's dynamic needs.",
-      "website": "https://www.linkedin.com/company/netflix/"
+      "website": "https://www.linkedin.com/company/netflix/",
+      "summary": "Senior Systems Engineer on the NTech Systems Engineering team. Served as the subject-matter authority for Atlassian tooling while owning and evolving a broader integration platform spanning Slack, Zendesk, Google, and 1Password. Built the connective tissue between internal systems and external tools — on-call for all production bridges and integrations.",
+      "highlights": [
+        "Atlassian Informed Captain — Served as the primary Atlassian-certified technical authority across the organization: championed product improvements and best practices, and was the go-to voice for tooling decisions, stakeholder questions, and operational standards.",
+        "Cloud Transformation & Partner Migrations — Supported a large-scale Atlassian Data Center to Cloud migration for 5,000+ external partners, resolving blockers, fixing cutover bugs, and applying configuration changes — including scheme migrations in the cloud environment — to keep the project moving and ensure operational continuity. Also developed Python-based scripts to replicate user identity and authorization data during M&A-related Atlassian platform migrations.",
+        "GenAI-Powered Self-Service Bot (MCP Server) — Revived a legacy Slack bot originally built for datacenter operations, modernized it to current engineering standards, and rebuilt it as a full Model Context Protocol (MCP) server integrated with an internal GenAI registry. Enabled engineers to search issues, run JQL queries, create and update tickets, manage project access and roles, and provision new projects entirely via natural language — removing the need for site-admin involvement on routine operations. Grew from 30,000 to 60,000+ requests per week within the first week of broader rollout and usage continued to scale.",
+        "Support Channel Automation & Deflection — Extended the same MCP bot into engineering support channels to surface Jira permission diagnostics, suggest access fixes, and resolve automation issues in-thread without escalation, substantially reducing support tickets that previously required site-admin intervention.",
+        "Developer Productivity & SRE — Owned and operated 6+ production services; raised test coverage from near-zero to the 75% organizational gold standard and established daily redeployment cadences across legacy repositories that previously had no automated deployment pipeline. Maintained on-call coverage for all integration bridges across Slack, Zendesk, and Google.",
+        "Platform & Integration Work — Stabilized a high-traffic mutual TLS API proxy supporting millions of requests across multiple OAuth scopes; designed and maintained a custom data sync service connecting Jira Assets to internal sources of truth; managed enterprise SCIM identity connector deployment with automated Jenkins update pipelines; built automated workflows to reactivate lapsed partners and prune inactive ones with upstream authorization checks and full audit trails; implemented multi-language Jira workflows for a global product division across 15+ languages; built agile dashboards serving thousands of engineering users; and delivered custom Jira configuration and automation for an ad operations team supporting $30M+ in revenue-linked workflows."
+      ]
     },
     {
-      "name": "Coinbase Inc.",
+      "name": "Coinbase Global Inc.",
       "url": "https://www.coinbase.com/",
-      "highlights": [
-        "Product Launch Calendar - Transformed cross-functional approval & rollout process for tracking features, releases, and programs, benefiting millions of global customers.",
-        "Rolling Intake - Streamlined IT Program Management with automated Insights self-service, enhancing efficiency for dynamic datasets.",
-        "MNPI Issue Level Security - Automated Restricted issue access for MNPI compliance across the organization.",
-        "WEB3 Demo to IT - Immersed in web3, completed Crypto-U courses, and served as COINbassador.",
-        "AUDIT-omation - Automated SOC & R+D Expense artifact gathering in Jira, supported $400M+ in refunds and time savings for tax and audit needs."
-      ],
       "position": "Systems Engineer",
       "startDate": "2022-04-09",
       "endDate": "2023-11-04",
-      "summary": "As a System Engineer on the IT Operations Atlassian team, I oversaw the Atlassian Suite, integrated Confluence, Jira, and Jira Service Management, along with Third-Party integrations. I upgraded systems and plugins, ensured tool currency and site reliability. Seamlessly integrated solutions across teams, managed user access, drove agile automation, and troubleshot effectively. Dedicated to scaling, cost-saving, and inventive collaboration, I collaborated with teams for dependable support and clear communication while maintaining meticulous documentation.",
-      "website": "https://www.linkedin.com/company/coinbase/"
+      "website": "https://www.linkedin.com/company/coinbase/",
+      "summary": "Served as Atlassian platform engineer on the IT Operations team, managing Jira, Confluence, and JSM alongside third-party integrations. Focused on automation, compliance, and enabling agile teams at scale.",
+      "highlights": [
+        "Release Tracking System — Transformed the cross-functional approval and rollout process for tracking features, releases, and programs, improving coordination across teams serving millions of global customers.",
+        "IT Program Intake Automation — Streamlined IT Program Management with automated self-service reporting and dynamic dataset handling, reducing manual overhead for intake workflows.",
+        "Compliance Access Controls — Automated restricted issue-level security controls for MNPI (Material Non-Public Information) compliance across the organization.",
+        "Audit Artifact Automation — Automated SOC and R&D expense artifact gathering in Jira, supporting $400M+ in refunds and significant audit preparation time savings for tax and legal teams.",
+        "Web3 & Crypto Education — Completed internal Crypto-U curriculum and served as a team representative for internal web3 education and adoption initiatives."
+      ]
     },
     {
       "name": "Blackboard, Inc.",
@@ -67,114 +65,101 @@
       "position": "Senior Systems Administrator",
       "startDate": "2018-04-09",
       "endDate": "2022-04-01",
+      "website": "https://www.linkedin.com/company/blackboard/",
+      "summary": "Served as SRE and platform lead for Atlassian Server/Datacenter tools supporting Product Development and Delivery teams. Drove Agile transformation, executed cloud migration, and governed third-party toolset standards.",
       "highlights": [
-        "SRE for Atlassian Server and Datacenter apps, supported teams and CI/CD pipelines",
-        "Managed Third Party SaaS apps, assessed toolset for Security, Accessibility (AX), User Experience (UX), and Product Experience (PX)",
-        "Executed Atlassian Cloud migration strategy with Platinum partner",
-        "Collaborated with vendors for security and accessibility features",
-        "Removed technical debt: legacy integrations, unused licenses, 200 old projects",
-        "Decommissioned VMs, promoted AWS usage, eliminated toil and blockers",
-        "Led Jira SAFe transformation, integrated Jira Align across PDD programs",
-        "Standardized schemes for 100+ active projects' fields, permissions, workflows",
-        "Enforced best practices and policies through configuration, automation, and behaviors",
-        "Created self-help pages, Slack channels for best practices and features",
-        "Coordinated SAML, SCIM, Azure AD changes for improved authentication",
-        "Deployed self-service Jira AIO add-on, enabled Power BI reports via AWS",
-        "Served as Scrum Master, facilitated Agile activities, sprint metrics, and roadmap plans"
-      ],
-      "summary": "As Senior System Admin for the Shared Services Tools Team, I managed critical apps and VM systems for Product Development and Delivery teams, handled user authorization, integration configuration, and toolset support. I ensured acceptance criteria aligned with security, architecture, and accessibility goals. Led Agile transformation and reduced technical debt. Implemented improvements and drove collaboration.",
-      "website": "https://www.linkedin.com/company/blackboard/"
+        "Executed Atlassian Cloud migration strategy with a Platinum partner; decommissioned legacy VMs and promoted AWS adoption.",
+        "Drove Jira SAFe transformation and integrated Jira Align across PDD programs; standardized schemes for 100+ active projects.",
+        "Managed third-party SaaS assessments for security, accessibility, and UX; coordinated SAML/SCIM/Azure AD changes.",
+        "Eliminated technical debt: removed 200 old projects, legacy integrations, and unused licenses.",
+        "Served as Scrum Master, deployed self-service Jira AIO add-on, and enabled Power BI reporting via AWS."
+      ]
     },
     {
       "name": "MAXIMUS sub. Omni",
       "position": "Application Administrator",
       "startDate": "2016-10-01",
       "endDate": "2018-04-01",
+      "website": "https://www.linkedin.com/company/maximus/",
+      "summary": "Managed middleware, SecOps, auth, and DevOps tooling for the Dept. of Education Debt Management System supporting 4,000 users 24/7/365.",
       "highlights": [
-        "Managed Middleware, SecOps, Help Desk, Auth, TFA, TLS, SLA, DevOps tools",
-        "Supported primary app with 4,000 users 24/7/365",
-        "Standardized change management processes and environment procedures",
-        "Coordinated DBA and System admin cleanup efforts for continuous improvement",
-        "Improved legacy systems including Symantec TFA, TLS 1.2, and compliance",
-        "Managed Help Desk app, database, client reporting, SSIS coordination",
-        "Acted as Subject Matter Expert, collaborated across teams for DevOps and tools",
-        "Developed new apps, fulfilled automation needs, upgraded legacy tools"
-      ],
-      "summary": "Managed the Middleware group at the Dept of Education Debt Management System, supported 4,000 users 24/7/365. Led standardization, system improvements, and compliance efforts. Supported Help Desk, client reporting, and collaborated on cross-team initiatives. Developed new applications and enhanced toolsets for team efficiency and excellence.",
-      "website": "https://www.linkedin.com/company/maximus/"
+        "Standardized change management processes and environment procedures across middleware, TFA, TLS, and Help Desk systems.",
+        "Improved legacy systems: Symantec TFA, TLS 1.2 compliance, and Help Desk DB/client reporting via SSIS.",
+        "Acted as SME across teams for DevOps tooling, automation development, and legacy system upgrades."
+      ]
     },
     {
       "name": "MAXIMUS sub. Omni",
-      "highlights": [
-        "ProdOps/24/7/ETL, Help Desk Admin, SOP/SLAs, Triage, SysAid, ReportsDB, SQL, SSMS, SSIS, HTML"
-      ],
       "position": "Production Control Specialist (SME)",
-      "endDate": "2016-09-30",
       "startDate": "2014-08-01",
-      "summary": "As a Production Control Specialist (SME) and Help Desk Supervising Administrator (HDSA), I provided 24/7/365/99.999% support and site reliability engineering for our primary application, Debt Manager. In addition to normal production activities, I provided full development support to the Help Desk Operations team, including the design, testing, and implementation of new features and settings in a production environment.\n\nProvided Production Control support and acted as subject matter expert for the DMCS Production Operations team, oversaw the operations of DBAs, Application, and System Administrators, as well as monitored the ETLs executing within the FICO Debt Management system. I also helped repair the reports database DSV & SMDL mappings for client reporting.",
-      "website": "https://www.linkedin.com/company/maximus/"
+      "endDate": "2016-09-30",
+      "website": "https://www.linkedin.com/company/maximus/",
+      "summary": "Provided 24/7/365 production control support and site reliability for the FICO Debt Management system. Oversaw DBA, Application, and System Admin operations; repaired reports database mappings and supported Help Desk development.",
+      "highlights": [
+        "ProdOps / 24x7 / ETL, Help Desk Admin, SOP/SLAs, Triage, SysAid, ReportsDB, SQL, SSMS, SSIS, HTML"
+      ]
     },
     {
       "name": "Xerox sub. Omni",
-      "highlights": [
-        "ProdOps/24/7/ETL, JBOSS, SLAs, Reporting, Contract Transition"
-      ],
       "position": "Production Operations Support",
-      "endDate": "2014-07-31",
       "startDate": "2014-01-31",
-      "summary": "Facilitated Production Control support and served as subject matter expert for the DMCS Production Operations team, oversaw the operations of DBAs, Application, and System Administrators for DMCS, as well as monitored the ETLs executing within the financial application. I documented and transitioned the contract procedures and policies to ensure a smooth transition to the next contract as an SME.",
-      "website": "https://www.linkedin.com/company/xerox/"
+      "endDate": "2014-07-31",
+      "website": "https://www.linkedin.com/company/xerox/",
+      "summary": "Production Control SME for the DMCS team. Monitored ETLs, supported DBAs and system admins, and documented/transitioned contract procedures for a smooth handoff.",
+      "highlights": [
+        "ProdOps / 24x7 / ETL, JBOSS, SLAs, Reporting, Contract Transition"
+      ]
     },
     {
       "name": "OmniSystems, Inc.",
-      "highlights": [
-        "Worked on the DMCS contract as a subcontractor, consulted on internal projects and new business"
-      ],
       "position": "Systems Engineer I",
-      "endDate": "2018-04-01",
       "startDate": "2014-04-01",
-      "summary": "Acted as a key resource for Executive staff to use for IT projects and assignments. My responsibilities ranged from configuring an office WiFi-DMZ to initializing an internal Help Desk to centralize all IT SOP knowledge bases. I maintained the server room, including organizing equipment, analyzing power efficiency and usage reduction, and documenting the server room layout in Visio format. No task was too large or too small.",
-      "website": "https://www.linkedin.com/company/omni-systems-inc./"
+      "endDate": "2018-04-01",
+      "website": "https://www.linkedin.com/company/omni-systems-inc./",
+      "summary": "Served as a key IT resource for organizational staff. Maintained the server room, configured network/DMZ, and stood up an internal Help Desk to centralize IT SOP knowledge. Consulted on new business alongside DMCS contract work.",
+      "highlights": [
+        "Worked on the DMCS contract as a subcontractor; consulted on internal projects and new business opportunities."
+      ]
     },
     {
       "name": "OmniSystems, Inc.",
-      "highlights": [
-        "USVI: EDA Marketplace, Superior Court, Police Dept, Fire Services, WAPA, WICO, UVI.edu",
-        "Taught a former Lieutenant General to use iCloud, saved clients' wedding photos, and held executives accountable for insecure devices"
-      ],
       "position": "Junior Systems Engineer",
       "startDate": "2010-04-01",
       "endDate": "2014-04-01",
-      "summary": "Acted as a key resource for Executive staff to use for IT projects and assignments. My responsibilities ranged from configuring an office WiFi-DMZ to initializing an internal Help Desk to centralize all our IT processes. I maintained the server room, including organizing equipment and improving power and airflow efficiency, as well as providing an analysis recommending system usage reduction, stratified by a documented layout of the server room in Visio format.",
-      "website": "https://www.linkedin.com/company/omni-systems-inc./"
+      "website": "https://www.linkedin.com/company/omni-systems-inc./",
+      "summary": "Provided field and infrastructure support across USVI government agencies and commercial clients. Handled everything from network configuration to device training and security enforcement.",
+      "highlights": [
+        "USVI clients: EDA Marketplace, Superior Court, Police Dept, Fire Services, WAPA, WICO, UVI.edu",
+        "Taught a former Lieutenant General to use iCloud, recovered clients' critical data, and enforced device security standards across the organization."
+      ]
     },
     {
       "name": "REAC-TAC Dept of HUD - sub:TomSawyerLLC",
-      "highlights": [
-        "Housing and Urban Development", "Remedy", "Phone Support", "Technical Training"
-      ],
       "position": "Call Center Representative (Tier 1+)",
-      "endDate": "2009-02-14",
       "startDate": "2008-11-30",
-      "summary": "As Tier 1+ Help Desk Support, I trained call center staff and modified systems we used. My primary responsibilities included answering customer calls and providing remediation, ranging from password resets to data entry and status updates. This included further escalation to Tier 2 support teams for collaborative resolution.",
-      "website": "https://hud-reac-tac-community.force.com/REACTAC/"
+      "endDate": "2009-02-14",
+      "website": "https://hud-reac-tac-community.force.com/REACTAC/",
+      "summary": "Tier 1+ Help Desk support for HUD. Trained call center staff, modified support systems, and escalated complex issues to Tier 2.",
+      "highlights": [
+        "Housing and Urban Development, Remedy, Phone Support, Technical Training"
+      ]
     },
     {
       "name": "REAC-TAC Dept of HUD - sub:CCSI",
-      "highlights": [
-        "HUD, Remedy, Support"
-      ],
       "position": "Call Center Representative (Tier 1)",
-      "endDate": "2008-07-31",
       "startDate": "2008-05-01",
-      "summary": "Performed any assigned duties as a first tier Help Desk Support. My responsibilities included answering customer calls and providing remediation, which ranged from password resets to data entry and status updates, as well as further escalation to Tier 2 support teams.",
-      "website": "https://hud-reac-tac-community.force.com/REACTAC/"
+      "endDate": "2008-07-31",
+      "website": "https://hud-reac-tac-community.force.com/REACTAC/",
+      "summary": "First-tier Help Desk support for HUD REAC-TAC. Handled password resets, data entry, status updates, and Tier 2 escalations.",
+      "highlights": [
+        "HUD, Remedy, Phone Support"
+      ]
     }
   ],
   "skills": [
     {
       "name": "Atlassian Suite",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "Jira",
         "Jira Service Management",
@@ -190,21 +175,31 @@
       ]
     },
     {
-      "name": "AI/ML",
-      "level": "Intermediate",
+      "name": "AI/ML & Developer Productivity",
+      "level": "Advanced",
       "keywords": [
+        "MCP Servers",
+        "Spring AI",
+        "GenAI Tool Integration",
+        "Claude API",
+        "OpenAI",
+        "AI-Assisted Development",
+        "Prompt Engineering",
+        "Tool Annotation Frameworks",
+        "Natural Language Processing",
         "TensorFlow",
         "TesseractOCR",
-        "Hugging Face",
         "PyTorch",
         "Jupyter",
-        "Stable Diffusion",
-        "OpenAI"
+        "Hugging Face",
+        "Developer Tooling",
+        "IDE Extensions",
+        "Command Pattern Architecture"
       ]
     },
     {
       "name": "AWS",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "EC2",
         "S3",
@@ -310,24 +305,33 @@
       ]
     },
     {
-      "name": "Development",
+      "name": "Development & Architecture",
       "level": "Advanced",
       "keywords": [
-        "Python",
         "Java",
-        "Javascript",
-        "Typescript",
-        "Groovy",
+        "Spring Boot",
+        "Spring AI",
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "Go",
         "React",
         "Node.js",
         "Next.js",
-        "Vault",
+        "Gradle",
+        "Maven",
+        "REST APIs",
+        "GraphQL",
+        "Microservices",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "GitHub Actions",
         "Jenkins",
-        "git",
-        "npm",
-        "yarn",
-        "lint",
-        "C++",
+        "Slack Bolt SDK",
+        "Command Pattern",
+        "Test-Driven Development",
+        "CI/CD Pipelines",
         "t-SQL",
         "Visual Basic/VBA",
         "PHP",
@@ -339,7 +343,7 @@
     },
     {
       "name": "Design",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "Figma",
         "spline.design",
@@ -358,7 +362,7 @@
     },
     {
       "name": "Microsoft Suite",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "Azure Active Directory (AD)",
         "PowerBI",
@@ -388,7 +392,7 @@
     },
     {
       "name": "Operating Systems (OS)",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "Linux",
         "Ubuntu",
@@ -401,7 +405,7 @@
     },
     {
       "name": "OS cli/shell",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "Powershell",
         "bat",
@@ -420,8 +424,9 @@
     },
     {
       "name": "Third Party SaaS",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
+        "1Password",
         "Asana",
         "BugCrowd",
         "Fortify-on-Demand",
@@ -437,7 +442,7 @@
     },
     {
       "name": "Virtualization",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "AWS EC2",
         "Docker",
@@ -454,7 +459,7 @@
     },
     {
       "name": "Web Services",
-      "level": "Expert",
+      "level": "Master",
       "keywords": [
         "REST APIs",
         "Apache",
