@@ -47,9 +47,11 @@ export default defineConfig({
     video: "retain-on-failure",
   },
 
-  // Use platform-agnostic snapshot paths to avoid Windows/Linux baseline conflicts
+  // Include platform in snapshot paths so Windows and Linux baselines don't
+  // conflict. Missing snapshots are created automatically on first run.
   snapshotPathTemplate:
-    "{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}",
+    "{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}-{platform}{ext}",
+  updateSnapshots: "missing",
 
   // Configure projects for different browsers and viewports
   // REDUCED: Only run Chromium for speed - add others back for full testing
