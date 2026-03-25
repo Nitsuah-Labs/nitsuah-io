@@ -160,7 +160,7 @@ Runs on `git commit`:
 Runs on `git push`:
 - Type checking
 - Unit tests
-- **Precheck (build + E2E)** ← Catches production issues!
+- Lightweight checks only (no E2E). Run `npm run precheck` manually before pushing for build + E2E coverage.
 
 **Bypass hooks** (use sparingly):
 ```bash

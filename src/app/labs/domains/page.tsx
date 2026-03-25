@@ -61,6 +61,7 @@ const DomainsContent = (): ReactElement => {
 
   // Production mode - load real wagmi component
   // Import lazily to avoid loading wagmi in test mode
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const DomainsContentProduction =
     require("./DomainsContentProduction").default;
   return <DomainsContentProduction />;

@@ -99,6 +99,5 @@ export async function gotoAndWaitForHydration(
 
   // Full hydration for local testing
   await page.goto(url, { waitUntil: "networkidle", timeout });
-  await page.waitForLoadState("networkidle", { timeout });
   await waitForReactHydration(page, timeout);
 }

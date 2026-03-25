@@ -90,13 +90,17 @@ export function getCompanyLogoUrl(companyName: string): string | null {
     blackboard: "blackboard.com",
   };
 
-  // Use Logo.dev API for company logos
+  // Use Logo.dev API for company logos; fall back to Clearbit when token is not set
   const token = process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN;
-  if (!token) return null;
 
   for (const key in companyDomains) {
     if (lowerName.includes(key)) {
-      return `https://img.logo.dev/${companyDomains[key]}?token=${token}&size=200`;
+      const domain = companyDomains[key];
+      if (token) {
+        return `https://img.logo.dev/${domain}?token=${token}&size=200`;
+      }
+      // Clearbit fallback – no auth required, works without env var
+      return `https://logo.clearbit.com/${domain}`;
     }
   }
 

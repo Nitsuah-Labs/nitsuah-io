@@ -79,6 +79,7 @@ export default function RegisterContent() {
 
   // Production mode - use real wagmi component
   // Import lazily to avoid loading wagmi in test mode
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const RegisterContentProduction =
     require("./RegisterContentProduction").default;
   return <RegisterContentProduction />;
