@@ -72,9 +72,11 @@ export async function gotoAndWaitForHydration(
 
     console.log(`[CI] Navigating to ${url}...`);
     try {
-      // 'load' fires after scripts run, giving React time to start mounting.
+      // 'domcontentloaded' fires after HTML is parsed — before external images
+      // (company logos etc.) which can be very slow in CI. React scripts are
+      // already bundled inline so they begin executing at DOMContentLoaded.
       await page.goto(url, {
-        waitUntil: "load",
+        waitUntil: "domcontentloaded",
         timeout,
       });
 
