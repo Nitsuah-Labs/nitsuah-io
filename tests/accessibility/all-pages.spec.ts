@@ -109,9 +109,8 @@ test.describe("Keyboard Navigation", () => {
 test.describe("Screen Reader Support", () => {
   // Skip image alt text test in CI — it has complex lazy-loading logic that times out.
   // Re-enable this test once page load performance improves.
-  const imageTest = process.env.CI ? test.skip : test;
-
-  imageTest("images have alt text", async ({ page }) => {
+  test("images have alt text", async ({ page }) => {
+    test.skip(!!process.env.CI, "Image test with lazy-loading logic skipped in CI; runs locally.");
     // Increase timeout for possible lazy-loaded images
     test.setTimeout(60000);
 
