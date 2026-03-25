@@ -8,8 +8,8 @@ test.describe("Page Rendering Diagnostics", () => {
   test("homepage - check if ANY HTML is rendered", async ({ page }) => {
     console.log("=== DIAGNOSTIC: Homepage rendering ===");
     
-    // Navigate with networkidle to ensure hydration happens
-    const response = await page.goto("/", { waitUntil: "networkidle" });
+    // Use domcontentloaded — networkidle blocks on external images (company logos etc.) in CI
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
     console.log("Response status:", response?.status());
     console.log("Response URL:", response?.url());
     

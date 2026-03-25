@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const CI_TIMEOUT = 120_000; // 2 minutes for CI (reduced from 5min to fail fast)
+const CI_TIMEOUT = 45_000; // 45s for CI — enough time for SSR pages, fails fast on real hangs
 const LOCAL_TIMEOUT = 60_000; // 1 minute for local development
 
 /**
@@ -24,7 +24,7 @@ export default defineConfig({
   // Test configuration
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0, // Increased retries for flaky CI tests
+  retries: process.env.CI ? 1 : 0, // 1 retry in CI to catch transient flakes without multiplying timeout cost
   // Use limited workers in CI to match GitHub Actions runners (2 cores)
   // For local runs, use 50% of cores to prevent overwhelming high-core machines
   workers: process.env.CI ? 2 : "50%",

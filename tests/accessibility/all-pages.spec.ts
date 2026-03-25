@@ -113,8 +113,8 @@ test.describe("Screen Reader Support", () => {
 
     await page.goto("/resume");
 
-    // Wait for network idle so images begin loading
-    await page.waitForLoadState("networkidle");
+    // Use domcontentloaded — networkidle blocks on external images (company logos etc.) in CI
+    await page.waitForLoadState("domcontentloaded");
 
     // Get all images (including Next.js Image components which render as img)
     const images = page.locator("img");
