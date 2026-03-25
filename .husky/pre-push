@@ -15,13 +15,9 @@ npm test || {
 	exit 1
 }
 
-# Run production build + E2E tests to catch CI issues early
-echo "3/3 Building production and running E2E tests (this catches what CI will see)..."
-echo "   This ensures pages work in production mode before pushing to CI."
-npm run precheck || {
-	echo "⚠️  Production build or E2E tests failed."
-	echo "   This is what CI will test. Fix these issues before pushing."
-	exit 1
-}
+# E2E tests are intentionally skipped here — they run in CI (GitHub Actions)
+# against the production build. Running them locally on every push is too
+# slow and depends on env-specific setup (ports, browsers, etc.).
+echo "3/3 Skipping E2E (runs in CI) — all pre-push checks passed!"
 
 echo "✅ Pre-push checks passed! Your code is ready for CI."

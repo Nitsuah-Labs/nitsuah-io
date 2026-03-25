@@ -61,58 +61,38 @@ export async function gotoAndWaitForHydration(
   const defaultTimeout = process.env.CI ? 30000 : 60000;
   const timeout = options?.timeout || defaultTimeout;
 
-  // Simplified CI approach - use load state which is faster than networkidle
+  // Simplified CI approach — wait for 'load' event (scripts executed, React
+  // has had a chance to mount) then verify body has at least one child element.
   if (process.env.CI) {
-    // Set up event listeners with proper cleanup
     const pageErrorHandler = (err: Error) => {
       console.error(`[CI Page Error] ${url}: ${err.message}`);
-      if (err.stack) console.error(err.stack);
-    };
-    const consoleErrorHandler = (msg: any) => {
-      if (msg.type() === "error") {
-        console.error(`[CI Console Error] ${url}: ${msg.text()}`);
-      }
     };
 
     page.on("pageerror", pageErrorHandler);
-    page.on("console", consoleErrorHandler);
 
-    if (process.env.DEBUG) console.log(`[CI] Navigating to ${url}...`);
+    console.log(`[CI] Navigating to ${url}...`);
     try {
+      // 'load' fires after scripts run, giving React time to start mounting.
       await page.goto(url, {
-        waitUntil: "domcontentloaded",
-        timeout: timeout
+        waitUntil: "load",
+        timeout,
       });
 
-      // Wait specifically for documentElement to exist
+      // Wait for body to contain at least one child — works for both App Router
+      // (renders into <body> directly) and Pages Router (#__next).
       await page.waitForFunction(
-        () => {
-          const hasDoc = document.documentElement !== null;
-          const hasBody = document.body !== null;
-          return hasDoc && hasBody;
-        },
-        { timeout: Math.floor(timeout / 3) }
+        () => document.body !== null && document.body.childElementCount > 0,
+        { timeout: Math.min(timeout, 15_000) }
       );
 
-      // Wait for React to start mounting content
-      await page.waitForFunction(
-        () => {
-          const rootElements = document.querySelectorAll('#__next, main, [data-testid]');
-          return rootElements.length > 0 || document.body.childElementCount > 3;
-        },
-        { timeout: Math.floor(timeout / 3) }
-      );
-
-      if (process.env.DEBUG) console.log(`[CI] Finished navigation/hydration for ${url}`);
+      console.log(`[CI] Ready: ${url}`);
     } catch (e) {
-      console.error(`[CI] Navigation/hydration failed for ${url}:`, e);
+      console.error(`[CI] Navigation failed for ${url}:`, e);
       const html = await page.content().catch(() => "N/A");
-      console.error(`[CI] Page content snippet: ${html.substring(0, 500)}`);
+      console.error(`[CI] Page HTML snippet: ${html.substring(0, 500)}`);
       throw e;
     } finally {
-      // Clean up event listeners
       page.off("pageerror", pageErrorHandler);
-      page.off("console", consoleErrorHandler);
     }
     return;
   }
