@@ -18,14 +18,13 @@ test.describe("Resume Page Accessibility Tests", () => {
     // Navigate using hydration-aware helper
     await gotoAndWaitForHydration(page, "/resume");
 
-    // Verify the resume content is present
-    const basicsExists = await page
+    // Verify the resume content is present — use waitFor to handle slower CI runners
+    await page
       .locator("#basics")
-      .isVisible()
-      .catch(() => false);
-    if (!basicsExists) {
-      throw new Error("Resume content (#basics) not found after waiting");
-    }
+      .waitFor({ state: "visible", timeout: 15000 })
+      .catch(async () => {
+        throw new Error("Resume content (#basics) not found after waiting");
+      });
   });
 
   test("should not have any automatically detectable accessibility issues", async ({

@@ -5,14 +5,34 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // In CI, keep checks lightweight but still verify the DOM is actually mounted
-  // before downstream assertions/axe scans run.
+  // In CI, poll for meaningful DOM content rather than using a fixed delay.
+  // domcontentloaded fires after HTML is parsed; React client components need
+  // additional time to hydrate on slow GitHub runners.
   if (process.env.CI) {
-    // Avoid strict DOM selector waits here — they have proven flaky on
-    // GitHub runners despite successful navigation. A short settle delay after
-    // domcontentloaded is more reliable in CI.
     await page.waitForLoadState("domcontentloaded", { timeout }).catch(() => {});
-    await page.waitForTimeout(750);
+
+    // Poll for actual DOM content up to 12s, fall back to a 1500ms fixed wait.
+    // We look for elements that reliably indicate the page tree is available:
+    // - footer: always SSR'd (no !mounted gate), shows HTML is parsed and CSS applied
+    // - main: present on most pages
+    // - #basics: resume server component
+    // Importantly we do NOT use bodyText length as that can pass before client
+    // components have hydrated (the SSR shell already has text).
+    await page
+      .waitForFunction(
+        () => {
+          const doc = document;
+          if (!doc || !doc.documentElement || !doc.body) return false;
+          return !!(
+            doc.querySelector("footer") ||
+            doc.querySelector("main") ||
+            doc.querySelector("#basics") ||
+            doc.querySelector(".resume-container")
+          );
+        },
+        { timeout: 12000 }
+      )
+      .catch(() => page.waitForTimeout(1500));
 
     return;
   }
