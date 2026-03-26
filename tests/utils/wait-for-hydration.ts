@@ -7,9 +7,33 @@ import { Page } from "@playwright/test";
 export async function waitForReactHydration(page: Page, timeout = 30000) {
   // Simplified but more robust hydration check for CI
   if (process.env.CI) {
-    // In CI, avoid extra selector/polling checks here. Navigation helper
-    // already waits for DOMContentLoaded; each test then waits for concrete UI.
-    await page.waitForTimeout(250);
+    await page.waitForFunction(
+      () => {
+        if (!document || !document.documentElement || !document.body) {
+          return false;
+        }
+
+        if (document.readyState === "loading") {
+          return false;
+        }
+
+        const hasCoreLayout = !!document.querySelector(
+          "main, header, footer, [role='main']"
+        );
+        const hasUsableText =
+          (document.body.textContent?.replace(/\s+/g, " ").trim().length ?? 0) >
+          20;
+
+        return hasCoreLayout || hasUsableText;
+      },
+      { timeout }
+    );
+
+    await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {
+      // Best-effort only. Some pages keep network activity alive in CI.
+    });
+
+    await page.waitForTimeout(150);
     return;
   }
 
@@ -74,9 +98,7 @@ export async function gotoAndWaitForHydration(
         timeout,
       });
 
-      // DOMContentLoaded is sufficient in CI; avoid brittle extra waits that
-      // can fail under transient runner load or route transitions.
-      await page.waitForTimeout(250);
+      await waitForReactHydration(page, timeout);
 
       console.log(`[CI] Ready: ${url}`);
     } catch (e) {
