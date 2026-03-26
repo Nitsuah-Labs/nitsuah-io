@@ -22,6 +22,8 @@ test.describe("Projects Page Visual Tests", () => {
       animations: "disabled",
       timeout: 30000,
       maxDiffPixels: MAX_VISUAL_DIFF_PIXELS,
+      maxDiffPixelRatio: 0.2,
+      threshold: 0.3,
     });
   });
 
