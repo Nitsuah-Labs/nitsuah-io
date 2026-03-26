@@ -23,7 +23,16 @@ export const CompanyLogo: FC<CompanyLogoProps> = ({
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
-    return null;
+    return (
+      <span
+        role="img"
+        aria-label={alt}
+        className={className}
+        style={style}
+      >
+        {alt.slice(0, 1).toUpperCase()}
+      </span>
+    );
   }
 
   return (

@@ -1,25 +1,62 @@
-# Script to run only the failing Playwright tests in Docker
-# Based on analysis of CI run #20292773787
+Write-Host "🔍 Running isolated Playwright tests in Docker..." -ForegroundColor Cyan
 
-Write-Host "🔍 Running isolated failing Playwright tests in Docker..." -ForegroundColor Cyan
+function Get-FailedTestFilesFromSuite {
+    param(
+        [Parameter(Mandatory = $true)] $Suite,
+        [Parameter(Mandatory = $true)] [System.Collections.Generic.HashSet[string]] $Accumulator
+    )
 
-# List of failing tests identified from CI logs (48 failures)
-$failingTests = @(
-    # Accessibility tests (16 failures)
-    "tests/accessibility/all-pages.spec.ts",
-    "tests/accessibility/resume.spec.ts",
-    
-    # Visual tests (11 failures)
-    "tests/visual/homepage.spec.ts",
-    "tests/visual/projects.spec.ts",
-    "tests/visual/resume.spec.ts",
-    
-    # E2E tests (10 failures)
-    "tests/e2e/labs/wallet-connection.spec.ts",
-    
-    # Diagnostics (1 failure)
-    "tests/diagnostics/page-rendering.spec.ts"
-)
+    if (-not $Suite) {
+        return
+    }
+
+    if ($Suite.tests) {
+        foreach ($test in $Suite.tests) {
+            if ($test.status -eq "failed" -and $test.location -and $test.location.file) {
+                [void]$Accumulator.Add($test.location.file)
+            }
+        }
+    }
+
+    if ($Suite.suites) {
+        foreach ($childSuite in $Suite.suites) {
+            Get-FailedTestFilesFromSuite -Suite $childSuite -Accumulator $Accumulator
+        }
+    }
+}
+
+$reportPath = "playwright-report/data/test-results.json"
+$failingTests = @()
+
+if (Test-Path $reportPath) {
+    try {
+        Write-Host "📄 Using failed tests from $reportPath" -ForegroundColor Yellow
+        $reportJson = Get-Content -Path $reportPath -Raw
+        $report = $reportJson | ConvertFrom-Json
+        $failedFilesSet = New-Object 'System.Collections.Generic.HashSet[string]'
+
+        if ($report.suites) {
+            foreach ($rootSuite in $report.suites) {
+                Get-FailedTestFilesFromSuite -Suite $rootSuite -Accumulator $failedFilesSet
+            }
+        }
+
+        $failingTests = @($failedFilesSet.ToArray() | Sort-Object -Unique)
+    }
+    catch {
+        Write-Host "⚠️  Unable to parse report. Falling back to default suite list." -ForegroundColor Yellow
+    }
+}
+
+if ($failingTests.Count -eq 0) {
+    Write-Host "ℹ️  No failed test report found. Falling back to current key suites." -ForegroundColor Yellow
+    $failingTests = @(
+        "tests/smoke.spec.ts",
+        "tests/accessibility/critical.spec.ts",
+        "tests/e2e/labs/navigation.spec.ts",
+        "tests/e2e/labs/wallet-connection.spec.ts"
+    )
+}
 
 Write-Host "`n📋 Failing Tests Summary:" -ForegroundColor Yellow
 Write-Host "  Total failing tests: $($failingTests.Count)" -ForegroundColor White

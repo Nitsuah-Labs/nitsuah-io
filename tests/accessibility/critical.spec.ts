@@ -1,7 +1,8 @@
 /**
- * Critical accessibility checks — homepage and resume only.
+ * Critical accessibility checks — homepage and resume, plus a shared
+ * button-label sanity check on labs.
  * Axe scanning every page in CI is slow and frame-race-prone;
- * these two cover the highest-traffic surfaces.
+ * this suite stays intentionally small.
  */
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";

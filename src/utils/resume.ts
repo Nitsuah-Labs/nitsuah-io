@@ -97,7 +97,7 @@ export function getCompanyLogoUrl(companyName: string): string | null {
     if (lowerName.includes(key)) {
       const domain = companyDomains[key];
       if (token) {
-        return `https://img.logo.dev/${domain}?token=${token}&size=200`;
+        return `https://img.logo.dev/${domain}?token=${encodeURIComponent(token)}&size=200`;
       }
       // Clearbit fallback – no auth required, works without env var
       return `https://logo.clearbit.com/${domain}`;

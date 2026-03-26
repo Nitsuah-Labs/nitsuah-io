@@ -1,97 +1,52 @@
-# Playwright Test Failures Analysis & Fixes
+# Playwright Stability Notes
 
-## 🔍 Issue Summary
-Based on CI run analysis (#20292773787), **48 out of 61 tests were failing** with `TimeoutError: page.waitForSelector: Timeout 30000ms exceeded`.
+## Current Strategy
 
-## 📊 Results After Timeout Fixes
+Playwright is split into two paths:
 
-### ✅ **Massive Improvement: 48 → 11 Failures**
-- **50 tests now passing** (up from 13)
-- **11 tests still failing** (down from 48)
-- **82% success rate** (up from 21%)
+1. **CI Fast** (`.github/workflows/ci.yml`)
+	- Keeps deterministic checks required for PR merge
+	- Avoids long-running flaky browser assertions in required CI
 
-### Resolved Issues (37 tests fixed)
-- ✅ All homepage tests passing
-- ✅ All resume tests passing  
-- ✅ All diagnostic tests passing
-- ✅ Most accessibility tests passing
-- ✅ Most visual tests passing
+2. **Playwright Nightly** (`.github/workflows/playwright-nightly.yml`)
+	- Runs full browser suite on schedule or manual dispatch
+	- Uses `FORCE_BROWSER_E2E=1` to enable browser-gated tests in CI context
 
-### Remaining Issues (11 failures)
+## Why this changed
 
-#### 1. Labs Pages Error State (10 failures)
-**Root Cause**: Register, Mint, and Domains pages showing Next.js error page (`#__next_error__`)
-- `tests/accessibility/all-pages.spec.ts` - Register Domain accessibility (1 failure)
-- `tests/e2e/labs/wallet-connection.spec.ts` - All 9 wallet flow tests
+Previous CI behavior had repeated long Playwright hangs and flaky failures
+driven by browser timing and frame-detachment issues. The current split keeps
+required CI reliable while retaining deeper browser coverage in nightly runs.
 
-**Why**: These pages likely require wallet connection to render properly or have runtime errors.
+## Current test entry points
 
-**Recommendation**: 
-- Investigate why `/labs/register`, `/labs/mint`, `/labs/domains` show error pages
-- May need to mock wallet state or fix page errors
-- Consider skipping these tests until pages are fixed
+- Smoke checks: `tests/smoke.spec.ts`
+- Accessibility checks: `tests/accessibility/critical.spec.ts`
+- Browser navigation checks: `tests/e2e/labs/navigation.spec.ts`
+- Wallet flow (already intentionally skipped where appropriate):
+  `tests/e2e/labs/wallet-connection.spec.ts`
 
-#### 2. Visual Regression (1 failure)
-**Issue**: `tests/visual/projects.spec.ts` - Screenshot mismatch
-- Expected: 3201px height
-- Received: 3329px height
-- 17% pixel difference
+## Useful commands
 
-**Recommendation**: Update visual baseline or investigate layout change.
-
-## 🔧 Fixes Applied
-
-### 1. Extended Timeouts in playwright.config.ts
-- ✅ Set CI test timeout to 45s via `CI_TIMEOUT`
-- ✅ Kept `webServer` startup timeout at 120s (intentionally higher for startup only)
-- ✅ Enabled CI retries (set to 1) for flaky tests
-
-### 2. Enhanced Hydration Waiting in wait-for-hydration.ts
-- ✅ Using default hydration timeout: 30s
-- ✅ Added explicit 10s hydration waits in CI environments
-- ✅ Tweaked post-hydration delay to improve stability
-
-### 3. Increased Test-Specific Timeouts
-- ✅ Accessibility tests tuned for CI where needed
-- ✅ Navigation waits tuned to avoid long hangs
-- ✅ Spline component wait: 3s → 5s
-- ✅ Projects page wait: 10s → 20s
-
-### 4. Docker Test Script
-- ✅ Created `scripts/run-failing-tests-docker.ps1` for isolated debugging
-- Enables running individual test suites
-- Provides pass/fail summary
-
-## 🚀 Usage
-
-### Run all tests locally:
 ```powershell
+# Full Playwright local run
 npm run test:e2e
+
+# Smoke only
+npm run test:smoke
+
+# Accessibility only
+npm run test:a11y
+
+# CI-like local pass
+npm run precheck
+
+# Docker isolation
+npm run precheck:docker
 ```
 
-### Run failing tests in Docker:
-```powershell
-.\scripts\run-failing-tests-docker.ps1
-```
+## Historical note
 
-### Run specific test suite:
-```powershell
-docker-compose -f docker-compose.test.yml run --rm playwright npx playwright test tests/accessibility/all-pages.spec.ts
-```
-
-### Run single test:
-```powershell
-npx playwright test tests/accessibility/all-pages.spec.ts --grep "Homepage"
-```
-
-## 📈 Next Steps
-
-1. **Investigate Labs Pages** - Fix error states on `/labs/register`, `/labs/mint`, `/labs/domains`
-2. **Update Visual Baselines** - Run `npm run test:visual:update` if layout change is intentional
-3. **Monitor CI** - Verify these timeout fixes work in GitHub Actions environment
-4. **Consider Test Isolation** - May need to skip wallet-dependent tests in CI
-
-## 🎯 Impact
-- **Major**: Reduced test failures by 77% (48 → 11)
-- **Stability**: Tests now have adequate time to complete in CI
-- **Reliability**: Eliminated false positives from aggressive timeouts
+If you see references to removed specs (for example `tests/visual/*` or
+`tests/accessibility/all-pages.spec.ts`) in older discussions, treat them as
+legacy context from the pre-split CI approach.
