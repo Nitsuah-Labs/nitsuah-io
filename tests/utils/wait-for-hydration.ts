@@ -5,35 +5,11 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // In CI, poll for meaningful DOM content rather than using a fixed delay.
-  // domcontentloaded fires after HTML is parsed; React client components need
-  // additional time to hydrate on slow GitHub runners.
+  // In CI, domcontentloaded is sufficient — Next.js pre-renders the full HTML
+  // shell server-side. Let each test's own assertions (toBeVisible, waitFor)
+  // wait for the specific content they need.
   if (process.env.CI) {
     await page.waitForLoadState("domcontentloaded", { timeout }).catch(() => {});
-
-    // Poll for actual DOM content up to 12s, fall back to a 1500ms fixed wait.
-    // We look for elements that reliably indicate the page tree is available:
-    // - footer: always SSR'd (no !mounted gate), shows HTML is parsed and CSS applied
-    // - main: present on most pages
-    // - #basics: resume server component
-    // Importantly we do NOT use bodyText length as that can pass before client
-    // components have hydrated (the SSR shell already has text).
-    await page
-      .waitForFunction(
-        () => {
-          const doc = document;
-          if (!doc || !doc.documentElement || !doc.body) return false;
-          return !!(
-            doc.querySelector("footer") ||
-            doc.querySelector("main") ||
-            doc.querySelector("#basics") ||
-            doc.querySelector(".resume-container")
-          );
-        },
-        { timeout: 12000 }
-      )
-      .catch(() => page.waitForTimeout(1500));
-
     return;
   }
 
