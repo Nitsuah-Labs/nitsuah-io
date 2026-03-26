@@ -5,35 +5,10 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // Simplified but more robust hydration check for CI
+  // In CI, avoid long polling checks that can deadlock when the page is under
+  // heavy runner load. Let route-specific assertions validate content.
   if (process.env.CI) {
-    await page.waitForFunction(
-      () => {
-        if (!document || !document.documentElement || !document.body) {
-          return false;
-        }
-
-        if (document.readyState === "loading") {
-          return false;
-        }
-
-        const hasCoreLayout = !!document.querySelector(
-          "main, header, footer, [role='main']"
-        );
-        const hasUsableText =
-          (document.body.textContent?.replace(/\s+/g, " ").trim().length ?? 0) >
-          20;
-
-        return hasCoreLayout || hasUsableText;
-      },
-      { timeout }
-    );
-
-    await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {
-      // Best-effort only. Some pages keep network activity alive in CI.
-    });
-
-    await page.waitForTimeout(150);
+    await page.waitForTimeout(250);
     return;
   }
 
