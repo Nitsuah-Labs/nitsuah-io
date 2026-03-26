@@ -240,7 +240,7 @@ export default function DomainsContentProduction(): ReactElement {
       <h1>SUB-DOMAIN PORTAL</h1>
       <div className="form-container">
         <div className="mint-container">
-          {helpersEnabled && !mounted && (
+          {helpersEnabled && mounted && (
             <div data-testid="domains-test-helpers" style={{ marginTop: 12 }}>
               <div data-testid="network-info">Network: testnet</div>
             </div>

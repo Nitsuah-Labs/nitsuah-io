@@ -79,16 +79,19 @@ export async function gotoAndWaitForHydration(
   const defaultTimeout = process.env.CI ? 30000 : 60000;
   const timeout = options?.timeout || defaultTimeout;
 
-  // Simplified CI approach — wait for 'load' event (scripts executed, React
-  // has had a chance to mount) then verify body has at least one child element.
+  // Simplified CI approach — navigate with "domcontentloaded" (faster than
+  // waiting for all external assets), then run hydration readiness checks.
   if (process.env.CI) {
+    const debugNav = process.env.PLAYWRIGHT_DEBUG_NAV === "1";
     const pageErrorHandler = (err: Error) => {
       console.error(`[CI Page Error] ${url}: ${err.message}`);
     };
 
     page.on("pageerror", pageErrorHandler);
 
-    console.log(`[CI] Navigating to ${url}...`);
+    if (debugNav) {
+      console.log(`[CI] Navigating to ${url}...`);
+    }
     try {
       // 'domcontentloaded' fires after HTML is parsed — before external images
       // (company logos etc.) which can be very slow in CI. React scripts are
@@ -100,7 +103,9 @@ export async function gotoAndWaitForHydration(
 
       await waitForReactHydration(page, timeout);
 
-      console.log(`[CI] Ready: ${url}`);
+      if (debugNav) {
+        console.log(`[CI] Ready: ${url}`);
+      }
     } catch (e) {
       console.error(`[CI] Navigation failed for ${url}:`, e);
       const html = await page.content().catch(() => "N/A");

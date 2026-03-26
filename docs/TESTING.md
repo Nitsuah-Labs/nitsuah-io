@@ -14,7 +14,7 @@ This project uses a multi-layered testing strategy to ensure code quality and ca
 
 ### 2. E2E Tests (Playwright)
 - **What:** Full user workflows, visual regression, accessibility
-- **When:** Pre-push hook, CI/CD pipeline
+- **When:** Manual precheck + CI/CD pipeline
 - **Command:** `npm run test:e2e`
 - **Projects:** 61 tests across visual/accessibility/integration
 
@@ -45,10 +45,10 @@ npm run precheck
 - Build configuration changes
 - Any changes to pages/layouts
 
-✅ **Integrated into pre-push hook:**
-- Runs automatically when you `git push`
+✅ **Run manually before pushing important changes:**
+- `npm run precheck`
 - Catches production-specific issues early
-- Prevents CI timeouts
+- Reduces CI failures and long timeout runs
 
 ❌ **Skip for:**
 - Documentation-only changes
@@ -73,12 +73,12 @@ npm test
 git add .
 git commit -m "feat: add MyComponent"
 
-# 5. Push (runs pre-push hook: typecheck, unit tests, precheck)
+# 5. Push (runs pre-push hook: typecheck + unit tests)
 git push
 # Pre-push hook runs:
 #  - npm run typecheck
 #  - npm test
-#  - npm run precheck (build + E2E tests)
+#  - (E2E skipped; run npm run precheck manually when needed)
 ```
 
 ### Manual Testing Commands

@@ -7,6 +7,10 @@ on:
     branches: [main, dev]
   workflow_dispatch: # Allow manual trigger from GitHub UI / gh CLI
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -95,7 +99,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Run Playwright tests (parallel)
+      - name: Run Playwright tests
         run: npm run test:e2e
         env:
           PLAYWRIGHT_WORKERS: 1 # Single worker — prevents frame/navigation race conditions on GitHub runners

@@ -2,7 +2,12 @@ import { defineConfig, devices } from "@playwright/test";
 
 const CI_TIMEOUT = 45_000; // 45s for CI — enough time for SSR pages, fails fast on real hangs
 const LOCAL_TIMEOUT = 60_000; // 1 minute for local development
-const CI_WORKERS = Number(process.env.PLAYWRIGHT_WORKERS || "1");
+const parsedWorkers = Number.parseInt(
+  process.env.PLAYWRIGHT_WORKERS ?? "",
+  10
+);
+const CI_WORKERS =
+  Number.isFinite(parsedWorkers) && parsedWorkers > 0 ? parsedWorkers : 1;
 
 /**
  * Playwright configuration for nitsuah.io testing
@@ -94,8 +99,8 @@ export default defineConfig({
     url: "http://localhost:3000",
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
-    // Increased timeout for CI environment - server needs time to fully start
-    timeout: process.env.CI ? 120 * 1000 : 60 * 1000, // Set to 2 min to match test timeout
+    // Server startup timeout in CI (intentionally higher than per-test timeout).
+    timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",

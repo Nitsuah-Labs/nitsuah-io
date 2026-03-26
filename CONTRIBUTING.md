@@ -32,13 +32,13 @@ npm run commit:safe
 # This catches what CI will test and prevents stallouts
 npm run precheck
 
-# Push (pre-push hook runs typecheck + tests + precheck automatically)
+# Push (pre-push hook runs typecheck + unit tests)
 git push
 
 # CI runs full test suite automatically
 ```
 
-**Note:** The pre-push hook now runs `npm run precheck` automatically, which builds the production bundle and runs E2E tests. This ensures you catch production-specific issues locally before pushing to CI.
+**Note:** The pre-push hook runs fast checks only (`typecheck` + `npm test`). E2E is intentionally skipped in hooks and should be run via `npm run precheck` before important pushes.
 
 ### For Pull Requests
 
@@ -80,7 +80,9 @@ Husky pre-commit hooks run `lint-staged` to automatically format staged files.
 
 **Pre-push (~1 minute):**
 
-- Production build only
+- Type checking
+- Unit tests
+- No E2E (run `npm run precheck` manually)
 
 **CI (Full Suite):**
 

@@ -11,7 +11,7 @@ import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 // overlay-removal logic to run in CI/dev. This file needs more time
 // than the global 30s timeout during some runs.
 // Allow more time for the resume page to fully render/hydrate in CI
-test.setTimeout(180000);
+test.setTimeout(120000);
 
 test.describe("Resume Page Accessibility Tests", () => {
   test.beforeEach(async ({ page }) => {
