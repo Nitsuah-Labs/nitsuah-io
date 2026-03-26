@@ -39,7 +39,10 @@ test("projects page HTML is served", async ({ request }) => {
 });
 
 test("browser sanity check (local only)", async ({ page }) => {
-  test.skip(!!process.env.CI, "Browser smoke runs locally only");
+  test.skip(
+    !!process.env.CI && process.env.FORCE_BROWSER_E2E !== "1",
+    "Browser smoke runs locally only unless FORCE_BROWSER_E2E=1"
+  );
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page.locator("html")).toBeVisible();
 });

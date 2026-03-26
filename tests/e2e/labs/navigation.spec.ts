@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { go } from "../../_utils/playwright-helpers";
 
 test.skip(
-  !!process.env.CI,
+  !!process.env.CI && process.env.FORCE_BROWSER_E2E !== "1",
   "Navigation browser checks run locally only; CI smoke covers route availability"
 );
 

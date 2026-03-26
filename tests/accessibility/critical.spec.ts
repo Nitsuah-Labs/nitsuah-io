@@ -8,7 +8,7 @@ import { expect, test } from "@playwright/test";
 import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 
 test.skip(
-  !!process.env.CI,
+  !!process.env.CI && process.env.FORCE_BROWSER_E2E !== "1",
   "Accessibility browser scans run locally only; CI keeps deterministic smoke checks"
 );
 
