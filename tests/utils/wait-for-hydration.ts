@@ -5,11 +5,18 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // In CI, domcontentloaded is sufficient — Next.js pre-renders the full HTML
-  // shell server-side. Let each test's own assertions (toBeVisible, waitFor)
-  // wait for the specific content they need.
+  // In CI, domcontentloaded fires before React client components mount.
+  // Wait up to 10s for any of the shell landmarks to appear in the DOM —
+  // this is fast when SSR is working (~1s) and has a hard cap so it never
+  // consumes the full 45s global timeout.
   if (process.env.CI) {
     await page.waitForLoadState("domcontentloaded", { timeout }).catch(() => {});
+    await page
+      .waitForSelector("header, main, footer, #basics, .resume-container", {
+        state: "attached",
+        timeout: 10000,
+      })
+      .catch(() => {}); // some pages may not have these, that's fine
     return;
   }
 
