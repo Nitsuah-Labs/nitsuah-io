@@ -13,10 +13,9 @@ const CI_WORKERS =
  * Playwright configuration for nitsuah.io testing
  *
  * Includes:
- * - Visual regression testing
+ * - Smoke tests (page render + navigation)
+ * - Accessibility testing (homepage + resume, axe-core)
  * - Functional E2E testing
- * - Accessibility testing
- * - Responsive design testing (mobile/tablet/desktop)
  */
 export default defineConfig({
   testDir: "./tests",
@@ -53,12 +52,6 @@ export default defineConfig({
     // Video on failure
     video: "retain-on-failure",
   },
-
-  // Include platform in snapshot paths so Windows and Linux baselines don't
-  // conflict. Missing snapshots are created automatically on first run.
-  snapshotPathTemplate:
-    "{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}-{platform}{ext}",
-  updateSnapshots: "missing",
 
   // Configure projects for different browsers and viewports
   // REDUCED: Only run Chromium for speed - add others back for full testing
