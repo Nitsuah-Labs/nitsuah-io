@@ -6,6 +6,7 @@ This repo uses a split strategy:
 
 - Fast, deterministic checks in required CI
 - Browser-heavy Playwright coverage in manual/nightly workflow
+- Docker-first local verification for CI parity
 
 ## Test Types
 
@@ -29,16 +30,19 @@ This repo uses a split strategy:
 Run this before pushing significant changes:
 
 ```bash
-npm run precheck
+npm run precheck:docker
 ```
 
 What it does:
-1. Builds production bundle (`npm run build:skip-wagmi`)
-2. Runs Playwright suite (`npm run test:e2e`)
+1. Builds/refreshes the Playwright Docker image (`npm run test:e2e:docker:build`)
+2. Runs the Playwright suite in Docker (`npm run test:e2e:docker`)
 
 ## Manual Commands
 
 ```bash
+# Recommended path (Docker-first)
+npm run precheck:docker
+
 # Unit tests
 npm test
 npm run test:watch
@@ -58,7 +62,6 @@ npm run test:a11y:quick
 # Docker
 npm run test:e2e:docker:build
 npm run test:e2e:docker
-npm run precheck:docker
 ```
 
 ## CI Workflows
@@ -83,7 +86,7 @@ npm run precheck:docker
 ### Pre-push (`.husky/pre-push`)
 - `npm run typecheck`
 - `npm test`
-- E2E is intentionally skipped here; run `npm run precheck` manually when needed
+- E2E is intentionally skipped here; run `npm run precheck:docker` manually when needed
 
 Bypass hooks only when necessary:
 
@@ -97,8 +100,7 @@ git push --no-verify
 ### Playwright fails locally
 
 ```bash
-npm run build:skip-wagmi
-npm run test:e2e
+npm run precheck:docker
 ```
 
 ### Need CI-like isolation
@@ -113,8 +115,6 @@ npm run precheck:docker
 npm run build:skip-wagmi
 npm run test:e2e
 ```
-- **Accessibility:** 100% WCAG 2.1 AA compliance
-- **Visual:** All public pages
 
 ## Resources
 

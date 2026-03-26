@@ -28,9 +28,8 @@ npm run dev
 # Quick commit (auto-formats + fast checks: ~3s)
 npm run commit:safe
 
-# OPTIONAL: Before pushing, test production build + E2E tests locally
-# This catches what CI will test and prevents stallouts
-npm run precheck
+# Recommended: before pushing, run Docker-based parity checks
+npm run precheck:docker
 
 # Push (pre-push hook runs typecheck + unit tests)
 git push
@@ -38,7 +37,7 @@ git push
 # CI runs full test suite automatically
 ```
 
-**Note:** The pre-push hook runs fast checks only (`typecheck` + `npm test`). E2E is intentionally skipped in hooks and should be run via `npm run precheck` before important pushes.
+**Note:** The pre-push hook runs fast checks only (`typecheck` + `npm test`). E2E is intentionally skipped in hooks and should be run via `npm run precheck:docker` before important pushes.
 
 ### For Pull Requests
 
@@ -82,15 +81,11 @@ Husky pre-commit hooks run `lint-staged` to automatically format staged files.
 
 - Type checking
 - Unit tests
-- No E2E (run `npm run precheck` manually)
+- No E2E (run `npm run precheck:docker` manually)
 
 **CI (Full Suite):**
-
-- Accessibility tests
-- Visual regression tests
-- E2E wallet flows
-- Lighthouse performance
-- Cross-browser testing
+- CI Fast: build, lint, typecheck, unit tests, security, lighthouse
+- Playwright Nightly: scheduled/manual browser-heavy Playwright coverage
 
 **Philosophy:** Fast checks locally, comprehensive checks in CI.
 
@@ -216,8 +211,7 @@ npm run dev:wagmi
 
 ### Unit Tests (Jest)
 
-**Current Coverage:** 98% statements | 81% branches | 82% functions
-**Test Count:** 213 tests across 16 suites
+Coverage and counts change over time; use `npm run test:coverage` and `npm test -- --listTests` for current values.
 
 ```bash
 npm test                           # All unit tests
@@ -231,6 +225,9 @@ npm test -- Connect.test.tsx      # Specific test file
 **Current scope:** smoke + browser navigation + accessibility checks
 
 ```bash
+# Docker-first (recommended)
+npm run precheck:docker
+
 # Quick local testing
 npm run test:e2e                  # All Playwright tests
 npm run test:a11y                 # Accessibility suite
@@ -351,7 +348,7 @@ Example: `feat: add dark mode toggle to navigation`
 - [ ] No linting errors (`npm run lint`)
 - [ ] Follows existing code style
 - [ ] Includes tests for new features
-- [ ] Ran `npm run precheck` for major behavior changes
+- [ ] Ran `npm run precheck:docker` for major behavior changes
 
 ### PR Description Should Include
 
@@ -372,9 +369,9 @@ Example: `feat: add dark mode toggle to navigation`
 ## Documentation
 
 - **Architecture**: `docs/ARCH.md` - Project structure and architecture
-- **Visual Testing**: `docs/VISUAL_REGRESSION.md` - Complete visual regression testing guide
+- **Testing Guide**: `docs/TESTING.md` - Current test strategy and commands
 - **Screenshots**: `docs/SCREENSHOTS.md` - Required visual assets
-- **Feedback**: `FEEDBACK.md` - Known issues and improvement ideas
+- **Roadmap/Tasks**: `ROADMAP.md` and `TASKS.md` - Planned and active work
 
 ## Troubleshooting
 
@@ -402,8 +399,8 @@ Expected! Local is lightweight. Check CI logs for specifics.
 ## Questions?
 
 - Open an issue for bugs or feature requests
-- Check `ARCHITECTURE.md` for project overview
-- Check `FEEDBACK.md` for known UI/UX issues
+- Check `docs/ARCH.md` for project overview
+- Check `TASKS.md` for known follow-ups
 - Discussions for general questions
 - Check existing issues before creating new ones
 

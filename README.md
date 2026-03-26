@@ -99,25 +99,23 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 
 ### Testing & Quality
 
-- **Unit Tests:** Jest with React Testing Library (213 passing)
-- **E2E Tests:** Playwright for visual regression and user flows (61 passing)
-- **Accessibility:** axe-core integration - WCAG 2.1 AA compliant (20 passing)
-- **Docker Testing:** CI-consistent environment with production builds
-- **Test Coverage:** 98% statement coverage, 100% test pass rate
-- **Test Suites:** 16 unit test suites + comprehensive E2E/accessibility coverage
+- **Unit Tests:** Jest + React Testing Library
+- **Playwright Coverage:** Smoke, browser flows, and critical accessibility checks
+- **Docker-First Validation:** Run Playwright in Docker for CI-consistent verification
+- **CI Model:** Fast required CI + nightly/manual browser-heavy Playwright
 
 ```bash
-# Run tests locally
-npm test                  # Unit tests (213 tests)
-npm run test:e2e         # E2E tests (61 tests)
-npm run test:a11y        # Accessibility tests (20 tests)
+# Quick local checks
+npm test
+npm run test:smoke
+npm run test:a11y:quick
 
-# Before pushing - runs production build + E2E (catches CI issues early!)
-npm run precheck          # Build + test in production mode
+# Recommended before pushing (Docker-first)
+npm run precheck:docker
 
-# Match CI environment exactly (Docker)
+# Manual Docker flow
 npm run test:e2e:docker:build
-npm run test:e2e:docker   # OR: npm run precheck:docker
+npm run test:e2e:docker
 ```
 
 ---
