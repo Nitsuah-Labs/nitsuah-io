@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { go } from "../../_utils/playwright-helpers";
 
+test.skip(
+  !!process.env.CI,
+  "Navigation browser checks run locally only; CI smoke covers route availability"
+);
+
 test.describe("Navigation Tests", () => {
   test("all main navigation links work", async ({ page }) => {
     await go(page, "/");

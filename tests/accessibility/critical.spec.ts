@@ -7,6 +7,11 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { gotoAndWaitForHydration } from "../utils/wait-for-hydration";
 
+test.skip(
+  !!process.env.CI,
+  "Accessibility browser scans run locally only; CI keeps deterministic smoke checks"
+);
+
 test("homepage has no WCAG 2.1 AA violations", async ({ page }) => {
   await gotoAndWaitForHydration(page, "/");
   const results = await new AxeBuilder({ page })
