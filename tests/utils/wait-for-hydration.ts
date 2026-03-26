@@ -7,15 +7,14 @@ import { Page } from "@playwright/test";
 export async function waitForReactHydration(page: Page, timeout = 30000) {
   // Simplified but more robust hydration check for CI
   if (process.env.CI) {
-    // In CI, just wait for body to have minimal content
-    await page.waitForFunction(
-      () => {
-        const body = document.body;
-        const hasContent = body && body.textContent && body.textContent.length > 50;
-        return hasContent;
-      },
-      { timeout }
-    );
+    // In CI, avoid long polling-based hydration checks. Once the body is
+    // attached after DOMContentLoaded, allow a short settle time and let the
+    // individual test wait for the specific UI it needs.
+    await page.waitForSelector("body", {
+      state: "attached",
+      timeout: Math.min(timeout, 5000),
+    });
+    await page.waitForTimeout(250);
     return;
   }
 
@@ -80,12 +79,22 @@ export async function gotoAndWaitForHydration(
         timeout,
       });
 
-      // Wait for body to contain at least one child — works for both App Router
-      // (renders into <body> directly) and Pages Router (#__next).
-      await page.waitForFunction(
-        () => document.body !== null && document.body.childElementCount > 0,
-        { timeout: Math.min(timeout, 15_000) }
-      );
+      // Avoid brittle waitForFunction polling in CI. Wait for the document body
+      // and optionally for a likely app root to attach, then let each test wait
+      // on the concrete UI it asserts against.
+      await page.waitForSelector("body", {
+        state: "attached",
+        timeout: Math.min(timeout, 5000),
+      });
+
+      await page
+        .waitForSelector("main, #__next, header, footer", {
+          state: "attached",
+          timeout: Math.min(timeout, 5000),
+        })
+        .catch(() => {});
+
+      await page.waitForTimeout(250);
 
       console.log(`[CI] Ready: ${url}`);
     } catch (e) {
