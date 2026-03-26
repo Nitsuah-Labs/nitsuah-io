@@ -73,7 +73,7 @@ for (const pageInfo of pages) {
 
 test.describe("Keyboard Navigation", () => {
   test("all interactive elements are keyboard accessible", async ({ page }) => {
-    await page.goto("/");
+    await gotoAndWaitForHydration(page, "/");
 
     // Tab through elements
     await page.keyboard.press("Tab");
@@ -88,7 +88,7 @@ test.describe("Keyboard Navigation", () => {
   });
 
   test("skip links work for keyboard users", async ({ page }) => {
-    await page.goto("/");
+    await gotoAndWaitForHydration(page, "/");
 
     // Press Tab to focus skip link (if exists)
     await page.keyboard.press("Tab");
@@ -114,7 +114,7 @@ test.describe("Screen Reader Support", () => {
     // Increase timeout for possible lazy-loaded images
     test.setTimeout(60000);
 
-    await page.goto("/resume");
+    await gotoAndWaitForHydration(page, "/resume");
 
     // Use domcontentloaded — networkidle blocks on external images (company logos etc.) in CI
     await page.waitForLoadState("domcontentloaded");
@@ -192,7 +192,7 @@ test.describe("Screen Reader Support", () => {
 
   test("buttons have accessible labels", async ({ page }) => {
     // Skip register page - use labs hub instead
-    await page.goto("/labs");
+    await gotoAndWaitForHydration(page, "/labs");
 
     // Get all buttons
     const buttons = page.locator("button");
@@ -210,7 +210,7 @@ test.describe("Screen Reader Support", () => {
   });
 
   test("form inputs have labels", async ({ page }) => {
-    await page.goto("/labs/register");
+    await gotoAndWaitForHydration(page, "/labs/register");
 
     // Get all inputs
     const inputs = page.locator('input[type="text"], input[type="email"]');
@@ -236,7 +236,7 @@ test.describe("Screen Reader Support", () => {
 
 test.describe("Color Contrast", () => {
   test("text has sufficient contrast", async ({ page }) => {
-    await page.goto("/");
+    await gotoAndWaitForHydration(page, "/");
 
     // Run axe with only color-contrast rule
     const accessibilityScanResults = await new AxeBuilder({ page })
@@ -250,7 +250,7 @@ test.describe("Color Contrast", () => {
 
 test.describe("ARIA Attributes", () => {
   test("live regions announce dynamic content", async ({ page }) => {
-    await page.goto("/labs/mint");
+    await gotoAndWaitForHydration(page, "/labs/mint");
 
     // Check for aria-live regions (for loading states, errors, etc.)
     const liveRegions = page.locator("[aria-live]");

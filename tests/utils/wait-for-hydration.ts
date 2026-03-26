@@ -5,10 +5,33 @@
 import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
-  // In CI, avoid long polling checks that can deadlock when the page is under
-  // heavy runner load. Let route-specific assertions validate content.
+  // In CI, keep checks lightweight but still verify the DOM is actually mounted
+  // before downstream assertions/axe scans run.
   if (process.env.CI) {
-    await page.waitForTimeout(250);
+    const ciTimeout = Math.min(timeout, 20000);
+
+    await page.waitForSelector("body", { state: "attached", timeout: ciTimeout });
+
+    await page
+      .waitForFunction(
+        () => {
+          if (!document.documentElement || !document.body) {
+            return false;
+          }
+
+          const hasMainStructure = !!document.querySelector(
+            "main, header, footer, #__next, #basics"
+          );
+          const hasMeaningfulText = (document.body.innerText || "").trim().length > 20;
+
+          return hasMainStructure || hasMeaningfulText;
+        },
+        { timeout: ciTimeout }
+      )
+      .catch(async () => {
+        await page.waitForTimeout(1000);
+      });
+
     return;
   }
 
