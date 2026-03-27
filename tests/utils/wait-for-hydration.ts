@@ -11,12 +11,12 @@ export async function waitForReactHydration(page: Page, timeout = 30000) {
   // consumes the full 45s global timeout.
   if (process.env.CI) {
     await page.waitForLoadState("domcontentloaded", { timeout }).catch(() => {});
-    await page
-      .waitForSelector("header, main, footer, #basics, .resume-container", {
-        state: "attached",
-        timeout: 10000,
-      })
-      .catch(() => {}); // some pages may not have these, that's fine
+    // Require at least one landmark to be present; if none appear within the
+    // timeout, the page failed to render and the calling test should fail.
+    await page.waitForSelector("header, main, footer, #basics, .resume-container", {
+      state: "attached",
+      timeout: 10000,
+    });
     return;
   }
 
@@ -79,10 +79,16 @@ export async function gotoAndWaitForHydration(
       // 'domcontentloaded' fires after HTML is parsed — before external images
       // (company logos etc.) which can be very slow in CI. React scripts are
       // already bundled inline so they begin executing at DOMContentLoaded.
-      await page.goto(url, {
+      const response = await page.goto(url, {
         waitUntil: "domcontentloaded",
         timeout,
       });
+
+      if (response && !response.ok()) {
+        throw new Error(
+          `Navigation to ${url} failed with HTTP ${response.status()}`
+        );
+      }
 
       await waitForReactHydration(page, timeout);
 

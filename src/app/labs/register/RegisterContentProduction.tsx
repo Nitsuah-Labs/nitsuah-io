@@ -10,6 +10,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
+import type { Abi } from "viem";
 import registerABI from "../../_components/_labs/_utils/registerABI.json";
 import "../../_components/_styles/labs.css";
 import ethLogo from "../../_components/_web3/_assets/ethlogo.png";
@@ -53,9 +54,9 @@ export default function RegisterContentProduction() {
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
   const network = chain?.name || "";
 
-  const contractConfig: { address: `0x${string}`; abi: any } = {
+  const contractConfig: { address: `0x${string}`; abi: Abi } = {
     address: contractAddress,
-    abi: contractABI as any,
+    abi: contractABI as Abi,
   };
 
   const { data: registerSim } = useSimulateContract({
@@ -65,7 +66,7 @@ export default function RegisterContentProduction() {
     query: {
       enabled: !!message,
     },
-  } as unknown as any) as any;
+  });
 
   const {
     writeContract: register,
@@ -78,8 +79,8 @@ export default function RegisterContentProduction() {
   });
 
   const handleRegister = () => {
-    if ((registerSim as any)?.request) {
-      register((registerSim as any).request);
+    if (registerSim?.request) {
+      register(registerSim.request);
     }
   };
 
@@ -180,7 +181,7 @@ export default function RegisterContentProduction() {
                 <button
                   className="labs-btn labs-btn-primary"
                   onClick={handleRegister}
-                  disabled={!(registerSim as any)?.request || isRegistering}
+                  disabled={!registerSim?.request || isRegistering}
                 >
                   {isRegistering ? "Registering..." : "Register"}
                 </button>

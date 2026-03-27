@@ -11,6 +11,7 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
+import type { Abi } from "viem";
 import contractAbi from "../../_components/_labs/_utils/domainABI.json";
 
 // LAB STYLES
@@ -74,9 +75,9 @@ export default function DomainsContentProduction(): ReactElement {
 
   const network = chain?.name || "";
 
-  const contractConfig: { address: `0x${string}`; abi: any } = {
+  const contractConfig: { address: `0x${string}`; abi: Abi } = {
     address: CONTRACT_ADDRESS,
-    abi: contractAbi.abi as any,
+    abi: contractAbi.abi as Abi,
   };
 
   const { data: names, refetch: refetchNames } = useReadContract({
@@ -85,14 +86,16 @@ export default function DomainsContentProduction(): ReactElement {
     query: { enabled: isConnected },
   });
 
-  type SimpleContractCall = {
+  type ContractCall = {
     address: `0x${string}`;
-    abi: any;
+    abi: Abi;
     functionName: string;
-    args?: any[];
+    args?: readonly unknown[];
   };
 
-  const recordCalls: SimpleContractCall[] | undefined = (
+  type ReadContractsInput = Parameters<typeof useReadContracts>[0]["contracts"];
+
+  const recordCalls: ContractCall[] | undefined = (
     names as string[] | undefined
   )?.map((name: string) => ({
     address: contractConfig.address,
@@ -101,7 +104,7 @@ export default function DomainsContentProduction(): ReactElement {
     args: [name],
   }));
 
-  const ownerCalls: SimpleContractCall[] | undefined = (
+  const ownerCalls: ContractCall[] | undefined = (
     names as string[] | undefined
   )?.map((name: string) => ({
     address: contractConfig.address,
@@ -110,23 +113,17 @@ export default function DomainsContentProduction(): ReactElement {
     args: [name],
   }));
 
-  const useReadContractsAny = useReadContracts as unknown as (props: any) => {
-    data?: any[];
-  };
-
-  const _recordsRes = useReadContractsAny({
-    contracts: (recordCalls || []) as readonly any[],
+  const { data: records } = useReadContracts({
+    contracts: (recordCalls || []) as ReadContractsInput,
     query: {
       enabled: !!names && Array.isArray(recordCalls) && recordCalls.length > 0,
     },
   });
-  const records = _recordsRes.data;
 
-  const _ownersRes = useReadContractsAny({
-    contracts: (ownerCalls || []) as readonly any[],
+  const { data: owners } = useReadContracts({
+    contracts: (ownerCalls || []) as ReadContractsInput,
     query: { enabled: !!names && (ownerCalls?.length ?? 0) > 0 },
   });
-  const owners = _ownersRes.data;
 
   useEffect(() => {
     if (
@@ -217,7 +214,7 @@ export default function DomainsContentProduction(): ReactElement {
       return;
     }
     if (registerSim?.request) {
-      registerDomain(registerSim.request as any);
+      registerDomain(registerSim.request);
     }
   };
 
@@ -225,7 +222,7 @@ export default function DomainsContentProduction(): ReactElement {
     if (!record || !domain) return;
     setLoading(true);
     if (setRecordSim?.request) {
-      setRecordWrite(setRecordSim.request as any);
+      setRecordWrite(setRecordSim.request);
     }
     setLoading(false);
   };
