@@ -24,12 +24,7 @@ export const CompanyLogo: FC<CompanyLogoProps> = ({
 
   if (hasError) {
     return (
-      <span
-        role="img"
-        aria-label={alt}
-        className={className}
-        style={style}
-      >
+      <span role="img" aria-label={alt} className={className} style={style}>
         {alt.slice(0, 1).toUpperCase()}
       </span>
     );
