@@ -1,6 +1,6 @@
 # ROADMAP
 
-Last Updated: 2026-03-27
+**Last Updated:** 2026-03-27
 
 ## 2025 Q4 (Completed)
 
