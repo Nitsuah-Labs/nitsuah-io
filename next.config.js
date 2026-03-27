@@ -6,8 +6,8 @@ const nextConfig = {
     removeConsole:
       process.env.NODE_ENV === "production"
         ? {
-            exclude: ["error", "warn"],
-          }
+          exclude: ["error", "warn"],
+        }
         : false,
   },
 
@@ -58,6 +58,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "logo.clearbit.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.logo.dev",
         port: "",
         pathname: "/**",
       },
