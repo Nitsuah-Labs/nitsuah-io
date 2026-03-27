@@ -13,6 +13,8 @@ concurrency:
 
 jobs:
   build-and-test:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     strategy:
@@ -76,6 +78,8 @@ jobs:
   lighthouse-check:
     runs-on: ubuntu-latest
     needs: build-and-test
+    permissions:
+      contents: read
     # Run on PRs, but continue even if build-and-test had issues (we'll rebuild if needed)
     if: github.event_name == 'pull_request' && !cancelled()
 
@@ -119,6 +123,8 @@ jobs:
         continue-on-error: true
 
   security-scan:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
