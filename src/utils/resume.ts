@@ -39,13 +39,17 @@ export function extractDurationText(duration: string): string {
 
 export function getProficiencyLevel(level?: string): number {
   const levels: { [key: string]: number } = {
-    Beginner: 1,
-    Intermediate: 2,
-    Advanced: 3,
-    Expert: 4,
+    beginner: 1,
+    intermediate: 2,
+    advanced: 3,
+    expert: 4,
+    master: 4,
   };
-  // Default to Intermediate (2) as middle of scale without Master level
-  return level ? levels[level] || 2 : 2;
+
+  if (!level) return 2;
+
+  // Default to Intermediate (2) when level is unrecognized.
+  return levels[level.trim().toLowerCase()] ?? 2;
 }
 
 /**
