@@ -37,7 +37,7 @@ All shipped. Validated in December 2025.
 
 **Goal:** `npm run precheck:docker` passes; site has full visual identity; dark mode toggle shipped.
 
-- 🔴 **Fix Playwright Docker image version drift** — `Dockerfile.test` pins `v1.56.1-noble` but `@playwright/test@1.57.0` is installed. Docker smoke run fails with missing browser binary. Fix: update to `v1.57.0-noble`. (P0 — see TASKS.md)
+- 🔴 **Fix Playwright Docker image version drift** — `Dockerfile.test` and `@playwright/test` are currently pinned to `v1.56.1` (no active drift). Any future upgrade must bump both Docker image (for example `v1.57.0-noble`) and `@playwright/test` together, with lockfile updated, to keep Docker smoke runs passing. (P0 — see TASKS.md)
 - 📋 **Dark Mode Toggle UI** — `ThemeContext` is wired; toggle component not shipped (P1)
 - 📋 **Visual assets: client demos** — Restaurant (22+ images 🔴), E-Commerce (12+ 🔴), Real Estate (🔴), CMS/Blog (🟡), NFT Minting (🟢) — tracked in `docs/SCREENSHOTS.md`
 - 📋 **Visual assets: crypto + projects pages** — 4 crypto entries using duplicates; Kryptos/GCP Tools/Stash using `cat.png` placeholder (🟡)
@@ -69,7 +69,7 @@ All shipped. Validated in December 2025.
 
 ## Architecture North Star
 
-Next.js 16 App Router SSR on Netlify — no static export (intentional for Web3 SSR features). Web3: wagmi v2 + viem v2, custom Connect UI with wallet logos and install prompts. Styling: CSS Modules + CSS custom properties, full dark/light theme system. Testing: Jest (98% unit) + Playwright split CI strategy. Architecture documented in `docs/ARCH.md`; CI split rationale in `docs/PLAYWRIGHT_FIXES.md`.
+Next.js 16 App Router SSR on Netlify — no static export (intentional for Web3 SSR features). Web3: wagmi v3 + viem v2, custom Connect UI with wallet logos and install prompts. Styling: CSS Modules + CSS custom properties, full dark/light theme system. Testing: Jest (98% unit) + Playwright split CI strategy. Architecture documented in `docs/ARCH.md`; CI split rationale in `docs/PLAYWRIGHT_FIXES.md`.
 
 <!--
 AGENT INSTRUCTIONS:

@@ -16,8 +16,8 @@
 ### Fix Playwright Docker Image Version Drift
 
 **Status:** Open  
-**Context:** `Dockerfile.test` pins `mcr.microsoft.com/playwright:v1.56.1-noble` but `package.json` has `@playwright/test@1.57.0`. Docker smoke run fails — `Executable doesn't exist at /ms-playwright/chromium_headless_shell-1200/`. The WebServer starts fine; only the browser binary is mismatched. Prescribed workflow is `npm run precheck:docker` (see `docs/TESTING.md`).  
-**Fix:** Update `Dockerfile.test` line 1 → `mcr.microsoft.com/playwright:v1.57.0-noble`  
+**Context:** `Dockerfile.test` pins `mcr.microsoft.com/playwright:v1.56.1-noble` and `package.json` / `package-lock.json` pin `@playwright/test` to `^1.56.1`. There is currently no version drift, but a previous attempt to upgrade only one side produced Docker smoke test failures — `Executable doesn't exist at /ms-playwright/chromium_headless_shell-1200/`. This task tracks the *coordinated* upgrade to Playwright `1.57.0+` and ensures the Docker image and npm dependency stay in sync. Prescribed workflow is `npm run precheck:docker` (see `docs/TESTING.md`).  
+**Fix:** When upgrading Playwright, bump `@playwright/test` in `package.json` to `^1.57.0` (regenerate `package-lock.json`) **and** update `Dockerfile.test` line 1 to a matching image tag (e.g. `mcr.microsoft.com/playwright:v1.57.0-noble`) so the container image and test runner share the same major/minor version.  
 **Acceptance:** `npm run precheck:docker` passes — `tests/smoke.spec.ts` + `tests/accessibility/critical.spec.ts` green
 
 ---
@@ -62,8 +62,8 @@
 ### Wallet / MetaMask Local Testing Setup
 
 **Status:** Open  
-**Context:** `tests/e2e/labs/wallet-connection.spec.ts` exists; wallet flows intentionally scoped to Playwright Nightly (see `docs/PLAYWRIGHT_FIXES.md`). No local mock wallet or test wallet documented.  
-**Acceptance:** At least one wallet connection path exercisable locally without a live wallet
+**Context:** `tests/e2e/labs/wallet-connection.spec.ts` exists but is currently `test.skip(...)` because labs pages render Wagmi-disabled UI in test helper mode (see `docs/PLAYWRIGHT_FIXES.md`). The spec is not yet gated to Playwright Nightly; goal is to introduce an explicit browser E2E/Nightly gate (for example, an env flag like `FORCE_BROWSER_E2E`) and document a local mock/test wallet strategy.  
+**Acceptance:** At least one wallet connection path exercisable locally without a live wallet, and `wallet-connection.spec.ts` is gated via an explicit Nightly/browser E2E mechanism instead of being unconditionally skipped
 
 ### API Documentation (`docs/API.md`)
 
@@ -74,7 +74,7 @@
 ### Refresh METRICS.md Currency
 
 **Status:** Open  
-**Context:** Values in `METRICS.md` appear accurate (98% unit coverage, 213 tests, Lighthouse scores) but are from December 2025 — 3+ months without revalidation. No "last validated" date field.  
+**Context:** Values in `METRICS.md` appear accurate (98% unit coverage, 213 tests, Lighthouse scores) but are from December 2025 — 3+ months without revalidation. `Health` section has a human-readable "Last Updated | 2025-12-06", but no machine-readable `<!-- last validated: ... -->` marker for tooling.  
 **Acceptance:** Add `<!-- last validated: YYYY-MM-DD -->` marker; re-run `npm run test:coverage` to confirm values
 
 ---
