@@ -56,9 +56,9 @@ export const HeroSection: React.FC = () => {
         </h1>
 
         <p className={styles.tagline}>
-          Building the future, one line at a time.
+          Building the future with AI & Web3.
           <br />
-          Developer Productivity Engineer | Web3 Researcher
+          Developer Productivity Engineer | Web3 & AI Researcher
         </p>
 
         <div className={styles.cta}>

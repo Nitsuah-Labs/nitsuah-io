@@ -39,13 +39,17 @@ export function extractDurationText(duration: string): string {
 
 export function getProficiencyLevel(level?: string): number {
   const levels: { [key: string]: number } = {
-    Beginner: 1,
-    Intermediate: 2,
-    Advanced: 3,
-    Expert: 4,
+    beginner: 1,
+    intermediate: 2,
+    advanced: 3,
+    expert: 4,
+    master: 4,
   };
-  // Default to Intermediate (2) as middle of scale without Master level
-  return level ? levels[level] || 2 : 2;
+
+  if (!level) return 2;
+
+  // Default to Intermediate (2) when level is unrecognized.
+  return levels[level.trim().toLowerCase()] ?? 2;
 }
 
 /**
@@ -76,24 +80,31 @@ export function calculateTotalYearsOfExperience(
 }
 
 /**
- * Get company logo URL from Clearbit Logo API
+ * Get company logo URL from Logo.dev API
  * @param companyName - The company name to look up
  * @returns Logo URL or null if not found
  */
 export function getCompanyLogoUrl(companyName: string): string | null {
   const lowerName = companyName.toLowerCase();
 
-  // Map company substrings to their domains
+  // Map company substrings to their domains for logo.dev API
   const companyDomains: { [key: string]: string } = {
     netflix: "netflix.com",
     coinbase: "coinbase.com",
     blackboard: "blackboard.com",
   };
 
-  // Use Clearbit Logo API for high-quality company logos
+  // Use Logo.dev API for company logos; fall back to Clearbit when token is not set
+  const token = process.env.NEXT_PUBLIC_LOGO_DEV_TOKEN;
+
   for (const key in companyDomains) {
     if (lowerName.includes(key)) {
-      return `https://logo.clearbit.com/${companyDomains[key]}`;
+      const domain = companyDomains[key];
+      if (token) {
+        return `https://img.logo.dev/${domain}?token=${encodeURIComponent(token)}&size=200`;
+      }
+      // Clearbit fallback – no auth required, works without env var
+      return `https://logo.clearbit.com/${domain}`;
     }
   }
 

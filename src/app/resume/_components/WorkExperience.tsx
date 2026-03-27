@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
 import {
@@ -9,6 +8,7 @@ import {
   extractDurationText,
   getCompanyLogoUrl,
 } from "../../../utils/resume";
+import { CompanyLogo } from "./CompanyLogo";
 
 interface WorkExperienceProps {
   work: ResumeData["work"];
@@ -64,7 +64,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                               className="company-logo-link print-hide"
                               title={job.name}
                             >
-                              <Image
+                              <CompanyLogo
                                 src={getCompanyLogoUrl(job.name)!}
                                 alt={job.name}
                                 width={48}
@@ -134,16 +134,19 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                 {job.highlights && job.highlights.length > 0 && (
                   <ul className="work-highlights">
                     {job.highlights.map((highlight, hidx) => {
-                      // Check if highlight has a dash within the first 80 characters
-                      const dashIndex = highlight.indexOf(" - ");
-                      const hasTitlePrefix = dashIndex > 0 && dashIndex < 80;
+                      // Match title prefix delimiters such as " - ", " – ", or " — "
+                      // within the first 80 characters.
+                      const prefixMatch = highlight.match(
+                        /^(.{1,80}?)\s([-–—])\s(.+)$/,
+                      );
 
-                      if (hasTitlePrefix) {
-                        const beforeDash = highlight.substring(0, dashIndex);
-                        const afterDash = highlight.substring(dashIndex + 3);
+                      if (prefixMatch) {
+                        const beforeDash = prefixMatch[1];
+                        const dash = prefixMatch[2];
+                        const afterDash = prefixMatch[3];
                         return (
                           <li key={hidx}>
-                            <strong>{beforeDash}</strong> - {afterDash}
+                            <strong>{beforeDash}</strong> {dash} {afterDash}
                           </li>
                         );
                       }
