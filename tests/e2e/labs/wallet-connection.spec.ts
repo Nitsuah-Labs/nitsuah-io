@@ -6,8 +6,8 @@ import { expect, test } from "@playwright/test";
  */
 
 test.describe("Wallet Connection Flow", () => {
-  // Skip entire suite - these tests require Web3 functionality that doesn't work in test mode
-  // Test helper mode shows simplified UI without wagmi hooks to avoid crashes
+  // Tests in this suite are currently skipped individually because they require
+  // Web3 functionality that is intentionally disabled in test helper mode.
   test.skip("shows connect wallet button when disconnected", async ({ page }) => {
     await page.goto("/labs/mint?testHelpers=1");
     await page.waitForLoadState("networkidle");

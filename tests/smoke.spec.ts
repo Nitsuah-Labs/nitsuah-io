@@ -10,7 +10,9 @@ const smokePaths = ["/", "/about", "/resume", "/projects", "/labs"];
 test("all key routes return 200", async ({ request }) => {
   for (const path of smokePaths) {
     const response = await request.get(path);
-    expect(response.status(), `${path} should return 200`).toBe(200);
+    expect(response.status(), {
+      message: `${path} should return 200`,
+    }).toBe(200);
   }
 });
 

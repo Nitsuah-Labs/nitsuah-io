@@ -6,7 +6,6 @@ import { useEffect, useState, type ReactElement } from "react";
 import "../../_components/_styles/labs.css";
 
 // LAB STYLES
-import DomainsNotConnected from "../../_components/_labs/DomainsNotConnected";
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
 import LabSubNav from "../../_components/_labs/LabSubNav";
@@ -23,10 +22,25 @@ const DomainsContentTest = (): ReactElement => {
       <h1>SUB-DOMAIN PORTAL</h1>
       <div className="form-container">
         <div className="mint-container">
-          <div data-testid="domains-test-helpers" style={{ marginTop: 12 }}>
+          <div
+            data-testid="domains-test-helpers"
+            style={{
+              marginTop: 12,
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
             <div data-testid="network-info">Network: testnet</div>
+            <button
+              className="labs-btn labs-btn-primary"
+              aria-label="Connect Wallet"
+              data-testid="domains-connect-button"
+              type="button"
+            >
+              Connect Wallet
+            </button>
           </div>
-          <DomainsNotConnected />
         </div>
       </div>
     </>
