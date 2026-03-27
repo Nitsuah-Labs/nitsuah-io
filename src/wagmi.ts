@@ -48,12 +48,14 @@ export function getWagmiConfig() {
   // This prevents WalletConnect from initializing in SSR or test harnesses
   // where it can cause multiple SignClient initializations.
   const isClient = typeof window !== "undefined";
+  const isTestMode = process.env.NEXT_PUBLIC_TEST_HELPERS === "1";
 
   const connectors = [] as any[];
   // injected connector is lightweight and can be created client or server-side
   connectors.push(injected());
 
-  if (isClient) {
+  // Skip WalletConnect and other connectors in test mode to prevent crashes
+  if (isClient && !isTestMode) {
     connectors.push(
       walletConnect({
         projectId: walletConnectProjectId,
@@ -66,7 +68,7 @@ export function getWagmiConfig() {
     connectors.push(metaMask());
     connectors.push(safe());
   }
-  // Don't add connectors on server-side at all to avoid initialization errors
+  // Don't add connectors on server-side or in test mode to avoid initialization errors
 
   _clientConfig = createConfig({
     chains: typedChains,

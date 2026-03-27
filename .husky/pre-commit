@@ -29,6 +29,6 @@ npm test || {
 	exit 1
 }
 
-echo "✅ All pre-commit checks passed! (accessibility tests will run on push)"
+echo "✅ All pre-commit checks passed!"
 
 

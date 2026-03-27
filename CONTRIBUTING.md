@@ -28,11 +28,16 @@ npm run dev
 # Quick commit (auto-formats + fast checks: ~3s)
 npm run commit:safe
 
-# Push (production build check: ~1min)
+# Recommended: before pushing, run Docker-based parity checks
+npm run precheck:docker
+
+# Push (pre-push hook runs typecheck + unit tests)
 git push
 
 # CI runs full test suite automatically
 ```
+
+**Note:** The pre-push hook runs fast checks only (`typecheck` + `npm test`). E2E is intentionally skipped in hooks and should be run via `npm run precheck:docker` before important pushes.
 
 ### For Pull Requests
 
@@ -74,15 +79,13 @@ Husky pre-commit hooks run `lint-staged` to automatically format staged files.
 
 **Pre-push (~1 minute):**
 
-- Production build only
+- Type checking
+- Unit tests
+- No E2E (run `npm run precheck:docker` manually)
 
 **CI (Full Suite):**
-
-- Accessibility tests
-- Visual regression tests
-- E2E wallet flows
-- Lighthouse performance
-- Cross-browser testing
+- CI Fast: build, lint, typecheck, unit tests, security, lighthouse
+- Playwright Nightly: scheduled/manual browser-heavy Playwright coverage
 
 **Philosophy:** Fast checks locally, comprehensive checks in CI.
 
@@ -208,8 +211,7 @@ npm run dev:wagmi
 
 ### Unit Tests (Jest)
 
-**Current Coverage:** 98% statements | 81% branches | 82% functions
-**Test Count:** 213 tests across 16 suites
+Coverage and counts change over time; use `npm run test:coverage` and `npm test -- --listTests` for current values.
 
 ```bash
 npm test                           # All unit tests
@@ -220,77 +222,25 @@ npm test -- Connect.test.tsx      # Specific test file
 
 ### E2E & Accessibility Tests (Playwright)
 
-**Test Count:** 61 Playwright tests (20 accessibility, 9 visual, 32 E2E)
+**Current scope:** smoke + browser navigation + accessibility checks
 
 ```bash
+# Docker-first (recommended)
+npm run precheck:docker
+
 # Quick local testing
 npm run test:e2e                  # All Playwright tests
 npm run test:a11y                 # Accessibility suite
-npm run test:a11y:quick          # Homepage, About, Projects only
-npm run test:visual              # Visual regression tests only
+npm run test:a11y:quick           # Homepage/resume focused checks
+npm run test:smoke                # Deterministic smoke checks
 
 # Specific test suites
-npx playwright test tests/visual/projects.spec.ts
-npx playwright test tests/accessibility/all-pages.spec.ts --grep="Homepage"
+npx playwright test tests/smoke.spec.ts
+npx playwright test tests/accessibility/critical.spec.ts --grep="homepage"
 
 # UI mode for debugging
 npm run test:e2e:ui
 ```
-
-### Visual Regression Testing
-
-Visual regression tests capture screenshots and compare them against baseline images to detect unintended visual changes.
-
-#### Running Visual Tests
-
-```bash
-# Run visual regression tests
-npm run test:visual
-
-# View test report with diffs
-npx playwright show-report
-```
-
-#### Updating Baselines
-
-When you make **intentional** visual changes (colors, layouts, fonts), update the baseline screenshots:
-
-```bash
-# Local update (fast, for development iteration)
-npm run test:visual:update
-
-# Docker update (CI-matched, use before committing)
-npm run test:visual:update:docker
-
-# Update specific test only
-./scripts/update-visual-baselines.sh --docker --test homepage
-```
-
-**Important:** Always use Docker mode (`npm run test:visual:update:docker`) before committing to ensure baselines match CI exactly.
-
-#### When to Update Baselines
-
-✅ **Do update** when you've made intentional changes to:
-
-- Colors, fonts, or styling
-- Layouts or component positioning  
-- UI elements (added/removed/modified)
-- Images or icons
-
-❌ **Don't update** for:
-
-- Unintended regressions (fix the code instead!)
-- Random differences (investigate root cause)
-- CI failures without understanding why
-
-#### Best Practices
-
-- **Review diffs**: Always check `npx playwright show-report` before committing baselines
-- **Use Docker**: Run `npm run test:visual:update:docker` before final commit
-- **Mask dynamic content**: Canvas, animations, and timestamps should be masked
-- **Document changes**: Include visual changes in commit messages
-
-**Full Documentation:** See `docs/VISUAL_REGRESSION.md` for complete guide and troubleshooting.
 
 ### Docker Testing (CI-Consistent Environment)
 
@@ -304,16 +254,15 @@ npm run test:e2e:docker:build
 npm run test:e2e:docker
 
 # Run specific test file in Docker
-docker-compose -f docker-compose.test.yml run --rm playwright npx playwright test tests/accessibility/all-pages.spec.ts
+docker-compose -f docker-compose.test.yml run --rm playwright npx playwright test tests/smoke.spec.ts
 ```
 
 **When to use Docker:**
 
-- Before committing visual baseline updates
-- Before pushing changes to visual components
+- Before pushing major test-sensitive changes
 - After updating dependencies
 - When local tests pass but CI fails
-- To regenerate visual snapshots consistently
+- To isolate browser/environment-specific behavior
 
 ### Test Writing Best Practices
 
@@ -399,7 +348,7 @@ Example: `feat: add dark mode toggle to navigation`
 - [ ] No linting errors (`npm run lint`)
 - [ ] Follows existing code style
 - [ ] Includes tests for new features
-- [ ] Visual baselines updated with Docker if UI changed (`npm run test:visual:update:docker`)
+- [ ] Ran `npm run precheck:docker` for major behavior changes
 
 ### PR Description Should Include
 
@@ -420,9 +369,9 @@ Example: `feat: add dark mode toggle to navigation`
 ## Documentation
 
 - **Architecture**: `docs/ARCH.md` - Project structure and architecture
-- **Visual Testing**: `docs/VISUAL_REGRESSION.md` - Complete visual regression testing guide
+- **Testing Guide**: `docs/TESTING.md` - Current test strategy and commands
 - **Screenshots**: `docs/SCREENSHOTS.md` - Required visual assets
-- **Feedback**: `FEEDBACK.md` - Known issues and improvement ideas
+- **Roadmap/Tasks**: `ROADMAP.md` and `TASKS.md` - Planned and active work
 
 ## Troubleshooting
 
@@ -450,8 +399,8 @@ Expected! Local is lightweight. Check CI logs for specifics.
 ## Questions?
 
 - Open an issue for bugs or feature requests
-- Check `ARCHITECTURE.md` for project overview
-- Check `FEEDBACK.md` for known UI/UX issues
+- Check `docs/ARCH.md` for project overview
+- Check `TASKS.md` for known follow-ups
 - Discussions for general questions
 - Check existing issues before creating new ones
 

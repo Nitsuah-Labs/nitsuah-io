@@ -1,16 +1,21 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const CI_TIMEOUT = 180_000; // 3 minutes for CI stability
-const LOCAL_TIMEOUT = 120_000; // 2 minutes for local development
+const CI_TIMEOUT = 45_000; // 45s for CI — enough time for SSR pages, fails fast on real hangs
+const LOCAL_TIMEOUT = 60_000; // 1 minute for local development
+const parsedWorkers = Number.parseInt(
+  process.env.PLAYWRIGHT_WORKERS ?? "",
+  10
+);
+const CI_WORKERS =
+  Number.isFinite(parsedWorkers) && parsedWorkers > 0 ? parsedWorkers : 1;
 
 /**
  * Playwright configuration for nitsuah.io testing
  *
  * Includes:
- * - Visual regression testing
+ * - Smoke tests (page render + navigation)
+ * - Accessibility testing (homepage + resume, axe-core)
  * - Functional E2E testing
- * - Accessibility testing
- * - Responsive design testing (mobile/tablet/desktop)
  */
 export default defineConfig({
   testDir: "./tests",
@@ -22,13 +27,16 @@ export default defineConfig({
   timeout: process.env.CI ? CI_TIMEOUT : LOCAL_TIMEOUT,
 
   // Test configuration
-  fullyParallel: true,
+  fullyParallel: !process.env.CI,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : 2,
+  retries: process.env.CI ? 1 : 0, // 1 retry in CI to catch transient flakes without multiplying timeout cost
+  // Use a single worker in CI by default to avoid production-server/resource
+  // contention on GitHub runners. Allow overriding via PLAYWRIGHT_WORKERS.
+  // For local runs, use 50% of cores to prevent overwhelming high-core machines.
+  workers: process.env.CI ? CI_WORKERS : "50%",
 
-  // Reporter configuration - simplified for speed
-  reporter: "list",
+  // Reporter configuration - include GitHub reporter for CI
+  reporter: process.env.CI ? [["list"], ["github"]] : "list",
 
   // Shared settings for all projects
   use: {
@@ -44,10 +52,6 @@ export default defineConfig({
     // Video on failure
     video: "retain-on-failure",
   },
-
-  // Use platform-agnostic snapshot paths to avoid Windows/Linux baseline conflicts
-  snapshotPathTemplate:
-    "{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}",
 
   // Configure projects for different browsers and viewports
   // REDUCED: Only run Chromium for speed - add others back for full testing
@@ -83,14 +87,19 @@ export default defineConfig({
   // Run local server before starting tests
   webServer: {
     // Use production server for more stable, pre-compiled pages
+    // Note: Requires .next build directory to exist (run `npm run build:skip-wagmi` first)
     command: "npm run start",
     url: "http://localhost:3000",
     // Allow reusing existing server in development (but not in CI for clean state)
     reuseExistingServer: !process.env.CI,
+    // Server startup timeout in CI (intentionally higher than per-test timeout).
     timeout: process.env.CI ? 120 * 1000 : 60 * 1000,
     // forward NEXT_PUBLIC_TEST_HELPERS to the server so pages can render test helpers
     env: {
       NEXT_PUBLIC_TEST_HELPERS: process.env.NEXT_PUBLIC_TEST_HELPERS ?? "",
     },
+    // Add stdout/stderr to see server logs
+    stdout: "pipe",
+    stderr: "pipe",
   },
 });
