@@ -1,123 +1,84 @@
 # TASKS
 
-**Last Updated:** 2026-03-27 | PMO audit — validated against live site https://nitsuah.io, Docker build, and `docs/`
+Last Updated: 2026-03-27
 
-## Priority Key
+## P0 - Blocking
 
-- **P0** — Blocking (CI or deploy pipeline broken)
-- **P1** — High (user-visible gap or quality debt)
-- **P2** — Medium (polish, docs, DX)
-- **P3** — Low (exploratory)
+- [ ] Keep the Playwright Docker image and npm version in lockstep.
+  - Priority: P0
+  - Context: any future Playwright upgrade must update both `Dockerfile.test` and `@playwright/test` together or Docker smoke runs will break.
+  - Acceptance Criteria: coordinated upgrades keep `npm run precheck:docker` passing.
 
----
+## P1 - High
 
-## P0 — Blocking
+- [ ] Replace placeholder-heavy client demo assets.
+  - Priority: P1
+  - Context: the restaurant, e-commerce, real-estate, CMS, and NFT demos still rely on missing or placeholder imagery tracked in `docs/SCREENSHOTS.md`.
+  - Acceptance Criteria: each demo renders with representative assets instead of placeholders.
 
-### Fix Playwright Docker Image Version Drift
+- [ ] Replace duplicate project and crypto page assets.
+  - Priority: P1
+  - Context: several project and crypto entries still reuse the same placeholder images.
+  - Acceptance Criteria: each featured project and crypto item has distinct representative media.
 
-**Status:** Open  
-**Context:** `Dockerfile.test` pins `mcr.microsoft.com/playwright:v1.56.1-noble` and `package.json` / `package-lock.json` pin `@playwright/test` to `^1.56.1`. There is currently no version drift, but a previous attempt to upgrade only one side produced Docker smoke test failures — `Executable doesn't exist at /ms-playwright/chromium_headless_shell-1200/`. This task tracks the *coordinated* upgrade to Playwright `1.57.0+` and ensures the Docker image and npm dependency stay in sync. Prescribed workflow is `npm run precheck:docker` (see `docs/TESTING.md`).  
-**Fix:** When upgrading Playwright, bump `@playwright/test` in `package.json` to `^1.57.0` (regenerate `package-lock.json`) **and** update `Dockerfile.test` line 1 to a matching image tag (e.g. `mcr.microsoft.com/playwright:v1.57.0-noble`) so the container image and test runner share the same major/minor version.  
-**Acceptance:** `npm run precheck:docker` passes — `tests/smoke.spec.ts` + `tests/accessibility/critical.spec.ts` green
+- [ ] Ship the dark mode toggle UI.
+  - Priority: P1
+  - Context: the theme system is complete, but the visible toggle still is not.
+  - Acceptance Criteria: the toggle is present in the header, persists, and avoids hydration issues.
 
----
+- [ ] Migrate labs from Mumbai to Amoy.
+  - Priority: P1
+  - Context: Mumbai is deprecated and the labs contract flows need an updated chain target.
+  - Acceptance Criteria: `src/wagmi.ts` and the labs pages use Amoy and no Mumbai references remain.
 
-## P1 — High
+## P2 - Medium
 
-### Visual Assets: Client Demos
+- [ ] Add a wallet and MetaMask local testing path.
+  - Priority: P2
+  - Context: the wallet E2E coverage is still skipped instead of being explicitly gated for nightly or browser-only runs.
+  - Acceptance Criteria: at least one local wallet flow is testable without a live wallet and the test is gated intentionally.
 
-**Status:** Open  
-**Context:** Three 🔴 High Priority demos in `/projects/clients` have no real images (from `docs/SCREENSHOTS.md`):
-- **Restaurant Demo**: 22+ Italian food images (800×600px min) — no images at all
-- **E-Commerce Storefront**: 12+ product images (keyboards, monitors, laptops — 800×800px min)
-- **Real Estate Demo**: property listing images — none present
-- **CMS/Blog Demo**: 10+ blog header images (1200×600px min) — 🟡 placeholder  
-- **NFT Minting Demo**: sample NFT art (512×512px min) — 🟢 emoji placeholders  
-**Acceptance:** Each demo renders without placeholder/emoji fallbacks; resolved per `docs/SCREENSHOTS.md` priorities
+- [ ] Add `docs/API.md`.
+  - Priority: P2
+  - Context: `docs/ARCH.md` covers architecture, but the wagmi and chain surface still lacks focused API documentation.
+  - Acceptance Criteria: `docs/API.md` documents the hook surface, chain config, and any server-side endpoints.
 
-### Visual Assets: Projects & Crypto Pages
+- [ ] Refresh `METRICS.md` and add a validation marker.
+  - Priority: P2
+  - Context: the current metrics are strong, but they have not been revalidated since December 2025.
+  - Acceptance Criteria: `METRICS.md` includes a `last validated` marker and coverage is re-run.
 
-**Status:** Open  
-**Context:** From `docs/SCREENSHOTS.md`:
-- Crypto `/crypto` page: DApp Gallery, ETH Smart Contracts, NFT Marketplace, Web3 Security Audits all using duplicate `trail.png`/`mint.gif`/`ledger.png` — 🟡
-- Projects `/projects` page: Kryptos, GCP Tools, Stash all using `cat.png` placeholder — 🟡  
-**Acceptance:** Unique representative images per project; no shared duplicates remaining
+## P3 - Exploratory
 
-### Dark Mode Toggle UI Component
+- [ ] Expand wallet-flow coverage in Playwright Nightly.
+  - Priority: P3
+  - Context: the full wallet lifecycle still lacks automated nightly coverage.
+  - Acceptance Criteria: the wallet connection flow passes in the Nightly workflow.
 
-**Status:** Open  
-**Context:** Theme system infrastructure is fully wired — `ThemeContext`, CSS custom properties, `localStorage` persistence, SSR-safe (see `docs/ARCH.md`). The toggle UI component was not shipped. In 2026Q1 roadmap since December.  
-**Acceptance:** Toggle visible in site header; persists on reload; no hydration mismatch
-
-### Mumbai → Amoy Testnet Migration
-
-**Status:** Open  
-**Context:** Polygon deprecated Mumbai testnet. Contracts deployed to Mumbai are unreachable. Affects `/labs` pages (register, mint, domains), `src/wagmi.ts` chain config, and deployed contract addresses.  
-**Acceptance:** `src/wagmi.ts` uses Amoy chain; labs contract interactions functional on Amoy; old Mumbai references removed
-
----
-
-## P2 — Medium
-
-### Wallet / MetaMask Local Testing Setup
-
-**Status:** Open  
-**Context:** `tests/e2e/labs/wallet-connection.spec.ts` exists but is currently `test.skip(...)` because labs pages render Wagmi-disabled UI in test helper mode (see `docs/PLAYWRIGHT_FIXES.md`). The spec is not yet gated to Playwright Nightly; goal is to introduce an explicit browser E2E/Nightly gate (for example, an env flag like `FORCE_BROWSER_E2E`) and document a local mock/test wallet strategy.  
-**Acceptance:** At least one wallet connection path exercisable locally without a live wallet, and `wallet-connection.spec.ts` is gated via an explicit Nightly/browser E2E mechanism instead of being unconditionally skipped
-
-### API Documentation (`docs/API.md`)
-
-**Status:** Open  
-**Context:** `docs/ARCH.md` covers architecture comprehensively. `src/generated.ts` (wagmi hooks) and `src/wagmi.ts` (chain/connector config) lack reference documentation. No `docs/API.md` found.  
-**Acceptance:** `docs/API.md` created covering wagmi hook surface, chain config, and any server-side endpoints
-
-### Refresh METRICS.md Currency
-
-**Status:** Open  
-**Context:** Values in `METRICS.md` appear accurate (98% unit coverage, 213 tests, Lighthouse scores) but are from December 2025 — 3+ months without revalidation. `Health` section has a human-readable "Last Updated | 2025-12-06", but no machine-readable `<!-- last validated: ... -->` marker for tooling.  
-**Acceptance:** Add `<!-- last validated: YYYY-MM-DD -->` marker; re-run `npm run test:coverage` to confirm values
-
----
-
-## P3 — Low / Exploratory
-
-### Playwright Nightly: Expand Wallet Flow Coverage
-
-**Status:** Open  
-**Context:** CI split documented in `docs/PLAYWRIGHT_FIXES.md`. Wallet tests are nightly-only. Full wallet connection lifecycle has no automated coverage.  
-**Acceptance:** Wallet connection test passing in Playwright Nightly workflow
-
-### Privacy-First Analytics
-
-**Status:** Open  
-**Context:** Referenced in 2026Q2 roadmap. No current analytics implementation.  
-**Acceptance:** Privacy-compliant analytics (Plausible or Fathom) with no PII collection; consent flow if required
-
----
+- [ ] Add privacy-first analytics.
+  - Priority: P3
+  - Context: analytics remains a roadmap concept rather than a live capability.
+  - Acceptance Criteria: a privacy-respecting analytics path is implemented without PII collection.
 
 ## Done
 
-- [x] Docker test infrastructure (`Dockerfile.test`, `docker-compose.test.yml`, `docs/TESTING.md`)
-- [x] CSS architecture — full migration to CSS Modules + CSS custom properties
-- [x] Dark mode theme system (ThemeContext, localStorage persistence, SSR-safe)
-- [x] Jest unit test coverage ≥98% — 213 tests across 16 suites
-- [x] GitHub Actions CI pipeline (lint, typecheck, unit tests, build, security scan, Lighthouse)
-- [x] Playwright E2E infrastructure (smoke, accessibility, navigation, wallet stubs)
-- [x] Visual regression tests (6 tests — Docker-standardized update workflow)
-- [x] Playwright CI split (CI Fast + Playwright Nightly — `docs/PLAYWRIGHT_FIXES.md`)
-- [x] `config/` directory — centralized Jest/ESLint/Prettier/wagmi config
-- [x] `.dockerignore` (comprehensive — node_modules, .next, .git, docs, coverage excluded)
-- [x] PR template + bug report template
-- [x] Netlify deployment (Node 22, `@netlify/plugin-nextjs` SSR mode)
-- [x] Resume page PDF mode (two-column Experience layout with summary cards)
-- [x] Portfolio navigation (Crypto added to dropdown)
-
----
+- [x] Docker test infrastructure.
+- [x] CSS architecture migration.
+- [x] Dark mode theme system.
+- [x] Jest unit coverage above 98 percent.
+- [x] GitHub Actions CI pipeline.
+- [x] Playwright E2E infrastructure.
+- [x] Visual regression coverage.
+- [x] Split Playwright CI strategy.
+- [x] Centralized `config/` directory.
+- [x] Comprehensive `.dockerignore`.
+- [x] PR and bug-report templates.
+- [x] Netlify deployment.
+- [x] Resume PDF mode.
+- [x] Portfolio navigation updates.
 
 <!-- AGENT INSTRUCTIONS:
-This file tracks actionable tasks.
-1. Keep active items in their priority sections (P0–P3)
-2. Move completed items to Done with [x]
-3. Evidence source in Context field — link to docs/ where applicable
-4. Keep descriptions concise but actionable
+1. Keep work in P0-P3 sections.
+2. Preserve short, scannable checklist entries.
+3. Keep detailed visual-asset inventory in `docs/SCREENSHOTS.md`.
 -->
