@@ -61,7 +61,7 @@
     "@wagmi/connectors": "^7.2.0",
     "@wagmi/core": "^3.0.0",
     "@walletconnect/ethereum-provider": "^2.23.5",
-    "bufferutil": "^4.0.9",
+    "bufferutil": "^4.1.0",
     "next": "^16.1.7",
     "react": "^19.2.2",
     "react-dom": "^19.2.2",
@@ -69,7 +69,7 @@
     "sharp": "^0.34.1",
     "utf-8-validate": "^6.0.6",
     "viem": "^2.46.1",
-    "wagmi": "^3.4.4"
+    "wagmi": "^3.6.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
