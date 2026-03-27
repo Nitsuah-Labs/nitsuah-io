@@ -43,7 +43,7 @@ export function getProficiencyLevel(level?: string): number {
     intermediate: 2,
     advanced: 3,
     expert: 4,
-    master: 5,
+    master: 4,
   };
 
   if (!level) return 2;
