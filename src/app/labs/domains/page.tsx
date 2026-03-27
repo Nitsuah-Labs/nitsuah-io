@@ -1,6 +1,7 @@
 // DOMAINS - cleaned implementation
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState, type ReactElement } from "react";
 import "../../_components/_styles/labs.css";
 
@@ -9,6 +10,11 @@ import DomainsNotConnected from "../../_components/_labs/DomainsNotConnected";
 import LabFooter from "../../_components/_labs/LabFooter";
 import LabNav from "../../_components/_labs/LabNav";
 import LabSubNav from "../../_components/_labs/LabSubNav";
+
+const DomainsContentProduction = dynamic(
+  () => import("./DomainsContentProduction"),
+  { ssr: false },
+);
 
 // Test mode stub component
 const DomainsContentTest = (): ReactElement => {
@@ -59,11 +65,7 @@ const DomainsContent = (): ReactElement => {
     return <DomainsContentTest />;
   }
 
-  // Production mode - load real wagmi component
-  // Import lazily to avoid loading wagmi in test mode
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const DomainsContentProduction =
-    require("./DomainsContentProduction").default;
+  // Production mode - load real wagmi component via dynamic import
   return <DomainsContentProduction />;
 };
 

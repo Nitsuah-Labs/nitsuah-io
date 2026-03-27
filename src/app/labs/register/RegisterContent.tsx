@@ -1,7 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import "../../_components/_styles/labs.css";
+
+const RegisterContentProduction = dynamic(
+  () => import("./RegisterContentProduction"),
+  { ssr: false },
+);
 
 export default function RegisterContent() {
   const [mounted, setMounted] = useState(false);
@@ -77,10 +83,6 @@ export default function RegisterContent() {
     );
   }
 
-  // Production mode - use real wagmi component
-  // Import lazily to avoid loading wagmi in test mode
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const RegisterContentProduction =
-    require("./RegisterContentProduction").default;
+  // Production mode - load real wagmi component via dynamic import
   return <RegisterContentProduction />;
 }
