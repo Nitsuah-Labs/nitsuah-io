@@ -2,6 +2,9 @@
   "name": "next-connectkit",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
   "scripts": {
     "dev": "next dev",
     "dev:wagmi": "npm run wagmi && next dev",
