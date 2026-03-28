@@ -1,49 +1,35 @@
-# ROADMAP.md
+# ROADMAP
 
-**Updated:** December 4, 2025
+**Last Updated:** 2026-03-27
 
-## 2025Q4
+## 2025 Q4 (Completed)
 
-- [x] Core features
-- [x] Initial release
-- [x] Setup Docker and re-enable skipped Playwright visual tests
-- [x] Docker environment for CI/local parity (Playwright v1.57.0 on Ubuntu Noble)
-- [x] FIX Resume page test investigation - RESOLVED: Use production build in tests
-- [x] **TECH DEBT** - Strategic codebase cleanup (98% test coverage, CSS modules, dark mode)
-- [x] **Test Coverage** - 213 tests across 16 suites, 98% statement coverage
-- [x] **Dark Mode** - Theme system with localStorage persistence (completed December 2025)
-- [x] **CSS Refactor** - All inline styles migrated to CSS modules (completed December 2025)
-- [x] **Documentation** - Cleaned up and consolidated project docs
+- [x] Stabilize the initial release foundation.
+- [x] Ship the CSS architecture, theme system, strong unit coverage, and split Playwright CI path.
+- [x] Consolidate core docs under `docs/` and keep the Netlify SSR deployment path working.
 
-## 2026Q1
+## 2026 Q1 (In Progress)
 
-- [x] **Visual Regression Automation** - Standardized screenshot update workflow with Docker
-- [x] **Resume Page Enhancements** - PDF mode improvements, Education/Experience layouts
-- [ ] **Dark Mode Toggle** - UI component to switch themes on demand (shows CSS/a11y best practices)
-- [ ] **Manual Wallet Setup** - MetaMask or embedded wallet for local Web3 testing
-- [ ] **Contract Testing** - Local testnet debugging
-- [ ] **Network Auto-Switch** - Auto-detect wrong network and prompt user to switch
-- [ ] **Mumbai → Amoy** - Polygon testnet migration (contract redeployment needed)
-- [ ] Screenshot requirements - see `docs/SCREENSHOTS.md`
+- [ ] Keep Playwright Docker and npm versions coordinated during upgrades.
+- [ ] Ship the dark mode toggle UI.
+- [ ] Replace placeholder-heavy client demo assets.
+- [ ] Replace duplicate project and crypto page assets.
 
-## 2026Q2
+## 2026 Q2 (Planned)
 
-- [ ] Advanced demos - Analytics
-- [ ] Backend services - add `ipfs` & `genai` & `neondb`
+- [ ] Migrate labs from Mumbai to Amoy.
+- [ ] Add a local wallet testing path.
+- [ ] Add `docs/API.md`.
+- [ ] Refresh `METRICS.md` and add a validation marker.
+- [ ] Add privacy-first analytics if the final product needs it.
 
-## 2026Q3
+## 2026 Q3 (Exploratory)
 
-- [ ] Enterprise features
+- [ ] Expand wallet-flow coverage in Playwright Nightly.
+- [ ] Revisit deeper contract testing and backend-service exploration.
+- [ ] Track contract deployment tooling and repo mapping work.
 
-<!--
-AGENT INSTRUCTIONS:
-This file tracks the project's high-level goals.
-1. Organize items by Quarter (Q1, Q2, etc.) or Milestone.
-2. Mark items as [x] when completed.
-3. Add new strategic goals as they emerge.
-4. Ensure items are high-level features or milestones, not individual bug fixes.
+## Notes
 
-_For feature requests see `FEEDBACK.md`_
-_For security status see `SECURITY_FIXES.md`_
-_For phase items see `PHASE_#.md`_
--->
+- The product is intentionally Netlify SSR, not a static export.
+- `docs/ARCH.md`, `docs/TESTING.md`, `docs/PLAYWRIGHT_FIXES.md`, and `docs/SCREENSHOTS.md` remain the supporting reference docs.
