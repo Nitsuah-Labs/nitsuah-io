@@ -1,34 +1,78 @@
 # TASKS
 
-**Last Updated:** December 8, 2025
+**Last Updated:** 2026-03-27
 
 ## Todo
 
-### High Priority
+### P0 - Blocking
 
-- [ ] **Wallet Testing Setup** - Setup MetaMask for local Web3 testing (NEXT UP!)
-- [ ] **Contract Deployer** - Track down deployer repo, find contract IDs, etc.
-- [ ] **Mumbai → Amoy** - Polygon testnet migration
-- [ ] **Visual Assets** - See `docs/SCREENSHOTS.md` for needed screenshots:
-  - Crypto page: 4 projects need screenshots
-  - Projects page: 3 projects need screenshots  
-  - Client demos: 100+ product/content images needed?
-  - avatar - maybe we need to update repo to scale this service for us?
+- [ ] Keep the Playwright Docker image and npm version in lockstep.
+  - Context: any future Playwright upgrade must update both `Dockerfile.test` and `@playwright/test` together or Docker smoke runs will break.
+  - Acceptance Criteria: coordinated upgrades keep `npm run precheck:docker` passing.
 
-### Done
+### P1 - High
 
-- [x] **Docker Test Environment** - Fully functional Docker setup for CI-consistent testing
-- [x] **Resume Page PDF Mode** - Two-column Experience layout with summary cards
-- [x] **Portfolio Navigation** - Added Crypto to portfolio dropdown menu
-- [x] **Location Links** - Made location clickable with URL support
-- [x] **TypeScript Types** - Added `url` property to location interface
+- [ ] Replace placeholder-heavy client demo assets.
+  - Context: the restaurant, e-commerce, real-estate, CMS, and NFT demos still rely on missing or placeholder imagery tracked in `docs/SCREENSHOTS.md`.
+  - Acceptance Criteria: each demo renders with representative assets instead of placeholders.
 
----
+- [ ] Replace duplicate project and crypto page assets.
+  - Context: several project and crypto entries still reuse the same placeholder images.
+  - Acceptance Criteria: each featured project and crypto item has distinct representative media.
+
+- [ ] Ship the dark mode toggle UI.
+  - Context: the theme system is complete, but the visible toggle still is not.
+  - Acceptance Criteria: the toggle is present in the header, persists, and avoids hydration issues.
+
+- [ ] Migrate labs from Mumbai to Amoy.
+  - Context: Mumbai is deprecated and the labs contract flows need an updated chain target.
+  - Acceptance Criteria: `src/wagmi.ts` and the labs pages use Amoy and no Mumbai references remain.
+
+### P2 - Medium
+
+- [ ] Add a wallet and MetaMask local testing path.
+  - Context: the wallet E2E coverage is still skipped instead of being explicitly gated for nightly or browser-only runs.
+  - Acceptance Criteria: at least one local wallet flow is testable without a live wallet and the test is gated intentionally.
+
+- [ ] Add `docs/API.md`.
+  - Context: `docs/ARCH.md` covers architecture, but the wagmi and chain surface still lacks focused API documentation.
+  - Acceptance Criteria: `docs/API.md` documents the hook surface, chain config, and any server-side endpoints.
+
+- [ ] Refresh `METRICS.md` and add a validation marker.
+  - Context: the current metrics are strong, but they have not been revalidated since December 2025.
+  - Acceptance Criteria: `METRICS.md` includes a `last validated` marker and coverage is re-run.
+
+### P3 - Exploratory
+
+- [ ] Expand wallet-flow coverage in Playwright Nightly.
+  - Context: the full wallet lifecycle still lacks automated nightly coverage.
+  - Acceptance Criteria: the wallet connection flow passes in the Nightly workflow.
+
+- [ ] Add privacy-first analytics.
+  - Context: analytics remains a roadmap concept rather than a live capability.
+  - Acceptance Criteria: a privacy-respecting analytics path is implemented without PII collection.
+
+## In Progress
+
+## Done
+
+- [x] Docker test infrastructure.
+- [x] CSS architecture migration.
+- [x] Dark mode theme system.
+- [x] Jest unit coverage above 98 percent.
+- [x] GitHub Actions CI pipeline.
+- [x] Playwright E2E infrastructure.
+- [x] Visual regression coverage.
+- [x] Split Playwright CI strategy.
+- [x] Centralized `config/` directory.
+- [x] Comprehensive `.dockerignore`.
+- [x] PR and bug-report templates.
+- [x] Netlify deployment.
+- [x] Resume PDF mode.
+- [x] Portfolio navigation updates.
 
 <!-- AGENT INSTRUCTIONS:
-This file tracks actionable tasks.
-1. Keep "Active Tasks" section focused on pending work
-2. Move completed items to "Completed" section with dates
-3. Mark items as [x] when verified complete
-4. Keep descriptions concise but actionable
+1. Keep work in P0-P3 sections.
+2. Preserve short, scannable checklist entries.
+3. Keep detailed visual-asset inventory in `docs/SCREENSHOTS.md`.
 -->
