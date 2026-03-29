@@ -37,7 +37,7 @@
 
 | Metric       | Value                                | Notes                                 |
 | ------------ | ------------------------------------ | ------------------------------------- |
-| Image        | mcr.microsoft.com/playwright:v1.56.1 | Ubuntu Noble base                     |
+| Image        | mcr.microsoft.com/playwright:v1.57.0-noble | Ubuntu Noble base                     |
 | Build Time   | 332s (5.5 min)                       | First build with dependencies         |
 | Context Size | 136.88 MB                            | Project files copied to image         |
 | Status       | ✅ Production Ready                   | All 61 tests passing (100% pass rate) |
@@ -50,9 +50,11 @@
 - **Lines of Code**: 21,791 LOC (excluding tests, generated files, config, node_modules, build artifacts).
 - **Test Infrastructure**: Production build strategy resolved all test issues. Playwright uses `npm run start` instead of dev server to ensure proper React hydration and DOM rendering.
 - **Docker Strategy**: Built Docker image for CI-consistent testing. Successfully generates visual regression baselines matching CI exactly.
-- **Visual Tests**: All 9 Playwright visual regression tests passing with Docker-generated baselines. Projects page uses maxDiffPixels: 100000 (~2% tolerance) for dynamic animations and Spline 3D content.
+| Last Updated    | 2026-03-29 | Metrics audit date             |
 - **Security**: Zero npm audit vulnerabilities. All dependencies current with no high/critical security alerts.
 - **Accessibility**: WCAG 2.1 AA compliance validated with axe-core. All 13 pages (4 main + 9 Labs) have proper landmarks, skip-link targets, and semantic HTML.
+
+Last validated: 2026-03-29 — Docker, Playwright, and dark mode toggle feature branch (see PR)
 
 <!--
 AGENT INSTRUCTIONS:
