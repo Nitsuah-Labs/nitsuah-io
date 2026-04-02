@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { act } from "react";
 import ExperienceSection from "../ExperienceSection";
 
 describe("ExperienceSection", () => {
