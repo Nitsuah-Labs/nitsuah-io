@@ -20,7 +20,7 @@
 | Skipped Tests   | 0          | All tests enabled and passing  |
 | Security Alerts | 0          | npm audit (zero high/critical) |
 | Health Score    | 98/100     | Excellent health status        |
-| Last Updated    | 2026-03-29 | Metrics audit date             |
+| Last Updated    | 2026-04-02 | Metrics audit date             |
 
 ## Test Breakdown
 
@@ -53,7 +53,7 @@
 - **Security**: Zero npm audit vulnerabilities. All dependencies current with no high/critical security alerts.
 - **Accessibility**: WCAG 2.1 AA compliance validated with axe-core. All 13 pages (4 main + 9 Labs) have proper landmarks, skip-link targets, and semantic HTML.
 
-Last validated: 2026-03-29 — Docker, Playwright, and dark mode toggle feature branch (see PR)
+Last validated: 2026-04-02 — Docker rebuild + container run + browser verification confirmed dark mode CSS overrides fixed (see PR)
 
 <!--
 AGENT INSTRUCTIONS:

@@ -91,7 +91,7 @@ const MintExample: React.FC = () => {
     return (
       <div
         style={{
-          background: "rgba(10, 10, 10, 0.6)",
+          background: "var(--color-surface)",
           border: "2px solid rgba(16, 185, 129, 0.5)",
           borderRadius: "16px",
           padding: "2rem",
@@ -116,7 +116,10 @@ const MintExample: React.FC = () => {
   };
 
   return (
-    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div
+      className="App"
+      style={{ background: "var(--color-background)", minHeight: "100vh" }}
+    >
       <HomeBar />
       <main
         style={{

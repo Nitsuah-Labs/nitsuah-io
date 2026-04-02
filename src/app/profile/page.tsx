@@ -40,7 +40,7 @@ const ProfilePage: React.FC = () => {
   return (
     <div
       style={{
-        background: "#0a0a0a",
+        background: "var(--color-background)",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
