@@ -48,10 +48,11 @@ describe("DemoCard", () => {
     let container;
     act(() => {
       ({ container } = render(
-      <DemoCard hover={false}>
-        <div>No Hover</div>
-      </DemoCard>,
-    );
+        <DemoCard hover={false}>
+          <div>No Hover</div>
+        </DemoCard>,
+      ));
+    });
     const card = container.firstChild as HTMLElement;
 
     expect(card.className).not.toContain("hoverable");

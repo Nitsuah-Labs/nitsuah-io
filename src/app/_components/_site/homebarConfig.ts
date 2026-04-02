@@ -38,7 +38,8 @@ export const portfolioSub: NavMenuItem[] = [
 
 export const navStyles = {
   appBar: {
-    backgroundColor: "color-mix(in srgb, var(--color-background) 90%, transparent)",
+    backgroundColor:
+      "color-mix(in srgb, var(--color-background) 90%, transparent)",
     zIndex: 1000,
   },
   link: {

@@ -46,7 +46,10 @@ export class SplineErrorBoundary extends React.Component<Props, State> {
                 Interactive 3D scene temporarily unavailable
               </p>
               <p
-                style={{ fontSize: "0.9rem", color: "var(--color-text-secondary)" }}
+                style={{
+                  fontSize: "0.9rem",
+                  color: "var(--color-text-secondary)",
+                }}
               >
                 The visualization will be back soon
               </p>
