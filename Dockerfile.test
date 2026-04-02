@@ -10,10 +10,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 
-# Install dependencies (use ci for faster installs with lock file)
+# Install dependencies from the lock file for deterministic builds
 RUN npm ci --legacy-peer-deps --prefer-offline
-# Force install latest testing-library/react, jest-dom, and react-dom to fix act incompatibility
-RUN npm install @testing-library/react@latest @testing-library/jest-dom@latest react-dom@latest --legacy-peer-deps
 
 # Copy project files
 COPY . .

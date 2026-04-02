@@ -94,7 +94,8 @@ const LabNav: React.FC<LabNavProps> = () => {
     <AppBar
       position="static"
       sx={{
-        backgroundColor:
+        backgroundColor: "var(--color-background)",
+        background:
           "color-mix(in srgb, var(--color-background) 90%, transparent)",
       }}
     >

@@ -6,17 +6,11 @@ FROM node:20-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for Playwright (if needed for E2E)
-RUN apt-get update && apt-get install -y wget gnupg2 libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2 libgbm-dev libxshmfence1 libxcomposite1 libxrandr2 libu2f-udev libdrm2 --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
 # Copy package files first for better layer caching
 COPY package.json package-lock.json ./
 
 # Install all dependencies
 RUN npm ci --legacy-peer-deps --prefer-offline
-
-# Optionally install Playwright for E2E (safe for unit tests too)
-RUN npx playwright install --with-deps || true
 
 # Copy project files
 COPY . .

@@ -53,7 +53,7 @@
 - **Security**: Zero npm audit vulnerabilities. All dependencies current with no high/critical security alerts.
 - **Accessibility**: WCAG 2.1 AA compliance validated with axe-core. All 13 pages (4 main + 9 Labs) have proper landmarks, skip-link targets, and semantic HTML.
 
-Last validated: 2026-04-02 — Docker rebuild + container run + browser verification confirmed dark mode CSS overrides fixed (see PR)
+Last validated: 2026-04-02 — Docker, Playwright, and dark mode toggle updates
 
 <!--
 AGENT INSTRUCTIONS:
