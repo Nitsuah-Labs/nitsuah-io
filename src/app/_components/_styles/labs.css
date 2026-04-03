@@ -9,9 +9,9 @@ html {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: #181818;
+  background-color: var(--color-background);
   text-align: center;
-  color: #ffffff;
+  color: var(--color-text-primary);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -30,7 +30,7 @@ p {
 
 .lab-container {
   height: 100%;
-  background-color: #181818;
+  background-color: var(--color-background);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,7 +38,7 @@ p {
 
 .long-container {
   height: 100%;
-  background-color: #181818;
+  background-color: var(--color-background);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -62,12 +62,12 @@ header {
   margin: 0;
   font-size: 35px;
   font-weight: bold;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .subtitle {
   font-size: 25px;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .left {
@@ -104,7 +104,8 @@ header {
 
 .right {
   display: flex;
-  background: #181818;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   padding: 12px 20px;
   height: 99%;
@@ -153,7 +154,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 }
 
 .lab-content-container {
-  background-color: #181818;
+  background-color: var(--color-background);
 }
 
 .cta-button {

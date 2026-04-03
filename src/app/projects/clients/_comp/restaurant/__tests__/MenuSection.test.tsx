@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { act } from "react";
 import { MenuSection } from "../MenuSection";
 
 const mockMenu = [
@@ -31,15 +32,17 @@ describe("MenuSection", () => {
     const add = jest.fn();
     const setCategory = jest.fn();
 
-    render(
-      <MenuSection
-        menuData={mockMenu as any}
-        categories={["All", "Starters", "Mains"]}
-        selectedCategory="All"
-        setSelectedCategory={setCategory}
-        addToCart={add}
-      />,
-    );
+    act(() => {
+      render(
+        <MenuSection
+          menuData={mockMenu as any}
+          categories={["All", "Starters", "Mains"]}
+          selectedCategory="All"
+          setSelectedCategory={setCategory}
+          addToCart={add}
+        />,
+      );
+    });
 
     // category buttons (use role to target the button specifically)
     expect(
@@ -48,7 +51,9 @@ describe("MenuSection", () => {
     expect(screen.getByRole("button", { name: /Mains/ })).toBeInTheDocument();
 
     // click category button
-    fireEvent.click(screen.getByRole("button", { name: /Starters/ }));
+    act(() => {
+      fireEvent.click(screen.getByRole("button", { name: /Starters/ }));
+    });
     expect(setCategory).toHaveBeenCalledWith("Starters");
 
     // click first "Add to Pickup Order" button
@@ -56,7 +61,9 @@ describe("MenuSection", () => {
       name: /Add to Pickup Order/i,
     });
     expect(addButtons.length).toBeGreaterThan(0);
-    fireEvent.click(addButtons[0]);
+    act(() => {
+      fireEvent.click(addButtons[0]);
+    });
     expect(add).toHaveBeenCalled();
   });
 
@@ -65,15 +72,17 @@ describe("MenuSection", () => {
     const setCategory = jest.fn();
 
     // Render with "Starters" selected
-    render(
-      <MenuSection
-        menuData={mockMenu as any}
-        categories={["All", "Starters", "Mains"]}
-        selectedCategory="Starters"
-        setSelectedCategory={setCategory}
-        addToCart={add}
-      />,
-    );
+    act(() => {
+      render(
+        <MenuSection
+          menuData={mockMenu as any}
+          categories={["All", "Starters", "Mains"]}
+          selectedCategory="Starters"
+          setSelectedCategory={setCategory}
+          addToCart={add}
+        />,
+      );
+    });
 
     // Should show Starters items
     expect(screen.getByText("Bruschetta")).toBeInTheDocument();

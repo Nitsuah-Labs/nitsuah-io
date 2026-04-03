@@ -1,0 +1,28 @@
+# Use a pinned Node 22 LTS image to align with CI and reduce build drift
+FROM node:22.13.0-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first for better layer caching
+COPY package.json package-lock.json ./
+
+# Install all dependencies
+RUN npm ci --legacy-peer-deps --prefer-offline
+
+# Copy project files
+COPY . .
+
+# Build for production (skip wagmi codegen for test env)
+RUN npm run build:skip-wagmi
+
+# Set environment variables for tests
+ENV CI=true
+ENV NODE_ENV=production
+ENV NEXT_PUBLIC_TEST_HELPERS=1
+
+# Expose port for production server (if needed)
+EXPOSE 3000
+
+# Default command runs all Jest unit/integration tests
+CMD ["npm", "test"]

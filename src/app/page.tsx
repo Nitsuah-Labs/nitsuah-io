@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
               minHeight: "150vh",
               paddingTop: "100vh",
               padding: "4rem 2rem",
-              background: "#0a0a0a",
+              background: "var(--color-background)",
               position: "relative",
               zIndex: 1,
               display: "flex",
@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
               >
                 <h2
                   style={{
-                    color: "rgba(255, 255, 255, 0.9)",
+                    color: "var(--color-text-primary)",
                     fontSize: "2.5rem",
                     fontWeight: "600",
                     marginBottom: "0.5rem",
@@ -63,7 +63,7 @@ const HomePage: React.FC = () => {
                 </h2>
                 <p
                   style={{
-                    color: "rgba(255, 255, 255, 0.6)",
+                    color: "var(--color-text-secondary)",
                     fontSize: "1.1rem",
                   }}
                 >
