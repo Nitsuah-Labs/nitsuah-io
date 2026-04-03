@@ -1,6 +1,6 @@
 # ROADMAP
 
-**Last Updated:** 2026-03-27
+**Last Updated:** 2026-04-03 (pmo/q2-2026-planning)
 
 ## 2025 Q4 (Completed)
 
@@ -8,28 +8,87 @@
 - [x] Ship the CSS architecture, theme system, strong unit coverage, and split Playwright CI path.
 - [x] Consolidate core docs under `docs/` and keep the Netlify SSR deployment path working.
 
-## 2026 Q1 (In Progress)
+## 2026 Q1 (Completed)
 
-- [ ] Keep Playwright Docker and npm versions coordinated during upgrades.
-- [ ] Ship the dark mode toggle UI.
-- [ ] Replace placeholder-heavy client demo assets.
-- [ ] Replace duplicate project and crypto page assets.
+- [x] Keep Playwright Docker and npm versions coordinated during upgrades.
+- [x] Ship the dark mode toggle UI.
+- [ ] Replace placeholder-heavy client demo assets. *(carry → Q2)*
+- [ ] Replace duplicate project and crypto page assets. *(carry → Q2)*
 
-## 2026 Q2 (Planned)
+## 2026 Q2 (In Progress)
 
-- [ ] Migrate labs from Mumbai to Amoy.
-- [ ] Add a local wallet testing path.
-- [ ] Add `docs/API.md`.
-- [ ] Refresh `METRICS.md` and add a validation marker.
-- [ ] Add privacy-first analytics if the final product needs it.
+### CEO Priorities (load speed, home page redesign)
+- [ ] **Move Spline animation off home page to `/3d`**: isolate the 3D scene to a dedicated `/3d` route; remove the "scroll for more" prompt from the home page hero. This is the primary load-speed fix.
+- [ ] **Home page as landing page**: redesign the home page as a focused landing page that highlights primary projects as cards (title, short description, link). Use the same card styling as the Projects page. Prioritize newer projects: agent-board, overseer, bb-mcp, darkmoon.
+- [ ] **Load speed improvements**: with the Spline scene removed from the critical path, measure and document LCP improvement; ensure the home page reaches a Lighthouse performance score ≥ 90.
 
-## 2026 Q3 (Exploratory)
+### Carry-overs
+- [ ] Replace placeholder-heavy client demo assets (restaurant, e-commerce, real-estate, CMS, NFT).
+- [ ] Replace duplicate project and crypto page assets with distinct representative media.
 
-- [ ] Expand wallet-flow coverage in Playwright Nightly.
-- [ ] Revisit deeper contract testing and backend-service exploration.
-- [ ] Track contract deployment tooling and repo mapping work.
+### Web3 Maintenance
+- [ ] Migrate labs contracts from Mumbai to Amoy testnet.
+- [ ] Add a local wallet testing path (mock provider, no live wallet required).
+- [ ] Upgrade to wagmi v4 / viem v3 when stable; update generated hooks.
+
+### AI Integration (bb-mcp)
+- [ ] Add AI chat widget powered by bb-mcp for portfolio visitor Q&A.
+- [ ] Expose `/api/chat` route proxying bb-mcp; keep API key server-side only.
+- [ ] Add streaming response support and typing indicator.
+
+### Design Refresh
+- [ ] Bento grid layout for Projects and Skills sections.
+- [ ] Micro-interaction pass: hover states, scroll-triggered reveals, smooth page transitions.
+- [ ] Variable font + fluid typography scale for all headings.
+- [ ] Glassmorphism card polish on Labs and Crypto pages.
+
+### Cross-Repo Data
+- [ ] Live kryptos feed widget: pull real-time cipher challenge stats into Labs sidebar.
+- [ ] Wire skyview event sink to capture page-view telemetry (privacy-first, no PII).
+
+### Docs & Quality
+- [ ] Add `docs/API.md` covering wagmi hook surface, chain config, and `/api/*` routes.
+- [ ] Refresh `METRICS.md` with a `last validated` marker and re-run coverage.
+- [x] Add `docs/INTEGRATIONS.md` mapping sister-repo connection points.
+
+## 2026 Q3 (Planned)
+
+### Portfolio Intelligence
+- [ ] Agent-board showcase section: visualize autonomous agents building / maintaining the site.
+- [ ] On-chain resume page: verifiable credentials tied to wallet address (EAS attestations).
+- [ ] AI-generated project summaries with human-editable overrides.
+
+### Web3 Depth
+- [ ] Expand wallet-flow coverage in Playwright Nightly (connection, signing, disconnect).
+- [ ] Add EIP-6963 multi-wallet discovery support.
+- [ ] Hardware wallet path (Ledger/Trezor) for Labs contract interactions.
+- [ ] Farm staking demo: embed live staking flow pulling from farm repo contracts.
+
+### PWA & Offline
+- [ ] Add `manifest.json` and service worker for installable PWA on mobile.
+- [ ] Offline fallback page with cached project data.
+- [ ] Push notification opt-in for new project announcements (vapid, server-side).
+
+## 2026 Q4 (Exploratory)
+
+### Scale & Performance
+- [ ] Full Core Web Vitals audit targeting LCP < 1.5s, CLS = 0, INP < 100ms.
+- [ ] Migrate to Turbopack for dev and production (drop webpack config).
+- [ ] Bundle splitting review: reduce initial JS payload below 150 KB (gzip).
+
+### Ecosystem Expansion
+- [ ] Internationalization (i18n) foundation via `next-intl`.
+- [ ] Social graph page: aggregate on-chain activity, GitHub contributions, and project signals.
+- [ ] skyview dashboard embed: public analytics card showing visitor trends.
+- [ ] darkmoon theming engine: pull design tokens from darkmoon for consistent cross-repo branding.
+
+### Deprecation / De-prioritization Signals
+- [ ] Evaluate Spline 3D scenes: keep hero only, lazy-load or replace others with CSS animations to improve LCP.
+- [ ] Assess Material-UI dependency: plan incremental migration to pure Tailwind if bundle cost outweighs benefit.
 
 ## Notes
 
 - The product is intentionally Netlify SSR, not a static export.
 - `docs/ARCH.md`, `docs/TESTING.md`, `docs/PLAYWRIGHT_FIXES.md`, and `docs/SCREENSHOTS.md` remain the supporting reference docs.
+- Sister-repo integration priority: bb-mcp (AI chat) → kryptos (data) → skyview (analytics) → agent-board (showcase) → farm (staking) → darkmoon (theming).
+- Deprioritized repos (no active integration planned this year): gcp, stash — set to low-friction contribution mode.
