@@ -1,5 +1,4 @@
 // HOMEPAGE - src/app/page.tsx
-"use client";
 import React from "react";
 import { HeroSection } from "./_components/HeroSection";
 import Footer from "./_components/_site/Footer";

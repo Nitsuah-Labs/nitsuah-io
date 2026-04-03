@@ -6,11 +6,12 @@
 
 ### P0 - Blocking
 
-- [x] **[Q2-CEO] Move Spline 3D animation to `/3d` route** — relocate the Spline scene from the home page hero to a dedicated `/3d` page; remove the "scroll for more" prompt from the home page.
+- [ ] **[Q2-CEO] Move Spline 3D animation to `/3d` route** — relocate the Spline scene from the home page hero to a dedicated `/3d` page; remove the "scroll for more" prompt from the home page.
   - Context: CEO directive — the Spline scene inflates the home page bundle and hurts LCP; it belongs on an opt-in page, not the critical landing path.
   - Acceptance Criteria: home page loads without any Spline bundle; `/3d` route renders the Spline scene; "scroll for more" prompt is removed; Lighthouse performance score on the home page improves by ≥ 15 points.
   - Completed: 2026-04-03
   - Evidence: `src/app/page.tsx` no longer imports/renders Spline; new `src/app/3d/page.tsx` hosts the Spline scene; `HeroSection` now supports disabling scroll prompt and home passes `showScrollIndicator={false}`.
+  - Follow-up: record Lighthouse before/after measurement evidence showing the home page performance score improved by ≥ 15 points, then re-check this task.
 
 - [ ] **[Q2-CEO] Redesign home page as a landing page with project cards** — replace the current hero/Spline layout with a focused landing page that prominently features primary projects as cards (title, short description, link to project). Use the same card styling as the existing Projects page. Lead with newer projects: agent-board, overseer, bb-mcp, darkmoon.
   - Context: CEO directive — the home page should immediately communicate what the portfolio author builds; project cards give visitors a fast scannable overview.

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
