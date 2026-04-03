@@ -12,6 +12,7 @@ import Brand from "./_comp/homebar/Brand";
 import DesktopNav from "./_comp/homebar/DesktopNav";
 import MobileNav from "./_comp/homebar/MobileNav";
 import { navStyles, pages } from "./homebarConfig";
+import ThemeToggle from "./ThemeToggle";
 
 // Replace empty interface with object type
 type HomeBarProps = object;
@@ -77,6 +78,7 @@ const NavigationContent: React.FC<{
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <ThemeToggle />
         {showMobileNav && (
           <div>
             <MobileNav pages={pages} />

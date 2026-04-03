@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { act } from "react";
 import { DemoButton } from "../DemoButton";
 
 describe("DemoButton", () => {
@@ -14,7 +15,9 @@ describe("DemoButton", () => {
     render(<DemoButton onClick={handleClick}>Click Me</DemoButton>);
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    act(() => {
+      fireEvent.click(button);
+    });
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -28,7 +31,9 @@ describe("DemoButton", () => {
     );
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    act(() => {
+      fireEvent.click(button);
+    });
 
     // onClick should not be called when disabled
     expect(handleClick).not.toHaveBeenCalled();

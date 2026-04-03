@@ -60,7 +60,10 @@ const CryptoPage = () => {
   };
 
   return (
-    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div
+      className="App"
+      style={{ background: "var(--color-background)", minHeight: "100vh" }}
+    >
       <HomeBar />
       <main
         id="main"

@@ -47,7 +47,10 @@ const Blogsite = () => {
   }, [selectedCategory, sortBy]);
 
   return (
-    <div className="App" style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div
+      className="App"
+      style={{ background: "var(--color-background)", minHeight: "100vh" }}
+    >
       <HomeBar />
       <main
         style={{
@@ -83,7 +86,7 @@ const Blogsite = () => {
               style={{
                 textAlign: "center",
                 padding: "4rem 2rem",
-                color: "rgba(255, 255, 255, 0.5)",
+                color: "var(--color-text-secondary)",
               }}
             >
               <p style={{ fontSize: "1.2rem" }}>

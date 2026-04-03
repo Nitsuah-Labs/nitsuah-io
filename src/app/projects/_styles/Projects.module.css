@@ -1,7 +1,7 @@
 /* Projects Page Styles */
 
 .pageWrapper {
-  background: #0a0a0a;
+  background: var(--color-background);
   min-height: 100vh;
 }
 

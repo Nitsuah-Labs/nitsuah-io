@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { act } from "react";
 import { DemoTable } from "../DemoTable";
 
 type Row = { id: number; name: string; value: number };
@@ -32,7 +33,9 @@ describe("DemoTable", () => {
 
     // click first row
     const firstRow = screen.getAllByRole("row")[1]; // [0] is header
-    fireEvent.click(firstRow);
+    act(() => {
+      fireEvent.click(firstRow);
+    });
     expect(onRowClick).toHaveBeenCalledWith(data[0]);
   });
 

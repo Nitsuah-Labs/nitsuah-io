@@ -130,3 +130,65 @@ Proactive security measures with automated vulnerability scanning and best pract
 - **Rate Limiting**: API route protection with request throttling and abuse prevention
 - **Secure Headers**: X-Frame-Options, X-Content-Type-Options, and Referrer-Policy configured
 - **Wallet Security**: Client-side signing only, private keys never exposed to server
+
+---
+
+## Planned Capabilities
+
+> Features planned for 2026 Q2–Q4. Not yet shipped. Overseer agents execute against these blocks.
+
+### 🤖 AI Integration (bb-mcp)
+
+Conversational AI layer powered by the bb-mcp sister repo for interactive portfolio engagement.
+
+- **Portfolio Chat Widget**: Floating AI assistant answers visitor questions about projects, skills, and availability
+- **Streaming Responses**: Token-by-token streaming with typing indicator for perceived responsiveness
+- **Server-Side API Key**: `/api/chat` proxy keeps credentials off the client
+- **Context Injection**: System prompt includes project list, skills, and contact info for grounded answers
+- **Graceful Degradation**: Widget hides cleanly when bb-mcp is unavailable; no broken UI
+
+### 📊 Analytics (skyview)
+
+Privacy-first event telemetry via the skyview sister repo.
+
+- **Page View Events**: Anonymous page-view stream with path, referrer, and viewport; no PII
+- **CTA Click Tracking**: Key conversion events (project demo clicks, resume download, wallet connect)
+- **Skyview Dashboard Embed**: Public analytics card surfaced on the portfolio for transparency
+- **GDPR-Safe by Default**: No cookies, no fingerprinting, aggregate-only reporting
+
+### 📐 Design System Refresh
+
+Visual and interaction upgrades aligned with 2026 design conventions.
+
+- **Bento Grid Layout**: Asymmetric bento grid for Projects and Skills sections
+- **Fluid Typography**: `clamp()`-based type scale with variable font support
+- **Micro-Interactions**: Scroll-triggered reveals, hover lift, and crossfade page transitions
+- **Glassmorphism Polish**: Refined glass-card treatment on Labs and Crypto pages
+- **Dark-First**: Expanded dark mode token set; darkmoon theming engine integration planned for Q4
+
+### 📱 Progressive Web App
+
+Installable, offline-capable experience for mobile visitors.
+
+- **Web App Manifest**: Full `manifest.json` with icons, theme color, and display mode
+- **Service Worker**: Cache-first strategy for project data and static assets
+- **Offline Fallback**: Graceful offline page with cached project list
+- **Install Prompt**: Deferred install banner respecting user dismissal
+
+### 🔗 Cross-Repo Integrations
+
+Connections to sister repos that enrich portfolio content and demonstrations.
+
+- **kryptos Feed**: Live cipher challenge stats surfaced in Labs sidebar (kryptos repo)
+- **farm Staking Demo**: Live staking flow in Labs pulling from farm contracts on Amoy
+- **agent-board Showcase**: `/lab/agents` page showing autonomous agent activity log (read-only)
+- **darkmoon Tokens**: Shared design token pipeline for consistent cross-repo branding (Q4)
+
+### 🏅 On-Chain Resume
+
+Verifiable professional credentials anchored to a wallet address.
+
+- **EAS Attestations**: Skill and experience attestations via Ethereum Attestation Service on Base
+- **`/resume/onchain` Route**: Displays attestations for a configured wallet; graceful fallback
+- **Wallet-Gated View**: Optional private attestations visible only to connected wallet owner
+- **Export**: One-click share link with attestation proof bundle

@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh" }}>
+    <div style={{ background: "var(--color-background)", minHeight: "100vh" }}>
       <HomeBar />
       <main
         style={{

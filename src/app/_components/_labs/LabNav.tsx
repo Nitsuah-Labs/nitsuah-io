@@ -91,7 +91,14 @@ const LabNav: React.FC<LabNavProps> = () => {
 
   return (
     // Keep AppBar static to match visual regression baseline for labs pages
-    <AppBar position="static" sx={{ backgroundColor: "#181818" }}>
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "var(--color-background)",
+        background:
+          "color-mix(in srgb, var(--color-background) 90%, transparent)",
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Home Button with Double-Click - MOVED TO LEFT */}

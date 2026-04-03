@@ -19,7 +19,7 @@ const AboutPage: React.FC = () => {
           style={{
             minHeight: "100vh",
             paddingTop: "100vh",
-            background: "#0a0a0a",
+            background: "var(--color-background)",
             position: "relative",
             zIndex: 1,
           }}
