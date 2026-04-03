@@ -60,10 +60,6 @@
   - Context: `docs/ARCH.md` covers architecture, but the wagmi and chain surface lacks focused API documentation.
   - Acceptance Criteria: `docs/API.md` documents the hook surface, chain config, and any `/api/*` server routes.
 
-- [ ] Add `docs/INTEGRATIONS.md`.
-  - Context: multiple sister repos (bb-mcp, kryptos, skyview, agent-board, farm, darkmoon) now integrate with this portfolio; a single map of connection points reduces agent context-switching.
-  - Acceptance Criteria: document each integration point: data contract, auth model, update cadence, and link to source repo.
-
 - [ ] Refresh `METRICS.md` and add a validation marker.
   - Context: metrics are strong but have not been revalidated since Q1 2026.
   - Acceptance Criteria: `METRICS.md` includes a `last validated` marker and coverage is re-run; health score reflects current CI state.
@@ -121,6 +117,7 @@
 - [x] Netlify deployment.
 - [x] Resume PDF mode.
 - [x] Portfolio navigation updates.
+- [x] Add `docs/INTEGRATIONS.md`.
 
 <!-- AGENT INSTRUCTIONS:
 1. Keep work in P0-P3 sections.
