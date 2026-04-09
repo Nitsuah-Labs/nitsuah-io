@@ -48,7 +48,8 @@ const ThreeDPage: React.FC = () => {
                   margin: 0,
                 }}
               >
-                Interactive Spline scene moved off the home page for faster landing performance.
+                Interactive Spline scene moved off the home page for faster
+                landing performance.
               </p>
             </div>
             <div
