@@ -6,7 +6,13 @@ import { ScrollIndicator } from "../../components/ui/ScrollIndicator";
 import { useDelayedVisibility, useScrollOpacity } from "../../hooks";
 import styles from "./HeroSection.module.css";
 
-export const HeroSection: React.FC = () => {
+type HeroSectionProps = {
+  showScrollIndicator?: boolean;
+};
+
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  showScrollIndicator = true,
+}) => {
   const opacity = useScrollOpacity(300);
   const showScrollHint = useDelayedVisibility(2000);
   const [displayedText, setDisplayedText] = useState("nitsuah");
@@ -71,7 +77,9 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      <ScrollIndicator isVisible={showScrollHint && opacity > 0.5} />
+      <ScrollIndicator
+        isVisible={showScrollIndicator && showScrollHint && opacity > 0.5}
+      />
     </section>
   );
 };
