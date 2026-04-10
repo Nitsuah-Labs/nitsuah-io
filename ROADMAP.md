@@ -18,7 +18,7 @@
 ## 2026 Q2 (In Progress)
 
 ### CEO Priorities (load speed, home page redesign)
-- [ ] **Move Spline animation off home page to `/3d`**: isolate the 3D scene to a dedicated `/3d` route; remove the "scroll for more" prompt from the home page hero. This is the primary load-speed fix.
+- [x] **Move Spline animation off home page to `/3d`**: isolate the 3D scene to a dedicated `/3d` route; remove the "scroll for more" prompt from the home page hero. This is the primary load-speed fix.
 - [ ] **Home page as landing page**: redesign the home page as a focused landing page that highlights primary projects as cards (title, short description, link). Use the same card styling as the Projects page. Prioritize newer projects: agent-board, overseer, bb-mcp, darkmoon.
 - [ ] **Load speed improvements**: with the Spline scene removed from the critical path, measure and document LCP improvement; ensure the home page reaches a Lighthouse performance score ≥ 90.
 
