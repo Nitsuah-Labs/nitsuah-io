@@ -156,19 +156,6 @@ const projects: Project[] = [
     status: "active",
     featured: false,
   },
-  {
-    id: "darkmoon",
-    title: "darkmoon.dev",
-    short: "Custom domain showcasing additional projects.",
-    description:
-      "Alternative portfolio site featuring specialized projects and blockchain applications.",
-    externalLink: "https://darkmoon.dev",
-    highlight: "Alternative portfolio and project showcase",
-    tags: ["web3", "blockchain"],
-    category: "Web3",
-    status: "active",
-    featured: false,
-  },
   // END WEB3 PROJECTS
   {
     id: "games",

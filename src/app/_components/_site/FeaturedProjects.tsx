@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { featuredProjects, Project } from "../../../lib/data/projects";
 import "../_styles/FeaturedProjects.css";
@@ -11,7 +13,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     if (project.demo) {
       window.location.href = project.demo;
     } else if (project.externalLink) {
-      window.open(project.externalLink, "_blank");
+      window.open(project.externalLink, "_blank", "noopener,noreferrer");
     }
   };
 

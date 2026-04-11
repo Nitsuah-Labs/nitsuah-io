@@ -29,9 +29,14 @@ export const LandingHero: React.FC = () => {
           <Link href="/projects" className={styles.primaryButton}>
             Explore Projects
           </Link>
-          <Link href="https://github.com/nitsuah" target="_blank" className={styles.secondaryButton}>
+          <a
+            href="https://github.com/nitsuah"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.secondaryButton}
+          >
             GitHub Profile
-          </Link>
+          </a>
         </div>
       </div>
     </section>
