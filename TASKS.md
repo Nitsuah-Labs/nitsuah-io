@@ -16,6 +16,9 @@
 - [ ] **[Q2-CEO] Redesign home page as a landing page with project cards** — replace the current hero/Spline layout with a focused landing page that prominently features primary projects as cards (title, short description, link to project). Use the same card styling as the existing Projects page. Lead with newer projects: agent-board, overseer, bb-mcp, darkmoon.
   - Context: CEO directive — the home page should immediately communicate what the portfolio author builds; project cards give visitors a fast scannable overview.
   - Acceptance Criteria: home page has a clear above-the-fold intro + featured project cards section; cards match Projects page styling; new projects (agent-board, overseer, bb-mcp, darkmoon) appear first; no Spline or scroll-trigger blocking the cards.
+  - Completed: 2026-04-11
+  - Evidence: `src/app/page.tsx` now renders LandingHero + FeaturedProjects components; new `src/app/_components/LandingHero.tsx` provides clean intro without scroll effects; new `src/app/_components/_site/FeaturedProjects.tsx` displays top 4 featured projects in 2x2 grid; new `src/app/_components/_styles/FeaturedProjects.css` provides matching card styling with hover effects; projects.ts updated to feature agent-board, overseer, bb-mcp, darkmoon as P0 visible projects.
+  - Follow-up: refresh README/docs screenshots to reflect the new landing page design.
 
 - [ ] Keep the Playwright Docker image and npm version in lockstep.
   - Context: any future Playwright upgrade must update both `Dockerfile.test` and `@playwright/test` together or Docker smoke runs will break.

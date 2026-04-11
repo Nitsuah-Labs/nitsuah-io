@@ -107,3 +107,132 @@
     opacity: 0;
   }
 }
+
+/* Landing Hero Styles - Simpler hero for home page landing */
+.landingHero {
+  min-height: auto;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.landingContent {
+  max-width: 900px;
+  text-align: center;
+  z-index: 10;
+}
+
+.badge {
+  display: inline-block;
+  background: #f0f4f8;
+  color: #3b82f6;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.landingTagline {
+  margin-bottom: 1.5rem;
+}
+
+.landingTitle {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+}
+
+.landingTitle .highlight {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.landingDescription {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landingCTA {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+/* Button overrides for landing */
+.landingHero .primaryButton {
+  background-color: #3b82f6;
+  color: white;
+  padding: 1.125rem 2.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.landingHero .primaryButton:hover {
+  background-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.landingHero .secondaryButton {
+  background-color: white;
+  color: #3b82f6;
+  padding: 1.125rem 2.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.landingHero .secondaryButton:hover {
+  background-color: #f9fafb;
+  border-color: #3b82f6;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .landingHero {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .landingTitle {
+    font-size: 2rem;
+  }
+
+  .landingDescription {
+    font-size: 1rem;
+  }
+
+  .landingCTA {
+    gap: 1rem;
+  }
+
+  .landingHero .primaryButton,
+  .landingHero .secondaryButton {
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+  }
+}
