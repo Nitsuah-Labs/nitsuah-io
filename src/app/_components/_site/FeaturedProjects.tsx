@@ -73,7 +73,8 @@ const FeaturedProjects: React.FC = () => {
         <div className="featured-header">
           <h2>Featured Projects</h2>
           <p>
-            A collection of current work showcasing AI, DevOps, Web3, and product engineering.
+            A collection of current work showcasing AI, DevOps, Web3, and
+            product engineering.
           </p>
         </div>
 

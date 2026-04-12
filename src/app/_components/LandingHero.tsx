@@ -17,12 +17,15 @@ export const LandingHero: React.FC = () => {
         <h1 className={styles.landingTitle}>
           Developer Productivity Engineer
           <br />
-          <span className={styles.highlight}>Building the Future with AI & Web3</span>
+          <span className={styles.highlight}>
+            Building the Future with AI & Web3
+          </span>
         </h1>
 
         <p className={styles.landingDescription}>
-          I create intelligent systems that bridge human intent and AI execution. Currently working 
-          on multi-agent orchestration, repository intelligence, and blockchain applications.
+          I create intelligent systems that bridge human intent and AI
+          execution. Currently working on multi-agent orchestration, repository
+          intelligence, and blockchain applications.
         </p>
 
         <div className={styles.landingCTA}>
