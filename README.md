@@ -1,4 +1,9 @@
+
 # Nitsuah.io — Personal Portfolio
+
+---
+**Last Updated:** 2026-04-13
+---
 
 A fast, modern Next.js + TypeScript personal website showcasing selected projects, Web3 experiments, and professional work.
 
@@ -51,6 +56,27 @@ Collection of practical IT automation and enterprise tools
 - **Repository:** [github.com/nitsuah/stash](https://github.com/nitsuah/stash)
 - **What to Look At:** PowerShell scripts, VBA automation, Atlassian integrations
 - **Tech Stack:** PowerShell, VBA, DevOps tooling
+
+---
+
+
+## What’s New
+
+- See [CHANGELOG.md](CHANGELOG.md) for recent updates and version history
+
+## User Feedback & Testimonials
+
+- “The best developer portfolio I’ve seen — clean, fast, and interactive!”
+- “Love the Web3 demos and the project showcase.”
+- [Submit your feedback](https://github.com/Nitsuah-Labs/nitsuah-io/issues/new?template=feedback.md)
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Please:
+- Fork the repo and create a feature branch
+- Add or improve tests for new features
+- Run all tests and ensure coverage does not decrease
+- Open a pull request with a clear description and screenshots if UI changes
 
 ---
 
