@@ -11,11 +11,10 @@ export const LandingHero: React.FC = () => {
     <section className={styles.landingHero}>
       <div className={styles.landingContent}>
         <div className={styles.landingTagline}>
-          <span className={styles.badge}>Austin Hardin</span>
         </div>
 
         <h1 className={styles.landingTitle}>
-          Developer Productivity Engineer
+          Austin Hardy - Developer Productivity Engineer
           <br />
           <span className={styles.highlight}>
             Building the Future with AI & Web3
