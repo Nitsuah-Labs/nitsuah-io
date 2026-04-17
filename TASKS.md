@@ -6,6 +6,20 @@
 
 ### P0 - Blocking
 
+- [ ] **[Q2-CEO] Move Spline 3D animation to `/3d` route** — relocate the Spline scene from the home page hero to a dedicated `/3d` page; remove the "scroll for more" prompt from the home page.
+  - Context: CEO directive — the Spline scene inflates the home page bundle and hurts LCP; it belongs on an opt-in page, not the critical landing path.
+  - Acceptance Criteria: home page loads without any Spline bundle; `/3d` route renders the Spline scene; "scroll for more" prompt is removed; Lighthouse performance score on the home page improves by ≥ 15 points.
+  - Completed: 2026-04-03
+  - Evidence: `src/app/page.tsx` no longer imports/renders Spline; new `src/app/3d/page.tsx` hosts the Spline scene; `HeroSection` now supports disabling scroll prompt and home passes `showScrollIndicator={false}`.
+  - Follow-up: record Lighthouse before/after measurement evidence showing the home page performance score improved by ≥ 15 points, then re-check this task.
+
+- [ ] **[Q2-CEO] Redesign home page as a landing page with project cards** — replace the current hero/Spline layout with a focused landing page that prominently features primary projects as cards (title, short description, link to project). Use the same card styling as the existing Projects page. Lead with newer projects: agent-board, overseer, bb-mcp, darkmoon.
+  - Context: CEO directive — the home page should immediately communicate what the portfolio author builds; project cards give visitors a fast scannable overview.
+  - Acceptance Criteria: home page has a clear above-the-fold intro + featured project cards section; cards match Projects page styling; new projects (agent-board, overseer, bb-mcp, darkmoon) appear first; no Spline or scroll-trigger blocking the cards.
+  - Completed: 2026-04-11
+  - Evidence: `src/app/page.tsx` now renders LandingHero + FeaturedProjects components; new `src/app/_components/LandingHero.tsx` provides clean intro without scroll effects; new `src/app/_components/_site/FeaturedProjects.tsx` displays top 4 featured projects in 2x2 grid; new `src/app/_components/_styles/FeaturedProjects.css` provides matching card styling with hover effects; projects.ts updated to feature agent-board, overseer, bb-mcp, darkmoon as P0 visible projects.
+  - Follow-up: refresh README/docs screenshots to reflect the new landing page design.
+
 - [ ] Keep the Playwright Docker image and npm version in lockstep.
   - Context: any future Playwright upgrade must update both `Dockerfile.test` and `@playwright/test` together or Docker smoke runs will break.
   - Acceptance Criteria: coordinated upgrades keep `npm run precheck:docker` passing.
@@ -96,21 +110,6 @@
 
 ## Done
 
-- [x] Docker test infrastructure.
-- [x] CSS architecture migration.
-- [x] Dark mode theme system.
-- [x] Dark mode toggle UI.
-- [x] Jest unit coverage above 98 percent.
-- [x] GitHub Actions CI pipeline.
-- [x] Playwright E2E infrastructure.
-- [x] Visual regression coverage.
-- [x] Split Playwright CI strategy.
-- [x] Centralized `config/` directory.
-- [x] Comprehensive `.dockerignore`.
-- [x] PR and bug-report templates.
-- [x] Netlify deployment.
-- [x] Resume PDF mode.
-- [x] Portfolio navigation updates.
 
 <!-- AGENT INSTRUCTIONS:
 1. Keep work in P0-P3 sections.

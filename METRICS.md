@@ -1,4 +1,7 @@
+
 # Metrics
+
+**Last Validated:** 2026-04-13 (Overseer compliance review)
 
 ## Core Metrics
 

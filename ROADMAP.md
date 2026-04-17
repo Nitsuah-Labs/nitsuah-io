@@ -1,12 +1,8 @@
 # ROADMAP
 
-**Last Updated:** 2026-04-03
+**Last Updated:** 2026-04-13 (Overseer compliance review)
+Next Review: 2026-05-01
 
-## 2025 Q4 (Completed)
-
-- [x] Stabilize the initial release foundation.
-- [x] Ship the CSS architecture, theme system, strong unit coverage, and split Playwright CI path.
-- [x] Consolidate core docs under `docs/` and keep the Netlify SSR deployment path working.
 
 ## 2026 Q1 (Completed)
 

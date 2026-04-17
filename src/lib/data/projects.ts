@@ -18,6 +18,70 @@ export type Project = {
 };
 
 const projects: Project[] = [
+  // Flagship Projects (Featured on Home Page)
+  {
+    id: "agent-board",
+    title: "Agent Board",
+    short:
+      "Unified dashboard orchestrating autonomous AI agents across GitHub repositories.",
+    description:
+      "Meta-repository intelligence layer that gives you and your AI agents a unified view across all your GitHub repositories. Enforces standardized documentation (ROADMAP, TASKS, METRICS, FEATURES) for visible momentum from strategy to shipped code.",
+    github: "https://github.com/nitsuah/agent-board",
+    demo: "https://agent-board.netlify.app",
+    highlight:
+      "Multi-agent orchestration, repo intelligence, automated governance",
+    tags: ["typescript", "nextjs", "ai", "devops"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "overseer",
+    title: "Overseer",
+    short:
+      "Repository health scoring, AI-powered summaries, and cross-repo PMO/DEV flow tracking.",
+    description:
+      "Intelligent repository monitoring dashboard providing health scoring, AI-powered documentation generation, automatic fix workflows, and cross-repo plan-execution visibility. Multi-provider AI failover with Gemini, OpenAI, and Anthropic support.",
+    github: "https://github.com/nitsuah/overseer",
+    demo: "https://app.overseer.netlify.app",
+    highlight:
+      "Health scoring, AI enrichment, multi-provider failover, PMO visibility",
+    tags: ["typescript", "nextjs", "ai", "devops"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "bb-mcp",
+    title: "Blackboard MCP",
+    short:
+      "Production-ready MCP server providing multi-persona access to Blackboard LMS data.",
+    description:
+      "Full-stack AI product engineering demonstration as an MCP server, exposing Blackboard LMS data across student, instructor, admin, and parent personas with RBAC, PII handling, rate limiting, and streaming response support.",
+    github: "https://github.com/nitsuah/bb-mcp",
+    highlight:
+      "Multi-persona tools, RBAC, streaming responses, institutional compliance",
+    tags: ["typescript", "mcp", "ai", "api"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "darkmoon",
+    title: "darkmoon.dev",
+    short:
+      "Full-stack portfolio site with Web3 integrations, real-time blockchain data, and 3D graphics.",
+    description:
+      "Advanced portfolio website showcasing Web3 integration, real-time blockchain applications, 3D Spline animations, and modern React patterns. Serves as a secondary portfolio domain with specialized project content.",
+    externalLink: "https://darkmoon.dev",
+    infoUrl: "https://darkmoon.dev",
+    highlight: "Web3 integration, real-time data, 3D graphics, design showcase",
+    tags: ["typescript", "nextjs", "web3", "3d"],
+    category: "Web3",
+    status: "active",
+    featured: true,
+  },
+  // Original Projects
   {
     id: "kryptos",
     title: "Kryptos",
@@ -88,19 +152,6 @@ const projects: Project[] = [
     demo: "/labs/",
     highlight: "Web3 experiments and blockchain tools",
     tags: ["web3", "blockchain", "experiments"],
-    category: "Web3",
-    status: "active",
-    featured: false,
-  },
-  {
-    id: "darkmoon",
-    title: "darkmoon.dev",
-    short: "Custom domain showcasing additional projects.",
-    description:
-      "Alternative portfolio site featuring specialized projects and blockchain applications.",
-    externalLink: "https://darkmoon.dev",
-    highlight: "Alternative portfolio and project showcase",
-    tags: ["web3", "blockchain"],
     category: "Web3",
     status: "active",
     featured: false,
