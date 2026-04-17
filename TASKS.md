@@ -3,15 +3,12 @@
 
 **Last Updated:** 2026-04-13 (Overseer compliance review)
 
-
 ## Done
 
 - [x] Move Spline 3D animation to `/3d` route (Q2-2026)
 - [x] Redesign home page as a landing page with project cards (Q2-2026)
 
 ## In Progress
-
-# (No active tasks currently marked as in progress)
 
 ## Todo
 
