@@ -1,28 +1,17 @@
-
-# 🗺️ Nitsuah.io Roadmap
+# ROADMAP
 
 **Last Updated:** 2026-04-13 (Overseer compliance review)
 Next Review: 2026-05-01
 
 
-## Q4 2025: Foundation (Completed) 🚀
-- [x] Stabilize the initial release foundation
-- [x] Ship the CSS architecture, theme system, strong unit coverage, and split Playwright CI path
-- [x] Consolidate core docs under `docs/` and keep the Netlify SSR deployment path working
+## 2026 Q1 (Completed)
 
+- [x] Keep Playwright Docker and npm versions coordinated during upgrades.
+- [x] Ship the dark mode toggle UI.
+- [ ] Replace placeholder-heavy client demo assets. *(carry → Q2)*
+- [ ] Replace duplicate project and crypto page assets. *(carry → Q2)*
 
-## Q1 2026: UI & Testing (Completed) ✅
-- [x] Keep Playwright Docker and npm versions coordinated during upgrades
-- [x] Ship the dark mode toggle UI
-- [ ] Replace placeholder-heavy client demo assets *(carry → Q2)*
-- [ ] Replace duplicate project and crypto page assets *(carry → Q2)*
-
-
-## Q2 2026: Performance & AI (IN PROGRESS) 🏗️
-### CEO Priorities (load speed, home page redesign)
-- [x] Move Spline animation off home page to `/3d`
-- [x] Home page as landing page
-- [ ] Load speed improvements: with the Spline scene removed from the critical path, measure and document LCP improvement; ensure the home page reaches a Lighthouse performance score ≥ 90
+## 2026 Q2 (In Progress)
 
 ### Carry-overs
 - [ ] Replace placeholder-heavy client demo assets (restaurant, e-commerce, real-estate, CMS, NFT).
@@ -53,11 +42,12 @@ Next Review: 2026-05-01
 - [ ] Refresh `METRICS.md` with a `last validated` marker and re-run coverage.
 - [x] Add `docs/INTEGRATIONS.md` mapping sister-repo connection points.
 
+## 2026 Q3 (Planned)
 
-## Q3 2026: Portfolio Intelligence (Planned) 🤖
-- [ ] Agent-board showcase section: visualize autonomous agents building / maintaining the site
-- [ ] On-chain resume page: verifiable credentials tied to wallet address (EAS attestations)
-- [ ] AI-generated project summaries with human-editable overrides
+### Portfolio Intelligence
+- [ ] Agent-board showcase section: visualize autonomous agents building / maintaining the site.
+- [ ] On-chain resume page: verifiable credentials tied to wallet address (EAS attestations).
+- [ ] AI-generated project summaries with human-editable overrides.
 
 ### Web3 Depth
 - [ ] Expand wallet-flow coverage in Playwright Nightly (connection, signing, disconnect).
@@ -70,11 +60,12 @@ Next Review: 2026-05-01
 - [ ] Offline fallback page with cached project data.
 - [ ] Push notification opt-in for new project announcements (vapid, server-side).
 
+## 2026 Q4 (Exploratory)
 
-## Q4 2026: Scale & Ecosystem (Exploratory) 🧪
-- [ ] Full Core Web Vitals audit targeting LCP < 1.5s, CLS = 0, INP < 100ms
-- [ ] Migrate to Turbopack for dev and production (drop webpack config)
-- [ ] Bundle splitting review: reduce initial JS payload below 150 KB (gzip)
+### Scale & Performance
+- [ ] Full Core Web Vitals audit targeting LCP < 1.5s, CLS = 0, INP < 100ms.
+- [ ] Migrate to Turbopack for dev and production (drop webpack config).
+- [ ] Bundle splitting review: reduce initial JS payload below 150 KB (gzip).
 
 ### Ecosystem Expansion
 - [ ] Internationalization (i18n) foundation via `next-intl`.
