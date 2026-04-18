@@ -8,7 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `docs/INTEGRATIONS.md` cross-repo connection map for sister-repo integration points.
+- Planned: AI chat widget via bb-mcp (`/api/chat` proxy).
+- Planned: Bento grid layout for Projects and Skills sections.
+- Planned: Live kryptos cipher-challenge stats in Labs sidebar.
+- Planned: skyview privacy-first analytics event sink.
+- Planned: `docs/API.md` wagmi hook and chain surface documentation.
+- Planned: `docs/INTEGRATIONS.md` cross-repo connection map.
 
 ### Changed
 - ROADMAP.md expanded through Q4 2026 with AI, PWA, cross-repo, and on-chain resume milestones.

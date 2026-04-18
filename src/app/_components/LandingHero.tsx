@@ -10,8 +10,7 @@ export const LandingHero: React.FC = () => {
   return (
     <section className={styles.landingHero}>
       <div className={styles.landingContent}>
-        <div className={styles.landingTagline}>
-        </div>
+        <div className={styles.landingTagline}></div>
 
         <h1 className={styles.landingTitle}>
           Austin Hardy - Developer Productivity Engineer
