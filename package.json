@@ -62,7 +62,7 @@
     "@splinetool/runtime": "^1.12.81",
     "@tanstack/react-query": "^5.95.2",
     "@wagmi/connectors": "^8.0.3",
-    "@wagmi/core": "^3.0.0",
+    "@wagmi/core": "^3.4.5",
     "@walletconnect/ethereum-provider": "^2.23.5",
     "bufferutil": "^4.1.0",
     "next": "^16.2.3",
