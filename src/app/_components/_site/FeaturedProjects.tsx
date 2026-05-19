@@ -73,14 +73,15 @@ const FeaturedProjects: React.FC = () => {
         <div className="featured-header">
           <h2>Featured Projects</h2>
           <p>
-            A collection of current work showcasing AI, DevOps, Web3, and
-            product engineering.
+            A collection of current work showcasing AI, DevOps, Web3, and product engineering.
           </p>
         </div>
 
-        <div className="featured-projects-grid">
+        <div className="featured-projects-grid" style={{ justifyItems: "center" }}>
           {featuredProjects.slice(0, 4).map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <div style={{ maxWidth: 260, width: "100%" }} key={project.id}>
+              <ProjectCard project={project} />
+            </div>
           ))}
         </div>
 

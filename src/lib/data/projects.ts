@@ -43,7 +43,7 @@ const projects: Project[] = [
     description:
       "Intelligent repository monitoring dashboard providing health scoring, AI-powered documentation generation, automatic fix workflows, and cross-repo plan-execution visibility. Multi-provider AI failover with Gemini, OpenAI, and Anthropic support.",
     github: "https://github.com/nitsuah/overseer",
-    demo: "https://app.overseer.netlify.app",
+    demo: "https://ghoverseer.netflify.app",
     highlight:
       "Health scoring, AI enrichment, multi-provider failover, PMO visibility",
     tags: ["typescript", "nextjs", "ai", "devops"],
