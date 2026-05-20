@@ -63,13 +63,6 @@
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .featured-project-card {
-    max-width: 100%;
-    margin: 0;
-  }
-}
-
 .featured-project-card::before {
   content: "";
   position: absolute;
@@ -98,7 +91,7 @@
   align-items: flex-start;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .featured-project-card .project-title {
@@ -225,6 +218,8 @@
 
   .featured-project-card {
     padding: 1.75rem;
+    max-width: 100%;
+    margin: 0;
   }
 
   .featured-project-card .project-tag {
