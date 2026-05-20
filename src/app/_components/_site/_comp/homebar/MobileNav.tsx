@@ -24,11 +24,13 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         anchorEl={anchorEl}
         open={open}
         onClose={() => setAnchorEl(null)}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#1a1a1a",
-            border: "2px solid #f97316",
-            borderRadius: "8px",
+        slotProps={{
+          paper: {
+            sx: {
+              backgroundColor: "#1a1a1a",
+              border: "2px solid #f97316",
+              borderRadius: "8px",
+            },
           },
         }}
       >
