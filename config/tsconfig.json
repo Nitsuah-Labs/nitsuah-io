@@ -22,6 +22,10 @@
       "../node_modules/@types",
       "../src/types"
     ],
+    "types": [
+      "node",
+      "jest"
+    ],
     "plugins": [
       {
         "name": "next"
@@ -37,6 +41,7 @@
     
     // Path mapping for cleaner imports
     "baseUrl": "..",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["src/*"],
       "@/components/*": ["src/app/_components/*"],
