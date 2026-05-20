@@ -7,9 +7,9 @@ import HomeBar from "./_components/_site/Homebar";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="App" style={{ background: "var(--color-background)", color: "var(--color-text-primary)", minHeight: "100vh" }}>
+    <div className="App">
       <HomeBar />
-      <main id="main" tabIndex={-1} role="main" aria-label="Homepage Content" style={{ background: "var(--color-background)", color: "var(--color-text-primary)" }}>
+      <main id="main" tabIndex={-1} role="main" aria-label="Homepage Content">
         <LandingHero />
         <FeaturedProjects />
       </main>

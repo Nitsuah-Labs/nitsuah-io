@@ -39,7 +39,7 @@
   margin-bottom: 2rem;
 }
 
-/* For exactly 4 cards, use 2x2 layout on desktop */
+/* For exactly 4 cards, use a 4-column layout on desktop */
 @media (min-width: 1200px) {
   .featured-projects-grid {
     grid-template-columns: repeat(4, 1fr);
