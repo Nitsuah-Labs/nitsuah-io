@@ -6,7 +6,9 @@ import {
   calculateDuration,
   calculateTotalYearsOfExperience,
   extractDurationText,
+  formatDate,
   getCompanyLogoUrl,
+  isContractingRole,
 } from "../../../utils/resume";
 import { CompanyLogo } from "./CompanyLogo";
 
@@ -32,6 +34,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
       <div className="work-items">
         {displayedJobs.map((job, idx) => {
           const duration = calculateDuration(job.startDate, job.endDate);
+          const logoUrl = getCompanyLogoUrl(job.name);
+          const isContractRole = isContractingRole(job.name);
           const years = parseFloat(
             duration.match(/\(([^)]+) years\)/)?.[1] || "0",
           );
@@ -54,7 +58,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                     </div>
                     <div className="work-info">
                       <div className="work-position">
-                        {getCompanyLogoUrl(job.name) ? (
+                        {logoUrl ? (
                           <>
                             <a
                               href={job.url || "#"}
@@ -65,51 +69,70 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                               title={job.name}
                             >
                               <CompanyLogo
-                                src={getCompanyLogoUrl(job.name)!}
+                                src={logoUrl}
                                 alt={job.name}
-                                width={48}
-                                height={48}
+                                width={128}
+                                height={128}
                                 style={{
                                   objectFit: "contain",
                                   borderRadius: "6px",
                                 }}
                               />
                             </a>
-                            <span>{job.position}</span>
+                            <span>
+                              {job.position}
+                              {isContractRole ? (
+                                <span className="contract-role-marker">*</span>
+                              ) : null}
+                            </span>
                           </>
                         ) : (
-                          job.position
+                          <span>
+                            {job.position}
+                            {isContractRole ? (
+                              <span className="contract-role-marker">*</span>
+                            ) : null}
+                          </span>
                         )}
                       </div>
-                      <div className="work-company print-show">
-                        {job.url ? (
-                          <a
-                            href={job.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            {job.name}
-                          </a>
-                        ) : (
-                          job.name
-                        )}
-                      </div>
+                      {logoUrl ? (
+                        <div className="work-company print-show">
+                          {job.url ? (
+                            <a
+                              href={job.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {job.name}
+                            </a>
+                          ) : (
+                            job.name
+                          )}
+                        </div>
+                      ) : (
+                        <div className="work-company work-company-inline">
+                          {job.url ? (
+                            <a
+                              href={job.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {job.name}
+                            </a>
+                          ) : (
+                            job.name
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="work-duration-section">
                     <div className="work-dates">
-                      {new Date(job.startDate).toLocaleDateString("en-US", {
-                        month: "short",
-                        year: "numeric",
-                      })}{" "}
+                      {formatDate(job.startDate)}{" "}
                       -{" "}
-                      {job.endDate
-                        ? new Date(job.endDate).toLocaleDateString("en-US", {
-                            month: "short",
-                            year: "numeric",
-                          })
-                        : "Present"}
+                      {job.endDate ? formatDate(job.endDate) : "Present"}
                     </div>
                     <div className="duration-visual">
                       <div className="duration-bars">

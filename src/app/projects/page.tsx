@@ -97,28 +97,30 @@ import aiarf from "./_assets/arf-ai.png";
 import arfg from "./_assets/arf-guild.gif";
 import blendeth from "./_assets/blend-eth.gif";
 import cat from "./_assets/cat.png";
-import darkmoon from "./_assets/darkmoon.gif";
 import ngx from "./_assets/ng-game.png";
 import spline from "./_assets/spline.gif";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  labs: nitsuah,
-  darkmoon: darkmoon,
+  "agent-board": "/images/agent-board.png",
+  overseer: "/images/overseer.png",
+  "bb-mcp": "/images/mcp.png",
+  labs: "/images/labs.png",
+  darkmoon: "/images/darkmoon.png",
   spline3d: spline,
-  clients: cat,
+  clients: "/images/clients.png",
   blender: blendeth,
   paint3d: arfg,
   imagen: aiarf,
-  kryptos: cat,
-  gcp: cat,
-  stash: cat,
-  "nitsuah-io": nitsuah,
-  games: ngx,
+  kryptos: "/images/kryptos.png",
+  gcp: "/images/gcp.png",
+  stash: "/images/stash.png",
+  "nitsuah-io": "/images/portfolio.png",
+  games: "/images/games.png",
 };
 
 // GIF projects for unoptimized loading
-const gifProjects = new Set(["darkmoon", "spline3d", "blender", "paint3d"]);
+const gifProjects = new Set(["spline3d", "blender", "paint3d"]);
 
 const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);

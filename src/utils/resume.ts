@@ -5,10 +5,44 @@
 /** Identifier used in job names to mark subcontracted positions */
 export const SUBCONTRACT_IDENTIFIER = "sub.";
 
+export function isContractingRole(companyName: string): boolean {
+  const normalized = companyName.toLowerCase();
+  return /\bsub[.:]\b/.test(normalized) || normalized.includes(SUBCONTRACT_IDENTIFIER);
+}
+
 export function formatDate(dateStr: string): string {
   if (!dateStr) return "";
+
+  const dateOnlyMatch = dateStr.match(/^(\d{4})-(\d{2})/);
+  if (dateOnlyMatch) {
+    const year = Number(dateOnlyMatch[1]);
+    const monthIndex = Number(dateOnlyMatch[2]) - 1;
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    if (monthIndex >= 0 && monthIndex < months.length) {
+      return `${months[monthIndex]} ${year}`;
+    }
+  }
+
   const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 export function calculateDuration(startDate: string, endDate?: string): string {
@@ -38,18 +72,59 @@ export function extractDurationText(duration: string): string {
 }
 
 export function getProficiencyLevel(level?: string): number {
-  const levels: { [key: string]: number } = {
-    beginner: 1,
-    intermediate: 2,
-    advanced: 3,
-    expert: 4,
-    master: 4,
+  return getSkillLevelMeta(level).score;
+}
+
+export type NormalizedSkillLevel =
+  | "beginner"
+  | "intermediate"
+  | "advanced"
+  | "expert";
+
+export function normalizeProficiencyLevel(level?: string): NormalizedSkillLevel {
+  const normalized = level?.trim().toLowerCase();
+
+  if (normalized === "master" || normalized === "expert") return "expert";
+  if (normalized === "advanced") return "advanced";
+  if (normalized === "beginner" || normalized === "novice") return "beginner";
+
+  return "intermediate";
+}
+
+export function getSkillLevelMeta(level?: string): {
+  normalized: NormalizedSkillLevel;
+  score: number;
+  label: string;
+} {
+  const normalized = normalizeProficiencyLevel(level);
+
+  const metaByLevel: Record<NormalizedSkillLevel, { score: number; label: string }> = {
+    beginner: { score: 1, label: "Beginner" },
+    intermediate: { score: 2, label: "Intermediate" },
+    advanced: { score: 3, label: "Advanced" },
+    expert: { score: 5, label: "Expert" },
   };
 
-  if (!level) return 2;
+  return {
+    normalized,
+    score: metaByLevel[normalized].score,
+    label: metaByLevel[normalized].label,
+  };
+}
 
-  // Default to Intermediate (2) when level is unrecognized.
-  return levels[level.trim().toLowerCase()] ?? 2;
+export function parseSkillKeywords(keywords: string[] = []): string[] {
+  const seen = new Set<string>();
+
+  return keywords
+    .flatMap((entry) => entry.split(","))
+    .map((keyword) => keyword.trim())
+    .filter((keyword) => keyword.length > 0)
+    .filter((keyword) => {
+      const normalized = keyword.toLowerCase();
+      if (seen.has(normalized)) return false;
+      seen.add(normalized);
+      return true;
+    });
 }
 
 /**
@@ -64,10 +139,7 @@ export function calculateTotalYearsOfExperience(
 ): number {
   return work.reduce((sum, job) => {
     // Skip subcontracted work if excludeSubcontracted is true
-    if (
-      excludeSubcontracted &&
-      job.name.toLowerCase().includes(SUBCONTRACT_IDENTIFIER)
-    ) {
+    if (excludeSubcontracted && isContractingRole(job.name)) {
       return sum;
     }
     const startDate = new Date(job.startDate);
@@ -86,6 +158,19 @@ export function calculateTotalYearsOfExperience(
  */
 export function getCompanyLogoUrl(companyName: string): string | null {
   const lowerName = companyName.toLowerCase();
+
+  // Deterministic local logos for the top resume companies.
+  const localCompanyLogos: { [key: string]: string } = {
+    netflix: "/images/netflix-logo.svg",
+    coinbase: "/images/coinbase-logo.svg",
+    blackboard: "/images/blackboard-logo.svg",
+  };
+
+  for (const key in localCompanyLogos) {
+    if (lowerName.includes(key)) {
+      return localCompanyLogos[key];
+    }
+  }
 
   // Map company substrings to their domains for logo.dev API
   const companyDomains: { [key: string]: string } = {

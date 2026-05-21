@@ -17,6 +17,16 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         onClick={(e) => setAnchorEl(e.currentTarget)}
         size="large"
         color="inherit"
+        sx={{
+          color: "var(--color-text-primary)",
+          backgroundColor: "var(--color-surface)",
+          border: "1px solid var(--color-border)",
+          borderRadius: "12px",
+          "&:hover": {
+            backgroundColor: "var(--color-surface-elevated)",
+            borderColor: "var(--color-border-hover)",
+          },
+        }}
       >
         <MenuIcon />
       </IconButton>

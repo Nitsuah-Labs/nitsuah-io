@@ -28,11 +28,11 @@ import web3mint from "../../projects/_assets/web3-mint.png";
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
   github: cat,
-  labs: nitsuah,
+  labs: "/images/labs.png",
   darkmoon: darkmoon,
   spline3d: spline,
   nextgen: ngx,
-  clients: cat,
+  clients: "/images/clients.png",
   buildspace: buildspace,
   "ens-nft": polyens,
   "nft-store": solPay,
@@ -47,6 +47,8 @@ const projectImages: Record<string, any> = {
   "sol-core": solana,
   paint3d: arfg,
   imagen: aiarf,
+  games: "/images/games.png",
+  "nitsuah-io": "/images/portfolio.png",
 };
 
 const PortfolioGrid: React.FC = () => {

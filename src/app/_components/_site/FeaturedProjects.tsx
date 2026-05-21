@@ -9,6 +9,9 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const hasCode = Boolean(project.github);
+  const hasDemo = Boolean(project.demo || project.externalLink);
+
   const handleDemoClick = () => {
     if (project.demo) {
       window.location.href = project.demo;
@@ -33,8 +36,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         ))}
       </div>
 
-      <div className="project-links">
-        {project.github && (
+      <div className={`project-links ${hasCode !== hasDemo ? "single-action" : ""}`}>
+        {hasCode && (
           <a
             href={project.github}
             target="_blank"
@@ -49,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </a>
         )}
 
-        {(project.demo || project.externalLink) && (
+        {hasDemo && (
           <button
             onClick={handleDemoClick}
             className="project-link demo-link"

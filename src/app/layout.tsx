@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   generateBreadcrumbSchema,
   generateOrganizationSchema,
@@ -129,10 +130,8 @@ export default function RootLayout({
               }}
             />
 
-            <script
-              // Inline script to remove noisy dev overlays / debug UIs during tests
-              dangerouslySetInnerHTML={{
-                __html: `(() => {
+            <Script id="test-helpers-overlay-cleanup" strategy="beforeInteractive">
+              {`(() => {
                   try {
                     const removeByText = (texts) => {
                       const all = Array.from(document.querySelectorAll('*'));
@@ -202,9 +201,8 @@ export default function RootLayout({
                     // Safety: stop observing after 10s
                     setTimeout(() => mo.disconnect(), 10000);
                   } catch(e) { /* ignore */ }
-                })();`,
-              }}
-            />
+                })();`}
+            </Script>
           </>
         )}
         {/*
@@ -213,9 +211,8 @@ export default function RootLayout({
             the query param and perform the same early overlay hiding/removal and
             add the "test-helpers" body class so test-only CSS takes effect.
           */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
+        <Script id="runtime-test-helpers-guard" strategy="beforeInteractive">
+          {`(() => {
                 try {
                   const params = (typeof window !== 'undefined' && window.location && new URL(window.location.href).searchParams) || null;
                   if (!params || params.get('testHelpers') !== '1') return;
@@ -260,9 +257,8 @@ export default function RootLayout({
                   mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
                   setTimeout(() => mo.disconnect(), 10000);
                 } catch(e) {}
-              })();`,
-          }}
-        />
+              })();`}
+        </Script>
       </head>
       <body
         className={process.env.NEXT_PUBLIC_TEST_HELPERS ? "test-helpers" : ""}
