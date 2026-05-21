@@ -162,8 +162,8 @@
       "level": "Master",
       "keywords": [
         "Jira Cloud",
-        "Jira Service Management (JSM)",
-        "Jira Align (SAFe Transformation)",
+        "Jira Service Management, JSM",
+        "Jira Align, SAFe",
         "Confluence",
         "Bitbucket",
         "Guard",
@@ -171,33 +171,33 @@
         "Atlas",
         "Crowd Identity",
         "StatusPage",
-        "Jira Datacenter Migrations",
-        "Atlassian REST APIs & Webhooks",
-        "Federated Identity & Access Management",
-        "App Integration & Advanced Automation"
+        "Jira Data Center Migrations",
+        "Atlassian REST API & Webhooks",
+        "Federated IAM",
+        "App Integration & Automation"
       ]
     },
     {
       "name": "GenAI & Developer Tooling",
       "level": "Advanced",
       "keywords": [
-        "MCP Servers",
+        "MCP",
         "Spring AI",
-        "GenAI Tool Integration",
+        "GenAI Integrations",
         "Claude API",
         "OpenAI API",
         "Gemini API",
-        "AI-Assisted Development",
+        "AI-Assisted Engineering",
         "Prompt Engineering",
-        "Tool Annotation Frameworks",
-        "Natural Language Processing (NLP)",
+        "Tool Annotation",
+        "NLP",
         "PyTorch",
         "TensorFlow",
         "Hugging Face",
-        "TesseractOCR",
-        "Jupyter Labs",
+        "Tesseract OCR",
+        "JupyterLab",
         "Slack Bolt SDK",
-        "Developer Tooling & IDE Extensions"
+        "Dev Tooling & IDE Extensions"
       ]
     },
     {
@@ -205,10 +205,10 @@
       "level": "Master",
       "keywords": [
         "AWS, EC2, S3, IAM, RDS, Lambda, ECS, EKS, Route 53, VPC, CloudFront",
-        "Infrastructure as Code, Terraform, Pulumi, CloudFormation",
-        "Containerization, Docker, Kubernetes",
+        "IaC, Terraform, Pulumi, CloudFormation",
+        "Containers, Docker, Kubernetes",
         "Virtualization, vSphere, VMware, Hyper-V, Azure VM, Citrix, Xen",
-        "CI/CD Pipelines, GitHub Actions, Jenkins, Maven, Gradle",
+        "CI/CD, GitHub Actions, Jenkins, Maven, Gradle",
         "Observability, Datadog, New Relic, Splunk, Grafana, Kibana, PagerDuty, incident.io"
       ]
     },
@@ -216,7 +216,8 @@
       "name": "Software Engineering",
       "level": "Advanced",
       "keywords": [
-        "Java, Spring Boot",
+        "Java",
+        "Spring Boot",
         "Python",
         "Go",
         "TypeScript",
@@ -227,8 +228,8 @@
         "REST APIs",
         "GraphQL",
         "Microservices",
-        "Command Pattern Architecture",
-        "Test-Driven Development (TDD)"
+        "Command Pattern",
+        "TDD"
       ]
     },
     {
@@ -243,11 +244,11 @@
         "Neo4j",
         "Snowflake",
         "ElasticSearch",
-        "Microsoft SQL Server, T-SQL",
-        "SSIS, SSRS, SSMS",
+        "SQL Server, T-SQL",
+        "SSIS/SSRS/SSMS",
         "MySQL",
         "NoSQL Architecture",
-        "PowerBI",
+        "Power BI",
         "Tableau"
       ]
     },
@@ -259,8 +260,8 @@
         "Unix",
         "OSX",
         "Windows Server",
-        "Shell Scripting, Bash, PowerShell",
-        "CLI Tools, AWS CLI, GH CLI, Git",
+        "Shell, Bash, PowerShell",
+        "CLI, AWS CLI, GH CLI, Git",
         "Web/App Servers, Nginx, Apache, Tomcat, JBoss, IIS",
         ".NET Core",
         "PHP",
@@ -280,12 +281,12 @@
         "Asana",
         "Monday.com",
         "Notion",
-        "Azure Active Directory (AD)",
-        "SCIM & SAML Identity Provisioning",
+        "Azure AD",
+        "SCIM/SAML Provisioning",
         "BugCrowd",
-        "Fortify-on-Demand",
+        "Fortify on Demand",
         "ZenGRC",
-        "MNPI & SOC Compliance Automation"
+        "MNPI/SOC Compliance Automation"
       ]
     },
     {
@@ -304,7 +305,7 @@
         "Wagmi",
         "Chainlink",
         "Polygon",
-        "Decentralized Finance (DeFi)",
+        "DeFi, Decentralized Finance",
         "Tokenomics",
         "IPFS"
       ]
@@ -316,7 +317,7 @@
         "Figma",
         "LucidChart",
         "Visio",
-        "Spline.design",
+        "Spline",
         "Sketch",
         "UE5",
         "Unity",
@@ -327,12 +328,14 @@
       "name": "Auto Repair",
       "level": "Beginner",
       "keywords": [
-        "Fluid & Filter Maintenance, Oil, Coolant, Air/Fuel Filters",
-        "Charging System Service, Alternator & Battery Replacement",
-        "12V Electrical Troubleshooting & Basic Wiring Repair",
-        "Ignition System Maintenance, Spark Plugs & Coil Packs",
-        "OBD-II Diagnostic Scanning & Fault Code Isolation",
-        "Mechanical Tool & Shop Safety Proficiency"
+        "Fluids & Filters, Oil, Coolant, Air/Fuel",
+        "Charging System, Alternator, Battery",
+        "12V Electrical Diagnostics & Basic Wiring",
+        "Ignition System, Spark Plugs, Coil Packs",
+        "OBD-II Diagnostics",
+        "Fault Isolation",
+        "Mechanical Tooling",
+        "Shop Safety"
       ]
     }
   ],

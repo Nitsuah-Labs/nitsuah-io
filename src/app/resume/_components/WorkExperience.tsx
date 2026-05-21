@@ -71,8 +71,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                               <CompanyLogo
                                 src={logoUrl}
                                 alt={job.name}
-                                width={128}
-                                height={128}
+                                width={168}
+                                height={56}
                                 style={{
                                   objectFit: "contain",
                                   borderRadius: "6px",
