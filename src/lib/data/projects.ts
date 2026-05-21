@@ -39,7 +39,7 @@ const projects: Project[] = [
     id: "overseer",
     title: "Overseer",
     short:
-      "Repository health scoring, AI-powered summaries, and cross-repo PMO/DEV flow tracking.",
+      "Repository health scoring, AI-powered improvements, and cross-repo PMO/DEV flow tracking.",
     description:
       "Intelligent repository monitoring dashboard providing health scoring, AI-powered documentation generation, automatic fix workflows, and cross-repo plan-execution visibility. Multi-provider AI failover with Gemini, OpenAI, and Anthropic support.",
     github: "https://github.com/nitsuah/overseer",
@@ -64,7 +64,7 @@ const projects: Project[] = [
     tags: ["typescript", "mcp", "ai", "api"],
     category: "Apps",
     status: "active",
-    featured: true,
+    featured: false,
   },
   {
     id: "darkmoon",

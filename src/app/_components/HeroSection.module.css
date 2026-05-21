@@ -112,13 +112,18 @@
 .landingHero {
   min-height: auto;
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-background) 0%,
+    color-mix(in srgb, var(--color-surface) 85%, var(--color-background) 15%)
+      100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .landingContent {
@@ -149,7 +154,7 @@
   font-weight: 800;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   letter-spacing: -0.02em;
 }
 
@@ -162,7 +167,7 @@
 
 .landingDescription {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #6b7280;
+  color: var(--color-text-secondary);
   margin-bottom: 2.5rem;
   line-height: 1.8;
   max-width: 700px;
@@ -180,37 +185,37 @@
 
 /* Button overrides for landing */
 .landingHero .primaryButton {
-  background-color: #3b82f6;
+  background-color: var(--color-accent);
   color: white;
   padding: 1.125rem 2.5rem;
   border-radius: 10px;
   font-weight: 600;
   font-size: 1rem;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .landingHero .primaryButton:hover {
-  background-color: #2563eb;
+  background-color: var(--color-accent-hover);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .landingHero .secondaryButton {
-  background-color: white;
-  color: #3b82f6;
+  background-color: var(--color-surface-elevated);
+  color: var(--color-accent);
   padding: 1.125rem 2.5rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--color-border);
   border-radius: 10px;
   font-weight: 600;
   font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
 .landingHero .secondaryButton:hover {
-  background-color: #f9fafb;
-  border-color: #3b82f6;
+  background-color: var(--color-surface);
+  border-color: var(--color-accent);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 768px) {

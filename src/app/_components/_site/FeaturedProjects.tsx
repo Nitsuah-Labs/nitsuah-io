@@ -83,12 +83,6 @@ const FeaturedProjects: React.FC = () => {
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
-
-        <div className="featured-footer">
-          <a href="/projects" className="view-all-link">
-            Explore all projects →
-          </a>
-        </div>
       </div>
     </section>
   );

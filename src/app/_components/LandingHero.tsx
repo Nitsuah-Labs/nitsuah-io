@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import styles from "./HeroSection.module.css";
 
 /**
@@ -13,32 +12,16 @@ export const LandingHero: React.FC = () => {
         <div className={styles.landingTagline}></div>
 
         <h1 className={styles.landingTitle}>
-          Austin Hardy - Developer Productivity Engineer
+          Austin Hardy | Developer Productivity Engineer
           <br />
-          <span className={styles.highlight}>
-            Building the Future with AI & Web3
-          </span>
+          <span className={styles.highlight}>AI + Web3 Systems</span>
         </h1>
 
         <p className={styles.landingDescription}>
-          I create intelligent systems that bridge human intent and AI
+          I build intelligent systems that translate human intent into AI
           execution. Currently working on multi-agent orchestration, repository
           intelligence, and blockchain applications.
         </p>
-
-        <div className={styles.landingCTA}>
-          <Link href="/projects" className={styles.primaryButton}>
-            Explore Projects
-          </Link>
-          <a
-            href="https://github.com/nitsuah"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondaryButton}
-          >
-            GitHub Profile
-          </a>
-        </div>
       </div>
     </section>
   );
