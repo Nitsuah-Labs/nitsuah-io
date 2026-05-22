@@ -45,7 +45,7 @@
     color 0.3s ease;
 }
 .resume-page-root {
-  background: #1a1a1a;
+  background: var(--color-surface);
   min-height: 100vh;
 }
 

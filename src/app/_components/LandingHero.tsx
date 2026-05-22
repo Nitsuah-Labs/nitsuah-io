@@ -17,7 +17,7 @@ export const LandingHero: React.FC = () => {
           <br />
           Senior Systems Engineer
           <br />
-          <span className={styles.highlight}>AI + Web3 Systems</span>
+          <span className={styles.highlight}>SaaS | AI | Web3</span>
         </h1>
 
         <p className={styles.landingDescription}>

@@ -57,6 +57,17 @@
   align-items: start;
 }
 
+@media (min-width: 900px) {
+  .featured-projects-grid {
+    align-items: stretch;
+  }
+
+  .featured-project-card {
+    min-height: 214px;
+    height: 100%;
+  }
+}
+
 /* For exactly 4 cards, use a 4-column layout on desktop */
 @media (min-width: 1200px) {
   .featured-projects-grid {
