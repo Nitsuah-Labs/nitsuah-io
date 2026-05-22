@@ -77,11 +77,15 @@ export default function NotFound() {
           .not-found-content {
             max-width: 600px;
             text-align: center;
-            background: rgba(249, 115, 22, 0.05);
-            border: 2px solid rgba(249, 115, 22, 0.3);
+            background: color-mix(
+              in srgb,
+              var(--color-surface-elevated) 92%,
+              #f97316 8%
+            );
+            border: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
             padding: 2rem 1.5rem;
             border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(249, 115, 22, 0.15);
+            box-shadow: 0 10px 40px color-mix(in srgb, var(--color-accent) 18%, transparent);
           }
 
           .error-code {
@@ -105,13 +109,13 @@ export default function NotFound() {
           .error-title {
             font-size: 1.75rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--color-text-primary);
             margin-bottom: 0.5rem;
           }
 
           .error-description {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--color-text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.5;
           }
@@ -119,7 +123,7 @@ export default function NotFound() {
           .error-joke {
             display: block;
             font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--color-text-tertiary);
             margin-top: 0.25rem;
             font-style: italic;
           }
@@ -155,8 +159,8 @@ export default function NotFound() {
           }
 
           .primary-button {
-            background: #f97316;
-            color: white;
+            background: var(--color-accent);
+            color: #ffffff;
             padding: 0.65rem 1.25rem;
             border-radius: 8px;
             text-decoration: none;
@@ -169,16 +173,16 @@ export default function NotFound() {
           }
 
           .primary-button:hover {
-            background: #ea580c;
+            background: var(--color-accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
           }
 
           .secondary-button {
             background: transparent;
-            color: #f97316;
+            color: var(--color-accent);
             padding: 0.65rem 1.25rem;
-            border: 2px solid #f97316;
+            border: 2px solid var(--color-accent);
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
@@ -190,22 +194,26 @@ export default function NotFound() {
           }
 
           .secondary-button:hover {
-            background: #f97316;
+            background: var(--color-accent);
             color: white;
             transform: translateY(-2px);
           }
 
           .helpful-links {
             text-align: center;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(249, 115, 22, 0.2);
+            background: color-mix(
+              in srgb,
+              var(--color-surface) 88%,
+              var(--color-background) 12%
+            );
+            border: 1px solid color-mix(in srgb, var(--color-accent) 26%, var(--color-border));
             padding: 1.25rem;
             border-radius: 12px;
             margin-top: 0;
           }
 
           .helpful-links h3 {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--color-text-primary);
             margin-bottom: 0.75rem;
             font-size: 1rem;
           }
@@ -222,8 +230,8 @@ export default function NotFound() {
             justify-content: center;
             gap: 0.5rem;
             padding: 0.75rem 1rem;
-            background: #f97316;
-            border: 2px solid #f97316;
+            background: var(--color-accent);
+            border: 2px solid var(--color-accent);
             border-radius: 8px;
             text-decoration: none;
             color: #ffffff;
@@ -234,10 +242,10 @@ export default function NotFound() {
           }
 
           .link-card:hover {
-            background: #ea580c;
-            border-color: #ea580c;
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+            box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
           }
 
           .card-emoji {

@@ -62,27 +62,40 @@ const NavigationContent: React.FC<{
 
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <Brand
-          showFullName={showFullName}
-          isHovering={isHovering}
-          setIsHovering={setIsHovering}
-        />
+      {showMobileNav ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1.5rem",
+            width: "100%",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div style={{ marginLeft: 0 }}>
+            <MobileNav pages={pages} />
+          </div>
+          <div style={{ marginLeft: "0.75rem" }}>
+            <Brand
+              showFullName={showFullName}
+              isHovering={isHovering}
+              setIsHovering={setIsHovering}
+            />
+          </div>
+        </div>
+      ) : (
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <Brand
+            showFullName={showFullName}
+            isHovering={isHovering}
+            setIsHovering={setIsHovering}
+          />
 
-        {!showMobileNav && (
           <Box sx={{ marginLeft: "1rem" }}>
             <DesktopNav pages={pages} />
           </Box>
-        )}
-      </div>
-
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        {showMobileNav && (
-          <div>
-            <MobileNav pages={pages} />
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
@@ -113,8 +126,8 @@ const HomeBar: React.FC<HomeBarProps> = () => {
       component="header"
       role="banner"
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl" sx={{ px: { xs: 0.5, sm: 2 } }}>
+        <Toolbar disableGutters sx={{ pl: { xs: 0, sm: 0 } }}>
           <NavigationContent
             showFullName={showFullName}
             isHovering={isHovering}

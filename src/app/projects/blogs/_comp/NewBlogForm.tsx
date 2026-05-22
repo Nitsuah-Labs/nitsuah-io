@@ -1,11 +1,46 @@
 "use client";
-import { blogPosts } from "@/lib/data/blogs"; // used only for categories mapping in previous file
+import type { BlogPost } from "@/lib/data/blogs";
 import React from "react";
 
-const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
-  const categories = Array.from(
-    new Set(blogPosts.map((b) => b.category.toLowerCase())),
-  ).filter(Boolean);
+type NewBlogPayload = Pick<BlogPost, "title" | "category" | "excerpt" | "content"> & {
+  tags: string[];
+};
+
+interface NewBlogFormProps {
+  categories: string[];
+  onCancel: () => void;
+  onSubmit: (payload: NewBlogPayload) => void;
+}
+
+const NewBlogForm: React.FC<NewBlogFormProps> = ({
+  categories,
+  onCancel,
+  onSubmit,
+}) => {
+  const [title, setTitle] = React.useState("");
+  const [category, setCategory] = React.useState("");
+  const [excerpt, setExcerpt] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [tags, setTags] = React.useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit({
+      title: title.trim(),
+      category: category.trim(),
+      excerpt: excerpt.trim(),
+      content: content.trim(),
+      tags: tags
+        .split(",")
+        .map((tag) => tag.trim().toLowerCase())
+        .filter(Boolean),
+    });
+    setTitle("");
+    setCategory("");
+    setExcerpt("");
+    setContent("");
+    setTags("");
+  };
 
   return (
     <div
@@ -28,12 +63,7 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         Create New Blog Post
       </h2>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert(
-            "Blog submission functionality coming soon! This will integrate with your CMS.",
-          );
-        }}
+        onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
         <div>
@@ -51,6 +81,8 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
             type="text"
             required
             placeholder="Enter blog title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -76,6 +108,8 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
           </label>
           <select
             required
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -111,6 +145,8 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
             required
             placeholder="Brief description of your blog post..."
             rows={3}
+            value={excerpt}
+            onChange={(e) => setExcerpt(e.target.value)}
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -140,6 +176,8 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
             required
             placeholder="Write your blog content here..."
             rows={10}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -168,6 +206,8 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
           <input
             type="text"
             placeholder="web3, blockchain, tutorial..."
+            value={tags}
+            onChange={(e) => setTags(e.target.value)}
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -202,7 +242,7 @@ const NewBlogForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
               e.currentTarget.style.background = "#3b82f6";
             }}
           >
-            Publish Blog
+            Save Blog
           </button>
           <button
             type="button"

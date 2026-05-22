@@ -22,7 +22,14 @@ export const NFTDemo: React.FC<NFTDemoProps> = ({
 
   if (walletView) {
     return (
-      <div style={{ fontFamily: "system-ui, sans-serif" }}>
+      <div
+        style={{
+          fontFamily: "system-ui, sans-serif",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {/* Header */}
         <div
           style={{
@@ -59,7 +66,14 @@ export const NFTDemo: React.FC<NFTDemoProps> = ({
           </button>
         </div>
 
-        <div style={{ padding: "1.5rem" }}>
+        <div
+          style={{
+            padding: "1.25rem",
+            flex: 1,
+            minHeight: 0,
+            overflowY: "auto",
+          }}
+        >
           <div style={{ marginBottom: "1.5rem" }}>
             <Connect />
           </div>
@@ -110,7 +124,14 @@ export const NFTDemo: React.FC<NFTDemoProps> = ({
   }
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <style>{`
         @media (max-width: 768px) {
           .nft-header {
@@ -229,7 +250,14 @@ export const NFTDemo: React.FC<NFTDemoProps> = ({
       </nav>
 
       {/* Content */}
-      <div style={{ padding: "2rem 1.5rem", minHeight: "400px" }}>
+      <div
+        style={{
+          padding: "1.5rem 1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {view === "gallery" && (
           <div>
             <h2

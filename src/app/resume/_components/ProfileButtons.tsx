@@ -46,6 +46,7 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
   };
 
   return (
+    <>
     <div className="resume-profiles">
       {/* LinkedIn Button */}
       {profiles &&
@@ -270,5 +271,53 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
             </a>
           ))}
     </div>
+
+      {/* Print-only: show actual URLs as readable text */}
+      <div className="resume-profiles-print">
+        {profiles && profiles.filter((p) => p.network === "LinkedIn").map((profile, idx) => (
+          <div key={`print-li-${idx}`} className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">LinkedIn</span>
+            <span className="resume-profiles-print-url">{profile.url.replace(/^https?:\/\//, "")}</span>
+          </div>
+        ))}
+        {profiles && profiles.filter((p) => p.network === "GitHub").map((profile, idx) => (
+          <div key={`print-gh-${idx}`} className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">GitHub</span>
+            <span className="resume-profiles-print-url">{profile.url.replace(/^https?:\/\//, "")}</span>
+          </div>
+        ))}
+        {(url || website) && (
+          <div className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">Website</span>
+            <span className="resume-profiles-print-url">{(url || website || "").replace(/^https?:\/\//, "")}</span>
+          </div>
+        )}
+        {basics?.email && (
+          <div className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">Email</span>
+            <span className="resume-profiles-print-url">{basics.email}</span>
+          </div>
+        )}
+        {basics?.location && (
+          <div className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">Location</span>
+            <span className="resume-profiles-print-url">
+              {[basics.location.city, basics.location.region, basics.location.countryCode].filter(Boolean).join(", ")}
+            </span>
+          </div>
+        )}
+        {profiles && profiles.filter((p) => p.network !== "LinkedIn" && p.network !== "GitHub").map((profile, idx) => (
+          <div key={`print-other-${idx}`} className="resume-profiles-print-row">
+            <span className="resume-profiles-print-label">{profile.network}</span>
+            <span className="resume-profiles-print-url">{profile.url.replace(/^https?:\/\//, "")}</span>
+          </div>
+        ))}
+        <div className="resume-profiles-print-row">
+          <span className="resume-profiles-print-label">Projects</span>
+          <span className="resume-profiles-print-url">nitsuah.io/projects</span>
+        </div>
+      </div>
+      </>
   );
 };
+

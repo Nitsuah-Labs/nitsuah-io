@@ -15,7 +15,14 @@ export const PortfolioDemo: React.FC = () => {
   const projects = mockProjects;
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Header */}
       <div
         className="portfolio-header"
@@ -97,7 +104,14 @@ export const PortfolioDemo: React.FC = () => {
       </nav>
 
       {/* Content */}
-      <div style={{ padding: "2rem 1.5rem", minHeight: "450px" }}>
+      <div
+        style={{
+          padding: "1.5rem 1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {currentView === "gallery" && selectedProject === null && (
           <ProjectGallery
             projects={projects}

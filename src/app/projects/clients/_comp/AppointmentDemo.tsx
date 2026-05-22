@@ -22,7 +22,14 @@ export const AppointmentDemo: React.FC = () => {
   const appointments = mockAppointments;
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Header */}
       <div
         style={{
@@ -164,7 +171,14 @@ export const AppointmentDemo: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div style={{ padding: "1.5rem", maxHeight: "450px", overflowY: "auto" }}>
+      <div
+        style={{
+          padding: "1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {currentView === "calendar" && (
           <CalendarView
             appointments={appointments}

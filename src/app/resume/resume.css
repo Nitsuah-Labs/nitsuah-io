@@ -1254,6 +1254,34 @@
     display: none !important;
   }
 
+  .skill-item-beginner {
+    display: none !important;
+  }
+
+  .skills-grid {
+    display: none !important;
+  }
+
+  .skills-print-list {
+    display: block !important;
+  }
+
+  .resume-section.skills {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .resume-profiles {
+    display: none !important;
+  }
+
+  .resume-profiles-print {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0.35rem 2rem;
+    margin-top: 0.5rem;
+  }
+
   .resume-section {
     page-break-inside: auto;
     break-inside: auto;
@@ -1375,6 +1403,82 @@
   .resume-profiles a .icon {
     color: #111 !important;
   }
+}
+
+/* Print-only skills text list */
+.skills-print-list {
+  display: none;
+}
+
+.skills-print-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.skills-print-category {
+  font-weight: 700;
+  color: #222;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.skills-print-level {
+  font-size: 8pt;
+  font-style: italic;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.skills-print-level-expert {
+  color: #1d4ed8;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.skills-print-level-advanced {
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.skills-print-level-intermediate {
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+}
+
+.skills-print-keywords {
+  color: #444;
+  flex: 1;
+}
+
+/* Print-only profiles text */
+.resume-profiles-print {
+  display: none;
+}
+
+.resume-profiles-print-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 9.5pt;
+}
+
+.resume-profiles-print-label {
+  font-weight: 700;
+  color: #444;
+  min-width: 68px;
+}
+
+.resume-profiles-print-url {
+  color: #005ea6;
 }
 
 /* Responsive Design */

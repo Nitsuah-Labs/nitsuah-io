@@ -94,7 +94,14 @@ export const StorefrontDemo: React.FC = () => {
   };
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <style>{`
         @media (max-width: 768px) {
           .store-nav {
@@ -234,7 +241,14 @@ export const StorefrontDemo: React.FC = () => {
       </nav>
 
       {/* Page Content */}
-      <div style={{ padding: "1.5rem", minHeight: "400px" }}>
+      <div
+        style={{
+          padding: "1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {currentPage === "home" && (
           <HomePage
             products={products}

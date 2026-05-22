@@ -28,6 +28,10 @@ export default function RegisterContentProduction() {
   const [mounted, setMounted] = useState(false);
   const [message, setMessage] = useState("");
 
+  const { address: currentAccount, isConnected, chain } = useAccount();
+  const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
+  const network = chain?.name || "";
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -49,10 +53,6 @@ export default function RegisterContentProduction() {
       </>
     );
   }
-
-  const { address: currentAccount, isConnected, chain } = useAccount();
-  const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
-  const network = chain?.name || "";
 
   const contractConfig: { address: `0x${string}`; abi: Abi } = {
     address: contractAddress,

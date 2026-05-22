@@ -242,57 +242,48 @@ const Projects = () => {
           {/* Header */}
           <div className={styles.header}>
             <h1 className={styles.title}>PROJECTS</h1>
-            <h2 className={styles.subtitle}>
+            <p className={styles.subtitle}>
               Explore projects organized by category
-            </h2>
+            </p>
           </div>
 
-          {/* Filter Panel */}
-          <div className={styles.filterPanel}>
-            <div className={styles.filterHeader}>
-              <div className={styles.filterHeaderLeft}>
-                <button
-                  className={styles.filterToggle}
-                  onClick={() => setFiltersExpanded(!filtersExpanded)}
-                >
-                  <i className="fa fa-filter" aria-hidden="true"></i>
-                  <span>Filters</span>
-                  <span className={styles.expandIndicator}>
-                    {filtersExpanded ? "▲" : "▼"}
-                  </span>
-                </button>
+          {/* Category Filter Bar */}
+          <div className={styles.categoryFiltersBar}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`${styles.categoryButton} ${
+                  selectedCategory === cat ? styles.active : ""
+                }`}
+                aria-label={cat === "Featured" ? "⭐ Featured" : cat}
+              >
+                {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
+              </button>
+            ))}
+          </div>
 
-                {/* Category Filters Inline */}
-                <div className={styles.categoryButtonsInline}>
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`${styles.categoryButton} ${
-                        selectedCategory === cat ? styles.active : ""
-                      }`}
-                      aria-label={cat === "Featured" ? "⭐ Featured" : cat}
-                    >
-                      {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Tags Filter Panel */}
+          <div className={styles.filterPanel}>
+            <button
+              className={styles.filterToggle}
+              onClick={() => setFiltersExpanded(!filtersExpanded)}
+            >
+              <i className="fa fa-filter" aria-hidden="true"></i>
+              <span>Filter by Tags</span>
+              {selectedTags.length > 0 && (
+                <span style={{ marginLeft: "0.4rem", opacity: 0.7 }}>
+                  ({selectedTags.length} selected)
+                </span>
+              )}
+              <span className={styles.expandIndicator}>
+                {filtersExpanded ? "▲" : "▼"}
+              </span>
+            </button>
 
             {filtersExpanded && (
               <div className={styles.filterContent}>
-                {/* Tag Filters */}
-                <div className={styles.tagFilters}>
-                  <label className={styles.filterLabel}>
-                    Filter by Tags
-                    {selectedTags.length > 0 && (
-                      <span style={{ marginLeft: "0.5rem", opacity: 0.7 }}>
-                        ({selectedTags.length} selected)
-                      </span>
-                    )}
-                  </label>
-                  <div className={styles.tagButtons}>
+                <div className={styles.tagButtons}>
                     {availableTags.map((tag) => {
                       const category = getTagCategory(tag);
                       const colors = getCategoryColors(category);
@@ -333,7 +324,6 @@ const Projects = () => {
                         </button>
                       );
                     })}
-                  </div>
                 </div>
 
                 {/* Clear Filters */}

@@ -110,24 +110,39 @@
 
 /* Landing Hero Styles - Simpler hero for home page landing */
 .landingHero {
-  min-height: auto;
-  padding: 5rem 2rem;
-  background: linear-gradient(
-    135deg,
-    var(--color-background) 0%,
-    color-mix(in srgb, var(--color-surface) 85%, var(--color-background) 15%)
-      100%
-  );
+  min-height: 0;
+  height: 100%;
+  padding: 4.6rem 1.6rem 1.4rem;
+  background: var(--color-background);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(2, 8, 23, 0.35) 0%,
+      rgba(2, 8, 23, 0.78) 62%,
+      rgba(2, 8, 23, 0.94) 100%
+    ),
+    url("/images/background.png");
+  background-position: center 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.88;
+  pointer-events: none;
 }
 
 .landingContent {
-  max-width: 900px;
+  max-width: 860px;
   text-align: center;
   z-index: 10;
 }
@@ -150,12 +165,13 @@
 }
 
 .landingTitle {
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(1.8rem, 4.4vw, 3rem);
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.9rem;
   line-height: 1.2;
-  color: var(--color-text-primary);
+  color: #f8fafc;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 14px rgba(2, 6, 23, 0.75);
 }
 
 .landingTitle .highlight {
@@ -166,13 +182,14 @@
 }
 
 .landingDescription {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--color-text-secondary);
-  margin-bottom: 2.5rem;
-  line-height: 1.8;
-  max-width: 700px;
+  font-size: clamp(0.9rem, 1.3vw, 1.02rem);
+  color: rgba(226, 232, 240, 0.96);
+  margin-bottom: 0;
+  line-height: 1.65;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 0 2px 10px rgba(2, 6, 23, 0.85);
 }
 
 .landingCTA {
@@ -220,7 +237,8 @@
 
 @media (max-width: 768px) {
   .landingHero {
-    padding: 3.5rem 1.5rem;
+    min-height: clamp(320px, 44vh, 420px);
+    padding: 4.6rem 1.1rem 2.2rem;
   }
 
   .landingTitle {

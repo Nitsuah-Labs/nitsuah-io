@@ -93,7 +93,7 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
 
       <div className="skills-grid">
         {filteredSkills.map((skill, idx) => (
-          <div key={idx} className="skill-item">
+          <div key={idx} className={`skill-item${skill.levelMeta.normalized === "beginner" ? " skill-item-beginner" : ""}`}>
             <div className="skill-header">
               <span className="skill-name">{skill.name}</span>
               {skill.levelMeta && (
@@ -130,6 +130,28 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
       {filteredSkills.length === 0 && (
         <p className="skills-empty-state">No matching skill categories found.</p>
       )}
+
+      {/* Print-only compact skills list */}
+      <div className="skills-print-list">
+        {skills
+          .filter((skill) => {
+            const meta = getSkillLevelMeta(skill.level);
+            return meta.normalized !== "beginner";
+          })
+          .map((skill, idx) => {
+            const meta = getSkillLevelMeta(skill.level);
+            const keywords = parseSkillKeywords(skill.keywords || []);
+            return (
+              <div key={idx} className="skills-print-row">
+                <span className="skills-print-category">{skill.name}</span>
+                <span className={`skills-print-level skills-print-level-${meta.normalized}`}>{meta.label}</span>
+                {keywords.length > 0 && (
+                  <span className="skills-print-keywords">{keywords.join(", ")}</span>
+                )}
+              </div>
+            );
+          })}
+      </div>
     </section>
   );
 };

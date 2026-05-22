@@ -32,7 +32,14 @@ export const CRMDemo: React.FC = () => {
   );
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", height: "100%" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <style>{`
         @media (max-width: 768px) {
           .crm-metrics-grid {
@@ -198,9 +205,9 @@ export const CRMDemo: React.FC = () => {
       {/* Page Content */}
       <div
         style={{
-          padding: "1.5rem",
-          minHeight: "400px",
-          maxHeight: "500px",
+          padding: "1.25rem",
+          flex: 1,
+          minHeight: 0,
           overflowY: "auto",
         }}
       >

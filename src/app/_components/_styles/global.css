@@ -422,6 +422,33 @@ header {
   backdrop-filter: blur(10px); /* Add blur effect */
 }
 
+/* Home page single-screen layout on desktop */
+.home-single-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.home-main {
+  height: calc(100vh - 66px);
+  display: grid;
+  grid-template-rows: 55% 45%;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .home-single-page {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .home-main {
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+}
+
 .twitter-logo {
   width: 35px;
   height: 35px;
@@ -755,4 +782,39 @@ w3m-modal,
 [id^="wcm-"],
 [id^="w3m-"] {
   z-index: 50000;
+}
+
+/* Defensive overrides: prevent Featured Project card overlap on small screens */
+.featured-projects-grid {
+  align-items: start !important;
+  grid-auto-flow: row;
+  grid-auto-rows: max-content;
+}
+
+.featured-project-card {
+  box-sizing: border-box !important;
+  align-self: start;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .featured-projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .featured-project-card {
+    width: 100%;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .featured-project-card .project-links {
+    margin-top: 0.75rem !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .featured-project-card:hover {
+    transform: none !important;
+  }
 }

@@ -8,11 +8,14 @@ import styles from "./HeroSection.module.css";
 export const LandingHero: React.FC = () => {
   return (
     <section className={styles.landingHero}>
+      <div className={styles.heroBackdrop} aria-hidden="true" />
       <div className={styles.landingContent}>
         <div className={styles.landingTagline}></div>
 
         <h1 className={styles.landingTitle}>
-          Austin Hardy | Developer Productivity Engineer
+          Austin J. Hardy
+          <br />
+          Senior Systems Engineer
           <br />
           <span className={styles.highlight}>AI + Web3 Systems</span>
         </h1>
@@ -22,6 +25,7 @@ export const LandingHero: React.FC = () => {
           execution. Currently working on multi-agent orchestration, repository
           intelligence, and blockchain applications.
         </p>
+
       </div>
     </section>
   );
