@@ -60,17 +60,16 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             </MenuItem>
           ))}
 
-        {/* Projects label - not clickable, just a divider */}
-        <MenuItem
-          disabled
-          sx={{
-            opacity: 0.5,
-            color: "#888",
-            cursor: "default",
-            "&:hover": { backgroundColor: "transparent" },
-          }}
-        >
-          projects
+        <MenuItem key="projects" onClick={() => setAnchorEl(null)}>
+          <Link
+            href="/projects"
+            style={{
+              textDecoration: "none",
+              color: navStyles.link.color,
+            }}
+          >
+            projects
+          </Link>
         </MenuItem>
 
         {/* Projects subitems for mobile */}
