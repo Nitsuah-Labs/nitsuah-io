@@ -25,7 +25,6 @@ export const LandingHero: React.FC = () => {
           execution. Currently working on multi-agent orchestration, repository
           intelligence, and blockchain applications.
         </p>
-
       </div>
     </section>
   );

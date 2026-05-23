@@ -284,46 +284,46 @@ const Projects = () => {
             {filtersExpanded && (
               <div className={styles.filterContent}>
                 <div className={styles.tagButtons}>
-                    {availableTags.map((tag) => {
-                      const category = getTagCategory(tag);
-                      const colors = getCategoryColors(category);
-                      const isSelected = selectedTags.includes(tag);
-                      return (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag)}
-                          className={`${styles.tagButton} ${
-                            isSelected ? styles.selected : ""
-                          }`}
-                          style={{
-                            backgroundColor: isSelected
-                              ? colors.bg
-                              : "transparent",
-                            borderColor: isSelected
-                              ? colors.border
-                              : `${colors.border}80`,
-                            color: isSelected
-                              ? colors.text
-                              : "rgba(255, 255, 255, 0.6)",
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!isSelected) {
-                              e.currentTarget.style.borderColor = colors.border;
-                              e.currentTarget.style.color = colors.text;
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!isSelected) {
-                              e.currentTarget.style.borderColor = `${colors.border}80`;
-                              e.currentTarget.style.color =
-                                "rgba(255, 255, 255, 0.6)";
-                            }
-                          }}
-                        >
-                          {tag}
-                        </button>
-                      );
-                    })}
+                  {availableTags.map((tag) => {
+                    const category = getTagCategory(tag);
+                    const colors = getCategoryColors(category);
+                    const isSelected = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className={`${styles.tagButton} ${
+                          isSelected ? styles.selected : ""
+                        }`}
+                        style={{
+                          backgroundColor: isSelected
+                            ? colors.bg
+                            : "transparent",
+                          borderColor: isSelected
+                            ? colors.border
+                            : `${colors.border}80`,
+                          color: isSelected
+                            ? colors.text
+                            : "rgba(255, 255, 255, 0.6)",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isSelected) {
+                            e.currentTarget.style.borderColor = colors.border;
+                            e.currentTarget.style.color = colors.text;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isSelected) {
+                            e.currentTarget.style.borderColor = `${colors.border}80`;
+                            e.currentTarget.style.color =
+                              "rgba(255, 255, 255, 0.6)";
+                          }
+                        }}
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Clear Filters */}

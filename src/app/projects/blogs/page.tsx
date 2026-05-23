@@ -208,11 +208,14 @@ const Blogsite = () => {
                     }}
                   >
                     {selectedLocalBlog.author} • {selectedLocalBlog.readTime} •{" "}
-                    {new Date(selectedLocalBlog.date).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                    {new Date(selectedLocalBlog.date).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      },
+                    )}
                   </p>
                 </div>
                 <button

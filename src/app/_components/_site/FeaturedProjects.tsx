@@ -80,10 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       <div className="project-tags">
         {project.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className={`project-tag ${tagColorClass(tag)}`}
-          >
+          <span key={tag} className={`project-tag ${tagColorClass(tag)}`}>
             {tag}
           </span>
         ))}
@@ -91,7 +88,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       <p className="project-description">{project.short}</p>
 
-      <div className={`project-links ${hasCode !== hasDemo ? "single-action" : ""}`}>
+      <div
+        className={`project-links ${hasCode !== hasDemo ? "single-action" : ""}`}
+      >
         {hasCode && (
           <a
             href={project.github}
@@ -183,7 +182,8 @@ const FeaturedProjects: React.FC = () => {
           <h2>Featured Projects</h2>
           <br />
           <p>
-            A collection of current work showcasing <span className="label-ai">AI</span>,{" "}
+            A collection of current work showcasing{" "}
+            <span className="label-ai">AI</span>,{" "}
             <span className="label-devops">DevOps</span>,{" "}
             <span className="label-web3">Web3</span>, and product engineering.
           </p>

@@ -362,7 +362,10 @@ const CryptoPage = () => {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              <div className="portfolio-card-image" style={{ marginBottom: "0.45rem" }}>
+              <div
+                className="portfolio-card-image"
+                style={{ marginBottom: "0.45rem" }}
+              >
                 {project.image ? (
                   <Image
                     alt={project.title}
@@ -395,18 +398,27 @@ const CryptoPage = () => {
               </div>
 
               <div className="portfolio-card-content">
-                <h2 className="portfolio-card-title" style={{ fontSize: "1rem", marginBottom: "0.35rem" }}>
+                <h2
+                  className="portfolio-card-title"
+                  style={{ fontSize: "1rem", marginBottom: "0.35rem" }}
+                >
                   {project.title}
                 </h2>
 
                 {project.description && (
-                  <p className="portfolio-card-description" style={{ fontSize: "0.86rem", marginBottom: "0.5rem" }}>
+                  <p
+                    className="portfolio-card-description"
+                    style={{ fontSize: "0.86rem", marginBottom: "0.5rem" }}
+                  >
                     {project.description}
                   </p>
                 )}
 
                 {project.tags && project.tags.length > 0 && (
-                  <div className="portfolio-card-tags" style={{ gap: "0.3rem", marginBottom: "0.5rem" }}>
+                  <div
+                    className="portfolio-card-tags"
+                    style={{ gap: "0.3rem", marginBottom: "0.5rem" }}
+                  >
                     {project.tags.map((tag) => {
                       const category = getTagCategory(tag);
                       const categoryColors = {

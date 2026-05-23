@@ -130,8 +130,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                   </div>
                   <div className="work-duration-section">
                     <div className="work-dates">
-                      {formatDate(job.startDate)}{" "}
-                      -{" "}
+                      {formatDate(job.startDate)} -{" "}
                       {job.endDate ? formatDate(job.endDate) : "Present"}
                     </div>
                     <div className="duration-visual">

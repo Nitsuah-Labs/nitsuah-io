@@ -130,7 +130,10 @@ export default function RootLayout({
               }}
             />
 
-            <Script id="test-helpers-overlay-cleanup" strategy="beforeInteractive">
+            <Script
+              id="test-helpers-overlay-cleanup"
+              strategy="beforeInteractive"
+            >
               {`(() => {
                   try {
                     const removeByText = (texts) => {

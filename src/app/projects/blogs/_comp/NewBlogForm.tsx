@@ -2,7 +2,10 @@
 import type { BlogPost } from "@/lib/data/blogs";
 import React from "react";
 
-type NewBlogPayload = Pick<BlogPost, "title" | "category" | "excerpt" | "content"> & {
+type NewBlogPayload = Pick<
+  BlogPost,
+  "title" | "category" | "excerpt" | "content"
+> & {
   tags: string[];
 };
 

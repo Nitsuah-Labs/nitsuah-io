@@ -52,7 +52,7 @@ export default function RegisterContentProduction() {
         functionName: "register",
         args: [message],
         account: currentAccount,
-        chainId: chain.id,
+        chain,
       });
     }
   };
@@ -155,7 +155,10 @@ export default function RegisterContentProduction() {
                   className="labs-btn labs-btn-primary"
                   onClick={handleRegister}
                   disabled={
-                    !message.trim() || !currentAccount || !chain?.id || isRegistering
+                    !message.trim() ||
+                    !currentAccount ||
+                    !chain?.id ||
+                    isRegistering
                   }
                 >
                   {isRegistering ? "Registering..." : "Register"}

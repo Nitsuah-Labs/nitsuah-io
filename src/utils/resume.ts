@@ -7,7 +7,10 @@ export const SUBCONTRACT_IDENTIFIER = "sub.";
 
 export function isContractingRole(companyName: string): boolean {
   const normalized = companyName.toLowerCase();
-  return /\bsub[.:]\b/.test(normalized) || normalized.includes(SUBCONTRACT_IDENTIFIER);
+  return (
+    /\bsub[.:]\b/.test(normalized) ||
+    normalized.includes(SUBCONTRACT_IDENTIFIER)
+  );
 }
 
 export function formatDate(dateStr: string): string {
@@ -81,7 +84,9 @@ export type NormalizedSkillLevel =
   | "advanced"
   | "expert";
 
-export function normalizeProficiencyLevel(level?: string): NormalizedSkillLevel {
+export function normalizeProficiencyLevel(
+  level?: string,
+): NormalizedSkillLevel {
   const normalized = level?.trim().toLowerCase();
 
   if (normalized === "master" || normalized === "expert") return "expert";
@@ -98,7 +103,10 @@ export function getSkillLevelMeta(level?: string): {
 } {
   const normalized = normalizeProficiencyLevel(level);
 
-  const metaByLevel: Record<NormalizedSkillLevel, { score: number; label: string }> = {
+  const metaByLevel: Record<
+    NormalizedSkillLevel,
+    { score: number; label: string }
+  > = {
     beginner: { score: 1, label: "Beginner" },
     intermediate: { score: 2, label: "Intermediate" },
     advanced: { score: 3, label: "Advanced" },

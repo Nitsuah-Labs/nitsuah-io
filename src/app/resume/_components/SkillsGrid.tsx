@@ -2,10 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { ResumeData } from "../../../types/resume";
-import {
-  getSkillLevelMeta,
-  parseSkillKeywords,
-} from "../../../utils/resume";
+import { getSkillLevelMeta, parseSkillKeywords } from "../../../utils/resume";
 
 interface SkillsGridProps {
   skills: ResumeData["skills"];
@@ -93,7 +90,10 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
 
       <div className="skills-grid">
         {filteredSkills.map((skill, idx) => (
-          <div key={idx} className={`skill-item${skill.levelMeta.normalized === "beginner" ? " skill-item-beginner" : ""}`}>
+          <div
+            key={idx}
+            className={`skill-item${skill.levelMeta.normalized === "beginner" ? " skill-item-beginner" : ""}`}
+          >
             <div className="skill-header">
               <span className="skill-name">{skill.name}</span>
               {skill.levelMeta && (
@@ -128,7 +128,9 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
       </div>
 
       {filteredSkills.length === 0 && (
-        <p className="skills-empty-state">No matching skill categories found.</p>
+        <p className="skills-empty-state">
+          No matching skill categories found.
+        </p>
       )}
 
       {/* Print-only compact skills list */}
@@ -144,9 +146,15 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
             return (
               <div key={idx} className="skills-print-row">
                 <span className="skills-print-category">{skill.name}</span>
-                <span className={`skills-print-level skills-print-level-${meta.normalized}`}>{meta.label}</span>
+                <span
+                  className={`skills-print-level skills-print-level-${meta.normalized}`}
+                >
+                  {meta.label}
+                </span>
                 {keywords.length > 0 && (
-                  <span className="skills-print-keywords">{keywords.join(", ")}</span>
+                  <span className="skills-print-keywords">
+                    {keywords.join(", ")}
+                  </span>
                 )}
               </div>
             );

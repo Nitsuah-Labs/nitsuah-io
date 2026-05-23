@@ -82,10 +82,12 @@ export default function NotFound() {
               var(--color-surface-elevated) 92%,
               #f97316 8%
             );
-            border: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+            border: 2px solid
+              color-mix(in srgb, var(--color-accent) 35%, transparent);
             padding: 2rem 1.5rem;
             border-radius: 16px;
-            box-shadow: 0 10px 40px color-mix(in srgb, var(--color-accent) 18%, transparent);
+            box-shadow: 0 10px 40px
+              color-mix(in srgb, var(--color-accent) 18%, transparent);
           }
 
           .error-code {
@@ -175,7 +177,8 @@ export default function NotFound() {
           .primary-button:hover {
             background: var(--color-accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
+            box-shadow: 0 4px 12px
+              color-mix(in srgb, var(--color-accent) 35%, transparent);
           }
 
           .secondary-button {
@@ -206,7 +209,8 @@ export default function NotFound() {
               var(--color-surface) 88%,
               var(--color-background) 12%
             );
-            border: 1px solid color-mix(in srgb, var(--color-accent) 26%, var(--color-border));
+            border: 1px solid
+              color-mix(in srgb, var(--color-accent) 26%, var(--color-border));
             padding: 1.25rem;
             border-radius: 12px;
             margin-top: 0;
@@ -245,7 +249,8 @@ export default function NotFound() {
             background: var(--color-accent-hover);
             border-color: var(--color-accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
+            box-shadow: 0 4px 12px
+              color-mix(in srgb, var(--color-accent) 35%, transparent);
           }
 
           .card-emoji {

@@ -198,7 +198,9 @@ const MintExample: React.FC = () => {
                     nextType === "all"
                       ? clientProjects
                       : clientProjects.filter((p) => p.type === nextType);
-                  if (!nextProjects.some((project) => project.id === showDemo)) {
+                  if (
+                    !nextProjects.some((project) => project.id === showDemo)
+                  ) {
                     setShowDemo(nextProjects[0]?.id ?? null);
                   }
                 }}
