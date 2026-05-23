@@ -64,6 +64,7 @@
     "@wagmi/connectors": "^8.0.14",
     "@wagmi/core": "^3.4.5",
     "@walletconnect/ethereum-provider": "^2.23.5",
+    "accounts": "~0.10.0",
     "bufferutil": "^4.1.0",
     "next": "^16.2.6",
     "react": "^19.2.6",
