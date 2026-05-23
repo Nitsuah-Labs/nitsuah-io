@@ -1,20 +1,9 @@
 // Spline About Navigation
 "use client";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 // Set the scene URL
 const SPLINE_SCENE = `https://prod.spline.design/kkSOmPWkIvdc1562/scene.splinecode`;
-
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
-  ssr: false,
-  loading: () => (
-    <div className="spline-loading" aria-live="polite">
-      <div className="spinner" aria-hidden="true"></div>
-      <div className="spline-loading-text">Loading interactive scene...</div>
-    </div>
-  ),
-});
 
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +34,9 @@ export function SplineScene() {
       )}
       {/* Wrap Spline in canvas div to enable pointer events */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        <Spline scene={SPLINE_SCENE} onLoad={handleLoad} />
+        <div className="spline-loading-text" role="status" aria-live="polite">
+          Interactive scene is unavailable in this environment.
+        </div>
       </div>
     </>
   );

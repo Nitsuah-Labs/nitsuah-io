@@ -18,7 +18,6 @@ const nextConfig = {
       "@mui/icons-material",
       "@emotion/react",
       "@emotion/styled",
-      "@splinetool/react-spline",
       "wagmi",
       "viem",
     ],
