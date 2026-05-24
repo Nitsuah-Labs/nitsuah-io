@@ -163,7 +163,7 @@ const BlogGrid: React.FC<{
         ) : (
           <Link
             key={blog.id}
-            href={`/projects/blogs/${blog.slug}`}
+            href={`/projects/blogs/${encodeURIComponent(blog.slug)}`}
             style={{ textDecoration: "none" }}
           >
             {renderCard(blog)}

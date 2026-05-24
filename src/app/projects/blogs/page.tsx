@@ -12,6 +12,54 @@ import "./_styles/Blog.module.css";
 
 const LOCAL_BLOGS_KEY = "nitsuah_local_blogs";
 
+const normalizeText = (value: string, maxLength: number) =>
+  value
+    .replace(/[\u0000-\u001F\u007F]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+
+const sanitizeSlugSegment = (value: string) => {
+  const normalized = value
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return normalized || "post";
+};
+
+const sanitizeTags = (tags: unknown) => {
+  if (!Array.isArray(tags)) return [];
+
+  return tags
+    .map((tag) => normalizeText(String(tag), 40).toLowerCase())
+    .filter(Boolean)
+    .slice(0, 12);
+};
+
+const sanitizeBlogPost = (post: BlogPost): BlogPost => {
+  const safeTitle = normalizeText(post.title, 120);
+  const safeCategory = normalizeText(post.category, 40).toLowerCase();
+  const safeExcerpt = normalizeText(post.excerpt, 320);
+  const safeContent = normalizeText(post.content, 20000);
+  const safeSlug = sanitizeSlugSegment(post.slug || safeTitle);
+  const safeId = sanitizeSlugSegment(post.id || safeSlug);
+
+  return {
+    ...post,
+    id: safeId,
+    title: safeTitle,
+    slug: safeSlug,
+    excerpt: safeExcerpt,
+    content: safeContent,
+    category: safeCategory,
+    tags: sanitizeTags(post.tags),
+  };
+};
+
 const Blogsite = () => {
   const [posts, setPosts] = useState<BlogPost[]>(blogPosts);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -27,7 +75,23 @@ const Blogsite = () => {
       if (!raw) return;
       const localPosts = JSON.parse(raw) as BlogPost[];
       if (!Array.isArray(localPosts) || localPosts.length === 0) return;
-      setPosts([...localPosts, ...blogPosts]);
+      const safeLocalPosts = localPosts
+        .filter((post): post is BlogPost => {
+          return (
+            post !== null &&
+            typeof post === "object" &&
+            typeof post.title === "string" &&
+            typeof post.content === "string" &&
+            typeof post.excerpt === "string" &&
+            typeof post.category === "string" &&
+            typeof post.slug === "string" &&
+            typeof post.id === "string" &&
+            Array.isArray(post.tags)
+          );
+        })
+        .map((post) => sanitizeBlogPost({ ...post, localOnly: true }));
+
+      setPosts([...safeLocalPosts, ...blogPosts]);
     } catch {
       // Ignore malformed local blog cache and continue with file-based posts.
     }
@@ -73,23 +137,28 @@ const Blogsite = () => {
     tags: string[];
   }) => {
     const now = new Date();
-    const slugBase = payload.title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .trim()
-      .replace(/\s+/g, "-");
+    const safePayload = {
+      title: normalizeText(payload.title, 120),
+      category: normalizeText(payload.category, 40).toLowerCase(),
+      excerpt: normalizeText(payload.excerpt, 320),
+      content: normalizeText(payload.content, 20000),
+      tags: sanitizeTags(payload.tags),
+    };
+
+    const slugBase = sanitizeSlugSegment(safePayload.title);
+    const safeId = `local-${now.getTime()}-${sanitizeSlugSegment(safePayload.title).slice(0, 24)}`;
 
     const newPost: BlogPost = {
-      id: `local-${now.getTime()}`,
-      title: payload.title,
+      id: safeId,
+      title: safePayload.title,
       slug: `${slugBase}-${now.getTime()}`,
-      excerpt: payload.excerpt,
-      content: payload.content,
+      excerpt: safePayload.excerpt,
+      content: safePayload.content,
       author: "Austin H.",
       date: now.toISOString().slice(0, 10),
-      tags: payload.tags,
-      category: payload.category,
-      readTime: `${Math.max(1, Math.ceil(payload.content.split(/\s+/).length / 220))} min read`,
+      tags: safePayload.tags,
+      category: safePayload.category,
+      readTime: `${Math.max(1, Math.ceil(safePayload.content.split(/\s+/).length / 220))} min read`,
       published: true,
       localOnly: true,
     };
