@@ -40,7 +40,7 @@ export default function ResumePage() {
     ) || 0;
 
   return (
-    <div style={{ background: "#1a1a1a", minHeight: "100vh" }}>
+    <div className="resume-page-root">
       <div className="print-hide">
         <HomeBar />
       </div>

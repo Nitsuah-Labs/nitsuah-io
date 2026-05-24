@@ -10,7 +10,14 @@ export const ResumeSiteDemo: React.FC = () => {
   const [view, setView] = useState<"resume" | "contact">("resume");
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Header */}
       <div
         className="resume-header"
@@ -119,7 +126,14 @@ export const ResumeSiteDemo: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div style={{ padding: "2rem 1.5rem", minHeight: "450px" }}>
+      <div
+        style={{
+          padding: "1.5rem 1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {view === "resume" && (
           <div style={{ maxWidth: "900px", margin: "0 auto" }}>
             <ExperienceSection />

@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import type { BlogPost } from "@/lib/data/blogs";
+import { useEffect, useMemo, useState } from "react";
 import Footer from "../../../app/_components/_site/Footer";
 import HomeBar from "../../../app/_components/_site/Homebar";
 import { blogPosts } from "../../../lib/data/blogs";
@@ -9,23 +10,105 @@ import BlogsHeader from "./_comp/BlogsHeader";
 import NewBlogForm from "./_comp/NewBlogForm";
 import "./_styles/Blog.module.css";
 
+const LOCAL_BLOGS_KEY = "nitsuah_local_blogs";
+
+const normalizeText = (value: string, maxLength: number) =>
+  value
+    .replace(/[\u0000-\u001F\u007F]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+
+const sanitizeSlugSegment = (value: string) => {
+  const normalized = value
+    .normalize("NFKD")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return normalized || "post";
+};
+
+const sanitizeTags = (tags: unknown) => {
+  if (!Array.isArray(tags)) return [];
+
+  return tags
+    .map((tag) => normalizeText(String(tag), 40).toLowerCase())
+    .filter(Boolean)
+    .slice(0, 12);
+};
+
+const sanitizeBlogPost = (post: BlogPost): BlogPost => {
+  const safeTitle = normalizeText(post.title, 120);
+  const safeCategory = normalizeText(post.category, 40).toLowerCase();
+  const safeExcerpt = normalizeText(post.excerpt, 320);
+  const safeContent = normalizeText(post.content, 20000);
+  const safeSlug = sanitizeSlugSegment(post.slug || safeTitle);
+  const safeId = sanitizeSlugSegment(post.id || safeSlug);
+
+  return {
+    ...post,
+    id: safeId,
+    title: safeTitle,
+    slug: safeSlug,
+    excerpt: safeExcerpt,
+    content: safeContent,
+    category: safeCategory,
+    tags: sanitizeTags(post.tags),
+  };
+};
+
 const Blogsite = () => {
+  const [posts, setPosts] = useState<BlogPost[]>(blogPosts);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"recent" | "az">("recent");
   const [showNewBlogForm, setShowNewBlogForm] = useState(false);
+  const [selectedLocalBlog, setSelectedLocalBlog] = useState<BlogPost | null>(
+    null,
+  );
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(LOCAL_BLOGS_KEY);
+      if (!raw) return;
+      const localPosts = JSON.parse(raw) as BlogPost[];
+      if (!Array.isArray(localPosts) || localPosts.length === 0) return;
+      const safeLocalPosts = localPosts
+        .filter((post): post is BlogPost => {
+          return (
+            post !== null &&
+            typeof post === "object" &&
+            typeof post.title === "string" &&
+            typeof post.content === "string" &&
+            typeof post.excerpt === "string" &&
+            typeof post.category === "string" &&
+            typeof post.slug === "string" &&
+            typeof post.id === "string" &&
+            Array.isArray(post.tags)
+          );
+        })
+        .map((post) => sanitizeBlogPost({ ...post, localOnly: true }));
+
+      setPosts([...safeLocalPosts, ...blogPosts]);
+    } catch {
+      // Ignore malformed local blog cache and continue with file-based posts.
+    }
+  }, []);
 
   // Get unique categories
   const categories = useMemo(() => {
     const cats = new Set<string>(["all"]);
-    blogPosts.forEach((post) => {
+    posts.forEach((post) => {
       if (post.published) cats.add(post.category.toLowerCase());
     });
     return Array.from(cats);
-  }, []);
+  }, [posts]);
 
   // Filter and sort blogs
   const filteredBlogs = useMemo(() => {
-    let filtered = blogPosts.filter((post) => post.published);
+    let filtered = posts.filter((post) => post.published);
 
     // Filter by category
     if (selectedCategory !== "all") {
@@ -44,7 +127,50 @@ const Blogsite = () => {
     }
 
     return filtered;
-  }, [selectedCategory, sortBy]);
+  }, [posts, selectedCategory, sortBy]);
+
+  const handleNewBlogSave = (payload: {
+    title: string;
+    category: string;
+    excerpt: string;
+    content: string;
+    tags: string[];
+  }) => {
+    const now = new Date();
+    const safePayload = {
+      title: normalizeText(payload.title, 120),
+      category: normalizeText(payload.category, 40).toLowerCase(),
+      excerpt: normalizeText(payload.excerpt, 320),
+      content: normalizeText(payload.content, 20000),
+      tags: sanitizeTags(payload.tags),
+    };
+
+    const slugBase = sanitizeSlugSegment(safePayload.title);
+    const safeId = `local-${now.getTime()}-${sanitizeSlugSegment(safePayload.title).slice(0, 24)}`;
+
+    const newPost: BlogPost = {
+      id: safeId,
+      title: safePayload.title,
+      slug: `${slugBase}-${now.getTime()}`,
+      excerpt: safePayload.excerpt,
+      content: safePayload.content,
+      author: "Austin H.",
+      date: now.toISOString().slice(0, 10),
+      tags: safePayload.tags,
+      category: safePayload.category,
+      readTime: `${Math.max(1, Math.ceil(safePayload.content.split(/\s+/).length / 220))} min read`,
+      published: true,
+      localOnly: true,
+    };
+
+    setPosts((prev) => {
+      const next = [newPost, ...prev];
+      const onlyLocal = next.filter((post) => post.localOnly);
+      window.localStorage.setItem(LOCAL_BLOGS_KEY, JSON.stringify(onlyLocal));
+      return next;
+    });
+    setShowNewBlogForm(false);
+  };
 
   return (
     <div
@@ -68,7 +194,11 @@ const Blogsite = () => {
           />
 
           {showNewBlogForm && (
-            <NewBlogForm onCancel={() => setShowNewBlogForm(false)} />
+            <NewBlogForm
+              categories={categories.filter((cat) => cat !== "all")}
+              onCancel={() => setShowNewBlogForm(false)}
+              onSubmit={handleNewBlogSave}
+            />
           )}
 
           <BlogsControls
@@ -79,7 +209,10 @@ const Blogsite = () => {
             setSortBy={setSortBy}
           />
 
-          <BlogGrid filteredBlogs={filteredBlogs} />
+          <BlogGrid
+            filteredBlogs={filteredBlogs}
+            onOpenLocalBlog={(blog) => setSelectedLocalBlog(blog)}
+          />
 
           {filteredBlogs.length === 0 && (
             <div
@@ -95,6 +228,104 @@ const Blogsite = () => {
             </div>
           )}
         </div>
+
+        {selectedLocalBlog && (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(3, 10, 20, 0.82)",
+              zIndex: 1200,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "1rem",
+            }}
+            onClick={() => setSelectedLocalBlog(null)}
+          >
+            <article
+              style={{
+                width: "min(880px, 100%)",
+                maxHeight: "90vh",
+                overflowY: "auto",
+                background: "rgba(15, 23, 42, 0.98)",
+                border: "2px solid rgba(59,130,246,0.45)",
+                borderRadius: "14px",
+                padding: "1.4rem 1.2rem",
+                color: "rgba(255,255,255,0.92)",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "0.75rem",
+                  alignItems: "flex-start",
+                  marginBottom: "1rem",
+                }}
+              >
+                <div>
+                  <h2 style={{ margin: 0, fontSize: "1.5rem" }}>
+                    {selectedLocalBlog.title}
+                  </h2>
+                  <p
+                    style={{
+                      margin: "0.35rem 0 0",
+                      color: "rgba(148,163,184,0.95)",
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    {selectedLocalBlog.author} • {selectedLocalBlog.readTime} •{" "}
+                    {new Date(selectedLocalBlog.date).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      },
+                    )}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedLocalBlog(null)}
+                  style={{
+                    background: "transparent",
+                    border: "1px solid rgba(148,163,184,0.45)",
+                    color: "rgba(226,232,240,0.95)",
+                    borderRadius: "8px",
+                    padding: "0.35rem 0.65rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Close
+                </button>
+              </div>
+
+              <p
+                style={{
+                  marginTop: 0,
+                  color: "rgba(191,219,254,0.95)",
+                  lineHeight: 1.7,
+                }}
+              >
+                {selectedLocalBlog.excerpt}
+              </p>
+
+              <div
+                style={{
+                  whiteSpace: "pre-wrap",
+                  lineHeight: 1.8,
+                  fontSize: "1.02rem",
+                  marginTop: "1rem",
+                }}
+              >
+                {selectedLocalBlog.content}
+              </div>
+            </article>
+          </div>
+        )}
       </main>
       <Footer />
     </div>

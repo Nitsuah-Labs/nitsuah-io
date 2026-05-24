@@ -39,7 +39,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   return (
     <nav style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
       {pages
-        .filter((p) => p !== "portfolio")
+        .filter((p) => p !== "projects")
         .map((p) => (
           <Link key={p} href={`/${p}`} style={{ ...(navStyles.link as any) }}>
             <Button
@@ -65,7 +65,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           }}
           sx={{ color: (navStyles.link as any).color || undefined }}
         >
-          Portfolio
+          Projects
         </Button>
 
         {projectsOpen && (

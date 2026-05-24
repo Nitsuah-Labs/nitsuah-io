@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" role="img" aria-labelledby="title desc">
+  <title id="title">Netflix logo</title>
+  <desc id="desc">Netflix wordmark</desc>
+  <rect width="280" height="80" rx="8" fill="#111111"/>
+  <text x="140" y="52" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="1.5" fill="#E50914">NETFLIX</text>
+</svg>

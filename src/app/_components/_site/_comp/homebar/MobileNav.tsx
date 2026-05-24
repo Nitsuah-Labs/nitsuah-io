@@ -17,6 +17,16 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         onClick={(e) => setAnchorEl(e.currentTarget)}
         size="large"
         color="inherit"
+        sx={{
+          color: "var(--color-text-primary)",
+          backgroundColor: "var(--color-surface)",
+          border: "1px solid var(--color-border)",
+          borderRadius: "12px",
+          "&:hover": {
+            backgroundColor: "var(--color-surface-elevated)",
+            borderColor: "var(--color-border-hover)",
+          },
+        }}
       >
         <MenuIcon />
       </IconButton>
@@ -35,7 +45,7 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
         }}
       >
         {pages
-          .filter((p) => p !== "portfolio") // Remove portfolio from main list
+          .filter((p) => p !== "projects")
           .map((p) => (
             <MenuItem key={p} onClick={() => setAnchorEl(null)}>
               <Link
@@ -50,20 +60,19 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             </MenuItem>
           ))}
 
-        {/* Portfolio label - not clickable, just a divider */}
-        <MenuItem
-          disabled
-          sx={{
-            opacity: 0.5,
-            color: "#888",
-            cursor: "default",
-            "&:hover": { backgroundColor: "transparent" },
-          }}
-        >
-          portfolio
+        <MenuItem key="projects" onClick={() => setAnchorEl(null)}>
+          <Link
+            href="/projects"
+            style={{
+              textDecoration: "none",
+              color: navStyles.link.color,
+            }}
+          >
+            projects
+          </Link>
         </MenuItem>
 
-        {/* Portfolio subitems for mobile */}
+        {/* Projects subitems for mobile */}
         {portfolioSub.map((item, index) => {
           // Handle expandable Labs item - show its children instead
           if (item.expandable && item.children) {
@@ -97,18 +106,19 @@ const MobileNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             });
           }
 
-          // Style for Projects, Clients, Blogs
+          // Style for Clients, Blogs, crypto
           let color = navStyles.link.color; // Default orange
           let label = item.label;
 
-          if (item.label === "Projects") {
-            label = "projects"; // Keep orange
-          } else if (item.label === "Clients") {
+          if (item.label === "Clients") {
             label = "clients";
             color = "#10b981"; // Green
           } else if (item.label === "Blogs") {
             label = "blogs";
             color = "#3b82f6"; // Blue
+          } else if (item.label === "crypto") {
+            label = "crypto";
+            color = navStyles.link.color as string;
           }
 
           return (

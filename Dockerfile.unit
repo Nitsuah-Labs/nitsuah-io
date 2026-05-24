@@ -18,7 +18,7 @@ RUN npm run build:skip-wagmi
 
 # Set environment variables for tests
 ENV CI=true
-ENV NODE_ENV=production
+ENV NODE_ENV=test
 ENV NEXT_PUBLIC_TEST_HELPERS=1
 
 # Expose port for production server (if needed)

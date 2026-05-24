@@ -67,7 +67,14 @@ export const RealEstateDemo: React.FC = () => {
   });
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif" }}>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Header */}
       <div
         style={{
@@ -348,7 +355,14 @@ export const RealEstateDemo: React.FC = () => {
       </div>
 
       {/* Content */}
-      <div style={{ padding: "2rem 1.5rem", minHeight: "450px" }}>
+      <div
+        style={{
+          padding: "1.5rem 1.25rem",
+          flex: 1,
+          minHeight: 0,
+          overflowY: "auto",
+        }}
+      >
         {currentView === "listings" && (
           <>
             <div

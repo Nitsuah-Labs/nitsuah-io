@@ -74,10 +74,11 @@ export const RestaurantDemo: React.FC = () => {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        height: "100%",
+        minHeight: "100%",
         background: "linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%)",
         color: "white",
-        padding: "2rem 1rem",
+        padding: "1rem",
       }}
     >
       {/* Header */}

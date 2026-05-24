@@ -329,12 +329,12 @@ const CryptoPage = () => {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-            gap: "3rem",
-            marginTop: "2rem",
+            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+            gap: "1rem",
+            marginTop: "1rem",
             marginLeft: "0",
-            marginRight: "2rem",
-            marginBottom: "2rem",
+            marginRight: "0",
+            marginBottom: "1rem",
           }}
         >
           {filteredProjects.map((project, index) => (
@@ -348,6 +348,7 @@ const CryptoPage = () => {
                 border: "2px solid rgba(249, 115, 22, 0.3)",
                 transition: "all 0.3s ease",
                 width: "100%",
+                padding: "0.55rem",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.8)";
@@ -361,7 +362,10 @@ const CryptoPage = () => {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              <div className="portfolio-card-image">
+              <div
+                className="portfolio-card-image"
+                style={{ marginBottom: "0.45rem" }}
+              >
                 {project.image ? (
                   <Image
                     alt={project.title}
@@ -394,16 +398,27 @@ const CryptoPage = () => {
               </div>
 
               <div className="portfolio-card-content">
-                <h2 className="portfolio-card-title">{project.title}</h2>
+                <h2
+                  className="portfolio-card-title"
+                  style={{ fontSize: "1rem", marginBottom: "0.35rem" }}
+                >
+                  {project.title}
+                </h2>
 
                 {project.description && (
-                  <p className="portfolio-card-description">
+                  <p
+                    className="portfolio-card-description"
+                    style={{ fontSize: "0.86rem", marginBottom: "0.5rem" }}
+                  >
                     {project.description}
                   </p>
                 )}
 
                 {project.tags && project.tags.length > 0 && (
-                  <div className="portfolio-card-tags">
+                  <div
+                    className="portfolio-card-tags"
+                    style={{ gap: "0.3rem", marginBottom: "0.5rem" }}
+                  >
                     {project.tags.map((tag) => {
                       const category = getTagCategory(tag);
                       const categoryColors = {
@@ -435,6 +450,8 @@ const CryptoPage = () => {
                             background: categoryColors[category],
                             borderColor: categoryBorderColors[category],
                             color: categoryTextColors[category],
+                            fontSize: "0.68rem",
+                            padding: "0.18rem 0.42rem",
                           }}
                         >
                           {tag}
@@ -456,9 +473,10 @@ const CryptoPage = () => {
                         "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
                       color: "#000",
                       border: "2px solid #000",
-                      padding: "0.75rem 1rem",
+                      padding: "0.5rem 0.65rem",
                       borderRadius: "6px",
                       fontWeight: "600",
+                      fontSize: "0.78rem",
                       transition: "all 0.3s ease",
                       width: "100%",
                       textAlign: "center",

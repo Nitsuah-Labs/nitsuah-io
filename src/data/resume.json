@@ -158,320 +158,184 @@
   ],
   "skills": [
     {
-      "name": "Atlassian Suite",
+      "name": "Atlassian Ecosystem",
       "level": "Master",
       "keywords": [
-        "Jira",
-        "Jira Service Management",
+        "Jira Cloud",
+        "Jira Service Management, JSM",
+        "Jira Align, SAFe",
         "Confluence",
-        "Atlas",
-        "Compass",
         "Bitbucket",
-        "Crowd",
-        "Jira Align",
-        "Access/Guard",
+        "Guard",
+        "Compass",
+        "Atlas",
+        "Crowd Identity",
         "StatusPage",
-        "Cloud / Datacenter / Server"
+        "Jira Data Center Migrations",
+        "Atlassian REST API & Webhooks",
+        "Federated IAM",
+        "App Integration & Automation"
       ]
     },
     {
-      "name": "AI/ML & Developer Productivity",
+      "name": "GenAI & Developer Tooling",
       "level": "Advanced",
       "keywords": [
-        "MCP Servers",
+        "MCP",
         "Spring AI",
-        "GenAI Tool Integration",
+        "GenAI Integrations",
         "Claude API",
-        "OpenAI",
-        "AI-Assisted Development",
+        "OpenAI API",
+        "Gemini API",
+        "AI-Assisted Engineering",
         "Prompt Engineering",
-        "Tool Annotation Frameworks",
-        "Natural Language Processing",
-        "TensorFlow",
-        "TesseractOCR",
+        "Tool Annotation",
+        "NLP",
         "PyTorch",
-        "Jupyter",
+        "TensorFlow",
         "Hugging Face",
-        "Developer Tooling",
-        "IDE Extensions",
-        "Command Pattern Architecture"
+        "Tesseract OCR",
+        "JupyterLab",
+        "Slack Bolt SDK",
+        "Dev Tooling & IDE Extensions"
       ]
     },
     {
-      "name": "AWS",
+      "name": "Cloud & DevOps",
       "level": "Master",
       "keywords": [
-        "EC2",
-        "S3",
-        "IAM",
-        "RDS",
-        "ELB",
-        "ALB",
-        "Gateway",
-        "CloudFormation",
-        "Terraform",
-        "Pulumi",
-        "Amplify",
-        "CloudWatch",
-        "CloudTrail",
-        "Lambda",
-        "ECS",
-        "EKS",
-        "EBS",
-        "Route 53",
-        "VPC",
-        "CloudFront"
+        "AWS, EC2, S3, IAM, RDS, Lambda, ECS, EKS, Route 53, VPC, CloudFront",
+        "IaC, Terraform, Pulumi, CloudFormation",
+        "Containers, Docker, Kubernetes",
+        "Virtualization, vSphere, VMware, Hyper-V, Azure VM, Citrix, Xen",
+        "CI/CD, GitHub Actions, Jenkins, Maven, Gradle",
+        "Observability, Datadog, New Relic, Splunk, Grafana, Kibana, PagerDuty, incident.io"
       ]
     },
     {
-      "name": "Blockchain",
-      "level": "Intermediate",
-      "keywords": [
-        "rust",
-        "Solana",
-        "Solidity",
-        "Ethereum",
-        "Smart Contracts",
-        "wagmi",
-        "Web3.js",
-        "Ethers.js",
-        "IPFS",
-        "NFTs",
-        "Chainlink",
-        "Buildspace",
-        "Truffle",
-        "Hardhat",
-        "Polygon",
-        "Decentralized Finance (DeFi)",
-        "Web3",
-        "Tokenomics"
-      ]
-    },
-    {
-      "name": "Communication",
-      "level": "Intermediate",
-      "keywords": [
-        "Executive Quarterlies",
-        "All-hands Demos",
-        "Product Features",
-        "Knowledge Base",
-        "Zoom",
-        "Meets",
-        "Collaborate"
-      ]
-    },
-    {
-      "name": "CMS",
-      "level": "Advanced",
-      "keywords": [
-        "Netlify",
-        "Shopify",
-        "Magento",
-        "WordPress",
-        "S3",
-        "Dropbox Ent."
-      ]
-    },
-    {
-      "name": "CRM",
-      "level": "Advanced",
-      "keywords": [
-        "Salesforce",
-        "Zendesk",
-        "Notion",
-        "ServiceNow",
-        "Monday.com",
-        "SysAid",
-        "Hubspot CRM"
-      ]
-    },
-    {
-      "name": "Databases",
-      "level": "Advanced",
-      "keywords": [
-        "Aurora",
-        "Postgres",
-        "DynamoDB",
-        "Neo4j",
-        "Redis",
-        "Snowflake",
-        "MongoDB",
-        "ElasticSearch",
-        "Tableau",
-        "Microsoft SQL Server/Express/Access",
-        "SSMS/SSRS/SSIS",
-        "MySQL",
-        "NoSQL"
-      ]
-    },
-    {
-      "name": "Development & Architecture",
+      "name": "Software Engineering",
       "level": "Advanced",
       "keywords": [
         "Java",
         "Spring Boot",
-        "Spring AI",
         "Python",
+        "Go",
         "TypeScript",
         "JavaScript",
-        "Go",
-        "React",
         "Node.js",
+        "React",
         "Next.js",
-        "Gradle",
-        "Maven",
         "REST APIs",
         "GraphQL",
         "Microservices",
-        "Docker",
-        "Kubernetes",
-        "Git",
-        "GitHub Actions",
-        "Jenkins",
-        "Slack Bolt SDK",
         "Command Pattern",
-        "Test-Driven Development",
-        "CI/CD Pipelines",
-        "t-SQL",
-        "Visual Basic/VBA",
-        "PHP",
-        "ASP",
-        "HTML",
-        "CSS",
-        "Pascal"
+        "TDD"
       ]
     },
     {
-      "name": "Design",
-      "level": "Master",
-      "keywords": [
-        "Figma",
-        "spline.design",
-        "Sketch",
-        "Canva",
-        "GIMP",
-        "Adobe CS6",
-        "UE5",
-        "Unity",
-        "Blender",
-        "Sketchup",
-        "LucidChart",
-        "Visio",
-        "Paint3D"
-      ]
-    },
-    {
-      "name": "Microsoft Suite",
-      "level": "Master",
-      "keywords": [
-        "Azure Active Directory (AD)",
-        "PowerBI",
-        "Sharepoint",
-        "Office 365",
-        "Viva",
-        "Access",
-        "Outlook",
-        "Word",
-        "Excel",
-        "PowerPoint",
-        "OneNote"
-      ]
-    },
-    {
-      "name": "Observability",
+      "name": "Databases & Analytics",
       "level": "Advanced",
       "keywords": [
-        "PagerDuty",
-        "incident.io",
-        "Splunk",
-        "New Relic",
-        "Datadog",
-        "Grafana",
-        "Kibana"
+        "PostgreSQL",
+        "Amazon Aurora",
+        "DynamoDB",
+        "Redis",
+        "MongoDB",
+        "Neo4j",
+        "Snowflake",
+        "ElasticSearch",
+        "SQL Server, T-SQL",
+        "SSIS/SSRS/SSMS",
+        "MySQL",
+        "NoSQL Architecture",
+        "Power BI",
+        "Tableau"
       ]
     },
     {
-      "name": "Operating Systems (OS)",
+      "name": "OS & Middleware",
       "level": "Master",
       "keywords": [
-        "Linux",
-        "Ubuntu",
-        "RedHat",
+        "Linux, Ubuntu, RedHat",
+        "Unix",
         "OSX",
-        "iOS",
-        "Android",
-        "Windows"
-      ]
-    },
-    {
-      "name": "OS cli/shell",
-      "level": "Master",
-      "keywords": [
-        "Powershell",
-        "bat",
-        "bash",
-        "apt",
-        "yum",
-        "ssh",
-        "winRM",
-        "cygwin",
-        "aws cli",
-        "git",
-        "gh cli",
-        "vim",
-        "UNIX"
-      ]
-    },
-    {
-      "name": "Third Party SaaS",
-      "level": "Master",
-      "keywords": [
-        "1Password",
-        "Asana",
-        "BugCrowd",
-        "Fortify-on-Demand",
-        "GitHub",
-        "IntelliJ",
-        "JFrog",
-        "Miro",
-        "PractiTest",
-        "Slack",
-        "Stoplight",
-        "ZenGRC"
-      ]
-    },
-    {
-      "name": "Virtualization",
-      "level": "Master",
-      "keywords": [
-        "AWS EC2",
-        "Docker",
-        "Kubernetes",
-        "Azure VM",
-        "vSphere",
-        "Hyper-V",
-        "VMware",
-        "VirtualBox",
-        "G-Suite",
-        "Citrix",
-        "Xen"
-      ]
-    },
-    {
-      "name": "Web Services",
-      "level": "Master",
-      "keywords": [
-        "REST APIs",
-        "Apache",
-        "Tomcat",
-        "JBOSS",
-        "nginx",
-        "IIS",
-        "ASP",
-        ".NET",
+        "Windows Server",
+        "Shell, Bash, PowerShell",
+        "CLI, AWS CLI, GH CLI, Git",
+        "Web/App Servers, Nginx, Apache, Tomcat, JBoss, IIS",
+        ".NET Core",
         "PHP",
-        "SOAP",
-        "Lua"
+        "Lua",
+        "SOAP Protocols"
+      ]
+    },
+    {
+      "name": "Enterprise SaaS & Security",
+      "level": "Master",
+      "keywords": [
+        "Slack",
+        "Zendesk",
+        "ServiceNow",
+        "1Password",
+        "Salesforce",
+        "Asana",
+        "Monday.com",
+        "Notion",
+        "Azure AD",
+        "SCIM/SAML Provisioning",
+        "BugCrowd",
+        "Fortify on Demand",
+        "ZenGRC",
+        "MNPI/SOC Compliance Automation"
+      ]
+    },
+    {
+      "name": "Web3 & Blockchain",
+      "level": "Intermediate",
+      "keywords": [
+        "Ethereum",
+        "Solidity",
+        "Solana",
+        "Rust",
+        "Smart Contracts",
+        "Hardhat",
+        "Truffle",
+        "Ethers.js",
+        "Web3.js",
+        "Wagmi",
+        "Chainlink",
+        "Polygon",
+        "DeFi, Decentralized Finance",
+        "Tokenomics",
+        "IPFS"
+      ]
+    },
+    {
+      "name": "Design & Mapping",
+      "level": "Advanced",
+      "keywords": [
+        "Figma",
+        "LucidChart",
+        "Visio",
+        "Spline",
+        "Sketch",
+        "UE5",
+        "Unity",
+        "Blender"
+      ]
+    },
+    {
+      "name": "Auto Repair",
+      "level": "Beginner",
+      "keywords": [
+        "Fluids & Filters, Oil, Coolant, Air/Fuel",
+        "Charging System, Alternator, Battery",
+        "12V Electrical Wiring, Fuses, Relays",
+        "Ignition System, Spark Plugs, Coil Packs",
+        "OBD-II Diagnostics",
+        "Fault Isolation",
+        "Mechanical Tooling",
+        "Shop Safety"
       ]
     }
   ],

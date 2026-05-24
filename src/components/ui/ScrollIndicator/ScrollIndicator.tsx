@@ -14,6 +14,7 @@ export const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
 
   return (
     <div className={styles.container}>
+      <br />
       <div className={styles.text}>{text}</div>
       <div className={styles.mouse}>
         <div className={styles.wheel} />

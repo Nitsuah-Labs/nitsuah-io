@@ -1,0 +1,15 @@
+[
+  {
+    "id": "nextjs-16-react-19-upgrade",
+    "title": "Upgrading to Next.js 16 and React 19: A Complete Migration Guide",
+    "slug": "nextjs-16-react-19-upgrade",
+    "excerpt": "A practical migration guide from Next.js 14 and React 18 to Next.js 16 and React 19, including the key breaking changes and fixes.",
+    "content": "# Upgrading to Next.js 16 and React 19\n\n## Overview\n\nThis post covers a full migration path for a production portfolio app, including routing, UI library compatibility, and build system changes.\n\n## What Changed\n\n- Next.js moved middleware conventions toward proxy handlers.\n- React 19 removed some legacy typings and tightened behavior around render trees.\n- MUI v7 changed several layout APIs, requiring updates in grid-heavy views.\n\n## Migration Checklist\n\n1. Upgrade dependencies in small groups.\n2. Fix type errors first, then runtime warnings.\n3. Replace deprecated patterns before optimizing styles.\n4. Validate key routes after each deploy.\n\n## Results\n\nAfter migration, the app built cleanly and route startup remained stable with Docker warm-up verification.",
+    "author": "Austin H.",
+    "date": "2025-11-09",
+    "tags": ["nextjs", "react", "migration", "typescript"],
+    "category": "Development",
+    "readTime": "8 min read",
+    "published": true
+  }
+]

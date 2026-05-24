@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 import Footer from "../../../../app/_components/_site/Footer";
 import HomeBar from "../../../../app/_components/_site/Homebar";
 import { blogPosts } from "../../../../lib/data/blogs";
@@ -183,10 +184,159 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               fontSize: "1.125rem",
               lineHeight: "1.8",
             }}
-            dangerouslySetInnerHTML={{
-              __html: formatMarkdown(post.content),
-            }}
-          />
+          >
+            <ReactMarkdown
+              components={{
+                h1: ({ children }) => (
+                  <h1
+                    style={{
+                      fontSize: "2.25rem",
+                      fontWeight: "700",
+                      color: "#fff",
+                      margin: "3rem 0 1rem",
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2
+                    style={{
+                      fontSize: "1.875rem",
+                      fontWeight: "700",
+                      color: "#fff",
+                      margin: "2.5rem 0 1rem",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: "600",
+                      color: "#fff",
+                      margin: "2rem 0 1rem",
+                      lineHeight: "1.3",
+                    }}
+                  >
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p style={{ margin: "1.25rem 0", lineHeight: "1.8" }}>
+                    {children}
+                  </p>
+                ),
+                strong: ({ children }) => (
+                  <strong style={{ color: "#fff", fontWeight: 600 }}>
+                    {children}
+                  </strong>
+                ),
+                em: ({ children }) => (
+                  <em style={{ fontStyle: "italic" }}>{children}</em>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote
+                    style={{
+                      borderLeft: "4px solid #3b82f6",
+                      paddingLeft: "1.5rem",
+                      margin: "1.5rem 0",
+                      color: "rgba(255, 255, 255, 0.7)",
+                      fontStyle: "italic",
+                    }}
+                  >
+                    {children}
+                  </blockquote>
+                ),
+                ul: ({ children }) => (
+                  <ul
+                    style={{
+                      listStyleType: "disc",
+                      margin: "1rem 0",
+                      paddingLeft: "2rem",
+                      color: "rgba(255, 255, 255, 0.85)",
+                    }}
+                  >
+                    {children}
+                  </ul>
+                ),
+                li: ({ children }) => (
+                  <li style={{ margin: "0.5rem 0", paddingLeft: "0.5rem" }}>
+                    {children}
+                  </li>
+                ),
+                pre: ({ children }) => (
+                  <pre
+                    style={{
+                      background: "rgba(0, 0, 0, 0.4)",
+                      border: "2px solid rgba(59, 130, 246, 0.3)",
+                      borderRadius: "8px",
+                      padding: "1.5rem",
+                      overflowX: "auto",
+                      margin: "1.5rem 0",
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    {children}
+                  </pre>
+                ),
+                code: ({ inline, children, ...props }: any) => {
+                  const content = String(children).replace(/\n$/, "");
+
+                  if (inline) {
+                    return (
+                      <code
+                        {...props}
+                        style={{
+                          background: "rgba(59, 130, 246, 0.2)",
+                          color: "#3b82f6",
+                          padding: "0.2rem 0.5rem",
+                          borderRadius: "4px",
+                          fontSize: "0.9em",
+                          fontFamily: "'Courier New', monospace",
+                        }}
+                      >
+                        {content}
+                      </code>
+                    );
+                  }
+
+                  return (
+                    <code
+                      {...props}
+                      style={{
+                        color: "#e0e0e0",
+                        fontFamily: "'Courier New', monospace",
+                      }}
+                    >
+                      {content}
+                    </code>
+                  );
+                },
+                a: ({ href, children }) => (
+                  <a
+                    href={sanitizeHref(href ?? "")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#3b82f6",
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(59, 130, 246, 0.5)",
+                      transition: "border-color 0.2s ease",
+                    }}
+                  >
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </div>
 
           {/* Share Section */}
           <div
@@ -229,82 +379,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   );
 }
 
-// Basic markdown-to-HTML converter
-function formatMarkdown(markdown: string): string {
-  let html = markdown;
+function sanitizeHref(url: string): string {
+  try {
+    const parsedUrl = new URL(url, "https://nitsuah.io");
+    const allowedProtocols = new Set(["http:", "https:", "mailto:", "tel:"]);
 
-  // Headers
-  html = html.replace(
-    /^### (.*$)/gm,
-    '<h3 style="font-size: 1.5rem; font-weight: 600; color: #fff; margin: 2rem 0 1rem; line-height: 1.3;">$1</h3>',
-  );
-  html = html.replace(
-    /^## (.*$)/gm,
-    '<h2 style="font-size: 1.875rem; font-weight: 700; color: #fff; margin: 2.5rem 0 1rem; line-height: 1.3;">$1</h2>',
-  );
-  html = html.replace(
-    /^# (.*$)/gm,
-    '<h1 style="font-size: 2.25rem; font-weight: 700; color: #fff; margin: 3rem 0 1rem; line-height: 1.2;">$1</h1>',
-  );
+    if (!allowedProtocols.has(parsedUrl.protocol)) {
+      return "#";
+    }
 
-  // Code blocks
-  html = html.replace(
-    /```(\w+)?\n([\s\S]*?)```/g,
-    '<pre style="background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; font-size: 0.95rem;"><code style="color: #e0e0e0; font-family: \'Courier New\', monospace;">$2</code></pre>',
-  );
-
-  // Inline code
-  html = html.replace(
-    /`([^`]+)`/g,
-    "<code style=\"background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; font-family: 'Courier New', monospace;\">$1</code>",
-  );
-
-  // Bold
-  html = html.replace(
-    /\*\*(.+?)\*\*/g,
-    '<strong style="color: #fff; font-weight: 600;">$1</strong>',
-  );
-
-  // Italic
-  html = html.replace(/\*(.+?)\*/g, '<em style="font-style: italic;">$1</em>');
-
-  // Links
-  html = html.replace(
-    /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: none; border-bottom: 1px solid rgba(59, 130, 246, 0.5); transition: border-color 0.2s ease;">$1</a>',
-  );
-
-  // Blockquotes
-  html = html.replace(
-    /^> (.+$)/gm,
-    '<blockquote style="border-left: 4px solid #3b82f6; padding-left: 1.5rem; margin: 1.5rem 0; color: rgba(255, 255, 255, 0.7); font-style: italic;">$1</blockquote>',
-  );
-
-  // Lists
-  html = html.replace(
-    /^\- (.+$)/gm,
-    '<li style="margin: 0.5rem 0; padding-left: 0.5rem;">$1</li>',
-  );
-  // Wrap consecutive list items in ul tags
-  html = html.replace(
-    /(<li[^>]*>.*?<\/li>\s*)+/g,
-    (match) =>
-      `<ul style="list-style-type: disc; margin: 1rem 0; padding-left: 2rem; color: rgba(255, 255, 255, 0.85);">${match}</ul>`,
-  );
-
-  // Paragraphs (split by double newlines)
-  const paragraphs = html.split("\n\n");
-  html = paragraphs
-    .map((p) => {
-      p = p.trim();
-      if (!p) return "";
-      // Skip if already wrapped in HTML tag
-      if (p.match(/^<(h[1-6]|pre|ul|ol|blockquote|div)/)) {
-        return p;
-      }
-      return `<p style="margin: 1.25rem 0; line-height: 1.8;">${p}</p>`;
-    })
-    .join("\n");
-
-  return html;
+    return parsedUrl.toString();
+  } catch {
+    return "#";
+  }
 }

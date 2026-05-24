@@ -97,28 +97,30 @@ import aiarf from "./_assets/arf-ai.png";
 import arfg from "./_assets/arf-guild.gif";
 import blendeth from "./_assets/blend-eth.gif";
 import cat from "./_assets/cat.png";
-import darkmoon from "./_assets/darkmoon.gif";
 import ngx from "./_assets/ng-game.png";
 import spline from "./_assets/spline.gif";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  labs: nitsuah,
-  darkmoon: darkmoon,
+  "agent-board": "/images/agent-board.png",
+  overseer: "/images/overseer.png",
+  "bb-mcp": "/images/mcp.png",
+  labs: "/images/labs.png",
+  darkmoon: "/images/darkmoon.png",
   spline3d: spline,
-  clients: cat,
+  clients: "/images/clients.png",
   blender: blendeth,
   paint3d: arfg,
   imagen: aiarf,
-  kryptos: cat,
-  gcp: cat,
-  stash: cat,
-  "nitsuah-io": nitsuah,
-  games: ngx,
+  kryptos: "/images/kryptos.png",
+  gcp: "/images/gcp.png",
+  stash: "/images/stash.png",
+  "nitsuah-io": "/images/portfolio.png",
+  games: "/images/games.png",
 };
 
 // GIF projects for unoptimized loading
-const gifProjects = new Set(["darkmoon", "spline3d", "blender", "paint3d"]);
+const gifProjects = new Set(["spline3d", "blender", "paint3d"]);
 
 const Projects = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -240,98 +242,88 @@ const Projects = () => {
           {/* Header */}
           <div className={styles.header}>
             <h1 className={styles.title}>PROJECTS</h1>
-            <h2 className={styles.subtitle}>
+            <p className={styles.subtitle}>
               Explore projects organized by category
-            </h2>
+            </p>
           </div>
 
-          {/* Filter Panel */}
-          <div className={styles.filterPanel}>
-            <div className={styles.filterHeader}>
-              <div className={styles.filterHeaderLeft}>
-                <button
-                  className={styles.filterToggle}
-                  onClick={() => setFiltersExpanded(!filtersExpanded)}
-                >
-                  <i className="fa fa-filter" aria-hidden="true"></i>
-                  <span>Filters</span>
-                  <span className={styles.expandIndicator}>
-                    {filtersExpanded ? "▲" : "▼"}
-                  </span>
-                </button>
+          {/* Category Filter Bar */}
+          <div className={styles.categoryFiltersBar}>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`${styles.categoryButton} ${
+                  selectedCategory === cat ? styles.active : ""
+                }`}
+                aria-label={cat === "Featured" ? "⭐ Featured" : cat}
+              >
+                {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
+              </button>
+            ))}
+          </div>
 
-                {/* Category Filters Inline */}
-                <div className={styles.categoryButtonsInline}>
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`${styles.categoryButton} ${
-                        selectedCategory === cat ? styles.active : ""
-                      }`}
-                      aria-label={cat === "Featured" ? "⭐ Featured" : cat}
-                    >
-                      {cat === "all" ? "All" : cat === "Featured" ? "⭐" : cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Tags Filter Panel */}
+          <div className={styles.filterPanel}>
+            <button
+              className={styles.filterToggle}
+              onClick={() => setFiltersExpanded(!filtersExpanded)}
+            >
+              <i className="fa fa-filter" aria-hidden="true"></i>
+              <span>Filter by Tags</span>
+              {selectedTags.length > 0 && (
+                <span style={{ marginLeft: "0.4rem", opacity: 0.7 }}>
+                  ({selectedTags.length} selected)
+                </span>
+              )}
+              <span className={styles.expandIndicator}>
+                {filtersExpanded ? "▲" : "▼"}
+              </span>
+            </button>
 
             {filtersExpanded && (
               <div className={styles.filterContent}>
-                {/* Tag Filters */}
-                <div className={styles.tagFilters}>
-                  <label className={styles.filterLabel}>
-                    Filter by Tags
-                    {selectedTags.length > 0 && (
-                      <span style={{ marginLeft: "0.5rem", opacity: 0.7 }}>
-                        ({selectedTags.length} selected)
-                      </span>
-                    )}
-                  </label>
-                  <div className={styles.tagButtons}>
-                    {availableTags.map((tag) => {
-                      const category = getTagCategory(tag);
-                      const colors = getCategoryColors(category);
-                      const isSelected = selectedTags.includes(tag);
-                      return (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag)}
-                          className={`${styles.tagButton} ${
-                            isSelected ? styles.selected : ""
-                          }`}
-                          style={{
-                            backgroundColor: isSelected
-                              ? colors.bg
-                              : "transparent",
-                            borderColor: isSelected
-                              ? colors.border
-                              : `${colors.border}80`,
-                            color: isSelected
-                              ? colors.text
-                              : "rgba(255, 255, 255, 0.6)",
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!isSelected) {
-                              e.currentTarget.style.borderColor = colors.border;
-                              e.currentTarget.style.color = colors.text;
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!isSelected) {
-                              e.currentTarget.style.borderColor = `${colors.border}80`;
-                              e.currentTarget.style.color =
-                                "rgba(255, 255, 255, 0.6)";
-                            }
-                          }}
-                        >
-                          {tag}
-                        </button>
-                      );
-                    })}
-                  </div>
+                <div className={styles.tagButtons}>
+                  {availableTags.map((tag) => {
+                    const category = getTagCategory(tag);
+                    const colors = getCategoryColors(category);
+                    const isSelected = selectedTags.includes(tag);
+                    return (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className={`${styles.tagButton} ${
+                          isSelected ? styles.selected : ""
+                        }`}
+                        style={{
+                          backgroundColor: isSelected
+                            ? colors.bg
+                            : "transparent",
+                          borderColor: isSelected
+                            ? colors.border
+                            : `${colors.border}80`,
+                          color: isSelected
+                            ? colors.text
+                            : "rgba(255, 255, 255, 0.6)",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isSelected) {
+                            e.currentTarget.style.borderColor = colors.border;
+                            e.currentTarget.style.color = colors.text;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isSelected) {
+                            e.currentTarget.style.borderColor = `${colors.border}80`;
+                            e.currentTarget.style.color =
+                              "rgba(255, 255, 255, 0.6)";
+                          }
+                        }}
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Clear Filters */}

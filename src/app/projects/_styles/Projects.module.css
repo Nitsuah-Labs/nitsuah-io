@@ -6,11 +6,11 @@
 }
 
 .projectsPage {
-  margin-top: 80px;
-  margin-bottom: 60px;
-  padding-bottom: 80px;
+  margin-top: 72px;
+  margin-bottom: 48px;
+  padding-bottom: 56px;
   min-height: calc(100vh - 140px);
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .container {
@@ -20,7 +20,7 @@
 
 /* Header Section */
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: 0.85rem;
   text-align: center;
 }
 
@@ -31,51 +31,46 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .subtitle {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.35;
 }
 
-/* Filter Panel */
+/* Category Filter Bar - centered prominent row like clients */
+.categoryFiltersBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Filter Panel - tags only */
 .filterPanel {
-  margin-bottom: 2rem;
-  background: rgba(20, 20, 20, 0.6);
-  border: 1px solid rgba(249, 115, 22, 0.2);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.filterHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.filterHeaderLeft {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex: 1;
-  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+  background: rgba(20, 20, 20, 0.5);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
 }
 
 .filterToggle {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   background: transparent;
   border: none;
   color: #f97316;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+  width: 100%;
 }
 
 .filterToggle:hover {
@@ -83,61 +78,31 @@
 }
 
 .filterToggle i {
-  margin-right: 0.5rem;
-}
-
-.filterToggle span {
-  margin: 0 0.5rem;
+  font-size: 0.85rem;
 }
 
 .expandIndicator {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #f97316;
   font-weight: bold;
-  margin-left: 0.25rem !important;
+  margin-left: auto;
   transition: transform 0.3s ease;
 }
 
-.categoryButtonsInline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-}
-
 .filterContent {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(249, 115, 22, 0.2);
-}
-
-/* Category Filters */
-.categoryFilters {
-  margin-bottom: 1.5rem;
-}
-
-.filterLabel {
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.categoryButtons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(249, 115, 22, 0.15);
 }
 
 .categoryButton {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
   border: 2px solid rgba(249, 115, 22, 0.3);
   background: rgba(20, 20, 20, 0.8);
   color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -153,11 +118,6 @@
   border-color: #f97316;
   background: rgba(249, 115, 22, 0.2);
   color: #f97316;
-}
-
-/* Tag Filters */
-.tagFilters {
-  margin-top: 1.5rem;
 }
 
 .tagButtons {
@@ -192,8 +152,8 @@
 .projectGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1.4rem;
+  margin-top: 1rem;
 }
 
 /* Project Card */
@@ -462,11 +422,11 @@
 
   .projectGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.1rem;
   }
 
   .filterPanel {
-    padding: 1rem;
+    padding: 0.85rem;
   }
 
   .categoryButtons,
@@ -482,7 +442,7 @@
 
 @media (max-width: 480px) {
   .projectsPage {
-    padding: 1rem 0.5rem;
+    padding: 0.75rem 0.5rem;
   }
 
   .cardContent {

@@ -2,10 +2,9 @@
 
 import { TextField } from "@mui/material";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useAccount,
-  useSimulateContract,
   useSwitchChain,
   useWaitForTransactionReceipt,
   useWriteContract,
@@ -25,30 +24,7 @@ const contractAddress =
 const contractABI = registerABI.abi;
 
 export default function RegisterContentProduction() {
-  const [mounted, setMounted] = useState(false);
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Regular loading state
-  if (!mounted) {
-    return (
-      <>
-        <h1>REGISTRATION PORTAL</h1>
-        <div className="form-container">
-          <div className="mint-container">
-            <div className="labs-card">
-              <div className="labs-card-header">
-                <h2 className="labs-card-title">Loading...</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
 
   const { address: currentAccount, isConnected, chain } = useAccount();
   const { switchChain: wagmiSwitchNetwork } = useSwitchChain();
@@ -58,15 +34,6 @@ export default function RegisterContentProduction() {
     address: contractAddress,
     abi: contractABI as Abi,
   };
-
-  const { data: registerSim } = useSimulateContract({
-    ...contractConfig,
-    functionName: "register",
-    args: [message],
-    query: {
-      enabled: !!message,
-    },
-  });
 
   const {
     writeContract: register,
@@ -79,8 +46,14 @@ export default function RegisterContentProduction() {
   });
 
   const handleRegister = () => {
-    if (registerSim?.request) {
-      register(registerSim.request);
+    if (message.trim() && currentAccount && chain?.id) {
+      register({
+        ...contractConfig,
+        functionName: "register",
+        args: [message],
+        account: currentAccount,
+        chain,
+      });
     }
   };
 
@@ -181,7 +154,12 @@ export default function RegisterContentProduction() {
                 <button
                   className="labs-btn labs-btn-primary"
                   onClick={handleRegister}
-                  disabled={!registerSim?.request || isRegistering}
+                  disabled={
+                    !message.trim() ||
+                    !currentAccount ||
+                    !chain?.id ||
+                    isRegistering
+                  }
                 >
                   {isRegistering ? "Registering..." : "Register"}
                 </button>

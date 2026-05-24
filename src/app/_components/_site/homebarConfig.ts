@@ -13,7 +13,7 @@ export interface NavMenuItem {
   children?: MenuChild[];
 }
 
-export const pages = ["about", "resume", "portfolio"];
+export const pages = ["about", "resume", "projects"];
 
 export const labsSub: MenuChild[] = [
   { href: "/labs", label: "Hub" },
@@ -29,10 +29,9 @@ export const labsSub: MenuChild[] = [
 ];
 
 export const portfolioSub: NavMenuItem[] = [
-  { href: "/projects", label: "Projects" },
   { href: "/projects/clients", label: "Clients" },
   { href: "/projects/blogs", label: "Blogs" },
-  { href: "/crypto", label: "Crypto" },
+  { href: "/crypto", label: "crypto" },
   { label: "Labs", expandable: true, children: labsSub },
 ];
 

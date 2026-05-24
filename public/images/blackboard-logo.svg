@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" role="img" aria-labelledby="title desc">
+  <title id="title">Blackboard logo</title>
+  <desc id="desc">Blackboard wordmark</desc>
+  <rect width="280" height="80" rx="8" fill="#111111"/>
+  <circle cx="34" cy="40" r="16" fill="#FFFFFF"/>
+  <text x="34" y="46" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#111111">Bb</text>
+  <text x="158" y="48" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600" fill="#FFFFFF">Blackboard</text>
+</svg>

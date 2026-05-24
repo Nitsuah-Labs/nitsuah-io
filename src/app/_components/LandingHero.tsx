@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import styles from "./HeroSection.module.css";
 
 /**
@@ -9,36 +8,23 @@ import styles from "./HeroSection.module.css";
 export const LandingHero: React.FC = () => {
   return (
     <section className={styles.landingHero}>
+      <div className={styles.heroBackdrop} aria-hidden="true" />
       <div className={styles.landingContent}>
         <div className={styles.landingTagline}></div>
 
         <h1 className={styles.landingTitle}>
-          Austin Hardy - Developer Productivity Engineer
+          Austin J. Hardy
           <br />
-          <span className={styles.highlight}>
-            Building the Future with AI & Web3
-          </span>
+          Senior Systems Engineer
+          <br />
+          <span className={styles.highlight}>SaaS | AI | Web3</span>
         </h1>
 
         <p className={styles.landingDescription}>
-          I create intelligent systems that bridge human intent and AI
+          I build intelligent systems that translate human intent into AI
           execution. Currently working on multi-agent orchestration, repository
           intelligence, and blockchain applications.
         </p>
-
-        <div className={styles.landingCTA}>
-          <Link href="/projects" className={styles.primaryButton}>
-            Explore Projects
-          </Link>
-          <a
-            href="https://github.com/nitsuah"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondaryButton}
-          >
-            GitHub Profile
-          </a>
-        </div>
       </div>
     </section>
   );
