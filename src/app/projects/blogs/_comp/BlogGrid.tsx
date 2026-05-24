@@ -3,6 +3,21 @@ import type { BlogPost } from "@/lib/data/blogs";
 import Link from "next/link";
 import React from "react";
 
+const sanitizeKeyPart = (value: string, fallback: string) => {
+  const normalized = value.replace(/[^a-zA-Z0-9_-]/g, "");
+  return normalized.length > 0 ? normalized : fallback;
+};
+
+const sanitizeSlug = (value: string) => {
+  const normalized = value
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return normalized.length > 0 ? normalized : "post";
+};
+
 const BlogGrid: React.FC<{
   filteredBlogs: BlogPost[];
   onOpenLocalBlog: (blog: BlogPost) => void;
@@ -142,10 +157,13 @@ const BlogGrid: React.FC<{
         gap: "2rem",
       }}
     >
-      {filteredBlogs.map((blog) =>
-        blog.localOnly ? (
+      {filteredBlogs.map((blog) => {
+        const safeId = sanitizeKeyPart(blog.id, "blog");
+        const safeSlug = sanitizeSlug(blog.slug);
+
+        return blog.localOnly ? (
           <button
-            key={blog.id}
+            key={safeId}
             type="button"
             onClick={() => onOpenLocalBlog(blog)}
             style={{
@@ -162,14 +180,14 @@ const BlogGrid: React.FC<{
           </button>
         ) : (
           <Link
-            key={blog.id}
-            href={`/projects/blogs/${encodeURIComponent(blog.slug)}`}
+            key={safeId}
+            href={`/projects/blogs/${safeSlug}`}
             style={{ textDecoration: "none" }}
           >
             {renderCard(blog)}
           </Link>
-        ),
-      )}
+        );
+      })}
     </div>
   );
 };
