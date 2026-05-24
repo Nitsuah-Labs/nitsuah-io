@@ -32,11 +32,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       return url;
     }
 
-    if (!['http:', 'https:'].includes(parsed.protocol)) return url;
-    if (parsed.hostname.toLowerCase() !== 'github.com') return url;
+    if (!["http:", "https:"].includes(parsed.protocol)) return url;
+    if (parsed.hostname.toLowerCase() !== "github.com") return url;
     if (parsed.hash) return url;
 
-    const parts = parsed.pathname.replace(/^\/+|\/+$/g, '').split('/');
+    const parts = parsed.pathname.replace(/^\/+|\/+$/g, "").split("/");
     if (parts.length !== 2) return url;
 
     const [, repoRaw] = parts;

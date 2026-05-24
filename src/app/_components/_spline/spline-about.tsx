@@ -1,8 +1,6 @@
-// Spline About Navigation
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-// Set the scene URL
 const SPLINE_SCENE = `https://prod.spline.design/kkSOmPWkIvdc1562/scene.splinecode`;
 
 export function SplineScene() {
@@ -10,45 +8,38 @@ export function SplineScene() {
   const [shouldRender, setShouldRender] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Defer scene hydration slightly to keep page interactions responsive.
   useEffect(() => {
     let idleId: number | null = null;
     const scheduleRender = () => setShouldRender(true);
 
-    if ((window as Window & { requestIdleCallback?: typeof requestAnimationFrame }).requestIdleCallback) {
-      const requestIdleCallback = (window as Window & {
-        requestIdleCallback: (
-          callback: () => void,
-          options?: { timeout: number },
-        ) => number;
-      }).requestIdleCallback;
-      idleId = requestIdleCallback(scheduleRender, { timeout: 1500 });
+    const win = window as unknown as Record<string, unknown>;
+    if (typeof win["requestIdleCallback"] === "function") {
+      const ric = win["requestIdleCallback"] as (
+        cb: () => void,
+        opts?: { timeout: number },
+      ) => number;
+      idleId = ric(scheduleRender, { timeout: 1500 });
     } else {
       idleId = window.setTimeout(scheduleRender, 800);
     }
 
-    const timer = window.setTimeout(() => {
-      setIsLoading(false);
-    }, 10000);
+    const timer = window.setTimeout(() => setIsLoading(false), 10000);
 
     return () => {
-      const cancelIdleCallback = (window as Window & {
-        cancelIdleCallback?: (id: number) => void;
-      }).cancelIdleCallback;
-
-      if (cancelIdleCallback && idleId !== null) {
-        cancelIdleCallback(idleId);
+      const cic = (window as unknown as Record<string, unknown>)[
+        "cancelIdleCallback"
+      ];
+      if (typeof cic === "function" && idleId !== null) {
+        (cic as (id: number) => void)(idleId);
       } else if (idleId !== null) {
         clearTimeout(idleId);
       }
-
       clearTimeout(timer);
     };
   }, []);
 
-  // Keep spinner visible briefly after load to avoid flicker.
   const handleLoad = () => {
-    setTimeout(() => setIsLoading(false), 2000); // Keep visible for 2 more seconds after load
+    setTimeout(() => setIsLoading(false), 2000);
   };
 
   useEffect(() => {
@@ -60,7 +51,6 @@ export function SplineScene() {
       try {
         const { Application } = await import("@splinetool/runtime");
         if (cancelled || !canvasRef.current) return;
-
         const app = new Application(canvasRef.current, { renderMode: "auto" });
         await app.load(SPLINE_SCENE);
         if (!cancelled) handleLoad();
@@ -86,9 +76,10 @@ export function SplineScene() {
           </div>
         </div>
       )}
-      {/* Wrap Spline in canvas div to enable pointer events */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        {shouldRender ? <canvas ref={canvasRef} aria-label="About page 3D scene" /> : null}
+        {shouldRender ? (
+          <canvas ref={canvasRef} aria-label="About page 3D scene" />
+        ) : null}
       </div>
     </>
   );
