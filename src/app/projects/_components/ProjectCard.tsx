@@ -23,14 +23,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const getGithubReadmeUrl = (url?: string) => {
     if (!url) return undefined;
-    if (!url.includes("github.com")) return url;
-    if (url.includes("#")) return url;
 
-    const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)\/?$/i);
-    if (!match) return url;
+    let parsed: URL;
 
-    const repo = match[2].toLowerCase();
-    return `${url.replace(/\/$/, "")}#${repo}`;
+    try {
+      parsed = new URL(url);
+    } catch {
+      return url;
+    }
+
+    if (!['http:', 'https:'].includes(parsed.protocol)) return url;
+    if (parsed.hostname.toLowerCase() !== 'github.com') return url;
+    if (parsed.hash) return url;
+
+    const parts = parsed.pathname.replace(/^\/+|\/+$/g, '').split('/');
+    if (parts.length !== 2) return url;
+
+    const [, repoRaw] = parts;
+    if (!repoRaw) return url;
+
+    const repo = repoRaw.toLowerCase();
+    return `https://github.com/${parts[0]}/${repoRaw}#${repo}`;
   };
 
   const githubReadmeUrl = getGithubReadmeUrl(project.github);
