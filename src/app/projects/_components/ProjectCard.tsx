@@ -21,14 +21,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onToggleFeatured,
   getTagColors,
 }) => {
+  const getGithubReadmeUrl = (url?: string) => {
+    if (!url) return undefined;
+    if (!url.includes("github.com")) return url;
+    if (url.includes("#")) return url;
+
+    const match = url.match(/^https?:\/\/github\.com\/([^/]+)\/([^/#?]+)\/?$/i);
+    if (!match) return url;
+
+    const repo = match[2].toLowerCase();
+    return `${url.replace(/\/$/, "")}#${repo}`;
+  };
+
+  const githubReadmeUrl = getGithubReadmeUrl(project.github);
+
   const handleCardClick = () => {
     if (project.externalLink) {
       window.open(project.externalLink, "_blank");
     } else if (project.demo) {
       window.open(project.demo, "_blank");
-    } else if (project.github) {
+    } else if (githubReadmeUrl) {
       // If only GitHub link exists, use it as the card click target
-      window.open(project.github, "_blank");
+      window.open(githubReadmeUrl, "_blank");
     }
   };
 
@@ -113,9 +127,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               View
             </a>
           )}
-          {project.github && (
+          {githubReadmeUrl && (
             <a
-              href={project.github}
+              href={githubReadmeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={`${styles.cardButton} ${styles.githubButton}`}

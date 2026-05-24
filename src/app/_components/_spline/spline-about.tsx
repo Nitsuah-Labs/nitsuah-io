@@ -1,26 +1,80 @@
 // Spline About Navigation
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Set the scene URL
 const SPLINE_SCENE = `https://prod.spline.design/kkSOmPWkIvdc1562/scene.splinecode`;
 
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Auto-hide loading after 3 seconds minimum to ensure visibility
+  // Defer scene hydration slightly to keep page interactions responsive.
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    let idleId: number | null = null;
+    const scheduleRender = () => setShouldRender(true);
 
-    return () => clearTimeout(timer);
+    if ((window as Window & { requestIdleCallback?: typeof requestAnimationFrame }).requestIdleCallback) {
+      const requestIdleCallback = (window as Window & {
+        requestIdleCallback: (
+          callback: () => void,
+          options?: { timeout: number },
+        ) => number;
+      }).requestIdleCallback;
+      idleId = requestIdleCallback(scheduleRender, { timeout: 1500 });
+    } else {
+      idleId = window.setTimeout(scheduleRender, 800);
+    }
+
+    const timer = window.setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
+
+    return () => {
+      const cancelIdleCallback = (window as Window & {
+        cancelIdleCallback?: (id: number) => void;
+      }).cancelIdleCallback;
+
+      if (cancelIdleCallback && idleId !== null) {
+        cancelIdleCallback(idleId);
+      } else if (idleId !== null) {
+        clearTimeout(idleId);
+      }
+
+      clearTimeout(timer);
+    };
   }, []);
 
-  // Also hide when Spline actually loads (whichever is later)
+  // Keep spinner visible briefly after load to avoid flicker.
   const handleLoad = () => {
     setTimeout(() => setIsLoading(false), 2000); // Keep visible for 2 more seconds after load
   };
+
+  useEffect(() => {
+    if (!shouldRender || !canvasRef.current) return;
+
+    let cancelled = false;
+
+    const initSpline = async () => {
+      try {
+        const { Application } = await import("@splinetool/runtime");
+        if (cancelled || !canvasRef.current) return;
+
+        const app = new Application(canvasRef.current, { renderMode: "auto" });
+        await app.load(SPLINE_SCENE);
+        if (!cancelled) handleLoad();
+      } catch {
+        if (!cancelled) setIsLoading(false);
+      }
+    };
+
+    initSpline();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [shouldRender]);
 
   return (
     <>
@@ -34,9 +88,7 @@ export function SplineScene() {
       )}
       {/* Wrap Spline in canvas div to enable pointer events */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        <div className="spline-loading-text" role="status" aria-live="polite">
-          Interactive scene is unavailable in this environment.
-        </div>
+        {shouldRender ? <canvas ref={canvasRef} aria-label="About page 3D scene" /> : null}
       </div>
     </>
   );
