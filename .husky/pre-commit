@@ -1,34 +1,26 @@
 #!/bin/sh
-# Add Node.js to PATH for Git Bash on Windows
-export PATH="/c/Program Files/nodejs:$PATH"
+echo "Running pre-commit validation..."
 
-echo "🔍 Running pre-commit validation (fast checks with auto-fix)..."
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+DOCKER_RUN="docker run --rm -v ${REPO_ROOT}:/app -v nitsuah-io-node-modules:/app/node_modules -w /app node:22.13.0-slim"
 
 # Step 1: Type checking
 echo "1/4 Checking types..."
-npm run typecheck || exit 1
+$DOCKER_RUN sh -c "npm ci --legacy-peer-deps --prefer-offline && npm run typecheck" || exit 1
 
-# Step 2: Linting (next lint doesn't support --fix, auto-fix happens in lint-staged)
+# Step 2: Linting
 echo "2/4 Running linter..."
-npm run lint || {
-	echo "⚠️  Lint errors found. They will be auto-fixed in the next step if possible."
-}
+$DOCKER_RUN sh -c "npm run lint" || echo "Lint errors found."
 
-# Step 3: Auto-formatting and auto-fixing staged files
-echo "3/4 Auto-formatting and auto-fixing staged files..."
-npx lint-staged || {
-	echo "npx lint-staged failed or unavailable; falling back to project formatter..."
-	npm run format || exit 1
-	git add -A
-}
+# Step 3: Auto-formatting staged files and re-staging
+echo "3/4 Auto-formatting staged files..."
+$DOCKER_RUN sh -c "npm run format" && git add -A
 
 # Step 4: Jest unit tests
 echo "4/4 Running Jest tests..."
-npm test || {
-	echo "⚠️  Tests failed. Please fix them before committing."
-	exit 1
+$DOCKER_RUN sh -c "npm test" || {
+  echo "Tests failed. Please fix them before committing."
+  exit 1
 }
 
-echo "✅ All pre-commit checks passed!"
-
-
+echo "All pre-commit checks passed!"
