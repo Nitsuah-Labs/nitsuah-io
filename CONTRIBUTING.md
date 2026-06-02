@@ -6,8 +6,8 @@ This file covers repository-specific setup only.
 
 ## Local Setup
 
-1. Follow project prerequisites in README.md.
-2. Install dependencies: npm install
+1. Follow project prerequisites in [README.md](./README.md).
+2. Install dependencies: `npm ci`
 3. Run the project-specific development and test scripts documented in README.md.
 
 ## Repo Planning Sources
