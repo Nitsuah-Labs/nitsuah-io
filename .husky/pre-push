@@ -2,11 +2,16 @@
 echo "Running pre-push validation..."
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
+# Convert POSIX path (/c/Users/...) to Windows mixed format (C:/Users/...)
+# so Docker recognises the host volume path.
+WIN_ROOT="$(cygpath -m "$REPO_ROOT" 2>/dev/null || echo "$REPO_ROOT")"
+# Prevent Git Bash from converting container paths like /app -> C:/Program Files/Git/app
+export MSYS_NO_PATHCONV=1
 
 # Type check
 echo "1/3 Type checking..."
 docker run --rm \
-  -v "${REPO_ROOT}:/app" \
+  -v "${WIN_ROOT}:/app" \
   -v "nitsuah-io-node-modules:/app/node_modules" \
   -w /app \
   node:22.13.0-slim \
@@ -15,7 +20,7 @@ docker run --rm \
 # Run unit tests
 echo "2/3 Running unit tests..."
 docker run --rm \
-  -v "${REPO_ROOT}:/app" \
+  -v "${WIN_ROOT}:/app" \
   -v "nitsuah-io-node-modules:/app/node_modules" \
   -w /app \
   node:22.13.0-slim \

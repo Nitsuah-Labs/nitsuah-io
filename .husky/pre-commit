@@ -2,7 +2,12 @@
 echo "Running pre-commit validation..."
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-DOCKER_RUN="docker run --rm -v ${REPO_ROOT}:/app -v nitsuah-io-node-modules:/app/node_modules -w /app node:22.13.0-slim"
+# Convert POSIX path (/c/Users/...) to Windows mixed format (C:/Users/...)
+# so Docker recognises the host volume path.
+WIN_ROOT="$(cygpath -m "$REPO_ROOT" 2>/dev/null || echo "$REPO_ROOT")"
+# Prevent Git Bash from converting container paths like /app -> C:/Program Files/Git/app
+export MSYS_NO_PATHCONV=1
+DOCKER_RUN="docker run --rm -v ${WIN_ROOT}:/app -v nitsuah-io-node-modules:/app/node_modules -w /app node:22.13.0-slim"
 
 # Step 1: Type checking
 echo "1/4 Checking types..."
