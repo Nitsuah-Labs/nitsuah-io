@@ -3,18 +3,18 @@
 services:
   playwright:
     build:
-      context: .
-      dockerfile: Dockerfile.test
+      context: ..
+      dockerfile: config/Dockerfile.test
     volumes:
       # Mount source code for live updates during development
-      - .:/app
+      - ..:/app
       # Use named volume for node_modules to avoid conflicts with host
       - node_modules:/app/node_modules
       # Mask .next - use the build from Dockerfile for consistency
       - /app/.next
       # Mount test results directory
-      - ./test-results:/app/test-results
-      - ./playwright-report:/app/playwright-report
+      - ../test-results:/app/test-results
+      - ../playwright-report:/app/playwright-report
     environment:
       - CI=true
       - NODE_ENV=test

@@ -1,0 +1,21 @@
+# Ignore build artifacts and dependencies
+node_modules
+.next
+out
+build
+dist
+coverage
+
+# Ignore config files that shouldn't be formatted
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore generated files
+generated.ts
+*.min.js
+*.min.css
+
+# Ignore specific file types
+*.md
+*.json

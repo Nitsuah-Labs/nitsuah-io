@@ -132,19 +132,19 @@ update_baselines_docker() {
   
   # Build the Docker image first
   print_info "Building Docker image..."
-  docker-compose -f docker-compose.test.yml build
-  
+  docker-compose -f config/docker-compose.test.yml build
+
   # Construct the test command
   local test_cmd="npx playwright test"
   if [ -n "$TEST_PATTERN" ]; then
     test_cmd="$test_cmd $TEST_PATTERN"
   fi
   test_cmd="$test_cmd --update-snapshots --project=chromium-desktop"
-  
+
   print_info "Running: $test_cmd"
-  
+
   # Run tests with snapshot update flag
-  docker-compose -f docker-compose.test.yml run --rm playwright bash -c "$test_cmd"
+  docker-compose -f config/docker-compose.test.yml run --rm playwright bash -c "$test_cmd"
   
   print_success "Docker baseline update complete"
 }
