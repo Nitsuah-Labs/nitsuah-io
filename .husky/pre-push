@@ -1,23 +1,37 @@
 #!/bin/sh
-# Add Node.js to PATH for Git Bash on Windows
-export PATH="/c/Program Files/nodejs:$PATH"
+echo "Running pre-push validation..."
 
-echo "🔍 Running pre-push validation..."
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+# Convert POSIX path (/c/Users/...) to Windows mixed format (C:/Users/...)
+# so Docker recognises the host volume path.
+WIN_ROOT="$(cygpath -m "$REPO_ROOT" 2>/dev/null || echo "$REPO_ROOT")"
+# Prevent Git Bash from converting container paths like /app -> C:/Program Files/Git/app
+export MSYS_NO_PATHCONV=1
 
 # Type check
 echo "1/3 Type checking..."
-npm run typecheck || exit 1
+docker run --rm \
+  -v "${WIN_ROOT}:/app" \
+  -v "nitsuah-io-node-modules:/app/node_modules" \
+  -w /app \
+  node:22.13.0-slim \
+  sh -c "npm ci --legacy-peer-deps --prefer-offline && npm run typecheck" || exit 1
 
 # Run unit tests
 echo "2/3 Running unit tests..."
-npm test || {
-	echo "⚠️  Tests failed. Please fix them before pushing."
-	exit 1
-}
+docker run --rm \
+  -v "${WIN_ROOT}:/app" \
+  -v "nitsuah-io-node-modules:/app/node_modules" \
+  -w /app \
+  node:22.13.0-slim \
+  sh -c "npm test" || {
+    echo "Tests failed. Please fix them before pushing."
+    exit 1
+  }
 
 # E2E tests are intentionally skipped here — they run in CI (GitHub Actions)
 # against the production build. Running them locally on every push is too
 # slow and depends on env-specific setup (ports, browsers, etc.).
 echo "3/3 Skipping E2E (runs in CI) — all pre-push checks passed!"
 
-echo "✅ Pre-push checks passed! Your code is ready for CI."
+echo "Pre-push checks passed! Your code is ready for CI."

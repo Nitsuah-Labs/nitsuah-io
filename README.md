@@ -244,3 +244,9 @@ This file is the face of the project.
 3. Fill in the "Getting Started", "Installation", and "Usage" sections with accurate commands.
 4. Keep the tone professional and helpful.
 -->
+## Community Standards
+
+Shared community policies are centralized in https://github.com/nitsuah/.github:
+- Contributing: https://github.com/nitsuah/.github/blob/main/CONTRIBUTING.md
+- Code of Conduct: https://github.com/nitsuah/.github/blob/main/CODE_OF_CONDUCT.md
+- Security: https://github.com/nitsuah/.github/blob/main/SECURITY.md

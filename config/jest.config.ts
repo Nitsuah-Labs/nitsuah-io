@@ -27,7 +27,9 @@ const config: Config = {
     "<rootDir>/node_modules/",
     "<rootDir>/.next/",
     "<rootDir>/tests/", // Exclude Playwright tests (run with npm run test:e2e)
+    "<rootDir>/.claude/", // Exclude Claude worktrees
   ],
+  watchPathIgnorePatterns: ["<rootDir>/.claude/"],
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
