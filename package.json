@@ -64,7 +64,7 @@
     "@wagmi/connectors": "^8.0.15",
     "@wagmi/core": "^3.4.5",
     "@walletconnect/ethereum-provider": "^2.23.9",
-    "accounts": "~0.14.6",
+    "accounts": "~0.14.8",
     "@coinbase/wallet-sdk": "^4.3.6",
     "@metamask/connect-evm": "^1.4.0",
     "bufferutil": "^4.1.0",
