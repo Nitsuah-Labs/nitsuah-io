@@ -65,6 +65,11 @@ WCAG 2.1 AA compliance with comprehensive keyboard navigation and screen reader 
 - **Focus Management**: Visible focus indicators and logical tab order throughout site
 - **Alt Text**: Descriptive image alternatives for all visual content
 
+### 🏠 Landing Page
+
+- **Featured Projects Landing Page**: `LandingHero` + `FeaturedProjects` components replace the Spline hero; top 4 featured projects (agent-board, overseer, bb-mcp, darkmoon) appear in a 2×2 card grid above the fold.
+- **Spline 3D Scene on `/3d` Route**: Spline scene moved from home page to a dedicated opt-in `/3d` page, removing bundle weight from the critical landing path and improving home page LCP.
+
 ### 🎨 Dark Mode & Theming
 
 Complete theme system with user preference persistence and comprehensive design tokens.

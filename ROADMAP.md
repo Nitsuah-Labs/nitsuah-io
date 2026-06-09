@@ -1,15 +1,11 @@
 # ROADMAP
 
-**Last Updated:** 2026-04-13 (Overseer compliance review)
-Next Review: 2026-05-01
+**Last Updated:** 2026-06-08
+Next Review: 2026-07-01
 
+## 2026 Q1 ✅
 
-## 2026 Q1 (Completed)
-
-- [x] Keep Playwright Docker and npm versions coordinated during upgrades.
-- [x] Ship the dark mode toggle UI.
-- [ ] Replace placeholder-heavy client demo assets. *(carry → Q2)*
-- [ ] Replace duplicate project and crypto page assets. *(carry → Q2)*
+> Completed. Playwright/npm lockstep, dark mode toggle, and INTEGRATIONS.md all shipped. See FEATURES.md.
 
 ## 2026 Q2 (In Progress)
 
@@ -40,7 +36,6 @@ Next Review: 2026-05-01
 ### Docs & Quality
 - [ ] Add `docs/API.md` covering wagmi hook surface, chain config, and `/api/*` routes.
 - [ ] Refresh `METRICS.md` with a `last validated` marker and re-run coverage.
-- [x] Add `docs/INTEGRATIONS.md` mapping sister-repo connection points.
 
 ## 2026 Q3 (Planned)
 
