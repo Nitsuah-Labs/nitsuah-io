@@ -38,6 +38,9 @@ yarn-error.log*
 *.swo
 *~
 
+# Claude Code worktrees (can contain stale node_modules/symlinks)
+.claude
+
 # CI
 .github
 
