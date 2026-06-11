@@ -16,9 +16,24 @@ export interface ClientProject {
   features: string[];
   status: "live" | "demo" | "mockup";
   icon?: string;
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 export const clientProjects: ClientProject[] = [
+  {
+    id: "skyview",
+    name: "SkyView Dynamics",
+    type: "service",
+    description:
+      "Cinematic drone services marketing site for a real client. Video hero, Decap CMS for content management, Calendly booking integration, Netlify Forms, and a Playwright E2E + Vitest test suite.",
+    technologies: ["JavaScript", "Netlify", "Playwright"],
+    features: ["Video Hero", "Decap CMS", "Calendly Booking", "Netlify Forms"],
+    status: "live",
+    icon: "🚁",
+    liveUrl: "https://skyview.nitsuah.io",
+    githubUrl: "https://github.com/nitsuah/skyview",
+  },
   {
     id: "storefront",
     name: "Storefront",

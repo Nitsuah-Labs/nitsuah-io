@@ -139,10 +139,6 @@
   margin-bottom: 0.5rem;
   font-size: 0.82rem;
   flex-grow: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .featured-project-card .project-tags {
@@ -277,10 +273,6 @@
   background: #9a3412;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-}
-
-.featured-project-card--other-projects .project-description {
-  -webkit-line-clamp: 3;
 }
 
 .featured-header .label-ai {

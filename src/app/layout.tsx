@@ -12,11 +12,11 @@ import { Providers } from "./providers";
 import "./test-helpers.css";
 
 export const metadata: Metadata = {
-  title: "Austin J. Hardy | Developer & Researcher | nitsuah.io",
+  title: "Austin J. Hardy | Senior Platform & AI Engineer | nitsuah.io",
   description:
-    "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments. Austin J. Hardy's selected projects and technical work.",
+    "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
   keywords:
-    "Austin Hardy, nitsuah, developer, cryptography, Web3, Python, Next.js, portfolio, blockchain, automation",
+    "Austin Hardy, nitsuah, platform engineer, AI engineer, Atlassian, MCP, Next.js, TypeScript, enterprise automation, Web3",
   authors: [{ name: "Austin J. Hardy", url: "https://nitsuah.io" }],
   creator: "Austin J. Hardy",
   publisher: "Austin J. Hardy",
@@ -29,23 +29,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://nitsuah.io",
     siteName: "nitsuah.io",
-    title: "Austin J. Hardy | Developer & Researcher",
+    title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.",
+      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: [
       {
         url: "/social-preview.svg", // TODO: Convert to PNG for better social media compatibility
         width: 1200,
         height: 630,
-        alt: "Austin J. Hardy - Developer & Researcher Portfolio",
+        alt: "Austin J. Hardy - Senior Platform & AI Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Austin J. Hardy | Developer & Researcher",
+    title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.",
+      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: ["/social-preview.svg"], // TODO: Convert to PNG for better compatibility
     creator: "@nitsuah",
   },
