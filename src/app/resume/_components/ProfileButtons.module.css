@@ -6,11 +6,15 @@
   padding: 0.5rem 1rem;
   border: 1px solid;
   border-radius: 6px;
-  color: #fff;
+  color: var(--color-text-primary);
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 600;
   cursor: pointer;
+}
+
+.profileButton:hover {
+  color: #fff;
 }
 
 .icon {
