@@ -17,6 +17,9 @@ type Project = {
   description: string;
   type: ProjectType;
   status: string;
+  technologies?: string[];
+  liveUrl?: string;
+  githubUrl?: string;
 };
 
 const ClientsProjectList: React.FC<{
@@ -75,7 +78,13 @@ const ClientsProjectList: React.FC<{
               flexDirection: "column",
               position: "relative",
             }}
-            onClick={() => setShowDemo(project.id)}
+            onClick={() => {
+              if (project.liveUrl) {
+                window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+              } else {
+                setShowDemo(project.id);
+              }
+            }}
           >
             <div
               style={{
@@ -162,26 +171,91 @@ const ClientsProjectList: React.FC<{
               {project.description}
             </p>
 
-            <button
-              style={{
-                padding: "0.5rem 1rem",
-                background: "rgba(16, 185, 129, 0.2)",
-                border: "1px solid rgba(16, 185, 129, 0.4)",
-                borderRadius: "6px",
-                color: "#10b981",
-                fontWeight: "600",
-                fontSize: "0.875rem",
-                cursor: "pointer",
-                transition: "all 0.2s ease",
-                marginTop: "auto",
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowDemo(project.id);
-              }}
-            >
-              Launch Demo
-            </button>
+            {project.technologies && project.technologies.length > 0 && (
+              <p
+                style={{
+                  color: "rgba(16, 185, 129, 0.8)",
+                  fontSize: "0.75rem",
+                  textAlign: "center",
+                  margin: "0 0 0.75rem 0",
+                  fontWeight: "600",
+                }}
+              >
+                Stack: {project.technologies.join(" · ")}
+              </p>
+            )}
+
+            {project.liveUrl ? (
+              <div
+                style={{ display: "flex", gap: "0.5rem", marginTop: "auto" }}
+              >
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    flex: 1,
+                    padding: "0.5rem 1rem",
+                    background: "rgba(16, 185, 129, 0.2)",
+                    border: "1px solid rgba(16, 185, 129, 0.4)",
+                    borderRadius: "6px",
+                    color: "#10b981",
+                    fontWeight: "600",
+                    fontSize: "0.875rem",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  Live Site ↗
+                </a>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      flex: 1,
+                      padding: "0.5rem 1rem",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      borderRadius: "6px",
+                      color: "rgba(255,255,255,0.8)",
+                      fontWeight: "600",
+                      fontSize: "0.875rem",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
+            ) : (
+              <button
+                style={{
+                  padding: "0.5rem 1rem",
+                  background: "rgba(16, 185, 129, 0.2)",
+                  border: "1px solid rgba(16, 185, 129, 0.4)",
+                  borderRadius: "6px",
+                  color: "#10b981",
+                  fontWeight: "600",
+                  fontSize: "0.875rem",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  marginTop: "auto",
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowDemo(project.id);
+                }}
+              >
+                Launch Demo
+              </button>
+            )}
           </div>
         ))}
       </div>

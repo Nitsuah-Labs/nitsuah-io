@@ -15,15 +15,18 @@ export const LandingHero: React.FC = () => {
         <h1 className={styles.landingTitle}>
           Austin J. Hardy
           <br />
-          Senior Systems Engineer
-          <br />
-          <span className={styles.highlight}>SaaS | AI | Web3</span>
+          <span className={styles.highlight}>
+            Senior Platform & AI Engineer
+          </span>
         </h1>
 
         <p className={styles.landingDescription}>
-          I build intelligent systems that translate human intent into AI
-          execution. Currently working on multi-agent orchestration, repository
-          intelligence, and blockchain applications.
+          15 years building enterprise tooling, Atlassian platforms, and
+          AI-powered systems that engineers actually want to use.
+        </p>
+
+        <p className={styles.landingCompanies}>
+          Netflix &middot; Coinbase &middot; Blackboard
         </p>
       </div>
     </section>

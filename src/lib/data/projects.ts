@@ -20,21 +20,6 @@ export type Project = {
 const projects: Project[] = [
   // Flagship Projects (Featured on Home Page)
   {
-    id: "agent-board",
-    title: "Agent Board",
-    short:
-      "Unified dashboard orchestrating autonomous AI agents across GitHub repositories.",
-    description:
-      "Local-first AI control room for multi-model workflows. Chat, safety rails, and live observability in one dashboard — no external APIs, no data leaving your machine.",
-    github: "https://github.com/nitsuah/agent-board",
-    highlight:
-      "Multi-agent orchestration, repo intelligence, automated governance",
-    tags: ["typescript", "nextjs", "ai", "devops"],
-    category: "Apps",
-    status: "active",
-    featured: true,
-  },
-  {
     id: "overseer",
     title: "Overseer",
     short:
@@ -50,38 +35,6 @@ const projects: Project[] = [
     status: "active",
     featured: true,
   },
-  {
-    id: "bb-mcp",
-    title: "Blackboard MCP",
-    short:
-      "Production-ready MCP server providing multi-persona access to Blackboard LMS data.",
-    description:
-      "Full-stack AI product engineering demonstration as an MCP server, exposing Blackboard LMS data across student, instructor, admin, and parent personas with RBAC, PII handling, rate limiting, and streaming response support.",
-    github: "https://github.com/nitsuah/bb-mcp",
-    highlight:
-      "Multi-persona tools, RBAC, streaming responses, institutional compliance",
-    tags: ["typescript", "mcp", "ai", "api"],
-    category: "Apps",
-    status: "active",
-    featured: false,
-  },
-  {
-    id: "darkmoon",
-    title: "darkmoon.dev",
-    short:
-      "Full-stack portfolio site with Web3 integrations, real-time blockchain data, and 3D graphics.",
-    description:
-      "Advanced portfolio website showcasing Web3 integration, real-time blockchain applications, 3D Spline animations, and modern React patterns. Serves as a secondary portfolio domain with specialized project content.",
-    github: "https://github.com/nitsuah/darkmoon",
-    externalLink: "https://darkmoon.dev",
-    infoUrl: "https://darkmoon.dev",
-    highlight: "Web3 integration, real-time data, 3D graphics, design showcase",
-    tags: ["typescript", "nextjs", "web3", "3d"],
-    category: "Web3",
-    status: "active",
-    featured: true,
-  },
-  // Original Projects
   {
     id: "kryptos",
     title: "Kryptos",
@@ -99,6 +52,69 @@ const projects: Project[] = [
     featured: true,
   },
   {
+    id: "darkmoon",
+    title: "darkmoon.dev",
+    short:
+      "Full-stack portfolio site with Web3 integrations, real-time blockchain data, and 3D graphics.",
+    description:
+      "Advanced portfolio website showcasing Web3 integration, real-time blockchain applications, 3D Spline animations, and modern React patterns. Serves as a secondary portfolio domain with specialized project content.",
+    github: "https://github.com/nitsuah/darkmoon",
+    externalLink: "https://darkmoon.dev",
+    infoUrl: "https://darkmoon.dev",
+    highlight: "Web3 integration, real-time data, 3D graphics, design showcase",
+    tags: ["typescript", "nextjs", "web3", "3d"],
+    category: "Web3",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "bb-mcp",
+    title: "Blackboard MCP",
+    short:
+      "Production-ready MCP server providing multi-persona access to Blackboard LMS data.",
+    description:
+      "Full-stack AI product engineering demonstration as an MCP server, exposing Blackboard LMS data across student, instructor, admin, and parent personas with RBAC, PII handling, rate limiting, and streaming response support.",
+    github: "https://github.com/nitsuah/bb-mcp",
+    highlight:
+      "Multi-persona tools, RBAC, streaming responses, institutional compliance",
+    tags: ["typescript", "mcp", "ai", "api"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "stash",
+    title: "Stash",
+    short:
+      "15 years of enterprise automation: Atlassian, AWS IaC, SSO flows, and a role-based AI agent system.",
+    description:
+      "15 years of enterprise automation artifacts — Atlassian config templates, AWS IaC, OAuth/SAML/OIDC flows, SaaS API examples (Okta, Datadog, PagerDuty, Slack), and a role-based AI agent system for personal ops and product delivery.",
+    github: "https://github.com/nitsuah/stash",
+    demo: "",
+    highlight:
+      "Practical enterprise tooling, IT automation, workflow optimization",
+    tags: ["powershell", "vba", "devops", "sysadmin", "ai"],
+    category: "Apps",
+    status: "maintained",
+    featured: true,
+  },
+  // Additional Projects
+  {
+    id: "agent-board",
+    title: "Agent Board",
+    short:
+      "Unified dashboard orchestrating autonomous AI agents across GitHub repositories.",
+    description:
+      "Local-first AI control room for multi-model workflows. Chat, safety rails, and live observability in one dashboard — no external APIs, no data leaving your machine.",
+    github: "https://github.com/nitsuah/agent-board",
+    highlight:
+      "Multi-agent orchestration, repo intelligence, automated governance",
+    tags: ["typescript", "nextjs", "ai", "devops"],
+    category: "Apps",
+    status: "active",
+    featured: false,
+  },
+  {
     id: "gcp",
     title: "GCP Tools",
     short: "Google Drive reporting & migration scripts (Drive API automation).",
@@ -110,23 +126,7 @@ const projects: Project[] = [
     tags: ["python", "gcp", "automation", "enterprise"],
     category: "Apps",
     status: "maintained",
-    featured: true,
-  },
-  {
-    id: "stash",
-    title: "Stash",
-    short:
-      "Collection of sysadmin scripts (PowerShell, VBA, Atlassian helpers).",
-    description:
-      "Comprehensive system administration toolkit containing PowerShell automation scripts, VBA macros for Office integration, and Atlassian workflow helpers for enterprise IT operations.",
-    github: "https://github.com/nitsuah/stash",
-    demo: "",
-    highlight:
-      "Practical enterprise tooling, IT automation, workflow optimization",
-    tags: ["powershell", "vba", "devops", "sysadmin"],
-    category: "Apps",
-    status: "maintained",
-    featured: true,
+    featured: false,
   },
   {
     id: "nitsuah-io",

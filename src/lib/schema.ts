@@ -9,22 +9,22 @@ export function generatePersonSchema() {
     url: "https://nitsuah.io",
     image: "https://nitsuah.io/social-preview.png",
     sameAs: ["https://github.com/nitsuah", "https://github.com/Nitsuah-Labs"],
-    jobTitle: "Developer & Researcher",
+    jobTitle: "Senior Platform & AI Engineer",
     worksFor: {
       "@type": "Organization",
       name: "Nitsuah Labs",
     },
     knowsAbout: [
-      "Cryptography",
-      "Web3 Development",
-      "Python Programming",
+      "Atlassian Platform Engineering",
+      "AI Agents & MCP Servers",
       "Enterprise Automation",
       "Next.js",
       "TypeScript",
-      "System Administration",
+      "Cryptography",
+      "Web3 Development",
     ],
     description:
-      "Developer and researcher specializing in cryptography research, enterprise automation tools, and Web3 experiments.",
+      "Senior Platform & AI Engineer with 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": "https://nitsuah.io",
@@ -56,7 +56,7 @@ export function generateWebSiteSchema() {
     alternateName: "nitsuah.io",
     url: "https://nitsuah.io",
     description:
-      "Personal portfolio showcasing cryptography research, enterprise automation tools, and Web3 experiments.",
+      "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     author: {
       "@type": "Person",
       name: "Austin J. Hardy",
