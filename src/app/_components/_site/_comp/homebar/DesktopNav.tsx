@@ -1,10 +1,12 @@
 "use client";
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { navStyles, portfolioSub } from "../../homebarConfig";
 
 const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
+  const router = useRouter();
   const [projectsOpen, setProjectsOpen] = React.useState(false);
   const [labsExpanded, setLabsExpanded] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -61,7 +63,12 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
           aria-expanded={projectsOpen}
           aria-controls="projects-inline"
           onClick={() => {
-            setProjectsOpen((s) => !s);
+            if (projectsOpen) {
+              setProjectsOpen(false);
+              router.push("/projects");
+            } else {
+              setProjectsOpen(true);
+            }
           }}
           sx={{ color: (navStyles.link as any).color || undefined }}
         >
