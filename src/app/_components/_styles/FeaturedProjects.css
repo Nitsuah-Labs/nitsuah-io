@@ -57,7 +57,7 @@
   align-items: start;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1025px) {
   .featured-projects-grid {
     align-items: stretch;
   }
@@ -313,7 +313,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .featured-projects-section {
     height: auto;
     overflow: visible;
