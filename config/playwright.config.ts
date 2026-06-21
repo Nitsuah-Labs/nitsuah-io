@@ -18,10 +18,10 @@ const CI_WORKERS =
  * - Functional E2E testing
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: "../tests",
 
   // Global setup to clean WalletConnect state
-  globalSetup: require.resolve("./tests/global-setup"),
+  globalSetup: require.resolve("../tests/global-setup"),
 
   // Maximum time one test can run - increased for CI stability
   timeout: process.env.CI ? CI_TIMEOUT : LOCAL_TIMEOUT,
