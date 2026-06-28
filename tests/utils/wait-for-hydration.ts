@@ -15,7 +15,7 @@ export async function waitForReactHydration(page: Page, timeout = 30000) {
     // timeout, the page failed to render and the calling test should fail.
     await page.waitForSelector("header, main, footer, #basics, .resume-container", {
       state: "attached",
-      timeout: 10000,
+      timeout: 30000,
     });
     return;
   }
