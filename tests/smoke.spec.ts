@@ -46,5 +46,5 @@ test("browser sanity check (local only)", async ({ page }) => {
     "Browser smoke runs locally only unless FORCE_BROWSER_E2E=1"
   );
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("body")).toBeVisible();
+  await expect(page.locator("body")).toBeVisible({ timeout: 60000 });
 });

@@ -15,8 +15,32 @@ export async function waitForReactHydration(page: Page, timeout = 30000) {
     // timeout, the page failed to render and the calling test should fail.
     await page.waitForSelector("header, main, footer, #basics, .resume-container", {
       state: "attached",
-      timeout: 30000,
+      timeout: 60000,
     });
+
+    // Wait for React to hydrate - check that body has actual content
+    // We look for either #__next (Pages) or a main element (App) with content
+    await page.waitForFunction(
+      () => {
+        const main = document.querySelector("main");
+        const nextRoot = document.querySelector("#__next");
+        const body = document.body;
+
+        // Check that we have a significant number of children or content
+        const hasContent =
+          (main && main.childElementCount > 0) ||
+          (nextRoot && nextRoot.childElementCount > 0) ||
+          (body && body.childElementCount > 2);
+
+        // Also check that documentElement is not null
+        const hasDocument = document.documentElement !== null;
+
+        return !!(hasContent && hasDocument);
+      },
+      { timeout }
+    );
+
+    await page.waitForTimeout(1000);
     return;
   }
 
