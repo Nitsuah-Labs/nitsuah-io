@@ -102,7 +102,7 @@ import spline from "./_assets/spline.gif";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  "agent-board": "/images/agent-board.png",
+  "motor-pool": "/images/motor-pool.png",
   overseer: "/images/overseer.png",
   "bb-mcp": "/images/mcp.png",
   labs: "/images/labs.png",
