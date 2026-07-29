@@ -189,7 +189,6 @@ const FeaturedProjects: React.FC = () => {
           </p>
           <br />
         </div>
-
         <div className="featured-projects-grid">
           {featuredProjects.slice(0, 4).map((project) => (
             <ProjectCard key={project.id} project={project} />
