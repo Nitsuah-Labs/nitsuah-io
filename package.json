@@ -39,6 +39,7 @@
     "commit:safe": "npm run typecheck && npm run format && git add -A && git commit",
     "clean": "rm -rf .next out node_modules/.cache",
     "analyze": "cross-env ANALYZE=true npm run build",
+    "postinstall": "node -e \"const { spawnSync } = require('node:child_process'); try { require.resolve('patch-package'); } catch { console.log('patch-package not installed; skipping patch application'); process.exit(0); } const result = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['--no', 'patch-package'], { stdio: 'inherit' }); process.exit(result.status ?? 1);\"",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -69,8 +70,8 @@
     "@metamask/connect-evm": "^2.1.0",
     "bufferutil": "^4.1.0",
     "next": "^16.2.12",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-hot-toast": "^2.6.0",
     "react-markdown": "^10.1.0",
     "porto": "~0.2.35",
@@ -108,7 +109,8 @@
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
     "lint-staged": "^17.0.8",
-    "prettier": "^3.8.5",
+    "patch-package": "^8.0.0",
+    "prettier": "^3.9.6",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1"
@@ -119,6 +121,10 @@
     "uuid": "11.1.1",
     "ws": "8.21.0",
     "@babel/core": "7.29.7",
-    "js-yaml": "4.2.0"
+    "js-yaml": "4.2.0",
+    "glob": "13.0.6",
+    "test-exclude": {
+      "glob": "13.0.6"
+    }
   }
 }

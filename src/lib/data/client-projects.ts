@@ -1,11 +1,6 @@
 // src/lib/data/client-projects.ts
 export type ProjectType =
-  | "web3"
-  | "ecommerce"
-  | "saas"
-  | "service"
-  | "portfolio"
-  | "all";
+  "web3" | "ecommerce" | "saas" | "service" | "portfolio" | "all";
 
 export interface ClientProject {
   id: string;
