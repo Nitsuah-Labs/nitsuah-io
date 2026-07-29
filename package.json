@@ -39,7 +39,7 @@
     "commit:safe": "npm run typecheck && npm run format && git add -A && git commit",
     "clean": "rm -rf .next out node_modules/.cache",
     "analyze": "cross-env ANALYZE=true npm run build",
-    "postinstall": "patch-package",
+    "postinstall": "if command -v patch-package >/dev/null 2>&1; then patch-package; else echo 'patch-package not installed; skipping patch application'; fi",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -122,9 +122,9 @@
     "ws": "8.21.0",
     "@babel/core": "7.29.7",
     "js-yaml": "4.2.0",
-    "glob": ">=13.0.0",
+    "glob": "13.0.6",
     "test-exclude": {
-      "glob": ">=13.0.0"
+      "glob": "13.0.6"
     }
   }
 }
