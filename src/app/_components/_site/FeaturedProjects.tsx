@@ -178,19 +178,18 @@ const FeaturedProjects: React.FC = () => {
   return (
     <section className="featured-projects-section">
       <div className="featured-projects-container">
-        <div className="featured-header">
-          <h2>Featured Projects</h2>
-          <br />
-          <p>
-            A collection of current work showcasing{" "}
-            <span className="label-ai">AI</span>,{" "}
-            <span className="label-devops">DevOps</span>,{" "}
-            <span className="label-web3">Web3</span>, and product engineering.
-          </p>
-          <br />
-        </div>
-
         <div className="featured-projects-grid">
+          <div className="featured-header">
+            <h2>Featured Projects</h2>
+            <br />
+            <p>
+              A collection of current work showcasing{" "}
+              <span className="label-ai">AI</span>,{" "}
+              <span className="label-devops">DevOps</span>,{" "}
+              <span className="label-web3">Web3</span>, and product engineering.
+            </p>
+            <br />
+          </div>
           {featuredProjects.slice(0, 4).map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

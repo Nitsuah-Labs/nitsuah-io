@@ -24,10 +24,6 @@ export const LandingHero: React.FC = () => {
           15 years building enterprise tooling, Atlassian platforms, and
           AI-powered systems that engineers actually want to use.
         </p>
-
-        <p className={styles.landingCompanies}>
-          Netflix &middot; Coinbase &middot; Blackboard
-        </p>
       </div>
     </section>
   );
