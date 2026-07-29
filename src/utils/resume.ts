@@ -79,10 +79,7 @@ export function getProficiencyLevel(level?: string): number {
 }
 
 export type NormalizedSkillLevel =
-  | "beginner"
-  | "intermediate"
-  | "advanced"
-  | "expert";
+  "beginner" | "intermediate" | "advanced" | "expert";
 
 export function normalizeProficiencyLevel(
   level?: string,

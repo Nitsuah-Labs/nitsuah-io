@@ -3,12 +3,7 @@ import styles from "./Badge.module.css";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?:
-    | "default"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "danger";
+    "default" | "primary" | "secondary" | "success" | "warning" | "danger";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
 }
