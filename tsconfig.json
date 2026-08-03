@@ -22,8 +22,6 @@
       }
     ],
     "target": "ES2022",
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
     "types": [
       "jest",
       "@testing-library/jest-dom"

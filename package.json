@@ -18,9 +18,9 @@
     "typecheck": "tsc --project config/tsconfig.json --noEmit",
     "format": "prettier --config config/prettier.config.json --ignore-path config/.prettierignore --write \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
     "format:check": "prettier --config config/prettier.config.json --ignore-path config/.prettierignore --check \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
-    "test": "jest --config config/jest.config.ts",
-    "test:watch": "jest --config config/jest.config.ts --watch",
-    "test:coverage": "jest --config config/jest.config.ts --coverage",
+    "test": "jest --config config/jest.config.js",
+    "test:watch": "jest --config config/jest.config.js --watch",
+    "test:coverage": "jest --config config/jest.config.js --coverage",
     "test:e2e": "cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.config.ts",
     "test:e2e:ci": "cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.config.ts",
     "test:e2e:ui": "cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.config.ts --ui",
@@ -112,7 +112,7 @@
     "patch-package": "^8.0.0",
     "prettier": "^3.9.6",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "typescript-eslint": "^8.62.1"
   },
   "overrides": {
