@@ -13,6 +13,7 @@ const nextConfig = {
 
   // Reduce bundle size by optimizing package imports
   experimental: {
+    useTypeScriptCli: true,
     optimizePackageImports: [
       "@mui/material",
       "@mui/icons-material",

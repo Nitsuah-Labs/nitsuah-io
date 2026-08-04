@@ -22,30 +22,28 @@
       }
     ],
     "target": "ES2022",
-    "baseUrl": ".",
-    "ignoreDeprecations": "6.0",
     "types": [
       "jest",
       "@testing-library/jest-dom"
     ],
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@/components/*": [
-        "src/app/_components/*"
+        "./src/app/_components/*"
       ],
       "@/lib/*": [
-        "src/lib/*"
+        "./src/lib/*"
       ],
       "@/styles/*": [
-        "src/app/_components/_styles/*"
+        "./src/app/_components/_styles/*"
       ],
       "@/types/*": [
-        "src/types/*"
+        "./src/types/*"
       ],
       "@/utils/*": [
-        "src/utils/*"
+        "./src/utils/*"
       ]
     }
   },

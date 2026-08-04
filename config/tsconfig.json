@@ -9,7 +9,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -40,15 +39,13 @@
     "exactOptionalPropertyTypes": false,
     
     // Path mapping for cleaner imports
-    "baseUrl": "..",
-    "ignoreDeprecations": "6.0",
     "paths": {
-      "@/*": ["src/*"],
-      "@/components/*": ["src/app/_components/*"],
-      "@/lib/*": ["src/lib/*"],
-      "@/styles/*": ["src/app/_components/_styles/*"],
-      "@/types/*": ["src/types/*"],
-      "@/utils/*": ["src/utils/*"]
+      "@/*": ["../src/*"],
+      "@/components/*": ["../src/app/_components/*"],
+      "@/lib/*": ["../src/lib/*"],
+      "@/styles/*": ["../src/app/_components/_styles/*"],
+      "@/types/*": ["../src/types/*"],
+      "@/utils/*": ["../src/utils/*"]
     }
   },
   "include": [
@@ -67,7 +64,6 @@
     "**/*.test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx",
-    "jest.config.ts",
-    "jest.setup.js"
+    "jest.config.js"
   ]
 }
