@@ -64,7 +64,6 @@
     "**/*.test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx",
-    "jest.config.js",
-    "jest.setup.js"
+    "jest.config.js"
   ]
 }
