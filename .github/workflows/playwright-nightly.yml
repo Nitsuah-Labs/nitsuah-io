@@ -46,13 +46,14 @@ jobs:
           NEXT_PUBLIC_TEST_HELPERS: 1
           NODE_ENV: production
           FORCE_BROWSER_E2E: 1
+          PLAYWRIGHT_NIGHTLY: 1
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report-nightly
-          path: playwright-report/
+          path: playwright-report
           retention-days: 7
 
       - name: Upload test screenshots
