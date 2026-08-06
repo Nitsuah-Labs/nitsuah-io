@@ -204,28 +204,24 @@ export default function RootLayout({
                   // Ensure body class present early
                   try { document.body && document.body.classList.add('test-helpers'); } catch(e) {}
 
-                  const texts = ['Overseer Dashboard','Welcome to Overseer','Open Next.js Dev Tools','Next.js Dev Tools','Sign in with GitHub'];
-                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid="overseer"]'];
+                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid="overseer"]','[data-nextjs-dev-overlay]','nextjs-portal','[data-nextjs-devtools]'];
 
                   const removeNow = () => {
                     selectors.forEach(s => { try { document.querySelectorAll(s).forEach(n => n.remove()); } catch(e){} });
                     try {
-                      Array.from(document.querySelectorAll('*')).forEach(el => {
-                        try {
-                          const txt = el.textContent || '';
-                          for (const t of texts) if (txt.includes(t)) { el.remove(); break; }
-                        } catch(e){}
-                      });
+                      const footer = document.querySelector('footer');
+                      if (footer instanceof HTMLElement) {
+                        footer.style.removeProperty('display');
+                        footer.style.removeProperty('visibility');
+                        footer.style.removeProperty('opacity');
+                        footer.style.removeProperty('z-index');
+                      }
                     } catch(e){}
                   };
 
                   if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', removeNow);
                   } else { removeNow(); }
-
-                  const mo = new MutationObserver(() => removeNow());
-                  mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
-                  setTimeout(() => mo.disconnect(), 10000);
                 } catch(e) {}
               })();`}
         </Script>

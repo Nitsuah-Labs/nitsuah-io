@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const NIGHTLY_TIMEOUT = 90_000; // 90s for nightly browser tests (heavier axe scans)
-const CI_TIMEOUT = process.env.PLAYWRIGHT_NIGHTLY ? NIGHTLY_TIMEOUT : 45_000;
+const CI_TIMEOUT = process.env.PLAYWRIGHT_NIGHTLY === "1" ? NIGHTLY_TIMEOUT : 45_000;
 const LOCAL_TIMEOUT = 60_000; // 1 minute for local development
 const parsedWorkers = Number.parseInt(
   process.env.PLAYWRIGHT_WORKERS ?? "",
@@ -36,7 +36,7 @@ export default defineConfig({
   // For local runs, use 50% of cores to prevent overwhelming high-core machines.
   workers: process.env.CI ? CI_WORKERS : "50%",
 
-  // Reporter configuration - include GitHub reporter for CI; always emit HTML for artifacts
+  // Reporter configuration - include GitHub reporter for CI; emit HTML in CI for artifact upload
   reporter: process.env.CI
     ? [["list"], ["github"], ["html", { open: "never" }]]
     : "list",

@@ -6,9 +6,9 @@ import { Page } from "@playwright/test";
 
 export async function waitForReactHydration(page: Page, timeout = 30000) {
   // In CI, domcontentloaded fires before React client components mount.
-  // Wait up to 10s for any of the shell landmarks to appear in the DOM —
+  // Wait up to `timeout` ms for any of the shell landmarks to appear in the DOM —
   // this is fast when SSR is working (~1s) and has a hard cap so it never
-  // consumes the full 45s global timeout.
+  // consumes the full global timeout.
   if (process.env.CI) {
     await page.waitForLoadState("domcontentloaded", { timeout }).catch(() => {});
     // Require at least one landmark to be present; if none appear within the
