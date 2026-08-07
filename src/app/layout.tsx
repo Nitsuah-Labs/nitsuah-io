@@ -136,54 +136,27 @@ export default function RootLayout({
             >
               {`(() => {
                   try {
-                    const removeByText = (texts) => {
-                      const all = Array.from(document.querySelectorAll('*'));
-                      for (const el of all) {
-                        try {
-                          const txt = el.textContent || '';
-                          for (const t of texts) {
-                            if (txt && txt.includes(t)) {
-                              el.remove();
-                              break;
-                            }
-                          }
-                        } catch(e) {}
-                      }
-                    };
-
-                    const removeSelectors = (sels) => {
-                      for (const s of sels) {
-                        try {
-                          const nodes = Array.from(document.querySelectorAll(s));
-                          nodes.forEach(n => n.remove());
-                        } catch(e) {}
-                      }
-                    };
-
-                    const textsToRemove = [
-                      'Overseer Dashboard',
-                      'Welcome to Overseer',
-                      'Open Next.js Dev Tools',
-                      'Next.js Dev Tools',
-                      'Sign in with GitHub'
-                    ];
                     const selectorsToRemove = [
                       '#__next_dev_overlay',
                       '.next-dev-overlay',
                       '.react-dev-overlay',
                       '#next-overlay',
                       '.overseer',
-                      '[data-testid="overseer"]'
+                      '[data-testid="overseer"]',
+                      '[data-nextjs-dev-overlay]',
+                      'nextjs-portal',
+                      '[data-nextjs-devtools]'
                     ];
 
-                    // Run immediately if DOM ready or on DOMContentLoaded
                     const run = () => {
-                      removeByText(textsToRemove);
-                      removeSelectors(selectorsToRemove);
-                      // ensure any hidden footers get visible by resetting inline styles
+                      for (const s of selectorsToRemove) {
+                        try {
+                          document.querySelectorAll(s).forEach(n => n.remove());
+                        } catch(e) {}
+                      }
                       try {
                         const footer = document.querySelector('footer');
-                        if (footer && footer instanceof HTMLElement) {
+                        if (footer instanceof HTMLElement) {
                           footer.style.removeProperty('display');
                           footer.style.removeProperty('visibility');
                           footer.style.removeProperty('opacity');
@@ -197,12 +170,6 @@ export default function RootLayout({
                     } else {
                       run();
                     }
-
-                    // Also observe mutations for overlays that appear after load
-                    const mo = new MutationObserver(() => run());
-                    mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
-                    // Safety: stop observing after 10s
-                    setTimeout(() => mo.disconnect(), 10000);
                   } catch(e) { /* ignore */ }
                 })();`}
             </Script>
@@ -237,28 +204,24 @@ export default function RootLayout({
                   // Ensure body class present early
                   try { document.body && document.body.classList.add('test-helpers'); } catch(e) {}
 
-                  const texts = ['Overseer Dashboard','Welcome to Overseer','Open Next.js Dev Tools','Next.js Dev Tools','Sign in with GitHub'];
-                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid="overseer"]'];
+                  const selectors = ['#__next_dev_overlay','.next-dev-overlay','.react-dev-overlay','#next-overlay','.overseer','[data-testid="overseer"]','[data-nextjs-dev-overlay]','nextjs-portal','[data-nextjs-devtools]'];
 
                   const removeNow = () => {
                     selectors.forEach(s => { try { document.querySelectorAll(s).forEach(n => n.remove()); } catch(e){} });
                     try {
-                      Array.from(document.querySelectorAll('*')).forEach(el => {
-                        try {
-                          const txt = el.textContent || '';
-                          for (const t of texts) if (txt.includes(t)) { el.remove(); break; }
-                        } catch(e){}
-                      });
+                      const footer = document.querySelector('footer');
+                      if (footer instanceof HTMLElement) {
+                        footer.style.removeProperty('display');
+                        footer.style.removeProperty('visibility');
+                        footer.style.removeProperty('opacity');
+                        footer.style.removeProperty('z-index');
+                      }
                     } catch(e){}
                   };
 
                   if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', removeNow);
                   } else { removeNow(); }
-
-                  const mo = new MutationObserver(() => removeNow());
-                  mo.observe(document.documentElement || document.body, { childList: true, subtree: true });
-                  setTimeout(() => mo.disconnect(), 10000);
                 } catch(e) {}
               })();`}
         </Script>
