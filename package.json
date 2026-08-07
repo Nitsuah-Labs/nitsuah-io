@@ -78,7 +78,7 @@
     "sharp": "^0.35.3",
     "utf-8-validate": "^6.0.6",
     "viem": "^2.54.1",
-    "wagmi": "^3.7.5"
+    "wagmi": "^3.7.6"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
