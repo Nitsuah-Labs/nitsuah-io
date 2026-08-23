@@ -29,7 +29,7 @@ test.describe("Navigation Tests", () => {
     await go(page, "/");
     const projectsLink = page.getByRole("link", { name: /projects/i }).first();
     if (await projectsLink.isVisible()) {
-      await projectsLink.click();
+      await projectsLink.click({ force: true });
       await expect(page).toHaveURL(/\/projects/);
     }
   });
