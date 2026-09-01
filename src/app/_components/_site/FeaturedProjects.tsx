@@ -58,22 +58,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     }
   };
 
-  const handleCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleCardClick();
-    }
-  };
-
   return (
-    <div
-      className="featured-project-card"
-      onClick={handleCardClick}
-      onKeyDown={handleCardKeyDown}
-      role="button"
-      tabIndex={0}
-      aria-label={`Open ${project.title} ${hasDemo ? "demo" : "code"}`}
-    >
+    <div className="featured-project-card" onClick={handleCardClick}>
       <div className="project-header">
         <h3 className="project-title">{project.title}</h3>
       </div>
@@ -129,21 +115,10 @@ const OtherProjectsCard: React.FC = () => {
     window.location.href = "/projects";
   };
 
-  const handleCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleCardClick();
-    }
-  };
-
   return (
     <div
       className="featured-project-card featured-project-card--other-projects"
       onClick={handleCardClick}
-      onKeyDown={handleCardKeyDown}
-      role="button"
-      tabIndex={0}
-      aria-label="Open all projects"
     >
       <div className="project-header">
         <h3 className="project-title">My Other Projects</h3>

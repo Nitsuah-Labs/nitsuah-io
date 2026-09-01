@@ -258,7 +258,7 @@
 }
 
 .featured-project-card .demo-link:hover {
-  background: #15803d;
+  background: #166534;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
