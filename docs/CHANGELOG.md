@@ -8,17 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Home page redesigned as a focused landing page (`LandingHero` + `FeaturedProjects`) surfacing top projects (agent-board, overseer, bb-mcp, darkmoon) above the fold.
+- Dedicated `/3d` route for the Spline experience, moved off the home page to cut critical-path bundle weight and improve LCP.
 - Planned: AI chat widget via bb-mcp (`/api/chat` proxy).
 - Planned: Bento grid layout for Projects and Skills sections.
 - Planned: Live kryptos cipher-challenge stats in Labs sidebar.
 - Planned: skyview privacy-first analytics event sink.
 - Planned: `docs/API.md` wagmi hook and chain surface documentation.
-- Planned: `docs/INTEGRATIONS.md` cross-repo connection map.
 
 ### Changed
 - ROADMAP.md expanded through Q4 2026 with AI, PWA, cross-repo, and on-chain resume milestones.
 - TASKS.md updated with Q2 P1/P2 tasks for bento grid, AI chat, analytics, and design refresh.
 - FEATURES.md extended with Planned Capabilities section (AI, analytics, PWA, cross-repo integrations, on-chain resume).
+- Top-level docs consolidated under `docs/`, with completed handoffs and resolved trackers moved to `docs/archive/`.
+
+### Verified (2026-09-01)
+- Audited Q2 roadmap items against the codebase: none have shipped yet (AI chat, bento grid, Mumbai→Amoy migration, kryptos/skyview widgets, `docs/API.md`). They remain open in `docs/TASKS.md`.
+- `docs/INTEGRATIONS.md` was already complete (shipped alongside 0.3.0) but still listed as an open task — removed the stale duplicate.
+- Playwright Docker image and `@playwright/test` remain in lockstep (`v1.62.1`).
 
 ## [0.3.0] - 2026-04-03
 
@@ -26,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark mode toggle UI in header with localStorage persistence and hydration-safe rendering.
 - Docker test infrastructure with production build strategy for CI/local parity.
 - Split Playwright CI strategy: required `CI Fast` and scheduled `Playwright Nightly`.
+- Cross-repo integration map (`docs/INTEGRATIONS.md`) documenting planned connections to bb-mcp, kryptos, skyview, motor-pool, farm, and darkmoon.
 
 ### Changed
 - Playwright Docker image coordinated with npm `@playwright/test` version.
