@@ -2,7 +2,7 @@
 # Features
 
 ---
-**Last Updated:** 2026-04-13
+**Last Updated:** 2026-09-01
 ---
 
 ## Core Capabilities

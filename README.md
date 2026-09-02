@@ -2,7 +2,7 @@
 # Nitsuah.io — Personal Portfolio
 
 ---
-**Last Updated:** 2026-04-13
+**Last Updated:** 2026-09-01
 ---
 
 A fast, modern Next.js + TypeScript personal website showcasing selected projects, Web3 experiments, and professional work.
@@ -72,7 +72,7 @@ Collection of practical IT automation and enterprise tools
 
 ## Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Please:
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/nitsuah/.github/blob/main/CONTRIBUTING.md) for guidelines. Please:
 - Fork the repo and create a feature branch
 - Add or improve tests for new features
 - Run all tests and ensure coverage does not decrease

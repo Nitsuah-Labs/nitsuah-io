@@ -1,13 +1,15 @@
 # ROADMAP
 
-**Last Updated:** 2026-06-25
-Next Review: 2026-07-01
+**Last Updated:** 2026-09-01
+Next Review: 2026-10-01
+
+> **Status check (2026-09-01):** none of the Q2 items below shipped during Q2 — engineering time went to dependency maintenance and CI/Playwright stabilization instead (see `docs/CHANGELOG.md`). They carry forward unchanged as the active backlog. Quarter labels are targets, not commitments already met.
 
 ## 2026 Q1 ✅
 
 > Completed. Playwright/npm lockstep, dark mode toggle, and INTEGRATIONS.md all shipped. See FEATURES.md.
 
-## 2026 Q2 (In Progress)
+## 2026 Q2 (Carried Over — 0% shipped)
 
 ### Carry-overs
 - [ ] Replace placeholder-heavy client demo assets (restaurant, e-commerce, real-estate, CMS, NFT).
@@ -77,6 +79,6 @@ Next Review: 2026-07-01
 ## Notes
 
 - The product is intentionally Netlify SSR, not a static export.
-- `docs/ARCH.md`, `docs/TESTING.md`, `docs/PLAYWRIGHT_FIXES.md`, and `docs/SCREENSHOTS.md` remain the supporting reference docs.
+- `docs/ARCH.md` and `docs/TESTING.md` remain the supporting reference docs; `docs/PLAYWRIGHT_FIXES.md` and `docs/SCREENSHOTS.md` moved to `docs/archive/` in the July 2026 docs reorg (paths below are updated accordingly — `docs/SCREENSHOTS.md`'s asset backlog is still open, tracked under the "Carry-overs" task above).
 - Sister-repo integration priority: bb-mcp (AI chat) → kryptos (data) → skyview (analytics) → motor-pool (showcase) → farm (staking) → darkmoon (theming).
-- Deprioritized repos (no active integration planned this year): gcp, stash — set to low-friction contribution mode.
+- Deprioritized repos (no active integration planned this year): gcp, stash, osrs — set to low-friction contribution mode. See `docs/INTEGRATIONS.md`.
