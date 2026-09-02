@@ -10,8 +10,10 @@ test.describe("Navigation Tests", () => {
   test("all main navigation links work", async ({ page }) => {
     await go(page, "/");
 
+    const nav = page.locator("nav");
+
     // Test homepage link
-    const homeLink = page.getByRole("link", { name: /home|nitsuah/i }).first();
+    const homeLink = nav.getByRole("link", { name: /home|nitsuah/i }).first();
     if (await homeLink.isVisible()) {
       await homeLink.click();
       await expect(page).toHaveURL(/\/(\?.*)?$/); // Match path with optional query
@@ -19,17 +21,19 @@ test.describe("Navigation Tests", () => {
 
     // Test about link
     await go(page, "/");
-    const aboutLink = page.getByRole("link", { name: /about/i }).first();
+    const aboutLink = nav.getByRole("link", { name: /about/i }).first();
     if (await aboutLink.isVisible()) {
       await aboutLink.click();
       await expect(page).toHaveURL(/\/about/);
     }
 
-    // Test projects link
+    // Test projects link — rendered as a button in the desktop nav.
+    // First click opens the dropdown; second click navigates to /projects.
     await go(page, "/");
-    const projectsLink = page.getByRole("link", { name: /projects/i }).first();
+    const projectsLink = nav.getByRole("button", { name: /projects/i }).first();
     if (await projectsLink.isVisible()) {
-      await projectsLink.click({ force: true });
+      await projectsLink.click();
+      await projectsLink.click();
       await expect(page).toHaveURL(/\/projects/);
     }
   });

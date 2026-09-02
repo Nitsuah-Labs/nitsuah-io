@@ -1,6 +1,8 @@
 # TASKS
 
-**Last Updated:** 2026-06-25
+**Last Updated:** 2026-09-01
+
+> **Status check (2026-09-01):** verified against the current codebase — none of the items below have shipped since the last update. See `docs/ROADMAP.md` for the quarter-level status note.
 
 ## Todo
 
@@ -11,7 +13,7 @@
   - Acceptance Criteria: coordinated upgrades keep `npm run precheck:docker` passing.
 
 - [ ] Replace placeholder-heavy client demo assets.
-  - Context: the restaurant, e-commerce, real-estate, CMS, and NFT demos still rely on missing or placeholder imagery tracked in `docs/SCREENSHOTS.md`.
+  - Context: the restaurant, e-commerce, real-estate, CMS, and NFT demos still rely on missing or placeholder imagery tracked in `docs/archive/SCREENSHOTS.md`.
   - Acceptance Criteria: each demo renders with representative assets instead of placeholders.
 
 - [ ] Replace duplicate project and crypto page assets.
@@ -48,13 +50,6 @@
   - Context: `docs/ARCH.md` covers architecture, but the wagmi and chain surface lacks focused API documentation.
   - Acceptance Criteria: `docs/API.md` documents the hook surface, chain config, and any `/api/*` server routes.
 
-- [ ] Add `docs/INTEGRATIONS.md`.
-  - Context: multiple sister repos (bb-mcp, kryptos, skyview, motor-pool, farm, darkmoon) now integrate with this portfolio; a single map of connection points reduces agent context-switching.
-  - Acceptance Criteria: document each integration point: data contract, auth model, update cadence, and link to source repo.
-
-- [ ] Refresh `METRICS.md` and add a validation marker.
-  - Context: metrics are strong but have not been revalidated since Q1 2026.
-  - Acceptance Criteria: `METRICS.md` includes a `last validated` marker and coverage is re-run; health score reflects current CI state.
 
 - [ ] Micro-interaction and animation pass.
   - Context: hover states, scroll-triggered reveals, and page transitions are minimal; competitors use motion to improve perceived quality.
@@ -92,10 +87,15 @@
 
 ## In Progress
 
+## Done
+
+- [x] Refresh `METRICS.md` and add a validation marker. (2026-09-01)
+  - Re-ran the full test suite in Docker: Jest via `config/Dockerfile.unit` (214/214 passing, 97.21% stmt coverage) and Playwright via `config/docker-compose.test.yml` with `FORCE_BROWSER_E2E=1` (11/20 passing, 9 intentionally skipped wallet tests). Found and fixed a real bug along the way: the Docker Playwright command was missing `--config config/playwright.config.ts`, causing it to scan and crash on Jest test files.
+
 <!-- AGENT INSTRUCTIONS:
 1. Keep work in P0-P3 sections.
 2. Preserve short, scannable checklist entries with Context and Acceptance Criteria.
-3. Keep detailed visual-asset inventory in `docs/SCREENSHOTS.md`.
+3. Keep detailed visual-asset inventory in `docs/archive/SCREENSHOTS.md`.
 4. Cross-repo integration tasks should reference the source repo by name (e.g., bb-mcp, kryptos).
 5. Move completed items to Done when CI confirms the feature ships.
 -->

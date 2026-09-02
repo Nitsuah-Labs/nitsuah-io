@@ -20,7 +20,7 @@ services:
       - NODE_ENV=test
       - NEXT_PUBLIC_TEST_HELPERS=1
     # Override command for different test suites
-    command: npx playwright test
+    command: npx playwright test --config config/playwright.config.ts
     # Allocate enough resources for browser testing
     shm_size: "2gb"
 
