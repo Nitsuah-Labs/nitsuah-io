@@ -50,9 +50,6 @@
   - Context: `docs/ARCH.md` covers architecture, but the wagmi and chain surface lacks focused API documentation.
   - Acceptance Criteria: `docs/API.md` documents the hook surface, chain config, and any `/api/*` server routes.
 
-- [ ] Finish refreshing `METRICS.md` — Playwright suites still stale.
-  - Context: as of 2026-09-01 the Jest unit suite was re-run in Docker (214/214 passing, 97.21% stmt coverage) and `METRICS.md` has a current `Last Validated` marker, but the Playwright E2E/A11y/Visual/Resume counts still carry over from the 2026-04-13 audit — the Docker Playwright run (`npm run precheck:docker`) didn't finish in time to confirm them.
-  - Acceptance Criteria: run `npm run precheck:docker` to completion and replace the "not re-run this pass" rows in `METRICS.md` with current counts.
 
 - [ ] Micro-interaction and animation pass.
   - Context: hover states, scroll-triggered reveals, and page transitions are minimal; competitors use motion to improve perceived quality.
@@ -89,6 +86,11 @@
   - Acceptance Criteria: Spline scenes outside the hero are lazy-loaded or replaced with CSS animations; LCP improves by ≥ 10%.
 
 ## In Progress
+
+## Done
+
+- [x] Refresh `METRICS.md` and add a validation marker. (2026-09-01)
+  - Re-ran the full test suite in Docker: Jest via `config/Dockerfile.unit` (214/214 passing, 97.21% stmt coverage) and Playwright via `config/docker-compose.test.yml` with `FORCE_BROWSER_E2E=1` (11/20 passing, 9 intentionally skipped wallet tests). Found and fixed a real bug along the way: the Docker Playwright command was missing `--config config/playwright.config.ts`, causing it to scan and crash on Jest test files.
 
 <!-- AGENT INSTRUCTIONS:
 1. Keep work in P0-P3 sections.
