@@ -5,7 +5,13 @@ import { mainnet, polygon, polygonAmoy, sepolia } from "wagmi/chains";
 // Import connectors from the standalone package to ensure the bundler
 // resolves the correct ESM exports instead of a possibly-misaligned
 // internal path.
-import { injected, metaMask, safe, walletConnect } from "@wagmi/connectors";
+import {
+  injected,
+  metaMask,
+  mock,
+  safe,
+  walletConnect,
+} from "@wagmi/connectors";
 
 const walletConnectProjectId = "732797c00bb7ff1ca10685d9b9415cb6";
 
@@ -54,7 +60,21 @@ export function getWagmiConfig() {
   // injected connector is lightweight and can be created client or server-side
   connectors.push(injected());
 
-  // Skip WalletConnect and other connectors in test mode to prevent crashes
+  // Skip WalletConnect and other live connectors in test mode to prevent
+  // crashes (they require API keys / real extensions), but provide a mock
+  // wallet provider as a local testing fallback so wallet-connect UI and
+  // E2E flows (connect -> account -> disconnect) can still be exercised
+  // without a real wallet extension. See docs/TASKS.md P2: "Add a wallet
+  // and MetaMask local testing path".
+  if (isClient && isTestMode) {
+    connectors.push(
+      mock({
+        accounts: ["0x70997970C51812dc3A010C7d01b50e0d17dc79C"],
+        features: { defaultConnected: false },
+      }),
+    );
+  }
+
   if (isClient && !isTestMode) {
     connectors.push(
       walletConnect({
@@ -68,7 +88,7 @@ export function getWagmiConfig() {
     connectors.push(metaMask());
     connectors.push(safe());
   }
-  // Don't add connectors on server-side or in test mode to avoid initialization errors
+  // Don't add live connectors on server-side to avoid initialization errors
 
   _clientConfig = createConfig({
     chains: typedChains,
