@@ -54,7 +54,27 @@ export function getWagmiConfig() {
   // This prevents WalletConnect from initializing in SSR or test harnesses
   // where it can cause multiple SignClient initializations.
   const isClient = typeof window !== "undefined";
-  const isTestMode = process.env.NEXT_PUBLIC_TEST_HELPERS === "1";
+  // NEXT_PUBLIC_* env vars are inlined into the client bundle at *build*
+  // time. config/Dockerfile.test (and Dockerfile.unit) only set
+  // NEXT_PUBLIC_TEST_HELPERS=1 via `ENV` *after* `npm run build:skip-wagmi`
+  // runs, so the built bundle never actually observes it as "1" — the same
+  // reason mint/domains pages also fall back to a `?testHelpers=1` query
+  // param detected at runtime (see src/app/labs/mint/page.tsx
+  // `showTestHelpers`). Mirror that fallback here so the mock wallet
+  // provider is reachable in that Docker image too.
+  const hasTestHelpersParam =
+    isClient &&
+    (() => {
+      try {
+        return (
+          new URLSearchParams(window.location.search).get("testHelpers") === "1"
+        );
+      } catch {
+        return false;
+      }
+    })();
+  const isTestMode =
+    process.env.NEXT_PUBLIC_TEST_HELPERS === "1" || hasTestHelpersParam;
 
   const connectors = [] as any[];
   // injected connector is lightweight and can be created client or server-side
@@ -69,7 +89,10 @@ export function getWagmiConfig() {
   if (isClient && isTestMode) {
     connectors.push(
       mock({
-        accounts: ["0x70997970C51812dc3A010C7d01b50e0d17dc79C"],
+        // Verified EIP-55 checksummed test address (via viem's getAddress) —
+        // wagmi's mock connector throws "Address is invalid" on anything
+        // that doesn't pass checksum validation.
+        accounts: ["0x1234567890AbcdEF1234567890aBcdef12345678"],
         features: { defaultConnected: false },
       }),
     );

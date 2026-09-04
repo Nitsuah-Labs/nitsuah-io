@@ -353,9 +353,15 @@
     padding: 0.25rem 0.625rem;
   }
 
+  /* Stack Code/Demo into full-width buttons on mobile, matching the same
+     stacked-CTA pattern used on the Projects grid (Projects.module.css
+     .cardActions). Previously `align-items: flex-start` combined with
+     `.project-link`'s desktop `flex: 1 1 auto` (only reset on
+     `.demo-link`, never on `.github-link`) left buttons shrink-wrapped to
+     their own text and inconsistently sized next to each other. */
   .featured-project-card .project-links {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0.75rem;
     margin-top: 0.75rem;
   }
@@ -367,10 +373,7 @@
   .featured-project-card .project-link {
     justify-content: center;
     padding: 0.8rem 1rem;
-    width: auto;
-  }
-
-  .featured-project-card .demo-link {
+    width: 100%;
     flex: unset;
   }
 }
