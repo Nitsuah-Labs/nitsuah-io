@@ -102,7 +102,12 @@ import spline from "./_assets/spline.gif";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  "motor-pool": "/images/motor-pool.png",
+  // "/images/motor-pool.png" doesn't exist in public/images (404 -> broken
+  // image icon on the Projects grid). Reuse the existing agent-board.png
+  // asset, which is thematically apt (both are AI-agent orchestration
+  // dashboards) until dedicated motor-pool artwork ships — see
+  // docs/TASKS.md "Replace duplicate project and crypto page assets".
+  "motor-pool": "/images/agent-board.png",
   overseer: "/images/overseer.png",
   "bb-mcp": "/images/mcp.png",
   labs: "/images/labs.png",

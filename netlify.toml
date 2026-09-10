@@ -36,7 +36,7 @@
       style-src 'self' 'unsafe-inline'; \
       img-src 'self' data: https: blob:; \
       font-src 'self' data:; \
-      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org wss://*.walletconnect.com wss://*.walletconnect.org https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
+      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
       frame-src 'self' https://challenges.cloudflare.com; \
       worker-src 'self' blob:; \
       object-src 'none'; \
