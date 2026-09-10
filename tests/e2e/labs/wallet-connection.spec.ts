@@ -5,6 +5,45 @@ import { expect, test } from "@playwright/test";
  * These tests simulate wallet behavior without requiring actual MetaMask
  */
 
+test.describe("Wallet Connect Flow (mock provider)", () => {
+  // Exercises the real <Connect /> component (src/app/_components/_web3/Connect.tsx)
+  // end-to-end using the wagmi `mock` connector that src/wagmi.ts registers
+  // when NEXT_PUBLIC_TEST_HELPERS=1. Unlike the test-helper-stub assertions
+  // below, this verifies the actual connect -> account -> disconnect flow
+  // and is a regression test for the bug where Connect.tsx filtered the
+  // connector list down to WalletConnect only, hiding every other wallet
+  // (including the mock/MetaMask connectors) from the UI.
+  test("connects via the mock wallet provider, shows the account, and disconnects", async ({
+    page,
+  }) => {
+    await page.goto("/labs/mint?testHelpers=1");
+    await page.waitForLoadState("networkidle");
+
+    const connectRegion = page.getByRole("region", {
+      name: "Wallet connection controls",
+    });
+    await expect(connectRegion).toBeVisible();
+
+    const mockConnectButton = page.getByTestId("connector-mock");
+    await expect(mockConnectButton).toBeVisible();
+    await expect(mockConnectButton).toBeEnabled();
+
+    await mockConnectButton.click();
+
+    const disconnectButton = page.getByRole("button", {
+      name: /Disconnect from Mock Connector/i,
+    });
+    await expect(disconnectButton).toBeVisible({ timeout: 10000 });
+
+    // Account details render once connected.
+    await expect(page.getByText(/0x[a-fA-F0-9]{6,}/)).toBeVisible();
+
+    await disconnectButton.click();
+    await expect(mockConnectButton).toBeVisible();
+    await expect(disconnectButton).not.toBeVisible();
+  });
+});
+
 test.describe("Wallet Connection Flow", () => {
   // Tests in this suite are currently skipped individually because they require
   // Web3 functionality that is intentionally disabled in test helper mode.
