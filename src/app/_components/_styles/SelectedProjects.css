@@ -208,6 +208,12 @@
 }
 
 .portfolio-card {
+  /* Cards on the /crypto grid set an inline `width: 100%` alongside padding
+     and a border. Without border-box, the browser's default content-box
+     sizing adds that padding/border on top of the 100% width, pushing the
+     card past its grid track and off the right edge on mobile (~375px
+     viewports). border-box keeps padding/border inside the 100% width. */
+  box-sizing: border-box;
   background: #ffffff;
   border: 1px solid #e1e5e9;
   border-radius: 8px;

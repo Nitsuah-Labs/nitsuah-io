@@ -108,7 +108,21 @@ export function getWagmiConfig() {
         },
       }),
     );
-    connectors.push(metaMask());
+    connectors.push(
+      metaMask({
+        // Dapp identity shown on MetaMask's confirmation/pairing screens.
+        // Also required for the SDK's mobile deeplink + relay flow: without
+        // an explicit url the SDK falls back to window.location.hostname,
+        // which can produce an unstable pairing session (deep link opens
+        // MetaMask, then closes without completing the connection).
+        dapp: {
+          name: "nitsuah.io",
+          url:
+            (typeof window !== "undefined" && window.location.origin) ||
+            "https://nitsuah.io",
+        },
+      }),
+    );
     connectors.push(safe());
   }
   // Don't add live connectors on server-side to avoid initialization errors
