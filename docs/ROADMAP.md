@@ -16,7 +16,7 @@ Next Review: 2026-10-01
 - [ ] Replace duplicate project and crypto page assets with distinct representative media.
 
 ### Web3 Maintenance
-- [ ] Migrate labs contracts from Mumbai to Amoy testnet.
+- [x] Migrate labs contracts from Mumbai to Amoy testnet. (chain-config/UI done; see `docs/TASKS.md` for the remaining manual contract-redeployment step)
 - [ ] Add a local wallet testing path (mock provider, no live wallet required).
 - [ ] Upgrade to wagmi v4 / viem v3 when stable; update generated hooks.
 

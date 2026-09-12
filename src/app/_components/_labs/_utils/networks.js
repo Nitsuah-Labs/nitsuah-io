@@ -7,7 +7,7 @@ const networks = {
   "0x61": "BSC Testnet",
   "0x38": "BSC Mainnet",
   "0x89": "Polygon Mainnet",
-  "0x13881": "Polygon Mumbai Testnet",
+  "0x13882": "Polygon Amoy Testnet",
   "0xa86a": "AVAX Mainnet",
 };
 

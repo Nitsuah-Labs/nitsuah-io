@@ -1,4 +1,3 @@
-import { defineChain } from "viem";
 import { createConfig, http } from "wagmi";
 import type { Chain } from "wagmi/chains";
 import { mainnet, polygon, polygonAmoy, sepolia } from "wagmi/chains";
@@ -15,25 +14,9 @@ import {
 
 const walletConnectProjectId = "732797c00bb7ff1ca10685d9b9415cb6";
 
-// Mumbai testnet (deprecated but contracts still deployed there)
-// Define custom chain since it's removed from wagmi/chains
-export const polygonMumbai = defineChain({
-  id: 80001,
-  name: "Polygon Mumbai Testnet",
-  nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
-  rpcUrls: {
-    default: {
-      http: ["https://rpc-mumbai.maticvigil.com"],
-    },
-  },
-  blockExplorers: {
-    default: {
-      name: "PolygonScan",
-      url: "https://mumbai.polygonscan.com",
-    },
-  },
-  testnet: true,
-});
+// Polygon Amoy testnet (replaces the deprecated Mumbai testnet, which
+// Polygon has fully shut down). Amoy ships as a built-in chain preset in
+// wagmi/viem, so no custom chain definition is needed.
 
 // Create and cache the Wagmi config on first client access to avoid
 // initializing WalletConnect/SignClient during SSR or multiple test imports.
@@ -43,7 +26,7 @@ export function getWagmiConfig() {
   if (_clientConfig) return _clientConfig;
 
   // Base chains
-  const chains = [mainnet, polygon, sepolia, polygonAmoy, polygonMumbai];
+  const chains = [mainnet, polygon, sepolia, polygonAmoy];
 
   // createConfig expects a readonly tuple type; cast safely to the expected
   // readonly [Chain, ...Chain[]] to satisfy the signature while preserving
@@ -135,7 +118,6 @@ export function getWagmiConfig() {
       [polygon.id]: http(),
       [sepolia.id]: http(),
       [polygonAmoy.id]: http(),
-      [polygonMumbai.id]: http(),
     },
   });
 

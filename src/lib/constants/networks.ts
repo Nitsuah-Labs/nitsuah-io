@@ -4,7 +4,6 @@ export const EXPLORER_URLS: Record<number, string> = {
   137: "https://polygonscan.com",
   11155111: "https://sepolia.etherscan.io",
   80002: "https://amoy.polygonscan.com",
-  80001: "https://mumbai.polygonscan.com",
 };
 
 export function getExplorerLink(
