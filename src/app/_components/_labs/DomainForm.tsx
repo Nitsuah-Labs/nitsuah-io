@@ -45,7 +45,7 @@ export default function DomainForm(props: DomainFormProps): React.ReactElement {
     OPENSEA_LINK,
   } = props;
 
-  if (network !== "Polygon Mumbai Testnet") {
+  if (network !== "Polygon Amoy") {
     const refreshPage = () => window.location.reload();
     return (
       <div>
@@ -61,12 +61,8 @@ export default function DomainForm(props: DomainFormProps): React.ReactElement {
               }}
               className="labs-btn labs-btn-secondary labs-btn-large"
             >
-              <Image
-                className="logo"
-                src={icons180}
-                alt="polygon mumbai logo"
-              />
-              POLYGON MUMBAI
+              <Image className="logo" src={icons180} alt="polygon amoy logo" />
+              POLYGON AMOY
             </button>
           </div>
         </div>

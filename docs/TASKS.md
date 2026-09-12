@@ -20,9 +20,11 @@
   - Context: several project and crypto entries still reuse the same placeholder images.
   - Acceptance Criteria: each featured project and crypto item has distinct representative media.
 
-- [ ] Migrate labs contracts from Mumbai to Amoy testnet.
+- [x] Migrate labs contracts from Mumbai to Amoy testnet. (chain-config/UI done; contract redeployment still manual — see note below)
   - Context: Mumbai is deprecated; labs contract flows need an updated chain target.
   - Acceptance Criteria: `src/wagmi.ts` and all labs pages reference Amoy; zero Mumbai references remain.
+  - Done: `src/wagmi.ts` now uses wagmi's built-in `polygonAmoy` chain preset (custom Mumbai `defineChain` removed); all chain-id checks (80001 -> 80002), explorer links (mumbai.polygonscan.com -> amoy.polygonscan.com), the OpenSea testnet slug, user-facing "Switch to Mumbai" copy, and the network icon asset were updated across `src/app/labs/**` and `src/app/_components/_labs/**`. Zero `mumbai`/80001 references remain in `src/`.
+  - **Manual follow-up required (not done here, needs a funded wallet):** the Register and Domains labs contracts (`0x94b40dDa4ACfDe42c7B334A60f25a0f86CE163d8` and `0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163`) were only ever deployed to Mumbai, which is now fully shut down. The UI/chain-config points at Amoy, but there is no contract at those addresses on Amoy yet. Someone with a funded Amoy testnet wallet needs to redeploy both contracts to Amoy and update `CONTRACT_ADDRESS` in `RegisterContentProduction.tsx` and `DomainsContentProduction.tsx` to the new addresses before these labs pages will actually work on-chain.
 
 - [ ] Add AI chat widget via bb-mcp.
   - Context: bb-mcp repo provides the MCP-compatible AI chat backend; surfacing it here gives portfolio visitors an interactive Q&A about the work.

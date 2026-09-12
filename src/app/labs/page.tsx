@@ -12,7 +12,7 @@ import "../_components/_styles/labs.css";
 import { Connect } from "../_components/_web3/Connect";
 
 // LAB ASSETS
-import mumbai from "../_components/_web3/_assets/mumbai.png";
+import amoy from "../_components/_web3/_assets/amoy.png";
 // polygonLogo and ethLogo not currently used in this page
 
 function renderOutput() {
@@ -57,8 +57,8 @@ function renderOutput() {
             <h2 className="labs-card-title">
               <Image
                 className="logo"
-                src={mumbai}
-                alt="Mumbai icon"
+                src={amoy}
+                alt="Amoy icon"
                 style={{
                   display: "inline",
                   marginRight: "10px",

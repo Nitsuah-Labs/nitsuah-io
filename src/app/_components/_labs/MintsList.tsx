@@ -32,7 +32,7 @@ export default function MintsList(
             <div className="mint-row">
               <a
                 className="link"
-                href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${mint.id}`}
+                href={`https://testnets.opensea.io/assets/amoy/${CONTRACT_ADDRESS}/${mint.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -28,7 +28,7 @@ import polygonLogo from "../../_components/_web3/_assets/polygonlogo.png";
 // CONSTANTS
 const tld = ".nitsuah.eth";
 const SCAN_LINK =
-  "https://mumbai.polygonscan.com/address/0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163";
+  "https://amoy.polygonscan.com/address/0xBbDF8C47BC3FF87aaC2396493C3F98a89C399163";
 const OPENSEA_LINK =
   "https://testnets.opensea.io/collection/nitsuah-name-service-grnrwqs5vq";
 const CONTRACT_ADDRESS =
@@ -144,11 +144,11 @@ export default function DomainsContentProduction(): ReactElement {
 
   const handleSwitchNetwork = () => {
     if (wagmiSwitchNetwork) {
-      wagmiSwitchNetwork({ chainId: 80001 });
+      wagmiSwitchNetwork({ chainId: 80002 });
     } else if ((window as any).ethereum) {
       (window as any).ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x13881" }],
+        params: [{ chainId: "0x13882" }],
       });
     } else {
       alert(
@@ -158,7 +158,7 @@ export default function DomainsContentProduction(): ReactElement {
   };
 
   useEffect(() => {
-    if (network === "Polygon Mumbai Testnet") {
+    if (network === "Polygon Amoy") {
       refetchNames();
     }
   }, [isConnected, network, refetchNames]);
