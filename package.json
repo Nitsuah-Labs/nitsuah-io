@@ -129,9 +129,7 @@
     "@hono/node-server": "2.0.12",
     "protobufjs": "7.6.5",
     "brace-expansion": "5.0.9",
-    "next": {
-      "sharp": "0.35.4"
-    },
+    "sharp": "$sharp",
     "eslint-plugin-import": {
       "brace-expansion": "1.1.18"
     },
