@@ -149,7 +149,7 @@ const BlogGrid: React.FC<{
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-        gap: "3rem",
+        gap: "4rem",
       }}
     >
       {filteredBlogs.map((blog) => {
