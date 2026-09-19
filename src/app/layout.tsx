@@ -181,8 +181,10 @@ export default function RootLayout({
             the query param and perform the same early overlay hiding/removal and
             add the "test-helpers" body class so test-only CSS takes effect.
           */}
-        <Script id="runtime-test-helpers-guard" strategy="beforeInteractive">
-          {`(() => {
+        <script
+          id="runtime-test-helpers-guard"
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
                 try {
                   const params = (typeof window !== 'undefined' && window.location && new URL(window.location.href).searchParams) || null;
                   if (!params || params.get('testHelpers') !== '1') return;
@@ -223,8 +225,9 @@ export default function RootLayout({
                     document.addEventListener('DOMContentLoaded', removeNow);
                   } else { removeNow(); }
                 } catch(e) {}
-              })();`}
-        </Script>
+              })();`,
+          }}
+        />
       </head>
       <body
         className={process.env.NEXT_PUBLIC_TEST_HELPERS ? "test-helpers" : ""}

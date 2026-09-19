@@ -1,7 +1,7 @@
 "use client";
 import type { BlogPost } from "@/lib/data/blogs";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const sanitizeKeyPart = (value: string, fallback: string) => {
   const normalized = value.replace(/[^a-zA-Z0-9_-]/g, "");
@@ -16,6 +16,22 @@ const sanitizeSlug = (value: string) => {
     .replace(/^-|-$/g, "");
 
   return normalized.length > 0 ? normalized : "post";
+};
+
+const DateFormatter: React.FC<{ date: string }> = ({ date }) => {
+  const [formatted, setFormatted] = useState<string>("");
+
+  useEffect(() => {
+    setFormatted(
+      new Date(date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+    );
+  }, [date]);
+
+  return <span>{formatted || "—"}</span>;
 };
 
 const BlogGrid: React.FC<{
@@ -123,13 +139,7 @@ const BlogGrid: React.FC<{
         <span>•</span>
         <span>{blog.readTime}</span>
         <span>•</span>
-        <span>
-          {new Date(blog.date).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </span>
+        <DateFormatter date={blog.date} />
       </div>
     </article>
   );
@@ -139,7 +149,7 @@ const BlogGrid: React.FC<{
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-        gap: "2rem",
+        gap: "3rem",
       }}
     >
       {filteredBlogs.map((blog) => {
