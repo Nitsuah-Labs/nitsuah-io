@@ -619,6 +619,7 @@
 .work-position {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 1.125rem;
   font-weight: 600;
@@ -667,7 +668,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 168px;
+  margin-right: 0.5rem;
   height: 56px;
   flex-shrink: 0;
   transition:
