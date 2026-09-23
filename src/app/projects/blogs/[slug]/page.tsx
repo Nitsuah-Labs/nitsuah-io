@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import Footer from "../../../../app/_components/_site/Footer";
 import HomeBar from "../../../../app/_components/_site/Homebar";
 import { blogPosts } from "../../../../lib/data/blogs";
+import TableOfContents from "./TableOfContents";
 import "./BlogPost.module.css";
 
 interface BlogPostPageProps {
@@ -66,313 +67,315 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           minHeight: "calc(100vh - 140px)",
         }}
       >
-        <article
+        <div
           style={{
-            maxWidth: "800px",
-            margin: "0 auto",
-            padding: "2rem 1rem",
+            display: "flex",
+            gap: "2rem",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
           }}
         >
-          {/* Back Button */}
-          <Link
-            href="/projects/blogs"
+          <article
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              color: "#3b82f6",
-              textDecoration: "none",
-              marginBottom: "2rem",
-              fontSize: "0.95rem",
-              transition: "opacity 0.2s ease",
+              maxWidth: "800px",
+              padding: "2rem 1rem",
+              flex: 1,
             }}
-            className="blog-back-link"
           >
-            ← Back to Blog
-          </Link>
+            {/* Category Badge */}
+            <div
+              style={{
+                display: "inline-block",
+                padding: "0.5rem 1rem",
+                borderRadius: "20px",
+                background: "rgba(59, 130, 246, 0.2)",
+                border: "2px solid rgba(59, 130, 246, 0.4)",
+                color: "#3b82f6",
+                fontSize: "0.875rem",
+                fontWeight: "600",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {post.category}
+            </div>
 
-          {/* Category Badge */}
-          <div
-            style={{
-              display: "inline-block",
-              padding: "0.5rem 1rem",
-              borderRadius: "20px",
-              background: "rgba(59, 130, 246, 0.2)",
-              border: "2px solid rgba(59, 130, 246, 0.4)",
-              color: "#3b82f6",
-              fontSize: "0.875rem",
-              fontWeight: "600",
-              marginBottom: "1.5rem",
-            }}
-          >
-            {post.category}
-          </div>
+            {/* Title */}
+            <h1
+              style={{
+                fontSize: "clamp(2rem, 5vw, 3rem)",
+                fontWeight: "700",
+                color: "#fff",
+                marginBottom: "1.5rem",
+                lineHeight: "1.2",
+              }}
+            >
+              {post.title}
+            </h1>
 
-          {/* Title */}
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)",
-              fontWeight: "700",
-              color: "#fff",
-              marginBottom: "1.5rem",
-              lineHeight: "1.2",
-            }}
-          >
-            {post.title}
-          </h1>
-
-          {/* Meta Info */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              alignItems: "center",
-              paddingBottom: "2rem",
-              marginBottom: "2rem",
-              borderBottom: "2px solid rgba(59, 130, 246, 0.3)",
-              fontSize: "0.95rem",
-              color: "rgba(255, 255, 255, 0.6)",
-            }}
-          >
-            <span style={{ fontWeight: "600", color: "#fff" }}>
-              {post.author}
-            </span>
-            <span>•</span>
-            <span>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </span>
-            <span>•</span>
-            <span>{post.readTime}</span>
-          </div>
-
-          {/* Tags */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.75rem",
-              marginBottom: "3rem",
-            }}
-          >
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  padding: "0.5rem 1rem",
-                  borderRadius: "12px",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  color: "rgba(255, 255, 255, 0.7)",
-                  fontSize: "0.875rem",
-                }}
-              >
-                #{tag}
+            {/* Meta Info */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                alignItems: "center",
+                paddingBottom: "2rem",
+                marginBottom: "2rem",
+                borderBottom: "2px solid rgba(59, 130, 246, 0.3)",
+                fontSize: "0.95rem",
+                color: "rgba(255, 255, 255, 0.6)",
+              }}
+            >
+              <span style={{ fontWeight: "600", color: "#fff" }}>
+                {post.author}
               </span>
-            ))}
-          </div>
+              <span>•</span>
+              <span>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
+              <span>•</span>
+              <span>{post.readTime}</span>
+            </div>
 
-          {/* Content */}
-          <div
-            className="blog-content"
-            style={{
-              color: "rgba(255, 255, 255, 0.85)",
-              fontSize: "1.125rem",
-              lineHeight: "1.8",
-            }}
-          >
-            <ReactMarkdown
-              components={{
-                h1: ({ children }) => (
-                  <h1
-                    style={{
-                      fontSize: "2.25rem",
-                      fontWeight: "700",
-                      color: "#fff",
-                      margin: "3rem 0 1rem",
-                      lineHeight: "1.2",
-                    }}
-                  >
-                    {children}
-                  </h1>
-                ),
-                h2: ({ children }) => (
-                  <h2
-                    style={{
-                      fontSize: "1.875rem",
-                      fontWeight: "700",
-                      color: "#fff",
-                      margin: "2.5rem 0 1rem",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {children}
-                  </h2>
-                ),
-                h3: ({ children }) => (
-                  <h3
-                    style={{
-                      fontSize: "1.5rem",
-                      fontWeight: "600",
-                      color: "#fff",
-                      margin: "2rem 0 1rem",
-                      lineHeight: "1.3",
-                    }}
-                  >
-                    {children}
-                  </h3>
-                ),
-                p: ({ children }) => (
-                  <p style={{ margin: "1.25rem 0", lineHeight: "1.8" }}>
-                    {children}
-                  </p>
-                ),
-                strong: ({ children }) => (
-                  <strong style={{ color: "#fff", fontWeight: 600 }}>
-                    {children}
-                  </strong>
-                ),
-                em: ({ children }) => (
-                  <em style={{ fontStyle: "italic" }}>{children}</em>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote
-                    style={{
-                      borderLeft: "4px solid #3b82f6",
-                      paddingLeft: "1.5rem",
-                      margin: "1.5rem 0",
-                      color: "rgba(255, 255, 255, 0.7)",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    {children}
-                  </blockquote>
-                ),
-                ul: ({ children }) => (
-                  <ul
-                    style={{
-                      listStyleType: "disc",
-                      margin: "1rem 0",
-                      paddingLeft: "2rem",
-                      color: "rgba(255, 255, 255, 0.85)",
-                    }}
-                  >
-                    {children}
-                  </ul>
-                ),
-                li: ({ children }) => (
-                  <li style={{ margin: "0.5rem 0", paddingLeft: "0.5rem" }}>
-                    {children}
-                  </li>
-                ),
-                pre: ({ children }) => (
-                  <pre
-                    style={{
-                      background: "rgba(0, 0, 0, 0.4)",
-                      border: "2px solid rgba(59, 130, 246, 0.3)",
-                      borderRadius: "8px",
-                      padding: "1.5rem",
-                      overflowX: "auto",
-                      margin: "1.5rem 0",
-                      fontSize: "0.95rem",
-                    }}
-                  >
-                    {children}
-                  </pre>
-                ),
-                code: ({ inline, children, ...props }: any) => {
-                  const content = String(children).replace(/\n$/, "");
+            {/* Tags */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.75rem",
+                marginBottom: "3rem",
+              }}
+            >
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    padding: "0.5rem 1rem",
+                    borderRadius: "12px",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    fontSize: "0.875rem",
+                  }}
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
 
-                  if (inline) {
+            {/* Content */}
+            <div
+              className="blog-content"
+              style={{
+                color: "rgba(255, 255, 255, 0.85)",
+                fontSize: "1.125rem",
+                lineHeight: "1.8",
+              }}
+            >
+              <ReactMarkdown
+                components={{
+                  h1: ({ children }) => (
+                    <h2
+                      style={{
+                        fontSize: "2.25rem",
+                        fontWeight: "700",
+                        color: "#fff",
+                        margin: "3rem 0 1rem",
+                        lineHeight: "1.2",
+                      }}
+                    >
+                      {children}
+                    </h2>
+                  ),
+                  h2: ({ children }) => {
+                    const text = typeof children === "string" ? children : "";
+                    const id = text.replace(/\s+/g, "-").toLowerCase();
+                    return (
+                      <h2
+                        id={id}
+                        style={{
+                          fontSize: "1.875rem",
+                          fontWeight: "700",
+                          color: "#fff",
+                          margin: "2.5rem 0 1rem",
+                          lineHeight: "1.3",
+                        }}
+                      >
+                        {children}
+                      </h2>
+                    );
+                  },
+                  h3: ({ children }) => {
+                    const text = typeof children === "string" ? children : "";
+                    const id = text.replace(/\s+/g, "-").toLowerCase();
+                    return (
+                      <h3
+                        id={id}
+                        style={{
+                          fontSize: "1.5rem",
+                          fontWeight: "600",
+                          color: "#fff",
+                          margin: "2rem 0 1rem",
+                          lineHeight: "1.3",
+                        }}
+                      >
+                        {children}
+                      </h3>
+                    );
+                  },
+                  p: ({ children }) => (
+                    <p style={{ margin: "1.25rem 0", lineHeight: "1.8" }}>
+                      {children}
+                    </p>
+                  ),
+                  strong: ({ children }) => (
+                    <strong style={{ color: "#fff", fontWeight: 600 }}>
+                      {children}
+                    </strong>
+                  ),
+                  em: ({ children }) => (
+                    <em style={{ fontStyle: "italic" }}>{children}</em>
+                  ),
+                  blockquote: ({ children }) => (
+                    <blockquote
+                      style={{
+                        borderLeft: "4px solid #3b82f6",
+                        paddingLeft: "1.5rem",
+                        margin: "1.5rem 0",
+                        color: "rgba(255, 255, 255, 0.7)",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      {children}
+                    </blockquote>
+                  ),
+                  ul: ({ children }) => (
+                    <ul
+                      style={{
+                        listStyleType: "disc",
+                        margin: "1rem 0",
+                        paddingLeft: "2rem",
+                        color: "rgba(255, 255, 255, 0.85)",
+                      }}
+                    >
+                      {children}
+                    </ul>
+                  ),
+                  li: ({ children }) => (
+                    <li style={{ margin: "0.5rem 0", paddingLeft: "0.5rem" }}>
+                      {children}
+                    </li>
+                  ),
+                  pre: ({ children }) => (
+                    <pre
+                      style={{
+                        background: "rgba(0, 0, 0, 0.4)",
+                        border: "2px solid rgba(59, 130, 246, 0.3)",
+                        borderRadius: "8px",
+                        padding: "1.5rem",
+                        overflowX: "auto",
+                        margin: "1.5rem 0",
+                        fontSize: "0.95rem",
+                      }}
+                    >
+                      {children}
+                    </pre>
+                  ),
+                  code: ({ inline, children, ...props }: any) => {
+                    const content = String(children).replace(/\n$/, "");
+
+                    if (inline) {
+                      return (
+                        <code
+                          {...props}
+                          style={{
+                            background: "rgba(59, 130, 246, 0.2)",
+                            color: "#3b82f6",
+                            padding: "0.2rem 0.5rem",
+                            borderRadius: "4px",
+                            fontSize: "0.9em",
+                            fontFamily: "'Courier New', monospace",
+                          }}
+                        >
+                          {content}
+                        </code>
+                      );
+                    }
+
                     return (
                       <code
                         {...props}
                         style={{
-                          background: "rgba(59, 130, 246, 0.2)",
-                          color: "#3b82f6",
-                          padding: "0.2rem 0.5rem",
-                          borderRadius: "4px",
-                          fontSize: "0.9em",
+                          color: "#e0e0e0",
                           fontFamily: "'Courier New', monospace",
                         }}
                       >
                         {content}
                       </code>
                     );
-                  }
-
-                  return (
-                    <code
-                      {...props}
+                  },
+                  a: ({ href, children }) => (
+                    <a
+                      href={sanitizeHref(href ?? "")}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
-                        color: "#e0e0e0",
-                        fontFamily: "'Courier New', monospace",
+                        color: "#3b82f6",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(59, 130, 246, 0.5)",
+                        transition: "border-color 0.2s ease",
                       }}
                     >
-                      {content}
-                    </code>
-                  );
-                },
-                a: ({ href, children }) => (
-                  <a
-                    href={sanitizeHref(href ?? "")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color: "#3b82f6",
-                      textDecoration: "none",
-                      borderBottom: "1px solid rgba(59, 130, 246, 0.5)",
-                      transition: "border-color 0.2s ease",
-                    }}
-                  >
-                    {children}
-                  </a>
-                ),
-              }}
-            >
-              {post.content}
-            </ReactMarkdown>
-          </div>
+                      {children}
+                    </a>
+                  ),
+                }}
+              >
+                {post.content}
+              </ReactMarkdown>
+            </div>
 
-          {/* Share Section */}
-          <div
-            style={{
-              marginTop: "4rem",
-              paddingTop: "2rem",
-              borderTop: "2px solid rgba(59, 130, 246, 0.3)",
-              textAlign: "center",
-            }}
-          >
-            <p
+            {/* Share Section */}
+            <div
               style={{
-                color: "rgba(255, 255, 255, 0.6)",
-                marginBottom: "1rem",
+                marginTop: "4rem",
+                paddingTop: "2rem",
+                borderTop: "2px solid rgba(59, 130, 246, 0.3)",
+                textAlign: "center",
               }}
             >
-              Thanks for reading!
-            </p>
-            <Link
-              href="/projects/blogs"
-              style={{
-                display: "inline-block",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "8px",
-                background: "#3b82f6",
-                color: "#fff",
-                textDecoration: "none",
-                fontWeight: "600",
-                transition: "background 0.2s ease",
-              }}
-              className="blog-cta-button"
-            >
-              Read More Articles
-            </Link>
-          </div>
-        </article>
+              <p
+                style={{
+                  color: "rgba(255, 255, 255, 0.6)",
+                  marginBottom: "1rem",
+                }}
+              >
+                Thanks for reading!
+              </p>
+              <Link
+                href="/projects/blogs"
+                style={{
+                  display: "inline-block",
+                  padding: "0.75rem 1.5rem",
+                  borderRadius: "8px",
+                  background: "#3b82f6",
+                  color: "#fff",
+                  textDecoration: "none",
+                  fontWeight: "600",
+                  transition: "background 0.2s ease",
+                }}
+                className="blog-cta-button"
+              >
+                Read More Articles
+              </Link>
+            </div>
+          </article>
+          <TableOfContents />
+        </div>
       </main>
       <Footer />
     </div>
