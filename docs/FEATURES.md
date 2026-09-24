@@ -15,7 +15,7 @@ Modern personal portfolio with curated project showcase and professional present
 - **Interactive 3D Scenes**: Spline-powered 3D graphics and animations for visual engagement
 - **Professional Resume**: Structured CV with downloadable PDF option and contact information
 - **About Page**: Personal introduction, skills matrix, and professional background
-- **Blog Platform**: Technical writing and project updates with markdown support
+- **Blog Platform**: Technical writing and project updates with markdown support. Posts are file-sourced from `src/data/blogs.json` (11 entries as of 2026-09-24) and rendered with `react-markdown`. The in-app "New Blog Post" form and localStorage drafts were removed in #526 (2026-09-23)
 
 ### ⛓️ Web3 Integration
 
