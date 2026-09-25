@@ -254,6 +254,7 @@ Shared community policies are centralized in https://github.com/nitsuah/.github:
 - Security: https://github.com/nitsuah/.github/blob/main/SECURITY.md
 
 <!-- docs-index:start -->
+
 ## Docs Index
 
 Every tracked doc in this repo, so nothing is orphaned (also used by the Obsidian vault mirror).
@@ -274,4 +275,5 @@ Every tracked doc in this repo, so nothing is orphaned (also used by the Obsidia
 - [Delivery Pipeline Handoff](./docs/archive/HANDOFF-spline-move-3d-20260403.md) — `docs/archive/HANDOFF-spline-move-3d-20260403.md`
 - [Playwright Stability Notes](./docs/archive/PLAYWRIGHT_FIXES.md) — `docs/archive/PLAYWRIGHT_FIXES.md`
 - [Screenshot Requirements](./docs/archive/SCREENSHOTS.md) — `docs/archive/SCREENSHOTS.md`
+
 <!-- docs-index:end -->
