@@ -257,7 +257,7 @@ Shared community policies are centralized in https://github.com/nitsuah/.github:
 
 ## Docs Index
 
-Every committed doc in this repo (other than this README, `.github/` and `templates/`), the same set mirrored into the Obsidian vault, so none of them is orphaned.
+Every committed Markdown doc in this repo (other than this README, `.github/` and `templates/`), the same set mirrored into the Obsidian vault, so none of them is orphaned.
 
 - [Project Architecture](./docs/ARCH.md) — `docs/ARCH.md`
 - [Changelog](./docs/CHANGELOG.md) — `docs/CHANGELOG.md`
