@@ -1,3 +1,5 @@
+> 🧭 [nitsuah-io](../../README.md) · [Features](../FEATURES.md) · [Roadmap](../ROADMAP.md) · [Tasks](../TASKS.md) · [Changelog](../CHANGELOG.md) · [Metrics](../METRICS.md) <!-- nav -->
+
 ## HANDOFF BRIEF
 Date: 2026-04-11
 Repo: Nitsuah-Labs/nitsuah-io

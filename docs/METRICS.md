@@ -1,6 +1,8 @@
 
 # Metrics
 
+> 🧭 [nitsuah-io](../README.md) · [Features](./FEATURES.md) · [Roadmap](./ROADMAP.md) · [Tasks](./TASKS.md) · [Changelog](./CHANGELOG.md) · **Metrics** <!-- nav -->
+
 **Last Validated:** 2026-09-24 (PMO audit: Jest unit/coverage re-run in Docker via `config/Dockerfile.unit`. Playwright was last run 2026-09-01 via `config/docker-compose.test.yml` and not re-run this pass)
 
 ## Core Metrics
