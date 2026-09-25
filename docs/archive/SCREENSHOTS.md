@@ -1,5 +1,7 @@
 # Screenshot Requirements
 
+> 🧭 [nitsuah-io](../../README.md) · [Features](../FEATURES.md) · [Roadmap](../ROADMAP.md) · [Tasks](../TASKS.md) · [Changelog](../CHANGELOG.md) · [Metrics](../METRICS.md) <!-- nav -->
+
 This document tracks which demos and projects need updated screenshots or images.
 
 ## Priority Legend
