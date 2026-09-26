@@ -19,6 +19,13 @@ updates:
     labels:
       - 'dependencies'
     groups:
+      # Keep every @playwright/* npm bump in one PR (checked first, so it
+      # wins over minor-and-patch below) so there's a single npm-side change
+      # to pair with the matching config/Dockerfile.test image bump - see
+      # the docker ecosystem entry and scripts/check-playwright-lockstep.js.
+      playwright:
+        patterns:
+          - '@playwright/*'
       minor-and-patch:
         applies-to: version-updates
         update-types:
@@ -26,6 +33,25 @@ updates:
           - 'patch'
     commit-message:
       prefix: 'chore(deps)'
+
+  # Track the Playwright Docker test image so drift is visible, but never let
+  # Dependabot open a PR for it: Dependabot can't span an npm ecosystem and a
+  # docker ecosystem in one PR, so an auto-bumped image could merge on its
+  # own and silently break `npm run precheck:docker` until the npm side
+  # catches up (or vice versa). Bumping this image is a manual step done
+  # together with the @playwright/test npm bump above, in the same PR;
+  # scripts/check-playwright-lockstep.js (wired into precheck:docker and CI)
+  # fails the build if the two ever drift apart.
+  - package-ecosystem: 'docker'
+    directory: '/config'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+    open-pull-requests-limit: 0
+    labels:
+      - 'dependencies'
+      - 'docker'
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: 'github-actions'

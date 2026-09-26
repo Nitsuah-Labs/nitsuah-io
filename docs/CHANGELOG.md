@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - `npm run test:e2e:docker` (`config/docker-compose.test.yml`) was missing `--config config/playwright.config.ts` on its `playwright test` command, so it silently fell back to zero-config test discovery and crashed on the Jest files under `src/**/__tests__/` (`ReferenceError: describe is not defined`). Found while refreshing `docs/METRICS.md`.
+- `config/Dockerfile.test`'s Playwright image (`v1.62.1`) had drifted behind `@playwright/test` (`1.63.0`) in `package-lock.json`, which would break `npm run precheck:docker`. Realigned both to `v1.63.0` and added `scripts/check-playwright-lockstep.js` (run via `npm run check:playwright-lockstep`, wired into `precheck:docker` and the `CI Fast` workflow) so a future drift fails fast instead of silently. Dependabot now groups `@playwright/*` npm bumps into one PR and no longer opens PRs for the Docker image on its own, so the image bump stays a manual, coordinated step (`.github/dependabot.yml`).
 
 ### Verified (2026-09-01)
 - Audited Q2 roadmap items against the codebase: none have shipped yet (AI chat, bento grid, Mumbai→Amoy migration, kryptos/skyview widgets, `docs/API.md`). They remain open in `docs/TASKS.md`.

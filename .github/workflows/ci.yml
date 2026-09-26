@@ -35,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check Playwright Docker/npm version lockstep
+        run: npm run check:playwright-lockstep
+
       - name: Generate wagmi hooks
         run: |
           if [ -n "$ETHERSCAN_API_KEY" ] || [ -n "$NEXT_PUBLIC_ALCHEMY_API_KEY" ]; then
