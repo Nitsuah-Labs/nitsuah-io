@@ -97,6 +97,10 @@ jobs:
             !.next/cache
           retention-days: 1
           if-no-files-found: warn
+          # .next is a dot-directory, which upload-artifact@v4 skips by default;
+          # without this lighthouse-check always rebuilt instead of auditing
+          # the primary (.nvmrc) leg's build.
+          include-hidden-files: true
 
   lighthouse-check:
     runs-on: ubuntu-latest

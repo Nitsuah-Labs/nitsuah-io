@@ -6,6 +6,7 @@ const {
   extractNodeImageVersions,
   extractNetlifyNodeVersion,
   extractWorkflowNodeVersions,
+  satisfiesEngines,
   check,
   readFiles,
 } = require("../check-node-lockstep");
@@ -22,6 +23,7 @@ function alignedFiles(version) {
     ".github/workflows/ci.yml":
       `      - uses: actions/setup-node@v4\n` +
       `        with:\n          node-version-file: .nvmrc\n`,
+    "package.json": JSON.stringify({ engines: { node: "^22.13.0 || >=24" } }),
   };
 }
 
@@ -87,6 +89,34 @@ describe("extractWorkflowNodeVersions", () => {
   });
 });
 
+describe("satisfiesEngines", () => {
+  const range = "^22.13.0 || >=24";
+
+  it("accepts versions inside any branch of the range", () => {
+    expect(satisfiesEngines("26.10.0", range)).toBe(true);
+    expect(satisfiesEngines("24.0.0", range)).toBe(true);
+    expect(satisfiesEngines("22.13.0", range)).toBe(true);
+    expect(satisfiesEngines("22.22.2", range)).toBe(true);
+  });
+
+  it("rejects versions below every branch", () => {
+    expect(satisfiesEngines("22.12.9", range)).toBe(false);
+    expect(satisfiesEngines("23.0.0", range)).toBe(false);
+    expect(satisfiesEngines("20.19.0", range)).toBe(false);
+  });
+
+  it("handles exact pins and partial >= floors", () => {
+    expect(satisfiesEngines("26.10.0", "26.10.0")).toBe(true);
+    expect(satisfiesEngines("26.10.1", "26.10.0")).toBe(false);
+    expect(satisfiesEngines("26.10.0", ">=26.10")).toBe(true);
+  });
+
+  it("returns null for syntax it can't evaluate", () => {
+    expect(satisfiesEngines("26.10.0", "~20.1.0")).toBeNull();
+    expect(satisfiesEngines("26.10.0", "20.x")).toBeNull();
+  });
+});
+
 describe("check", () => {
   it("passes when every pin matches .nvmrc", () => {
     const result = check({
@@ -138,6 +168,24 @@ describe("check", () => {
     files["netlify.toml"] = "[build]\n";
     expect(check({ nvmrc: "26.10.0", files }).problems).toEqual([
       "netlify.toml: found Node (unset), expected 26.10.0",
+    ]);
+  });
+
+  it("flags an .nvmrc that package.json engines doesn't allow", () => {
+    const files = alignedFiles("26.10.0");
+    files["package.json"] = JSON.stringify({
+      engines: { node: "^20.19.0 || ^22.13.0" },
+    });
+    expect(check({ nvmrc: "26.10.0", files }).problems).toEqual([
+      'package.json: engines.node "^20.19.0 || ^22.13.0" does not allow 26.10.0',
+    ]);
+  });
+
+  it("flags an engines range it can't evaluate instead of passing it", () => {
+    const files = alignedFiles("26.10.0");
+    files["package.json"] = JSON.stringify({ engines: { node: "26.x" } });
+    expect(check({ nvmrc: "26.10.0", files }).problems).toEqual([
+      'package.json: engines.node "26.x" uses syntax check-node-lockstep can\'t evaluate',
     ]);
   });
 

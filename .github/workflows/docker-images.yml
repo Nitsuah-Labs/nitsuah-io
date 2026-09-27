@@ -2,8 +2,8 @@ name: Docker Images
 
 # Builds and runs the Docker images that CI Fast never touches (it uses
 # setup-node on the runner), so a base-image bump such as a Node major gets
-# real signal instead of an unrelated green check. Only runs when something
-# that shapes those images changes.
+# real signal instead of an unrelated green check. Runs when something that
+# shapes those images or the server runtime changes.
 
 permissions:
   contents: read
@@ -15,6 +15,10 @@ on:
       - ".nvmrc"
       - "config/Dockerfile.*"
       - "config/docker-compose*.yml"
+      # Dependency bumps are what break the server runtime (e.g. zustand's
+      # persist fallback on Node 25+), so run the in-image suites on them too.
+      - "package-lock.json"
+      - "tests/runtime.spec.ts"
       - ".github/workflows/docker-images.yml"
   workflow_dispatch:
 

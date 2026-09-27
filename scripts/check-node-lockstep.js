@@ -19,6 +19,7 @@ const DOCKER_IMAGE_FILES = [
   ".husky/pre-push",
 ];
 const NETLIFY_PATH = "netlify.toml";
+const PACKAGE_JSON_PATH = "package.json";
 const WORKFLOW_DIR = ".github/workflows";
 // Trailing marker that allows a workflow `node-version:` literal to differ from
 // .nvmrc, e.g. a temporary comparison leg while soaking a new Node major.
@@ -69,6 +70,37 @@ function extractWorkflowNodeVersions(content) {
   return versions;
 }
 
+// Minimal semver check for package.json "engines.node": supports `||`,
+// `^x.y.z`, `>=x[.y[.z]]` and exact `x.y.z`, which is all this repo uses.
+// Returns null for syntax it doesn't understand so the caller can flag it
+// instead of silently passing.
+function satisfiesEngines(version, range) {
+  const target = version.split(".").map(Number);
+  const cmp = (a, b) => {
+    for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return a[i] - b[i];
+    return 0;
+  };
+  let understood = true;
+  const matches = range.split("||").some((part) => {
+    const comparator = part.trim();
+    let m;
+    if ((m = comparator.match(/^\^(\d+)\.(\d+)\.(\d+)$/))) {
+      const floor = m.slice(1).map(Number);
+      return target[0] === floor[0] && cmp(target, floor) >= 0;
+    }
+    if ((m = comparator.match(/^>=\s*(\d+)(?:\.(\d+))?(?:\.(\d+))?$/))) {
+      const floor = m.slice(1).map((v) => Number(v ?? 0));
+      return cmp(target, floor) >= 0;
+    }
+    if ((m = comparator.match(/^(\d+)\.(\d+)\.(\d+)$/))) {
+      return cmp(target, m.slice(1).map(Number)) === 0;
+    }
+    understood = false;
+    return false;
+  });
+  return matches ? true : understood ? false : null;
+}
+
 function check({ nvmrc, files }) {
   const expected = parseNvmrc(nvmrc ?? "");
   if (!expected) {
@@ -107,6 +139,21 @@ function check({ nvmrc, files }) {
       .forEach((v) => mismatch(file, v));
   }
 
+  const packageJson = files[PACKAGE_JSON_PATH];
+  if (packageJson !== undefined) {
+    const range = JSON.parse(packageJson).engines?.node;
+    const satisfied = range ? satisfiesEngines(expected, range) : false;
+    if (satisfied === null) {
+      problems.push(
+        `${PACKAGE_JSON_PATH}: engines.node "${range}" uses syntax check-node-lockstep can't evaluate`,
+      );
+    } else if (!satisfied) {
+      problems.push(
+        `${PACKAGE_JSON_PATH}: engines.node "${range ?? "(unset)"}" does not allow ${expected}`,
+      );
+    }
+  }
+
   return { ok: problems.length === 0, expected, problems };
 }
 
@@ -120,6 +167,7 @@ function readFiles() {
   };
   DOCKER_IMAGE_FILES.forEach(read);
   read(NETLIFY_PATH);
+  read(PACKAGE_JSON_PATH);
   const workflowDir = path.join(REPO_ROOT, WORKFLOW_DIR);
   if (fs.existsSync(workflowDir)) {
     fs.readdirSync(workflowDir)
@@ -157,6 +205,7 @@ module.exports = {
   extractNodeImageVersions,
   extractNetlifyNodeVersion,
   extractWorkflowNodeVersions,
+  satisfiesEngines,
   check,
   readFiles,
 };
