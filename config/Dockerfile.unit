@@ -1,4 +1,6 @@
-# Use a pinned Node 22 LTS image to align with CI and reduce build drift
+# Pinned to the same exact Node version as .nvmrc, CI (setup-node reads .nvmrc),
+# Netlify, the dev compose file and the husky hooks - enforced by
+# `npm run check:node-lockstep` so the whole stack moves together.
 FROM node:26.10.0-slim
 
 # Set working directory
@@ -12,6 +14,9 @@ RUN npm ci --legacy-peer-deps --prefer-offline
 
 # Copy project files
 COPY . .
+
+# Fail the image build if the running Node isn't the one .nvmrc pins
+RUN test "$(node -v)" = "v$(cat .nvmrc)" || { echo "Node $(node -v) != .nvmrc $(cat .nvmrc)"; exit 1; }
 
 # Build for production (skip wagmi codegen for test env)
 RUN npm run build:skip-wagmi

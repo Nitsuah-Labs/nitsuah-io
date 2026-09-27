@@ -5,7 +5,9 @@
   publish = ".next"
   
 [build.environment]
-  NODE_VERSION = "22"
+  # Must match .nvmrc exactly - enforced by `npm run check:node-lockstep`.
+  # A NODE_VERSION set in the Netlify UI would override this; keep it unset there.
+  NODE_VERSION = "26.10.0"
   NPM_FLAGS = "--legacy-peer-deps"
 
 # Deploy previews (PR builds)

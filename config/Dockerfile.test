@@ -1,7 +1,19 @@
 # Dockerfile for running Playwright tests in a consistent environment
 # Uses production build to ensure all pages are pre-compiled
 
+# The Playwright image bundles its own Node (v1.63.0-noble ships Node 24), which
+# would silently run E2E on a different major than the rest of the stack. Overlay
+# the exact Node from .nvmrc instead; /usr/local/bin precedes the image's
+# /usr/bin/node on PATH. Must match .nvmrc - enforced by `npm run check:node-lockstep`.
+FROM node:26.10.0-slim AS node
+
 FROM mcr.microsoft.com/playwright:v1.63.0-noble
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -sf ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+  && ln -sf ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
+  && node -v && npm -v
 
 # Set working directory
 WORKDIR /app
@@ -15,6 +27,9 @@ RUN npm ci --legacy-peer-deps --prefer-offline
 
 # Copy project files
 COPY . .
+
+# Fail the image build if the running Node isn't the one .nvmrc pins
+RUN test "$(node -v)" = "v$(cat .nvmrc)" || { echo "Node $(node -v) != .nvmrc $(cat .nvmrc)"; exit 1; }
 
 # Build for production (pre-compiles all pages, more stable than dev mode)
 # Skip wagmi codegen since it requires API keys not available in test environment

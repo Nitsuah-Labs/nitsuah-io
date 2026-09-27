@@ -13,11 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Home page redesigned as a focused landing page (`LandingHero` + `FeaturedProjects`) surfacing top projects (agent-board, overseer, bb-mcp, darkmoon) above the fold.
 - Dedicated `/3d` route for the Spline experience, moved off the home page to cut critical-path bundle weight and improve LCP.
 - `scripts/check-playwright-lockstep.js`, wired into `precheck:docker` and CI, fails the build if `config/Dockerfile.test`'s Playwright image tag drifts from the installed `@playwright/test` version, so Docker smoke runs can't silently break again.
+- `scripts/check-node-lockstep.js` (`npm run check:node-lockstep`, CI, and a Jest test so the husky hooks catch it too) fails if any Node pin — `config/Dockerfile.unit`, the Node stage in `config/Dockerfile.test`, `config/docker-compose.yml`, the husky hooks, `netlify.toml`'s `NODE_VERSION`, or a workflow `node-version` — drifts from `.nvmrc`.
+- `Docker Images` workflow builds `config/Dockerfile.unit` and `config/Dockerfile.test` and runs Jest / Playwright inside them whenever `.nvmrc`, a Dockerfile or a compose file changes. CI Fast uses setup-node and never exercised these images.
 
 ### Fixed
 - Playwright Docker image (`config/Dockerfile.test`, `mcr.microsoft.com/playwright`) was pinned to `v1.62.1-noble` while `@playwright/test` had moved to `1.63.0`; realigned both to `1.63.0` and added Dependabot grouping (npm `@playwright/*` bumps together; Docker image auto-updates ignored) so future upgrades land in lockstep by construction, not convention.
 
 ### Changed
+- Whole stack moved from Node 22 to Node 26.10.0 in one step, with `.nvmrc` as the single source of truth: unit and E2E Docker images, dev compose, husky hooks, Netlify, and CI (setup-node now reads `.nvmrc`). `config/Dockerfile.test` overlays Node 26 onto the Playwright image, which otherwise ships its own Node 24. CI keeps a temporary `22.x` comparison leg while 26 soaks.
 - Labs contracts' chain config migrated from the shut-down Mumbai testnet to Amoy (`polygonAmoy`, chain id 80002, explorer/OpenSea links, copy) (#519). The contracts themselves still need redeploying to Amoy — tracked in TASKS.md.
 - In-app "New Blog Post" form and localStorage drafts removed; posts are file-sourced from `src/data/blogs.json` (#526).
 - `@splinetool/runtime` 2.0.56 with the Dependabot ignore removed (#524, #530); dotenv 18 (#528); grouped minor/patch bumps (#512, #518, #520, #525, #529).

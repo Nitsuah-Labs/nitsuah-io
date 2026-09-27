@@ -84,7 +84,7 @@ We welcome contributions! See [CONTRIBUTING.md](https://github.com/nitsuah/.gith
 
 ## Run Locally (3 Steps)
 
-Requires Node.js 22+
+Uses the Node.js version pinned in `.nvmrc` (currently 26.10.0; run `nvm use`). CI, Docker, Netlify and the git hooks all run that same version.
 
 ```bash
 # 1. Install dependencies
@@ -222,7 +222,7 @@ npm run wagmi      # Generate Web3 hooks
 
 ### Environment Setup
 
-- Node.js 22+ required
+- Node.js version pinned in `.nvmrc`; `npm run check:node-lockstep` keeps every other pin in sync
 - Uses wagmi CLI for smart contract integration
 - Spline scenes loaded from external CDN
 

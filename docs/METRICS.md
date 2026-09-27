@@ -39,12 +39,13 @@ The previously published "Resume Tests" (8) and "Visual Tests" (9) rows no longe
 
 | Metric | Value | Notes |
 | ------ | ----- | ----- |
-| Unit test image (`config/Dockerfile.unit`) | `node:22.13.0-slim` | Built and run 2026-09-01; `npm run test:coverage` passed (214/214) |
-| Playwright image (`config/Dockerfile.test`) | `mcr.microsoft.com/playwright:v1.62.1-noble` | Version bumped from v1.57.0 since last validation |
-| Playwright run | `docker-compose -f config/docker-compose.test.yml run --rm -e FORCE_BROWSER_E2E=1 playwright` | 20 tests, 11 passed, 9 intentionally skipped, 27.3s |
+| Unit test image (`config/Dockerfile.unit`) | `node:26.10.0-slim` | Built and run 2026-09-27 (Node 26 PR); `npm test` passed 247/247 across 21 suites |
+| Playwright image (`config/Dockerfile.test`) | `mcr.microsoft.com/playwright:v1.63.0-noble` + Node 26.10.0 overlay | The upstream image ships Node 24.20.0; the overlay stage makes E2E run on the `.nvmrc` version |
+| Playwright run | `docker run --rm --shm-size=2g -e FORCE_BROWSER_E2E=1 <Dockerfile.test image> npx playwright test --config config/playwright.config.ts` | 2026-09-27: 21 tests, 12 passed, 9 intentionally skipped, ~19.7s on Node 26.10.0 — identical to the Node 24.20.0 baseline image (~20.0s) |
 
 ## Notes
 
+- **Node 26 parity pass (2026-09-27)**: Node 22.22.2/npm 10.9.7 and Node 26.10.0/npm 11.19.1 were run side by side: `npm ci`, typecheck, format check, Jest (231/231, identical coverage table), `next build` (same 39 routes) and Docker E2E all matched. Two differences, neither a regression: (1) Node 26 has a global `localStorage` accessor (Web Storage unflagged in Node 25), so wagmi/zustand `persist` evaluating its default storage on the server logs one `ExperimentalWarning` per process (`typeof localStorage` is still `"undefined"` and wagmi uses its SSR noop storage); (2) npm 11 skips 9 dependency install scripts that have no `allowScripts` entry (esbuild, bufferutil, utf-8-validate, @parcel/watcher, unrs-resolver, protobufjs, @reown/appkit) — the installed tree was byte-identical for those packages and their native bindings load, so nothing on linux-x64 depends on those scripts today.
 - **Bug found and fixed while refreshing these numbers**: `npm run test:e2e:docker` (`config/docker-compose.test.yml`) ran `npx playwright test` with no `--config` flag. Since `config/playwright.config.ts` isn't at the repo root, Playwright silently fell back to zero-config discovery and picked up the `src/**/__tests__/*.test.tsx` Jest files too, which crashed with `ReferenceError: describe is not defined` for every Jest file. Fixed by pointing the compose command at `--config config/playwright.config.ts`.
 - **Code Coverage (2026-09-24)**: 97.37% statements / 84.56% branch / 84% functions, 223 tests across 19 suites. Re-run in Docker (`config/Dockerfile.unit`, `npm run test:coverage`, 6.4s). Previous measurement:
 - **Code Coverage (2026-09-01)**: 97.21% statements / 81.37% branch / 83.33% functions, measured via Jest coverage report, re-run 2026-09-01 in Docker (`config/Dockerfile.unit`). 214 tests across 17 suites — up from the previously recorded 213/16.

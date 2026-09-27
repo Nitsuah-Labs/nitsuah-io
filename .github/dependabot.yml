@@ -47,6 +47,13 @@ updates:
   # config/Dockerfile.test by hand, in the same PR. scripts/check-playwright-lockstep.js
   # (wired into `npm run precheck:docker` and CI) fails the build if the two
   # ever drift apart, so a one-sided bump can't merge silently.
+  #
+  # The node base images here (config/Dockerfile.unit, and the Node overlay
+  # stage in config/Dockerfile.test) are part of a stack-wide Node pin with
+  # .nvmrc as the source of truth. A Dependabot bump of either one will fail
+  # scripts/check-node-lockstep.js (CI + `npm test`) until .nvmrc,
+  # config/docker-compose.yml, the .husky hooks and netlify.toml's
+  # NODE_VERSION are bumped to the same exact version in the same PR.
   - package-ecosystem: 'docker'
     directory: '/config'
     schedule:
