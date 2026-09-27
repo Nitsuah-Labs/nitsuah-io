@@ -143,10 +143,14 @@ jobs:
       - name: Wait for application to start
         run: npx wait-on http://localhost:3000 --timeout 60000
 
+      # The config lives in config/, which lhci doesn't search, so pass it
+      # explicitly (without it autorun exited before auditing anything).
+      # lhci 0.12 (Lighthouse 10) scored accessibility as null because its
+      # axe-core can't parse CSS color(srgb ...) values; 0.15 fixes that.
       - name: Run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.12.x
-          lhci autorun
+          npm install -g @lhci/cli@0.15.x
+          lhci autorun --config=config/lighthouserc.json
         continue-on-error: true
 
   security-scan:

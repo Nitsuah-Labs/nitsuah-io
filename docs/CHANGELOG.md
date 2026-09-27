@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - zustand `persist` stores threw on the server under Node 25+ (zustand <5.0.14, pulled in by `@wagmi/core` and `@base-org/account`); a `zustand: 5.0.15` override dedupes every copy to a fixed release, which also removes the `localStorage` ExperimentalWarning from builds.
+- `lighthouse-check` never audited anything: `lhci autorun` couldn't find `config/lighthouserc.json` and exited before collecting (hidden by `continue-on-error`), and lhci 0.12's Lighthouse 10 scored accessibility as null because its axe-core can't parse CSS `color(srgb …)`. The step now passes `--config` and uses lhci 0.15 (Lighthouse 12.6); a local run on Node 26 scored performance 0.75 (warn threshold 0.85), and accessibility, best-practices and SEO 1.0.
 - CI's `build-files` artifact never uploaded (`upload-artifact@v4` skips the `.next` dot-directory by default), so `lighthouse-check` always rebuilt instead of auditing the tested build; `include-hidden-files: true` fixes it.
 - Playwright Docker image (`config/Dockerfile.test`, `mcr.microsoft.com/playwright`) was pinned to `v1.62.1-noble` while `@playwright/test` had moved to `1.63.0`; realigned both to `1.63.0` and added Dependabot grouping (npm `@playwright/*` bumps together; Docker image auto-updates ignored) so future upgrades land in lockstep by construction, not convention.
 
