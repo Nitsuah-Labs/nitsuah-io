@@ -58,6 +58,9 @@ jobs:
       - name: Run Jest tests
         run: npm test
 
+      - name: Check Playwright Docker/npm version lockstep
+        run: npm run check:playwright-lockstep
+
       - name: Build application
         id: build
         run: npx next build

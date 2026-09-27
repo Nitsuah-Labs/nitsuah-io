@@ -19,6 +19,18 @@ updates:
     labels:
       - 'dependencies'
     groups:
+      # Keep Playwright's npm packages bumping together in one PR, at any
+      # semver level (not just minor/patch), so a bump never lands without
+      # its @playwright/test companion. Listed before minor-and-patch so it
+      # takes priority for these packages. The Docker image side of the
+      # lockstep (config/Dockerfile.test's mcr.microsoft.com/playwright tag)
+      # can't be grouped with an npm update by Dependabot, since groups don't
+      # span ecosystems — see the docker block below for how that's handled,
+      # and scripts/check-playwright-lockstep.js / CI for the guardrail that
+      # catches drift either way.
+      playwright:
+        patterns:
+          - '@playwright/*'
       minor-and-patch:
         applies-to: version-updates
         update-types:
@@ -26,6 +38,31 @@ updates:
           - 'patch'
     commit-message:
       prefix: 'chore(deps)'
+
+  # Playwright's Docker test image (config/Dockerfile.test). Dependabot has
+  # no cross-ecosystem groups, so this can't be bundled into the npm
+  # "playwright" group above into a single PR. Instead, automatic bumps of
+  # the image tag are ignored here entirely: whoever bumps @playwright/test
+  # in the npm group must also bump `mcr.microsoft.com/playwright` in
+  # config/Dockerfile.test by hand, in the same PR. scripts/check-playwright-lockstep.js
+  # (wired into `npm run precheck:docker` and CI) fails the build if the two
+  # ever drift apart, so a one-sided bump can't merge silently.
+  - package-ecosystem: 'docker'
+    directory: '/config'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'nitsuah'
+    labels:
+      - 'dependencies'
+      - 'docker'
+    ignore:
+      - dependency-name: 'mcr.microsoft.com/playwright'
+    commit-message:
+      prefix: 'chore(docker)'
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: 'github-actions'
