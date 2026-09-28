@@ -13,24 +13,41 @@ concurrency:
 
 jobs:
   build-and-test:
+    name: build-and-test (${{ matrix.label }})
     permissions:
       contents: read
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [22.x] # Reduced to single version for speed
+        include:
+          # Primary leg: the exact Node pinned in .nvmrc, which Docker, Netlify
+          # and the husky hooks also use (see scripts/check-node-lockstep.js).
+          - label: .nvmrc
+            node-version: ""
+            primary: true
+          # Temporary soak leg while the Node 26 move is being kicked around:
+          # the same suite on the previous major, so a red .nvmrc / green 22.x
+          # split points straight at a Node regression. Drop once 26 is settled.
+          - label: 22.x
+            node-version: "22.x" # node-lockstep: baseline
+            primary: false
       fail-fast: false
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js (${{ matrix.label }})
         uses: actions/setup-node@v4
         with:
+          # An empty node-version falls through to node-version-file.
           node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
           cache: "npm"
+
+      - name: Report Node/npm versions
+        run: node -v && npm -v
 
       - name: Install dependencies
         run: npm ci
@@ -61,6 +78,9 @@ jobs:
       - name: Check Playwright Docker/npm version lockstep
         run: npm run check:playwright-lockstep
 
+      - name: Check Node version lockstep (.nvmrc vs Docker/CI/Netlify/hooks)
+        run: npm run check:node-lockstep
+
       - name: Build application
         id: build
         run: npx next build
@@ -69,7 +89,7 @@ jobs:
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
-        if: matrix.node-version == '22.x' && steps.build.outcome == 'success'
+        if: matrix.primary && steps.build.outcome == 'success'
         with:
           name: build-files
           path: |
@@ -77,6 +97,10 @@ jobs:
             !.next/cache
           retention-days: 1
           if-no-files-found: warn
+          # .next is a dot-directory, which upload-artifact@v4 skips by default;
+          # without this lighthouse-check always rebuilt instead of auditing
+          # the primary (.nvmrc) leg's build.
+          include-hidden-files: true
 
   lighthouse-check:
     runs-on: ubuntu-latest
@@ -90,10 +114,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 22.x
+      - name: Use Node.js (.nvmrc)
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version-file: .nvmrc
           cache: "npm"
 
       - name: Install dependencies
@@ -119,10 +143,14 @@ jobs:
       - name: Wait for application to start
         run: npx wait-on http://localhost:3000 --timeout 60000
 
+      # The config lives in config/, which lhci doesn't search, so pass it
+      # explicitly (without it autorun exited before auditing anything).
+      # lhci 0.12 (Lighthouse 10) scored accessibility as null because its
+      # axe-core can't parse CSS color(srgb ...) values; 0.15 fixes that.
       - name: Run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.12.x
-          lhci autorun
+          npm install -g @lhci/cli@0.15.x
+          lhci autorun --config=config/lighthouserc.json
         continue-on-error: true
 
   security-scan:

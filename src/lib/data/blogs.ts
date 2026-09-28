@@ -12,6 +12,7 @@ export interface BlogPost {
   category: string;
   readTime: string;
   published: boolean;
+  image?: string;
   localOnly?: boolean;
 }
 

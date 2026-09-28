@@ -39,7 +39,10 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
   }, [projectsOpen]);
 
   return (
-    <nav style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+    <nav
+      aria-label="Main navigation"
+      style={{ display: "flex", gap: "1rem", alignItems: "center" }}
+    >
       {pages
         .filter((p) => p !== "projects")
         .map((p) => (

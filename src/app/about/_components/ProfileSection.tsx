@@ -17,7 +17,7 @@ export const ProfileSection: React.FC = () => {
       style={{ opacity, zIndex: opacity > 0.01 ? 5 : -1 }}
     >
       <div className={styles.content}>
-        <h2 className={styles.title}>About Me</h2>
+        <h1 className={styles.title}>About Me</h1>
 
         <div className={styles.profileImage}>
           <Image

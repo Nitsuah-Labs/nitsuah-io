@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function Page() {
-  // Redirect legacy /blogs to the projects blogs page
-  redirect("/projects/blogs");
+  // Permanently (308) redirect legacy /blogs to the projects blogs page
+  permanentRedirect("/projects/blogs");
 }

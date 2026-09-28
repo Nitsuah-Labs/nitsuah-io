@@ -1,0 +1,74 @@
+name: Docker Images
+
+# Builds and runs the Docker images that CI Fast never touches (it uses
+# setup-node on the runner), so a base-image bump such as a Node major gets
+# real signal instead of an unrelated green check. Runs when something that
+# shapes those images or the server runtime changes.
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - ".nvmrc"
+      - "config/Dockerfile.*"
+      - "config/docker-compose*.yml"
+      # Dependency bumps are what break the server runtime (e.g. zustand's
+      # persist fallback on Node 25+), so run the in-image suites on them too.
+      - "package-lock.json"
+      - "tests/runtime.spec.ts"
+      - ".github/workflows/docker-images.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: docker-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # The Dockerfile itself fails the build if `node -v` != .nvmrc
+      - name: Build config/Dockerfile.unit
+        run: docker build -f config/Dockerfile.unit -t nitsuah-io-unit .
+
+      - name: Run Jest inside the unit image
+        run: docker run --rm nitsuah-io-unit
+
+  e2e-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build config/Dockerfile.test
+        run: docker build -f config/Dockerfile.test -t nitsuah-io-e2e .
+
+      - name: Run Playwright inside the E2E image
+        run: |
+          mkdir -p playwright-report test-results
+          docker run --rm --shm-size=2g \
+            -e FORCE_BROWSER_E2E=1 \
+            -v "$PWD/playwright-report:/app/playwright-report" \
+            -v "$PWD/test-results:/app/test-results" \
+            nitsuah-io-e2e \
+            npx playwright test --config config/playwright.config.ts
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-docker
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7

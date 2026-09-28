@@ -14,7 +14,6 @@ export const ResumeHeader: React.FC<ResumeHeaderProps> = ({ basics }) => {
     <section
       className={`resume-section basics ${styles.header}`}
       id="basics"
-      role="banner"
       aria-label="Resume header"
       data-testid="resume-header"
     >

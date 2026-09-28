@@ -5,7 +5,9 @@
   publish = ".next"
   
 [build.environment]
-  NODE_VERSION = "22"
+  # Must match .nvmrc exactly - enforced by `npm run check:node-lockstep`.
+  # A NODE_VERSION set in the Netlify UI would override this; keep it unset there.
+  NODE_VERSION = "26.10.0"
   NPM_FLAGS = "--legacy-peer-deps"
 
 # Deploy previews (PR builds)
@@ -36,7 +38,7 @@
       style-src 'self' 'unsafe-inline'; \
       img-src 'self' data: https: blob:; \
       font-src 'self' data:; \
-      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
+      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
       frame-src 'self' https://challenges.cloudflare.com; \
       worker-src 'self' blob:; \
       object-src 'none'; \

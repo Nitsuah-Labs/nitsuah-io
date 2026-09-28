@@ -79,7 +79,7 @@ export const getStatusColor = (status: string): string => {
     case "live":
       return "#10b981";
     case "demo":
-      return "#3b82f6";
+      return "#60a5fa";
     case "mockup":
       return "#9ca3af";
     default:

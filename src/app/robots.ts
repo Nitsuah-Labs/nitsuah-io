@@ -36,7 +36,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/",
       },
     ],
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/sitemap-index.xml`],
+    sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
   };
 }

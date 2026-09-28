@@ -68,7 +68,7 @@ const BlogGrid: React.FC<{
           borderRadius: "12px",
           background: "rgba(59,130,246,0.2)",
           border: "1px solid rgba(59,130,246,0.4)",
-          color: "#3b82f6",
+          color: "#60a5fa",
           fontSize: "0.75rem",
           fontWeight: "600",
           marginBottom: "1rem",

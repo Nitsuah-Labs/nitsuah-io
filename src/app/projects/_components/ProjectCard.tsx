@@ -100,7 +100,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Card Content */}
       <div className={styles.cardContent}>
-        <h3 className={styles.cardTitle}>{project.title}</h3>
+        <h2 className={styles.cardTitle}>{project.title}</h2>
         <p className={styles.cardDescription}>{project.description}</p>
 
         {/* Tags */}
