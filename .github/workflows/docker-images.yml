@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # The Dockerfile itself fails the build if `node -v` != .nvmrc
       - name: Build config/Dockerfile.unit
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build config/Dockerfile.test
         run: docker build -f config/Dockerfile.test -t nitsuah-io-e2e .
@@ -64,7 +64,7 @@ jobs:
             npx playwright test --config config/playwright.config.ts
 
       - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report-docker
