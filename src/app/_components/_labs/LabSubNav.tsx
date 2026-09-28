@@ -39,71 +39,85 @@ const LabSubNav: React.FC = () => {
     >
       {LAB_PAGES.map((page) => {
         const isActive = pathname === page.href;
+        const style: React.CSSProperties = {
+          color: isActive
+            ? "#c084fc"
+            : page.isWIP
+              ? "rgba(255, 255, 255, 0.5)"
+              : "rgba(255, 255, 255, 0.85)",
+          textDecoration: "none",
+          padding: "0.5rem 0.875rem",
+          borderRadius: "6px",
+          background: isActive ? "rgba(168, 85, 247, 0.1)" : "transparent",
+          border: isActive
+            ? "1px solid rgba(168, 85, 247, 0.4)"
+            : "1px solid transparent",
+          transition: "all 0.2s ease",
+          fontSize: "0.875rem",
+          fontWeight: isActive ? 600 : 400,
+          position: "relative",
+          cursor: page.isWIP ? "not-allowed" : "pointer",
+          opacity: page.isWIP ? 0.6 : 1,
+        };
+        const content = page.isIcon ? (
+          <span style={{ fontSize: "1.1rem" }} aria-hidden="true">
+            🏠
+          </span>
+        ) : (
+          <>
+            {page.label}
+            {page.isWIP && (
+              <span
+                style={{
+                  fontSize: "0.65rem",
+                  marginLeft: "0.25rem",
+                  opacity: 0.6,
+                }}
+              >
+                WIP
+              </span>
+            )}
+          </>
+        );
+
+        // Work-in-progress labs aren't links: plain text keeps them out of
+        // the tab order instead of a focusable href="#" that goes nowhere.
+        if (page.isWIP) {
+          return (
+            <span
+              key={page.href}
+              aria-disabled="true"
+              title={`${page.label} (Work in Progress)`}
+              style={style}
+            >
+              {content}
+            </span>
+          );
+        }
+
         return (
           <Link
             key={page.href}
-            href={page.isWIP ? "#" : page.href}
+            href={page.href}
             aria-current={isActive ? "page" : undefined}
-            aria-disabled={page.isWIP ? "true" : undefined}
-            onClick={(e) => {
-              if (page.isWIP) {
-                e.preventDefault();
-              }
-            }}
-            style={{
-              color: isActive
-                ? "#c084fc"
-                : page.isWIP
-                  ? "rgba(255, 255, 255, 0.5)"
-                  : "rgba(255, 255, 255, 0.85)",
-              textDecoration: "none",
-              padding: "0.5rem 0.875rem",
-              borderRadius: "6px",
-              background: isActive ? "rgba(168, 85, 247, 0.1)" : "transparent",
-              border: isActive
-                ? "1px solid rgba(168, 85, 247, 0.4)"
-                : "1px solid transparent",
-              transition: "all 0.2s ease",
-              fontSize: "0.875rem",
-              fontWeight: isActive ? 600 : 400,
-              position: "relative",
-              cursor: page.isWIP ? "not-allowed" : "pointer",
-              pointerEvents: page.isWIP ? "none" : "auto",
-              opacity: page.isWIP ? 0.6 : 1,
-            }}
+            aria-label={page.isIcon ? page.label : undefined}
+            style={style}
             onMouseEnter={(e) => {
-              if (!isActive && !page.isWIP) {
+              if (!isActive) {
                 e.currentTarget.style.background = "rgba(255, 255, 255, 0.08)";
                 e.currentTarget.style.color = "#fff";
               }
             }}
             onMouseLeave={(e) => {
-              if (!isActive && !page.isWIP) {
+              if (!isActive) {
                 e.currentTarget.style.background = "transparent";
                 e.currentTarget.style.borderColor = "transparent";
                 e.currentTarget.style.color = "rgba(255, 255, 255, 0.85)";
               }
             }}
-            title={page.isWIP ? `${page.label} (Work in Progress)` : page.label}
+            title={page.label}
           >
-            {page.isIcon ? (
-              <span style={{ fontSize: "1.1rem" }}>🏠</span>
-            ) : (
-              <>
-                {page.label}
-                {page.isWIP && (
-                  <span
-                    style={{
-                      fontSize: "0.65rem",
-                      marginLeft: "0.25rem",
-                      opacity: 0.6,
-                    }}
-                  >
-                    WIP
-                  </span>
-                )}
-              </>
-            )}
+            {content}
           </Link>
         );
       })}

@@ -146,7 +146,7 @@ const ClientsProjectList: React.FC<{
               {getProjectIcon(project as any)}
             </div>
 
-            <h3
+            <h2
               style={{
                 fontSize: "1.25rem",
                 fontWeight: "600",
@@ -156,7 +156,7 @@ const ClientsProjectList: React.FC<{
               }}
             >
               {project.name}
-            </h3>
+            </h2>
 
             <p
               style={{
@@ -392,7 +392,7 @@ const ClientsProjectList: React.FC<{
                   {getProjectIcon(project as any)}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <h3
+                  <h2
                     style={{
                       fontSize: "0.875rem",
                       fontWeight: "600",
@@ -404,7 +404,7 @@ const ClientsProjectList: React.FC<{
                     }}
                   >
                     {project.name}
-                  </h3>
+                  </h2>
                 </div>
               </div>
             );
