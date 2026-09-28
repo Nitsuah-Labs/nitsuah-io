@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function Page() {
-  // Redirect legacy /clients to the projects clients page
-  redirect("/projects/clients");
+  // Permanently (308) redirect legacy /clients to the projects clients page
+  permanentRedirect("/projects/clients");
 }

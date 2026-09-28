@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import Footer from "../../../../app/_components/_site/Footer";
 import HomeBar from "../../../../app/_components/_site/Homebar";
 import { blogPosts } from "../../../../lib/data/blogs";
+import { DEFAULT_OG_IMAGE, pageMetadata } from "../../../../lib/seo";
 import TableOfContents from "./TableOfContents";
 import "./BlogPost.module.css";
 
@@ -22,6 +23,13 @@ export async function generateStaticParams() {
     }));
 }
 
+// Social cards need a raster image; fall back to the site card for posts
+// without one (or with an SVG logo).
+function postImage(image: string | undefined, title: string) {
+  if (!image || image.endsWith(".svg")) return DEFAULT_OG_IMAGE;
+  return { url: image, alt: title };
+}
+
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
@@ -34,18 +42,18 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  return pageMetadata({
     title: `${post.title} | Blog`,
     description: post.excerpt,
+    path: `/projects/blogs/${post.slug}`,
+    image: postImage(post.image, post.title),
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
       tags: post.tags,
     },
-  };
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -90,7 +98,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 borderRadius: "20px",
                 background: "rgba(59, 130, 246, 0.2)",
                 border: "2px solid rgba(59, 130, 246, 0.4)",
-                color: "#3b82f6",
+                color: "#60a5fa",
                 fontSize: "0.875rem",
                 fontWeight: "600",
                 marginBottom: "1.5rem",
@@ -271,7 +279,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </li>
                   ),
                   pre: ({ children }) => (
+                    // Focusable so keyboard users can scroll wide code blocks
                     <pre
+                      tabIndex={0}
                       style={{
                         background: "rgba(0, 0, 0, 0.4)",
                         border: "2px solid rgba(59, 130, 246, 0.3)",
@@ -362,7 +372,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   display: "inline-block",
                   padding: "0.75rem 1.5rem",
                   borderRadius: "8px",
-                  background: "#3b82f6",
+                  background: "#2563eb",
                   color: "#fff",
                   textDecoration: "none",
                   fontWeight: "600",

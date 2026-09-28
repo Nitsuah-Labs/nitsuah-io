@@ -70,3 +70,21 @@ test("static assets are served with immutable caching", async ({ request }) => {
   expect(response.status()).toBe(200);
   expect(response.headers()["cache-control"]).toContain("immutable");
 });
+
+test("each page declares its own canonical URL and a working og:image", async ({
+  request,
+}) => {
+  for (const path of ["/", "/resume", "/projects/blogs/monorepo-strategy"]) {
+    const html = await (await request.get(path)).text();
+    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    expect(canonical, `${path} canonical`).toBe(
+      `https://nitsuah.io${path === "/" ? "" : path}`,
+    );
+    const ogImage = html.match(
+      /<meta property="og:image" content="([^"]+)"/,
+    )?.[1];
+    expect(ogImage, `${path} og:image`).toBeTruthy();
+    const image = await request.get(new URL(ogImage!).pathname);
+    expect(image.status(), `${path} og:image ${ogImage}`).toBe(200);
+  }
+});

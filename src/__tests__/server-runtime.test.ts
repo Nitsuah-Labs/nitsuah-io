@@ -9,6 +9,7 @@
 import robots from "../app/robots";
 import sitemap from "../app/sitemap";
 import { GET as serviceWorker } from "../app/sw.js/route";
+import { blogPosts } from "../lib/data/blogs";
 import { config as proxyConfig, proxy } from "../proxy";
 
 function withNodeEnv<T>(value: string, fn: () => T): T {
@@ -83,7 +84,8 @@ describe("robots", () => {
   it("points crawlers at the sitemap on the canonical host", () => {
     const result = robots();
     expect(result.host).toBe("https://nitsuah.io");
-    expect(result.sitemap).toContain("https://nitsuah.io/sitemap.xml");
+    // Only sitemaps that exist; a 404ing one is a Search Console error.
+    expect(result.sitemap).toBe("https://nitsuah.io/sitemap.xml");
     expect(Array.isArray(result.rules)).toBe(true);
   });
 });
@@ -105,6 +107,28 @@ describe("sitemap", () => {
       expect(Number.isNaN((entry.lastModified as Date).getTime())).toBe(false);
       expect(entry.priority).toBeGreaterThan(0);
       expect(entry.priority).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("includes every published blog post", () => {
+    const urls = entries.map((entry) => entry.url);
+    for (const post of blogPosts.filter((p) => p.published)) {
+      expect(urls).toContain(`https://nitsuah.io/projects/blogs/${post.slug}`);
+    }
+  });
+
+  it("leaves out pages marked noindex", () => {
+    const paths = entries.map((entry) => new URL(entry.url).pathname);
+    for (const noindex of [
+      "/labs/ai",
+      "/labs/dao",
+      "/labs/lookup",
+      "/labs/stake",
+      "/labs/token",
+      "/profile",
+      "/logout",
+    ]) {
+      expect(paths).not.toContain(noindex);
     }
   });
 });

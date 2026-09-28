@@ -6,13 +6,23 @@ import {
   generatePersonSchema,
   generateWebSiteSchema,
 } from "../lib/schema";
+import {
+  DEFAULT_OG_IMAGE,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SITE_URL,
+  TITLE_SUFFIX,
+} from "../lib/seo";
 import "../styles/theme.css";
 import SkipLink from "./_components/SkipLink";
 import { Providers } from "./providers";
 import "./test-helpers.css";
 
 export const metadata: Metadata = {
-  title: "Austin J. Hardy | Senior Platform & AI Engineer | nitsuah.io",
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s${TITLE_SUFFIX}`,
+  },
   description:
     "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
   keywords:
@@ -20,33 +30,25 @@ export const metadata: Metadata = {
   authors: [{ name: "Austin J. Hardy", url: "https://nitsuah.io" }],
   creator: "Austin J. Hardy",
   publisher: "Austin J. Hardy",
-  metadataBase: new URL("https://nitsuah.io"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL(SITE_URL),
+  // No site-wide `alternates.canonical`: it is inherited by every route, which
+  // would mark every page a duplicate of one URL. Each page sets its own via
+  // pageMetadata() in src/lib/seo.ts.
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nitsuah.io",
-    siteName: "nitsuah.io",
+    siteName: SITE_NAME,
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
       "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
-    images: [
-      {
-        url: "/social-preview.svg", // TODO: Convert to PNG for better social media compatibility
-        width: 1200,
-        height: 630,
-        alt: "Austin J. Hardy - Senior Platform & AI Engineer Portfolio",
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
       "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
-    images: ["/social-preview.svg"], // TODO: Convert to PNG for better compatibility
+    images: [DEFAULT_OG_IMAGE.url],
     creator: "@nitsuah",
   },
   robots: {
@@ -234,7 +236,7 @@ export default function RootLayout({
       >
         <Providers>
           {/* Skip link placed early; pages must supply a single <main id="main"> */}
-          <nav style={{ position: "relative" }}>
+          <nav aria-label="Skip links" style={{ position: "relative" }}>
             <SkipLink />
           </nav>
           {children}

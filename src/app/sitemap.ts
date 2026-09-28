@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { blogPosts } from "../lib/data/blogs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nitsuah.io";
@@ -50,17 +51,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Lab pages
-  const labPages = [
-    "ai",
-    "dao",
-    "domains",
-    "lookup",
-    "mint",
-    "register",
-    "stake",
-    "token",
-  ].map((lab) => ({
+  // Lab pages (the work-in-progress labs are noindex, so they stay out)
+  const labPages = ["domains", "mint", "register"].map((lab) => ({
     url: `${baseUrl}/labs/${lab}`,
     lastModified: currentDate,
     changeFrequency: "monthly" as const,
@@ -83,5 +75,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticPages, ...labPages, ...projectPages];
+  const blogPages = blogPosts
+    .filter((post) => post.published)
+    .map((post) => ({
+      url: `${baseUrl}/projects/blogs/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    }));
+
+  return [...staticPages, ...labPages, ...projectPages, ...blogPages];
 }
