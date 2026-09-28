@@ -100,13 +100,13 @@ const projects: Project[] = [
   },
   // Additional Projects
   {
-    id: "motor-pool",
-    title: "motor-pool",
+    id: "agent-board",
+    title: "agent-board",
     short:
       "Unified dashboard orchestrating autonomous AI agents across GitHub repositories.",
     description:
       "Local-first AI control room for multi-model workflows. Chat, safety rails, and live observability in one dashboard — no external APIs, no data leaving your machine.",
-    github: "https://github.com/nitsuah/motor-pool",
+    github: "https://github.com/nitsuah/agent-board",
     highlight:
       "Multi-agent orchestration, repo intelligence, automated governance",
     tags: ["typescript", "nextjs", "ai", "devops"],
