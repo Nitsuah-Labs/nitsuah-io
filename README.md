@@ -261,6 +261,7 @@ Every committed Markdown doc in this repo (other than this README, `.github/` an
 
 **`docs/`**
 
+- [API Reference](./docs/API.md) — `docs/API.md`
 - [Project Architecture](./docs/ARCH.md) — `docs/ARCH.md`
 - [Changelog](./docs/CHANGELOG.md) — `docs/CHANGELOG.md`
 - [Features](./docs/FEATURES.md) — `docs/FEATURES.md`
@@ -284,6 +285,6 @@ Every committed Markdown doc in this repo (other than this README, `.github/` an
 
 **`public/`**
 
-- [Social Preview Image Placeholder](./public/social-preview-placeholder.md) — `public/social-preview-placeholder.md`
+- [Social Preview Image](./public/social-preview-placeholder.md) — `public/social-preview-placeholder.md`
 
 <!-- docs-index:end -->

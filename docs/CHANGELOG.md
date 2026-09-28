@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `docs/API.md`: server routes (`/sw.js`, robots, sitemap, proxy middleware), page metadata via `pageMetadata()`, the wagmi config (chains, connectors, test-mode mock), generated contract hooks, Labs contract addresses and app hooks (TASKS P2).
+- Per-page metadata: every route has its own title, description, canonical URL and Open Graph/Twitter card (`src/lib/seo.ts` plus a server `layout.tsx` per route); `/profile`, `/logout` and the WIP Labs pages are `noindex`. `src/__tests__/seo.test.ts` enforces it, and `tests/runtime.spec.ts` checks the rendered canonical and `og:image` against `next start`.
+- `public/og-image.jpg` (1200×630) social card and a 180×180 `apple-icon.png`.
+- Sitemap lists all 11 published blog posts.
 - Home page redesigned as a focused landing page (`LandingHero` + `FeaturedProjects`) surfacing top projects (agent-board, overseer, bb-mcp, darkmoon) above the fold.
 - Dedicated `/3d` route for the Spline experience, moved off the home page to cut critical-path bundle weight and improve LCP.
 - `scripts/check-playwright-lockstep.js`, wired into `precheck:docker` and CI, fails the build if `config/Dockerfile.test`'s Playwright image tag drifts from the installed `@playwright/test` version, so Docker smoke runs can't silently break again.
@@ -18,6 +22,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Docker Images` workflow builds `config/Dockerfile.unit` and `config/Dockerfile.test` and runs Jest / Playwright inside them whenever `.nvmrc`, a Dockerfile or a compose file changes. CI Fast uses setup-node and never exercised these images.
 
 ### Fixed
+- Every page declared `<link rel="canonical" href="https://nitsuah.io">` (a root-layout `alternates.canonical` inherited by all routes), telling search engines each page, including every blog post, was a duplicate of the homepage.
+- Site-wide `og:image`/`twitter:image` pointed at `/social-preview.svg`, which doesn't exist (404), so shared links had no preview image.
+- Netlify CSP blocked Reown/WalletConnect AppKit's `api.web3modal.org` on every page; `connect-src` now allows `https://*.web3modal.org`.
+- All 19 non-blog pages shared one title and description; nested pages (Labs, blog posts) dropped the site-name suffix.
+- `robots.txt` advertised a nonexistent `/sitemap-index.xml`; the sitemap listed `noindex` WIP Labs pages; `/blogs` and `/clients` redirected with 307 instead of a permanent 308.
+- Accessibility (axe WCAG 2.1 A/AA + best-practice, every page): resume dates/durations (2.3–2.5:1), blog and client category pills and the blog CTA button now meet 4.5:1; skip-link and main navs have distinct labels; the resume header no longer declares a second `banner`; `/about` has an `<h1>`; project/client card titles no longer skip a heading level; code blocks are keyboard-focusable; WIP Labs nav items are plain text instead of focusable `href="#"` links.
+- Blog posts: about 50 relative "Code References" links (e.g. `../Dockerfile`) resolved to `https://nitsuah.io/...` 404s; they now link only files verified to exist in the real repos. Removed unfilled template text ("Summarize the main points of the article", stub "Conclusion" sections), an orphan link list, off-topic boilerplate "Further Reading" links, missing images (`monorepo.png`, `nextjs.png`) and screenshots reused from other projects. Fixed dead links to `nitsuah/ecs-patterns`, `nitsuah/motor-pool` (now `agent-board`) and `nitsuah/nitsuah-io` (now `Nitsuah-Labs/nitsuah-io`).
 - zustand `persist` stores threw on the server under Node 25+ (zustand <5.0.14, pulled in by `@wagmi/core` and `@base-org/account`); a `zustand: 5.0.15` override dedupes every copy to a fixed release, which also removes the `localStorage` ExperimentalWarning from builds.
 - `lighthouse-check` never audited anything: `lhci autorun` couldn't find `config/lighthouserc.json` and exited before collecting (hidden by `continue-on-error`), and lhci 0.12's Lighthouse 10 scored accessibility as null because its axe-core can't parse CSS `color(srgb …)`. The step now passes `--config` and uses lhci 0.15 (Lighthouse 12.6); a local run on Node 26 scored performance 0.75 (warn threshold 0.85), and accessibility, best-practices and SEO 1.0.
 - CI's `build-files` artifact never uploaded (`upload-artifact@v4` skips the `.next` dot-directory by default), so `lighthouse-check` always rebuilt instead of auditing the tested build; `include-hidden-files: true` fixes it.
