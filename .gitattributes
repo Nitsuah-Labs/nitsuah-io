@@ -15,6 +15,10 @@
 *.html text eol=lf
 *.md text eol=lf
 
+# Read by `cat .nvmrc` in config/Dockerfile.* and the husky hooks; a CRLF
+# checkout on Windows makes the Node-version check compare "26.x.y\r"
+.nvmrc text eol=lf
+
 # Binary files
 *.png binary
 *.jpg binary
