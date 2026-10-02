@@ -1,0 +1,5 @@
+Built my portfolio so my GitHub blogs render perfectly on it — 16-bit style. Zero sync, pure flex.
+
+nitsuah.io/projects/blogs ↔ nitsuah.github.io/blogs (lockstep)
+
+#nitsuah #portfolio #nextjs #react #typescript #indiedev #16bit #retro
