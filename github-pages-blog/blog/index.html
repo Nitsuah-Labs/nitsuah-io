@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nitsuah — Austin J. Hardy</title>
-  <meta name="description" content="Senior Systems Engineer · Developer Productivity · AI & Automation">
+  <title>Blogs — nitsuah</title>
+  <meta name="description" content="Technical posts on developer productivity, DevOps, AI, and systems engineering">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -37,10 +37,8 @@
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent); }
 
-    /* Layout */
     .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -89,164 +87,27 @@
       background: var(--accent);
     }
 
-    /* Hero */
-    .hero {
-      padding: 80px 0 60px;
+    .page-header {
+      padding: 60px 0 40px;
       text-align: center;
     }
 
-    .hero-badge {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--accent);
-      background: rgba(88, 166, 255, 0.1);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 9999px;
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
+    .page-title {
       font-family: 'Space Mono', monospace;
       font-weight: 700;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-    }
-
-    .hero .subtitle {
-      font-size: clamp(1.125rem, 2vw, 1.375rem);
-      color: var(--fg-muted);
-      max-width: 600px;
-      margin: 0 auto 32px;
-      line-height: 1.7;
-    }
-
-    .hero-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: transparent;
-      color: var(--fg);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--bg);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      background: var(--bg-elevated);
-    }
-
-    /* Section */
-    section { padding: 60px 0; }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .section-title {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 1.5rem;
       letter-spacing: -0.02em;
-    }
-
-    .section-link {
-      font-size: 0.875rem;
-      color: var(--fg-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .section-link:hover { color: var(--accent); }
-
-    /* Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    /* Card */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-      background: var(--card-hover);
-      transform: translateY(-2px);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
       margin-bottom: 12px;
     }
 
-    .card-title {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
+    .page-subtitle {
       font-size: 1.125rem;
-      line-height: 1.3;
-    }
-
-    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-
-    .tag {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      color: var(--accent);
-      background: rgba(88, 166, 255, 0.1);
-      border: 1px solid rgba(88, 166, 255, 0.2);
-      padding: 4px 10px;
-      border-radius: 6px;
-    }
-
-    .card-meta {
-      font-size: 0.75rem;
       color: var(--fg-muted);
-      margin-top: 16px;
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    /* Blog list */
     .blog-list { display: flex; flex-direction: column; gap: 16px; }
 
     .blog-item {
@@ -254,7 +115,7 @@
       grid-template-columns: auto 1fr auto;
       gap: 24px;
       align-items: start;
-      padding: 20px;
+      padding: 24px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -300,104 +161,6 @@
       border-radius: 6px;
     }
 
-    /* Article */
-    article {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .article-header {
-      margin-bottom: 40px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .article-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.875rem;
-      color: var(--fg-muted);
-      margin-bottom: 16px;
-    }
-
-    .article-title {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-
-    .article-body {
-      font-size: 1.0625rem;
-      line-height: 1.85;
-      color: var(--fg);
-    }
-
-    .article-body h2 {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 1.375rem;
-      margin: 40px 0 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .article-body h3 {
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 1.125rem;
-      margin: 32px 0 12px;
-    }
-
-    .article-body p { margin-bottom: 16px; }
-
-    .article-body ul, .article-body ol { margin: 16px 0 16px 24px; }
-
-    .article-body li { margin-bottom: 8px; }
-
-    .article-body code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9em;
-      background: var(--bg-elevated);
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-
-    .article-body pre {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      overflow-x: auto;
-      margin: 24px 0;
-    }
-
-    .article-body pre code {
-      background: transparent;
-      padding: 0;
-      border: none;
-      font-size: 0.875rem;
-      line-height: 1.7;
-    }
-
-    .article-body a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    .article-body blockquote {
-      border-left: 3px solid var(--accent);
-      padding-left: 16px;
-      margin: 24px 0;
-      color: var(--fg-muted);
-      font-style: italic;
-    }
-
-    /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 0;
@@ -411,22 +174,18 @@
     .footer-links a { color: var(--fg-muted); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Responsive */
     @media (max-width: 640px) {
-      .hero { padding: 60px 0 40px; }
+      .page-header { padding: 40px 0 30px; }
       .blog-item { grid-template-columns: 1fr; gap: 12px; }
       .blog-date { min-width: auto; }
       nav { display: none; }
-      .section-header { flex-direction: column; align-items: flex-start; }
     }
 
-    /* Focus states */
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
-    /* Selection */
     ::selection { background: var(--accent); color: var(--bg); }
   </style>
 </head>
@@ -435,39 +194,21 @@
     <div class="container header-inner">
       <a href="/" class="logo">nitsuah<span>.</span></a>
       <nav>
-        <a href="/" class="nav-link active">Profile</a>
-        <a href="/blog/" class="nav-link">Blogs</a>
+        <a href="/" class="nav-link">Profile</a>
+        <a href="/blog/" class="nav-link active">Blogs</a>
         <a href="https://github.com/nitsuah" class="nav-link" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <section class="hero">
-      <span class="hero-badge">Senior Systems Engineer</span>
-      <h1>Austin J. Hardy</h1>
-      <p class="subtitle">I build tools that eliminate toil, connect systems, and give people leverage — enterprise integrations, developer productivity tooling, AI/agent systems, plus a handful of projects that exist because they're interesting.</p>
-      <div class="hero-links">
-        <a href="https://nitsuah.io" class="btn btn-primary" target="_blank" rel="noopener">Portfolio →</a>
-        <a href="/blog/" class="btn btn-secondary">Read Blogs</a>
-        <a href="https://gist.github.com/nitsuah/086f7d1de6a5fd534ac4ccce226ac1d2" class="btn btn-secondary" target="_blank" rel="noopener">resume.json</a>
-      </div>
+    <section class="page-header">
+      <h1 class="page-title">Blogs</h1>
+      <p class="page-subtitle">Technical posts on developer productivity, DevOps, AI, and systems engineering — 11 posts and counting</p>
     </section>
 
     <section>
-      <div class="section-header">
-        <h2 class="section-title">Featured Projects</h2>
-        <a href="https://github.com/nitsuah?tab=repositories" class="section-link" target="_blank" rel="noopener">View all →</a>
-      </div>
-      <div class="grid" id="projects-grid"></div>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <h2 class="section-title">Latest Posts</h2>
-        <a href="/blog/" class="section-link">View all →</a>
-      </div>
-      <div class="blog-list" id="latest-posts"></div>
+      <div class="blog-list" id="blog-list"></div>
     </section>
   </main>
 
@@ -485,7 +226,6 @@
   </footer>
 
   <script>
-    // Blog data (from blogs.json)
     const blogPosts = [
       {
         "published": true,
@@ -615,10 +355,10 @@ jobs:
       - uses: actions/download-artifact@v4
       - uses: fregante/chrome-web-store-upload@v2
         with:
-          app-id: ${{ secrets.CHROME_APP_ID }}
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          app-id: \${{ secrets.CHROME_APP_ID }}
+          client-id: \${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: \${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: \${{ secrets.CHROME_REFRESH_TOKEN }}
 \`\`\`
 
 Now \`git push origin v1.0.0\` does everything.`
@@ -760,7 +500,7 @@ export default async function PostsPage() {
     <ul>
       {posts.map(post => (
         <li key={post.id}>{post.title}</li>
-      ))}
+      )}
     </ul>
   );
 }
@@ -859,11 +599,11 @@ Tests pass locally, fail in CI. Sound familiar?
 #!/bin/bash
 # scripts/check-lockstep.sh
 
-PLAYWRIGHT_LOCAL=$(npx playwright --version | cut -d' ' -f2)
-PLAYWRIGHT_DOCKER=$(docker run --rm mcr.microsoft.com/playwright:v1.45-focal npx playwright --version | cut -d' ' -f2)
+PLAYWRIGHT_LOCAL=\$(npx playwright --version | cut -d' ' -f2)
+PLAYWRIGHT_DOCKER=\$(docker run --rm mcr.microsoft.com/playwright:v1.45-focal npx playwright --version | cut -d' ' -f2)
 
-if [ "$PLAYWRIGHT_LOCAL" != "$PLAYWRIGHT_DOCKER" ]; then
-  echo "❌ Playwright version mismatch: local=$PLAYWRIGHT_LOCAL docker=$PLAYWRIGHT_DOCKER"
+if [ "\$PLAYWRIGHT_LOCAL" != "\$PLAYWRIGHT_DOCKER" ]; then
+  echo "❌ Playwright version mismatch: local=\$PLAYWRIGHT_LOCAL docker=\$PLAYWRIGHT_DOCKER"
   exit 1
 fi
 
@@ -1033,59 +773,23 @@ One change in the central repo updates CI everywhere.`
       }
     ];
 
-    const projects = [
-      { name: "agent-board", desc: "Local-first console for chatting & comparing multiple LLMs with safety rails", url: "https://github.com/nitsuah/agent-board", tags: ["Ollama", "Docker Model Runner", "TypeScript"] },
-      { name: "bb-mcp", desc: "MCP server exposing Blackboard Learn REST API to LLM clients with RBAC", url: "https://github.com/nitsuah/bb-mcp", tags: ["MCP", "Blackboard", "TypeScript"] },
-      { name: "ats-fill", desc: "Chrome extension that reads job postings and fills applications using your API key", url: "https://github.com/nitsuah/ats-fill", tags: ["Chrome Extension", "AI", "Privacy"] },
-      { name: "darkmoon", desc: "Discord bot for Destiny 2 — raids, LFG, vendor tracking, seasonal content", url: "https://github.com/nitsuah/darkmoon", tags: ["Discord.js", "Destiny 2", "Node.js"] },
-      { name: "fire", desc: "Lightweight FIRE tracker & API server — track financial independence progress", url: "https://github.com/nitsuah/fire", tags: ["Go", "PostgreSQL", "API"] },
-      { name: "kryptos", desc: "Research toolkit attacking Kryptos K4 cipher with classical cryptanalysis", url: "https://github.com/nitsuah/kryptos", tags: ["Cryptanalysis", "Python", "Research"] },
-      { name: "motor-pool", desc: "Local-first AI ops cockpit — multi-model chat, PII redaction, OpenTelemetry tracing", url: "https://github.com/nitsuah/motor-pool", tags: ["Ollama", "React", "TypeScript"] },
-      { name: "9router", desc: "Unlimited FREE AI coding — connect any IDE to 40+ providers with auto-fallback", url: "https://github.com/nitsuah/9router", tags: ["Proxy", "Go", "AI"] },
-      { name: "farm-3j", desc: "Next.js marketing site for farm business — good website, good farm", url: "https://github.com/nitsuah/farm-3j", tags: ["Next.js", "Tailwind", "TypeScript"] },
-      { name: "avatar", desc: "Create personalized generative AI models from user-provided image datasets", url: "https://github.com/nitsuah/avatar", tags: ["AI", "Diffusion", "Python"] },
-      { name: "gcp", desc: "CLI for auditing & bulk-copying Google Drive folder structures via Drive API", url: "https://github.com/nitsuah/gcp", tags: ["CLI", "Google Drive", "Go"] },
-      { name: "skyview", desc: "Glassmorphic marketing site for drone services — Decap CMS, Calendly, Netlify Forms", url: "https://github.com/nitsuah/skyview", tags: ["Next.js", "Decap CMS", "Client project"] }
-    ];
-
-    // Render projects
-    const projectsGrid = document.getElementById('projects-grid');
-    projects.forEach(p => {
-      const card = document.createElement('a');
-      card.href = p.url;
-      card.target = '_blank';
-      card.rel = 'noopener';
-      card.className = 'card';
-      card.innerHTML = \`
-        <div class="card-header">
-          <h3 class="card-title">\${p.name}</h3>
-        </div>
-        <p style="color: var(--fg-muted); font-size: 0.875rem; margin-bottom: 16px; line-height: 1.6;">\${p.desc}</p>
-        <div class="card-tags">
-          \${p.tags.map(t => \`<span class="tag">\${t}</span>\`).join('')}
-        </div>
-      \`;
-      projectsGrid.appendChild(card);
-    });
-
-    // Render latest posts (first 3)
-    const latestPosts = document.getElementById('latest-posts');
-    blogPosts.filter(p => p.published).slice(0, 3).forEach(post => {
+    const blogList = document.getElementById('blog-list');
+    blogPosts.filter(p => p.published).forEach(post => {
       const item = document.createElement('a');
-      item.href = \`/blog/\${post.slug}/\`;
+      item.href = `./${post.slug}/`;
       item.className = 'blog-item';
-      item.innerHTML = \`
-        <time class="blog-date" datetime="\${post.date}">\${post.date}</time>
+      item.innerHTML = `
+        <time class="blog-date" datetime="${post.date}">${post.date}</time>
         <div class="blog-content">
-          <h3>\${post.title}</h3>
-          <p class="blog-excerpt">\${post.excerpt}</p>
+          <h3>${post.title}</h3>
+          <p class="blog-excerpt">${post.excerpt}</p>
           <div class="blog-tags">
-            <span class="blog-category">\${post.category}</span>
-            \${post.tags.slice(0, 2).map(t => \`<span class="blog-category">\${t}</span>\`).join('')}
+            <span class="blog-category">${post.category}</span>
+            ${post.tags.slice(0, 3).map(t => `<span class="blog-category">${t}</span>`).join('')}
           </div>
         </div>
-      \`;
-      latestPosts.appendChild(item);
+      `;
+      blogList.appendChild(item);
     });
   </script>
 </body>
