@@ -16,7 +16,19 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = path.join(DIR, req.url === '/' ? 'index.html' : req.url);
+  // Sanitize path to prevent directory traversal
+  let requestedPath = req.url === '/' ? 'index.html' : req.url;
+  // Remove query string
+  requestedPath = requestedPath.split('?')[0];
+  // Normalize and ensure path stays within DIR
+  const normalizedPath = path.normalize(requestedPath).replace(/^(\.\.(\/|\\|$))+/, '');
+  const filePath = path.join(DIR, normalizedPath);
+  // Verify the resolved path is within DIR
+  if (!filePath.startsWith(DIR)) {
+    res.writeHead(403);
+    res.end('Forbidden');
+    return;
+  }
   const ext = path.extname(filePath);
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
