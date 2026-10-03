@@ -37,10 +37,8 @@
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent); }
 
-    /* Layout */
     .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -89,7 +87,6 @@
       background: var(--accent);
     }
 
-    /* Hero */
     .hero {
       padding: 80px 0 60px;
       text-align: center;
@@ -159,7 +156,6 @@
       background: var(--bg-elevated);
     }
 
-    /* Section */
     section { padding: 60px 0; }
 
     .section-header {
@@ -188,14 +184,12 @@
 
     .section-link:hover { color: var(--accent); }
 
-    /* Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    /* Card */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -225,6 +219,39 @@
       line-height: 1.3;
     }
 
+    .card-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    .card-link-live {
+      color: #2ea44f;
+      background: rgba(46, 164, 79, 0.1);
+      border: 1px solid rgba(46, 164, 79, 0.2);
+    }
+
+    .card-link-page {
+      color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+
+    .card-link:hover { opacity: 0.8; }
+
     .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 
     .tag {
@@ -246,7 +273,6 @@
       flex-wrap: wrap;
     }
 
-    /* Blog list */
     .blog-list { display: flex; flex-direction: column; gap: 16px; }
 
     .blog-item {
@@ -300,7 +326,6 @@
       border-radius: 6px;
     }
 
-    /* Article */
     article {
       max-width: 720px;
       margin: 0 auto;
@@ -397,7 +422,6 @@
       font-style: italic;
     }
 
-    /* Footer */
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 0;
@@ -411,7 +435,6 @@
     .footer-links a { color: var(--fg-muted); }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Responsive */
     @media (max-width: 640px) {
       .hero { padding: 60px 0 40px; }
       .blog-item { grid-template-columns: 1fr; gap: 12px; }
@@ -420,13 +443,11 @@
       .section-header { flex-direction: column; align-items: flex-start; }
     }
 
-    /* Focus states */
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
-    /* Selection */
     ::selection { background: var(--accent); color: var(--bg); }
   </style>
 </head>
@@ -456,7 +477,7 @@
 
     <section>
       <div class="section-header">
-        <h2 class="section-title">Featured Projects</h2>
+        <h2 class="section-title">Projects</h2>
         <a href="https://github.com/nitsuah?tab=repositories" class="section-link" target="_blank" rel="noopener">View all →</a>
       </div>
       <div class="grid" id="projects-grid"></div>
@@ -485,7 +506,6 @@
   </footer>
 
   <script>
-    // Blog data (from blogs.json)
     const blogPosts = [
       {
         "published": true,
@@ -615,10 +635,10 @@ jobs:
       - uses: actions/download-artifact@v4
       - uses: fregante/chrome-web-store-upload@v2
         with:
-          app-id: ${{ secrets.CHROME_APP_ID }}
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          app-id: \${{ secrets.CHROME_APP_ID }}
+          client-id: \${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: \${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: \${{ secrets.CHROME_REFRESH_TOKEN }}
 \`\`\`
 
 Now \`git push origin v1.0.0\` does everything.`
@@ -760,7 +780,7 @@ export default async function PostsPage() {
     <ul>
       {posts.map(post => (
         <li key={post.id}>{post.title}</li>
-      ))}
+      )}
     </ul>
   );
 }
@@ -859,11 +879,11 @@ Tests pass locally, fail in CI. Sound familiar?
 #!/bin/bash
 # scripts/check-lockstep.sh
 
-PLAYWRIGHT_LOCAL=$(npx playwright --version | cut -d' ' -f2)
-PLAYWRIGHT_DOCKER=$(docker run --rm mcr.microsoft.com/playwright:v1.45-focal npx playwright --version | cut -d' ' -f2)
+PLAYWRIGHT_LOCAL=\$(npx playwright --version | cut -d' ' -f2)
+PLAYWRIGHT_DOCKER=\$(docker run --rm mcr.microsoft.com/playwright:v1.45-focal npx playwright --version | cut -d' ' -f2)
 
-if [ "$PLAYWRIGHT_LOCAL" != "$PLAYWRIGHT_DOCKER" ]; then
-  echo "❌ Playwright version mismatch: local=$PLAYWRIGHT_LOCAL docker=$PLAYWRIGHT_DOCKER"
+if [ "\$PLAYWRIGHT_LOCAL" != "\$PLAYWRIGHT_DOCKER" ]; then
+  echo "❌ Playwright version mismatch: local=\$PLAYWRIGHT_LOCAL docker=\$PLAYWRIGHT_DOCKER"
   exit 1
 fi
 
@@ -1034,18 +1054,17 @@ One change in the central repo updates CI everywhere.`
     ];
 
     const projects = [
-      { name: "agent-board", desc: "Local-first console for chatting & comparing multiple LLMs with safety rails", url: "https://github.com/nitsuah/agent-board", tags: ["Ollama", "Docker Model Runner", "TypeScript"] },
-      { name: "bb-mcp", desc: "MCP server exposing Blackboard Learn REST API to LLM clients with RBAC", url: "https://github.com/nitsuah/bb-mcp", tags: ["MCP", "Blackboard", "TypeScript"] },
-      { name: "ats-fill", desc: "Chrome extension that reads job postings and fills applications using your API key", url: "https://github.com/nitsuah/ats-fill", tags: ["Chrome Extension", "AI", "Privacy"] },
-      { name: "darkmoon", desc: "Discord bot for Destiny 2 — raids, LFG, vendor tracking, seasonal content", url: "https://github.com/nitsuah/darkmoon", tags: ["Discord.js", "Destiny 2", "Node.js"] },
-      { name: "fire", desc: "Lightweight FIRE tracker & API server — track financial independence progress", url: "https://github.com/nitsuah/fire", tags: ["Go", "PostgreSQL", "API"] },
-      { name: "kryptos", desc: "Research toolkit attacking Kryptos K4 cipher with classical cryptanalysis", url: "https://github.com/nitsuah/kryptos", tags: ["Cryptanalysis", "Python", "Research"] },
-      { name: "motor-pool", desc: "Local-first AI ops cockpit — multi-model chat, PII redaction, OpenTelemetry tracing", url: "https://github.com/nitsuah/motor-pool", tags: ["Ollama", "React", "TypeScript"] },
-      { name: "9router", desc: "Unlimited FREE AI coding — connect any IDE to 40+ providers with auto-fallback", url: "https://github.com/nitsuah/9router", tags: ["Proxy", "Go", "AI"] },
-      { name: "farm-3j", desc: "Next.js marketing site for farm business — good website, good farm", url: "https://github.com/nitsuah/farm-3j", tags: ["Next.js", "Tailwind", "TypeScript"] },
-      { name: "avatar", desc: "Create personalized generative AI models from user-provided image datasets", url: "https://github.com/nitsuah/avatar", tags: ["AI", "Diffusion", "Python"] },
-      { name: "gcp", desc: "CLI for auditing & bulk-copying Google Drive folder structures via Drive API", url: "https://github.com/nitsuah/gcp", tags: ["CLI", "Google Drive", "Go"] },
-      { name: "skyview", desc: "Glassmorphic marketing site for drone services — Decap CMS, Calendly, Netlify Forms", url: "https://github.com/nitsuah/skyview", tags: ["Next.js", "Decap CMS", "Client project"] }
+      { name: "ats-fill", desc: "Chrome extension that reads a job posting and fills out the application using your own API key — no server, nothing tracked", url: "https://github.com/nitsuah/ats-fill", liveUrl: "https://nitsuah.github.io/ats-fill/", tags: ["Chrome Extension", "AI", "Privacy"] },
+      { name: "bb-mcp", desc: "MCP server that puts the Blackboard Learn API in front of LLM clients, with role-based access control", url: "https://github.com/nitsuah/bb-mcp", pageUrl: "https://nitsuah.github.io/bb-mcp/", tags: ["MCP", "Blackboard", "TypeScript"] },
+      { name: "darkmoon", desc: "Solo browser combat game — React 19, Three.js, Socket.io. Multiplayer and mobile in progress", url: "https://github.com/nitsuah/darkmoon", liveUrl: "https://darkmoon.dev", tags: ["React 19", "Three.js", "Socket.io"] },
+      { name: "fire", desc: "Self-hosted FIRE tracker — net worth, projections, and a read-only MCP server for LLM clients; your financial data stays on your machine", url: "https://github.com/nitsuah/fire", liveUrl: "https://lifefire.netlify.app/", pageUrl: "https://nitsuah.github.io/fire/", tags: ["Go", "PostgreSQL", "MCP"] },
+      { name: "games", desc: "Browser arcade — seven classic games (asteroids, tanks, breakout, snake, and more) rebuilt in Next.js and Three.js", url: "https://github.com/nitsuah/games", liveUrl: "https://nitsuah-arcade.netlify.app", tags: ["Next.js", "Three.js", "Games"] },
+      { name: "kryptos", desc: "An ongoing attempt at the CIA's unsolved Kryptos K4 cipher — classical cryptanalysis, automated hypothesis testing, reproducible results", url: "https://github.com/nitsuah/kryptos", liveUrl: "https://kryptos-k4.netlify.app/", tags: ["Cryptanalysis", "Python", "Research"] },
+      { name: "motor-pool", desc: "Local-first console for chatting with and comparing multiple LLMs (Ollama, Docker Model Runners) — safety rails and full request tracing, nothing leaves your machine", url: "https://github.com/nitsuah/motor-pool", pageUrl: "https://nitsuah.github.io/motor-pool/", tags: ["Ollama", "React", "TypeScript"] },
+      { name: "nitsuah-io", desc: "Personal site and project showcase", url: "https://github.com/Nitsuah-Labs/nitsuah-io", liveUrl: "https://nitsuah.io", tags: ["Next.js", "Tailwind", "TypeScript"] },
+      { name: "stash", desc: "Public Obsidian vault and agent automation system — scheduled routines, repo mirrors, linked project notes, audits, and CI-backed knowledge management", url: "https://github.com/nitsuah/stash", pageUrl: "https://nitsuah.github.io/stash/", tags: ["Obsidian", "Automation", "TypeScript"] },
+      { name: "vigil", desc: "Points at a GitHub repo, audits its docs, CI, tests, and security, and opens PRs with the fixes", url: "https://github.com/nitsuah/vigil", liveUrl: "https://gh-vigil.netlify.app/", pageUrl: "https://nitsuah.github.io/vigil/", tags: ["Security", "GitHub", "Automation"] },
+      { name: "vhs", desc: "Scan tapes with barcode or AI vision, track condition and value, and manage your collection with optional serverless deployment", url: "https://github.com/nitsuah/vhs", liveUrl: "https://vhsbox.netlify.app/", pageUrl: "https://nitsuah.github.io/vhs/", tags: ["AI Vision", "Next.js", "Collection"] }
     ];
 
     // Render projects
@@ -1056,15 +1075,24 @@ One change in the central repo updates CI everywhere.`
       card.target = '_blank';
       card.rel = 'noopener';
       card.className = 'card';
-      card.innerHTML = \`
+      let linksHtml = '<div class="card-links">';
+      if (p.liveUrl) {
+        linksHtml += `<a href="${p.liveUrl}" class="card-link card-link-live" target="_blank" rel="noopener">▶ LIVE</a>`;
+      }
+      if (p.pageUrl) {
+        linksHtml += `<a href="${p.pageUrl}" class="card-link card-link-page" target="_blank" rel="noopener">▣ PAGE</a>`;
+      }
+      linksHtml += '</div>';
+      card.innerHTML = `
         <div class="card-header">
-          <h3 class="card-title">\${p.name}</h3>
+          <h3 class="card-title">${p.name}</h3>
         </div>
-        <p style="color: var(--fg-muted); font-size: 0.875rem; margin-bottom: 16px; line-height: 1.6;">\${p.desc}</p>
+        <p style="color: var(--fg-muted); font-size: 0.875rem; margin-bottom: 16px; line-height: 1.6;">${p.desc}</p>
+        ${linksHtml}
         <div class="card-tags">
-          \${p.tags.map(t => \`<span class="tag">\${t}</span>\`).join('')}
+          ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
         </div>
-      \`;
+      `;
       projectsGrid.appendChild(card);
     });
 
@@ -1072,19 +1100,19 @@ One change in the central repo updates CI everywhere.`
     const latestPosts = document.getElementById('latest-posts');
     blogPosts.filter(p => p.published).slice(0, 3).forEach(post => {
       const item = document.createElement('a');
-      item.href = \`/blog/\${post.slug}/\`;
+      item.href = `/blog/${post.slug}/`;
       item.className = 'blog-item';
-      item.innerHTML = \`
-        <time class="blog-date" datetime="\${post.date}">\${post.date}</time>
+      item.innerHTML = `
+        <time class="blog-date" datetime="${post.date}">${post.date}</time>
         <div class="blog-content">
-          <h3>\${post.title}</h3>
-          <p class="blog-excerpt">\${post.excerpt}</p>
+          <h3>${post.title}</h3>
+          <p class="blog-excerpt">${post.excerpt}</p>
           <div class="blog-tags">
-            <span class="blog-category">\${post.category}</span>
-            \${post.tags.slice(0, 2).map(t => \`<span class="blog-category">\${t}</span>\`).join('')}
+            <span class="blog-category">${post.category}</span>
+            ${post.tags.slice(0, 2).map(t => `<span class="blog-category">${t}</span>`).join('')}
           </div>
         </div>
-      \`;
+      `;
       latestPosts.appendChild(item);
     });
   </script>
