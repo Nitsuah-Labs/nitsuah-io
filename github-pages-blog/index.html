@@ -457,7 +457,7 @@
       <a href="/" class="logo">nitsuah<span>.</span></a>
       <nav>
         <a href="/" class="nav-link active">Profile</a>
-        <a href="/blog/" class="nav-link">Blogs</a>
+        <a href="./blog/" class="nav-link">Blogs</a>
         <a href="https://github.com/nitsuah" class="nav-link" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -470,7 +470,7 @@
       <p class="subtitle">I build tools that eliminate toil, connect systems, and give people leverage — enterprise integrations, developer productivity tooling, AI/agent systems, plus a handful of projects that exist because they're interesting.</p>
       <div class="hero-links">
         <a href="https://nitsuah.io" class="btn btn-primary" target="_blank" rel="noopener">Portfolio →</a>
-        <a href="/blog/" class="btn btn-secondary">Read Blogs</a>
+        <a href="./blog/" class="btn btn-secondary">Read Blogs</a>
         <a href="https://gist.github.com/nitsuah/086f7d1de6a5fd534ac4ccce226ac1d2" class="btn btn-secondary" target="_blank" rel="noopener">resume.json</a>
       </div>
     </section>
@@ -486,7 +486,7 @@
     <section>
       <div class="section-header">
         <h2 class="section-title">Latest Posts</h2>
-        <a href="/blog/" class="section-link">View all →</a>
+        <a href="./blog/" class="section-link">View all →</a>
       </div>
       <div class="blog-list" id="latest-posts"></div>
     </section>
@@ -1100,7 +1100,7 @@ One change in the central repo updates CI everywhere.`
     const latestPosts = document.getElementById('latest-posts');
     blogPosts.filter(p => p.published).slice(0, 3).forEach(post => {
       const item = document.createElement('a');
-      item.href = `/blog/${post.slug}/`;
+      item.href = `./blog/${post.slug}/`;
       item.className = 'blog-item';
       item.innerHTML = `
         <time class="blog-date" datetime="${post.date}">${post.date}</time>
