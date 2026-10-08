@@ -1,0 +1,812 @@
+{
+  "product": "nitsuah-io",
+  "live": "https://nitsuah.io/",
+  "page": "https://nitsuah-labs.github.io/nitsuah-io/",
+  "pagesDir": "github-pages-blog",
+  "features": [
+    {
+      "id": "project-gallery",
+      "title": "Project Gallery",
+      "category": "Portfolio & Showcase",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "interactive-3d-scenes",
+      "title": "Interactive 3D Scenes",
+      "category": "Portfolio & Showcase",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "professional-resume",
+      "title": "Professional Resume",
+      "category": "Portfolio & Showcase",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "about-page",
+      "title": "About Page",
+      "category": "Portfolio & Showcase",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "blog-platform",
+      "title": "Blog Platform",
+      "category": "Portfolio & Showcase",
+      "screenshots": [],
+      "spots": [
+        "brag-7s",
+        "brag-pages-7s"
+      ]
+    },
+    {
+      "id": "wallet-connection",
+      "title": "Wallet Connection",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "multi-chain-support",
+      "title": "Multi-Chain Support",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "network-switching",
+      "title": "Network Switching",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "ens-resolution",
+      "title": "ENS Resolution",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "smart-contract-interactions",
+      "title": "Smart Contract Interactions",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "balance-display",
+      "title": "Balance Display",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "wallet-dashboard",
+      "title": "Wallet Dashboard",
+      "category": "Web3 Integration",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "domain-registration",
+      "title": "Domain Registration",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "nft-minting",
+      "title": "NFT Minting",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "token-staking",
+      "title": "Token Staking",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "dao-governance",
+      "title": "DAO Governance",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "ai-integration",
+      "title": "AI Integration",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "domain-lookup",
+      "title": "Domain Lookup",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "token-dashboard",
+      "title": "Token Dashboard",
+      "category": "Labs Section",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "loading-states",
+      "title": "Loading States",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "toast-notifications",
+      "title": "Toast Notifications",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "copy-to-clipboard",
+      "title": "Copy to Clipboard",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "wallet-install-prompts",
+      "title": "Wallet Install Prompts",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "search-functionality",
+      "title": "Search Functionality",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "responsive-design",
+      "title": "Responsive Design",
+      "category": "User Experience",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "skip-navigation",
+      "title": "Skip Navigation",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "semantic-html",
+      "title": "Semantic HTML",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "keyboard-navigation",
+      "title": "Keyboard Navigation",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "screen-reader-support",
+      "title": "Screen Reader Support",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "color-contrast",
+      "title": "Color Contrast",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "focus-management",
+      "title": "Focus Management",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "alt-text",
+      "title": "Alt Text",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "automated-audit-2026-09-28",
+      "title": "Automated audit (2026-09-28)",
+      "category": "Accessibility",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "featured-projects-landing-page",
+      "title": "Featured Projects Landing Page",
+      "category": "Landing Page",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "spline-3d-scene-on-3d-route",
+      "title": "Spline 3D Scene on `/3d` Route",
+      "category": "Landing Page",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "theme-toggle",
+      "title": "Theme Toggle",
+      "category": "Dark Mode & Theming",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "localstorage-persistence",
+      "title": "LocalStorage Persistence",
+      "category": "Dark Mode & Theming",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "css-custom-properties",
+      "title": "CSS Custom Properties",
+      "category": "Dark Mode & Theming",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "ssr-safe-implementation",
+      "title": "SSR-Safe Implementation",
+      "category": "Dark Mode & Theming",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "theme-context",
+      "title": "Theme Context",
+      "category": "Dark Mode & Theming",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "unit-tests",
+      "title": "Unit Tests",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "e2e-tests",
+      "title": "E2E Tests",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "accessibility-tests",
+      "title": "Accessibility Tests",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "visual-regression",
+      "title": "Visual Regression",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "docker-testing",
+      "title": "Docker Testing",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "pre-commit-hooks",
+      "title": "Pre-commit Hooks",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "ci-pipeline",
+      "title": "CI Pipeline",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "next-js-app-router",
+      "title": "Next.js App Router",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "image-optimization",
+      "title": "Image Optimization",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "bundle-analysis",
+      "title": "Bundle Analysis",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "cdn-delivery",
+      "title": "CDN Delivery",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "lazy-loading",
+      "title": "Lazy Loading",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "build-performance",
+      "title": "Build Performance",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "font-optimization",
+      "title": "Font Optimization",
+      "category": "Performance",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "ai-chat-widget",
+      "title": "AI Chat Widget",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "on-chain-resume",
+      "title": "On-chain Resume",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "bento-grid-layout",
+      "title": "Bento Grid Layout",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "live-cross-repo-widgets",
+      "title": "Live Cross-Repo Widgets",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "pwa-offline-support",
+      "title": "PWA & Offline Support",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "showcase-page",
+      "title": "Showcase Page",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "typescript",
+      "title": "TypeScript",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "eslint-prettier",
+      "title": "ESLint + Prettier",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "wagmi-cli",
+      "title": "Wagmi CLI",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "path-aliases",
+      "title": "Path Aliases",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "git-hooks",
+      "title": "Git Hooks",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "environment-config",
+      "title": "Environment Config",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "hot-reload",
+      "title": "Hot Reload",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "documentation",
+      "title": "Documentation",
+      "category": "AI/ML & Market Trends",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "netlify-hosting",
+      "title": "Netlify Hosting",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "deploy-previews",
+      "title": "Deploy Previews",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "branch-deploys",
+      "title": "Branch Deploys",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "github-actions",
+      "title": "GitHub Actions",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "environment-variables",
+      "title": "Environment Variables",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "build-optimization",
+      "title": "Build Optimization",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "status-badges",
+      "title": "Status Badges",
+      "category": "Deployment & CI/CD",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "dependency-audits",
+      "title": "Dependency Audits",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "content-security-policy",
+      "title": "Content Security Policy",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "https-enforcement",
+      "title": "HTTPS Enforcement",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "environment-isolation",
+      "title": "Environment Isolation",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "rate-limiting",
+      "title": "Rate Limiting",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "secure-headers",
+      "title": "Secure Headers",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "wallet-security",
+      "title": "Wallet Security",
+      "category": "Security",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "portfolio-chat-widget",
+      "title": "Portfolio Chat Widget",
+      "category": "AI Integration (bb-mcp)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "streaming-responses",
+      "title": "Streaming Responses",
+      "category": "AI Integration (bb-mcp)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "server-side-api-key",
+      "title": "Server-Side API Key",
+      "category": "AI Integration (bb-mcp)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "context-injection",
+      "title": "Context Injection",
+      "category": "AI Integration (bb-mcp)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "graceful-degradation",
+      "title": "Graceful Degradation",
+      "category": "AI Integration (bb-mcp)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "page-view-events",
+      "title": "Page View Events",
+      "category": "Analytics (skyview)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "cta-click-tracking",
+      "title": "CTA Click Tracking",
+      "category": "Analytics (skyview)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "skyview-dashboard-embed",
+      "title": "Skyview Dashboard Embed",
+      "category": "Analytics (skyview)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "gdpr-safe-by-default",
+      "title": "GDPR-Safe by Default",
+      "category": "Analytics (skyview)",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "design-system-refresh-bento-grid-layout",
+      "title": "Bento Grid Layout",
+      "category": "Design System Refresh",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "fluid-typography",
+      "title": "Fluid Typography",
+      "category": "Design System Refresh",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "micro-interactions",
+      "title": "Micro-Interactions",
+      "category": "Design System Refresh",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "glassmorphism-polish",
+      "title": "Glassmorphism Polish",
+      "category": "Design System Refresh",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "dark-first",
+      "title": "Dark-First",
+      "category": "Design System Refresh",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "web-app-manifest",
+      "title": "Web App Manifest",
+      "category": "Progressive Web App",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "service-worker",
+      "title": "Service Worker",
+      "category": "Progressive Web App",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "offline-fallback",
+      "title": "Offline Fallback",
+      "category": "Progressive Web App",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "install-prompt",
+      "title": "Install Prompt",
+      "category": "Progressive Web App",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "kryptos-feed",
+      "title": "kryptos Feed",
+      "category": "Cross-Repo Integrations",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "farm-staking-demo",
+      "title": "farm Staking Demo",
+      "category": "Cross-Repo Integrations",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "agent-board-showcase",
+      "title": "agent-board Showcase",
+      "category": "Cross-Repo Integrations",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "darkmoon-tokens",
+      "title": "darkmoon Tokens",
+      "category": "Cross-Repo Integrations",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "eas-attestations",
+      "title": "EAS Attestations",
+      "category": "On-Chain Resume",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "resume-onchain-route",
+      "title": "`/resume/onchain` Route",
+      "category": "On-Chain Resume",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "wallet-gated-view",
+      "title": "Wallet-Gated View",
+      "category": "On-Chain Resume",
+      "screenshots": [],
+      "spots": []
+    },
+    {
+      "id": "export",
+      "title": "Export",
+      "category": "On-Chain Resume",
+      "screenshots": [],
+      "spots": []
+    }
+  ],
+  "spots": [
+    {
+      "id": "brag-7s",
+      "seconds": 7.1,
+      "format": "landscape",
+      "tool": "brag (one-off, source not kept)",
+      "features": [
+        "blog-platform"
+      ],
+      "published": "public/brag/brag.mp4",
+      "rendered": "2026-10-02"
+    },
+    {
+      "id": "brag-pages-7s",
+      "seconds": 6.6,
+      "format": "landscape",
+      "tool": "brag (one-off, source not kept)",
+      "features": [
+        "blog-platform"
+      ],
+      "published": "public/brag/brag-github-pages.mp4",
+      "rendered": "2026-10-02"
+    }
+  ],
+  "reels": [
+    {
+      "id": "hero",
+      "spots": [
+        "brag-7s"
+      ],
+      "published": "public/brag/brag.mp4"
+    }
+  ],
+  "brand": {
+    "source": null,
+    "derived": [],
+    "manual": []
+  }
+}
