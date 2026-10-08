@@ -40,9 +40,7 @@
     "commit:quick": "git commit --no-verify",
     "commit:safe": "npm run typecheck && npm run format && git add -A && git commit",
     "clean": "rm -rf .next out node_modules/.cache",
-    "analyze": "cross-env ANALYZE=true npm run build",
-    "postinstall": "node -e \"const { spawnSync } = require('node:child_process'); try { require.resolve('patch-package'); } catch { console.log('patch-package not installed; skipping patch application'); process.exit(0); } const result = spawnSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['--no', 'patch-package'], { stdio: 'inherit' }); process.exit(result.status ?? 1);\"",
-    "prepare": "husky"
+    "analyze": "cross-env ANALYZE=true npm run build"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -130,20 +128,24 @@
     "js-yaml": "4.3.2",
     "nanoid": ">=3.3.17",
     "glob": "13.0.6",
-    "axios": "1.18.1",
+    "axios": "1.20.0",
+    "source-map-js": "1.2.2",
     "@hono/node-server": "2.0.12",
     "protobufjs": "7.6.5",
-    "brace-expansion": "5.0.9",
+    "brace-expansion": "5.0.12",
     "sharp": "$sharp",
     "zustand": "5.0.15",
     "eslint-plugin-import": {
-      "brace-expansion": "1.1.18"
+      "brace-expansion": "1.1.21"
     },
     "eslint-plugin-jsx-a11y": {
-      "brace-expansion": "1.1.18"
+      "brace-expansion": "1.1.21"
     },
     "eslint-plugin-react": {
-      "brace-expansion": "1.1.18"
+      "brace-expansion": "1.1.21"
+    },
+    "minimatch@3.1.5": {
+      "brace-expansion": "1.1.21"
     }
   }
 }
