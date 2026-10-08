@@ -1,0 +1,1 @@
+npm error A complete log of this run can be found in: C:\Users\ajhar\AppData\Local\npm-cache\_logs\2026-10-08T08_22_01_020Z-debug-0.log
