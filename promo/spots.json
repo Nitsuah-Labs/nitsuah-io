@@ -37,7 +37,10 @@
       "title": "Blog Platform",
       "category": "Portfolio & Showcase",
       "screenshots": [],
-      "spots": []
+      "spots": [
+        "brag-7s",
+        "brag-pages-7s"
+      ]
     },
     {
       "id": "wallet-connection",
@@ -774,7 +777,9 @@
       "seconds": 7.1,
       "format": "landscape",
       "tool": "brag (one-off, source not kept)",
-      "features": [],
+      "features": [
+        "blog-platform"
+      ],
       "published": "public/brag/brag.mp4",
       "rendered": "2026-10-02"
     },
@@ -783,7 +788,9 @@
       "seconds": 6.6,
       "format": "landscape",
       "tool": "brag (one-off, source not kept)",
-      "features": [],
+      "features": [
+        "blog-platform"
+      ],
       "published": "public/brag/brag-github-pages.mp4",
       "rendered": "2026-10-02"
     }
