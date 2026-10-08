@@ -81,7 +81,7 @@
     "react-dom": "^19.3.0",
     "react-hot-toast": "^2.6.1",
     "react-markdown": "^10.1.0",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "utf-8-validate": "^6.0.6",
     "viem": "^2.56.9",
     "wagmi": "^3.7.7"
