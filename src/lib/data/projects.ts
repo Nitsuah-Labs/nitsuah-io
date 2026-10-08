@@ -27,7 +27,7 @@ const projects: Project[] = [
     description:
       "AI-powered GitHub dashboard for repo health, automated documentation & best practices, and cross-repo execution visibility. Multi-provider AI with BYOK.",
     github: "https://github.com/nitsuah/overseer",
-    demo: "https://ghoverseer.netlify.app",
+    demo: "https://gh-vigil.netlify.app",
     highlight:
       "Health scoring, AI enrichment, multi-provider failover, PMO visibility",
     tags: ["typescript", "nextjs", "ai", "devops"],
