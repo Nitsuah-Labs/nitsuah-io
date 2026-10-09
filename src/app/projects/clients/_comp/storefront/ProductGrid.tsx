@@ -61,9 +61,17 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
               SALE
             </div>
           )}
-          <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
-            {product.img}
-          </div>
+          <img
+            src={product.img}
+            alt={product.name}
+            style={{
+              width: "100%",
+              height: "120px",
+              objectFit: "cover",
+              borderRadius: "4px",
+              marginBottom: "0.5rem",
+            }}
+          />
           <div
             style={{
               fontWeight: "600",

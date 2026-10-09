@@ -42,9 +42,17 @@ export const BundleGrid: React.FC<BundleGridProps> = ({
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          <div style={{ fontSize: "3rem", textAlign: "center" }}>
-            {bundle.img}
-          </div>
+          <img
+            src={bundle.img}
+            alt={bundle.name}
+            style={{
+              width: "100%",
+              height: "140px",
+              objectFit: "cover",
+              borderRadius: "4px",
+              marginBottom: "0.5rem",
+            }}
+          />
           <h3
             style={{
               fontWeight: "600",

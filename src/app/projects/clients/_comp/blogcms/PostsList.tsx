@@ -106,6 +106,17 @@ export const PostsList: React.FC<PostsListProps> = ({
                 border: "2px solid rgba(139, 92, 246, 0.2)",
               }}
             >
+              <img
+                src={post.image}
+                alt={post.title}
+                style={{
+                  width: "100%",
+                  height: "180px",
+                  objectFit: "cover",
+                  borderRadius: "4px",
+                  marginBottom: "1rem",
+                }}
+              />
               <div style={{ marginBottom: "1rem" }}>
                 <div
                   style={{

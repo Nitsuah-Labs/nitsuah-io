@@ -1,5 +1,6 @@
 /**
  * Mock data for Blog CMS Demo
+ * Using placeholder images from unsplash - replace with actual blog header images
  */
 
 export interface BlogPost {
@@ -11,6 +12,7 @@ export interface BlogPost {
   date: string;
   category: string;
   status: "published" | "draft";
+  image: string;
 }
 
 export const mockBlogPosts: BlogPost[] = [
@@ -25,6 +27,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-15",
     category: "Web Development",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop",
   },
   {
     id: 2,
@@ -36,6 +40,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-10",
     category: "Backend",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1200&h=600&fit=crop",
   },
   {
     id: 3,
@@ -48,6 +54,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-05",
     category: "Frontend",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=600&fit=crop",
   },
   {
     id: 4,
@@ -59,6 +67,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-20",
     category: "Programming",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&h=600&fit=crop",
   },
   {
     id: 5,
@@ -70,6 +80,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-18",
     category: "Backend",
     status: "draft",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
   },
   {
     id: 6,
@@ -81,6 +93,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-22",
     category: "Web Development",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop",
   },
   {
     id: 7,
@@ -92,6 +106,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-12",
     category: "Security",
     status: "published",
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&h=600&fit=crop",
   },
   {
     id: 8,
@@ -103,6 +119,8 @@ export const mockBlogPosts: BlogPost[] = [
     date: "2024-01-08",
     category: "Architecture",
     status: "draft",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop",
   },
 ];
 
