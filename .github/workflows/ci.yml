@@ -68,9 +68,10 @@ jobs:
       - name: Run validation (typecheck + format)
         run: npm run validate
 
-      - name: Run ESLint
-        run: npm run lint
-        continue-on-error: true
+      # ESLint is skipped, not silently failing: eslint-config-next / typescript-eslint
+      # don't support TypeScript 7 yet. Re-enable as a required step (docs/TASKS.md, P2).
+      - name: ESLint (skipped until TS 7 support upstream)
+        run: echo "::warning title=ESLint skipped::eslint-config-next/typescript-eslint don't support TypeScript 7 yet; see docs/TASKS.md"
 
       - name: Run Jest tests
         run: npm test
