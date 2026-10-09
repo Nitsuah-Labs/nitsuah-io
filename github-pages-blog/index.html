@@ -460,7 +460,7 @@
 <body>
   <header>
     <div class="container header-inner">
-      <a href="/" class="logo">nitsuah<span>.</span></a>
+      <a href="/nitsuah-io" class="logo">nitsuah<span>.</span></a>
       <nav>
         <a href="/" class="nav-link active">Profile</a>
         <a href="./blog/" class="nav-link">Blogs</a>
@@ -481,23 +481,161 @@
       </div>
     </section>
 
-    <section>
+    <section class="featured-projects">
       <div class="section-header">
-        <h2 class="section-title">Watch</h2>
-        <a href="https://nitsuah.io/projects/blogs" class="section-link" target="_blank" rel="noopener">See it live →</a>
+        <h2 class="section-title">Featured Projects</h2>
+        <a href="https://github.com/nitsuah?tab=repositories" class="section-link" target="_blank" rel="noopener">View all →</a>
       </div>
-      <!-- Served by nitsuah.io (public/brag/), not copied into this Pages folder. -->
-      <div class="watch-grid">
-        <figure>
-          <video src="https://nitsuah.io/brag/brag.mp4" poster="https://nitsuah.io/brag/brag.jpg" controls muted playsinline preload="metadata" aria-label="7-second video: blog posts rendering 16-bit style on nitsuah.io"></video>
-          <figcaption>Blogs on nitsuah.io, rendered 16-bit style</figcaption>
-        </figure>
-        <figure>
-          <video src="https://nitsuah.io/brag/brag-github-pages.mp4" poster="https://nitsuah.io/brag/brag-github-pages.jpg" controls muted playsinline preload="metadata" aria-label="7-second video: the same posts on this GitHub Pages site, kept in lockstep"></video>
-          <figcaption>The same posts here on GitHub Pages, in lockstep</figcaption>
-        </figure>
+      <div class="carousel" role="region" aria-label="Featured project videos">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Project cards will be rendered here by JS -->
+        </div>
+        <button class="carousel-btn carousel-prev" aria-label="Previous project" id="carousel-prev">‹</button>
+        <button class="carousel-btn carousel-next" aria-label="Next project" id="carousel-next">›</button>
+        <div class="carousel-indicators" id="carousel-indicators" aria-label="Project navigation"></div>
       </div>
     </section>
+
+    <style>
+      .featured-projects { margin-bottom: 60px; }
+
+      .carousel { position: relative; max-width: 1200px; margin: 0 auto; }
+
+      .carousel-track {
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 16px 60px 24px;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .carousel-track::-webkit-scrollbar { height: 8px; }
+      .carousel-track::-webkit-scrollbar-track { background: var(--bg-elevated); border-radius: 4px; }
+      .carousel-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+      .carousel-track::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+      .project-card {
+        flex: 0 0 calc(33.333% - 16px);
+        min-width: 280px;
+        max-width: 360px;
+        scroll-snap-align: start;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .project-video {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      .project-video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .project-video .play-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+      }
+
+      .project-card:hover .play-overlay { opacity: 1; }
+
+      .play-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--bg);
+        font-size: 24px;
+        padding-left: 4px;
+      }
+
+      .project-info { padding: 16px; }
+
+      .project-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--fg); }
+      .project-desc { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+      .project-tag { font-size: 0.7rem; padding: 3px 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+      .project-links { display: flex; gap: 8px; }
+      .project-link { flex: 1; text-align: center; padding: 8px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 6px; text-decoration: none; transition: all 0.2s ease; }
+      .project-link.primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
+      .project-link.primary:hover { filter: brightness(1.1); }
+      .project-link.secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+      .project-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        color: var(--fg);
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        z-index: 10;
+        opacity: 0.7;
+      }
+
+      .carousel-btn:hover { opacity: 1; background: var(--accent); border-color: var(--accent); color: var(--bg); }
+      .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+      .carousel-prev { left: 0; }
+      .carousel-next { right: 0; }
+
+      .carousel-indicators { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+      .carousel-indicator { width: 10px; height: 10px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: all 0.2s ease; }
+      .carousel-indicator.active { background: var(--accent); transform: scale(1.2); }
+      .carousel-indicator:hover { background: var(--accent); }
+
+      @media (max-width: 1024px) {
+        .project-card { flex: 0 0 calc(50% - 12px); }
+        .carousel-track { padding: 16px 50px 24px; }
+      }
+
+      @media (max-width: 640px) {
+        .project-card { flex: 0 0 85%; min-width: 260px; }
+        .carousel-track { padding: 16px 16px 24px; scroll-snap-align: center; }
+        .carousel-btn { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .carousel-track { scroll-behavior: auto; }
+        .project-card { transition: none; }
+      }
+    </style>
 
     <section>
       <div class="section-header">
@@ -1139,6 +1277,105 @@ One change in the central repo updates CI everywhere.`
       `;
       latestPosts.appendChild(item);
     });
+
+    // Featured projects carousel data - pulls from external repos' brag/promo outputs
+    const featuredProjects = [
+      { name: "darkmoon", desc: "Solo browser combat game — React 19, Three.js, Socket.io. Multiplayer and mobile in progress", repo: "https://github.com/nitsuah/darkmoon", liveUrl: "https://darkmoon.dev", videoUrl: "https://raw.githubusercontent.com/nitsuah/darkmoon/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/darkmoon/main/public/brag/brag.jpg", tags: ["React 19", "Three.js", "Socket.io"] },
+      { name: "vigil", desc: "Points at a GitHub repo, audits its docs, CI, tests, and security, and opens PRs with the fixes", repo: "https://github.com/nitsuah/vigil", liveUrl: "https://gh-vigil.netlify.app/", videoUrl: "https://raw.githubusercontent.com/nitsuah/vigil/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/vigil/main/public/brag/brag.jpg", tags: ["Security", "GitHub", "Automation"] },
+      { name: "fire", desc: "Self-hosted FIRE tracker — net worth, projections, and a read-only MCP server for LLM clients; your financial data stays on your machine", repo: "https://github.com/nitsuah/fire", liveUrl: "https://lifefire.netlify.app/", videoUrl: "https://raw.githubusercontent.com/nitsuah/fire/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/fire/main/public/brag/brag.jpg", tags: ["Go", "PostgreSQL", "MCP"] },
+      { name: "kryptos", desc: "An ongoing attempt at the CIA's unsolved Kryptos K4 cipher — classical cryptanalysis, automated hypothesis testing, reproducible results", repo: "https://github.com/nitsuah/kryptos", liveUrl: "https://kryptos-k4.netlify.app/", videoUrl: "https://raw.githubusercontent.com/nitsuah/kryptos/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/kryptos/main/public/brag/brag.jpg", tags: ["Cryptanalysis", "Python", "Research"] },
+      { name: "games", desc: "Browser arcade — seven classic games (asteroids, tanks, breakout, snake, and more) rebuilt in Next.js and Three.js", repo: "https://github.com/nitsuah/games", liveUrl: "https://nitsuah-arcade.netlify.app", videoUrl: "https://raw.githubusercontent.com/nitsuah/games/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/games/main/public/brag/brag.jpg", tags: ["Next.js", "Three.js", "Games"] },
+      { name: "vhs", desc: "Scan tapes with barcode or AI vision, track condition and value, and manage your collection with optional serverless deployment", repo: "https://github.com/nitsuah/vhs", liveUrl: "https://vhsbox.netlify.app/", videoUrl: "https://raw.githubusercontent.com/nitsuah/vhs/main/public/brag/brag.mp4", posterUrl: "https://raw.githubusercontent.com/nitsuah/vhs/main/public/brag/brag.jpg", tags: ["AI Vision", "Next.js", "Collection"] }
+    ];
+
+    // Render carousel
+    const carouselTrack = document.getElementById('carousel-track');
+    const carouselIndicators = document.getElementById('carousel-indicators');
+    let currentIndex = 0;
+
+    featuredProjects.forEach((p, i) => {
+      const card = document.createElement('article');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <div class="project-video">
+          <video src="${p.videoUrl}" poster="${p.posterUrl}" muted playsinline preload="metadata" aria-label="Video demo of ${p.name}"></video>
+          <div class="play-overlay"><div class="play-icon">▶</div></div>
+        </div>
+        <div class="project-info">
+          <h3 class="project-name">${p.name}</h3>
+          <p class="project-desc">${p.desc}</p>
+          <div class="project-tags">
+            ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
+          </div>
+          <div class="project-links">
+            <a href="${p.repo}" target="_blank" rel="noopener" class="project-link secondary">Code</a>
+            <a href="${p.liveUrl}" target="_blank" rel="noopener" class="project-link primary">Live Demo</a>
+          </div>
+        </div>
+      `;
+      carouselTrack.appendChild(card);
+
+      // Create indicator
+      const indicator = document.createElement('button');
+      indicator.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
+      indicator.setAttribute('aria-label', 'Go to ' + p.name);
+      indicator.addEventListener('click', () => goToSlide(i));
+      carouselIndicators.appendChild(indicator);
+    });
+
+    // Carousel navigation
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const indicators = carouselIndicators.querySelectorAll('.carousel-indicator');
+    const cardWidth = 344; // card width + gap
+
+    function updateCarousel() {
+      carouselTrack.scrollTo({ left: currentIndex * cardWidth, behavior: 'smooth' });
+      indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentIndex));
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === featuredProjects.length - 1;
+    }
+
+    function goToSlide(index) {
+      currentIndex = Math.max(0, Math.min(index, featuredProjects.length - 1));
+      updateCarousel();
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    // Keyboard navigation
+    carouselTrack.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    carouselTrack.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carouselTrack.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        goToSlide(currentIndex + (diff > 0 ? 1 : -1));
+      }
+    }, { passive: true });
+
+    // Auto-update indicators on scroll (for manual scroll)
+    let scrollTimeout;
+    carouselTrack.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollLeft = carouselTrack.scrollLeft;
+        const newIndex = Math.round(scrollLeft / cardWidth);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < featuredProjects.length) {
+          currentIndex = newIndex;
+          updateCarousel();
+        }
+      }, 100);
+    }, { passive: true });
+
+    // Initialize
+    updateCarousel();
   </script>
 </body>
 </html>
