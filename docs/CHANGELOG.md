@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Docker Images` workflow builds `config/Dockerfile.unit` and `config/Dockerfile.test` and runs Jest / Playwright inside them whenever `.nvmrc`, a Dockerfile or a compose file changes. CI Fast uses setup-node and never exercised these images.
 
 ### Fixed
+- `npm run lint` failed on ESLint 10 (no `eslint.config.*`; only the legacy `.eslintrc.json`). Migrated to a flat `eslint.config.mjs` with the same rules and ignores (Next core-web-vitals, typescript-eslint recommended, Prettier). `typescript` now aliases `@typescript/typescript6` because typescript-eslint does not support TS 7 (`tsc` stays 7.x via `@typescript/native`); the React plugin version is pinned because eslint-plugin-react 7.37.5 auto-detect breaks on ESLint 10. Lint now runs and reports existing source issues; CI keeps `continue-on-error` on the ESLint step until they are cleaned up.
 - Every page declared `<link rel="canonical" href="https://nitsuah.io">` (a root-layout `alternates.canonical` inherited by all routes), telling search engines each page, including every blog post, was a duplicate of the homepage.
 - Site-wide `og:image`/`twitter:image` pointed at `/social-preview.svg`, which doesn't exist (404), so shared links had no preview image.
 - Netlify CSP blocked Reown/WalletConnect AppKit's `api.web3modal.org` on every page; `connect-src` now allows `https://*.web3modal.org`.

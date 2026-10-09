@@ -12,8 +12,8 @@
     "build:skip-wagmi": "next build",
     "build:ci": "npm run build:skip-wagmi",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "wagmi": "node scripts/wagmi-generate.js",
     "typecheck": "tsc --project config/tsconfig.json --noEmit",
     "format": "prettier --config config/prettier.config.json --ignore-path config/.prettierignore --write \"src/**/*.{js,jsx,ts,tsx,json,css}\"",
@@ -97,6 +97,7 @@
     "@types/react-dom": "^19.3.0",
     "@typescript-eslint/eslint-plugin": "^8.71.0",
     "@typescript-eslint/parser": "^8.71.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@wagmi/cli": "^2.10.0",
     "babel-jest": "^30.5.2",
     "baseline-browser-mapping": "^2.11.27",
@@ -115,7 +116,7 @@
     "patch-package": "^8.0.0",
     "prettier": "^3.9.9",
     "ts-node": "^10.9.2",
-    "typescript": "^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.71.0"
   },
   "overrides": {
