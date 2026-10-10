@@ -31,16 +31,15 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.3)";
       }}
     >
-      <div
+      <img
+        src={property.image}
+        alt={property.title}
         style={{
-          fontSize: "6rem",
-          textAlign: "center",
-          padding: "2rem 1rem",
-          background: "rgba(16, 185, 129, 0.05)",
+          width: "100%",
+          height: "180px",
+          objectFit: "cover",
         }}
-      >
-        {property.icon}
-      </div>
+      />
       <div style={{ padding: "1rem" }}>
         <div
           style={{

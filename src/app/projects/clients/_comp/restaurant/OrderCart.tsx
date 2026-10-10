@@ -83,7 +83,19 @@ export const OrderCart: React.FC<Props> = ({
                   >
                     <div>
                       <div style={{ fontWeight: "700", color: "#ec4899" }}>
-                        {item.emoji} {item.name}
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{
+                            width: "24px",
+                            height: "24px",
+                            objectFit: "cover",
+                            borderRadius: "4px",
+                            marginRight: "0.5rem",
+                            verticalAlign: "middle",
+                          }}
+                        />
+                        {item.name}
                       </div>
                       <div
                         style={{

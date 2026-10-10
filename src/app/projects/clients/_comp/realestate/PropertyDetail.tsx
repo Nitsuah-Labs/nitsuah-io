@@ -37,16 +37,15 @@ export const PropertyDetail: React.FC<PropertyDetailProps> = ({
           overflow: "hidden",
         }}
       >
-        <div
+        <img
+          src={property.image}
+          alt={property.title}
           style={{
-            fontSize: "10rem",
-            textAlign: "center",
-            padding: "3rem",
-            background: "rgba(16, 185, 129, 0.05)",
+            width: "100%",
+            height: "300px",
+            objectFit: "cover",
           }}
-        >
-          {property.icon}
-        </div>
+        />
         <div style={{ padding: "2rem" }}>
           <div
             style={{

@@ -44,7 +44,16 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "8rem" }}>{product.img}</div>
+          <img
+            src={product.img}
+            alt={product.name}
+            style={{
+              width: "100%",
+              maxWidth: "400px",
+              height: "auto",
+              borderRadius: "8px",
+            }}
+          />
         </div>
 
         <div>
