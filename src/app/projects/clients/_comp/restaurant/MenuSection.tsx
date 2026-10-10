@@ -80,6 +80,17 @@ export const MenuSection: React.FC<Props> = ({
                     border: "2px solid rgba(236, 72, 153, 0.2)",
                   }}
                 >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{
+                      width: "100%",
+                      height: "160px",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                      marginBottom: "0.75rem",
+                    }}
+                  />
                   <div
                     style={{
                       display: "flex",
@@ -89,25 +100,16 @@ export const MenuSection: React.FC<Props> = ({
                     }}
                   >
                     <div style={{ flex: 1 }}>
-                      <div
+                      <h4
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.5rem",
+                          fontWeight: "700",
+                          color: "#ec4899",
+                          fontSize: "1.1rem",
                           marginBottom: "0.25rem",
                         }}
                       >
-                        <span style={{ fontSize: "1.5rem" }}>{item.emoji}</span>
-                        <h4
-                          style={{
-                            fontWeight: "700",
-                            color: "#ec4899",
-                            fontSize: "1.1rem",
-                          }}
-                        >
-                          {item.name}
-                        </h4>
-                      </div>
+                        {item.name}
+                      </h4>
                       <p
                         style={{
                           color: "rgba(255,255,255,0.7)",

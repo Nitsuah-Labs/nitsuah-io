@@ -372,10 +372,7 @@ const CryptoPage = () => {
                     src={project.image}
                     fill
                     style={{ objectFit: "cover" }}
-                    unoptimized={
-                      typeof project.image === "object" &&
-                      project.image.src?.endsWith(".gif")
-                    }
+                    unoptimized={project.image.endsWith(".gif")}
                   />
                 ) : (
                   <div

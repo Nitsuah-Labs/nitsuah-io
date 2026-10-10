@@ -53,6 +53,9 @@ export const BlogCMSDemo: React.FC = () => {
       category: newPost.category || "Uncategorized",
       date: new Date().toISOString().split("T")[0],
       status: (newPost.status as "published" | "draft") || "draft",
+      image:
+        newPost.image ||
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=600&fit=crop",
     };
 
     setPosts([post, ...posts]);
