@@ -7,7 +7,7 @@
 # /usr/bin/node on PATH. Must match .nvmrc - enforced by `npm run check:node-lockstep`.
 FROM node:26.10.0-slim AS node
 
-FROM mcr.microsoft.com/playwright:v1.63.0-noble
+FROM mcr.microsoft.com/playwright:v1.64.0-noble
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
