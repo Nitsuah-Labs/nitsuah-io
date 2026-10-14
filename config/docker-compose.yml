@@ -1,7 +1,7 @@
 services:
   app:
     # Must match .nvmrc exactly - enforced by `npm run check:node-lockstep`.
-    image: node:26.10.0-slim
+    image: node:26.11.1-slim
     working_dir: /app
     volumes:
       - ..:/app
