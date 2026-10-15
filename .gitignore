@@ -63,3 +63,6 @@ next-env.d.ts
 
 # Lighthouse CI local run output (CI uploads reports to temporary storage)
 .lighthouseci/
+
+# Promo render output (frames, mp4 masters, stills)
+promo/out/

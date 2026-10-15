@@ -43,6 +43,10 @@
 
 ### P2 - Medium
 
+- [ ] Make the copy agree across screens (found framing the site tour on 2026-10-15).
+  - Context: the landing page says "Senior Platform & AI Engineer" while `/resume` says "Senior Systems Engineer" and the Pages page badge says "Senior Systems Engineer"; on a 390 px phone the landing page's Code and View All Projects buttons run past the right edge (`featured-projects-landing-page-mobile.png`) and the resume's Coinbase logo overlaps its job title (`professional-resume-mobile.png`).
+  - Acceptance Criteria: one title everywhere; no clipped buttons or overlapping logos at 390 px.
+
 - [ ] Fix the phone and Labs layout findings from the 2026-10-15 review pass.
   - Context: [#566](https://github.com/Nitsuah-Labs/nitsuah-io/issues/566) `/profile` is 32 px wider than a 390 px viewport, [#567](https://github.com/Nitsuah-Labs/nitsuah-io/issues/567) every Labs page scrolls 8 px sideways (`.App { width: 100vw }` plus the default body margin).
   - Acceptance Criteria: no page-level horizontal scroll on any route at 390 and 1440 px; phone journey baselines updated.

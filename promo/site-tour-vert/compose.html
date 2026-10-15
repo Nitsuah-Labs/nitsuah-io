@@ -1,0 +1,101 @@
+<!doctype html>
+<!-- nitsuah.io · vertical site tour (1080x1920, 29 s). Every frame is window.render(t), a
+     pure function of time (no CSS transitions). The pages are the committed full-page
+     screenshots in docs/screenshots/, scrolled top to bottom inside a 980 px window. -->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=block">
+<style>
+  :root { --bg:#0a0a0b; --text:#fafafa; --muted:#8b93a1; --orange:#f97316; --border:#2a2a30; }
+  * { box-sizing:border-box; margin:0; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:var(--bg); color:var(--text); font-family:Inter, sans-serif; -webkit-font-smoothing:antialiased; }
+  #glow { position:absolute; inset:0; background:radial-gradient(900px 700px at 85% 8%, #f9731622, transparent 70%), radial-gradient(900px 800px at 5% 95%, #58a6ff22, transparent 70%); }
+  #mark { position:absolute; left:0; right:0; top:58px; text-align:center; font:800 58px/1 Inter; letter-spacing:-.03em; z-index:5; }
+  #mark b { color:var(--orange); font-weight:800; }
+  #pills { position:absolute; left:50px; right:50px; top:148px; height:56px; display:flex; justify-content:space-between; z-index:5; }
+  .pill { flex:1; margin:0 5px; text-align:center; border-radius:999px; border:2px solid var(--border); color:var(--muted); font:700 25px/52px Inter; letter-spacing:.04em; text-transform:uppercase; }
+  .pill.on { background:var(--orange); border-color:var(--orange); color:#1a0e04; }
+  #panel { position:absolute; left:50px; top:228px; width:980px; height:1300px; border-radius:28px; overflow:hidden; background:#0d0d10; border:2px solid var(--border); box-shadow:0 50px 120px #000a; }
+  #strip { position:absolute; left:0; top:0; width:980px; }
+  #strip .pg { position:absolute; left:0; width:980px; overflow:hidden; }
+  #strip img { display:block; height:auto; max-width:none; }
+  #strip .mob { border-radius:22px; }
+  #outro { position:absolute; left:0; top:0; width:1080px; height:1920px; opacity:0; z-index:6; }
+  #outro .big { position:absolute; left:0; right:0; top:700px; text-align:center; font:800 150px/1 Inter; letter-spacing:-.04em; }
+  #outro .big b { color:var(--orange); font-weight:800; }
+  #outro .who { position:absolute; left:60px; right:60px; top:930px; text-align:center; font:700 54px/1.2 Inter; }
+  #outro .role { position:absolute; left:60px; right:60px; top:1010px; text-align:center; font:600 44px/1.25 Inter; color:var(--muted); }
+  #cap { position:absolute; left:50px; right:50px; top:1640px; height:150px; display:flex; align-items:flex-start; justify-content:center; text-align:center;
+         font:700 54px/1.2 Inter; letter-spacing:-.01em; text-shadow:0 4px 24px #000, 0 0 6px #000; opacity:0; z-index:9; }
+</style>
+</head>
+<body>
+<div id="glow"></div>
+<div id="mark">nitsuah<b>.io</b></div>
+<div id="pills"></div>
+<div id="panel"><div id="strip"></div></div>
+<div id="outro"><div class="big">nitsuah<b>.io</b></div><div class="who">Austin J. Hardy</div><div class="role">Senior Platform &amp; AI Engineer</div></div>
+<div id="cap"></div>
+<script>
+const $ = (s) => document.querySelector(s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+// Inlined from spot.json (a file:// page cannot fetch it). Keep the two in step.
+const SPOT = {"scenes":[["home",0,6.5],["projects",6.5,11.8],["resume",11.8,15.5],["about",15.5,18.3],["blog",18.3,22],["labs",22,26],["outro",26,29]],"narration":{"lines":[{"at":0.3,"dur":3.05,"text":"Austin Hardy, Senior Platform and AI Engineer."},{"at":3.5,"dur":3.25,"text":"Fifteen years of enterprise tooling and AI systems."},{"at":6.9,"dur":4.7,"text":"Featured projects: Overseer, Kryptos, darkmoon and Blackboard MCP."},{"at":12,"dur":1.97,"text":"A resume with work history and skills."},{"at":15.7,"dur":1.07,"text":"An about page."},{"at":18.5,"dur":2.22,"text":"A blog with eleven technical posts."},{"at":22.2,"dur":2.54,"text":"And Labs: Web3 testnet experiments."},{"at":26.2,"dur":1.24,"text":"nitsuah dot io.","cap":"nitsuah.io"}]}};
+// Each page: the screenshot, where it sits in the strip, and how it is framed. Desktop shots
+// are scaled to the 980 px window; the resume is cropped to its 880 px content column so the
+// text stays readable; blog, about and labs use the 390 px phone shots at 2x, centred.
+const PAGES = [
+  { file: 'featured-projects-landing-page.png', top: 0,       h: 612.5, imgW: 980,  imgX: 0 },
+  { file: 'project-gallery.png',                top: 626.5,   h: 2418,  imgW: 980,  imgX: 0 },
+  { file: 'professional-resume.png',            top: 3058.5,  h: 3726,  imgW: 1604, imgX: -312 },
+  { file: 'about-page-mobile.png',              top: 6798.5,  h: 1600,  imgW: 780,  imgX: 0, left: 100, w: 780 },
+  { file: 'blog-platform-mobile.png',           top: 8412.5,  h: 5200,  imgW: 780,  imgX: 0, left: 100, w: 780 },
+  { file: 'labs-mobile.png',                    top: 13626.5, h: 3920,  imgW: 780,  imgX: 0, left: 100, w: 780 },
+];
+// Scroll keyframes [t, strip y]: hold on each page, then glide to the next.
+const KEYS = [[0, 0], [5.7, 0], [6.6, 626.5], [11.1, 1744.5], [11.95, 3058.5], [15.0, 4358.5], [15.85, 6798.5], [18.1, 7098.5], [18.6, 8412.5], [21.7, 9912.5], [22.3, 13626.5], [26, 14126.5]];
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const scrollAt = (t) => {
+  for (let i = 1; i < KEYS.length; i++) if (t <= KEYS[i][0]) { const [t0, y0] = KEYS[i - 1], [t1, y1] = KEYS[i]; return y0 + (y1 - y0) * ease((t - t0) / (t1 - t0)); }
+  return KEYS[KEYS.length - 1][1];
+};
+
+const strip = $('#strip');
+PAGES.forEach((p) => {
+  const d = document.createElement('div'); d.className = 'pg' + (p.left ? ' mob' : ''); d.style.top = p.top + 'px'; d.style.height = p.h + 'px';
+  if (p.left) { d.style.left = p.left + 'px'; d.style.width = p.w + 'px'; }
+  const i = document.createElement('img'); i.src = '../../docs/screenshots/' + p.file; i.style.width = p.imgW + 'px'; i.style.marginLeft = p.imgX + 'px'; d.appendChild(i); strip.appendChild(d);
+});
+const NAV = SPOT.scenes.filter((s) => s[0] !== 'outro').map((s) => s[0]);
+NAV.forEach((n) => { const p = document.createElement('div'); p.className = 'pill'; p.id = 'p-' + n; p.textContent = n; $('#pills').appendChild(p); });
+
+window.render = (t) => {
+  strip.style.transform = `translateY(${-scrollAt(t)}px)`;
+  const cur = SPOT.scenes.find(([, a, b]) => t >= a && t < b) || SPOT.scenes[SPOT.scenes.length - 1];
+  NAV.forEach((n) => $('#p-' + n).classList.toggle('on', n === cur[0]));
+  const o = SPOT.scenes[SPOT.scenes.length - 1];
+  const out = clamp((t - o[1]) / 0.35);
+  $('#outro').style.opacity = out;
+  const hide = 1 - out;
+  $('#panel').style.opacity = hide; $('#pills').style.opacity = hide;
+  const L = SPOT.narration.lines.find((l) => t >= l.at && t < l.at + l.dur + 0.35);
+  const cap = $('#cap');
+  cap.textContent = L ? (L.cap || L.text) : '';
+  cap.style.opacity = L ? Math.min(clamp((t - L.at) / 0.15), clamp((L.at + L.dur + 0.35 - t) / 0.2)) : 0;
+};
+// Overflow report used by the render check: every visible element must sit inside 1080x1920.
+window.bounds = () => {
+  const out = [];
+  document.querySelectorAll('#mark, #pills *, #panel, #outro *, #cap').forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    if (+getComputedStyle(el).opacity === 0) return;
+    if (r.left < -0.5 || r.right > 1080.5 || r.top < -0.5 || r.bottom > 1920.5) out.push([el.id || el.className, Math.round(r.left), Math.round(r.right), Math.round(r.top), Math.round(r.bottom)]);
+  });
+  return out;
+};
+window.render(0);
+</script>
+</body>
+</html>
