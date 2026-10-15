@@ -148,6 +148,19 @@ npm run test:e2e:docker
 
 ---
 
+## Screenshots & diagrams
+
+One screenshot per page of the site lives in [`docs/screenshots/`](./docs/screenshots) (desktop 1440×900, plus `-mobile` 390×844 for the main pages). `.github/workflows/visual-docs.yml` redraws them in the Playwright image and opens a PR; run `npm run test:e2e:docker:build` then `docker compose -f config/docker-compose.test.yml run --rm playwright npm run capture:screenshots` to do the same locally.
+
+| Home | Projects |
+| --- | --- |
+| ![Home](./docs/screenshots/featured-projects-landing-page.png) | ![Projects](./docs/screenshots/project-gallery.png) |
+| **Resume** | **Blog** |
+| ![Resume](./docs/screenshots/professional-resume.png) | ![Blog](./docs/screenshots/blog-platform.png) |
+
+<!-- visual-docs:start -->
+<!-- visual-docs:end -->
+
 ## Project Structure
 
 ```text
