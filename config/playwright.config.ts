@@ -21,6 +21,10 @@ const CI_WORKERS =
 export default defineConfig({
   testDir: "../tests",
 
+  // Screenshot suite (tests/visual) and nightly journeys (tests/journeys) have
+  // their own configs and Docker-drawn baselines; keep them out of the PR run.
+  testIgnore: ["**/journeys/**", "**/visual/**"],
+
   // Global setup to clean WalletConnect state
   globalSetup: require.resolve("../tests/global-setup"),
 

@@ -8,7 +8,9 @@
       "id": "project-gallery",
       "title": "Project Gallery",
       "category": "Portfolio & Showcase",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/project-gallery.png"
+      ],
       "spots": []
     },
     {
@@ -22,21 +24,27 @@
       "id": "professional-resume",
       "title": "Professional Resume",
       "category": "Portfolio & Showcase",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/professional-resume.png"
+      ],
       "spots": []
     },
     {
       "id": "about-page",
       "title": "About Page",
       "category": "Portfolio & Showcase",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/about-page.png"
+      ],
       "spots": []
     },
     {
       "id": "blog-platform",
       "title": "Blog Platform",
       "category": "Portfolio & Showcase",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/blog-platform.png"
+      ],
       "spots": [
         "brag-7s",
         "brag-pages-7s"
@@ -46,21 +54,27 @@
       "id": "wallet-connection",
       "title": "Wallet Connection",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/wallet-connection.png"
+      ],
       "spots": []
     },
     {
       "id": "multi-chain-support",
       "title": "Multi-Chain Support",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/network-switching.png"
+      ],
       "spots": []
     },
     {
       "id": "network-switching",
       "title": "Network Switching",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/network-switching.png"
+      ],
       "spots": []
     },
     {
@@ -74,21 +88,27 @@
       "id": "smart-contract-interactions",
       "title": "Smart Contract Interactions",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/nft-minting.png"
+      ],
       "spots": []
     },
     {
       "id": "balance-display",
       "title": "Balance Display",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/wallet-dashboard.png"
+      ],
       "spots": []
     },
     {
       "id": "wallet-dashboard",
       "title": "Wallet Dashboard",
       "category": "Web3 Integration",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/wallet-dashboard.png"
+      ],
       "spots": []
     },
     {
@@ -102,7 +122,9 @@
       "id": "nft-minting",
       "title": "NFT Minting",
       "category": "Labs Section",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/nft-minting.png"
+      ],
       "spots": []
     },
     {
@@ -110,69 +132,82 @@
       "title": "Token Staking",
       "category": "Labs Section",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "dao-governance",
       "title": "DAO Governance",
       "category": "Labs Section",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "ai-integration",
       "title": "AI Integration",
       "category": "Labs Section",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "domain-lookup",
       "title": "Domain Lookup",
       "category": "Labs Section",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "token-dashboard",
       "title": "Token Dashboard",
       "category": "Labs Section",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "loading-states",
       "title": "Loading States",
       "category": "User Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "error-handling",
       "title": "Error Handling",
       "category": "User Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "toast-notifications",
       "title": "Toast Notifications",
       "category": "User Experience",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/wallet-connection.png"
+      ],
       "spots": []
     },
     {
       "id": "copy-to-clipboard",
       "title": "Copy to Clipboard",
       "category": "User Experience",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/wallet-dashboard.png"
+      ],
       "spots": []
     },
     {
       "id": "wallet-install-prompts",
       "title": "Wallet Install Prompts",
       "category": "User Experience",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/labs-mint.png"
+      ],
       "spots": []
     },
     {
@@ -180,13 +215,17 @@
       "title": "Search Functionality",
       "category": "User Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "responsive-design",
       "title": "Responsive Design",
       "category": "User Experience",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/project-gallery-mobile.png",
+        "docs/screenshots/featured-projects-landing-page-mobile.png"
+      ],
       "spots": []
     },
     {
@@ -194,62 +233,72 @@
       "title": "Skip Navigation",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "semantic-html",
       "title": "Semantic HTML",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "keyboard-navigation",
       "title": "Keyboard Navigation",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "screen-reader-support",
       "title": "Screen Reader Support",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "color-contrast",
       "title": "Color Contrast",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "focus-management",
       "title": "Focus Management",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "alt-text",
       "title": "Alt Text",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "automated-audit-2026-09-28",
       "title": "Automated audit (2026-09-28)",
       "category": "Accessibility",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "featured-projects-landing-page",
       "title": "Featured Projects Landing Page",
       "category": "Landing Page",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/featured-projects-landing-page.png"
+      ],
       "spots": []
     },
     {
@@ -263,7 +312,9 @@
       "id": "theme-toggle",
       "title": "Theme Toggle",
       "category": "Dark Mode & Theming",
-      "screenshots": [],
+      "screenshots": [
+        "docs/screenshots/theme-toggle.png"
+      ],
       "spots": []
     },
     {
@@ -271,280 +322,328 @@
       "title": "LocalStorage Persistence",
       "category": "Dark Mode & Theming",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "css-custom-properties",
       "title": "CSS Custom Properties",
       "category": "Dark Mode & Theming",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "ssr-safe-implementation",
       "title": "SSR-Safe Implementation",
       "category": "Dark Mode & Theming",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "theme-context",
       "title": "Theme Context",
       "category": "Dark Mode & Theming",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "unit-tests",
       "title": "Unit Tests",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "e2e-tests",
       "title": "E2E Tests",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "accessibility-tests",
       "title": "Accessibility Tests",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "visual-regression",
       "title": "Visual Regression",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "docker-testing",
       "title": "Docker Testing",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "pre-commit-hooks",
       "title": "Pre-commit Hooks",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "ci-pipeline",
       "title": "CI Pipeline",
       "category": "Testing & Quality",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
+    },
+    {
+      "id": "nightly-journeys",
+      "title": "Nightly Journeys",
+      "category": "Testing & Quality",
+      "screenshots": [],
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "next-js-app-router",
       "title": "Next.js App Router",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "image-optimization",
       "title": "Image Optimization",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "bundle-analysis",
       "title": "Bundle Analysis",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "cdn-delivery",
       "title": "CDN Delivery",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "lazy-loading",
       "title": "Lazy Loading",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "build-performance",
       "title": "Build Performance",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "font-optimization",
       "title": "Font Optimization",
       "category": "Performance",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "typescript",
       "title": "TypeScript",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "eslint-prettier",
       "title": "ESLint + Prettier",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "wagmi-cli",
       "title": "Wagmi CLI",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "path-aliases",
       "title": "Path Aliases",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "git-hooks",
       "title": "Git Hooks",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "environment-config",
       "title": "Environment Config",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "hot-reload",
       "title": "Hot Reload",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "documentation",
       "title": "Documentation",
       "category": "Developer Experience",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "netlify-hosting",
       "title": "Netlify Hosting",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "deploy-previews",
       "title": "Deploy Previews",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "branch-deploys",
       "title": "Branch Deploys",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "github-actions",
       "title": "GitHub Actions",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "environment-variables",
       "title": "Environment Variables",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "build-optimization",
       "title": "Build Optimization",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "status-badges",
       "title": "Status Badges",
       "category": "Deployment & CI/CD",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "dependency-audits",
       "title": "Dependency Audits",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "content-security-policy",
       "title": "Content Security Policy",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "https-enforcement",
       "title": "HTTPS Enforcement",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "environment-isolation",
       "title": "Environment Isolation",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "rate-limiting",
       "title": "Rate Limiting",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "secure-headers",
       "title": "Secure Headers",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     },
     {
       "id": "wallet-security",
       "title": "Wallet Security",
       "category": "Security",
       "screenshots": [],
-      "spots": []
+      "spots": [],
+      "visual": "none"
     }
   ],
   "spots": [
