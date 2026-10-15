@@ -6,7 +6,7 @@
 // font rendering differs).
 const { test, expect } = require("@playwright/test");
 const { pages } = require("./pages");
-const { prepare, open } = require("./fixture");
+const { prepare, open, expandForCapture } = require("./fixture");
 
 test.beforeEach(async ({ page }) => {
   await prepare(page);
@@ -17,10 +17,11 @@ for (const p of pages) {
     const mobile = testInfo.project.name === "screenshots-mobile";
     test.skip(mobile && !p.mobile, "desktop-only page");
     await open(page, p.path);
+    await expandForCapture(page);
     await expect(page).toHaveScreenshot(
       `${p.id}${mobile ? "-mobile" : ""}.png`,
       {
-        fullPage: !mobile,
+        fullPage: true,
       },
     );
   });

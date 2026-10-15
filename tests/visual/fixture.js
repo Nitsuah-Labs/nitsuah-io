@@ -171,6 +171,61 @@ async function freezeGifs(page) {
   });
 }
 
+/**
+ * Full-page captures only (the journeys keep the real layout): make the
+ * page's chrome and scroll containers flow in the document, so every shot
+ * runs top to bottom with the footer once at the true bottom.
+ *   - the footer bar is position: fixed (it would be painted mid-page over
+ *     content); make it relative so its absolutely placed children still anchor
+ *   - the home and Labs pages scroll or clip inside `.App`/`main` (100vh
+ *     wrappers with overflow hidden/auto, the home page is a two-row grid),
+ *     which fullPage cannot extend; any clipped box is expanded
+ *   - the "|" between the footer's LinkedIn and GitHub icons is a bare text
+ *     divider that reads as a stray caret in a still
+ */
+async function expandForCapture(page) {
+  await page.addStyleTag({
+    content: `
+      .footer-container { position: relative !important; }
+      .footer-container .divider { display: none !important; }
+      /* A build with NEXT_PUBLIC_TEST_HELPERS=1 makes test-helpers.css force
+         footer display: block, which stacks the icons at the left. */
+      footer.footer-container { display: flex !important; }
+      /* The home page is a two-row 100vh grid whose rows clip their cards. */
+      .home-main > section { height: auto !important; min-height: 0 !important; overflow-x: clip !important; overflow-y: visible !important; }
+    `,
+  });
+  await page.evaluate(() => {
+    const expand = (el) => {
+      el.style.setProperty("height", "auto", "important");
+      el.style.setProperty("max-height", "none", "important");
+      // Free the vertical axis only: the real layout hides sideways overflow.
+      el.style.setProperty("overflow-x", "clip", "important");
+      el.style.setProperty("overflow-y", "visible", "important");
+      if (getComputedStyle(el).display === "grid")
+        el.style.setProperty("grid-template-rows", "none", "important");
+    };
+    // A clipped box and every ancestor up to <html> flow with their content
+    // (an ancestor with a fixed 100vh height would clip it again). Repeat:
+    // freeing a box can reveal another clipped one inside it.
+    for (let pass = 0; pass < 4; pass++) {
+      for (const el of document.querySelectorAll("body *")) {
+        const s = getComputedStyle(el);
+        const clipped =
+          /(hidden|auto|scroll)/.test(s.overflowY) &&
+          el.scrollHeight > el.clientHeight + 8 &&
+          el.clientHeight > 60;
+        if (!clipped) continue;
+        for (let p = el; p; p = p.parentElement) expand(p);
+      }
+    }
+  });
+  await page.evaluate(
+    () =>
+      new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))),
+  );
+}
+
 /** Wait until fonts are ready and the page has stopped changing. */
 async function settle(page) {
   await page.waitForLoadState("load");
@@ -207,4 +262,4 @@ async function open(page, path) {
   await settle(page);
 }
 
-module.exports = { FIXED_NOW, prepare, settle, open };
+module.exports = { FIXED_NOW, prepare, settle, open, expandForCapture };
