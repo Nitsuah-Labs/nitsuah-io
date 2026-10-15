@@ -54,6 +54,7 @@ const ProfilePage: React.FC = () => {
           padding: "2rem 1rem",
           maxWidth: "800px",
           width: "100%",
+          boxSizing: "border-box",
           margin: "80px auto 0",
         }}
       >

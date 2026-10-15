@@ -1,13 +1,15 @@
 // Spline Home Navigation
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// Set the scene URL
+// Public scene URL (no API key needed)
 const SPLINE_SCENE = `https://prod.spline.design/I53VLJ6OCdGVN8lr/scene.splinecode`;
 
 export function SplineScene() {
   const [isLoading, setIsLoading] = useState(true);
   const [shouldRender, setShouldRender] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Auto-hide loading after 10 seconds regardless of actual load state
   useEffect(() => {
@@ -38,6 +40,34 @@ export function SplineScene() {
     };
   }, []);
 
+  // Mount the Spline runtime on the canvas once the browser is idle
+  useEffect(() => {
+    if (!shouldRender || !canvasRef.current) return;
+
+    let cancelled = false;
+
+    const initSpline = async () => {
+      try {
+        const { Application } = await import("@splinetool/runtime");
+        if (cancelled || !canvasRef.current) return;
+        const app = new Application(canvasRef.current, { renderMode: "auto" });
+        await app.load(SPLINE_SCENE);
+        if (!cancelled) setIsLoading(false);
+      } catch {
+        if (!cancelled) {
+          setFailed(true);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    initSpline();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [shouldRender]);
+
   return (
     // Use the page-level spline container so the scene can sit behind header/footer
     <div
@@ -55,11 +85,14 @@ export function SplineScene() {
         </div>
       )}
 
-      {/* The Spline runtime injects a canvas; wrap it so we can force sizing via CSS */}
+      {/* The Spline runtime draws into this canvas; CSS forces it to fill the wrapper */}
       <div className="spline-canvas" aria-hidden={isLoading ? "true" : "false"}>
-        {shouldRender ? (
+        {shouldRender && !failed ? (
+          <canvas ref={canvasRef} aria-label="Interactive 3D scene" />
+        ) : null}
+        {failed ? (
           <div className="spline-loading-text" role="status" aria-live="polite">
-            Interactive scene is unavailable in this environment.
+            Interactive scene could not be loaded.
           </div>
         ) : null}
       </div>

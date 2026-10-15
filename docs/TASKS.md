@@ -19,7 +19,7 @@
   - Context: [#565](https://github.com/Nitsuah-Labs/nitsuah-io/issues/565) blog post is 1040 px wide on a phone (CSS-module selectors never match), [#569](https://github.com/Nitsuah-Labs/nitsuah-io/issues/569) 7 of 11 posts contain mangled `|--` punctuation.
   - Acceptance Criteria: both issues closed with the journeys' baselines regenerated in the same PR.
 
-- [ ] Capture for promo: interactive-3d-scenes, spline-3d-scene-on-3d-route (the `/3d` scene once it loads, [#568](https://github.com/Nitsuah-Labs/nitsuah-io/issues/568)); ens-resolution (a connected wallet whose address resolves to an ENS name); domain-registration (`/labs/register` with a connected wallet).
+- [ ] Capture for promo: interactive-3d-scenes, spline-3d-scene-on-3d-route (the `/3d` scene once it loads, [#568](https://github.com/Nitsuah-Labs/nitsuah-io/issues/568); "3d" is not in the screenshot fixture set, so capture it from the live scene); ens-resolution (a connected wallet whose address resolves to an ENS name); domain-registration (`/labs/register` with a connected wallet).
 
 - [ ] Replace placeholder-heavy client demo assets.
   - Context: the restaurant, e-commerce, real-estate, CMS, and NFT demos still rely on missing or placeholder imagery tracked in `docs/archive/SCREENSHOTS.md`.
