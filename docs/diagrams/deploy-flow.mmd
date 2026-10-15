@@ -1,0 +1,16 @@
+flowchart TD
+  push["Push or pull request"]
+
+  push --> ci["ci.yml (CI Fast): typecheck and format, Jest, Playwright and Node lockstep checks, next build"]
+  push --> docker["docker-images.yml: build unit and Playwright images (PRs that touch .nvmrc, Dockerfiles or the lockfile)"]
+  push --> journeys["journeys.yml: Playwright journeys, read-only on PRs"]
+  ci --> lh["Lighthouse CI (PRs only)"]
+
+  push -- "main" --> netlify["Netlify: next build, production deploy"]
+  push -- "pull request" --> preview["Netlify deploy preview"]
+  push -- "main, github-pages-blog/**" --> pages["deploy-github-pages.yml: upload github-pages-blog, deploy to GitHub Pages"]
+  push -- "main, UI or docs/diagrams change" --> vdocs["visual-docs.yml: regenerate docs/screenshots and docs/diagrams, open bot PR"]
+
+  cron["Nightly cron"] --> journeys
+  journeys -- "failure" --> issue["bot:journey issue, dedup by fingerprint"]
+  vdocs --> botpr["bot/visual-docs pull request"]

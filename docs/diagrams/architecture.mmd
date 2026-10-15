@@ -1,0 +1,33 @@
+flowchart LR
+  visitor["Visitor's browser"]
+
+  subgraph netlify["Netlify (next build, SSR)"]
+    proxy["src/proxy.ts: security headers"]
+    pages["App Router pages: /, /about, /resume, /projects, /projects/blogs, /labs, /crypto, /3d, /profile"]
+    data["In-repo data: src/data/blogs.json, src/lib/data/projects.ts"]
+    csp["netlify.toml: CSP and cache headers"]
+  end
+
+  subgraph client["Client providers (src/app/providers.tsx)"]
+    theme["ThemeProvider: nitsuah-theme in localStorage"]
+    wagmi["wagmi config: injected, WalletConnect, MetaMask, Safe"]
+  end
+
+  subgraph external["Third-party origins"]
+    rpc["Chain RPCs via viem http(): mainnet, Polygon, Sepolia, Amoy"]
+    wc["WalletConnect relay"]
+    spline["prod.spline.design scene"]
+  end
+
+  subgraph ghpages["GitHub Pages (github-pages-blog/)"]
+    blog["Static blog: index.html plus one page per post"]
+  end
+
+  visitor --> proxy --> pages
+  csp -.-> proxy
+  pages --> data
+  pages --> client
+  wagmi --> rpc
+  wagmi --> wc
+  pages -. "/3d only" .-> spline
+  visitor --> blog
