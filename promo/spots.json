@@ -11,7 +11,9 @@
       "screenshots": [
         "docs/screenshots/project-gallery.png"
       ],
-      "spots": []
+      "spots": [
+        "site-tour-vert"
+      ]
     },
     {
       "id": "interactive-3d-scenes",
@@ -27,7 +29,9 @@
       "screenshots": [
         "docs/screenshots/professional-resume.png"
       ],
-      "spots": []
+      "spots": [
+        "site-tour-vert"
+      ]
     },
     {
       "id": "about-page",
@@ -36,7 +40,9 @@
       "screenshots": [
         "docs/screenshots/about-page.png"
       ],
-      "spots": []
+      "spots": [
+        "site-tour-vert"
+      ]
     },
     {
       "id": "blog-platform",
@@ -47,7 +53,8 @@
       ],
       "spots": [
         "brag-7s",
-        "brag-pages-7s"
+        "brag-pages-7s",
+        "site-tour-vert"
       ]
     },
     {
@@ -299,7 +306,9 @@
       "screenshots": [
         "docs/screenshots/featured-projects-landing-page.png"
       ],
-      "spots": []
+      "spots": [
+        "site-tour-vert"
+      ]
     },
     {
       "id": "spline-3d-scene-on-3d-route",
@@ -668,6 +677,21 @@
       ],
       "published": "public/brag/brag-github-pages.mp4",
       "rendered": "2026-10-02"
+    },
+    {
+      "id": "site-tour-vert",
+      "seconds": 29,
+      "format": "vertical",
+      "tool": "compose (promo/site-tour-vert)",
+      "features": [
+        "featured-projects-landing-page",
+        "project-gallery",
+        "professional-resume",
+        "about-page",
+        "blog-platform"
+      ],
+      "published": "github-pages-blog/brag/site-tour-vert.mp4",
+      "rendered": "2026-10-15"
     }
   ],
   "reels": [

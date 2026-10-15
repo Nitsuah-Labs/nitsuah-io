@@ -42,6 +42,9 @@
     .watch-grid figure { margin: 0; }
     .watch-grid video { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border); background: #000; }
     .watch-grid figcaption { color: var(--fg-muted); font-size: 14px; margin-top: 8px; }
+    .site-tour { margin: 0 0 48px; text-align: center; }
+    .site-tour video { display: block; width: min(100%, 320px); aspect-ratio: 9 / 16; margin: 0 auto; border-radius: 12px; border: 1px solid var(--border); background: #000; }
+    .site-tour p { color: var(--fg-muted); font-size: 14px; margin-top: 10px; }
 
     header {
       position: sticky;
@@ -479,6 +482,17 @@
         <a href="./blog/" class="btn btn-secondary">Read Blogs</a>
         <a href="https://gist.github.com/nitsuah/086f7d1de6a5fd534ac4ccce226ac1d2" class="btn btn-secondary" target="_blank" rel="noopener">resume.json</a>
       </div>
+    </section>
+
+    <section class="site-tour">
+      <div class="section-header">
+        <h2 class="section-title">Site tour</h2>
+        <a href="https://nitsuah.io" class="section-link" target="_blank" rel="noopener">nitsuah.io →</a>
+      </div>
+      <video poster="brag/site-tour-vert.jpg" playsinline preload="none" controls aria-label="Vertical tour of nitsuah.io: home, projects, resume, about, blog and Labs">
+        <source src="brag/site-tour-vert.mp4" type="video/mp4">
+      </video>
+      <p>29 s, narrated, captions on. Made for Shorts, Reels and TikTok.</p>
     </section>
 
     <section class="featured-projects">

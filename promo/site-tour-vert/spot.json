@@ -1,0 +1,103 @@
+{
+  "title": "nitsuah.io - a tour of the site and portfolio (vertical, narrated)",
+  "format": "vertical",
+  "size": [
+    1080,
+    1920
+  ],
+  "duration": 29,
+  "fps": 30,
+  "poster": 5.4,
+  "scenes": [
+    [
+      "home",
+      0,
+      6.5
+    ],
+    [
+      "projects",
+      6.5,
+      11.8
+    ],
+    [
+      "resume",
+      11.8,
+      15.5
+    ],
+    [
+      "about",
+      15.5,
+      18.3
+    ],
+    [
+      "blog",
+      18.3,
+      22
+    ],
+    [
+      "labs",
+      22,
+      26
+    ],
+    [
+      "outro",
+      26,
+      29
+    ]
+  ],
+  "narration": {
+    "voice": "af_heart",
+    "speed": 1,
+    "lines": [
+      {
+        "id": "01",
+        "at": 0.3,
+        "dur": 3.05,
+        "text": "Austin Hardy, Senior Platform and AI Engineer."
+      },
+      {
+        "id": "02",
+        "at": 3.5,
+        "dur": 3.25,
+        "text": "Fifteen years of enterprise tooling and AI systems."
+      },
+      {
+        "id": "03",
+        "at": 6.9,
+        "dur": 4.7,
+        "text": "Featured projects: Overseer, Kryptos, darkmoon and Blackboard MCP."
+      },
+      {
+        "id": "04",
+        "at": 12,
+        "dur": 1.97,
+        "text": "A resume with work history and skills."
+      },
+      {
+        "id": "05",
+        "at": 15.7,
+        "dur": 1.07,
+        "text": "An about page."
+      },
+      {
+        "id": "06",
+        "at": 18.5,
+        "dur": 2.22,
+        "text": "A blog with eleven technical posts."
+      },
+      {
+        "id": "07",
+        "at": 22.2,
+        "dur": 2.54,
+        "text": "And Labs: Web3 testnet experiments."
+      },
+      {
+        "id": "08",
+        "at": 26.2,
+        "dur": 1.24,
+        "text": "nitsuah dot io.",
+        "cap": "nitsuah.io"
+      }
+    ]
+  }
+}
