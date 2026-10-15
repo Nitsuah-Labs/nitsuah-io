@@ -424,15 +424,15 @@ header {
 
 /* Home page single-screen layout on desktop */
 .home-single-page {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .home-main {
-  height: calc(100vh - 66px);
+  min-height: calc(100vh - 66px);
   display: grid;
   grid-template-rows: 55% 45%;
-  overflow: hidden;
+  /* keep the last card row clear of the fixed footer bar */
+  padding-bottom: 8rem;
 }
 
 @media (max-width: 900px) {
@@ -444,6 +444,7 @@ header {
 
   .home-main {
     height: auto;
+    min-height: 0;
     display: block;
     overflow: visible;
   }
@@ -528,6 +529,14 @@ main {
   height: 100% !important;
   display: block;
   pointer-events: auto; /* Enable Spline canvas interactions */
+}
+
+/* /3d frames the scene in a fixed-height panel: keep it inside the frame */
+.spline-frame .spline-container {
+  position: relative;
+  inset: auto;
+  height: 100%;
+  pointer-events: auto;
 }
 
 .spline-loading {
