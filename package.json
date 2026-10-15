@@ -27,6 +27,7 @@
     "test:e2e:headed": "cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.config.ts --headed",
     "test:e2e:docker": "docker-compose -f config/docker-compose.test.yml run --rm playwright",
     "test:e2e:docker:build": "docker-compose -f config/docker-compose.test.yml build",
+    "test:journeys": "cross-env NODE_ENV=production NEXT_PUBLIC_TEST_HELPERS=1 npm run build:skip-wagmi && cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.journeys.config.ts",
     "capture:screenshots": "cross-env NODE_ENV=production NEXT_PUBLIC_TEST_HELPERS=1 npm run build:skip-wagmi && cross-env NEXT_PUBLIC_TEST_HELPERS=1 playwright test --config config/playwright.screenshots.config.ts",
     "test:a11y": "playwright test --config config/playwright.config.ts tests/accessibility/critical.spec.ts --project=chromium-desktop",
     "test:a11y:quick": "playwright test --config config/playwright.config.ts tests/accessibility/critical.spec.ts --grep=\"(homepage|resume)\" --project=chromium-desktop",
