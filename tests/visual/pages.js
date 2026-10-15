@@ -6,6 +6,8 @@
 // Not captured (see docs/screenshots/README.md):
 //   /blogs, /clients  308 redirects to /projects/blogs and /projects/clients
 //   /logout           disconnects the wallet and redirects to / after 1 s
+//   /3d               the Spline scene needs the network; the fixture blocks it and hides canvases,
+//                     so the capture would show the fallback text (capture the live scene by hand)
 const BLOG_SLUG = "portfolio-netlify-docker";
 
 const pages = [
@@ -18,7 +20,6 @@ const pages = [
   { id: "client-projects", path: "/projects/clients", mobile: true },
   { id: "labs", path: "/labs", mobile: true },
   { id: "crypto", path: "/crypto", mobile: true },
-  { id: "3d", path: "/3d" },
   { id: "profile", path: "/profile" },
   { id: "labs-domains", path: "/labs/domains" },
   { id: "labs-mint", path: "/labs/mint" },
