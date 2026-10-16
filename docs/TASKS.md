@@ -15,10 +15,6 @@
 
 ### P1 - High
 
-- [ ] Fix the content and phone-layout `bot:review` findings (#565, #569) from the 2026-10-15 journeys review pass.
-  - Context: [#565](https://github.com/Nitsuah-Labs/nitsuah-io/issues/565) blog post is 1040 px wide on a phone (CSS-module selectors never match), [#569](https://github.com/Nitsuah-Labs/nitsuah-io/issues/569) 7 of 11 posts contain mangled `|--` punctuation.
-  - Acceptance Criteria: both issues closed with the journeys' baselines regenerated in the same PR.
-
 - [ ] Capture for promo: interactive-3d-scenes, spline-3d-scene-on-3d-route (the `/3d` scene once it loads, [#568](https://github.com/Nitsuah-Labs/nitsuah-io/issues/568); "3d" is not in the screenshot fixture set, so capture it from the live scene); ens-resolution (a connected wallet whose address resolves to an ENS name); domain-registration (`/labs/register` with a connected wallet).
 
 
@@ -39,10 +35,6 @@
 - [ ] Make the copy agree across screens (found framing the site tour on 2026-10-15).
   - Context: the landing page says "Senior Platform & AI Engineer" while `/resume` says "Senior Systems Engineer" and the Pages page badge says "Senior Systems Engineer"; on a 390 px phone the landing page's Code and View All Projects buttons run past the right edge (`featured-projects-landing-page-mobile.png`) and the resume's Coinbase logo overlaps its job title (`professional-resume-mobile.png`).
   - Acceptance Criteria: one title everywhere; no clipped buttons or overlapping logos at 390 px.
-
-- [ ] Fix the phone and Labs layout findings from the 2026-10-15 review pass.
-  - Context: [#566](https://github.com/Nitsuah-Labs/nitsuah-io/issues/566) `/profile` is 32 px wider than a 390 px viewport, [#567](https://github.com/Nitsuah-Labs/nitsuah-io/issues/567) every Labs page scrolls 8 px sideways (`.App { width: 100vw }` plus the default body margin).
-  - Acceptance Criteria: no page-level horizontal scroll on any route at 390 and 1440 px; phone journey baselines updated.
 
 - [ ] Re-enable ESLint as a required CI check once `eslint-config-next` and `typescript-eslint` support TypeScript 7.
   - Context: the repo is on TS 7, and both packages fail against it, so `npm run lint` can't run. CI's ESLint step is replaced by a visible "skipped" warning instead of a step that fails with `continue-on-error`. We stay on TS 7 rather than aliasing `typescript` to TS 6 (decided 2026-10-09). The flat-config migration is ready in draft #557 (drop its `package.json` TypeScript alias when reviving it).
