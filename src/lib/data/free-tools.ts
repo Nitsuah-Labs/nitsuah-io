@@ -10,4 +10,10 @@ export const freeToolSlugs = [
   "srt-subtitle-shifter",
   "invoice-generator",
   "accessibility-checklist",
+  "word-counter",
+  "aspect-ratio-calculator",
+  "color-converter",
+  "text-case-converter",
+  "utm-link-builder",
+  "password-generator",
 ] as const;
