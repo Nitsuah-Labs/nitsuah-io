@@ -17,9 +17,9 @@ const f=el('p','From:\n'+g('from'));f.style.whiteSpace='pre-line';const t=el('p'
 const tb=el('table');const hr=el('tr',undefined,el('thead',undefined,tb));['Description','Qty','Rate','Amount'].forEach(h=>el('th',h,hr));
 const body=el('tbody',undefined,tb);let sub=0;
 for(let i=1;i<=5;i++){const d=g('d'+i),q=parseFloat(g('q'+i))||0,r=parseFloat(g('r'+i))||0;if(!d&&!q&&!r)continue;const a=q*r;sub+=a;
-const tr=el('tr',undefined,body);el('td',d,tr);el('td',String(q),tr);el('td',money(r),tr);el('td',money(a),tr)}
+const tr=el('tr',undefined,body);el('td',d,tr);el('td',String(q),tr);el('td',money(r),tr);el('td',money(a),tr);}
 const tax=sub*((parseFloat(g('tax'))||0)/100);
-[['Subtotal',sub],['Tax',tax],['Total due',sub+tax]].forEach(function(x){const tr=el('tr',undefined,body);const c=el('th',x[0],tr);c.colSpan=3;el('td',money(x[1]),tr)});
-const n=el('p',g('notes'));n.style.whiteSpace='pre-line'}
+[['Subtotal',sub],['Tax',tax],['Total due',sub+tax]].forEach(function(x){const tr=el('tr',undefined,body);const c=el('th',x[0],tr);c.colSpan=3;el('td',money(x[1]),tr);});
+const n=el('p',g('notes'));n.style.whiteSpace='pre-line';}
 document.querySelectorAll('input,textarea').forEach(e=>e.addEventListener('input',run));run();
-document.getElementById('print').addEventListener('click',function(){window.print()});</script></body></html>
+document.getElementById('print').addEventListener('click',function(){window.print();});</script></body></html>
