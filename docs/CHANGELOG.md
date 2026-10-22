@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Fixed:** removed the `Sitemap: https://nitsuah.io/sitemap-index.xml` line from `public/robots.txt`. That URL does not exist (the app serves `/sitemap.xml`), so crawlers following robots.txt got about 95 404s a week, each one a function invocation.
+
 ### Changed
 
 - **Changed:** `netlify.toml` gains a production-only `ignore` command, so a push to `main` deploys only when something outside docs, tests, CI config or promo assets changed. Each production deploy costs 15 Netlify credits, and docs/test-only merges no longer spend them. Deploy previews are unaffected, and a missing `CACHED_COMMIT_REF` makes the check fail open so the build still runs.
