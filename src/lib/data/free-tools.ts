@@ -8,4 +8,6 @@ export const freeToolSlugs = [
   "late-fee-calculator",
   "local-business-json-ld-generator",
   "srt-subtitle-shifter",
+  "invoice-generator",
+  "accessibility-checklist",
 ] as const;

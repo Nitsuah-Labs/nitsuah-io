@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free invoice generator (print or save as PDF) | Nitsuah Labs free tools</title><meta name="description" content="Make a clean invoice in your browser and print it or save it as a PDF. No sign-up, nothing uploaded."><link rel="canonical" href="https://nitsuah.io/tools/invoice-generator"><link rel="stylesheet" href="/tools/style.css"></head><body>
+<a class="skip" href="#main">Skip to content</a><header><strong>Nitsuah Labs tools</strong><nav aria-label="Main"><a href="/tools">All tools</a></nav></header>
+<main id="main"><h1>Free invoice generator</h1><p>Fill in the details, check the preview, then print or save as PDF from your browser. Nothing is uploaded.</p><div class="noprint"><label for="from">Your name and address</label><textarea id="from" rows="3">Your Name
+123 Main Street
+Your Town, ST 00000</textarea><label for="to">Bill to</label><textarea id="to" rows="3">Client Name
+456 Client Road
+Client Town, ST 00000</textarea>
+<label for="num">Invoice number</label><input id="num" type="text" value="1001"><label for="date">Invoice date</label><input id="date" type="date" value="2026-01-15"><label for="due">Due date</label><input id="due" type="date" value="2026-02-14">
+<fieldset><legend>Line item 1</legend><label for="d1">Description</label><input id="d1" type="text" value="Website design"><label for="q1">Quantity</label><input id="q1" type="number" step="any" value="1"><label for="r1">Rate ($)</label><input id="r1" type="number" step="any" value="1200"></fieldset><fieldset><legend>Line item 2</legend><label for="d2">Description</label><input id="d2" type="text" value="Hosting setup"><label for="q2">Quantity</label><input id="q2" type="number" step="any" value="2"><label for="r2">Rate ($)</label><input id="r2" type="number" step="any" value="75"></fieldset><fieldset><legend>Line item 3</legend><label for="d3">Description</label><input id="d3" type="text" value=""><label for="q3">Quantity</label><input id="q3" type="number" step="any" value="0"><label for="r3">Rate ($)</label><input id="r3" type="number" step="any" value="0"></fieldset><fieldset><legend>Line item 4</legend><label for="d4">Description</label><input id="d4" type="text" value=""><label for="q4">Quantity</label><input id="q4" type="number" step="any" value="0"><label for="r4">Rate ($)</label><input id="r4" type="number" step="any" value="0"></fieldset><fieldset><legend>Line item 5</legend><label for="d5">Description</label><input id="d5" type="text" value=""><label for="q5">Quantity</label><input id="q5" type="number" step="any" value="0"><label for="r5">Rate ($)</label><input id="r5" type="number" step="any" value="0"></fieldset><label for="tax">Tax (%)</label><input id="tax" type="number" step="any" value="0"><label for="notes">Notes or payment details</label><textarea id="notes" rows="3">Payment due within 30 days. Thank you.</textarea>
+<button class="btn" id="print" type="button">Print or save as PDF</button></div><section id="preview" aria-label="Invoice preview" aria-live="polite"></section><h2>About this tool</h2><p>Fill in your details and up to five line items; the preview updates as you type and totals are calculated for you. Use your browser's print dialog and choose Save as PDF to keep a copy. Nothing leaves your device. Check tax and invoicing rules where you work; this is a formatting aid, not legal or tax advice.</p></main>
+<footer><p class="muted">Free, runs in your browser, nothing is uploaded or tracked. <a href="/tools">More free tools</a>.</p></footer><script>document.body.className='pp';const g=i=>document.getElementById(i).value;const money=n=>'$'+n.toFixed(2);
+function run(){const pv=document.getElementById('preview');pv.textContent='';
+const el=(t,x,p)=>{const e=document.createElement(t);if(x!==undefined)e.textContent=x;(p||pv).appendChild(e);return e};
+el('h2','Invoice '+g('num'));el('p','Date: '+g('date')+'   Due: '+g('due'));
+const f=el('p','From:\n'+g('from'));f.style.whiteSpace='pre-line';const t=el('p','Bill to:\n'+g('to'));t.style.whiteSpace='pre-line';
+const tb=el('table');const hr=el('tr',undefined,el('thead',undefined,tb));['Description','Qty','Rate','Amount'].forEach(h=>el('th',h,hr));
+const body=el('tbody',undefined,tb);let sub=0;
+for(let i=1;i<=5;i++){const d=g('d'+i),q=parseFloat(g('q'+i))||0,r=parseFloat(g('r'+i))||0;if(!d&&!q&&!r)continue;const a=q*r;sub+=a;
+const tr=el('tr',undefined,body);el('td',d,tr);el('td',String(q),tr);el('td',money(r),tr);el('td',money(a),tr)}
+const tax=sub*((parseFloat(g('tax'))||0)/100);
+[['Subtotal',sub],['Tax',tax],['Total due',sub+tax]].forEach(function(x){const tr=el('tr',undefined,body);const c=el('th',x[0],tr);c.colSpan=3;el('td',money(x[1]),tr)});
+const n=el('p',g('notes'));n.style.whiteSpace='pre-line'}
+document.querySelectorAll('input,textarea').forEach(e=>e.addEventListener('input',run));run();
+document.getElementById('print').addEventListener('click',function(){window.print()});</script></body></html>

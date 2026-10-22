@@ -74,7 +74,7 @@ WCAG 2.1 AA compliance with comprehensive keyboard navigation and screen reader 
 
 ### 🧰 Free Tools
 
-- **Browser tools at `/tools`**: WCAG contrast checker, freelance hourly-rate, project-quote, margin/markup and late-fee calculators, a local-business JSON-LD generator and an SRT subtitle shifter. Static pages in `public/tools/`, client-side only (nothing is uploaded or tracked), with canonical URLs and sitemap entries; the slug list lives in `src/lib/data/free-tools.ts` and `src/__tests__/free-tools.test.ts` checks every page.
+- **Browser tools at `/tools`**: WCAG contrast checker, freelance hourly-rate, project-quote, margin/markup and late-fee calculators, a local-business JSON-LD generator and an SRT subtitle shifter, an invoice generator (print or save as PDF) and a WCAG 2.2 AA accessibility checklist. Static pages in `public/tools/`, client-side only (nothing is uploaded or tracked), with canonical URLs and sitemap entries; the slug list lives in `src/lib/data/free-tools.ts` and `src/__tests__/free-tools.test.ts` checks every page.
 
 ### 🎨 Dark Mode & Theming
 
