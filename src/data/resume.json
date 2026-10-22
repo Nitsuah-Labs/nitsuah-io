@@ -5,7 +5,7 @@
     "email": "ajhardy4@vt.edu",
     "website": "https://nitsuah.io",
     "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
-    "summary": "Developer Productivity & Integration Engineer with 15+ years connecting enterprise tools, automating workflows, and building platforms that empower thousands of engineers. Deep Atlassian expertise paired with hands-on GenAI tool development — MCP server architecture, Spring AI, and natural-language interfaces to internal systems. Known for being the technical authority others rely on when the systems need to actually work. Ut prosim.",
+    "summary": "Developer Productivity & Integration Engineer with 16+ years connecting enterprise tools, automating workflows, and building platforms that empower thousands of engineers. Deep Atlassian expertise paired with hands-on GenAI tool development — MCP server architecture, Spring AI, and natural-language interfaces to internal systems. Known for being the technical authority others rely on when the systems need to actually work. Ut prosim.",
     "location": {
       "countryCode": "US",
       "address": "United States",
@@ -159,184 +159,320 @@
   ],
   "skills": [
     {
-      "name": "Atlassian Ecosystem",
+      "name": "Atlassian Suite",
       "level": "Master",
       "keywords": [
-        "Jira Cloud",
-        "Jira Service Management, JSM",
-        "Jira Align, SAFe",
+        "Jira",
+        "Jira Service Management",
         "Confluence",
-        "Bitbucket",
-        "Guard",
-        "Compass",
         "Atlas",
-        "Crowd Identity",
+        "Compass",
+        "Bitbucket",
+        "Crowd",
+        "Jira Align",
+        "Access/Guard",
         "StatusPage",
-        "Jira Data Center Migrations",
-        "Atlassian REST API & Webhooks",
-        "Federated IAM",
-        "App Integration & Automation"
+        "Cloud / Datacenter / Server"
       ]
     },
     {
-      "name": "GenAI & Developer Tooling",
+      "name": "AI/ML & Developer Productivity",
       "level": "Advanced",
       "keywords": [
-        "MCP",
+        "MCP Servers",
         "Spring AI",
-        "GenAI Integrations",
+        "GenAI Tool Integration",
         "Claude API",
-        "OpenAI API",
-        "Gemini API",
-        "AI-Assisted Engineering",
+        "OpenAI",
+        "AI-Assisted Development",
         "Prompt Engineering",
-        "Tool Annotation",
-        "NLP",
-        "PyTorch",
+        "Tool Annotation Frameworks",
+        "Natural Language Processing",
         "TensorFlow",
+        "TesseractOCR",
+        "PyTorch",
+        "Jupyter",
         "Hugging Face",
-        "Tesseract OCR",
-        "JupyterLab",
-        "Slack Bolt SDK",
-        "Dev Tooling & IDE Extensions"
+        "Developer Tooling",
+        "IDE Extensions",
+        "Command Pattern Architecture"
       ]
     },
     {
-      "name": "Cloud & DevOps",
+      "name": "AWS",
       "level": "Master",
       "keywords": [
-        "AWS, EC2, S3, IAM, RDS, Lambda, ECS, EKS, Route 53, VPC, CloudFront",
-        "IaC, Terraform, Pulumi, CloudFormation",
-        "Containers, Docker, Kubernetes",
-        "Virtualization, vSphere, VMware, Hyper-V, Azure VM, Citrix, Xen",
-        "CI/CD, GitHub Actions, Jenkins, Maven, Gradle",
-        "Observability, Datadog, New Relic, Splunk, Grafana, Kibana, PagerDuty, incident.io"
+        "EC2",
+        "S3",
+        "IAM",
+        "RDS",
+        "ELB",
+        "ALB",
+        "Gateway",
+        "CloudFormation",
+        "Terraform",
+        "Pulumi",
+        "Amplify",
+        "CloudWatch",
+        "CloudTrail",
+        "Lambda",
+        "ECS",
+        "EKS",
+        "EBS",
+        "Route 53",
+        "VPC",
+        "CloudFront"
       ]
     },
     {
-      "name": "Software Engineering",
+      "name": "Blockchain",
+      "level": "Intermediate",
+      "keywords": [
+        "rust",
+        "Solana",
+        "Solidity",
+        "Ethereum",
+        "Smart Contracts",
+        "wagmi",
+        "Web3.js",
+        "Ethers.js",
+        "IPFS",
+        "NFTs",
+        "Chainlink",
+        "Buildspace",
+        "Truffle",
+        "Hardhat",
+        "Polygon",
+        "Decentralized Finance (DeFi)",
+        "Web3",
+        "Tokenomics"
+      ]
+    },
+    {
+      "name": "Communication",
+      "level": "Intermediate",
+      "keywords": [
+        "Executive Quarterlies",
+        "All-hands Demos",
+        "Product Features",
+        "Knowledge Base",
+        "Zoom",
+        "Meets",
+        "Collaborate"
+      ]
+    },
+    {
+      "name": "CMS",
+      "level": "Advanced",
+      "keywords": [
+        "Netlify",
+        "Shopify",
+        "Magento",
+        "WordPress",
+        "S3",
+        "Dropbox Ent."
+      ]
+    },
+    {
+      "name": "CRM",
+      "level": "Advanced",
+      "keywords": [
+        "Salesforce",
+        "Zendesk",
+        "Notion",
+        "ServiceNow",
+        "Monday.com",
+        "SysAid",
+        "Hubspot CRM"
+      ]
+    },
+    {
+      "name": "Databases",
+      "level": "Advanced",
+      "keywords": [
+        "Aurora",
+        "Postgres",
+        "DynamoDB",
+        "Neo4j",
+        "Redis",
+        "Snowflake",
+        "MongoDB",
+        "ElasticSearch",
+        "Tableau",
+        "Microsoft SQL Server/Express/Access",
+        "SSMS/SSRS/SSIS",
+        "MySQL",
+        "NoSQL"
+      ]
+    },
+    {
+      "name": "Development & Architecture",
       "level": "Advanced",
       "keywords": [
         "Java",
         "Spring Boot",
+        "Spring AI",
         "Python",
-        "Go",
         "TypeScript",
         "JavaScript",
-        "Node.js",
+        "Go",
         "React",
+        "Node.js",
         "Next.js",
+        "Gradle",
+        "Maven",
         "REST APIs",
         "GraphQL",
         "Microservices",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "GitHub Actions",
+        "Jenkins",
+        "Slack Bolt SDK",
         "Command Pattern",
-        "TDD"
-      ]
-    },
-    {
-      "name": "Databases & Analytics",
-      "level": "Advanced",
-      "keywords": [
-        "PostgreSQL",
-        "Amazon Aurora",
-        "DynamoDB",
-        "Redis",
-        "MongoDB",
-        "Neo4j",
-        "Snowflake",
-        "ElasticSearch",
-        "SQL Server, T-SQL",
-        "SSIS/SSRS/SSMS",
-        "MySQL",
-        "NoSQL Architecture",
-        "Power BI",
-        "Tableau"
-      ]
-    },
-    {
-      "name": "OS & Middleware",
-      "level": "Master",
-      "keywords": [
-        "Linux, Ubuntu, RedHat",
-        "Unix",
-        "OSX",
-        "Windows Server",
-        "Shell, Bash, PowerShell",
-        "CLI, AWS CLI, GH CLI, Git",
-        "Web/App Servers, Nginx, Apache, Tomcat, JBoss, IIS",
-        ".NET Core",
+        "Test-Driven Development",
+        "CI/CD Pipelines",
+        "t-SQL",
+        "Visual Basic/VBA",
         "PHP",
-        "Lua",
-        "SOAP Protocols"
+        "ASP",
+        "HTML",
+        "CSS",
+        "Pascal"
       ]
     },
     {
-      "name": "Enterprise SaaS & Security",
+      "name": "Design",
       "level": "Master",
-      "keywords": [
-        "Slack",
-        "Zendesk",
-        "ServiceNow",
-        "1Password",
-        "Salesforce",
-        "Asana",
-        "Monday.com",
-        "Notion",
-        "Azure AD",
-        "SCIM/SAML Provisioning",
-        "BugCrowd",
-        "Fortify on Demand",
-        "ZenGRC",
-        "MNPI/SOC Compliance Automation"
-      ]
-    },
-    {
-      "name": "Web3 & Blockchain",
-      "level": "Intermediate",
-      "keywords": [
-        "Ethereum",
-        "Solidity",
-        "Solana",
-        "Rust",
-        "Smart Contracts",
-        "Hardhat",
-        "Truffle",
-        "Ethers.js",
-        "Web3.js",
-        "Wagmi",
-        "Chainlink",
-        "Polygon",
-        "DeFi, Decentralized Finance",
-        "Tokenomics",
-        "IPFS"
-      ]
-    },
-    {
-      "name": "Design & Mapping",
-      "level": "Advanced",
       "keywords": [
         "Figma",
-        "LucidChart",
-        "Visio",
-        "Spline",
+        "spline.design",
         "Sketch",
+        "Canva",
+        "GIMP",
+        "Adobe CS6",
         "UE5",
         "Unity",
-        "Blender"
+        "Blender",
+        "Sketchup",
+        "LucidChart",
+        "Visio",
+        "Paint3D"
       ]
     },
     {
-      "name": "Auto Repair",
-      "level": "Beginner",
+      "name": "Microsoft Suite",
+      "level": "Master",
       "keywords": [
-        "Fluids & Filters, Oil, Coolant, Air/Fuel",
-        "Charging System, Alternator, Battery",
-        "12V Electrical Wiring, Fuses, Relays",
-        "Ignition System, Spark Plugs, Coil Packs",
-        "OBD-II Diagnostics",
-        "Fault Isolation",
-        "Mechanical Tooling",
-        "Shop Safety"
+        "Azure Active Directory (AD)",
+        "PowerBI",
+        "Sharepoint",
+        "Office 365",
+        "Viva",
+        "Access",
+        "Outlook",
+        "Word",
+        "Excel",
+        "PowerPoint",
+        "OneNote"
+      ]
+    },
+    {
+      "name": "Observability",
+      "level": "Advanced",
+      "keywords": [
+        "PagerDuty",
+        "incident.io",
+        "Splunk",
+        "New Relic",
+        "Datadog",
+        "Grafana",
+        "Kibana"
+      ]
+    },
+    {
+      "name": "Operating Systems (OS)",
+      "level": "Master",
+      "keywords": [
+        "Linux",
+        "Ubuntu",
+        "RedHat",
+        "OSX",
+        "iOS",
+        "Android",
+        "Windows"
+      ]
+    },
+    {
+      "name": "OS cli/shell",
+      "level": "Master",
+      "keywords": [
+        "Powershell",
+        "bat",
+        "bash",
+        "apt",
+        "yum",
+        "ssh",
+        "winRM",
+        "cygwin",
+        "aws cli",
+        "git",
+        "gh cli",
+        "vim",
+        "UNIX"
+      ]
+    },
+    {
+      "name": "Third Party SaaS",
+      "level": "Master",
+      "keywords": [
+        "1Password",
+        "Asana",
+        "BugCrowd",
+        "Fortify-on-Demand",
+        "GitHub",
+        "IntelliJ",
+        "JFrog",
+        "Miro",
+        "PractiTest",
+        "Slack",
+        "Stoplight",
+        "ZenGRC"
+      ]
+    },
+    {
+      "name": "Virtualization",
+      "level": "Master",
+      "keywords": [
+        "AWS EC2",
+        "Docker",
+        "Kubernetes",
+        "Azure VM",
+        "vSphere",
+        "Hyper-V",
+        "VMware",
+        "VirtualBox",
+        "G-Suite",
+        "Citrix",
+        "Xen"
+      ]
+    },
+    {
+      "name": "Web Services",
+      "level": "Master",
+      "keywords": [
+        "REST APIs",
+        "Apache",
+        "Tomcat",
+        "JBOSS",
+        "nginx",
+        "IIS",
+        "ASP",
+        ".NET",
+        "PHP",
+        "SOAP",
+        "Lua"
       ]
     }
   ],
