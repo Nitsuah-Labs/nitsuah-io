@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Changed:** `netlify.toml` gains a production-only `ignore` command, so a push to `main` deploys only when something outside docs, tests, CI config or promo assets changed. Each production deploy costs 15 Netlify credits, and docs/test-only merges no longer spend them. Deploy previews are unaffected, and a missing `CACHED_COMMIT_REF` makes the check fail open so the build still runs.
+
 ### Added
 - Representative images for the storefront, restaurant, NFT, blog CMS and real-estate demos, and distinct media for all 12 crypto projects, replacing the emoji placeholders and reused images (#559).
 - Journeys review fixes from 2026-10-15: blog posts fit a phone and lost the mangled `|--` punctuation, `/profile` and the Labs pages no longer scroll sideways, and the home project-card buttons no longer clip at 1440×900 (#574, closing #565–#567, #569, #572).
