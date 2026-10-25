@@ -72,6 +72,11 @@ export const metadata: Metadata = {
   },
 };
 
+// Cloudflare Web Analytics (cookieless RUM). The site is not proxied through
+// Cloudflare, so the beacon is loaded explicitly. The token is public.
+const CF_BEACON_TOKEN =
+  process.env.NEXT_PUBLIC_CF_BEACON_TOKEN ?? "01170225cb9e4ab9ac7996912c06b6dd";
+
 export default function RootLayout({
   children,
 }: {
@@ -241,6 +246,16 @@ export default function RootLayout({
           </nav>
           {children}
         </Providers>
+        {process.env.NODE_ENV === "production" &&
+          !process.env.NEXT_PUBLIC_TEST_HELPERS &&
+          CF_BEACON_TOKEN && (
+            <Script
+              id="cf-web-analytics"
+              src="https://static.cloudflareinsights.com/beacon.min.js"
+              strategy="afterInteractive"
+              data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+            />
+          )}
       </body>
     </html>
   );
