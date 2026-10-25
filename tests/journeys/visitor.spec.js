@@ -17,10 +17,11 @@ test(
     });
     await step(page, "see the featured project cards", async () => {
       for (const name of [
-        "Overseer",
-        "Kryptos",
-        "darkmoon.dev",
-        "Blackboard MCP",
+        "Vigil",
+        "motor-pool",
+        "ats-fill",
+        "fire",
+        "VHS Box",
       ]) {
         await expect(
           page.getByRole("heading", { name, exact: true }),
@@ -49,12 +50,8 @@ test(
       await page.getByRole("button", { name: "Web3", exact: true }).click();
       await settle(page);
       await expect(cards).not.toHaveCount(all);
-      await expect(
-        page.getByRole("heading", { name: "darkmoon.dev" }),
-      ).toBeVisible();
-      await expect(page.getByRole("heading", { name: "Overseer" })).toHaveCount(
-        0,
-      );
+      await expect(page.getByRole("heading", { name: "/labs" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Vigil" })).toHaveCount(0);
     });
     await step(page, "go back to all projects", async () => {
       await page.getByRole("button", { name: "all", exact: true }).click();

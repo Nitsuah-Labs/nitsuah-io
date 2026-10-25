@@ -153,7 +153,7 @@ Proactive security measures with automated vulnerability scanning and best pract
 
 ## Planned Capabilities
 
-> Features planned for 2026 Q2–Q4. Not yet shipped. Overseer agents execute against these blocks.
+> Features planned for 2026 Q2–Q4. Not yet shipped. Vigil (formerly Overseer) agents execute against these blocks.
 
 ### 🧠 AI/ML & Market Trends
 

@@ -165,7 +165,7 @@ const FeaturedProjects: React.FC = () => {
           <br />
         </div>
         <div className="featured-projects-grid">
-          {featuredProjects.slice(0, 4).map((project) => (
+          {featuredProjects.slice(0, 5).map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
           <OtherProjectsCard />
