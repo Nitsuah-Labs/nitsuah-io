@@ -69,7 +69,7 @@ WCAG 2.1 AA compliance with comprehensive keyboard navigation and screen reader 
 
 ### 🏠 Landing Page
 
-- **Featured Projects Landing Page**: `LandingHero` + `FeaturedProjects` components replace the Spline hero; top 4 featured projects (motor-pool, overseer, bb-mcp, darkmoon) appear in a 2×2 card grid above the fold.
+- **Featured Projects Landing Page**: `LandingHero` + `FeaturedProjects` components replace the Spline hero; top 4 featured projects (motor-pool, [vigil](https://github.com/nitsuah/vigil), bb-mcp, darkmoon) appear in a 2×2 card grid above the fold.
 - **Spline 3D Scene on `/3d` Route**: Spline scene moved from home page to a dedicated opt-in `/3d` page, removing bundle weight from the critical landing path and improving home page LCP.
 
 ### 🧰 Free Tools
