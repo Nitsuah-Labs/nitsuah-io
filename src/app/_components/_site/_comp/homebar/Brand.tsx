@@ -381,7 +381,7 @@ const Brand: React.FC<{
       <Link
         href="/"
         style={{ textDecoration: "none", color: "inherit" }}
-        aria-label="Austin H home - Navigate to homepage"
+        aria-label={`${showFullName || isHovering ? "AUSTIN H." : "NITSUAH"} home - Navigate to homepage`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >

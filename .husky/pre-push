@@ -14,7 +14,7 @@ docker run --rm \
   -v "${WIN_ROOT}:/app" \
   -v "nitsuah-io-node-modules:/app/node_modules" \
   -w /app \
-  node:26.11.1-slim \
+  node:26.12.0 \
   sh -c "npm ci --legacy-peer-deps --prefer-offline && npm run typecheck" || exit 1
 
 # Run unit tests
@@ -23,7 +23,7 @@ docker run --rm \
   -v "${WIN_ROOT}:/app" \
   -v "nitsuah-io-node-modules:/app/node_modules" \
   -w /app \
-  node:26.11.1-slim \
+  node:26.12.0-slim \
   sh -c "npm test" || {
     echo "Tests failed. Please fix them before pushing."
     exit 1
