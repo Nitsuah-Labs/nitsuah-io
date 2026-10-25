@@ -239,14 +239,16 @@ async function settle(page) {
   );
   // The header brand swaps NITSUAH -> AUSTIN H. on a 3 s timer (Homebar.tsx);
   // wait for the swap so no shot lands on either side of it. Labs pages use
-  // a different header and have no brand link.
-  const brand = page.locator('a[aria-label^="Austin H home"]');
+  // a different header and have no brand link. The aria-label prefix is
+  // uppercase ("AUSTIN H. home" / "NITSUAH home"), so match the shared suffix.
+  const brand = page.locator('a[aria-label$="home - Navigate to homepage"]');
   if ((await brand.count()) > 0) {
     await page.waitForFunction(
       () =>
-        /AUSTIN H./.test(
-          document.querySelector('a[aria-label^="Austin H home"]')
-            ?.textContent ?? "",
+        /AUSTIN H\./.test(
+          document.querySelector(
+            'a[aria-label$="home - Navigate to homepage"]',
+          )?.textContent ?? "",
         ),
       null,
       { timeout: 10_000 },

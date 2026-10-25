@@ -3,9 +3,6 @@
 import React, { useState } from "react";
 import { ResumeData } from "../../../types/resume";
 import {
-  calculateDuration,
-  calculateTotalYearsOfExperience,
-  extractDurationText,
   formatDate,
   getCompanyLogoUrl,
   isContractingRole,
@@ -20,11 +17,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
   const displayedJobs = showAllJobs ? work : work.slice(0, 3);
 
-  // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
-  const totalYears = calculateTotalYearsOfExperience(work, true);
-  const totalFullBars = Math.floor(totalYears);
-  const totalPartialBar = totalYears - totalFullBars;
-
   return (
     <section className="resume-section work" id="work">
       <h2 className="section-title">
@@ -33,15 +25,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
 
       <div className="work-items">
         {displayedJobs.map((job, idx) => {
-          const duration = calculateDuration(job.startDate, job.endDate);
           const logoUrl = getCompanyLogoUrl(job.name);
           const isContractRole = isContractingRole(job.name);
-          const years = parseFloat(
-            duration.match(/\(([^)]+) years\)/)?.[1] || "0",
-          );
-          const fullBars = Math.floor(years);
-          const partialBar = years - fullBars;
-          const isCurrent = !job.endDate;
 
           return (
             <div className="work-item" key={idx}>
@@ -132,21 +117,6 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                     <div className="work-dates">
                       {formatDate(job.startDate)} -{" "}
                       {job.endDate ? formatDate(job.endDate) : "Present"}
-                    </div>
-                    <div className="duration-visual">
-                      <div className="duration-bars">
-                        {Array.from({ length: fullBars }).map((_, i) => (
-                          <div key={i} className="duration-bar full" />
-                        ))}
-                        {partialBar > 0 && (
-                          <div className="duration-bar partial" />
-                        )}
-                      </div>
-                      <div
-                        className={`duration-text ${isCurrent ? "current" : ""}`}
-                      >
-                        {extractDurationText(duration)}
-                      </div>
                     </div>
                   </div>
                 </div>

@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   title: DEFAULT_TITLE,
   absoluteTitle: true,
   description:
-    "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+    "Senior Platform & AI Engineer — Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling built at Netflix, Coinbase, and Blackboard.",
   path: "/",
 });
 

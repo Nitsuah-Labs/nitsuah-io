@@ -18,20 +18,86 @@ export type Project = {
 };
 
 const projects: Project[] = [
-  // Flagship Projects (Featured on Home Page)
+  // Flagship Projects (first five are shown on the home page)
   {
-    id: "overseer",
-    title: "Overseer",
+    id: "vigil",
+    title: "Vigil",
     short:
-      "Repository health scoring, AI-powered improvements, and cross-repo PMO/DEV flow tracking.",
+      "Every repo graded, every TASKS.md rolled up, and your agents can ask what to work on next.",
     description:
-      "AI-powered GitHub dashboard for repo health, automated documentation & best practices, and cross-repo execution visibility. Multi-provider AI with BYOK.",
-    github: "https://github.com/nitsuah/overseer",
+      "A dashboard and MCP server for everyone with too many GitHub repos. Health grades for every repo, one ranked list of open work across all of them, a map of which repo uses which, and Claude can read it all.",
+    github: "https://github.com/nitsuah/vigil",
     demo: "https://gh-vigil.netlify.app",
+    infoUrl: "https://nitsuah.github.io/vigil/",
     highlight:
-      "Health scoring, AI enrichment, multi-provider failover, PMO visibility",
-    tags: ["typescript", "nextjs", "ai", "devops"],
+      "Repo health grades, cross-repo task rollup, dependency map, MCP server",
+    tags: ["typescript", "mcp", "ai", "devops"],
     category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "motor-pool",
+    title: "motor-pool",
+    short:
+      "Your local AI ops cockpit. Local models, tools and agents in one cockpit, one docker compose up.",
+    description:
+      "A local-first control room for multi-model AI: chat, local models, MCP tool containers and live system state in one Docker stack on your own machine.",
+    github: "https://github.com/nitsuah/motor-pool",
+    demo: "https://nitsuah.github.io/motor-pool/",
+    highlight:
+      "Local models, safety rails, MCP tool containers, live observability",
+    tags: ["ai", "devops", "docker"],
+    category: "AI/ML",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "ats-fill",
+    title: "ats-fill",
+    short:
+      "The same 20 questions on 47 different forms. Fill the form, keep the receipts.",
+    description:
+      "A local-first Chrome extension that fills Greenhouse, Lever, Ashby and Workday application forms from your saved profile. You review every field and press submit. Pipeline tracker, job search across 16 boards, analytics and interview prep. No server, no account.",
+    github: "https://github.com/nitsuah/ats-fill",
+    demo: "https://nitsuah.github.io/ats-fill/",
+    externalLink:
+      "https://chromewebstore.google.com/detail/ats-fill/amofaeopfmaicbiijgjaojenedkkadmn",
+    highlight: "Chrome Web Store, local-first, no server, no account",
+    tags: ["javascript", "ai", "chrome"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "fire",
+    title: "fire",
+    short:
+      "When can I retire? Self-hosted net worth and retirement projections. Your money, your machine.",
+    description:
+      "A self-hosted Financial Independence, Retire Early tracker. Net worth, retirement projections and insights in one dashboard, a read-only MCP server for Claude, and your data stays on your machine.",
+    github: "https://github.com/nitsuah/fire",
+    demo: "https://lifefire.netlify.app",
+    infoUrl: "https://nitsuah.github.io/fire/",
+    highlight: "Self-hosted, retirement projections, read-only MCP server",
+    tags: ["javascript", "mcp", "finance"],
+    category: "Apps",
+    status: "active",
+    featured: true,
+  },
+  {
+    id: "vhs",
+    title: "VHS Box",
+    short:
+      "Snap the shelf. AI reads the spines. Every tape gets an ID, a condition and a price.",
+    description:
+      "Catalog every tape you own. Photograph your tape shelf, AI reads the spines, and every tape gets an ID, a condition and a price. Self-hosted, open source.",
+    github: "https://github.com/nitsuah/vhs",
+    demo: "https://vhsbox.netlify.app",
+    infoUrl: "https://nitsuah.github.io/vhs/",
+    highlight: "AI vision spine reading, condition and price tracking",
+    tags: ["ai", "postgres", "vision"],
+    category: "AI/ML",
     status: "active",
     featured: true,
   },
@@ -49,23 +115,23 @@ const projects: Project[] = [
     tags: ["python", "cryptography", "research", "algorithms"],
     category: "Apps",
     status: "active",
-    featured: true,
+    featured: false,
   },
   {
     id: "darkmoon",
     title: "darkmoon.dev",
     short:
-      "Full-stack portfolio site with Web3 integrations, real-time blockchain data, and 3D graphics.",
+      "3D browser combat game built with React 19, Three.js and Socket.io. Solo combat is live.",
     description:
-      "Advanced portfolio website showcasing Web3 integration, real-time blockchain applications, 3D Spline animations, and modern React patterns. Serves as a secondary portfolio domain with specialized project content.",
+      "3D browser combat game built with React 19, Three.js and Socket.io. Solo combat is live; multiplayer and mobile gameplay are in active development.",
     github: "https://github.com/nitsuah/darkmoon",
     externalLink: "https://darkmoon.dev",
     infoUrl: "https://darkmoon.dev",
-    highlight: "Web3 integration, real-time data, 3D graphics, design showcase",
-    tags: ["typescript", "nextjs", "web3", "3d"],
-    category: "Web3",
+    highlight: "Real-time 3D combat in the browser, multiplayer in progress",
+    tags: ["typescript", "threejs", "games", "3d"],
+    category: "Apps",
     status: "active",
-    featured: true,
+    featured: false,
   },
   {
     id: "bb-mcp",
@@ -80,15 +146,15 @@ const projects: Project[] = [
     tags: ["typescript", "mcp", "ai", "api"],
     category: "Apps",
     status: "active",
-    featured: true,
+    featured: false,
   },
   {
     id: "stash",
     title: "Stash",
     short:
-      "15 years of enterprise automation: Atlassian, AWS IaC, SSO flows, and a role-based AI agent system.",
+      "Enterprise automation toolkit: Atlassian, AWS IaC, SSO flows, and a role-based AI agent system.",
     description:
-      "15 years of enterprise automation artifacts — Atlassian config templates, AWS IaC, OAuth/SAML/OIDC flows, SaaS API examples (Okta, Datadog, PagerDuty, Slack), and a role-based AI agent system for personal ops and product delivery.",
+      "Enterprise automation artifacts — Atlassian config templates, AWS IaC, OAuth/SAML/OIDC flows, SaaS API examples (Okta, Datadog, PagerDuty, Slack), and a role-based AI agent system for personal ops and product delivery.",
     github: "https://github.com/nitsuah/stash",
     demo: "",
     highlight:
@@ -96,24 +162,9 @@ const projects: Project[] = [
     tags: ["powershell", "vba", "devops", "sysadmin", "ai"],
     category: "Apps",
     status: "maintained",
-    featured: true,
-  },
-  // Additional Projects
-  {
-    id: "agent-board",
-    title: "agent-board",
-    short:
-      "Unified dashboard orchestrating autonomous AI agents across GitHub repositories.",
-    description:
-      "Local-first AI control room for multi-model workflows. Chat, safety rails, and live observability in one dashboard — no external APIs, no data leaving your machine.",
-    github: "https://github.com/nitsuah/agent-board",
-    highlight:
-      "Multi-agent orchestration, repo intelligence, automated governance",
-    tags: ["typescript", "nextjs", "ai", "devops"],
-    category: "Apps",
-    status: "active",
     featured: false,
   },
+  // Additional Projects
   {
     id: "gcp",
     title: "GCP Tools",
@@ -163,7 +214,7 @@ const projects: Project[] = [
     short: "Collection of browser-based games and interactive experiences.",
     description:
       "Browser-based game collection featuring classic arcade games and modern interactive experiences built with vanilla JavaScript and canvas.",
-    demo: "https://nitsuah-arcade.netlify.app/",
+    // demo: "https://nitsuah-arcade.netlify.app/", // offline (Netlify site-not-found); restore when the site is back
     github: "https://github.com/nitsuah/games",
     highlight: "Game development and canvas animations",
     tags: ["games", "javascript", "canvas"],
