@@ -26,7 +26,8 @@ export interface ResumeData {
     name: string;
     position: string;
     url?: string;
-    startDate: string;
+    /** ISO date; omit for undated / collapsed earlier-experience entries */
+    startDate?: string;
     endDate?: string;
     summary?: string;
     highlights?: string[];
