@@ -152,9 +152,9 @@ const projects: Project[] = [
     id: "stash",
     title: "Stash",
     short:
-      "15 years of enterprise automation: Atlassian, AWS IaC, SSO flows, and a role-based AI agent system.",
+      "Enterprise automation toolkit: Atlassian, AWS IaC, SSO flows, and a role-based AI agent system.",
     description:
-      "15 years of enterprise automation artifacts — Atlassian config templates, AWS IaC, OAuth/SAML/OIDC flows, SaaS API examples (Okta, Datadog, PagerDuty, Slack), and a role-based AI agent system for personal ops and product delivery.",
+      "Enterprise automation artifacts — Atlassian config templates, AWS IaC, OAuth/SAML/OIDC flows, SaaS API examples (Okta, Datadog, PagerDuty, Slack), and a role-based AI agent system for personal ops and product delivery.",
     github: "https://github.com/nitsuah/stash",
     demo: "",
     highlight:
