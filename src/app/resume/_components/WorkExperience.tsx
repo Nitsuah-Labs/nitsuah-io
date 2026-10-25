@@ -13,9 +13,15 @@ interface WorkExperienceProps {
   work: ResumeData["work"];
 }
 
+const INITIAL_VISIBLE = 3;
+
 export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
   const [showAllJobs, setShowAllJobs] = useState(false);
-  const displayedJobs = showAllJobs ? work : work.slice(0, 3);
+  // With a short list (e.g. three featured roles + collapsed earlier experience),
+  // show everything rather than hiding the undated summary behind "Show All".
+  const needsCollapse = work.length > INITIAL_VISIBLE + 1;
+  const displayedJobs =
+    showAllJobs || !needsCollapse ? work : work.slice(0, INITIAL_VISIBLE);
 
   return (
     <section className="resume-section work" id="work">
@@ -113,12 +119,15 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
                       )}
                     </div>
                   </div>
-                  <div className="work-duration-section">
-                    <div className="work-dates">
-                      {formatDate(job.startDate)} -{" "}
-                      {job.endDate ? formatDate(job.endDate) : "Present"}
+                  {job.startDate ? (
+                    <div className="work-duration-section">
+                      <div className="work-dates">
+                        {formatDate(job.startDate)}
+                        {" - "}
+                        {job.endDate ? formatDate(job.endDate) : "Present"}
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </label>
               <div className="work-details">
@@ -151,7 +160,7 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
           );
         })}
       </div>
-      {work.length > 3 && (
+      {needsCollapse && (
         <div
           style={{ textAlign: "center", marginTop: "1.5rem" }}
           className="print-hide"
@@ -185,8 +194,8 @@ export const WorkExperience: React.FC<WorkExperienceProps> = ({ work }) => {
               style={{ marginRight: "0.5rem" }}
             ></i>
             {showAllJobs
-              ? `Show Less (${work.length - 3} hidden)`
-              : `Show All (${work.length - 3} more)`}
+              ? `Show Less (${work.length - INITIAL_VISIBLE} hidden)`
+              : `Show All (${work.length - INITIAL_VISIBLE} more)`}
           </button>
         </div>
       )}

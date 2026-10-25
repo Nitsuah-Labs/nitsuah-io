@@ -103,11 +103,15 @@ test(
       await expect(
         page.getByRole("heading", { name: "Austin J. Hardy" }),
       ).toBeVisible();
+      await expect(page.getByTestId("resume-label")).toHaveText(
+        "Senior Platform & AI Engineer",
+      );
       await expect(page.getByRole("heading", { name: "About" })).toBeVisible();
     });
     await step(page, "scan the work history", async () => {
       await expect(page.getByText("Work Experience")).toBeVisible();
       await expect(page.getByText("Nov 2023 - Mar 2026")).toBeVisible();
+      await expect(page.getByText("Earlier experience")).toBeVisible();
     });
   },
 );
