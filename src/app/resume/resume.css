@@ -54,7 +54,11 @@
   min-height: 100vh;
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support — screen only.
+   These rules use !important and outrank the print stylesheet's color
+   resets when left unbounded, which makes the name (white) and body
+   (light gray) invisible on a forced white print background. */
+@media screen {
 :root.dark .resume-container {
   color: #e0e0e0;
 }
@@ -290,6 +294,7 @@
 :root.dark .projects-link {
   background: rgba(255, 255, 255, 0.03) !important;
 }
+} /* end @media screen — dark mode */
 
 .resume-content {
   position: relative;
@@ -1231,7 +1236,27 @@
 /* Print Styles */
 @media print {
   @page {
+    size: letter;
     margin: 0.5in 0.45in;
+  }
+
+  /* Force light tokens even when html has .dark / data-theme=dark */
+  :root,
+  :root.dark,
+  :root[data-theme="dark"] {
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-elevated: #ffffff;
+    --color-border: #d1d5db;
+    --color-border-hover: #9ca3af;
+    --color-text-primary: #111111;
+    --color-text-secondary: #333333;
+    --color-text-tertiary: #444444;
+    --color-text-link: #003b66;
+    --color-text-link-hover: #002744;
+    --color-accent: #b04115;
+    --color-accent-hover: #8a3210;
+    --color-accent-light: #f8f9fa;
   }
 
   html,
@@ -1242,6 +1267,19 @@
   .resume-section {
     background: #fff !important;
     color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Site chrome: HomeBar/Footer are already .print-hide; belt-and-suspenders */
+  header,
+  footer,
+  .header-container,
+  .footer-container,
+  .skip-link,
+  nav[aria-label="Main navigation"],
+  .MuiAppBar-root {
+    display: none !important;
   }
 
   .resume-container {
@@ -1312,24 +1350,58 @@
   .resume-label,
   .resume-summary p,
   .resume-summary h2,
+  .resume-summary h3,
   .work-position,
   .work-company,
   .work-company-inline,
+  .work-company a,
+  .work-date,
   .work-summary,
   .work-highlights,
+  .work-highlights li,
+  .total-label,
+  .total-duration-text,
   .skill-name,
   .skill-level,
+  .skill-keywords,
   .education-degree,
   .education-institution,
+  .education-institution a,
+  .education-date,
+  .education-score,
   .language-name,
   .language-fluency,
+  .pdf-section-heading,
   .pdf-work-position,
   .pdf-work-company,
   .pdf-work-duration,
   .pdf-card-label,
   .pdf-card-value,
   .pdf-card-value-small,
-  .pdf-card-duration {
+  .pdf-card-duration,
+  .skills-print-category,
+  .skills-print-keywords,
+  .resume-profiles-print-label,
+  .resume-profiles-print-url,
+  .projects-link p,
+  .projects-link-anchor,
+  .contact-item,
+  .contact-link {
+    color: #111 !important;
+  }
+
+  .resume-name {
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  .section-title,
+  .pdf-section-heading {
+    color: #b04115 !important;
+    border-bottom-color: #dbeffd !important;
+  }
+
+  .work-highlights li::marker {
     color: #111 !important;
   }
 
