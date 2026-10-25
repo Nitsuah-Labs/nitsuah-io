@@ -1,8 +1,5 @@
 import { ResumeData } from "../../types/resume";
-import {
-  calculateTotalYearsOfExperience,
-  getCompanyLogoUrl,
-} from "../../utils/resume";
+import { getCompanyLogoUrl } from "../../utils/resume";
 import Footer from "../_components/_site/Footer";
 import HomeBar from "../_components/_site/Homebar";
 import {
@@ -25,11 +22,6 @@ function getResumeData(): ResumeData {
 
 export default function ResumePage() {
   const resume = getResumeData();
-
-  // Calculate total years across all jobs (excluding subcontracted companies to avoid double counting)
-  const totalYears = calculateTotalYearsOfExperience(resume.work || [], true);
-  const totalFullBars = Math.floor(totalYears);
-  const totalPartialBar = totalYears - totalFullBars;
 
   // Count skills and categories
   const skillsCount = resume.skills?.length || 0;
@@ -76,14 +68,6 @@ export default function ResumePage() {
               {/* Left Column - Work History Cards */}
               <div className="pdf-work-cards">
                 {resume.work?.slice(0, 3).map((job, idx) => {
-                  const startDate = new Date(job.startDate);
-                  const endDate = job.endDate
-                    ? new Date(job.endDate)
-                    : new Date();
-                  const years =
-                    (endDate.getTime() - startDate.getTime()) /
-                    (1000 * 60 * 60 * 24 * 365.25);
-
                   const logoUrl = getCompanyLogoUrl(job.name);
 
                   return (
@@ -102,9 +86,6 @@ export default function ResumePage() {
                           </div>
                           <div className="pdf-work-company">{job.name}</div>
                         </div>
-                        <div className="pdf-work-duration">
-                          {years.toFixed(1)} years
-                        </div>
                       </div>
                     </div>
                   );
@@ -118,9 +99,9 @@ export default function ResumePage() {
                     <i className="fa fa-briefcase" aria-hidden="true"></i>
                   </div>
                   <div className="pdf-card-content">
-                    <div className="pdf-card-label">Total Experience</div>
-                    <div className="pdf-card-value">
-                      {totalYears.toFixed(1)} years
+                    <div className="pdf-card-label">Experience</div>
+                    <div className="pdf-card-value-small">
+                      Netflix · Coinbase · Blackboard
                     </div>
                   </div>
                 </div>
@@ -184,28 +165,6 @@ export default function ResumePage() {
           {resume.work && resume.work.length > 0 && (
             <div style={{ marginTop: "2.5rem" }}>
               <WorkExperience work={resume.work} />
-              {/* Total Experience Summary */}
-              {resume.work && resume.work.length > 0 && (
-                <div
-                  className="work-total-summary print-hide"
-                  style={{ marginTop: "2.5rem" }}
-                >
-                  <div className="total-label">Total Experience</div>
-                  <div className="total-duration-container">
-                    <div className="total-duration-bars">
-                      {Array.from({ length: totalFullBars }).map((_, i) => (
-                        <div key={i} className="duration-bar full" />
-                      ))}
-                      {totalPartialBar > 0 && (
-                        <div className="duration-bar partial" />
-                      )}
-                    </div>
-                    <div className="total-duration-text">
-                      {totalYears.toFixed(1)} years
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           )}
 

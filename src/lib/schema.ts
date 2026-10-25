@@ -24,7 +24,7 @@ export function generatePersonSchema() {
       "Web3 Development",
     ],
     description:
-      "Senior Platform & AI Engineer with 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Senior Platform & AI Engineer who has built Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": "https://nitsuah.io",
@@ -56,7 +56,7 @@ export function generateWebSiteSchema() {
     alternateName: "nitsuah.io",
     url: "https://nitsuah.io",
     description:
-      "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Senior Platform & AI Engineer — Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling built at Netflix, Coinbase, and Blackboard.",
     author: {
       "@type": "Person",
       name: "Austin J. Hardy",

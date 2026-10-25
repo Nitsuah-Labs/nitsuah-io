@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s${TITLE_SUFFIX}`,
   },
   description:
-    "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+    "Senior Platform & AI Engineer who has built Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
   keywords:
     "Austin Hardy, nitsuah, platform engineer, AI engineer, Atlassian, MCP, Next.js, TypeScript, enterprise automation, Web3",
   authors: [{ name: "Austin J. Hardy", url: "https://nitsuah.io" }],
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: [DEFAULT_OG_IMAGE.url],
     creator: "@nitsuah",
   },
