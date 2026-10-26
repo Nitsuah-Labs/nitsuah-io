@@ -27,7 +27,7 @@ const projects: Project[] = [
     description:
       "A dashboard and MCP server for everyone with too many GitHub repos. Health grades for every repo, one ranked list of open work across all of them, a map of which repo uses which, and Claude can read it all.",
     github: "https://github.com/nitsuah/vigil",
-    demo: "https://gh-vigil.netlify.app",
+    demo: "https://vigil.nitsuah.io",
     infoUrl: "https://nitsuah.github.io/vigil/",
     highlight:
       "Repo health grades, cross-repo task rollup, dependency map, MCP server",
@@ -77,7 +77,7 @@ const projects: Project[] = [
     description:
       "A self-hosted Financial Independence, Retire Early tracker. Net worth, retirement projections and insights in one dashboard, a read-only MCP server for Claude, and your data stays on your machine.",
     github: "https://github.com/nitsuah/fire",
-    demo: "https://lifefire.netlify.app",
+    demo: "https://fire.nitsuah.io",
     infoUrl: "https://nitsuah.github.io/fire/",
     highlight: "Self-hosted, retirement projections, read-only MCP server",
     tags: ["javascript", "mcp", "finance"],
@@ -93,7 +93,7 @@ const projects: Project[] = [
     description:
       "Catalog every tape you own. Photograph your tape shelf, AI reads the spines, and every tape gets an ID, a condition and a price. Self-hosted, open source.",
     github: "https://github.com/nitsuah/vhs",
-    demo: "https://vhsbox.netlify.app",
+    demo: "https://vhs.nitsuah.io",
     infoUrl: "https://nitsuah.github.io/vhs/",
     highlight: "AI vision spine reading, condition and price tracking",
     tags: ["ai", "postgres", "vision"],
@@ -109,7 +109,7 @@ const projects: Project[] = [
     description:
       "Advanced Python cryptography research toolkit featuring comprehensive cipher-solving algorithms, automated cryptanalysis pipelines, and statistical analysis tools for classical cryptographic systems.",
     github: "https://github.com/nitsuah/kryptos",
-    demo: "",
+    demo: "https://kryptos.nitsuah.io",
     highlight:
       "Research-grade pipelines, comprehensive test suites, scoring heuristics",
     tags: ["python", "cryptography", "research", "algorithms"],
@@ -214,7 +214,7 @@ const projects: Project[] = [
     short: "Collection of browser-based games and interactive experiences.",
     description:
       "Browser-based game collection featuring classic arcade games and modern interactive experiences built with vanilla JavaScript and canvas.",
-    // demo: "https://nitsuah-arcade.netlify.app/", // offline (Netlify site-not-found); restore when the site is back
+    demo: "https://arcade.nitsuah.io",
     github: "https://github.com/nitsuah/games",
     highlight: "Game development and canvas animations",
     tags: ["games", "javascript", "canvas"],
