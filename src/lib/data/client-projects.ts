@@ -26,7 +26,7 @@ export const clientProjects: ClientProject[] = [
     features: ["Video Hero", "Decap CMS", "Calendly Booking", "Netlify Forms"],
     status: "live",
     icon: "🚁",
-    liveUrl: "https://skyview.nitsuah.io",
+    liveUrl: "https://skyviewd.netlify.app",
     githubUrl: "https://github.com/nitsuah/skyview",
   },
   {
