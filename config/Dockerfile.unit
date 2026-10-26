@@ -1,7 +1,7 @@
 # Pinned to the same exact Node version as .nvmrc, CI (setup-node reads .nvmrc),
 # Netlify, the dev compose file and the husky hooks - enforced by
 # `npm run check:node-lockstep` so the whole stack moves together.
-FROM node:26.12.0-slim
+FROM node:26.12.1-slim
 
 # Set working directory
 WORKDIR /app
