@@ -52,7 +52,6 @@ Crawl-delay: 1
 
 # Sitemap locations
 Sitemap: https://nitsuah.io/sitemap.xml
-Sitemap: https://nitsuah.io/sitemap-index.xml
 
 # Host directive (helps with canonical URL)
 Host: nitsuah.io

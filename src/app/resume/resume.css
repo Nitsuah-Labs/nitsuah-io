@@ -54,242 +54,247 @@
   min-height: 100vh;
 }
 
-/* Dark Mode Support */
-:root.dark .resume-container {
-  color: #e0e0e0;
-}
+/* Dark Mode Support — screen only.
+   These rules use !important and outrank the print stylesheet's color
+   resets when left unbounded, which makes the name (white) and body
+   (light gray) invisible on a forced white print background. */
+@media screen {
+  :root.dark .resume-container {
+    color: #e0e0e0;
+  }
 
-:root.dark .resume-name {
-  color: #fff !important;
-}
+  :root.dark .resume-name {
+    color: #fff !important;
+  }
 
-:root.dark .resume-label {
-  color: #b0b0b0 !important;
-}
+  :root.dark .resume-label {
+    color: #b0b0b0 !important;
+  }
 
-:root.dark .resume-summary p {
-  color: #d0d0d0 !important;
-}
+  :root.dark .resume-summary p {
+    color: #d0d0d0 !important;
+  }
 
-:root.dark .section-title {
-  color: #ff8c42 !important;
-  border-bottom-color: #333 !important;
-}
+  :root.dark .section-title {
+    color: #ff8c42 !important;
+    border-bottom-color: #333 !important;
+  }
 
-:root.dark .resume-summary h3 {
-  color: #ff8c42 !important;
-}
+  :root.dark .resume-summary h3 {
+    color: #ff8c42 !important;
+  }
 
-:root.dark .contact-item {
-  color: #d0d0d0 !important;
-}
+  :root.dark .contact-item {
+    color: #d0d0d0 !important;
+  }
 
-:root.dark .contact-link {
-  color: #6ba4ff !important;
-}
+  :root.dark .contact-link {
+    color: #6ba4ff !important;
+  }
 
-:root.dark .contact-link:hover {
-  color: #8ab9ff !important;
-}
+  :root.dark .contact-link:hover {
+    color: #8ab9ff !important;
+  }
 
-:root.dark .profile-link {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  color: #e0e0e0 !important;
-}
+  :root.dark .profile-link {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #e0e0e0 !important;
+  }
 
-:root.dark .profile-link:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: #ff8c42 !important;
-}
+  :root.dark .profile-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ff8c42 !important;
+  }
 
-:root.dark .work-total-summary {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  border-left-color: #ff8c42 !important;
-}
+  :root.dark .work-total-summary {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: #ff8c42 !important;
+  }
 
-:root.dark .total-label {
-  color: #e0e0e0 !important;
-}
+  :root.dark .total-label {
+    color: #e0e0e0 !important;
+  }
 
-:root.dark .total-duration-text {
-  color: #e0e0e0 !important;
-}
+  :root.dark .total-duration-text {
+    color: #e0e0e0 !important;
+  }
 
-:root.dark .work-header {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-left-color: #ff8c42 !important;
-}
+  :root.dark .work-header {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-left-color: #ff8c42 !important;
+  }
 
-:root.dark .work-label:hover .work-header {
-  background: rgba(255, 255, 255, 0.06) !important;
-}
+  :root.dark .work-label:hover .work-header {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
 
-:root.dark .work-position {
-  color: #fff !important;
-}
+  :root.dark .work-position {
+    color: #fff !important;
+  }
 
-:root.dark .work-company {
-  color: #b0b0b0 !important;
-}
+  :root.dark .work-company {
+    color: #b0b0b0 !important;
+  }
 
-:root.dark .work-company-inline {
-  color: #9ca3af !important;
-}
+  :root.dark .work-company-inline {
+    color: #9ca3af !important;
+  }
 
-:root.dark .work-company a {
-  color: #6ba4ff !important;
-}
+  :root.dark .work-company a {
+    color: #6ba4ff !important;
+  }
 
-:root.dark .work-company a:hover {
-  color: #8ab9ff !important;
-}
+  :root.dark .work-company a:hover {
+    color: #8ab9ff !important;
+  }
 
-:root.dark .work-date {
-  color: #888 !important;
-}
+  :root.dark .work-date {
+    color: #888 !important;
+  }
 
-:root.dark .work-summary {
-  color: #d0d0d0 !important;
-}
+  :root.dark .work-summary {
+    color: #d0d0d0 !important;
+  }
 
-:root.dark .work-highlights li {
-  color: #d0d0d0 !important;
-}
+  :root.dark .work-highlights li {
+    color: #d0d0d0 !important;
+  }
 
-:root.dark .work-highlights li::marker {
-  color: #ff8c42 !important;
-}
+  :root.dark .work-highlights li::marker {
+    color: #ff8c42 !important;
+  }
 
-:root.dark .skill-item {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
+  :root.dark .skill-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
 
-:root.dark .skill-item:hover {
-  border-color: #ff8c42 !important;
-}
+  :root.dark .skill-item:hover {
+    border-color: #ff8c42 !important;
+  }
 
-:root.dark .skill-name {
-  color: #fff !important;
-}
+  :root.dark .skill-name {
+    color: #fff !important;
+  }
 
-:root.dark .skill-level {
-  color: #ff8c42 !important;
-}
+  :root.dark .skill-level {
+    color: #ff8c42 !important;
+  }
 
-:root.dark .skill-bar {
-  background: rgba(255, 255, 255, 0.1) !important;
-}
+  :root.dark .skill-bar {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
 
-:root.dark .skill-bar-fill {
-  background: linear-gradient(90deg, #ff8c42 0%, #ff6b1a 100%) !important;
-}
+  :root.dark .skill-bar-fill {
+    background: linear-gradient(90deg, #ff8c42 0%, #ff6b1a 100%) !important;
+  }
 
-:root.dark .skill-bar-fill-beginner {
-  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%) !important;
-}
+  :root.dark .skill-bar-fill-beginner {
+    background: linear-gradient(90deg, #ef4444 0%, #f87171 100%) !important;
+  }
 
-:root.dark .skill-bar-fill-intermediate {
-  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%) !important;
-}
+  :root.dark .skill-bar-fill-intermediate {
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%) !important;
+  }
 
-:root.dark .skill-bar-fill-advanced {
-  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%) !important;
-}
+  :root.dark .skill-bar-fill-advanced {
+    background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%) !important;
+  }
 
-:root.dark .skill-bar-fill-expert {
-  background: linear-gradient(90deg, #60a5fa 0%, #93c5fd 100%) !important;
-}
+  :root.dark .skill-bar-fill-expert {
+    background: linear-gradient(90deg, #60a5fa 0%, #93c5fd 100%) !important;
+  }
 
-:root.dark .skill-keywords {
-  color: #999 !important;
-}
+  :root.dark .skill-keywords {
+    color: #999 !important;
+  }
 
-:root.dark .skills-search,
-:root.dark .skills-filter-select {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #e0e0e0;
-}
+  :root.dark .skills-search,
+  :root.dark .skills-filter-select {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+  }
 
-:root.dark .skill-keyword-chip {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: #d0d0d0;
-}
+  :root.dark .skill-keyword-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #d0d0d0;
+  }
 
-:root.dark .education-item {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
+  :root.dark .education-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
 
-:root.dark .education-item:hover {
-  border-color: #ff8c42 !important;
-}
+  :root.dark .education-item:hover {
+    border-color: #ff8c42 !important;
+  }
 
-:root.dark .education-degree {
-  color: #fff !important;
-}
+  :root.dark .education-degree {
+    color: #fff !important;
+  }
 
-:root.dark .education-institution {
-  color: #b0b0b0 !important;
-}
+  :root.dark .education-institution {
+    color: #b0b0b0 !important;
+  }
 
-:root.dark .education-institution a {
-  color: #6ba4ff !important;
-}
+  :root.dark .education-institution a {
+    color: #6ba4ff !important;
+  }
 
-:root.dark .education-institution a:hover {
-  color: #8ab9ff !important;
-}
+  :root.dark .education-institution a:hover {
+    color: #8ab9ff !important;
+  }
 
-:root.dark .education-logo-link {
-  display: inline-block;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
-}
+  :root.dark .education-logo-link {
+    display: inline-block;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
 
-:root.dark .education-logo-link:hover {
-  transform: scale(1.05);
-  opacity: 0.8;
-}
+  :root.dark .education-logo-link:hover {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
 
-:root.dark .education-date,
-:root.dark .education-score {
-  color: #888 !important;
-}
+  :root.dark .education-date,
+  :root.dark .education-score {
+    color: #888 !important;
+  }
 
-:root.dark .language-item {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
+  :root.dark .language-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
 
-:root.dark .language-name {
-  color: #fff !important;
-}
+  :root.dark .language-name {
+    color: #fff !important;
+  }
 
-:root.dark .language-fluency {
-  color: #ff8c42 !important;
-}
+  :root.dark .language-fluency {
+    color: #ff8c42 !important;
+  }
 
-:root.dark .projects-link p {
-  color: #d0d0d0 !important;
-}
+  :root.dark .projects-link p {
+    color: #d0d0d0 !important;
+  }
 
-:root.dark .projects-link-anchor {
-  color: #6ba4ff !important;
-}
+  :root.dark .projects-link-anchor {
+    color: #6ba4ff !important;
+  }
 
-:root.dark .projects-link-anchor:hover {
-  color: #8ab9ff !important;
-}
+  :root.dark .projects-link-anchor:hover {
+    color: #8ab9ff !important;
+  }
 
-:root.dark .projects-link {
-  background: rgba(255, 255, 255, 0.03) !important;
-}
+  :root.dark .projects-link {
+    background: rgba(255, 255, 255, 0.03) !important;
+  }
+} /* end @media screen — dark mode */
 
 .resume-content {
   position: relative;
@@ -1231,7 +1236,27 @@
 /* Print Styles */
 @media print {
   @page {
+    size: letter;
     margin: 0.5in 0.45in;
+  }
+
+  /* Force light tokens even when html has .dark / data-theme=dark */
+  :root,
+  :root.dark,
+  :root[data-theme="dark"] {
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-elevated: #ffffff;
+    --color-border: #d1d5db;
+    --color-border-hover: #9ca3af;
+    --color-text-primary: #111111;
+    --color-text-secondary: #333333;
+    --color-text-tertiary: #444444;
+    --color-text-link: #003b66;
+    --color-text-link-hover: #002744;
+    --color-accent: #b04115;
+    --color-accent-hover: #8a3210;
+    --color-accent-light: #f8f9fa;
   }
 
   html,
@@ -1242,6 +1267,19 @@
   .resume-section {
     background: #fff !important;
     color: #111 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Site chrome: HomeBar/Footer are already .print-hide; belt-and-suspenders */
+  header,
+  footer,
+  .header-container,
+  .footer-container,
+  .skip-link,
+  nav[aria-label="Main navigation"],
+  .MuiAppBar-root {
+    display: none !important;
   }
 
   .resume-container {
@@ -1312,24 +1350,58 @@
   .resume-label,
   .resume-summary p,
   .resume-summary h2,
+  .resume-summary h3,
   .work-position,
   .work-company,
   .work-company-inline,
+  .work-company a,
+  .work-date,
   .work-summary,
   .work-highlights,
+  .work-highlights li,
+  .total-label,
+  .total-duration-text,
   .skill-name,
   .skill-level,
+  .skill-keywords,
   .education-degree,
   .education-institution,
+  .education-institution a,
+  .education-date,
+  .education-score,
   .language-name,
   .language-fluency,
+  .pdf-section-heading,
   .pdf-work-position,
   .pdf-work-company,
   .pdf-work-duration,
   .pdf-card-label,
   .pdf-card-value,
   .pdf-card-value-small,
-  .pdf-card-duration {
+  .pdf-card-duration,
+  .skills-print-category,
+  .skills-print-keywords,
+  .resume-profiles-print-label,
+  .resume-profiles-print-url,
+  .projects-link p,
+  .projects-link-anchor,
+  .contact-item,
+  .contact-link {
+    color: #111 !important;
+  }
+
+  .resume-name {
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  .section-title,
+  .pdf-section-heading {
+    color: #b04115 !important;
+    border-bottom-color: #dbeffd !important;
+  }
+
+  .work-highlights li::marker {
     color: #111 !important;
   }
 

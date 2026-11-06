@@ -87,6 +87,18 @@ const nextConfig = {
 
   // Generate standalone output for faster deployments
   output: process.env.BUILD_STANDALONE ? "standalone" : undefined,
+
+  // Free browser tools are static pages in public/tools; serve them at
+  // pretty URLs (/tools and /tools/<slug>) next to the rest of the site.
+  async rewrites() {
+    return [
+      { source: "/tools", destination: "/tools/index.html" },
+      {
+        source: "/tools/:slug([a-z0-9-]+)",
+        destination: "/tools/:slug.html",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

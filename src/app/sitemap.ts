@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "../lib/data/blogs";
+import { freeToolSlugs } from "../lib/data/free-tools";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://nitsuah.io";
@@ -84,5 +85,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     }));
 
-  return [...staticPages, ...labPages, ...projectPages, ...blogPages];
+  // Free browser tools (static pages in public/tools)
+  const toolPages = ["", ...freeToolSlugs].map((slug) => ({
+    url: slug ? `${baseUrl}/tools/${slug}` : `${baseUrl}/tools`,
+    lastModified: currentDate,
+    changeFrequency: "monthly" as const,
+    priority: slug ? 0.6 : 0.7,
+  }));
+
+  return [
+    ...staticPages,
+    ...labPages,
+    ...projectPages,
+    ...toolPages,
+    ...blogPages,
+  ];
 }

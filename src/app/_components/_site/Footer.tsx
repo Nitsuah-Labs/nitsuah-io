@@ -73,6 +73,45 @@ const Footer: React.FC = () => {
         </svg>
       </a>
       <p className="divider"> | </p>
+      <a
+        href="https://www.youtube.com/@nitsuahlabs"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Watch Nitsuah Labs on YouTube"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "1rem",
+          height: "1rem",
+          padding: "0.4rem",
+          borderRadius: 6,
+          textDecoration: "none",
+          border: "1px solid #FF0000",
+          background: "#FF0000",
+          color: "#fff",
+          cursor: "pointer",
+          transition: "all 0.2s ease",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = "0 2px 8px rgba(255, 0, 0, 0.6)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = "none";
+        }}
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden
+          focusable={false}
+        >
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+        </svg>
+      </a>
+      <p className="divider"> | </p>
       <GitHubButton />
       {/* Export PDF Button - Only visible on resume page */}
       {pathname === "/resume" && (

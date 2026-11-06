@@ -7,7 +7,7 @@
 [build.environment]
   # Must match .nvmrc exactly - enforced by `npm run check:node-lockstep`.
   # A NODE_VERSION set in the Netlify UI would override this; keep it unset there.
-  NODE_VERSION = "26.10.0"
+  NODE_VERSION = "26.12.1"
   NPM_FLAGS = "--legacy-peer-deps"
 
 # Deploy previews (PR builds)
@@ -15,7 +15,12 @@
   command = "next build"
 
 # Production builds
+# Every production deploy costs Netlify credits, so skip the ones that cannot change
+# what is served (docs, tests, CI config, promo assets). Exit 0 = no relevant changes =
+# skip; an empty CACHED_COMMIT_REF or COMMIT_REF is guarded explicitly (exit 1 = build), so it fails open.
+# Production only: deploy previews are free and stay on for review.
 [context.production]
+  ignore = "test -n \"$CACHED_COMMIT_REF\" && test -n \"$COMMIT_REF\" && git diff --quiet \"$CACHED_COMMIT_REF\" \"$COMMIT_REF\" -- . ':(exclude)docs' ':(exclude)tests' ':(exclude)__mocks__' ':(exclude)promo' ':(exclude).github' ':(exclude).husky' ':(exclude)playwright-report' ':(exclude)test-results' ':(exclude)*.md'"
   command = "next build"
 
 # Branch deploys
@@ -34,11 +39,11 @@
     # Content Security Policy - strict XSS protection
     Content-Security-Policy = """
       default-src 'self'; \
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com; \
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com https://static.cloudflareinsights.com; \
       style-src 'self' 'unsafe-inline'; \
       img-src 'self' data: https: blob:; \
       font-src 'self' data:; \
-      connect-src 'self' https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
+      connect-src 'self' https://cloudflareinsights.com https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; \
       frame-src 'self' https://challenges.cloudflare.com; \
       worker-src 'self' blob:; \
       object-src 'none'; \

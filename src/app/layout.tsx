@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s${TITLE_SUFFIX}`,
   },
   description:
-    "Senior Platform & AI Engineer — 15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+    "Senior Platform & AI Engineer who has built Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
   keywords:
     "Austin Hardy, nitsuah, platform engineer, AI engineer, Atlassian, MCP, Next.js, TypeScript, enterprise automation, Web3",
   authors: [{ name: "Austin J. Hardy", url: "https://nitsuah.io" }],
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Austin J. Hardy | Senior Platform & AI Engineer",
     description:
-      "15 years building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
+      "Building Atlassian enterprise platforms, MCP servers, and AI-powered developer tooling at Netflix, Coinbase, and Blackboard.",
     images: [DEFAULT_OG_IMAGE.url],
     creator: "@nitsuah",
   },
@@ -71,6 +71,11 @@ export const metadata: Metadata = {
     // google: 'your-verification-code-here',
   },
 };
+
+// Cloudflare Web Analytics (cookieless RUM). The site is not proxied through
+// Cloudflare, so the beacon is loaded explicitly. The token is public.
+const CF_BEACON_TOKEN =
+  process.env.NEXT_PUBLIC_CF_BEACON_TOKEN ?? "01170225cb9e4ab9ac7996912c06b6dd";
 
 export default function RootLayout({
   children,
@@ -241,6 +246,16 @@ export default function RootLayout({
           </nav>
           {children}
         </Providers>
+        {process.env.NODE_ENV === "production" &&
+          !process.env.NEXT_PUBLIC_TEST_HELPERS &&
+          CF_BEACON_TOKEN && (
+            <Script
+              id="cf-web-analytics"
+              src="https://static.cloudflareinsights.com/beacon.min.js"
+              strategy="afterInteractive"
+              data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+            />
+          )}
       </body>
     </html>
   );

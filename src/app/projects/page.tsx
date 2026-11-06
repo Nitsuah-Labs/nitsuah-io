@@ -102,9 +102,12 @@ import spline from "./_assets/spline.gif";
 
 // Map project IDs to their images
 const projectImages: Record<string, any> = {
-  // motor-pool was renamed agent-board; agent-board.png is its artwork.
-  "agent-board": "/images/agent-board.png",
-  overseer: "/images/overseer.png",
+  // agent-board.png is artwork from before the motor-pool rename; vigil.png from Overseer→Vigil.
+  "motor-pool": "/images/agent-board.png",
+  vigil: "/images/vigil.png",
+  "ats-fill": "/images/ats-fill.jpg",
+  fire: "/images/fire.jpg",
+  vhs: "/images/vhs.jpg",
   "bb-mcp": "/images/mcp.png",
   labs: "/images/labs.png",
   darkmoon: "/images/darkmoon.png",

@@ -53,6 +53,7 @@ const ThreeDPage: React.FC = () => {
               </p>
             </div>
             <div
+              className="spline-frame"
               style={{
                 width: "100%",
                 height: "70vh",

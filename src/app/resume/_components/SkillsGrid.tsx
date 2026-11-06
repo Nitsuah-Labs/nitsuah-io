@@ -12,6 +12,11 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
   const [query, setQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState("all");
 
+  const hasAnyLevels = useMemo(
+    () => skills.some((skill) => Boolean(skill.level?.trim())),
+    [skills],
+  );
+
   const enrichedSkills = useMemo(
     () =>
       skills.map((skill) => {
@@ -30,21 +35,24 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
 
     return enrichedSkills.filter((skill) => {
       const matchesLevel =
-        levelFilter === "all" || skill.levelMeta.normalized === levelFilter;
+        !hasAnyLevels ||
+        levelFilter === "all" ||
+        skill.levelMeta?.normalized === levelFilter;
 
       if (!normalizedQuery) return matchesLevel;
 
       const haystack = [
         skill.name,
-        skill.levelMeta.label,
+        skill.levelMeta?.label,
         ...skill.parsedKeywords,
       ]
+        .filter(Boolean)
         .join(" ")
         .toLowerCase();
 
       return matchesLevel && haystack.includes(normalizedQuery);
     });
-  }, [enrichedSkills, levelFilter, query]);
+  }, [enrichedSkills, hasAnyLevels, levelFilter, query]);
 
   return (
     <section className="resume-section skills" id="skills">
@@ -66,21 +74,25 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
             onChange={(event) => setQuery(event.target.value)}
           />
 
-          <label className="sr-only" htmlFor="skills-level-filter">
-            Filter skills by proficiency
-          </label>
-          <select
-            id="skills-level-filter"
-            className="skills-filter-select"
-            value={levelFilter}
-            onChange={(event) => setLevelFilter(event.target.value)}
-          >
-            <option value="all">All levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-            <option value="expert">Expert / Master</option>
-          </select>
+          {hasAnyLevels ? (
+            <>
+              <label className="sr-only" htmlFor="skills-level-filter">
+                Filter skills by proficiency
+              </label>
+              <select
+                id="skills-level-filter"
+                className="skills-filter-select"
+                value={levelFilter}
+                onChange={(event) => setLevelFilter(event.target.value)}
+              >
+                <option value="all">All levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+                <option value="expert">Expert / Master</option>
+              </select>
+            </>
+          ) : null}
 
           <span className="skill-results-count" aria-live="polite">
             {filteredSkills.length} / {skills.length}
@@ -92,19 +104,19 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
         {filteredSkills.map((skill, idx) => (
           <div
             key={idx}
-            className={`skill-item${skill.levelMeta.normalized === "beginner" ? " skill-item-beginner" : ""}`}
+            className={`skill-item${skill.levelMeta?.normalized === "beginner" ? " skill-item-beginner" : ""}`}
           >
             <div className="skill-header">
               <span className="skill-name">{skill.name}</span>
-              {skill.levelMeta && (
+              {skill.levelMeta ? (
                 <span
                   className={`skill-level skill-level-${skill.levelMeta.normalized}`}
                 >
                   {skill.levelMeta.label}
                 </span>
-              )}
+              ) : null}
             </div>
-            {skill.levelMeta && (
+            {skill.levelMeta ? (
               <div className="skill-bar">
                 <div
                   className={`skill-bar-fill skill-bar-fill-${skill.levelMeta.normalized}`}
@@ -113,7 +125,7 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
                   }}
                 ></div>
               </div>
-            )}
+            ) : null}
             {skill.parsedKeywords.length > 0 && (
               <ul className="skill-keyword-list">
                 {skill.parsedKeywords.map((keyword) => (
@@ -138,7 +150,7 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
         {skills
           .filter((skill) => {
             const meta = getSkillLevelMeta(skill.level);
-            return meta.normalized !== "beginner";
+            return !meta || meta.normalized !== "beginner";
           })
           .map((skill, idx) => {
             const meta = getSkillLevelMeta(skill.level);
@@ -146,11 +158,13 @@ export const SkillsGrid: React.FC<SkillsGridProps> = ({ skills }) => {
             return (
               <div key={idx} className="skills-print-row">
                 <span className="skills-print-category">{skill.name}</span>
-                <span
-                  className={`skills-print-level skills-print-level-${meta.normalized}`}
-                >
-                  {meta.label}
-                </span>
+                {meta ? (
+                  <span
+                    className={`skills-print-level skills-print-level-${meta.normalized}`}
+                  >
+                    {meta.label}
+                  </span>
+                ) : null}
                 {keywords.length > 0 && (
                   <span className="skills-print-keywords">
                     {keywords.join(", ")}

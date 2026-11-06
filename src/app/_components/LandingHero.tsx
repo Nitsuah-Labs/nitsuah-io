@@ -21,8 +21,9 @@ export const LandingHero: React.FC = () => {
         </h1>
 
         <p className={styles.landingDescription}>
-          15 years building enterprise tooling, Atlassian platforms, and
-          AI-powered systems that engineers actually want to use.
+          Enterprise tooling, Atlassian platforms, and AI-powered systems that
+          engineers actually want to use, built at Netflix, Coinbase, and
+          Blackboard.
         </p>
       </div>
     </section>

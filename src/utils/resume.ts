@@ -48,7 +48,10 @@ export function formatDate(dateStr: string): string {
   });
 }
 
-export function calculateDuration(startDate: string, endDate?: string): string {
+export function calculateDuration(
+  startDate?: string,
+  endDate?: string,
+): string {
   if (!startDate) return "";
 
   const start = new Date(startDate);
@@ -75,7 +78,7 @@ export function extractDurationText(duration: string): string {
 }
 
 export function getProficiencyLevel(level?: string): number {
-  return getSkillLevelMeta(level).score;
+  return getSkillLevelMeta(level)?.score ?? 0;
 }
 
 export type NormalizedSkillLevel =
@@ -97,7 +100,9 @@ export function getSkillLevelMeta(level?: string): {
   normalized: NormalizedSkillLevel;
   score: number;
   label: string;
-} {
+} | null {
+  if (!level?.trim()) return null;
+
   const normalized = normalizeProficiencyLevel(level);
 
   const metaByLevel: Record<
@@ -139,12 +144,16 @@ export function parseSkillKeywords(keywords: string[] = []): string[] {
  * @returns Total years of experience
  */
 export function calculateTotalYearsOfExperience(
-  work: Array<{ name: string; startDate: string; endDate?: string }>,
+  work: Array<{ name: string; startDate?: string; endDate?: string }>,
   excludeSubcontracted = true,
 ): number {
   return work.reduce((sum, job) => {
     // Skip subcontracted work if excludeSubcontracted is true
     if (excludeSubcontracted && isContractingRole(job.name)) {
+      return sum;
+    }
+    // Skip undated / collapsed earlier-experience entries
+    if (!job.startDate) {
       return sum;
     }
     const startDate = new Date(job.startDate);

@@ -138,13 +138,14 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
           >
             <span className={styles.icon}>📍</span>
             <span>
-              {[
-                basics.location.city,
-                basics.location.region,
-                basics.location.countryCode,
-              ]
-                .filter(Boolean)
-                .join(", ")}
+              {basics.location.address ||
+                [
+                  basics.location.city,
+                  basics.location.region,
+                  basics.location.countryCode,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
             </span>
           </a>
         )}
@@ -326,13 +327,14 @@ export const ProfileButtons: React.FC<ProfileButtonsProps> = ({
           <div className="resume-profiles-print-row">
             <span className="resume-profiles-print-label">Location</span>
             <span className="resume-profiles-print-url">
-              {[
-                basics.location.city,
-                basics.location.region,
-                basics.location.countryCode,
-              ]
-                .filter(Boolean)
-                .join(", ")}
+              {basics.location.address ||
+                [
+                  basics.location.city,
+                  basics.location.region,
+                  basics.location.countryCode,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
             </span>
           </div>
         )}

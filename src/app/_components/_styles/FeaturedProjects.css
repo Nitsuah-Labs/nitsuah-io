@@ -68,10 +68,14 @@
   }
 }
 
-/* For exactly 4 cards, use a 4-column layout on desktop */
+/* 5 featured cards + "My Other Projects" in one row on desktop */
 @media (min-width: 1200px) {
+  .featured-projects-container {
+    max-width: 1280px;
+  }
+
   .featured-projects-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 

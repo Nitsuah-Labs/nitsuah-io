@@ -88,6 +88,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               maxWidth: "800px",
               padding: "2rem 1rem",
               flex: 1,
+              // Let the flex item shrink below its widest code line so <pre> scrolls
+              minWidth: 0,
             }}
           >
             {/* Category Badge */}
