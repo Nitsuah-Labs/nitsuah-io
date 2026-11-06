@@ -148,9 +148,10 @@
     "eslint-plugin-react": {
       "brace-expansion": "1.1.21"
     },
-    "minimatch@>=7.0.0 <11.0.1": "^11.0.5",
     "minimatch@3.1.5": {
       "brace-expansion": "1.1.21"
-    }
+    },
+    "minimatch": "^11.0.4",
+    "minimatch@^3.1.2": "^3.1.5"
   }
 }
