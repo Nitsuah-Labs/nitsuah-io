@@ -131,7 +131,7 @@
     "@babel/core": "7.29.7",
     "js-yaml": "4.3.2",
     "nanoid": ">=3.3.17",
-    "glob": "13.0.6",
+    "glob": "^14.0.4",
     "axios": "1.20.0",
     "source-map-js": "1.2.2",
     "@hono/node-server": "2.1.6",
@@ -148,10 +148,9 @@
     "eslint-plugin-react": {
       "brace-expansion": "1.1.21"
     },
+    "minimatch@>=7.0.0 <11.0.1": "^11.0.5",
     "minimatch@3.1.5": {
       "brace-expansion": "1.1.21"
-    },
-    "minimatch": "^11.0.4",
-    "minimatch@^3.1.2": "^3.1.5"
+    }
   }
 }
