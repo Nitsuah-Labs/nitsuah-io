@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Fixed:** the Visual docs workflow failed at "Render diagrams" on every push since mermaid-cli 12 made `puppeteer` a peer dependency, which `legacy-peer-deps` in `.npmrc` skips; the step now installs `puppeteer@^25` alongside mermaid-cli (browser download skipped, the runner's Chrome is used).
 - **Fixed:** removed the `Sitemap: https://nitsuah.io/sitemap-index.xml` line from `public/robots.txt`. That URL does not exist (the app serves `/sitemap.xml`), so crawlers following robots.txt got about 95 404s a week, each one a function invocation.
 
 ### Changed
