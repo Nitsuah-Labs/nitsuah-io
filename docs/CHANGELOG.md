@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Changed:** dependency updates: Playwright 1.65 in lockstep (`@playwright/test`, `config/Dockerfile.test` and the Journeys workflow image), Next 16.4.6, hono 4.13.18, plus the minor/patch group (wagmi, viem, x402, Spline, TanStack Query, ESLint tooling) and an in-range lockfile refresh.
 - **Changed:** `netlify.toml` gains a production-only `ignore` command, so a push to `main` deploys only when something outside docs, tests, CI config or promo assets changed. Each production deploy costs 15 Netlify credits, and docs/test-only merges no longer spend them. Deploy previews are unaffected, and a missing `CACHED_COMMIT_REF` makes the check fail open so the build still runs.
 
 ### Added

@@ -40,7 +40,7 @@ jobs:
     with:
       # Keep in step with @playwright/test in package.json and the image in
       # config/Dockerfile.test (noble: the baselines are drawn there).
-      image: mcr.microsoft.com/playwright:v1.64.0-noble
+      image: mcr.microsoft.com/playwright:v1.65.0-noble
       command: npm run test:journeys
       features: promo/spots.json
       kit-ref: 24e08b791b2e14546baaa6971cc26a9b1cec7c15
@@ -57,7 +57,7 @@ jobs:
       issues: write
     uses: nitsuah/.github/.github/workflows/journeys.yml@24e08b791b2e14546baaa6971cc26a9b1cec7c15
     with:
-      image: mcr.microsoft.com/playwright:v1.64.0-noble
+      image: mcr.microsoft.com/playwright:v1.65.0-noble
       command: npm run test:journeys
       features: promo/spots.json
       kit-ref: 24e08b791b2e14546baaa6971cc26a9b1cec7c15
