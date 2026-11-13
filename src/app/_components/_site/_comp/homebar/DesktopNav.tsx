@@ -93,7 +93,7 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
               );
               if (!buttons.length) return;
               const active = document.activeElement as HTMLElement | null;
-              let idx = buttons.findIndex((b) => b === active);
+              const idx = buttons.findIndex((b) => b === active);
               if (e.key === "ArrowRight") {
                 e.preventDefault();
                 const next =
