@@ -69,8 +69,12 @@ jobs:
             PUPPETEER="-p $RUNNER_TEMP/puppeteer.json"
           fi
           CONFIG=""; [ -f docs/diagrams/mermaid.config.json ] && CONFIG="-c docs/diagrams/mermaid.config.json"
+          # .npmrc sets legacy-peer-deps, so npx won't pull mermaid-cli's
+          # puppeteer peer dependency on its own; name it explicitly. Chrome
+          # comes from the runner, so skip Puppeteer's browser download.
+          export PUPPETEER_SKIP_DOWNLOAD=1
           for f in docs/diagrams/*.mmd; do
-            npx -y @mermaid-js/mermaid-cli@12.0.0 $PUPPETEER $CONFIG -b white -i "$f" -o "${f%.mmd}.svg"
+            npx -y -p 'puppeteer@^25' -p @mermaid-js/mermaid-cli@12.0.0 mmdc $PUPPETEER $CONFIG -b white -i "$f" -o "${f%.mmd}.svg"
             echo >> "${f%.mmd}.svg"   # end-of-file-fixer
           done
 
