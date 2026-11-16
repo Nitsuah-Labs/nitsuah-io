@@ -1,5 +1,5 @@
 # Bugs
 
-> Generated from open `bot:journey` / `bot:review` issues in [Nitsuah-Labs/nitsuah-io](https://github.com/Nitsuah-Labs/nitsuah-io/issues). Don’t edit this file by hand: fix or close the issue. Updated 2026-11-15 by [the nightly journey run](https://github.com/Nitsuah-Labs/nitsuah-io/actions/runs/43721905359).
+> Generated from open `bot:journey` / `bot:review` issues in [Nitsuah-Labs/nitsuah-io](https://github.com/Nitsuah-Labs/nitsuah-io/issues). Don’t edit this file by hand: fix or close the issue. Updated 2026-11-16 by [the nightly journey run](https://github.com/Nitsuah-Labs/nitsuah-io/actions/runs/43901573172).
 
 No open bot issues. 🎉
