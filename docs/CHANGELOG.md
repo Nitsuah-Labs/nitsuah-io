@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Changed:** `repo-health` workflow pins the shared kit to `nitsuah/.github@a0df883` (kit lockfile: msgpack 1.2.4, urllib3 2.8.0, certifi 2026.10.23), clearing the Python rows in the repo-health advisory issue (#611).
+
 ### Fixed
 
 - **Fixed:** the Visual docs workflow failed at "Render diagrams" on every push since mermaid-cli 12 made `puppeteer` a peer dependency, which `legacy-peer-deps` in `.npmrc` skips; the step now installs `puppeteer@^25` alongside mermaid-cli (browser download skipped, the runner's Chrome is used).
