@@ -231,6 +231,15 @@ async function settle(page) {
   await page.waitForLoadState("load");
   await page.evaluate(() => document.fonts.ready);
   await page.addStyleTag({ content: FREEZE_CSS });
+  // Wait for React to hydrate. HomeBar (Homebar.tsx) renders null until its
+  // mount effect runs, so its MUI app bar only appears once the client has
+  // taken over. This covers the about and 3d pages, whose SSR markup is
+  // present before any effects run. Labs pages use LabNav, which is
+  // server-rendered, so for them this resolves immediately.
+  await page
+    .locator("header.MuiAppBar-root")
+    .first()
+    .waitFor({ state: "attached", timeout: 15_000 });
   // Client components fill in dates/lists after hydration.
   await page.waitForLoadState("networkidle").catch(() => {});
   await page.evaluate(
