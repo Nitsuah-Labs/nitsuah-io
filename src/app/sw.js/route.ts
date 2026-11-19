@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// Prerendered at build time so it also works in a static export.
+export const dynamic = "force-static";
+
 // Return an empty service worker to unregister any cached service workers
 export async function GET() {
   return new NextResponse(

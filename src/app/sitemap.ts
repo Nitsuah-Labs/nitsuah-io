@@ -1,4 +1,7 @@
 import { MetadataRoute } from "next";
+
+// Prerendered at build time so it also works in a static export.
+export const dynamic = "force-static";
 import { blogPosts } from "../lib/data/blogs";
 import { freeToolSlugs } from "../lib/data/free-tools";
 

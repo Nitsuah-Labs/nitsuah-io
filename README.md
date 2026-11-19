@@ -114,7 +114,7 @@ Note: Uses wagmi CLI to generate Web3 hooks on build
 - **UI:** Material-UI, Emotion, custom CSS
 - **3D Graphics:** Spline Runtime
 - **Testing:** Jest (unit), Playwright (E2E/a11y)
-- **Deployment:** Netlify with automatic deployments
+- **Deployment:** Cloudflare Pages (project `nitsuah-io`), a static export built from `main` with `STATIC_EXPORT=1 npx next build` into `out/`; headers live in `public/_headers`. Preview deployments are off.
 - **CI:** GitHub Actions (build, typecheck, lint, tests)
 
 ### Web3 Features
@@ -213,7 +213,7 @@ src/
 
 - **Production:** Commits to `main` → [nitsuah.io](https://nitsuah.io)
 - **Staging:** Commits to `dev` → [dev.nitsuah.io](https://dev.nitsuah.io)
-- **Status:** [![Netlify Status](https://api.netlify.com/api/v1/badges/82ca203b-6c2a-4b49-b60a-ab80cf2a6c5c/deploy-status?branch=main)](https://app.netlify.com/sites/nitsuah-io/deploys)
+- **Status:** Hosted on Cloudflare Pages
 
 ### GitHub Actions CI
 
