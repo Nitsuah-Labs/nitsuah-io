@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (static export). Server-side 308 for legacy
+# /clients, matching permanentRedirect() on the Netlify/Next.js server build.
+/clients /projects/clients 308
+/clients/ /projects/clients 308
