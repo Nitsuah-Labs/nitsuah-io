@@ -1,5 +1,8 @@
 import { MetadataRoute } from "next";
 
+// Prerendered at build time so it also works in a static export.
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = "https://nitsuah.io";
 

@@ -1,0 +1,27 @@
+# Cloudflare Pages headers (static export build). Mirrors what Netlify serves
+# today from netlify.toml [[headers]] and src/proxy.ts (middleware does not run
+# in a static export).
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000
+
+# Netlify applies the CSP to static files (Next.js pages are served by its
+# runtime without it), so keep the same scope here: static assets and the
+# plain-HTML free tools.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; frame-src 'self' https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; frame-src 'self' https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+/tools/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://prod.spline.design https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://prod.spline.design https://*.spline.design https://*.walletconnect.com https://*.walletconnect.org https://*.web3modal.org wss://*.walletconnect.com wss://*.walletconnect.org wss://*.cx.metamask.io https://*.cx.metamask.io https://*.infura.io https://*.alchemy.com https://*.maticvigil.com https://*.polygonscan.com https://*.etherscan.io; frame-src 'self' https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate

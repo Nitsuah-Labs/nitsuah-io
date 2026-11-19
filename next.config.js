@@ -1,3 +1,8 @@
+// STATIC_EXPORT=1 builds a fully static site into out/ for Cloudflare Pages.
+// Every route is prerendered, so no server is needed. Without it, the build
+// is the normal Next.js server build used by CI, e2e tests and `next start`.
+const isStaticExport = process.env.STATIC_EXPORT === "1";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Optimize compilation
@@ -6,8 +11,8 @@ const nextConfig = {
     removeConsole:
       process.env.NODE_ENV === "production"
         ? {
-          exclude: ["error", "warn"],
-        }
+            exclude: ["error", "warn"],
+          }
         : false,
   },
 
@@ -48,6 +53,8 @@ const nextConfig = {
 
   // Improve image optimization
   images: {
+    // Static export has no image optimizer; serve the original files.
+    unoptimized: isStaticExport,
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 60,
@@ -86,19 +93,28 @@ const nextConfig = {
   compress: true,
 
   // Generate standalone output for faster deployments
-  output: process.env.BUILD_STANDALONE ? "standalone" : undefined,
+  output: isStaticExport
+    ? "export"
+    : process.env.BUILD_STANDALONE
+      ? "standalone"
+      : undefined,
 
   // Free browser tools are static pages in public/tools; serve them at
   // pretty URLs (/tools and /tools/<slug>) next to the rest of the site.
-  async rewrites() {
-    return [
-      { source: "/tools", destination: "/tools/index.html" },
-      {
-        source: "/tools/:slug([a-z0-9-]+)",
-        destination: "/tools/:slug.html",
-      },
-    ];
-  },
+  // On Cloudflare Pages these pretty URLs come free: Pages serves
+  // /tools/index.html at /tools and /tools/<slug>.html at /tools/<slug>.
+  // Static export does not support rewrites, so skip them there.
+  ...(isStaticExport ? {} : { rewrites }),
 };
+
+async function rewrites() {
+  return [
+    { source: "/tools", destination: "/tools/index.html" },
+    {
+      source: "/tools/:slug([a-z0-9-]+)",
+      destination: "/tools/:slug.html",
+    },
+  ];
+}
 
 module.exports = nextConfig;
