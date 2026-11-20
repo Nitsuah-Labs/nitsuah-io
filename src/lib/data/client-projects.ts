@@ -24,9 +24,10 @@ export const clientProjects: ClientProject[] = [
       "Cinematic drone services marketing site for a real client. Video hero, Decap CMS for content management, Calendly booking integration, Netlify Forms, and a Playwright E2E + Vitest test suite.",
     technologies: ["JavaScript", "Netlify", "Playwright"],
     features: ["Video Hero", "Decap CMS", "Calendly Booking", "Netlify Forms"],
-    status: "live",
+    status: "demo",
     icon: "🚁",
-    liveUrl: "https://skyviewd.netlify.app",
+    // skyviewd.netlify.app was retired; the GitHub Pages showcase is the live demo.
+    liveUrl: "https://nitsuah.github.io/skyview/",
     githubUrl: "https://github.com/nitsuah/skyview",
   },
   {
