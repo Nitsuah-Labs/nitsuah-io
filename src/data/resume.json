@@ -4,6 +4,7 @@
     "label": "Senior Platform & AI Engineer",
     "title": "Senior Platform & AI Engineer",
     "email": "ajhardy4@vt.edu",
+    "url": "https://nitsuah.io",
     "website": "https://nitsuah.io",
     "picture": "https://i.postimg.cc/zBwYQ6c0/ajh.jpg",
     "summary": "Platform & AI engineer at Netflix, Coinbase and Blackboard. Builds MCP servers and LLM-powered self-service tools on top of enterprise systems (Jira, Slack, Zendesk, SCIM/SSO), and owns the production integrations behind them. Most recently built a GenAI bot at Netflix that grew to 60k+ requests a week.",
@@ -22,7 +23,7 @@
       {
         "network": "GitHub",
         "username": "nitsuah",
-        "url": "https://www.github.com/nitsuah/"
+        "url": "https://github.com/nitsuah"
       }
     ]
   },
@@ -66,7 +67,7 @@
       "position": "Senior Systems Administrator",
       "startDate": "2018-04-09",
       "endDate": "2022-04-01",
-      "website": "https://www.linkedin.com/company/blackboard/",
+      "website": "https://www.linkedin.com/company/blackboardco/",
       "summary": "SRE and platform lead for Atlassian Server/Datacenter tools supporting Product Development and Delivery. Drove Agile transformation, cloud migration, and third-party toolset governance.",
       "highlights": [
         "Executed Atlassian Cloud migration with a Platinum partner; decommissioned legacy VMs and promoted AWS adoption.",
