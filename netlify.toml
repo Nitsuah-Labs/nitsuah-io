@@ -1,3 +1,6 @@
+# ROLLBACK-ONLY: nitsuah.io is served by Cloudflare Pages; Netlify is not the live host.
+# This file is kept so the site can be redeployed to Netlify as a rollback if needed.
+#
 # Netlify configuration for nitsuah.io
 
 [build]
