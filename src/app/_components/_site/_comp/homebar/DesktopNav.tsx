@@ -46,14 +46,20 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
       {pages
         .filter((p) => p !== "projects")
         .map((p) => (
-          <Link key={p} href={`/${p}`} style={{ ...(navStyles.link as any) }}>
-            <Button
-              color="inherit"
-              sx={{ color: (navStyles.link as any).color }}
-            >
-              {p}
-            </Button>
-          </Link>
+          <Button
+            key={p}
+            component={Link}
+            href={`/${p}`}
+            color="inherit"
+            // Only the colour/underline from navStyles.link: its font and
+            // padding used to sit on the wrapping <Link>, not the Button text.
+            sx={{
+              color: (navStyles.link as any).color,
+              textDecoration: "none",
+            }}
+          >
+            {p}
+          </Button>
         ))}
 
       {/* Projects inline toggle - expands sublinks inside the same nav bar */}
