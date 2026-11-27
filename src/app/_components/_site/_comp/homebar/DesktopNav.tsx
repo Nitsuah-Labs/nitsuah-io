@@ -51,8 +51,12 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
             component={Link}
             href={`/${p}`}
             color="inherit"
-            style={{ ...(navStyles.link as any) }}
-            sx={{ color: (navStyles.link as any).color }}
+            // Only the colour/underline from navStyles.link: its font and
+            // padding used to sit on the wrapping <Link>, not the Button text.
+            sx={{
+              color: (navStyles.link as any).color,
+              textDecoration: "none",
+            }}
           >
             {p}
           </Button>
