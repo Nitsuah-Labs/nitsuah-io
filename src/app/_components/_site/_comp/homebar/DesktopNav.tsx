@@ -46,14 +46,16 @@ const DesktopNav: React.FC<{ pages: string[] }> = ({ pages }) => {
       {pages
         .filter((p) => p !== "projects")
         .map((p) => (
-          <Link key={p} href={`/${p}`} style={{ ...(navStyles.link as any) }}>
-            <Button
-              color="inherit"
-              sx={{ color: (navStyles.link as any).color }}
-            >
-              {p}
-            </Button>
-          </Link>
+          <Button
+            key={p}
+            component={Link}
+            href={`/${p}`}
+            color="inherit"
+            style={{ ...(navStyles.link as any) }}
+            sx={{ color: (navStyles.link as any).color }}
+          >
+            {p}
+          </Button>
         ))}
 
       {/* Projects inline toggle - expands sublinks inside the same nav bar */}
