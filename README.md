@@ -212,7 +212,6 @@ src/
 ### Automatic Deployments
 
 - **Production:** Commits to `main` → [nitsuah.io](https://nitsuah.io)
-- **Staging:** Commits to `dev` → [dev.nitsuah.io](https://dev.nitsuah.io)
 - **Status:** Hosted on Cloudflare Pages
 
 ### GitHub Actions CI
